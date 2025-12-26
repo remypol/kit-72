@@ -1,0 +1,44 @@
+{
+  "name": "Kit-72 — Notfallvorsorge",
+  "short_name": "Kit-72",
+  "description": "Bereite dein 72-Stunden-Notfallpaket vor mit Ratgebern, Rechnern und personalisierten Checklisten",
+  "start_url": "/de/",
+  "display": "standalone",
+  "background_color": "#0a0f1a",
+  "theme_color": "#0a0f1a",
+  "orientation": "portrait-primary",
+  "scope": "/",
+  "lang": "de",
+  "categories": ["utilities", "lifestyle"],
+  "icons": [
+    {
+      "src": "/icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Wasser-Rechner",
+      "url": "/de/tools/wasser-rechner/",
+      "description": "Berechne deinen Wasserbedarf"
+    },
+    {
+      "name": "Notfallpaket Zusammenstellen",
+      "url": "/de/tools/notfallpaket-zusammenstellen/",
+      "description": "Stelle dein persönliches Notfallpaket zusammen"
+    },
+    {
+      "name": "Energie-Rechner",
+      "url": "/de/tools/energie-rechner/",
+      "description": "Berechne deinen Energiebedarf"
+    }
+  ]
+}

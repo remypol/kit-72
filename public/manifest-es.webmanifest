@@ -24,7 +24,6 @@
       "purpose": "any maskable"
     }
   ],
-  "screenshots": [],
   "shortcuts": [
     {
       "name": "Calculadora de Agua",
@@ -35,6 +34,11 @@
       "name": "Configurador de Kit",
       "url": "/es/herramientas/configurador-kit/",
       "description": "Arma tu kit personalizado"
+    },
+    {
+      "name": "Calculadora de Energía",
+      "url": "/es/herramientas/calculadora-energia/",
+      "description": "Calcula tus necesidades energéticas"
     }
   ]
 }

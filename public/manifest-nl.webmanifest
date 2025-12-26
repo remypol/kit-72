@@ -1,0 +1,44 @@
+{
+  "name": "Kit-72 — Noodvoorbereiding",
+  "short_name": "Kit-72",
+  "description": "Bereid je 72-uurs noodpakket voor met gidsen, calculators en gepersonaliseerde checklists",
+  "start_url": "/nl/",
+  "display": "standalone",
+  "background_color": "#0a0f1a",
+  "theme_color": "#0a0f1a",
+  "orientation": "portrait-primary",
+  "scope": "/",
+  "lang": "nl",
+  "categories": ["utilities", "lifestyle"],
+  "icons": [
+    {
+      "src": "/icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Water Calculator",
+      "url": "/nl/tools/water-calculator/",
+      "description": "Bereken hoeveel water je nodig hebt"
+    },
+    {
+      "name": "Noodpakket Samenstellen",
+      "url": "/nl/tools/noodpakket-samenstellen/",
+      "description": "Stel je eigen noodpakket samen"
+    },
+    {
+      "name": "Energie Calculator",
+      "url": "/nl/tools/energie-calculator/",
+      "description": "Bereken je energiebehoefte"
+    }
+  ]
+}
