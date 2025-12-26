@@ -1,0 +1,88 @@
+---
+/**
+ * ChecklistItem Component for MDX
+ * Interactive checklist item with localStorage persistence
+ */
+
+interface Props {
+  id: string;
+  label: string;
+  quantity?: string;
+  notes?: string;
+  priority?: 'critical' | 'recommended' | 'optional';
+  storageKey?: string;
+}
+
+const {
+  id,
+  label,
+  quantity,
+  notes,
+  priority = 'recommended',
+  storageKey = 'mdx-checklist',
+} = Astro.props;
+
+const priorityStyles = {
+  critical: 'border-l-[--color-status-critical]',
+  recommended: 'border-l-[--color-accent-primary]',
+  optional: 'border-l-[--color-text-muted]',
+};
+
+const priorityLabels = {
+  critical: { text: 'Esencial', class: 'bg-red-500/20 text-red-400' },
+  recommended: { text: 'Recomendado', class: 'bg-[--color-accent-primary]/20 text-[--color-accent-primary]' },
+  optional: { text: 'Opcional', class: 'bg-[--color-bg-tertiary] text-[--color-text-muted]' },
+};
+---
+
+<div
+  class={`checklist-item card p-4 mb-2 border-l-4 ${priorityStyles[priority]} flex items-start gap-3`}
+  data-checklist-id={id}
+  data-storage-key={storageKey}
+>
+  <input
+    type="checkbox"
+    id={`check-${id}`}
+    class="mt-1 w-5 h-5 rounded border-[--color-border] text-[--color-accent-primary] focus:ring-[--color-accent-primary] cursor-pointer"
+  />
+  <label for={`check-${id}`} class="flex-1 cursor-pointer">
+    <span class="font-medium text-[--color-text-primary]">{label}</span>
+    {quantity && (
+      <span class="ml-2 text-sm text-[--color-text-muted]">({quantity})</span>
+    )}
+    {notes && (
+      <p class="text-sm text-[--color-text-secondary] mt-1 m-0">{notes}</p>
+    )}
+  </label>
+  <span class={`text-xs px-2 py-0.5 rounded flex-shrink-0 ${priorityLabels[priority].class}`}>
+    {priorityLabels[priority].text}
+  </span>
+</div>
+
+<script>
+  // Initialize checklist items with localStorage persistence
+  document.addEventListener('DOMContentLoaded', () => {
+    const checklistItems = document.querySelectorAll('.checklist-item');
+
+    checklistItems.forEach((item) => {
+      const id = item.getAttribute('data-checklist-id');
+      const storageKey = item.getAttribute('data-storage-key') || 'mdx-checklist';
+      const checkbox = item.querySelector('input[type="checkbox"]') as HTMLInputElement;
+
+      if (!checkbox || !id) return;
+
+      // Load saved state
+      const saved = localStorage.getItem(`${storageKey}-${id}`);
+      if (saved === 'true') {
+        checkbox.checked = true;
+        item.classList.add('opacity-60');
+      }
+
+      // Save state on change
+      checkbox.addEventListener('change', () => {
+        localStorage.setItem(`${storageKey}-${id}`, String(checkbox.checked));
+        item.classList.toggle('opacity-60', checkbox.checked);
+      });
+    });
+  });
+</script>

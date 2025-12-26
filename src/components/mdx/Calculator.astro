@@ -1,0 +1,36 @@
+---
+/**
+ * Calculator Component for MDX
+ * Embeds the water or power calculator widget
+ */
+
+interface Props {
+  type: 'water' | 'power';
+  locale?: 'es' | 'nl' | 'de';
+  compact?: boolean;
+}
+
+const { type, locale = 'es', compact = false } = Astro.props;
+
+// Import the appropriate calculator component
+import WaterCalculator from '../tools/WaterCalculator.tsx';
+import PowerCalculator from '../tools/PowerCalculator.tsx';
+
+const Calculator = type === 'water' ? WaterCalculator : PowerCalculator;
+---
+
+<div class={`calculator-embed my-6 ${compact ? 'max-w-md mx-auto' : ''}`}>
+  <Calculator client:visible locale={locale} />
+</div>
+
+<style>
+  .calculator-embed {
+    /* Ensure calculator doesn't break out of prose */
+    clear: both;
+  }
+
+  .calculator-embed :global(.card) {
+    /* Override any prose styles */
+    margin: 0;
+  }
+</style>
