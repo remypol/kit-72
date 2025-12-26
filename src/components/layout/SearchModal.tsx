@@ -1,15 +1,15 @@
 /**
  * SearchModal Component
  *
- * Full-screen search modal for mobile, command palette style for desktop.
- * Searches through site pages and shows results grouped by category.
+ * Full-screen search modal using Pagefind for real full-text search.
+ * Falls back to hardcoded pages if Pagefind is not available.
  *
  * Features:
+ * - Real full-text search via Pagefind
  * - Keyboard navigation (arrow keys, enter, escape)
- * - Recent searches stored locally
- * - Grouped results by section
+ * - Locale-filtered results (only current language)
+ * - Highlighted search excerpts
  * - Full screen on mobile
- * - Multi-locale support (ES, NL, DE)
  */
 
 import { useState, useEffect, useRef, useCallback } from 'react';
@@ -20,11 +20,21 @@ interface SearchModalProps {
   locale?: 'es' | 'nl' | 'de';
 }
 
+interface PagefindResult {
+  id: string;
+  url: string;
+  content: string;
+  word_count: number;
+  meta: {
+    title?: string;
+  };
+  excerpt: string;
+}
+
 interface SearchResult {
   title: string;
   path: string;
-  category: string;
-  description?: string;
+  excerpt?: string;
 }
 
 interface SearchContent {
@@ -33,10 +43,11 @@ interface SearchContent {
   closeLabel: string;
   noResults: string;
   popularPages: string;
+  searching: string;
   navigate: string;
   select: string;
   close: string;
-  pages: SearchResult[];
+  fallbackPages: { title: string; path: string }[];
 }
 
 const contentPerLocale: Record<string, SearchContent> = {
@@ -46,43 +57,16 @@ const contentPerLocale: Record<string, SearchContent> = {
     closeLabel: 'Cerrar',
     noResults: 'No se encontraron resultados para',
     popularPages: 'Páginas populares',
+    searching: 'Buscando...',
     navigate: 'navegar',
     select: 'seleccionar',
     close: 'cerrar',
-    pages: [
-      // Main
-      { title: 'Inicio', path: '/es/', category: 'Principal', description: 'Página principal' },
-
-      // Guías principales
-      { title: 'Kit de Emergencia', path: '/es/kit-de-emergencia/', category: 'Guías', description: 'Guía completa de preparación' },
-      { title: 'Kit 72 Horas', path: '/es/kit-72-horas/', category: 'Guías', description: 'Mochila de emergencia BOB' },
-      { title: 'Almacenamiento de Agua', path: '/es/guias/almacenamiento-agua/', category: 'Guías', description: 'Cómo almacenar agua potable' },
-      { title: 'Almacenamiento de Comida', path: '/es/guias/almacenamiento-comida/', category: 'Guías', description: 'Alimentos de larga duración' },
-      { title: 'Energía y Comunicación', path: '/es/guias/energia-comunicacion/', category: 'Guías', description: 'Mantente conectado' },
-      { title: 'Botiquín de Primeros Auxilios', path: '/es/guias/botiquin-primeros-auxilios/', category: 'Guías', description: 'Suministros médicos esenciales' },
-
-      // Escenarios
-      { title: 'Escenarios de Emergencia', path: '/es/escenarios/', category: 'Escenarios', description: 'Todos los escenarios' },
-      { title: 'Prepararse para un Apagón', path: '/es/escenarios/prepararse-apagon/', category: 'Escenarios', description: 'Corte de electricidad' },
-      { title: 'Prepararse para Ola de Calor', path: '/es/escenarios/prepararse-ola-calor/', category: 'Escenarios', description: 'Temperaturas extremas' },
-      { title: 'Prepararse para Corte de Agua', path: '/es/escenarios/prepararse-corte-agua/', category: 'Escenarios', description: 'Interrupción del suministro' },
-      { title: 'Kit de Evacuación', path: '/es/escenarios/kit-evacuacion/', category: 'Escenarios', description: 'Salida de emergencia' },
-
-      // Herramientas
-      { title: 'Herramientas', path: '/es/herramientas/', category: 'Herramientas', description: 'Calculadoras y configuradores' },
-      { title: 'Configurador de Kit', path: '/es/herramientas/configurador-kit/', category: 'Herramientas', description: 'Crea tu lista personalizada' },
-      { title: 'Calculadora de Agua', path: '/es/herramientas/calculadora-agua/', category: 'Herramientas', description: 'Calcula cuánta agua necesitas' },
-      { title: 'Calculadora de Energía', path: '/es/herramientas/calculadora-energia/', category: 'Herramientas', description: 'Qué powerbank necesitas' },
-
-      // Componentes
-      { title: 'Componentes del Kit', path: '/es/componentes/', category: 'Componentes', description: 'Todos los componentes' },
-      { title: 'Linternas de Emergencia', path: '/es/componentes/linternas/', category: 'Componentes', description: 'Iluminación de respaldo' },
-      { title: 'Powerbanks', path: '/es/componentes/powerbanks/', category: 'Componentes', description: 'Baterías portátiles' },
-      { title: 'Radios de Emergencia', path: '/es/componentes/radios-emergencia/', category: 'Componentes', description: 'Comunicación sin internet' },
-      { title: 'Bidones de Agua', path: '/es/componentes/bidones-agua/', category: 'Componentes', description: 'Almacenamiento de agua' },
-      { title: 'Comida de Emergencia', path: '/es/componentes/comida-emergencia/', category: 'Componentes', description: 'Alimentos de larga duración' },
-      { title: 'Botiquín Básico', path: '/es/componentes/botiquin-basico/', category: 'Componentes', description: 'Kit de primeros auxilios' },
-      { title: 'Mochilas de Emergencia', path: '/es/componentes/mochilas/', category: 'Componentes', description: 'Mochilas para kit 72h' },
+    fallbackPages: [
+      { title: 'Kit de Emergencia', path: '/es/kit-de-emergencia/' },
+      { title: 'Prepararse para un Apagón', path: '/es/escenarios/prepararse-apagon/' },
+      { title: 'Almacenamiento de Agua', path: '/es/guias/almacenamiento-agua/' },
+      { title: 'Calculadora de Energía', path: '/es/herramientas/calculadora-energia/' },
+      { title: 'Configurador de Kit', path: '/es/herramientas/configurador-kit/' },
     ],
   },
   nl: {
@@ -91,45 +75,16 @@ const contentPerLocale: Record<string, SearchContent> = {
     closeLabel: 'Sluiten',
     noResults: 'Geen resultaten gevonden voor',
     popularPages: 'Populaire pagina\'s',
+    searching: 'Zoeken...',
     navigate: 'navigeren',
     select: 'selecteren',
     close: 'sluiten',
-    pages: [
-      // Hoofdpagina
-      { title: 'Home', path: '/nl/', category: 'Hoofdpagina', description: 'Startpagina' },
-
-      // Hoofdgidsen
-      { title: 'Noodpakket Samenstellen', path: '/nl/noodpakket-samenstellen/', category: 'Gidsen', description: 'Complete gids voor voorbereiding' },
-      { title: 'Noodpakket 72 Uur', path: '/nl/noodpakket-72-uur/', category: 'Gidsen', description: 'Noodtas voor 3 dagen' },
-      { title: 'Water Opslaan', path: '/nl/gidsen/water-opslaan/', category: 'Gidsen', description: 'Hoe je drinkwater opslaat' },
-      { title: 'Voedsel Opslaan', path: '/nl/gidsen/voedsel-opslaan/', category: 'Gidsen', description: 'Langdurig houdbaar voedsel' },
-      { title: 'Energie & Communicatie', path: '/nl/gidsen/energie-communicatie/', category: 'Gidsen', description: 'Blijf verbonden' },
-      { title: 'EHBO-kit', path: '/nl/gidsen/ehbo-kit/', category: 'Gidsen', description: 'Essentiële medische benodigdheden' },
-
-      // Scenario's
-      { title: "Alle Scenario's", path: '/nl/scenario/', category: "Scenario's", description: "Overzicht van alle scenario's" },
-      { title: 'Stroomstoring', path: '/nl/scenario/stroomstoring/', category: "Scenario's", description: 'Stroomuitval voorbereiden' },
-      { title: 'Hittegolf', path: '/nl/scenario/hittegolf/', category: "Scenario's", description: 'Extreme temperaturen' },
-      { title: 'Wateruitval', path: '/nl/scenario/wateruitval/', category: "Scenario's", description: 'Onderbreking watervoorziening' },
-      { title: 'Overstroming', path: '/nl/scenario/overstroming/', category: "Scenario's", description: 'Voorbereiden op hoogwater' },
-      { title: 'Evacuatie', path: '/nl/scenario/evacuatie/', category: "Scenario's", description: 'Nooduitgang en vluchten' },
-      { title: 'Cyberaanval', path: '/nl/scenario/cyberaanval/', category: "Scenario's", description: 'Digitale verstoring' },
-
-      // Tools
-      { title: 'Tools', path: '/nl/tools/', category: 'Tools', description: 'Calculators en hulpmiddelen' },
-      { title: 'Noodpakket Samenstellen', path: '/nl/tools/noodpakket-samenstellen/', category: 'Tools', description: 'Maak je eigen checklist' },
-      { title: 'Water Calculator', path: '/nl/tools/water-calculator/', category: 'Tools', description: 'Bereken je waterbehoefte' },
-      { title: 'Energie Calculator', path: '/nl/tools/energie-calculator/', category: 'Tools', description: 'Welke powerbank heb je nodig' },
-
-      // Producten
-      { title: 'Producten', path: '/nl/producten/', category: 'Producten', description: 'Alle aanbevolen producten' },
-      { title: 'Zaklampen', path: '/nl/producten/zaklampen/', category: 'Producten', description: 'Noodverlichting' },
-      { title: 'Powerbanks', path: '/nl/producten/powerbanks/', category: 'Producten', description: 'Draagbare batterijen' },
-      { title: 'Noodradio', path: '/nl/producten/noodradio/', category: 'Producten', description: 'Communicatie zonder internet' },
-      { title: 'Wateropslag', path: '/nl/producten/wateropslag/', category: 'Producten', description: 'Watercontainers' },
-      { title: 'Noodvoedsel', path: '/nl/producten/noodvoedsel/', category: 'Producten', description: 'Langdurig houdbaar eten' },
-      { title: 'EHBO-doos', path: '/nl/producten/ehbo-doos/', category: 'Producten', description: 'Verbandmiddelen' },
-      { title: 'Noodtassen', path: '/nl/producten/noodtassen/', category: 'Producten', description: 'Rugzakken voor noodpakket' },
+    fallbackPages: [
+      { title: 'Noodpakket Samenstellen', path: '/nl/noodpakket-samenstellen/' },
+      { title: 'Stroomstoring', path: '/nl/scenario/stroomstoring/' },
+      { title: 'Water Opslaan', path: '/nl/gidsen/water-opslaan/' },
+      { title: 'Energie Calculator', path: '/nl/tools/energie-calculator/' },
+      { title: 'Noodpakket Samenstellen', path: '/nl/tools/noodpakket-samenstellen/' },
     ],
   },
   de: {
@@ -138,54 +93,63 @@ const contentPerLocale: Record<string, SearchContent> = {
     closeLabel: 'Schließen',
     noResults: 'Keine Ergebnisse gefunden für',
     popularPages: 'Beliebte Seiten',
+    searching: 'Suche...',
     navigate: 'navigieren',
     select: 'auswählen',
     close: 'schließen',
-    pages: [
-      // Hauptseite
-      { title: 'Startseite', path: '/de/', category: 'Hauptseite', description: 'Homepage' },
-
-      // Hauptratgeber
-      { title: 'Notfallausrüstung', path: '/de/notfallausruestung/', category: 'Ratgeber', description: 'Kompletter Vorbereitungsratgeber' },
-      { title: 'Notfallpaket 72 Stunden', path: '/de/notfallpaket-72-stunden/', category: 'Ratgeber', description: 'Notfalltasche für 3 Tage' },
-      { title: 'Wasser Lagerung', path: '/de/ratgeber/wasser-lagerung/', category: 'Ratgeber', description: 'Wie man Trinkwasser lagert' },
-      { title: 'Lebensmittel Lagerung', path: '/de/ratgeber/lebensmittel-lagerung/', category: 'Ratgeber', description: 'Lang haltbare Lebensmittel' },
-      { title: 'Energie & Kommunikation', path: '/de/ratgeber/energie-kommunikation/', category: 'Ratgeber', description: 'Bleiben Sie verbunden' },
-      { title: 'Erste-Hilfe-Set', path: '/de/ratgeber/erste-hilfe-set/', category: 'Ratgeber', description: 'Wichtige medizinische Vorräte' },
-
-      // Szenarien
-      { title: 'Alle Szenarien', path: '/de/szenarien/', category: 'Szenarien', description: 'Übersicht aller Szenarien' },
-      { title: 'Stromausfall', path: '/de/szenarien/stromausfall/', category: 'Szenarien', description: 'Vorbereitung auf Stromausfall' },
-      { title: 'Hitzewelle', path: '/de/szenarien/hitzewelle/', category: 'Szenarien', description: 'Extreme Temperaturen' },
-      { title: 'Wasserausfall', path: '/de/szenarien/wasserausfall/', category: 'Szenarien', description: 'Unterbrechung der Wasserversorgung' },
-      { title: 'Evakuierung', path: '/de/szenarien/evakuierung/', category: 'Szenarien', description: 'Notausgang und Flucht' },
-
-      // Tools
-      { title: 'Tools', path: '/de/tools/', category: 'Tools', description: 'Rechner und Hilfsmittel' },
-      { title: 'Notfallpaket Zusammenstellen', path: '/de/tools/notfallpaket-zusammenstellen/', category: 'Tools', description: 'Erstellen Sie Ihre Checkliste' },
-      { title: 'Wasser Rechner', path: '/de/tools/wasser-rechner/', category: 'Tools', description: 'Berechnen Sie Ihren Wasserbedarf' },
-      { title: 'Energie Rechner', path: '/de/tools/energie-rechner/', category: 'Tools', description: 'Welche Powerbank brauchen Sie' },
-
-      // Produkte
-      { title: 'Produkte', path: '/de/produkte/', category: 'Produkte', description: 'Alle empfohlenen Produkte' },
-      { title: 'Taschenlampen', path: '/de/produkte/taschenlampen/', category: 'Produkte', description: 'Notbeleuchtung' },
-      { title: 'Powerbanks', path: '/de/produkte/powerbanks/', category: 'Produkte', description: 'Tragbare Batterien' },
-      { title: 'Notfallradio', path: '/de/produkte/notfallradio/', category: 'Produkte', description: 'Kommunikation ohne Internet' },
-      { title: 'Wasserspeicher', path: '/de/produkte/wasserspeicher/', category: 'Produkte', description: 'Wasserbehälter' },
-      { title: 'Notnahrung', path: '/de/produkte/notnahrung/', category: 'Produkte', description: 'Lang haltbares Essen' },
-      { title: 'Erste-Hilfe-Kasten', path: '/de/produkte/erste-hilfe-kasten/', category: 'Produkte', description: 'Verbandmaterial' },
-      { title: 'Notfallrucksack', path: '/de/produkte/notfallrucksack/', category: 'Produkte', description: 'Rucksäcke für Notfallpaket' },
+    fallbackPages: [
+      { title: 'Notfallausrüstung', path: '/de/notfallausruestung/' },
+      { title: 'Stromausfall', path: '/de/szenarien/stromausfall/' },
+      { title: 'Wasser Lagerung', path: '/de/ratgeber/wasser-lagerung/' },
+      { title: 'Energie Rechner', path: '/de/tools/energie-rechner/' },
+      { title: 'Notfallpaket Zusammenstellen', path: '/de/tools/notfallpaket-zusammenstellen/' },
     ],
   },
 };
+
+// Pagefind type declarations
+declare global {
+  interface Window {
+    pagefind?: {
+      search: (query: string, options?: { filters?: Record<string, string> }) => Promise<{
+        results: Array<{ data: () => Promise<PagefindResult> }>;
+      }>;
+      init: () => Promise<void>;
+    };
+  }
+}
 
 export default function SearchModal({ isOpen, onClose, locale = 'es' }: SearchModalProps) {
   const [query, setQuery] = useState('');
   const [results, setResults] = useState<SearchResult[]>([]);
   const [selectedIndex, setSelectedIndex] = useState(0);
+  const [isSearching, setIsSearching] = useState(false);
+  const [pagefindLoaded, setPagefindLoaded] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
+  const searchTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   const content = contentPerLocale[locale] || contentPerLocale.es;
+
+  // Load Pagefind script
+  useEffect(() => {
+    if (typeof window !== 'undefined' && !window.pagefind) {
+      const script = document.createElement('script');
+      script.src = '/pagefind/pagefind.js';
+      script.async = true;
+      script.onload = async () => {
+        if (window.pagefind) {
+          await window.pagefind.init();
+          setPagefindLoaded(true);
+        }
+      };
+      script.onerror = () => {
+        console.warn('Pagefind not available, falling back to static search');
+      };
+      document.head.appendChild(script);
+    } else if (window.pagefind) {
+      setPagefindLoaded(true);
+    }
+  }, []);
 
   // Focus input when modal opens
   useEffect(() => {
@@ -209,30 +173,69 @@ export default function SearchModal({ isOpen, onClose, locale = 'es' }: SearchMo
     };
   }, [isOpen]);
 
-  // Search logic
-  const search = useCallback((searchQuery: string) => {
+  // Search with Pagefind
+  const performSearch = useCallback(async (searchQuery: string) => {
     if (!searchQuery.trim()) {
       setResults([]);
+      setIsSearching(false);
       return;
     }
 
-    const q = searchQuery.toLowerCase();
-    const filtered = content.pages.filter(
-      (page) =>
-        page.title.toLowerCase().includes(q) ||
-        page.description?.toLowerCase().includes(q) ||
-        page.category.toLowerCase().includes(q)
-    );
+    setIsSearching(true);
 
-    setResults(filtered);
+    try {
+      if (window.pagefind && pagefindLoaded) {
+        const searchResults = await window.pagefind.search(searchQuery);
+
+        // Load full data for top 10 results
+        const fullResults = await Promise.all(
+          searchResults.results.slice(0, 10).map(async (r) => {
+            const data = await r.data();
+            return data;
+          })
+        );
+
+        // Filter by locale (URL must start with /locale/)
+        const localePrefix = `/${locale}/`;
+        const filteredResults = fullResults
+          .filter((r) => r.url.startsWith(localePrefix))
+          .map((r) => ({
+            title: r.meta.title || r.url,
+            path: r.url,
+            excerpt: r.excerpt,
+          }));
+
+        setResults(filteredResults);
+      } else {
+        // Fallback: filter popular pages
+        const filtered = content.fallbackPages.filter(
+          (page) => page.title.toLowerCase().includes(searchQuery.toLowerCase())
+        );
+        setResults(filtered);
+      }
+    } catch (error) {
+      console.error('Search error:', error);
+      setResults([]);
+    }
+
+    setIsSearching(false);
     setSelectedIndex(0);
-  }, [content.pages]);
+  }, [locale, pagefindLoaded, content.fallbackPages]);
 
-  // Handle input change
+  // Debounced search
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
     setQuery(value);
-    search(value);
+
+    // Clear previous timeout
+    if (searchTimeoutRef.current) {
+      clearTimeout(searchTimeoutRef.current);
+    }
+
+    // Debounce search
+    searchTimeoutRef.current = setTimeout(() => {
+      performSearch(value);
+    }, 150);
   };
 
   // Keyboard navigation
@@ -249,17 +252,6 @@ export default function SearchModal({ isOpen, onClose, locale = 'es' }: SearchMo
       window.location.href = results[selectedIndex].path;
     }
   };
-
-  // Group results by category
-  const groupedResults = results.reduce((acc, result) => {
-    if (!acc[result.category]) {
-      acc[result.category] = [];
-    }
-    acc[result.category].push(result);
-    return acc;
-  }, {} as Record<string, SearchResult[]>);
-
-  let flatIndex = 0;
 
   return (
     <>
@@ -309,6 +301,9 @@ export default function SearchModal({ isOpen, onClose, locale = 'es' }: SearchMo
             aria-controls="search-results-list"
             aria-activedescendant={results[selectedIndex] ? `search-result-${selectedIndex}` : undefined}
           />
+          {isSearching && (
+            <div className="animate-spin w-5 h-5 border-2 border-current border-t-transparent rounded-full opacity-50" />
+          )}
           {/* Mobile close button */}
           <button
             type="button"
@@ -334,46 +329,49 @@ export default function SearchModal({ isOpen, onClose, locale = 'es' }: SearchMo
 
         {/* Results */}
         <div className="search-results" id="search-results-list" role="listbox" aria-label={content.ariaLabel}>
-          {query && results.length === 0 && (
+          {isSearching && (
+            <div className="p-4 text-center text-tertiary" role="status" aria-live="polite">
+              {content.searching}
+            </div>
+          )}
+
+          {!isSearching && query && results.length === 0 && (
             <div className="p-4 text-center text-tertiary" role="status" aria-live="polite">
               {content.noResults} "{query}"
             </div>
           )}
 
-          {Object.entries(groupedResults).map(([category, categoryResults]) => (
-            <div key={category} className="mb-4" role="group" aria-label={category}>
-              <div className="px-4 py-2 text-xs font-semibold text-tertiary uppercase tracking-wide" id={`category-${category}`}>
-                {category}
-              </div>
-              {categoryResults.map((result) => {
-                const currentIndex = flatIndex++;
-                return (
-                  <a
-                    key={result.path}
-                    href={result.path}
-                    id={`search-result-${currentIndex}`}
-                    role="option"
-                    aria-selected={currentIndex === selectedIndex}
-                    className={`search-result-item ${currentIndex === selectedIndex ? 'selected' : ''}`}
-                    onClick={onClose}
-                  >
-                    <div className="search-result-title">{result.title}</div>
-                    {result.description && (
-                      <div className="search-result-path">{result.description}</div>
-                    )}
-                  </a>
-                );
-              })}
+          {!isSearching && results.length > 0 && (
+            <div className="py-2">
+              {results.map((result, index) => (
+                <a
+                  key={result.path}
+                  href={result.path}
+                  id={`search-result-${index}`}
+                  role="option"
+                  aria-selected={index === selectedIndex}
+                  className={`search-result-item ${index === selectedIndex ? 'selected' : ''}`}
+                  onClick={onClose}
+                >
+                  <div className="search-result-title">{result.title}</div>
+                  {result.excerpt && (
+                    <div
+                      className="search-result-excerpt"
+                      dangerouslySetInnerHTML={{ __html: result.excerpt }}
+                    />
+                  )}
+                </a>
+              ))}
             </div>
-          ))}
+          )}
 
           {/* Empty state - show popular pages */}
-          {!query && (
+          {!query && !isSearching && (
             <div className="p-4">
               <div className="text-xs font-semibold text-tertiary uppercase tracking-wide mb-2">
                 {content.popularPages}
               </div>
-              {content.pages.slice(1, 6).map((page) => (
+              {content.fallbackPages.map((page) => (
                 <a
                   key={page.path}
                   href={page.path}
@@ -381,7 +379,6 @@ export default function SearchModal({ isOpen, onClose, locale = 'es' }: SearchMo
                   onClick={onClose}
                 >
                   <div className="search-result-title">{page.title}</div>
-                  <div className="search-result-path">{page.description}</div>
                 </a>
               ))}
             </div>
@@ -401,6 +398,26 @@ export default function SearchModal({ isOpen, onClose, locale = 'es' }: SearchMo
           </span>
         </div>
       </div>
+
+      <style>{`
+        .search-result-excerpt {
+          font-size: 12px;
+          color: var(--color-text-muted);
+          line-height: 1.5;
+          margin-top: 4px;
+          overflow: hidden;
+          display: -webkit-box;
+          -webkit-line-clamp: 2;
+          -webkit-box-orient: vertical;
+        }
+
+        .search-result-excerpt mark {
+          background: var(--color-accent-primary);
+          color: var(--color-bg-primary);
+          padding: 0 2px;
+          border-radius: 2px;
+        }
+      `}</style>
     </>
   );
 }
