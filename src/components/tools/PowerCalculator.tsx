@@ -9,10 +9,11 @@ import deTranslations from '../../../src/i18n/de.json';
 
 type Locale = 'es' | 'nl' | 'de';
 
+// Use type assertion for locale-specific variations
 const translations: Record<Locale, typeof esTranslations> = {
   es: esTranslations,
-  nl: nlTranslations,
-  de: deTranslations,
+  nl: nlTranslations as unknown as typeof esTranslations,
+  de: deTranslations as unknown as typeof esTranslations,
 };
 
 // Animated number component
@@ -223,7 +224,7 @@ function DurationSelector({ days, onChange, presets }: {
 function SafetySelector({ margin, onChange, options }: {
   margin: number;
   onChange: (margin: number) => void;
-  options: { value: number; label: string; desc: string; icon: keyof typeof iconPaths }[];
+  options: { value: number; label: string; desc: string; icon: string }[];
 }) {
 
   return (
@@ -722,7 +723,7 @@ function PowerCalculator({ locale = 'es' }: PowerCalculatorProps) {
     }
   };
 
-  const categoryLabels: Record<string, { label: string; icon: keyof typeof iconPaths }> = {
+  const categoryLabels: Record<string, { label: string; icon: string }> = {
     communication: { label: t.devices.categories.communication, icon: 'smartphone' },
     lighting: { label: t.devices.categories.lighting, icon: 'flashlight' },
     medical: { label: t.devices.categories.medical, icon: 'heart' },

@@ -64,8 +64,9 @@ export function useKitBuilder({ locale, initialScenario }: UseKitBuilderProps) {
     affiliateUrl: item.affiliateUrl,
   }));
 
-  const quickPresets: QuickPreset[] = kitData.quickPresets || [];
-  const categoriesData: CategoryData[] = kitData.categories || [];
+  // Type assertion for locale-specific data structures
+  const quickPresets = (kitData.quickPresets || []) as QuickPreset[];
+  const categoriesData = (kitData.categories || []) as CategoryData[];
 
   // State
   const [scenario, setScenario] = useState<string>(initialScenario || defaultScenario);

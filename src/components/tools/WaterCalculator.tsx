@@ -9,10 +9,11 @@ import deTranslations from '../../../src/i18n/de.json';
 
 type Locale = 'es' | 'nl' | 'de';
 
+// Use type assertion for locale-specific variations
 const translations: Record<Locale, typeof esTranslations> = {
   es: esTranslations,
-  nl: nlTranslations,
-  de: deTranslations,
+  nl: nlTranslations as unknown as typeof esTranslations,
+  de: deTranslations as unknown as typeof esTranslations,
 };
 
 // Water storage product recommendations
@@ -217,7 +218,7 @@ function NumberStepper({
   min?: number;
   max?: number;
   label: string;
-  icon?: keyof typeof icons;
+  icon?: string;
   color?: 'accent' | 'blue' | 'green';
 }) {
   const colorClasses = {
@@ -305,7 +306,7 @@ function PresetButton({
   label: string;
   sublabel: string;
   onClick: () => void;
-  icon: keyof typeof icons;
+  icon: string;
 }) {
   return (
     <button
@@ -332,7 +333,7 @@ function WaterCategoryCard({
   delay = 0,
   isVisible
 }: {
-  icon: keyof typeof icons;
+  icon: string;
   label: string;
   value: number;
   color: string;

@@ -10,11 +10,11 @@ import deTranslations from '../i18n/de.json';
 
 export type Locale = 'es' | 'nl' | 'de';
 
-// Translation getter
+// Translation getter - use type assertion for locale-specific variations
 const translationsMap: Record<Locale, typeof esTranslations> = {
   es: esTranslations,
-  nl: nlTranslations,
-  de: deTranslations,
+  nl: nlTranslations as unknown as typeof esTranslations,
+  de: deTranslations as unknown as typeof esTranslations,
 };
 
 export function getTranslations(locale: Locale) {

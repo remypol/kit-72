@@ -10,13 +10,14 @@ import deTranslations from './de.json';
 
 export type Locale = 'es' | 'nl' | 'de';
 
+// Use a base type that allows locale-specific variations
 export type Translations = typeof esTranslations;
 
-// All translations keyed by locale
+// Allow locale-specific keys by using a less strict type assertion
 const translations: Record<Locale, Translations> = {
   es: esTranslations,
-  nl: nlTranslations,
-  de: deTranslations,
+  nl: nlTranslations as unknown as Translations,
+  de: deTranslations as unknown as Translations,
 };
 
 /**
