@@ -1,0 +1,637 @@
+{
+  "meta": {
+    "locale": "de",
+    "currency": "EUR",
+    "lastUpdated": "2025-12-26",
+    "source": "Kit-72 translated from Spanish",
+    "affiliateProgram": "Amazon Associates DE"
+  },
+  "scenarios": {
+    "general": {
+      "id": "general",
+      "label": "Basis-Kit",
+      "icon": "Backpack",
+      "description": "72h Grundversorgung",
+      "color": "from-[--color-accent-primary]/20 to-[--color-accent-secondary]/10",
+      "time": "10 Min"
+    },
+    "stromausfall": {
+      "id": "stromausfall",
+      "label": "Stromausfall",
+      "icon": "Zap",
+      "description": "Kein Strom",
+      "color": "from-purple-500/20 to-purple-600/10",
+      "time": "8 Min"
+    },
+    "hitzewelle": {
+      "id": "hitzewelle",
+      "label": "Hitzewelle",
+      "icon": "Sun",
+      "description": "Extreme Temperaturen",
+      "color": "from-orange-500/20 to-orange-600/10",
+      "time": "6 Min"
+    },
+    "wasserausfall": {
+      "id": "wasserausfall",
+      "label": "Wasserausfall",
+      "icon": "Droplet",
+      "description": "Keine Wasserversorgung",
+      "color": "from-blue-500/20 to-blue-600/10",
+      "time": "5 Min"
+    },
+    "evakuierung": {
+      "id": "evakuierung",
+      "label": "Evakuierung",
+      "icon": "LogOut",
+      "description": "Notfall-Flucht",
+      "color": "from-rose-500/20 to-rose-600/10",
+      "time": "12 Min"
+    }
+  },
+  "quickPresets": [
+    {
+      "id": "allein",
+      "label": "Ich lebe allein",
+      "description": "Einfaches Einzel-Kit",
+      "scenario": "general",
+      "hasBabies": false,
+      "hasPets": false,
+      "icon": "Backpack",
+      "color": "from-emerald-500/20 to-emerald-600/10"
+    },
+    {
+      "id": "familie",
+      "label": "Familie mit Kindern",
+      "description": "Komplettes Familien-Kit",
+      "scenario": "general",
+      "hasBabies": true,
+      "hasPets": false,
+      "icon": "Users",
+      "color": "from-blue-500/20 to-blue-600/10"
+    },
+    {
+      "id": "haustiere",
+      "label": "Mit Haustieren",
+      "description": "Kit inkl. Hund/Katze",
+      "scenario": "general",
+      "hasBabies": false,
+      "hasPets": true,
+      "icon": "PawPrint",
+      "color": "from-amber-500/20 to-amber-600/10"
+    },
+    {
+      "id": "flucht",
+      "label": "Fluchtrucksack",
+      "description": "15 Min zum Verlassen",
+      "scenario": "evakuierung",
+      "hasBabies": false,
+      "hasPets": false,
+      "icon": "LogOut",
+      "color": "from-rose-500/20 to-rose-600/10"
+    }
+  ],
+  "categories": [
+    "Wasser",
+    "Nahrung",
+    "Beleuchtung",
+    "Energie",
+    "Erste-Hilfe",
+    "Hygiene",
+    "Dokumente",
+    "Werkzeuge",
+    "Schutz",
+    "Kuehlung",
+    "Babys",
+    "Haustiere"
+  ],
+  "items": [
+    {
+      "id": "wasser-1",
+      "name": "Trinkwasser in Flaschen",
+      "category": "Wasser",
+      "quantity": "3L x Person x Tag",
+      "priority": "critical",
+      "scenarios": ["general", "stromausfall", "hitzewelle", "wasserausfall", "evakuierung"],
+      "affiliateUrl": "https://www.amazon.de/s?k=wasserkanister+5+liter+trinkwasser",
+      "affiliateSource": "amazon"
+    },
+    {
+      "id": "wasser-2",
+      "name": "Wasserentkeimungstabletten",
+      "category": "Wasser",
+      "quantity": "1 Packung",
+      "priority": "recommended",
+      "scenarios": ["general", "wasserausfall", "evakuierung"],
+      "affiliateUrl": "https://www.amazon.de/s?k=wasserentkeimungstabletten",
+      "affiliateSource": "amazon"
+    },
+    {
+      "id": "wasser-3",
+      "name": "Tragbarer Wasserfilter",
+      "category": "Wasser",
+      "quantity": "1 Stueck",
+      "priority": "optional",
+      "scenarios": ["wasserausfall", "evakuierung"],
+      "affiliateUrl": "https://www.amazon.de/s?k=lifestraw+wasserfilter",
+      "affiliateSource": "amazon"
+    },
+    {
+      "id": "nahrung-1",
+      "name": "Energieriegel",
+      "category": "Nahrung",
+      "quantity": "6-9 pro Person",
+      "priority": "critical",
+      "scenarios": ["general", "stromausfall", "evakuierung"],
+      "affiliateUrl": "https://www.amazon.de/s?k=notfall+energieriegel+langzeit",
+      "affiliateSource": "amazon"
+    },
+    {
+      "id": "nahrung-2",
+      "name": "Nuesse und Trockenobst",
+      "category": "Nahrung",
+      "quantity": "200g pro Person",
+      "priority": "critical",
+      "scenarios": ["general", "stromausfall", "evakuierung"],
+      "affiliateUrl": "https://www.amazon.de/s?k=nussmischung+trockenobst",
+      "affiliateSource": "amazon"
+    },
+    {
+      "id": "nahrung-3",
+      "name": "Konserven (Dosen)",
+      "category": "Nahrung",
+      "quantity": "3-6 pro Person",
+      "priority": "recommended",
+      "scenarios": ["general", "stromausfall", "wasserausfall"]
+    },
+    {
+      "id": "nahrung-4",
+      "name": "Handdosenoeffner",
+      "category": "Nahrung",
+      "quantity": "1 Stueck",
+      "priority": "critical",
+      "scenarios": ["general", "stromausfall"],
+      "affiliateUrl": "https://www.amazon.de/s?k=dosenoeffner+manuell",
+      "affiliateSource": "amazon"
+    },
+    {
+      "id": "nahrung-5",
+      "name": "Elektrolyte/Rehydrationssalze",
+      "category": "Nahrung",
+      "quantity": "10+ Beutel",
+      "priority": "critical",
+      "scenarios": ["hitzewelle"],
+      "affiliateUrl": "https://www.amazon.de/s?k=elektrolyte+pulver+rehydration",
+      "affiliateSource": "amazon"
+    },
+    {
+      "id": "nahrung-6",
+      "name": "Isotonische Getraenke",
+      "category": "Nahrung",
+      "quantity": "6-12 Stueck",
+      "priority": "recommended",
+      "scenarios": ["hitzewelle"]
+    },
+    {
+      "id": "licht-1",
+      "name": "LED-Taschenlampe",
+      "category": "Beleuchtung",
+      "quantity": "1-2 Stueck",
+      "priority": "critical",
+      "scenarios": ["general", "stromausfall", "evakuierung"],
+      "affiliateUrl": "https://www.amazon.de/s?k=led+taschenlampe+aufladbar",
+      "affiliateSource": "amazon"
+    },
+    {
+      "id": "licht-2",
+      "name": "Ersatzbatterien",
+      "category": "Beleuchtung",
+      "quantity": "2-3 Sets",
+      "priority": "critical",
+      "scenarios": ["general", "stromausfall"],
+      "affiliateUrl": "https://www.amazon.de/s?k=batterien+aa+aaa+set",
+      "affiliateSource": "amazon"
+    },
+    {
+      "id": "licht-3",
+      "name": "Kerzen und Feuerzeug",
+      "category": "Beleuchtung",
+      "quantity": "10-20 Kerzen",
+      "priority": "recommended",
+      "scenarios": ["stromausfall"],
+      "affiliateUrl": "https://www.amazon.de/s?k=notfallkerzen+lange+brenndauer",
+      "affiliateSource": "amazon"
+    },
+    {
+      "id": "licht-4",
+      "name": "Stirnlampe",
+      "category": "Beleuchtung",
+      "quantity": "1 pro Person",
+      "priority": "recommended",
+      "scenarios": ["stromausfall", "evakuierung"],
+      "affiliateUrl": "https://www.amazon.de/s?k=stirnlampe+led+aufladbar",
+      "affiliateSource": "amazon"
+    },
+    {
+      "id": "energie-1",
+      "name": "Powerbank (10.000mAh+)",
+      "category": "Energie",
+      "quantity": "1 pro Person",
+      "priority": "critical",
+      "scenarios": ["general", "stromausfall", "evakuierung"],
+      "affiliateUrl": "https://www.amazon.de/s?k=anker+powercore+20000",
+      "affiliateSource": "amazon"
+    },
+    {
+      "id": "energie-2",
+      "name": "Kurbelradio / Solarradio",
+      "category": "Energie",
+      "quantity": "1 Stueck",
+      "priority": "recommended",
+      "scenarios": ["general", "stromausfall", "evakuierung"],
+      "affiliateUrl": "https://www.amazon.de/s?k=kurbelradio+solar+notfall",
+      "affiliateSource": "amazon"
+    },
+    {
+      "id": "energie-3",
+      "name": "KFZ-Ladegeraet",
+      "category": "Energie",
+      "quantity": "1 Stueck",
+      "priority": "recommended",
+      "scenarios": ["stromausfall", "evakuierung"],
+      "affiliateUrl": "https://www.amazon.de/s?k=auto+ladegeraet+usb+schnell",
+      "affiliateSource": "amazon"
+    },
+    {
+      "id": "energie-4",
+      "name": "Tragbare Powerstation",
+      "category": "Energie",
+      "quantity": "300-500Wh",
+      "priority": "optional",
+      "scenarios": ["stromausfall"],
+      "notes": "Fuer laengere Stromausfaelle",
+      "affiliateUrl": "https://www.amazon.de/s?k=powerstation+500wh+tragbar",
+      "affiliateSource": "amazon"
+    },
+    {
+      "id": "erstehilfe-1",
+      "name": "Pflaster (verschiedene Groessen)",
+      "category": "Erste-Hilfe",
+      "quantity": "20+ Stueck",
+      "priority": "critical",
+      "scenarios": ["general", "evakuierung"],
+      "affiliateUrl": "https://www.amazon.de/s?k=pflaster+set+verschiedene+groessen",
+      "affiliateSource": "amazon"
+    },
+    {
+      "id": "erstehilfe-2",
+      "name": "Sterile Kompressen",
+      "category": "Erste-Hilfe",
+      "quantity": "1 Packung",
+      "priority": "critical",
+      "scenarios": ["general", "evakuierung"],
+      "affiliateUrl": "https://www.amazon.de/s?k=sterile+kompressen",
+      "affiliateSource": "amazon"
+    },
+    {
+      "id": "erstehilfe-3",
+      "name": "Desinfektionsmittel",
+      "category": "Erste-Hilfe",
+      "quantity": "1 Flasche",
+      "priority": "critical",
+      "scenarios": ["general", "evakuierung"],
+      "affiliateUrl": "https://www.amazon.de/s?k=wunddesinfektion+spray",
+      "affiliateSource": "amazon"
+    },
+    {
+      "id": "erstehilfe-4",
+      "name": "Schmerzmittel",
+      "category": "Erste-Hilfe",
+      "quantity": "1 Packung",
+      "priority": "recommended",
+      "scenarios": ["general", "evakuierung"]
+    },
+    {
+      "id": "erstehilfe-5",
+      "name": "Persoenliche Medikamente",
+      "category": "Erste-Hilfe",
+      "quantity": "7+ Tage Vorrat",
+      "priority": "critical",
+      "scenarios": ["general", "stromausfall", "hitzewelle", "wasserausfall", "evakuierung"]
+    },
+    {
+      "id": "hygiene-1",
+      "name": "Feuchttuecher",
+      "category": "Hygiene",
+      "quantity": "2-3 Packungen",
+      "priority": "critical",
+      "scenarios": ["general", "wasserausfall", "evakuierung"],
+      "affiliateUrl": "https://www.amazon.de/s?k=feuchttuecher+erwachsene",
+      "affiliateSource": "amazon"
+    },
+    {
+      "id": "hygiene-2",
+      "name": "Handdesinfektionsmittel",
+      "category": "Hygiene",
+      "quantity": "2 Flaschen",
+      "priority": "critical",
+      "scenarios": ["general", "wasserausfall", "evakuierung"],
+      "affiliateUrl": "https://www.amazon.de/s?k=handdesinfektion+gel",
+      "affiliateSource": "amazon"
+    },
+    {
+      "id": "hygiene-3",
+      "name": "Toilettenpapier",
+      "category": "Hygiene",
+      "quantity": "2-4 Rollen",
+      "priority": "critical",
+      "scenarios": ["general", "wasserausfall"]
+    },
+    {
+      "id": "hygiene-4",
+      "name": "Muellbeutel",
+      "category": "Hygiene",
+      "quantity": "10 Stueck",
+      "priority": "recommended",
+      "scenarios": ["general", "wasserausfall"],
+      "affiliateUrl": "https://www.amazon.de/s?k=muellbeutel+reissfest",
+      "affiliateSource": "amazon"
+    },
+    {
+      "id": "hygiene-5",
+      "name": "Menstruationsartikel",
+      "category": "Hygiene",
+      "quantity": "Nach Bedarf",
+      "priority": "critical",
+      "scenarios": ["general", "evakuierung"]
+    },
+    {
+      "id": "doks-1",
+      "name": "Kopien Personalausweis/Reisepass",
+      "category": "Dokumente",
+      "quantity": "Fuer alle Familienmitglieder",
+      "priority": "critical",
+      "scenarios": ["general", "evakuierung"]
+    },
+    {
+      "id": "doks-2",
+      "name": "Krankenversicherungskarte",
+      "category": "Dokumente",
+      "quantity": "Kopien",
+      "priority": "critical",
+      "scenarios": ["general", "evakuierung"]
+    },
+    {
+      "id": "doks-3",
+      "name": "Notfall-Kontaktliste",
+      "category": "Dokumente",
+      "quantity": "Ausgedruckt",
+      "priority": "critical",
+      "scenarios": ["general", "stromausfall", "evakuierung"]
+    },
+    {
+      "id": "doks-4",
+      "name": "Bargeld",
+      "category": "Dokumente",
+      "quantity": "100-200 EUR",
+      "priority": "critical",
+      "scenarios": ["general", "stromausfall", "evakuierung"]
+    },
+    {
+      "id": "werkzeug-1",
+      "name": "Taschenmesser/Multitool",
+      "category": "Werkzeuge",
+      "quantity": "1 Stueck",
+      "priority": "critical",
+      "scenarios": ["general", "evakuierung"],
+      "affiliateUrl": "https://www.amazon.de/s?k=victorinox+taschenmesser",
+      "affiliateSource": "amazon"
+    },
+    {
+      "id": "werkzeug-2",
+      "name": "Signalpfeife",
+      "category": "Werkzeuge",
+      "quantity": "1 pro Person",
+      "priority": "recommended",
+      "scenarios": ["general", "evakuierung"],
+      "affiliateUrl": "https://www.amazon.de/s?k=notfallpfeife+signalpfeife",
+      "affiliateSource": "amazon"
+    },
+    {
+      "id": "werkzeug-3",
+      "name": "Panzerband/Gaffa-Tape",
+      "category": "Werkzeuge",
+      "quantity": "1 Rolle",
+      "priority": "recommended",
+      "scenarios": ["general"],
+      "affiliateUrl": "https://www.amazon.de/s?k=gaffa+tape+wasserfest",
+      "affiliateSource": "amazon"
+    },
+    {
+      "id": "schutz-1",
+      "name": "Rettungsdecke",
+      "category": "Schutz",
+      "quantity": "1 pro Person",
+      "priority": "critical",
+      "scenarios": ["general", "stromausfall", "evakuierung"],
+      "affiliateUrl": "https://www.amazon.de/s?k=rettungsdecke+gold+silber",
+      "affiliateSource": "amazon"
+    },
+    {
+      "id": "schutz-2",
+      "name": "Regenponcho",
+      "category": "Schutz",
+      "quantity": "1 pro Person",
+      "priority": "recommended",
+      "scenarios": ["evakuierung"],
+      "affiliateUrl": "https://www.amazon.de/s?k=regenponcho+notfall",
+      "affiliateSource": "amazon"
+    },
+    {
+      "id": "schutz-3",
+      "name": "Atemschutzmasken",
+      "category": "Schutz",
+      "quantity": "5-10 Stueck",
+      "priority": "recommended",
+      "scenarios": ["general", "evakuierung"],
+      "affiliateUrl": "https://www.amazon.de/s?k=ffp2+masken",
+      "affiliateSource": "amazon"
+    },
+    {
+      "id": "kuehlung-1",
+      "name": "Batteriebetriebener Ventilator",
+      "category": "Kuehlung",
+      "quantity": "1-2 Stueck",
+      "priority": "recommended",
+      "scenarios": ["hitzewelle"],
+      "affiliateUrl": "https://www.amazon.de/s?k=ventilator+batterie+tragbar",
+      "affiliateSource": "amazon"
+    },
+    {
+      "id": "kuehlung-2",
+      "name": "Mikrofaserhandtuecher",
+      "category": "Kuehlung",
+      "quantity": "2 pro Person",
+      "priority": "critical",
+      "scenarios": ["hitzewelle"],
+      "affiliateUrl": "https://www.amazon.de/s?k=mikrofaser+handtuch+kuehlung",
+      "affiliateSource": "amazon"
+    },
+    {
+      "id": "kuehlung-3",
+      "name": "Spruehflasche fuer Wasser",
+      "category": "Kuehlung",
+      "quantity": "1-2 Stueck",
+      "priority": "recommended",
+      "scenarios": ["hitzewelle"],
+      "affiliateUrl": "https://www.amazon.de/s?k=spruehflasche+wasser+nebel",
+      "affiliateSource": "amazon"
+    },
+    {
+      "id": "kuehlung-4",
+      "name": "Kuehlelemente",
+      "category": "Kuehlung",
+      "quantity": "4-6 Stueck",
+      "priority": "critical",
+      "scenarios": ["hitzewelle", "stromausfall"],
+      "affiliateUrl": "https://www.amazon.de/s?k=kuehlakku+kuehltasche",
+      "affiliateSource": "amazon"
+    },
+    {
+      "id": "kuehlung-5",
+      "name": "Sonnenschutz LSF50+",
+      "category": "Kuehlung",
+      "quantity": "1 Flasche",
+      "priority": "critical",
+      "scenarios": ["hitzewelle"],
+      "affiliateUrl": "https://www.amazon.de/s?k=sonnencreme+lsf50",
+      "affiliateSource": "amazon"
+    },
+    {
+      "id": "kuehlung-6",
+      "name": "Sonnenhut mit breiter Krempe",
+      "category": "Kuehlung",
+      "quantity": "1 pro Person",
+      "priority": "critical",
+      "scenarios": ["hitzewelle"],
+      "affiliateUrl": "https://www.amazon.de/s?k=sonnenhut+breite+krempe",
+      "affiliateSource": "amazon"
+    },
+    {
+      "id": "baby-1",
+      "name": "Windeln",
+      "category": "Babys",
+      "quantity": "Vorrat fuer 3+ Tage",
+      "priority": "critical",
+      "scenarios": ["general", "evakuierung"],
+      "notes": "Falls Babys vorhanden"
+    },
+    {
+      "id": "baby-2",
+      "name": "Saeuglingsnahrung / Babyglaeser",
+      "category": "Babys",
+      "quantity": "Vorrat fuer 3+ Tage",
+      "priority": "critical",
+      "scenarios": ["general", "evakuierung"],
+      "notes": "Falls Babys vorhanden"
+    },
+    {
+      "id": "baby-3",
+      "name": "Babyflaeschen",
+      "category": "Babys",
+      "quantity": "2-3 Stueck",
+      "priority": "critical",
+      "scenarios": ["general", "evakuierung"],
+      "notes": "Falls Babys vorhanden"
+    },
+    {
+      "id": "tier-1",
+      "name": "Tierfutter",
+      "category": "Haustiere",
+      "quantity": "Vorrat fuer 3+ Tage",
+      "priority": "critical",
+      "scenarios": ["general", "evakuierung"],
+      "notes": "Falls Haustiere vorhanden"
+    },
+    {
+      "id": "tier-2",
+      "name": "Zusaetzliches Wasser fuer Tiere",
+      "category": "Haustiere",
+      "quantity": "1L/Hund/Tag",
+      "priority": "critical",
+      "scenarios": ["general", "hitzewelle", "evakuierung"],
+      "notes": "Falls Haustiere vorhanden"
+    },
+    {
+      "id": "tier-3",
+      "name": "Transportbox",
+      "category": "Haustiere",
+      "quantity": "1 pro Tier",
+      "priority": "critical",
+      "scenarios": ["evakuierung"],
+      "notes": "Falls Haustiere vorhanden",
+      "affiliateUrl": "https://www.amazon.de/s?k=transportbox+hund+katze",
+      "affiliateSource": "amazon"
+    },
+    {
+      "id": "tier-4",
+      "name": "Leine / Geschirr",
+      "category": "Haustiere",
+      "quantity": "1 pro Tier",
+      "priority": "critical",
+      "scenarios": ["evakuierung"],
+      "notes": "Falls Haustiere vorhanden",
+      "affiliateUrl": "https://www.amazon.de/s?k=hundegeschirr+sicherheit",
+      "affiliateSource": "amazon"
+    }
+  ],
+  "ui": {
+    "title": "Kit-Konfigurator",
+    "subtitle": "Deine persoenliche Checkliste",
+    "scenarioSectionTitle": "Waehle dein Szenario",
+    "familySectionTitle": "Deine Familie",
+    "babiesOption": "Babys oder Kleinkinder",
+    "babiesDescription": "Fuegt Windeln, Flaeschen, etc. hinzu",
+    "petsOption": "Haustiere",
+    "petsDescription": "Fuegt Futter, Transportbox, etc. hinzu",
+    "progressTitle": "Dein Kit-Fortschritt",
+    "progressComplete": "Kit vollstaendig!",
+    "itemsLabel": "Artikel",
+    "criticalLabel": "Kritisch",
+    "criticalMissing": "Dir fehlen {count} kritische Artikel",
+    "criticalComplete": "Alle kritischen Artikel vollstaendig",
+    "congratulations": "Glueckwunsch! Dein Kit ist bereit",
+    "priorityLegend": {
+      "critical": "Kritisch",
+      "recommended": "Empfohlen",
+      "optional": "Optional"
+    },
+    "categoryComplete": "Vollstaendig",
+    "printButton": "Drucken",
+    "shareButton": "Teilen",
+    "resetButton": "Zuruecksetzen",
+    "buyButton": "Kaufen",
+    "autoSaveMessage": "Dein Fortschritt wird automatisch gespeichert",
+    "resumeBanner": {
+      "title": "Fortschritt gespeichert",
+      "itemsMarked": "{count} Artikel markiert",
+      "startOver": "Neu beginnen"
+    },
+    "quickStartTitle": "Schnellstart",
+    "printHeader": {
+      "title": "Kit-72.com - Notfallvorsorge",
+      "generated": "Erstellt am",
+      "scenario": "Szenario",
+      "withBabies": "Mit Babys",
+      "withPets": "Mit Haustieren",
+      "scanQR": "QR-Code scannen fuer Online-Version"
+    },
+    "milestones": {
+      "25": "25% geschafft - Guter Anfang!",
+      "50": "50% - Du bist auf halbem Weg!",
+      "75": "75% - Fast geschafft!",
+      "100": "100% - Kit vollstaendig!"
+    },
+    "linkCopied": "Link kopiert"
+  },
+  "storageKey": "kit72_builder_de"
+}

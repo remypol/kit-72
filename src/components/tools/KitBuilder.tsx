@@ -3,10 +3,12 @@ import { useState, useEffect, useRef, useCallback } from 'react';
 // Import data files for each locale
 import esKitData from '../../data/kit-items/es.json';
 import nlKitData from '../../data/kit-items/nl.json';
+import deKitData from '../../data/kit-items/de.json';
 
 // Import i18n translations
 import esTranslations from '../../i18n/es.json';
 import nlTranslations from '../../i18n/nl.json';
+import deTranslations from '../../i18n/de.json';
 
 type Locale = 'es' | 'nl' | 'de';
 
@@ -14,6 +16,7 @@ type Locale = 'es' | 'nl' | 'de';
 function getKitData(locale: Locale) {
   switch (locale) {
     case 'nl': return nlKitData;
+    case 'de': return deKitData;
     case 'es':
     default: return esKitData;
   }
@@ -23,6 +26,7 @@ function getKitData(locale: Locale) {
 function getTranslations(locale: Locale) {
   switch (locale) {
     case 'nl': return nlTranslations;
+    case 'de': return deTranslations;
     case 'es':
     default: return esTranslations;
   }
