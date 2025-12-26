@@ -13,6 +13,7 @@
  */
 
 import { useState, useEffect, useCallback } from 'react';
+import { Icon } from '../ui/Icon';
 
 interface Phase {
   id: string;
@@ -58,7 +59,7 @@ const phaseConfigPerLocale: Record<string, { labels: PhaseLabels; ids: { before:
 };
 
 const defaultPhasesES: Phase[] = [
-  { id: 'antes', label: 'Antes', icon: 'shield' },
+  { id: 'antes', label: 'Antes', icon: 'Shield' },
   { id: 'durante', label: 'Durante', icon: 'activity' },
   { id: 'despues', label: 'Después', icon: 'check-circle' },
 ];
@@ -66,39 +67,10 @@ const defaultPhasesES: Phase[] = [
 function buildPhasesFromLabels(labels: PhaseLabels, ids?: { before: string; during: string; after: string }): Phase[] {
   const phaseIds = ids || { before: 'antes', during: 'durante', after: 'despues' };
   return [
-    { id: phaseIds.before, label: labels.before, icon: 'shield' },
+    { id: phaseIds.before, label: labels.before, icon: 'Shield' },
     { id: phaseIds.during, label: labels.during, icon: 'activity' },
     { id: phaseIds.after, label: labels.after, icon: 'check-circle' },
   ];
-}
-
-// Icon SVG paths
-const icons: Record<string, string> = {
-  shield: '<path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/>',
-  activity: '<path d="M22 12h-2.48a2 2 0 0 0-1.93 1.46l-2.35 8.36a.25.25 0 0 1-.48 0L9.24 2.18a.25.25 0 0 0-.48 0l-2.35 8.36A2 2 0 0 1 4.49 12H2"/>',
-  'check-circle': '<circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/>',
-  check: '<path d="M20 6 9 17l-5-5"/>',
-};
-
-function Icon({ name, size = 18 }: { name: string; size?: number }) {
-  const path = icons[name];
-  if (!path) return null;
-
-  return (
-    <svg
-      width={size}
-      height={size}
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      aria-hidden="true"
-    >
-      <g dangerouslySetInnerHTML={{ __html: path }} />
-    </svg>
-  );
 }
 
 export default function PhaseTabs({
@@ -214,7 +186,7 @@ export default function PhaseTabs({
             >
               <span className="phase-tab__indicator">
                 {state === 'completed' ? (
-                  <Icon name="check" size={14} />
+                  <Icon name="Check" size={14} />
                 ) : (
                   <span className="phase-tab__number">{index + 1}</span>
                 )}

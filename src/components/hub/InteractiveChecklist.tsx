@@ -12,6 +12,7 @@
  */
 
 import { useState, useEffect, useCallback } from 'react';
+import { Icon } from '../ui/Icon';
 
 interface ChecklistItem {
   id: string;
@@ -37,44 +38,13 @@ interface InteractiveChecklistProps {
   title?: string;
 }
 
-// Icon SVG paths
-const icons: Record<string, string> = {
-  flashlight: '<path d="M18 6c0 2-2 2-2 4v10a2 2 0 0 1-2 2h-4a2 2 0 0 1-2-2V10c0-2-2-2-2-4V2h12z"/><line x1="6" x2="18" y1="6" y2="6"/><line x1="12" x2="12" y1="12" y2="12"/>',
-  battery: '<rect width="16" height="10" x="2" y="7" rx="2" ry="2"/><line x1="22" x2="22" y1="11" y2="13"/><line x1="6" x2="6" y1="11" y2="13"/><line x1="10" x2="10" y1="11" y2="13"/><line x1="14" x2="14" y1="11" y2="13"/>',
-  radio: '<path d="M4.9 19.1C1 15.2 1 8.8 4.9 4.9"/><path d="M7.8 16.2c-2.3-2.3-2.3-6.1 0-8.5"/><circle cx="12" cy="12" r="2"/><path d="M16.2 7.8c2.3 2.3 2.3 6.1 0 8.5"/><path d="M19.1 4.9C23 8.8 23 15.1 19.1 19"/>',
-  utensils: '<path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2"/><path d="M7 2v20"/><path d="M21 15V2a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3zm0 0v7"/>',
-  thermometer: '<path d="M14 4v10.54a4 4 0 1 1-4 0V4a2 2 0 0 1 4 0Z"/>',
-  check: '<path d="M20 6 9 17l-5-5"/>',
-  chevronDown: '<path d="m6 9 6 6 6-6"/>',
-};
-
-function Icon({ name, size = 18 }: { name: string; size?: number }) {
-  const path = icons[name];
-  if (!path) return null;
-
-  return (
-    <svg
-      width={size}
-      height={size}
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      aria-hidden="true"
-    >
-      <g dangerouslySetInnerHTML={{ __html: path }} />
-    </svg>
-  );
-}
-
+// Map category IDs to shared Icon names
 const categoryIcons: Record<string, string> = {
-  iluminacion: 'flashlight',
-  energia: 'battery',
-  comunicacion: 'radio',
-  alimentacion: 'utensils',
-  confort: 'thermometer',
+  iluminacion: 'Flashlight',
+  energia: 'Battery',
+  comunicacion: 'Radio',
+  alimentacion: 'Utensils',
+  confort: 'Thermometer',
 };
 
 const priorityConfig = {
@@ -198,7 +168,7 @@ export default function InteractiveChecklist({
             checkedItems.has(item.id)
           ).length;
           const isExpanded = expandedCategories.has(category.id);
-          const iconName = categoryIcons[category.id] || 'check';
+          const iconName = categoryIcons[category.id] || 'Check';
 
           return (
             <div key={category.id} className="checklist-category">
@@ -218,7 +188,7 @@ export default function InteractiveChecklist({
                   </span>
                 </div>
                 <span className={`category-chevron ${isExpanded ? 'expanded' : ''}`}>
-                  <Icon name="chevronDown" size={20} />
+                  <Icon name="ChevronDown" size={20} />
                 </span>
               </button>
 

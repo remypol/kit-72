@@ -13,6 +13,7 @@
  */
 
 import { useState, useEffect } from 'react';
+import { Icon } from '../ui/Icon';
 
 interface StickyActionBarProps {
   /** The label shown before the action */
@@ -36,31 +37,6 @@ const closeLabels: Record<string, string> = {
   nl: 'Sluiten',
   de: 'Schließen',
 };
-
-// Icon SVG paths
-const icons = {
-  arrowRight: '<path d="M5 12h14"/><path d="m12 5 7 7-7 7"/>',
-  x: '<path d="M18 6 6 18"/><path d="m6 6 12 12"/>',
-  check: '<path d="M20 6 9 17l-5-5"/>',
-};
-
-function Icon({ name, size = 16 }: { name: keyof typeof icons; size?: number }) {
-  return (
-    <svg
-      width={size}
-      height={size}
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      aria-hidden="true"
-    >
-      <g dangerouslySetInnerHTML={{ __html: icons[name] }} />
-    </svg>
-  );
-}
 
 export default function StickyActionBar({
   label,
