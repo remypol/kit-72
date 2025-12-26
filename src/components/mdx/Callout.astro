@@ -1,0 +1,54 @@
+---
+/**
+ * Callout Component for MDX
+ * Highlighted boxes for tips, warnings, info, etc.
+ */
+
+interface Props {
+  type?: 'info' | 'tip' | 'warning' | 'danger';
+  title?: string;
+}
+
+const { type = 'info', title } = Astro.props;
+
+const styles = {
+  info: {
+    bg: 'bg-[--color-status-info]/10',
+    border: 'border-l-[--color-status-info]',
+    icon: 'ℹ️',
+    titleColor: 'text-[--color-status-info]',
+  },
+  tip: {
+    bg: 'bg-[--color-accent-subtle]',
+    border: 'border-l-[--color-accent-primary]',
+    icon: '💡',
+    titleColor: 'text-[--color-accent-primary]',
+  },
+  warning: {
+    bg: 'bg-[--color-status-warning]/10',
+    border: 'border-l-[--color-status-warning]',
+    icon: '⚠️',
+    titleColor: 'text-[--color-status-warning]',
+  },
+  danger: {
+    bg: 'bg-[--color-status-critical]/10',
+    border: 'border-l-[--color-status-critical]',
+    icon: '🚨',
+    titleColor: 'text-[--color-status-critical]',
+  },
+};
+
+const style = styles[type];
+---
+
+<div class={`card p-6 mb-6 not-prose border-l-4 ${style.bg} ${style.border}`}>
+  {title && (
+    <h3 class={`font-semibold mb-2 text-base flex items-center gap-2 ${style.titleColor}`}>
+      <span>{style.icon}</span>
+      {title}
+    </h3>
+  )}
+  <div class="text-[--color-text-secondary] text-sm [&>p]:m-0 [&>p:not(:last-child)]:mb-2 [&>ul]:m-0 [&>ul]:pl-4 [&>li]:text-sm">
+    <slot />
+  </div>
+</div>

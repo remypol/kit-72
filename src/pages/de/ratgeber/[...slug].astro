@@ -1,0 +1,147 @@
+---
+/**
+ * Dynamic route for German guide pages from Content Collections
+ */
+import { getCollection } from 'astro:content';
+import ArticleLayout from '../../../layouts/ArticleLayout.astro';
+import Icon from '../../../components/ui/Icon.astro';
+
+export async function getStaticPaths() {
+  const guides = await getCollection('guides', ({ data }) => {
+    return data.locale === 'de' && !data.draft;
+  });
+
+  return guides.map((guide) => {
+    const slug = guide.id.replace('de/', '').replace('.mdx', '').replace('.md', '');
+    return {
+      params: { slug },
+      props: { guide },
+    };
+  });
+}
+
+const { guide } = Astro.props;
+const { Content } = await guide.render();
+
+const {
+  title,
+  description,
+  dateModified,
+  datePublished,
+  author,
+  breadcrumbs = [],
+  readTime,
+  schemaType,
+  faqs = [],
+  sources = [],
+  ctaTitle,
+  ctaDescription,
+  ctaPrimaryUrl,
+  ctaPrimaryText,
+  ctaSecondaryUrl,
+  ctaSecondaryText,
+  toc = [],
+} = guide.data;
+
+const faqSchema = faqs.length > 0 ? {
+  mainEntity: faqs.map(faq => ({
+    '@type': 'Question',
+    name: faq.question,
+    acceptedAnswer: {
+      '@type': 'Answer',
+      text: faq.answer
+    }
+  }))
+} : undefined;
+---
+
+<ArticleLayout
+  title={title}
+  description={description}
+  updatedDate={dateModified}
+  publishedDate={datePublished}
+  author={author}
+  breadcrumbs={breadcrumbs}
+  readTime={readTime}
+  schemaType={schemaType}
+  schemaData={faqSchema}
+  faqData={faqs}
+  locale="de"
+>
+  {toc.length > 0 && (
+    <nav slot="toc" class="p-4 bg-[--color-bg-tertiary] rounded-lg mb-8">
+      <h2 class="text-sm font-semibold mb-3 text-[--color-text-primary]">Auf dieser Seite</h2>
+      <ul class="space-y-2 text-sm">
+        {toc.map((item) => (
+          <li>
+            <a href={`#${item.id}`} class="text-[--color-text-secondary] hover:text-[--color-accent-primary] transition-colors">
+              {item.label}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+  )}
+
+  <Content />
+
+  {faqs.length > 0 && (
+    <section id="faq" class="mb-12">
+      <h2>Häufig gestellte Fragen</h2>
+      <div class="space-y-4 my-8">
+        {faqs.map((faq) => (
+          <details class="card group">
+            <summary class="px-6 py-4 cursor-pointer list-none flex items-center justify-between hover:bg-[--color-bg-tertiary] transition-colors">
+              <span class="font-medium text-[--color-text-primary] pr-4">{faq.question}</span>
+              <svg class="w-5 h-5 text-[--color-text-muted] transform transition-transform group-open:rotate-180 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+              </svg>
+            </summary>
+            <div class="px-6 pb-4">
+              <p class="text-[--color-text-secondary] m-0">{faq.answer}</p>
+            </div>
+          </details>
+        ))}
+      </div>
+    </section>
+  )}
+
+  {sources.length > 0 && (
+    <div slot="sources">
+      <h2 id="quellen">Quellen und Referenzen</h2>
+      <ul class="text-sm space-y-2">
+        {sources.map((source) => (
+          <li>
+            <a href={source.url} target="_blank" rel="noopener">
+              {source.title}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
+  )}
+
+  {ctaTitle && (
+    <div slot="cta" class="card p-8 text-center bg-[--color-bg-tertiary]">
+      <h3 class="text-xl font-semibold mb-4">{ctaTitle}</h3>
+      {ctaDescription && (
+        <p class="text-[--color-text-secondary] mb-6">{ctaDescription}</p>
+      )}
+      <div class="flex flex-wrap gap-4 justify-center">
+        {ctaPrimaryUrl && ctaPrimaryText && (
+          <a href={ctaPrimaryUrl} class="inline-flex items-center gap-2 px-6 py-3 bg-[--color-accent-primary] text-[--color-bg-primary] font-semibold rounded hover:bg-[--color-accent-hover] transition-colors">
+            {ctaPrimaryText}
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+            </svg>
+          </a>
+        )}
+        {ctaSecondaryUrl && ctaSecondaryText && (
+          <a href={ctaSecondaryUrl} class="inline-flex items-center gap-2 px-6 py-3 border border-[--color-border] text-[--color-text-primary] font-medium rounded hover:border-[--color-accent-primary] hover:text-[--color-accent-primary] transition-colors">
+            {ctaSecondaryText}
+          </a>
+        )}
+      </div>
+    </div>
+  )}
+</ArticleLayout>

@@ -1,0 +1,297 @@
+---
+title: "Almacenamiento de Agua para Emergencias: Guía Completa"
+description: "Cómo almacenar agua de forma segura para emergencias. Tipos de recipientes, cantidades, rotación, tratamiento y errores a evitar."
+locale: es
+dateModified: "2025-12-15"
+author: "Equipo Kit-72"
+readTime: "12 min"
+schemaType: FAQPage
+
+breadcrumbs:
+  - label: "Guías"
+    href: "/es/guias/"
+  - label: "Almacenamiento de Agua"
+
+toc:
+  - id: cuanta-agua
+    label: "¿Cuánta agua almacenar?"
+  - id: tipos-recipientes
+    label: "Tipos de recipientes"
+  - id: donde-guardar
+    label: "Dónde guardar el agua"
+  - id: rotacion
+    label: "Rotación y mantenimiento"
+  - id: tratamiento
+    label: "Tratamiento del agua"
+  - id: agua-emergencia
+    label: "Fuentes de agua de emergencia"
+  - id: errores
+    label: "Errores comunes"
+  - id: faq
+    label: "Preguntas frecuentes"
+
+faqs:
+  - question: "¿El agua caduca realmente?"
+    answer: "El agua en sí no caduca, pero el envase sí puede degradarse y afectar al sabor/seguridad. La fecha de caducidad en botellas se refiere más al envase que al contenido. Agua almacenada correctamente en recipientes alimentarios puede durar años, pero se recomienda rotarla para mantener frescura."
+  - question: "¿Puedo almacenar agua del grifo directamente?"
+    answer: "Sí, si tu agua del grifo es potable. Usa recipientes alimentarios limpios, llena hasta arriba para minimizar aire, y rota cada 6 meses. El cloro residual del agua tratada ayuda a conservarla. Si quieres más seguridad, añade conservante específico para agua."
+  - question: "¿Cuánto espacio necesito?"
+    answer: "Un litro de agua ocupa exactamente un litro de espacio (1 dm³). Para una familia de 4, almacenar 3 días a 5L/persona/día = 60L, que equivale aproximadamente a un cubo de 40×40×40cm. 10 garrafas de 6L ocupan un estante de despensa."
+  - question: "¿Qué hago si el agua huele o sabe mal?"
+    answer: "Primero, airearla: verter entre dos recipientes varias veces para oxigenar. Si persiste el mal olor/sabor, trátala con pastillas potabilizadoras o hiérvela. Si tiene olor químico fuerte o color extraño, NO la bebas y descártala."
+  - question: "¿Las botellas de plástico liberan tóxicos?"
+    answer: "Las botellas de agua comerciales (PET) son seguras para almacenamiento normal. Evita: exponerlas al sol directo, calentarlas (coche en verano), reutilizarlas indefinidamente, o usar plásticos no alimentarios. En condiciones normales, el riesgo es mínimo."
+  - question: "¿Puedo beber agua destilada en emergencia?"
+    answer: "Sí, a corto plazo. El agua destilada carece de minerales, pero en una emergencia de 3-7 días no es problema si también comes alimentos que los aportan. No es ideal para consumo prolongado exclusivo."
+
+sources:
+  - title: "OMS — Guías para la calidad del agua potable"
+    url: "https://www.who.int/water_sanitation_health/dwq/en/"
+  - title: "Ready.gov — Storing Water"
+    url: "https://www.ready.gov/water"
+  - title: "CDC — Emergency Water Supply"
+    url: "https://www.cdc.gov/healthywater/emergency/index.html"
+
+ctaTitle: "Calcula tu agua necesaria"
+ctaDescription: "Usa nuestra calculadora para obtener la cantidad exacta para tu familia."
+ctaPrimaryUrl: "/es/herramientas/calculadora-agua/"
+ctaPrimaryText: "Calcular mi agua"
+ctaSecondaryUrl: "/es/escenarios/prepararse-corte-agua/"
+ctaSecondaryText: "Guía: Prepararse para corte de agua"
+
+relatedScenarios:
+  - "prepararse-corte-agua"
+relatedProducts:
+  - "bidones-agua"
+---
+
+import Callout from '../../../components/mdx/Callout.astro';
+import DataTable from '../../../components/mdx/DataTable.astro';
+import ComparisonCard from '../../../components/mdx/ComparisonCard.astro';
+
+<Callout type="info">
+**Lo esencial:** Almacena mínimo 3 litros por persona y día.
+Usa recipientes alimentarios, guárdalos en lugar fresco y oscuro, y rota el agua cada 6 meses si la llenas tú,
+o antes de la fecha de caducidad si es comercial.
+</Callout>
+
+## ¿Cuánta agua almacenar?
+
+La recomendación oficial es **3 litros por persona y día** como mínimo vital.
+Pero esto cubre solo bebida y cocina básica. Para mayor confort:
+
+<div class="grid md:grid-cols-3 gap-4 my-6 not-prose">
+  <div class="card p-5 text-center border-t-4 border-t-[--color-status-critical]">
+    <div class="text-3xl font-bold text-[--color-status-critical] mb-1">3L</div>
+    <div class="text-sm font-medium mb-2">Mínimo vital</div>
+    <p class="text-xs text-[--color-text-muted]">Bebida + cocina básica. Sin higiene.</p>
+  </div>
+  <div class="card p-5 text-center border-t-4 border-t-[--color-status-warning]">
+    <div class="text-3xl font-bold text-[--color-status-warning] mb-1">5-7L</div>
+    <div class="text-sm font-medium mb-2">Recomendado</div>
+    <p class="text-xs text-[--color-text-muted]">Bebida + cocina + higiene básica.</p>
+  </div>
+  <div class="card p-5 text-center border-t-4 border-t-[--color-status-success]">
+    <div class="text-3xl font-bold text-[--color-status-success] mb-1">10-15L</div>
+    <div class="text-sm font-medium mb-2">Confortable</div>
+    <p class="text-xs text-[--color-text-muted]">Incluye higiene completa y WC.</p>
+  </div>
+</div>
+
+<Callout type="tip" title="Ejemplo de cálculo">
+Familia de 4 personas + 1 perro, 3 días, nivel estándar (5L/persona):
+
+- 4 personas × 5L × 3 días = **60L**
+- 1 perro × 1L × 3 días = **3L**
+- **Total: 63L** (≈ 10 garrafas de 6L o 3 bidones de 20L)
+</Callout>
+
+## Tipos de recipientes
+
+No todos los recipientes son iguales. Elige según tu espacio y necesidades:
+
+### Botellas comerciales (1.5-2L)
+
+**Capacidad:** 1.5-2L | **Duración:** 1-2 años (sellada)
+
+| Ventajas | Inconvenientes |
+|----------|----------------|
+| Ya potabilizada | Coste por litro alto |
+| Sellada de fábrica | Mucho plástico |
+| Fácil rotación | Ocupa más espacio |
+| Portátil | |
+
+**Mejor para:** Agua de bebida principal, kit de evacuación
+
+### Garrafas grandes (5-8L)
+
+**Capacidad:** 5-8L | **Duración:** 1-2 años (sellada)
+
+| Ventajas | Inconvenientes |
+|----------|----------------|
+| Mejor relación calidad/precio | Más difícil de transportar llenas |
+| Menos plástico por litro | Ocupan espacio |
+| Manejables | |
+
+**Mejor para:** Almacenamiento principal en casa
+
+### Bidones alimentarios (20-30L)
+
+**Capacidad:** 20-30L | **Duración:** 5-10 años (el bidón)
+
+| Ventajas | Inconvenientes |
+|----------|----------------|
+| Económico | Pesados llenos (+20kg) |
+| Reutilizable años | Necesitan espacio |
+| Algunos con grifo | Requieren llenado |
+
+**Mejor para:** Almacenamiento a largo plazo, uso general
+
+### Depósitos grandes (100-1000L)
+
+**Capacidad:** 100-1000L | **Duración:** 10-20 años
+
+| Ventajas | Inconvenientes |
+|----------|----------------|
+| Máxima capacidad | Requieren espacio dedicado |
+| Una inversión duradera | Instalación |
+| Algunos conectan a bajantes | No portátiles |
+
+**Mejor para:** Casas con jardín/terraza, autosuficiencia
+
+### Bolsas de agua para bañera
+
+**Capacidad:** 100-200L | **Duración:** Un solo uso
+
+| Ventajas | Inconvenientes |
+|----------|----------------|
+| Barato | Un solo uso |
+| Aprovecha la bañera | Necesita aviso previo |
+| Almacena mucho rápido | No portátil |
+
+**Mejor para:** Emergencia con aviso (huracán, corte programado)
+
+## Dónde guardar el agua
+
+La ubicación es tan importante como el recipiente. El enemigo del agua almacenada es:
+luz solar, calor, y proximidad a químicos.
+
+| Ubicación | Valoración | Por qué | Consejos |
+|-----------|------------|---------|----------|
+| Despensa/armario interior | Excelente | Temperatura estable, oscuro, accesible | Ideal para almacenamiento principal |
+| Garaje (clima templado) | Bueno | Espacio disponible, suelo de cemento fresco | Evitar si hay cambios bruscos de temperatura |
+| Sótano | Excelente | Fresco y oscuro naturalmente | Vigilar humedad, elevar del suelo si hay riesgo de inundación |
+| Balcón/terraza | Regular | Expuesto a sol y temperaturas extremas | Solo en recipientes opacos y con sombra |
+| Junto a productos químicos | Malo | El plástico absorbe olores y vapores | NUNCA junto a gasolina, pinturas, lejía abierta |
+
+## Rotación y mantenimiento
+
+El agua almacenada necesita mantenimiento. Establece un calendario:
+
+| Tipo de almacenamiento | Rotar cada | Notas |
+|------------------------|------------|-------|
+| Agua embotellada comercial (sellada) | Cada 1-2 años | Revisar fecha de caducidad |
+| Agua del grifo en bidones | Cada 6 meses | Vaciar, limpiar, rellenar |
+| Agua tratada con conservante | Cada 5 años | Seguir instrucciones del producto |
+| Depósitos grandes | Anual | Drenar, limpiar interior, rellenar |
+
+<Callout type="tip" title="Sistema FIFO">
+Usa el sistema **First In, First Out**: consume primero el agua más antigua.
+Etiqueta cada recipiente con la fecha de llenado. Cuando añadas agua nueva, ponla al fondo
+y usa la del frente.
+</Callout>
+
+## Tratamiento del agua
+
+Si necesitas usar agua de fuentes no verificadas, trátala antes de beber:
+
+### Pastillas potabilizadoras
+**Efectividad:** Alta | **Coste:** 5-10€ / 50 pastillas
+
+Seguir instrucciones. Generalmente 1 pastilla por litro, esperar 30 min.
+
+- ✓ Baratas, portátiles, fáciles de usar
+- ✗ Sabor a cloro, no eliminan químicos
+
+### Hervir
+**Efectividad:** Alta | **Coste:** Gratis (coste de combustible)
+
+Hervir a borbotones durante 3 minutos mínimo. Dejar enfriar.
+
+- ✓ Gratis si tienes fuego, muy efectivo
+- ✗ Necesita combustible, no elimina químicos
+
+### Filtro de gravedad
+**Efectividad:** Muy alta | **Coste:** 80-200€ + filtros
+
+Verter agua en la parte superior, recoger filtrada abajo.
+
+- ✓ No necesita electricidad, gran capacidad, elimina muchos contaminantes
+- ✗ Inversión inicial, mantenimiento de filtros
+
+### Filtro de botella/pajita
+**Efectividad:** Alta | **Coste:** 20-50€
+
+Beber directamente a través del filtro o llenar botella.
+
+- ✓ Portátil, inmediato, económico
+- ✗ Capacidad limitada, no filtra virus todos
+
+### Lejía (emergencia)
+**Efectividad:** Media | **Coste:** 1-2€ / botella
+
+2 gotas de lejía SIN ADITIVOS por litro de agua clara. Esperar 30 min.
+
+- ✓ Muy barato, disponible en cualquier sitio
+- ✗ Solo para emergencias, riesgo de error en dosis
+
+## Fuentes de agua de emergencia
+
+Si te quedas sin agua almacenada, hay fuentes de emergencia en tu hogar:
+
+| Fuente | ¿Potable? | Cómo acceder | Cantidad aprox. |
+|--------|-----------|--------------|-----------------|
+| Termo de agua caliente | ✓ Sí | Cerrar entrada de agua y gas/electricidad. Abrir grifo de drenaje inferior. | 50-100L típico |
+| Tanque del WC (cisterna) | ⚠ No sin tratar | Solo el agua del tanque, NO de la taza. Usar para limpieza. | 6-9L por cisterna |
+| Hielo del congelador | ✓ Sí | Derretir cubitos. Es agua potable congelada. | Variable |
+| Agua de lluvia | ⚠ No sin tratar | Recoger en recipientes limpios. SIEMPRE tratar antes de beber. | Depende de precipitación |
+| Piscina/jacuzzi | ⚠ No sin tratar | SOLO para limpieza y WC. Contiene cloro y químicos. | Miles de litros |
+
+<Callout type="warning" title="NUNCA uses estas fuentes">
+- Agua de radiadores de coche (contiene anticongelante tóxico)
+- Agua de camas de agua (tratada con químicos)
+- Agua estancada con mal olor, color o espuma
+- Agua de inundación (contaminación fecal probable)
+</Callout>
+
+## Errores comunes
+
+### Almacenar en recipientes no alimentarios
+**Por qué es problema:** El plástico puede liberar químicos al agua
+
+**Solución:** Usar SOLO recipientes marcados como "food grade" o "apto para alimentos"
+
+### Guardar al sol o calor
+**Por qué es problema:** El calor degrada el plástico y favorece bacterias
+
+**Solución:** Lugar fresco (menos de 25°C), oscuro, temperatura estable
+
+### No rotar el agua almacenada
+**Por qué es problema:** El agua puede desarrollar sabor, olor o contaminantes
+
+**Solución:** Marcar fecha de llenado, rotar según calendario
+
+### Almacenar junto a químicos
+**Por qué es problema:** El plástico absorbe vapores de gasolina, pintura, etc.
+
+**Solución:** Separar físicamente de cualquier producto químico
+
+### No calcular la cantidad real necesaria
+**Por qué es problema:** Quedarse corto en emergencia o desperdiciar espacio
+
+**Solución:** Usar calculadora: 3L/persona/día mínimo, más para higiene
+
+### Reutilizar botellas de refrescos/zumo
+**Por qué es problema:** Pueden tener residuos de azúcar que favorecen bacterias
+
+**Solución:** Si reutilizas, limpiar exhaustivamente con lejía diluida

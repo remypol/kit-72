@@ -1,0 +1,62 @@
+---
+/**
+ * ComparisonCard Component for MDX
+ * Card showing pros/cons comparison for a product or option
+ */
+
+interface Props {
+  title: string;
+  icon?: string;
+  capacity?: string;
+  duration?: string;
+  pros: string[];
+  cons: string[];
+  bestFor: string;
+}
+
+const { title, icon, capacity, duration, pros, cons, bestFor } = Astro.props;
+---
+
+<div class="card p-6 mb-4">
+  <div class="flex items-start gap-4 mb-4">
+    {icon && <span class="text-3xl">{icon}</span>}
+    <div class="flex-1">
+      <div class="flex items-center justify-between flex-wrap gap-2">
+        <h3 class="text-lg font-semibold m-0">{title}</h3>
+        {capacity && (
+          <span class="px-3 py-1 text-sm bg-[--color-bg-tertiary] rounded">{capacity}</span>
+        )}
+      </div>
+      {duration && (
+        <p class="text-sm text-[--color-text-muted] mt-1">Duración: {duration}</p>
+      )}
+    </div>
+  </div>
+
+  <div class="grid md:grid-cols-3 gap-4">
+    <div>
+      <h4 class="text-sm font-semibold text-[--color-status-success] mb-2">Ventajas</h4>
+      <ul class="space-y-1 m-0 p-0 list-none">
+        {pros.map((pro) => (
+          <li class="flex items-center gap-2 text-sm text-[--color-text-secondary]">
+            <span class="text-[--color-status-success]">+</span> {pro}
+          </li>
+        ))}
+      </ul>
+    </div>
+    <div>
+      <h4 class="text-sm font-semibold text-[--color-status-critical] mb-2">Inconvenientes</h4>
+      <ul class="space-y-1 m-0 p-0 list-none">
+        {cons.map((con) => (
+          <li class="flex items-center gap-2 text-sm text-[--color-text-secondary]">
+            <span class="text-[--color-status-critical]">-</span> {con}
+          </li>
+        ))}
+      </ul>
+    </div>
+    <div>
+      <h4 class="text-sm font-semibold text-[--color-accent-primary] mb-2">Mejor para</h4>
+      <p class="text-sm text-[--color-text-secondary] m-0">{bestFor}</p>
+    </div>
+  </div>
+</div>
