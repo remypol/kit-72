@@ -1,6 +1,4 @@
-/* Google Fonts Import - must come before @import "tailwindcss" */
-@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=JetBrains+Mono:wght@400;500;600&family=Source+Sans+3:wght@300;400;500;600;700&display=swap');
-
+/* Fonts loaded via HTML <link> tags for better performance - see BaseLayout.astro */
 @import "tailwindcss";
 
 /* ============================================
