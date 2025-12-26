@@ -496,14 +496,5 @@ for (const [altLocale, altPath] of Object.entries(alternates)) {
   {!hideBottomNav && (
     <BottomNav client:idle currentPath={currentPath} locale={locale} />
   )}
-
-  {/* Unregister any existing service workers - they were causing download issues */}
-  <script>
-    if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.getRegistrations().then(registrations => {
-        registrations.forEach(registration => registration.unregister());
-      });
-    }
-  </script>
 </body>
 </html>
