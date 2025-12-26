@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { Icon } from '../ui/Icon';
+import { withErrorBoundary } from '../ui/withErrorBoundary';
 
 // Import translations
 import esTranslations from '../../../src/i18n/es.json';
@@ -378,7 +379,7 @@ interface WaterCalculatorProps {
   locale?: Locale;
 }
 
-export default function WaterCalculator({ locale = 'es' }: WaterCalculatorProps) {
+function WaterCalculator({ locale = 'es' }: WaterCalculatorProps) {
   const t = translations[locale].calculators.water;
   const waterProducts = waterProductsByLocale[locale];
 
@@ -790,3 +791,5 @@ export default function WaterCalculator({ locale = 'es' }: WaterCalculatorProps)
     </div>
   );
 }
+
+export default withErrorBoundary(WaterCalculator);

@@ -13,6 +13,7 @@
 
 import { useState, useEffect, useCallback } from 'react';
 import { Icon } from '../ui/Icon';
+import { withErrorBoundary } from '../ui/withErrorBoundary';
 
 interface ChecklistItem {
   id: string;
@@ -62,7 +63,7 @@ const priorityConfig = {
   },
 };
 
-export default function InteractiveChecklist({
+function InteractiveChecklist({
   storageKey,
   categories,
   title = 'Checklist',
@@ -474,3 +475,5 @@ export default function InteractiveChecklist({
     </div>
   );
 }
+
+export default withErrorBoundary(InteractiveChecklist);

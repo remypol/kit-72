@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
 import { Icon } from '../ui/Icon';
+import { withErrorBoundary } from '../ui/withErrorBoundary';
 
 // Import data files for each locale
 import esKitData from '../../data/kit-items/es.json';
@@ -447,7 +448,7 @@ interface KitBuilderProps {
   showPresets?: boolean;
 }
 
-export default function KitBuilder({ locale = 'es', initialScenario, showPresets = true }: KitBuilderProps) {
+function KitBuilder({ locale = 'es', initialScenario, showPresets = true }: KitBuilderProps) {
   // Load data and translations for locale
   const kitData = getKitData(locale);
   const t = getTranslations(locale);
@@ -1177,3 +1178,5 @@ export default function KitBuilder({ locale = 'es', initialScenario, showPresets
     </div>
   );
 }
+
+export default withErrorBoundary(KitBuilder);

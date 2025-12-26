@@ -1,5 +1,6 @@
 import { useState, useMemo, useEffect, useRef } from 'react';
 import { Icon } from '../ui/Icon';
+import { withErrorBoundary } from '../ui/withErrorBoundary';
 
 // Import translations
 import esTranslations from '../../../src/i18n/es.json';
@@ -598,7 +599,7 @@ interface PowerCalculatorProps {
   locale?: Locale;
 }
 
-export default function PowerCalculator({ locale = 'es' }: PowerCalculatorProps) {
+function PowerCalculator({ locale = 'es' }: PowerCalculatorProps) {
   const t = translations[locale].calculators.power;
   const productRecommendations = productRecommendationsByLocale[locale];
   const defaultDevices = useMemo(() => getLocalizedDevices(t), [t]);
@@ -1043,3 +1044,5 @@ export default function PowerCalculator({ locale = 'es' }: PowerCalculatorProps)
     </div>
   );
 }
+
+export default withErrorBoundary(PowerCalculator);
