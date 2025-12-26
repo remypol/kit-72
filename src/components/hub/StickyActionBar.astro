@@ -1,0 +1,246 @@
+---
+/**
+ * StickyActionBar Component (Astro)
+ *
+ * A contextual sticky bar that appears after scrolling past the hero.
+ * Zero React dependency - uses vanilla JS.
+ *
+ * Features:
+ * - Appears after scrolling ~200px
+ * - Contextual CTA based on page type
+ * - Progress indicator (optional)
+ * - Dismissible with localStorage memory
+ * - Positioned above bottom nav on mobile
+ */
+import Icon from '../ui/Icon.astro';
+
+interface Props {
+  /** The label shown before the action */
+  label?: string;
+  /** The action button text */
+  actionText: string;
+  /** The action URL */
+  actionUrl: string;
+  /** Optional progress info (e.g., "3 de 15 items") */
+  progress?: string;
+  /** Unique key for dismiss memory */
+  dismissKey?: string;
+  /** Scroll threshold to show the bar (default 200) */
+  scrollThreshold?: number;
+  /** Locale for i18n */
+  locale?: 'es' | 'nl' | 'de';
+}
+
+const {
+  label,
+  actionText,
+  actionUrl,
+  progress,
+  dismissKey,
+  scrollThreshold = 200,
+  locale = 'es',
+} = Astro.props;
+
+const closeLabels: Record<string, string> = {
+  es: 'Cerrar',
+  nl: 'Sluiten',
+  de: 'Schließen',
+};
+const closeLabel = closeLabels[locale] || closeLabels.es;
+---
+
+<div
+  class="sticky-action-bar"
+  data-scroll-threshold={scrollThreshold}
+  data-dismiss-key={dismissKey}
+>
+  <div class="sticky-action-bar__content">
+    <div class="sticky-action-bar__text">
+      {label && <span class="sticky-action-bar__label">{label}</span>}
+      {progress && (
+        <span class="sticky-action-bar__progress">
+          <Icon name="Check" size={12} />
+          {progress}
+        </span>
+      )}
+    </div>
+    <a href={actionUrl} class="sticky-action-bar__button">
+      {actionText}
+      <Icon name="ArrowRight" size={16} />
+    </a>
+  </div>
+  {dismissKey && (
+    <button
+      type="button"
+      class="sticky-action-bar__dismiss"
+      aria-label={closeLabel}
+    >
+      <Icon name="X" size={16} />
+    </button>
+  )}
+</div>
+
+<script>
+  // Initialize all sticky action bars on the page
+  function initStickyActionBars() {
+    const bars = document.querySelectorAll('.sticky-action-bar');
+
+    bars.forEach((bar) => {
+      const threshold = parseInt(bar.getAttribute('data-scroll-threshold') || '200', 10);
+      const dismissKey = bar.getAttribute('data-dismiss-key');
+      const dismissBtn = bar.querySelector('.sticky-action-bar__dismiss');
+
+      // Check if previously dismissed
+      if (dismissKey) {
+        const dismissed = localStorage.getItem(`sticky_dismissed_${dismissKey}`);
+        if (dismissed) {
+          bar.remove();
+          return;
+        }
+      }
+
+      // Handle dismiss
+      if (dismissBtn) {
+        dismissBtn.addEventListener('click', () => {
+          if (dismissKey) {
+            localStorage.setItem(`sticky_dismissed_${dismissKey}`, 'true');
+          }
+          bar.classList.remove('sticky-action-bar--visible');
+          setTimeout(() => bar.remove(), 300);
+        });
+      }
+
+      // Track scroll position
+      let ticking = false;
+      const handleScroll = () => {
+        if (!ticking) {
+          window.requestAnimationFrame(() => {
+            const shouldShow = window.scrollY > threshold;
+            bar.classList.toggle('sticky-action-bar--visible', shouldShow);
+            ticking = false;
+          });
+          ticking = true;
+        }
+      };
+
+      // Initial check
+      handleScroll();
+
+      window.addEventListener('scroll', handleScroll, { passive: true });
+    });
+  }
+
+  // Run on DOM ready
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initStickyActionBars);
+  } else {
+    initStickyActionBars();
+  }
+
+  // Also run on Astro page transitions
+  document.addEventListener('astro:page-load', initStickyActionBars);
+</script>
+
+<style>
+  .sticky-action-bar {
+    position: fixed;
+    bottom: calc(var(--bottom-nav-height, 56px) + env(safe-area-inset-bottom, 0px) + 8px);
+    left: 50%;
+    transform: translateX(-50%) translateY(100px);
+    z-index: 90;
+    opacity: 0;
+    pointer-events: none;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    max-width: calc(100% - 32px);
+    width: 100%;
+  }
+
+  .sticky-action-bar--visible {
+    transform: translateX(-50%) translateY(0);
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .sticky-action-bar__content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 12px 16px;
+    background: var(--color-bg-secondary);
+    border: 1px solid var(--color-border);
+    border-radius: 16px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(8px);
+  }
+
+  .sticky-action-bar__text {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    flex: 1;
+    min-width: 0;
+  }
+
+  .sticky-action-bar__label {
+    font-size: 12px;
+    color: var(--color-text-muted);
+  }
+
+  .sticky-action-bar__progress {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 11px;
+    color: var(--color-status-success);
+  }
+
+  .sticky-action-bar__button {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 16px;
+    background: var(--color-accent-primary);
+    color: var(--color-bg-primary);
+    font-size: 13px;
+    font-weight: 600;
+    border-radius: 10px;
+    text-decoration: none;
+    white-space: nowrap;
+    transition: background 0.2s ease;
+  }
+
+  .sticky-action-bar__button:hover {
+    background: var(--color-accent-hover);
+  }
+
+  .sticky-action-bar__dismiss {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--color-bg-tertiary);
+    border: 1px solid var(--color-border);
+    border-radius: 50%;
+    color: var(--color-text-muted);
+    cursor: pointer;
+    transition: color 0.2s ease, background 0.2s ease;
+  }
+
+  .sticky-action-bar__dismiss:hover {
+    background: var(--color-bg-elevated);
+    color: var(--color-text-primary);
+  }
+
+  /* Larger screens */
+  @media (min-width: 768px) {
+    .sticky-action-bar {
+      max-width: 480px;
+      bottom: 24px;
+    }
+  }
+</style>

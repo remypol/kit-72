@@ -11,7 +11,7 @@ import TLDRBlock from '../../../components/hub/TLDRBlock.astro';
 import CollapsibleSection from '../../../components/hub/CollapsibleSection.astro';
 import PhaseTabs from '../../../components/hub/PhaseTabs.tsx';
 import InteractiveChecklist from '../../../components/hub/InteractiveChecklist.tsx';
-import StickyActionBar from '../../../components/hub/StickyActionBar.tsx';
+import StickyActionBar from '../../../components/hub/StickyActionBar.astro';
 import Icon from '../../../components/ui/Icon.astro';
 import HeroImage from '../../../components/content/HeroImage.astro';
 
@@ -395,10 +395,9 @@ const labels = phaseLabels || defaultPhaseLabels;
     )}
   </main>
 
-  <!-- Sticky Action Bar -->
+  <!-- Sticky Action Bar (Astro - no client hydration needed) -->
   {actionBarUrl && actionBarText && (
     <StickyActionBar
-      client:idle
       actionText={actionBarText}
       actionUrl={actionBarUrl}
       dismissKey={`scenario_${scenarioKey}`}
