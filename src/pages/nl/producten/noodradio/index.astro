@@ -1,0 +1,176 @@
+---
+import BaseLayout from '../../../../layouts/BaseLayout.astro';
+import Breadcrumb from '../../../../components/layout/Breadcrumb.astro';
+import Icon from '../../../../components/ui/Icon.astro';
+import HeroImage from '../../../../components/content/HeroImage.astro';
+---
+
+<BaseLayout
+  title="Noodradio: Dynamo of zonne-energie? Koopgids & Vergelijking"
+  description="De juiste noodradio voor crisissituaties. Dynamo, zonne-energie, batterijen — waar je op moet letten."
+  locale="nl"
+  dateModified="2025-12-16"
+  schemaType="Article"
+  alternates={{
+    de: '/de/produkte/notfallradio/',
+  }}
+>
+  <section class="py-16">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6">
+      <Breadcrumb items={[{ label: 'Producten', href: '/nl/producten/' }, { label: 'Noodradio' }]} class="mb-4" locale="nl" />
+      <h1 class="text-4xl font-bold mb-6">Noodradio</h1>
+
+      <div class="mb-8">
+        <HeroImage
+          src="/images/shared/emergency-radio.webp"
+          alt="Noodradio met dynamo en zonnepaneel"
+          priority={true}
+        />
+      </div>
+
+      <div class="prose prose-lg">
+        <p class="lead">
+          Als stroom, internet en mobiele netwerken uitvallen, is de radio vaak de
+          <strong>enige informatiebron</strong>. NPO Radio 1 en regionale omroepen zijn de
+          officiële kanalen voor noodmeldingen in Nederland.
+        </p>
+
+        <!-- Key Info -->
+        <div class="card p-6 my-8 bg-[--color-bg-tertiary] not-prose">
+          <h3 class="text-lg font-semibold mb-4 flex items-center gap-2">
+            <Icon name="Radio" size={20} class="text-[--color-accent-primary]" />
+            Belangrijke Frequenties
+          </h3>
+          <div class="space-y-2 text-sm">
+            <div class="flex justify-between items-center p-3 bg-[--color-bg-secondary] rounded">
+              <span>NPO Radio 1</span>
+              <span class="font-semibold">98.9 MHz (FM) / DAB+</span>
+            </div>
+            <div class="flex justify-between items-center p-3 bg-[--color-bg-secondary] rounded">
+              <span>Regionale omroep</span>
+              <span class="font-semibold">Zoek je lokale frequentie</span>
+            </div>
+          </div>
+          <p class="text-xs text-[--color-text-muted] mt-3">
+            💡 Noteer de frequenties van je lokale omroep — zij informeren bij regionale incidenten.
+          </p>
+        </div>
+
+        <h2>Waarom een speciale noodradio?</h2>
+        <p>
+          Een normale radio heeft stroom nodig of moet regelmatig worden opgeladen.
+          Een <strong>noodradio</strong> biedt:
+        </p>
+        <ul>
+          <li><strong>Dynamo:</strong> Stroom uit eigen spierkracht</li>
+          <li><strong>Zonnepaneel:</strong> Opladen bij daglicht</li>
+          <li><strong>Batterijen:</strong> Klassieke backup-optie</li>
+          <li><strong>USB-lading:</strong> Normale oplading wanneer er stroom is</li>
+        </ul>
+
+        <h2>Ontvangstmogelijkheden</h2>
+
+        <h3>FM (87.5-108 MHz)</h3>
+        <p>
+          De standaard in Nederland. Goede geluidskwaliteit, maar beperkt bereik.
+          <strong>Onmisbaar.</strong>
+        </p>
+
+        <h3>AM/MW (Middengolf)</h3>
+        <p>
+          Slechtere geluidskwaliteit, maar <strong>groter bereik</strong>.
+          Kan in crisissituaties belangrijk zijn als lokale FM-zenders uitvallen.
+        </p>
+
+        <h3>DAB+</h3>
+        <p>
+          Digitale standaard met beter geluid en meer zenders.
+          Echter hoger stroomverbruik — minder ideaal voor noodgevallen.
+        </p>
+
+        <div class="card p-6 my-8 bg-[--color-accent-subtle] not-prose">
+          <p class="font-medium mb-2">💡 Aanbeveling</p>
+          <p class="text-sm text-[--color-text-secondary]">
+            Prioriteit: <strong>FM + AM</strong>. DAB+ is een nice-to-have,
+            maar niet essentieel voor noodsituaties.
+          </p>
+        </div>
+
+        <h2>Belangrijke extra functies</h2>
+        <ul>
+          <li><strong>Ingebouwde zaklamp:</strong> Praktisch dubbel gebruik</li>
+          <li><strong>USB-uitgang:</strong> Kan smartphone noodopladen (langzaam, maar handig)</li>
+          <li><strong>SOS-sirene:</strong> Voor noodsignalen als je hulp nodig hebt</li>
+          <li><strong>Koptelefoonaansluiting:</strong> Voor privé luisteren</li>
+          <li><strong>Waterdicht (IPX4):</strong> Bescherming tegen spatwater</li>
+        </ul>
+
+        <h2>Gebruiksduur</h2>
+        <div class="overflow-x-auto not-prose my-6">
+          <table class="w-full text-sm">
+            <thead>
+              <tr class="border-b border-[--color-border-primary]">
+                <th class="text-left py-2">Stroombron</th>
+                <th class="text-left py-2">Gebruiksduur</th>
+                <th class="text-left py-2">Opmerking</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="border-b border-[--color-border-secondary]">
+                <td class="py-2">3x AAA batterijen</td>
+                <td class="py-2">8-12 uur</td>
+                <td class="py-2 text-[--color-text-muted]">Reserve inplannen</td>
+              </tr>
+              <tr class="border-b border-[--color-border-secondary]">
+                <td class="py-2">1 min. draaien</td>
+                <td class="py-2">5-10 min. radio</td>
+                <td class="py-2 text-[--color-text-muted]">Vermoeiend op den duur</td>
+              </tr>
+              <tr class="border-b border-[--color-border-secondary]">
+                <td class="py-2">Zonnepaneel (volle zon)</td>
+                <td class="py-2">Laadt interne accu</td>
+                <td class="py-2 text-[--color-text-muted]">Langzaam, maar duurzaam</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2>Aanbevolen merken</h2>
+        <ul>
+          <li><strong>Sangean</strong> — professionele kwaliteit, duurzaam</li>
+          <li><strong>Midland</strong> — goede prijs-kwaliteit</li>
+          <li><strong>Mesqool</strong> — budget optie, solide basis</li>
+          <li><strong>RunningSnail</strong> — compact, veel functies</li>
+        </ul>
+
+        <h2>Checklist</h2>
+        <ul>
+          <li>☐ FM-ontvangst (AM optioneel maar aanbevolen)</li>
+          <li>☐ Dynamo aanwezig</li>
+          <li>☐ Zonnepaneel of batterijen als backup</li>
+          <li>☐ Zaklamp ingebouwd</li>
+          <li>☐ USB-uitgang voor smartphone</li>
+          <li>☐ Lokale zenderfrequenties genoteerd</li>
+          <li>☐ Functietest elke 6 maanden</li>
+        </ul>
+      </div>
+
+      <!-- Shop Link -->
+      <div class="mt-12 card p-6 bg-[--color-bg-tertiary]">
+        <h3 class="font-semibold mb-2">Noodradio's op Bol.com</h3>
+        <p class="text-sm text-[--color-text-secondary] mb-4">
+          Aanbevolen dynamo-radio's met zonnepaneel en zaklamp.
+        </p>
+        <a
+          href="https://www.bol.com/nl/nl/s/?searchtext=noodradio+dynamo+solar"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex items-center gap-2 px-4 py-2 bg-[--color-accent-primary] text-[--color-bg-primary] font-medium rounded hover:bg-[--color-accent-hover] transition-colors"
+        >
+          Bekijk op Bol.com
+          <Icon name="ExternalLink" size={16} />
+        </a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

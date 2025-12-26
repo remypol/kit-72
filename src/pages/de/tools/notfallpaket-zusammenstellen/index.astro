@@ -1,0 +1,67 @@
+---
+import BaseLayout from '../../../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../../../components/ui/Breadcrumbs.astro';
+import KitBuilder from '../../../../components/tools/KitBuilder';
+---
+
+<BaseLayout
+  title="Notfallpaket Zusammenstellen — Kit-72"
+  description="Interaktive Tool zum Erstellen eines personalisierten Notfallpakets für deine Familie. Wähle dein Szenario, hake Artikel ab und exportiere deine Checkliste."
+  locale="de"
+  dateModified="2025-12-15"
+  schemaType="HowTo"
+  schemaData={{
+    name: 'Wie du ein Notfallpaket zusammenstellst',
+    description: 'Schritt-für-Schritt-Anleitung zum Zusammenstellen eines 72-Stunden-Notfallpakets, angepasst an deine Familie, Haustiere und spezifische Szenarien.',
+    totalTime: 'PT10M',
+    estimatedCost: {
+      '@type': 'MonetaryAmount',
+      currency: 'EUR',
+      value: '100-250',
+    },
+    tool: [
+      { '@type': 'HowToTool', name: 'Dieses Online-Tool' },
+      { '@type': 'HowToTool', name: 'Drucker (optional)' },
+    ],
+    step: [
+      {
+        '@type': 'HowToStep',
+        position: 1,
+        name: 'Wähle dein Szenario',
+        text: 'Wähle das Szenario, auf das du dich vorbereiten möchtest: Stromausfall, Hitzewelle, Wasserausfall, Evakuierung, Überschwemmung oder Cyberangriff. Jedes Szenario fügt spezifische Artikel zu deiner Checkliste hinzu.',
+      },
+      {
+        '@type': 'HowToStep',
+        position: 2,
+        name: 'Gib deine Haushaltszusammensetzung an',
+        text: 'Gib an, ob du Babys oder Kleinkinder hast (Windeln, Flaschen werden hinzugefügt) und ob du Haustiere hast (Futter, Transportbox werden hinzugefügt).',
+      },
+      {
+        '@type': 'HowToStep',
+        position: 3,
+        name: 'Hake vorhandene Artikel ab',
+        text: 'Gehe die Liste durch und hake die Artikel ab, die du bereits zu Hause hast. Du siehst deinen Fortschritt in Prozent und kannst identifizieren, was dir noch fehlt.',
+      },
+      {
+        '@type': 'HowToStep',
+        position: 4,
+        name: 'Speichere oder drucke deine Checkliste',
+        text: 'Exportiere deine personalisierte Checkliste als PDF zum Drucken oder speichere sie online für den Zugriff von jedem Gerät. Dein Fortschritt wird automatisch gespeichert.',
+      },
+    ],
+  }}
+>
+  <section class="py-12 md:py-16">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6">
+      <div class="mb-8">
+        <Breadcrumbs locale="de" />
+        <h1 class="text-4xl font-bold mb-4">Notfallpaket Zusammenstellen</h1>
+        <p class="text-xl text-[--color-text-secondary]">
+          Erstelle eine personalisierte Checkliste für deine Familie und Situation. Wähle dein Szenario, hake Artikel ab und teile oder drucke dein Paket.
+        </p>
+      </div>
+
+      <KitBuilder locale="de" client:load />
+    </div>
+  </section>
+</BaseLayout>

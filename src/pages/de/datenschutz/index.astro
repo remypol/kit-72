@@ -1,0 +1,36 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import Breadcrumb from '../../../components/layout/Breadcrumb.astro';
+---
+
+<BaseLayout title="Datenschutzerklärung — Kit-72" description="Wie wir mit deinen Daten umgehen." locale="de">
+  <section class="py-16">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6">
+      <Breadcrumb items={[{ label: 'Datenschutz' }]} class="mb-4" locale="de" />
+      <h1 class="text-4xl font-bold mb-6">Datenschutzerklärung</h1>
+
+      <div class="prose prose-lg">
+        <p><em>Zuletzt aktualisiert: Dezember 2025</em></p>
+
+        <h2>Welche Daten erheben wir?</h2>
+        <p>Kit-72.com erhebt nur minimale Daten:</p>
+        <ul>
+          <li>Anonyme Analysedaten (Seitenaufrufe, keine personenbezogenen Daten)</li>
+          <li>Lokale Speicherung im Browser für den Notfallpaket-Konfigurator</li>
+        </ul>
+
+        <h2>Cookies</h2>
+        <p>Wir verwenden nur funktionale Cookies für den Betrieb der Website. Keine Tracking-Cookies von Drittanbietern.</p>
+
+        <h2>Affiliate-Links</h2>
+        <p>Einige Links zu Produkten sind Affiliate-Links. Wenn du über diese Links kaufst, erhalten wir eine kleine Provision ohne zusätzliche Kosten für dich.</p>
+
+        <h2>Deine Rechte</h2>
+        <p>Gemäß DSGVO hast du das Recht auf Auskunft, Berichtigung und Löschung deiner Daten. Da wir keine personenbezogenen Daten speichern, gibt es in der Regel keine zu löschenden Daten.</p>
+
+        <h2>Kontakt</h2>
+        <p>Fragen zum Datenschutz? Kontaktiere uns über unsere Website.</p>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

@@ -1,0 +1,33 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import Breadcrumb from '../../../components/layout/Breadcrumb.astro';
+---
+
+<BaseLayout title="Privacybeleid — Kit-72" description="Hoe we omgaan met je gegevens." locale="nl">
+  <section class="py-16">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6">
+      <Breadcrumb items={[{ label: 'Privacy' }]} class="mb-4" locale="nl" />
+      <h1 class="text-4xl font-bold mb-6">Privacybeleid</h1>
+      
+      <div class="prose prose-lg">
+        <p><em>Laatst bijgewerkt: december 2025</em></p>
+        
+        <h2>Welke gegevens verzamelen we?</h2>
+        <p>Kit-72.com verzamelt minimale gegevens:</p>
+        <ul>
+          <li>Anonieme analytics (paginabezoeken, geen persoonlijke data)</li>
+          <li>Lokale opslag in je browser voor de noodpakket-configurator</li>
+        </ul>
+
+        <h2>Cookies</h2>
+        <p>We gebruiken alleen functionele cookies voor de werking van de site. Geen tracking cookies van derden.</p>
+
+        <h2>Affiliate links</h2>
+        <p>Sommige links naar producten zijn affiliate links. Als je via deze links koopt, ontvangen wij een kleine commissie zonder extra kosten voor jou.</p>
+
+        <h2>Contact</h2>
+        <p>Vragen over privacy? Neem contact op via onze website.</p>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

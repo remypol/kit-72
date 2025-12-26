@@ -1,0 +1,315 @@
+{
+  "meta": {
+    "locale": "nl",
+    "hreflang": "nl-NL",
+    "name": "Nederlands",
+    "flag": "🇳🇱"
+  },
+  "site": {
+    "title": "Kit-72",
+    "description": "Gidsen en tools voor je 72-uurs noodpakket. Gepersonaliseerde checklists, calculators en praktische tips.",
+    "tagline": "Gidsen en tools voor je noodpakket. Praktische informatie, zonder paniek."
+  },
+  "nav": {
+    "home": "Home",
+    "guides": "Gidsen",
+    "scenarios": "Scenario's",
+    "components": "Producten",
+    "tools": "Tools",
+    "search": "Zoeken",
+    "configurator": "Samenstellen"
+  },
+  "footer": {
+    "copyright": "Alle rechten voorbehouden.",
+    "affiliateNote": "Deze site bevat affiliate links.",
+    "moreInfo": "Meer informatie",
+    "legal": "Juridisch"
+  },
+  "common": {
+    "readMore": "Lees meer",
+    "learnMore": "Meer weten",
+    "viewAll": "Bekijk alles",
+    "close": "Sluiten",
+    "back": "Terug",
+    "next": "Volgende",
+    "previous": "Vorige",
+    "loading": "Laden...",
+    "error": "Fout",
+    "success": "Gelukt",
+    "comingSoon": "Binnenkort",
+    "lastUpdated": "Laatst bijgewerkt",
+    "author": "Team Kit-72"
+  },
+  "accessibility": {
+    "skipToContent": "Ga naar hoofdinhoud",
+    "mainNavigation": "Hoofdnavigatie",
+    "chooseLanguage": "Kies je taal"
+  },
+  "kitBuilder": {
+    "title": "Noodpakket Samenstellen",
+    "addToKit": "Toevoegen aan pakket",
+    "removeFromKit": "Verwijderen uit pakket",
+    "yourKit": "Jouw Pakket",
+    "emptyKit": "Je pakket is leeg",
+    "itemsSelected": "artikelen geselecteerd",
+    "exportPdf": "Exporteer PDF",
+    "shareKit": "Deel pakket",
+    "resetKit": "Reset pakket",
+    "storageKey": "kit72_builder_nl",
+    "urlParams": {
+      "scenario": "scenario",
+      "babies": "baby",
+      "pets": "huisdier"
+    },
+    "progress": {
+      "label": "Voortgang noodpakket",
+      "completed": "voltooid",
+      "complete": "Compleet",
+      "critical": "kritiek"
+    },
+    "resumeBanner": {
+      "title": "Voortgang opgeslagen",
+      "itemsMarked": "items aangevinkt",
+      "restart": "Opnieuw beginnen"
+    },
+    "quickPresets": {
+      "title": "Snel starten",
+      "solo": { "label": "Ik woon alleen", "description": "Basis individueel pakket" },
+      "family": { "label": "Gezin met kinderen", "description": "Compleet gezinspakket" },
+      "pets": { "label": "Met huisdieren", "description": "Inclusief hond/kat" },
+      "evacuation": { "label": "Evacuatietas", "description": "15 min om te vertrekken" }
+    },
+    "scenariosSection": {
+      "title": "Kies je scenario",
+      "general": { "label": "Algemeen Pakket", "description": "Basis voorbereiding 72 uur" },
+      "stroomstoring": { "label": "Stroomstoring", "description": "Langdurige stroomuitval" },
+      "hittegolf": { "label": "Hittegolf", "description": "Extreme temperaturen" },
+      "wateruitval": { "label": "Wateruitval", "description": "Geen watervoorziening" },
+      "evacuatie": { "label": "Evacuatie", "description": "Nooduitgang" },
+      "overstroming": { "label": "Overstroming", "description": "Hoogwater of dijkdoorbraak" },
+      "cyberaanval": { "label": "Cyberaanval", "description": "Uitval digitale systemen" }
+    },
+    "familySection": {
+      "title": "Jouw huishouden",
+      "babies": { "label": "Baby's of kleine kinderen", "description": "Voegt luiers, flesjes, etc. toe" },
+      "pets": { "label": "Huisdieren", "description": "Voegt voer, bench, etc. toe" }
+    },
+    "progressSection": {
+      "title": "Voortgang van je Pakket",
+      "complete": "Pakket Compleet!",
+      "items": "Items:",
+      "criticalLabel": "Kritiek:",
+      "congratulations": "Gefeliciteerd! Je noodpakket is klaar",
+      "missingCritical": "Je mist nog {count} kritieke items",
+      "allCriticalDone": "Alle kritieke items voltooid"
+    },
+    "priority": {
+      "critical": "Kritiek",
+      "recommended": "Aanbevolen",
+      "optional": "Optioneel"
+    },
+    "actions": {
+      "print": "Afdrukken",
+      "share": "Delen",
+      "reset": "Resetten",
+      "buy": "Kopen"
+    },
+    "autoSave": "Je voortgang wordt automatisch opgeslagen",
+    "linkCopied": "Link gekopieerd",
+    "milestones": {
+      "25": "25% voltooid - Goed begin!",
+      "50": "50% - Je bent halverwege!",
+      "75": "75% - Bijna klaar!",
+      "100": "100% - Pakket compleet!"
+    },
+    "print": {
+      "siteName": "Kit-72.com",
+      "tagline": "Noodvoorbereiding",
+      "generated": "Gegenereerd:",
+      "scenario": "Scenario:",
+      "withBabies": "Met baby's",
+      "withPets": "Met huisdieren",
+      "scanQr": "Scan voor online versie:",
+      "url": "kit-72.com/nl/tools/noodpakket-samenstellen/"
+    },
+    "categories": {
+      "Water": "Water",
+      "Voeding": "Voeding",
+      "Verlichting": "Verlichting",
+      "Energie": "Energie",
+      "EHBO": "EHBO",
+      "Hygiëne": "Hygiëne",
+      "Documenten": "Documenten",
+      "Gereedschap": "Gereedschap",
+      "Bescherming": "Bescherming",
+      "Koeling": "Koeling",
+      "Baby": "Baby",
+      "Huisdieren": "Huisdieren",
+      "Overstroming": "Overstroming"
+    }
+  },
+  "calculators": {
+    "water": {
+      "title": "Water Calculator",
+      "quickSetup": "Snelle configuratie",
+      "presets": {
+        "solo": { "label": "Alleen", "sublabel": "1 volwassene, 3 dagen" },
+        "couple": { "label": "Stel", "sublabel": "2 volwassenen, 3 dagen" },
+        "family": { "label": "Gezin", "sublabel": "2 volwassenen, 2 kinderen" },
+        "withPet": { "label": "Met huisdier", "sublabel": "2 volwassenen, 1 hond" }
+      },
+      "people": {
+        "title": "Personen",
+        "adults": "Volwassenen",
+        "children": "Kinderen (4-12 jaar)",
+        "babies": "Baby's (0-3 jaar)",
+        "total": "totaal"
+      },
+      "pets": {
+        "title": "Huisdieren",
+        "dogs": "Honden",
+        "cats": "Katten",
+        "total": "totaal"
+      },
+      "duration": {
+        "title": "Duur",
+        "daysLabel": "Dagen autonomie",
+        "day": "dag",
+        "days": "dagen",
+        "recommended": "72u aanbevolen"
+      },
+      "conditions": {
+        "title": "Omstandigheden",
+        "climate": "Klimaat",
+        "normal": "Normaal",
+        "hot": "Extreme hitte",
+        "comfort": "Comfortniveau",
+        "minimal": "Minimaal",
+        "standard": "Standaard",
+        "comfortable": "Comfortabel"
+      },
+      "calculate": "Water berekenen",
+      "calculating": "Berekenen...",
+      "result": {
+        "title": "Totaal nodig",
+        "forDays": "voor {days} dagen",
+        "perDay": "/dag",
+        "person": "persoon",
+        "people": "personen",
+        "pet": "huisdier",
+        "pets": "huisdieren",
+        "hotClimate": "Warm klimaat",
+        "normalClimate": "Normaal klimaat",
+        "comfortLevel": "Comfort"
+      },
+      "breakdown": {
+        "drinking": "Drinken",
+        "cooking": "Koken",
+        "hygiene": "Hygiëne",
+        "sanitation": "WC",
+        "pets": "Huisdieren"
+      },
+      "storage": {
+        "title": "Hoe op te slaan",
+        "subtitle": "Praktische suggesties voor je voorraad",
+        "bottles5L": "Flessen 5L",
+        "drinkingOnly": "Alleen voor drinken",
+        "containers20L": "Jerrycans 20L",
+        "generalUse": "Hygiëne en algemeen gebruik",
+        "alternative": "Alternatief: 8L",
+        "easierToMove": "Makkelijker te verplaatsen"
+      },
+      "products": {
+        "title": "Aanbevolen producten",
+        "subtitle": "Wateropslag oplossingen bij Bol.com",
+        "bestSeller": "Meest verkocht",
+        "viewMore": "Bekijk meer wateropslag producten",
+        "viewAt": "Bekijk bij Bol.com"
+      },
+      "tip": "Vergeet huisdieren niet! Honden en katten hebben ook ongeveer 50-100ml water per kg lichaamsgewicht per dag nodig."
+    },
+    "power": {
+      "title": "Energie Calculator",
+      "duration": {
+        "title": "Duur van de noodsituatie",
+        "subtitle": "Hoeveel dagen wil je overbruggen?",
+        "24h": "24u",
+        "72h": "72u",
+        "1week": "1 week",
+        "2weeks": "2 weken",
+        "shortEmergency": "Korte noodsituatie",
+        "standardKit": "Standaard pakket",
+        "extendedEmergency": "Langere noodsituatie",
+        "maxPreparation": "Maximale voorbereiding"
+      },
+      "devices": {
+        "title": "Apparaten om op te laden",
+        "subtitle": "Selecteer het aantal van elk",
+        "active": "actief",
+        "actives": "actief",
+        "categories": {
+          "communication": "Communicatie",
+          "lighting": "Verlichting",
+          "medical": "Medisch",
+          "other": "Overig"
+        },
+        "items": {
+          "smartphone": "Smartphone",
+          "tablet": "Tablet",
+          "smartwatch": "Smartwatch",
+          "headlamp": "Hoofdlamp",
+          "lantern": "Campinglamp",
+          "radio": "Noodradio",
+          "cpap": "CPAP draagbaar",
+          "nebulizer": "Vernevelaar"
+        },
+        "perDay": "×/dag",
+        "every": "elke",
+        "daysInterval": "dagen",
+        "addCustom": "Aangepast apparaat toevoegen",
+        "deviceName": "Naam apparaat",
+        "add": "Toevoegen"
+      },
+      "safety": {
+        "title": "Veiligheidsmarge",
+        "subtitle": "Batterijen verliezen efficiëntie bij kou en gebruik",
+        "tight": "Krap",
+        "noBuffer": "Geen buffer",
+        "minimum": "Minimaal",
+        "buffer20": "+20% buffer",
+        "recommended": "Aanbevolen",
+        "buffer30": "+30% buffer",
+        "conservative": "Conservatief",
+        "buffer50": "+50% buffer"
+      },
+      "calculating": "Berekenen...",
+      "result": {
+        "title": "Jouw energiebehoefte",
+        "days": "dagen",
+        "devices": "apparaten",
+        "totalCapacity": "Totaal aanbevolen capaciteit",
+        "consumption": "Verbruik",
+        "losses": "+30% verliezen",
+        "margin": "marge",
+        "breakdown": "Uitsplitsing per apparaat",
+        "summary": "Samenvatting behoefte",
+        "recommended": "Aanbevolen"
+      },
+      "products": {
+        "title": "Aanbevolen producten",
+        "subtitle": "Selectie powerbanks van betrouwbare merken bij Bol.com",
+        "idealForYou": "Ideaal voor jou",
+        "viewMore": "Bekijk meer powerbanks bij Bol.com",
+        "viewAt": "Bekijk bij Bol.com"
+      },
+      "tips": {
+        "coldWeather": "Batterijen verliezen tot 30% capaciteit bij 0°C.",
+        "solarPanel": "Een 21W zonnepaneel kan helpen bij langere noodsituaties."
+      },
+      "empty": {
+        "title": "Geen apparaten geselecteerd",
+        "subtitle": "Voeg minimaal één apparaat toe om je energiebehoefte te berekenen."
+      }
+    }
+  }
+}

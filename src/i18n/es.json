@@ -1,0 +1,312 @@
+{
+  "meta": {
+    "locale": "es",
+    "hreflang": "es-ES",
+    "name": "Español",
+    "flag": "🇪🇸"
+  },
+  "site": {
+    "title": "Kit-72",
+    "description": "Guías y herramientas para preparar tu kit de emergencia de 72 horas. Checklists personalizados, calculadoras y consejos prácticos.",
+    "tagline": "Guías y herramientas para preparar tu kit de emergencia. Información práctica, sin alarmismo."
+  },
+  "nav": {
+    "home": "Inicio",
+    "guides": "Guías",
+    "scenarios": "Escenarios",
+    "components": "Componentes",
+    "tools": "Herramientas",
+    "search": "Buscar",
+    "configurator": "Configurador"
+  },
+  "footer": {
+    "copyright": "Todos los derechos reservados.",
+    "affiliateNote": "Este sitio contiene enlaces de afiliado.",
+    "moreInfo": "Más información",
+    "legal": "Legal"
+  },
+  "common": {
+    "readMore": "Leer más",
+    "learnMore": "Saber más",
+    "viewAll": "Ver todo",
+    "close": "Cerrar",
+    "back": "Volver",
+    "next": "Siguiente",
+    "previous": "Anterior",
+    "loading": "Cargando...",
+    "error": "Error",
+    "success": "Éxito",
+    "comingSoon": "Próximamente",
+    "lastUpdated": "Última actualización",
+    "author": "Equipo Kit-72"
+  },
+  "accessibility": {
+    "skipToContent": "Saltar al contenido principal",
+    "mainNavigation": "Navegación principal",
+    "chooseLanguage": "Elige tu idioma"
+  },
+  "kitBuilder": {
+    "title": "Configurador de Kit",
+    "addToKit": "Añadir al kit",
+    "removeFromKit": "Quitar del kit",
+    "yourKit": "Tu Kit",
+    "emptyKit": "Tu kit está vacío",
+    "itemsSelected": "artículos seleccionados",
+    "exportPdf": "Exportar PDF",
+    "shareKit": "Compartir kit",
+    "resetKit": "Reiniciar kit",
+    "storageKey": "kit72_builder",
+    "urlParams": {
+      "scenario": "escenario",
+      "babies": "bebes",
+      "pets": "mascotas"
+    },
+    "progress": {
+      "label": "Progreso del kit",
+      "completed": "completado",
+      "complete": "Completo",
+      "critical": "críticos"
+    },
+    "resumeBanner": {
+      "title": "Progreso guardado",
+      "itemsMarked": "items marcados",
+      "restart": "Empezar de nuevo"
+    },
+    "quickPresets": {
+      "title": "Empieza rápido",
+      "solo": { "label": "Vivo solo", "description": "Kit individual básico" },
+      "family": { "label": "Familia con niños", "description": "Kit familiar completo" },
+      "pets": { "label": "Con mascotas", "description": "Kit incluyendo perro/gato" },
+      "evacuation": { "label": "Mochila de huida", "description": "15 min para salir" }
+    },
+    "scenariosSection": {
+      "title": "Elige tu escenario",
+      "general": { "label": "Kit General", "description": "Preparación básica 72h" },
+      "apagon": { "label": "Apagón", "description": "Corte de electricidad" },
+      "calor": { "label": "Ola de Calor", "description": "Temperaturas extremas" },
+      "agua": { "label": "Corte de Agua", "description": "Sin suministro de agua" },
+      "evacuacion": { "label": "Evacuación", "description": "Salida de emergencia" }
+    },
+    "familySection": {
+      "title": "Tu familia",
+      "babies": { "label": "Bebés o niños pequeños", "description": "Añade pañales, biberones, etc." },
+      "pets": { "label": "Mascotas", "description": "Añade comida, transportín, etc." }
+    },
+    "progressSection": {
+      "title": "Progreso de tu Kit",
+      "complete": "¡Kit Completo!",
+      "items": "Items:",
+      "criticalLabel": "Críticos:",
+      "congratulations": "¡Felicidades! Tu kit está listo",
+      "missingCritical": "Te faltan {count} items críticos",
+      "allCriticalDone": "Todos los items críticos completados"
+    },
+    "priority": {
+      "critical": "Crítico",
+      "recommended": "Recomendado",
+      "optional": "Opcional"
+    },
+    "actions": {
+      "print": "Imprimir",
+      "share": "Compartir",
+      "reset": "Reiniciar",
+      "buy": "Comprar"
+    },
+    "autoSave": "Tu progreso se guarda automáticamente",
+    "linkCopied": "Enlace copiado",
+    "milestones": {
+      "25": "25% completado - ¡Buen comienzo!",
+      "50": "50% - ¡Vas por la mitad!",
+      "75": "75% - ¡Ya casi lo tienes!",
+      "100": "100% - ¡Kit completo!"
+    },
+    "print": {
+      "siteName": "Kit-72.com",
+      "tagline": "Preparación para emergencias",
+      "generated": "Generado:",
+      "scenario": "Escenario:",
+      "withBabies": "Con bebés",
+      "withPets": "Con mascotas",
+      "scanQr": "Escanea para ver online:",
+      "url": "kit-72.com/herramientas/configurador-kit/"
+    },
+    "categories": {
+      "Agua": "Agua",
+      "Alimentación": "Alimentación",
+      "Iluminación": "Iluminación",
+      "Energía": "Energía",
+      "Botiquín": "Botiquín",
+      "Higiene": "Higiene",
+      "Documentación": "Documentación",
+      "Herramientas": "Herramientas",
+      "Protección": "Protección",
+      "Refrigeración": "Refrigeración",
+      "Bebés": "Bebés",
+      "Mascotas": "Mascotas"
+    }
+  },
+  "calculators": {
+    "water": {
+      "title": "Calculadora de Agua",
+      "quickSetup": "Configuración rápida",
+      "presets": {
+        "solo": { "label": "Solo", "sublabel": "1 adulto, 3 días" },
+        "couple": { "label": "Pareja", "sublabel": "2 adultos, 3 días" },
+        "family": { "label": "Familia", "sublabel": "2 adultos, 2 niños" },
+        "withPet": { "label": "Con mascota", "sublabel": "2 adultos, 1 perro" }
+      },
+      "people": {
+        "title": "Personas",
+        "adults": "Adultos",
+        "children": "Niños (4-12 años)",
+        "babies": "Bebés (0-3 años)",
+        "total": "total"
+      },
+      "pets": {
+        "title": "Mascotas",
+        "dogs": "Perros",
+        "cats": "Gatos",
+        "total": "total"
+      },
+      "duration": {
+        "title": "Duración",
+        "daysLabel": "Días de autonomía",
+        "day": "día",
+        "days": "días",
+        "recommended": "72h recomendado"
+      },
+      "conditions": {
+        "title": "Condiciones",
+        "climate": "Clima",
+        "normal": "Normal",
+        "hot": "Calor extremo",
+        "comfort": "Nivel de confort",
+        "minimal": "Mínimo",
+        "standard": "Estándar",
+        "comfortable": "Cómodo"
+      },
+      "calculate": "Calcular agua necesaria",
+      "calculating": "Calculando...",
+      "result": {
+        "title": "Total necesario",
+        "forDays": "para {days} días",
+        "perDay": "/día",
+        "person": "persona",
+        "people": "personas",
+        "pet": "mascota",
+        "pets": "mascotas",
+        "hotClimate": "Clima cálido",
+        "normalClimate": "Clima normal",
+        "comfortLevel": "Confort"
+      },
+      "breakdown": {
+        "drinking": "Beber",
+        "cooking": "Cocinar",
+        "hygiene": "Higiene",
+        "sanitation": "WC",
+        "pets": "Mascotas"
+      },
+      "storage": {
+        "title": "Cómo almacenarlo",
+        "subtitle": "Sugerencias prácticas para tu reserva",
+        "bottles5L": "Garrafas 5L",
+        "drinkingOnly": "Solo para beber",
+        "containers20L": "Bidones 20L",
+        "generalUse": "Higiene y uso general",
+        "alternative": "Alternativa: 8L",
+        "easierToMove": "Más fácil de mover"
+      },
+      "products": {
+        "title": "Productos recomendados",
+        "subtitle": "Soluciones de almacenamiento en Amazon España",
+        "bestSeller": "Más vendido",
+        "viewMore": "Ver más productos de almacenamiento de agua",
+        "viewAt": "Ver en Amazon"
+      },
+      "tip": "¡No olvides a las mascotas! Los perros y gatos también necesitan aproximadamente 50-100ml de agua por kg de peso corporal al día."
+    },
+    "power": {
+      "title": "Calculadora de Energía",
+      "duration": {
+        "title": "Duración de la emergencia",
+        "subtitle": "¿Cuántos días quieres cubrir?",
+        "24h": "24h",
+        "72h": "72h",
+        "1week": "1 semana",
+        "2weeks": "2 semanas",
+        "shortEmergency": "Emergencia corta",
+        "standardKit": "Kit estándar",
+        "extendedEmergency": "Emergencia prolongada",
+        "maxPreparation": "Preparación máxima"
+      },
+      "devices": {
+        "title": "Dispositivos a cargar",
+        "subtitle": "Selecciona la cantidad de cada uno",
+        "active": "activo",
+        "actives": "activos",
+        "categories": {
+          "communication": "Comunicación",
+          "lighting": "Iluminación",
+          "medical": "Médico",
+          "other": "Otros"
+        },
+        "items": {
+          "smartphone": "Smartphone",
+          "tablet": "Tablet",
+          "smartwatch": "Smartwatch",
+          "headlamp": "Linterna frontal",
+          "lantern": "Lámpara de camping",
+          "radio": "Radio de emergencia",
+          "cpap": "CPAP portátil",
+          "nebulizer": "Nebulizador"
+        },
+        "perDay": "×/día",
+        "every": "cada",
+        "daysInterval": "días",
+        "addCustom": "Añadir dispositivo personalizado",
+        "deviceName": "Nombre del dispositivo",
+        "add": "Añadir"
+      },
+      "safety": {
+        "title": "Margen de seguridad",
+        "subtitle": "Las baterías pierden eficiencia con el frío y el uso",
+        "tight": "Ajustado",
+        "noBuffer": "Sin margen",
+        "minimum": "Mínimo",
+        "buffer20": "+20% margen",
+        "recommended": "Recomendado",
+        "buffer30": "+30% margen",
+        "conservative": "Conservador",
+        "buffer50": "+50% margen"
+      },
+      "calculating": "Calculando...",
+      "result": {
+        "title": "Tu necesidad energética",
+        "days": "días",
+        "devices": "dispositivos",
+        "totalCapacity": "Capacidad total recomendada",
+        "consumption": "Consumo",
+        "losses": "+30% pérdidas",
+        "margin": "margen",
+        "breakdown": "Desglose por dispositivo",
+        "summary": "Resumen de necesidades",
+        "recommended": "Recomendado"
+      },
+      "products": {
+        "title": "Productos recomendados",
+        "subtitle": "Selección de powerbanks de marcas fiables en Amazon España",
+        "idealForYou": "Ideal para ti",
+        "viewMore": "Ver más powerbanks en Amazon",
+        "viewAt": "Ver en Amazon"
+      },
+      "tips": {
+        "coldWeather": "Las baterías pierden hasta un 30% de capacidad a 0°C.",
+        "solarPanel": "Un panel solar de 21W puede ayudar en emergencias prolongadas."
+      },
+      "empty": {
+        "title": "Sin dispositivos seleccionados",
+        "subtitle": "Añade al menos un dispositivo para calcular tu necesidad energética."
+      }
+    }
+  }
+}

@@ -1,0 +1,624 @@
+---
+import ArticleLayout from '../../../../layouts/ArticleLayout.astro';
+
+const tocItems = [
+  { id: 'cuanta-agua', label: '¿Cuánta agua almacenar?' },
+  { id: 'tipos-recipientes', label: 'Tipos de recipientes' },
+  { id: 'donde-guardar', label: 'Dónde guardar el agua' },
+  { id: 'rotacion', label: 'Rotación y mantenimiento' },
+  { id: 'tratamiento', label: 'Tratamiento del agua' },
+  { id: 'agua-emergencia', label: 'Fuentes de agua de emergencia' },
+  { id: 'errores', label: 'Errores comunes' },
+  { id: 'faq', label: 'Preguntas frecuentes' },
+];
+
+const breadcrumbs = [
+  { label: 'Inicio', href: '/es/' },
+  { label: 'Guías', href: '/es/guias/' },
+  { label: 'Almacenamiento de Agua' },
+];
+
+const containerTypes = [
+  {
+    name: 'Botellas comerciales (1.5-2L)',
+    capacity: '1.5-2L',
+    pros: ['Ya potabilizada', 'Sellada de fábrica', 'Fácil rotación', 'Portátil'],
+    cons: ['Coste por litro alto', 'Mucho plástico', 'Ocupa más espacio'],
+    bestFor: 'Agua de bebida principal, kit de evacuación',
+    durability: '1-2 años (sellada)',
+    icon: '🍶',
+  },
+  {
+    name: 'Garrafas grandes (5-8L)',
+    capacity: '5-8L',
+    pros: ['Mejor relación calidad/precio', 'Menos plástico por litro', 'Manejables'],
+    cons: ['Más difícil de transportar llenas', 'Ocupan espacio'],
+    bestFor: 'Almacenamiento principal en casa',
+    durability: '1-2 años (sellada)',
+    icon: '🫗',
+  },
+  {
+    name: 'Bidones alimentarios (20-30L)',
+    capacity: '20-30L',
+    pros: ['Económico', 'Reutilizable años', 'Algunos con grifo'],
+    cons: ['Pesados llenos (+20kg)', 'Necesitan espacio', 'Requieren llenado'],
+    bestFor: 'Almacenamiento a largo plazo, uso general',
+    durability: '5-10 años (el bidón)',
+    icon: '🪣',
+  },
+  {
+    name: 'Depósitos grandes (100-1000L)',
+    capacity: '100-1000L',
+    pros: ['Máxima capacidad', 'Una inversión duradera', 'Algunos conectan a bajantes'],
+    cons: ['Requieren espacio dedicado', 'Instalación', 'No portátiles'],
+    bestFor: 'Casas con jardín/terraza, autosuficiencia',
+    durability: '10-20 años',
+    icon: '🏗️',
+  },
+  {
+    name: 'Bolsas de agua para bañera',
+    capacity: '100-200L',
+    pros: ['Barato', 'Aprovecha la bañera', 'Almacena mucho rápido'],
+    cons: ['Un solo uso', 'Necesita aviso previo', 'No portátil'],
+    bestFor: 'Emergencia con aviso (huracán, corte programado)',
+    durability: 'Un solo uso',
+    icon: '🛁',
+  },
+];
+
+const storageLocations = [
+  {
+    location: 'Despensa/armario interior',
+    rating: 'Excelente',
+    why: 'Temperatura estable, oscuro, accesible',
+    tips: 'Ideal para almacenamiento principal',
+  },
+  {
+    location: 'Garaje (clima templado)',
+    rating: 'Bueno',
+    why: 'Espacio disponible, suelo de cemento fresco',
+    tips: 'Evitar si hay cambios bruscos de temperatura',
+  },
+  {
+    location: 'Sótano',
+    rating: 'Excelente',
+    why: 'Fresco y oscuro naturalmente',
+    tips: 'Vigilar humedad, elevar del suelo si hay riesgo de inundación',
+  },
+  {
+    location: 'Balcón/terraza',
+    rating: 'Regular',
+    why: 'Expuesto a sol y temperaturas extremas',
+    tips: 'Solo en recipientes opacos y con sombra',
+  },
+  {
+    location: 'Junto a productos químicos',
+    rating: 'Malo',
+    why: 'El plástico absorbe olores y vapores',
+    tips: 'NUNCA junto a gasolina, pinturas, lejía abierta',
+  },
+];
+
+const rotationSchedule = [
+  { type: 'Agua embotellada comercial (sellada)', rotation: 'Cada 1-2 años', notes: 'Revisar fecha de caducidad' },
+  { type: 'Agua del grifo en bidones', rotation: 'Cada 6 meses', notes: 'Vaciar, limpiar, rellenar' },
+  { type: 'Agua tratada con conservante', rotation: 'Cada 5 años', notes: 'Seguir instrucciones del producto' },
+  { type: 'Depósitos grandes', rotation: 'Anual', notes: 'Drenar, limpiar interior, rellenar' },
+];
+
+const treatmentMethods = [
+  {
+    method: 'Pastillas potabilizadoras',
+    effectiveness: 'Alta',
+    howTo: 'Seguir instrucciones. Generalmente 1 pastilla por litro, esperar 30 min.',
+    pros: 'Baratas, portátiles, fáciles de usar',
+    cons: 'Sabor a cloro, no eliminan químicos',
+    cost: '5-10€ / 50 pastillas',
+  },
+  {
+    method: 'Hervir',
+    effectiveness: 'Alta',
+    howTo: 'Hervir a borbotones durante 3 minutos mínimo. Dejar enfriar.',
+    pros: 'Gratis si tienes fuego, muy efectivo',
+    cons: 'Necesita combustible, no elimina químicos',
+    cost: 'Gratis (coste de combustible)',
+  },
+  {
+    method: 'Filtro de gravedad',
+    effectiveness: 'Muy alta',
+    howTo: 'Verter agua en la parte superior, recoger filtrada abajo.',
+    pros: 'No necesita electricidad, gran capacidad, elimina muchos contaminantes',
+    cons: 'Inversión inicial, mantenimiento de filtros',
+    cost: '80-200€ + filtros',
+  },
+  {
+    method: 'Filtro de botella/pajita',
+    effectiveness: 'Alta',
+    howTo: 'Beber directamente a través del filtro o llenar botella.',
+    pros: 'Portátil, inmediato, económico',
+    cons: 'Capacidad limitada, no filtra virus todos',
+    cost: '20-50€',
+  },
+  {
+    method: 'Lejía (emergencia)',
+    effectiveness: 'Media',
+    howTo: '2 gotas de lejía SIN ADITIVOS por litro de agua clara. Esperar 30 min.',
+    pros: 'Muy barato, disponible en cualquier sitio',
+    cons: 'Solo para emergencias, riesgo de error en dosis',
+    cost: '1-2€ / botella',
+  },
+];
+
+const emergencySources = [
+  {
+    source: 'Termo de agua caliente',
+    potable: true,
+    howTo: 'Cerrar entrada de agua y gas/electricidad. Abrir grifo de drenaje inferior.',
+    capacity: '50-100L típico',
+  },
+  {
+    source: 'Tanque del WC (cisterna)',
+    potable: false,
+    howTo: 'Solo el agua del tanque, NO de la taza. Usar para limpieza.',
+    capacity: '6-9L por cisterna',
+  },
+  {
+    source: 'Hielo del congelador',
+    potable: true,
+    howTo: 'Derretir cubitos. Es agua potable congelada.',
+    capacity: 'Variable',
+  },
+  {
+    source: 'Agua de lluvia',
+    potable: false,
+    howTo: 'Recoger en recipientes limpios. SIEMPRE tratar antes de beber.',
+    capacity: 'Depende de precipitación',
+  },
+  {
+    source: 'Piscina/jacuzzi',
+    potable: false,
+    howTo: 'SOLO para limpieza y WC. Contiene cloro y químicos.',
+    capacity: 'Miles de litros',
+  },
+];
+
+const commonMistakes = [
+  {
+    mistake: 'Almacenar en recipientes no alimentarios',
+    why: 'El plástico puede liberar químicos al agua',
+    solution: 'Usar SOLO recipientes marcados como "food grade" o "apto para alimentos"',
+  },
+  {
+    mistake: 'Guardar al sol o calor',
+    why: 'El calor degrada el plástico y favorece bacterias',
+    solution: 'Lugar fresco (<25°C), oscuro, temperatura estable',
+  },
+  {
+    mistake: 'No rotar el agua almacenada',
+    why: 'El agua puede desarrollar sabor, olor o contaminantes',
+    solution: 'Marcar fecha de llenado, rotar según calendario',
+  },
+  {
+    mistake: 'Almacenar junto a químicos',
+    why: 'El plástico absorbe vapores de gasolina, pintura, etc.',
+    solution: 'Separar físicamente de cualquier producto químico',
+  },
+  {
+    mistake: 'No calcular la cantidad real necesaria',
+    why: 'Quedarse corto en emergencia o desperdiciar espacio',
+    solution: 'Usar calculadora: 3L/persona/día mínimo, más para higiene',
+  },
+  {
+    mistake: 'Reutilizar botellas de refrescos/zumo',
+    why: 'Pueden tener residuos de azúcar que favorecen bacterias',
+    solution: 'Si reutilizas, limpiar exhaustivamente con lejía diluida',
+  },
+];
+
+const faqs = [
+  {
+    question: '¿El agua caduca realmente?',
+    answer: 'El agua en sí no caduca, pero el envase sí puede degradarse y afectar al sabor/seguridad. La fecha de caducidad en botellas se refiere más al envase que al contenido. Agua almacenada correctamente en recipientes alimentarios puede durar años, pero se recomienda rotarla para mantener frescura.'
+  },
+  {
+    question: '¿Puedo almacenar agua del grifo directamente?',
+    answer: 'Sí, si tu agua del grifo es potable. Usa recipientes alimentarios limpios, llena hasta arriba para minimizar aire, y rota cada 6 meses. El cloro residual del agua tratada ayuda a conservarla. Si quieres más seguridad, añade conservante específico para agua.'
+  },
+  {
+    question: '¿Cuánto espacio necesito?',
+    answer: 'Un litro de agua ocupa exactamente un litro de espacio (1 dm³). Para una familia de 4, almacenar 3 días a 5L/persona/día = 60L, que equivale aproximadamente a un cubo de 40×40×40cm. 10 garrafas de 6L ocupan un estante de despensa.'
+  },
+  {
+    question: '¿Qué hago si el agua huele o sabe mal?',
+    answer: 'Primero, airearla: verter entre dos recipientes varias veces para oxigenar. Si persiste el mal olor/sabor, trátala con pastillas potabilizadoras o hiérvela. Si tiene olor químico fuerte o color extraño, NO la bebas y descártala.'
+  },
+  {
+    question: '¿Las botellas de plástico liberan tóxicos?',
+    answer: 'Las botellas de agua comerciales (PET) son seguras para almacenamiento normal. Evita: exponerlas al sol directo, calentarlas (coche en verano), reutilizarlas indefinidamente, o usar plásticos no alimentarios. En condiciones normales, el riesgo es mínimo.'
+  },
+  {
+    question: '¿Puedo beber agua destilada en emergencia?',
+    answer: 'Sí, a corto plazo. El agua destilada carece de minerales, pero en una emergencia de 3-7 días no es problema si también comes alimentos que los aportan. No es ideal para consumo prolongado exclusivo.'
+  },
+];
+
+// Generate FAQPage schema for rich results
+const faqSchema = {
+  mainEntity: faqs.map(faq => ({
+    '@type': 'Question',
+    name: faq.question,
+    acceptedAnswer: {
+      '@type': 'Answer',
+      text: faq.answer
+    }
+  }))
+};
+---
+
+<ArticleLayout
+  faqData={faqs}
+  title="Almacenamiento de Agua para Emergencias: Guía Completa"
+  description="Cómo almacenar agua de forma segura para emergencias. Tipos de recipientes, cantidades, rotación, tratamiento y errores a evitar."
+  updatedDate="2025-12-15"
+  author="Equipo Kit-72"
+  readTime="12 min"
+  breadcrumbs={breadcrumbs}
+  schemaType="FAQPage"
+  schemaData={faqSchema}
+>
+  <!-- TOC Slot -->
+  <nav slot="toc" class="p-4 bg-[--color-bg-tertiary] rounded-lg">
+    <h2 class="text-sm font-semibold mb-3 text-[--color-text-primary]">En esta página</h2>
+    <ul class="space-y-2 text-sm">
+      {tocItems.map((item) => (
+        <li>
+          <a href={`#${item.id}`} class="text-[--color-text-secondary] hover:text-[--color-accent-primary] transition-colors">
+            {item.label}
+          </a>
+        </li>
+      ))}
+    </ul>
+  </nav>
+
+  <!-- Main Content -->
+  <div class="card p-6 mb-8 not-prose border-l-4 border-l-[--color-status-info]">
+    <p class="text-[--color-text-secondary] m-0">
+      <strong class="text-[--color-text-primary]">Lo esencial:</strong> Almacena mínimo 3 litros por persona y día.
+      Usa recipientes alimentarios, guárdalos en lugar fresco y oscuro, y rota el agua cada 6 meses si la llenas tú,
+      o antes de la fecha de caducidad si es comercial.
+    </p>
+  </div>
+
+  <section id="cuanta-agua" class="mb-12">
+    <h2>¿Cuánta agua almacenar?</h2>
+    <p>
+      La recomendación oficial es <strong>3 litros por persona y día</strong> como mínimo vital.
+      Pero esto cubre solo bebida y cocina básica. Para mayor confort:
+    </p>
+
+    <div class="grid md:grid-cols-3 gap-4 my-6 not-prose">
+      <div class="card p-5 text-center border-t-4 border-t-[--color-status-critical]">
+        <div class="text-3xl font-bold text-[--color-status-critical] mb-1">3L</div>
+        <div class="text-sm font-medium mb-2">Mínimo vital</div>
+        <p class="text-xs text-[--color-text-muted]">Bebida + cocina básica. Sin higiene.</p>
+      </div>
+      <div class="card p-5 text-center border-t-4 border-t-[--color-status-warning]">
+        <div class="text-3xl font-bold text-[--color-status-warning] mb-1">5-7L</div>
+        <div class="text-sm font-medium mb-2">Recomendado</div>
+        <p class="text-xs text-[--color-text-muted]">Bebida + cocina + higiene básica.</p>
+      </div>
+      <div class="card p-5 text-center border-t-4 border-t-[--color-status-success]">
+        <div class="text-3xl font-bold text-[--color-status-success] mb-1">10-15L</div>
+        <div class="text-sm font-medium mb-2">Confortable</div>
+        <p class="text-xs text-[--color-text-muted]">Incluye higiene completa y WC.</p>
+      </div>
+    </div>
+
+    <div class="card p-6 my-6 not-prose bg-[--color-accent-subtle] border-[--color-border-accent]">
+      <h3 class="font-semibold text-[--color-text-primary] mb-3 text-base">📊 Ejemplo de cálculo</h3>
+      <p class="text-sm text-[--color-text-secondary] mb-2">
+        Familia de 4 personas + 1 perro, 3 días, nivel estándar (5L/persona):
+      </p>
+      <ul class="text-sm text-[--color-text-secondary] space-y-1">
+        <li>• 4 personas × 5L × 3 días = <strong>60L</strong></li>
+        <li>• 1 perro × 1L × 3 días = <strong>3L</strong></li>
+        <li>• <strong>Total: 63L</strong> (≈ 10 garrafas de 6L o 3 bidones de 20L)</li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="tipos-recipientes" class="mb-12">
+    <h2>Tipos de recipientes</h2>
+    <p>
+      No todos los recipientes son iguales. Elige según tu espacio y necesidades:
+    </p>
+
+    <div class="space-y-6 my-8">
+      {containerTypes.map((container) => (
+        <div class="card p-6">
+          <div class="flex items-start gap-4 mb-4">
+            <span class="text-3xl">{container.icon}</span>
+            <div class="flex-1">
+              <div class="flex items-center justify-between">
+                <h3 class="text-lg font-semibold m-0">{container.name}</h3>
+                <span class="px-3 py-1 text-sm bg-[--color-bg-tertiary] rounded">{container.capacity}</span>
+              </div>
+              <p class="text-sm text-[--color-text-muted] mt-1">Duración: {container.durability}</p>
+            </div>
+          </div>
+          <div class="grid md:grid-cols-3 gap-4">
+            <div>
+              <h4 class="text-sm font-semibold text-[--color-status-success] mb-2">Ventajas</h4>
+              <ul class="space-y-1">
+                {container.pros.map((pro) => (
+                  <li class="flex items-center gap-2 text-sm text-[--color-text-secondary]">
+                    <span class="text-[--color-status-success]">+</span> {pro}
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div>
+              <h4 class="text-sm font-semibold text-[--color-status-critical] mb-2">Inconvenientes</h4>
+              <ul class="space-y-1">
+                {container.cons.map((con) => (
+                  <li class="flex items-center gap-2 text-sm text-[--color-text-secondary]">
+                    <span class="text-[--color-status-critical]">-</span> {con}
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div>
+              <h4 class="text-sm font-semibold text-[--color-accent-primary] mb-2">Mejor para</h4>
+              <p class="text-sm text-[--color-text-secondary]">{container.bestFor}</p>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <section id="donde-guardar" class="mb-12">
+    <h2>Dónde guardar el agua</h2>
+    <p>
+      La ubicación es tan importante como el recipiente. El enemigo del agua almacenada es:
+      luz solar, calor, y proximidad a químicos.
+    </p>
+
+    <div class="overflow-x-auto my-6">
+      <table>
+        <thead>
+          <tr>
+            <th>Ubicación</th>
+            <th>Valoración</th>
+            <th>Por qué</th>
+            <th>Consejos</th>
+          </tr>
+        </thead>
+        <tbody>
+          {storageLocations.map((loc) => (
+            <tr>
+              <td class="font-medium">{loc.location}</td>
+              <td>
+                <span class={`px-2 py-0.5 text-xs rounded ${
+                  loc.rating === 'Excelente' ? 'bg-[--color-status-success]/20 text-[--color-status-success]' :
+                  loc.rating === 'Bueno' ? 'bg-[--color-status-warning]/20 text-[--color-status-warning]' :
+                  loc.rating === 'Regular' ? 'bg-[--color-status-info]/20 text-[--color-status-info]' :
+                  'bg-[--color-status-critical]/20 text-[--color-status-critical]'
+                }`}>
+                  {loc.rating}
+                </span>
+              </td>
+              <td class="text-sm text-[--color-text-secondary]">{loc.why}</td>
+              <td class="text-sm text-[--color-text-secondary]">{loc.tips}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section id="rotacion" class="mb-12">
+    <h2>Rotación y mantenimiento</h2>
+    <p>
+      El agua almacenada necesita mantenimiento. Establece un calendario:
+    </p>
+
+    <div class="overflow-x-auto my-6">
+      <table>
+        <thead>
+          <tr>
+            <th>Tipo de almacenamiento</th>
+            <th>Rotar cada</th>
+            <th>Notas</th>
+          </tr>
+        </thead>
+        <tbody>
+          {rotationSchedule.map((item) => (
+            <tr>
+              <td class="font-medium">{item.type}</td>
+              <td><code>{item.rotation}</code></td>
+              <td class="text-sm text-[--color-text-secondary]">{item.notes}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+
+    <div class="card p-6 my-6 not-prose bg-[--color-accent-subtle] border-[--color-border-accent]">
+      <h3 class="font-semibold text-[--color-text-primary] mb-3 text-base">💡 Sistema FIFO</h3>
+      <p class="text-sm text-[--color-text-secondary]">
+        Usa el sistema <strong>First In, First Out</strong>: consume primero el agua más antigua.
+        Etiqueta cada recipiente con la fecha de llenado. Cuando añadas agua nueva, ponla al fondo
+        y usa la del frente.
+      </p>
+    </div>
+  </section>
+
+  <section id="tratamiento" class="mb-12">
+    <h2>Tratamiento del agua</h2>
+    <p>
+      Si necesitas usar agua de fuentes no verificadas, trátala antes de beber:
+    </p>
+
+    <div class="space-y-4 my-8">
+      {treatmentMethods.map((method) => (
+        <div class="card p-6">
+          <div class="flex items-start justify-between mb-3">
+            <h3 class="text-lg font-semibold m-0">{method.method}</h3>
+            <div class="flex items-center gap-2">
+              <span class={`px-2 py-0.5 text-xs rounded ${
+                method.effectiveness === 'Muy alta' ? 'bg-[--color-status-success]/20 text-[--color-status-success]' :
+                method.effectiveness === 'Alta' ? 'bg-[--color-status-warning]/20 text-[--color-status-warning]' :
+                'bg-[--color-status-info]/20 text-[--color-status-info]'
+              }`}>
+                {method.effectiveness}
+              </span>
+              <span class="text-xs text-[--color-text-muted]">{method.cost}</span>
+            </div>
+          </div>
+          <p class="text-sm text-[--color-text-secondary] mb-3">
+            <strong>Cómo:</strong> {method.howTo}
+          </p>
+          <div class="grid sm:grid-cols-2 gap-4 text-sm">
+            <div>
+              <span class="text-[--color-status-success]">+</span> {method.pros}
+            </div>
+            <div>
+              <span class="text-[--color-status-critical]">-</span> {method.cons}
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <section id="agua-emergencia" class="mb-12">
+    <h2>Fuentes de agua de emergencia</h2>
+    <p>
+      Si te quedas sin agua almacenada, hay fuentes de emergencia en tu hogar:
+    </p>
+
+    <div class="overflow-x-auto my-6">
+      <table>
+        <thead>
+          <tr>
+            <th>Fuente</th>
+            <th>¿Potable?</th>
+            <th>Cómo acceder</th>
+            <th>Cantidad aprox.</th>
+          </tr>
+        </thead>
+        <tbody>
+          {emergencySources.map((source) => (
+            <tr>
+              <td class="font-medium">{source.source}</td>
+              <td>
+                {source.potable ? (
+                  <span class="text-[--color-status-success]">✓ Sí</span>
+                ) : (
+                  <span class="text-[--color-status-warning]">⚠ No sin tratar</span>
+                )}
+              </td>
+              <td class="text-sm text-[--color-text-secondary]">{source.howTo}</td>
+              <td class="text-sm">{source.capacity}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+
+    <div class="card p-6 my-6 not-prose bg-[--color-status-critical]/10 border border-[--color-status-critical]/30">
+      <h3 class="font-semibold text-[--color-status-critical] mb-2 text-base">⚠️ NUNCA uses estas fuentes</h3>
+      <ul class="space-y-1 text-sm text-[--color-text-secondary]">
+        <li>• Agua de radiadores de coche (contiene anticongelante tóxico)</li>
+        <li>• Agua de camas de agua (tratada con químicos)</li>
+        <li>• Agua estancada con mal olor, color o espuma</li>
+        <li>• Agua de inundación (contaminación fecal probable)</li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="errores" class="mb-12">
+    <h2>Errores comunes</h2>
+
+    <div class="space-y-4 my-8">
+      {commonMistakes.map((item) => (
+        <div class="card p-6">
+          <div class="flex items-start gap-4">
+            <span class="text-2xl flex-shrink-0">⚠️</span>
+            <div>
+              <h3 class="font-semibold text-[--color-text-primary] mb-1 text-base">{item.mistake}</h3>
+              <p class="text-sm text-[--color-text-secondary] mb-2">
+                <strong>Por qué es problema:</strong> {item.why}
+              </p>
+              <p class="text-sm text-[--color-accent-primary] m-0">
+                <strong>Solución:</strong> {item.solution}
+              </p>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <section id="faq" class="mb-12">
+    <h2>Preguntas frecuentes</h2>
+
+    <div class="space-y-4 my-8">
+      {faqs.map((faq) => (
+        <details class="card group">
+          <summary class="px-6 py-4 cursor-pointer list-none flex items-center justify-between hover:bg-[--color-bg-tertiary] transition-colors">
+            <span class="font-medium text-[--color-text-primary] pr-4">{faq.question}</span>
+            <svg class="w-5 h-5 text-[--color-text-muted] transform transition-transform group-open:rotate-180 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+            </svg>
+          </summary>
+          <div class="px-6 pb-4">
+            <p class="text-[--color-text-secondary] m-0">{faq.answer}</p>
+          </div>
+        </details>
+      ))}
+    </div>
+  </section>
+
+  <!-- Sources Slot -->
+  <div slot="sources">
+    <h2 id="fuentes">Fuentes y referencias</h2>
+    <ul class="text-sm space-y-2">
+      <li>
+        <a href="https://www.who.int/water_sanitation_health/dwq/en/" target="_blank" rel="noopener">
+          OMS — Guías para la calidad del agua potable
+        </a>
+      </li>
+      <li>
+        <a href="https://www.ready.gov/water" target="_blank" rel="noopener">
+          Ready.gov — Storing Water
+        </a>
+      </li>
+      <li>
+        <a href="https://www.cdc.gov/healthywater/emergency/index.html" target="_blank" rel="noopener">
+          CDC — Emergency Water Supply
+        </a>
+      </li>
+    </ul>
+  </div>
+
+  <!-- CTA Slot -->
+  <div slot="cta" class="card p-8 text-center bg-[--color-bg-tertiary]">
+    <h3 class="text-xl font-semibold mb-4">Calcula tu agua necesaria</h3>
+    <p class="text-[--color-text-secondary] mb-6">
+      Usa nuestra calculadora para obtener la cantidad exacta para tu familia.
+    </p>
+    <div class="flex flex-wrap gap-4 justify-center">
+      <a href="/es/herramientas/calculadora-agua/" class="inline-flex items-center gap-2 px-6 py-3 bg-[--color-accent-primary] text-[--color-bg-primary] font-semibold rounded hover:bg-[--color-accent-hover] transition-colors">
+        Calcular mi agua
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+        </svg>
+      </a>
+      <a href="/es/escenarios/prepararse-corte-agua/" class="inline-flex items-center gap-2 px-6 py-3 border border-[--color-border] text-[--color-text-primary] font-medium rounded hover:border-[--color-accent-primary] hover:text-[--color-accent-primary] transition-colors">
+        Guía: Prepararse para corte de agua
+      </a>
+    </div>
+  </div>
+</ArticleLayout>

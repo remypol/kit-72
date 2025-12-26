@@ -1,0 +1,568 @@
+---
+import BaseLayout from '../../../../layouts/BaseLayout.astro';
+import ProductGrid from '../../../../components/content/ProductGrid.astro';
+import Icon from '../../../../components/ui/Icon.astro';
+
+const amazonProducts = [
+  {
+    name: 'Deuter Futura 32',
+    description: 'Mochila de senderismo con sistema de ventilación, muy cómoda',
+    amazonUrl: 'https://www.amazon.es/s?k=deuter+futura+32',
+    price: '~100€',
+    rating: 4.7,
+    features: ['32 litros', 'Ventilación espalda', 'Funda lluvia'],
+    badge: 'premium' as const
+  },
+  {
+    name: 'Mountaintop 40L',
+    description: 'Excelente relación calidad-precio, ideal para kit 72h',
+    amazonUrl: 'https://www.amazon.es/s?k=mountaintop+mochila+40l',
+    price: '~45€',
+    rating: 4.5,
+    features: ['40 litros', 'Cinturón lumbar', 'Funda incluida'],
+    badge: 'recommended' as const
+  },
+  {
+    name: 'Mochila Táctica 45L MOLLE',
+    description: 'Estilo militar con sistema MOLLE para accesorios',
+    amazonUrl: 'https://www.amazon.es/s?k=mochila+tactica+45l+molle',
+    price: '~35€',
+    rating: 4.3,
+    features: ['45 litros', 'Sistema MOLLE', 'Ultra resistente'],
+    badge: 'best-value' as const
+  },
+  {
+    name: 'Mochila Niño 20L',
+    description: 'Mochila ligera para niños, ideal para su propio kit básico',
+    amazonUrl: 'https://www.amazon.es/s?k=mochila+senderismo+niño+20l',
+    price: '~25€',
+    rating: 4.4,
+    features: ['20 litros', 'Ligera', 'Ajustable']
+  }
+];
+
+const backpackTypes = [
+  {
+    name: 'Mochila de día (20-30L)',
+    description: 'Compacta y ligera, para emergencias urbanas rápidas',
+    pros: ['Ligera', 'Discreta', 'Fácil de llevar', 'Económica'],
+    cons: ['Capacidad limitada', 'Sin soporte lumbar', 'Para 24-48h máximo'],
+    bestFor: 'Kit básico individual, ciudad, oficina',
+    capacity: '20-30L',
+    icon: 'Backpack'
+  },
+  {
+    name: 'Mochila técnica (35-50L)',
+    description: 'Equilibrio entre capacidad y comodidad, soporte ergonómico',
+    pros: ['Buen soporte', 'Organización', 'Resistente', 'Versátil'],
+    cons: ['Más cara', 'Más pesada vacía', 'Puede ser excesiva'],
+    bestFor: 'Kit 72 horas completo, familias pequeñas',
+    capacity: '35-50L',
+    icon: 'Mountain'
+  },
+  {
+    name: 'Mochila expedición (50-70L)',
+    description: 'Gran capacidad para situaciones prolongadas',
+    pros: ['Máxima capacidad', 'Muy cómoda con peso', 'Modular', 'Duradera'],
+    cons: ['Pesada', 'Cara', 'Voluminosa', 'Excesiva para 72h'],
+    bestFor: 'Evacuaciones largas, familias, zonas remotas',
+    capacity: '50-70L',
+    icon: 'Tent'
+  },
+  {
+    name: 'Mochila táctica/MOLLE',
+    description: 'Sistema militar modular con accesorios externos',
+    pros: ['Muy resistente', 'Modular', 'Organizada', 'Robusta'],
+    cons: ['Pesada', 'Aspecto militar', 'Más cara', 'Puede llamar atención'],
+    bestFor: 'Entusiastas, situaciones extremas',
+    capacity: '30-50L',
+    icon: 'HardHat'
+  },
+  {
+    name: 'Bolsa de viaje con ruedas',
+    description: 'Alternativa para personas con problemas de espalda',
+    pros: ['No cargas peso', 'Gran capacidad', 'Fácil manejar'],
+    cons: ['Inútil en terreno irregular', 'Ocupa manos', 'No es mochila'],
+    bestFor: 'Evacuaciones urbanas, aeropuertos, personas mayores',
+    capacity: '40-80L',
+    icon: 'Briefcase'
+  }
+];
+
+const keyFeatures = [
+  { name: 'Capacidad (L)', description: '35-45L es ideal para kit 72h de 1 persona', icon: 'Ruler' },
+  { name: 'Sistema de carga', description: 'Cinturón lumbar y correas pectorales para distribuir peso', icon: 'Scale' },
+  { name: 'Resistencia agua', description: 'Tejido resistente + funda impermeable incluida', icon: 'Droplets' },
+  { name: 'Compartimentos', description: 'Varios bolsillos para organizar por categoría', icon: 'Package' },
+  { name: 'Acceso rápido', description: 'Bolsillos laterales y frontales para lo urgente', icon: 'Zap' },
+  { name: 'Material', description: 'Nylon 600D+ o Cordura. Costuras reforzadas', icon: 'Shield' },
+  { name: 'Puntos de anclaje', description: 'Para colgar material extra (MOLLE, lazos)', icon: 'Link' },
+  { name: 'Ventilación espalda', description: 'Panel de malla para reducir sudor', icon: 'Wind' }
+];
+
+const recommendations = [
+  {
+    type: 'Básica económica',
+    name: 'Mochila urbana 25-30L',
+    price: '25-50€',
+    features: ['25-30L', 'Bolsillos básicos', 'Nylon resistente', 'Ligera'],
+    verdict: 'Para empezar. Sirve para kit básico individual.',
+    priority: 'essential'
+  },
+  {
+    type: 'Recomendada',
+    name: 'Mochila senderismo 40L',
+    price: '50-100€',
+    features: ['35-45L', 'Cinturón lumbar', 'Funda lluvia', 'Compartimentos'],
+    verdict: 'La mejor relación calidad-precio. Cómoda con peso.',
+    priority: 'essential'
+  },
+  {
+    type: 'Premium',
+    name: 'Mochila técnica marca',
+    price: '100-200€',
+    features: ['40-50L', 'Ergonómica', 'Muy resistente', 'Garantía larga'],
+    verdict: 'Para uso frecuente o situaciones exigentes.',
+    priority: 'recommended'
+  },
+  {
+    type: 'Táctica/MOLLE',
+    name: 'Mochila militar 3 días',
+    price: '60-150€',
+    features: ['35-45L', 'Sistema MOLLE', 'Ultra resistente', 'Modular'],
+    verdict: 'Máxima versatilidad y durabilidad.',
+    priority: 'optional'
+  },
+  {
+    type: 'Niños',
+    name: 'Mochila infantil 15-20L',
+    price: '20-40€',
+    features: ['15-20L', 'Ligera', 'Ajustable', 'Colores visibles'],
+    verdict: 'Para que cada niño lleve su propio kit básico.',
+    priority: 'recommended'
+  }
+];
+
+const packingOrder = [
+  {
+    zone: 'Fondo (zona lumbar)',
+    items: ['Saco de dormir', 'Ropa extra', 'Artículos pesados pero poco usados'],
+    tip: 'El peso pesado va cerca de la espalda y zona lumbar'
+  },
+  {
+    zone: 'Centro (espalda media)',
+    items: ['Comida', 'Agua', 'Equipo pesado de uso frecuente'],
+    tip: 'El centro de gravedad debe quedar entre los omóplatos'
+  },
+  {
+    zone: 'Superior',
+    items: ['Ropa de lluvia', 'Botiquín', 'Linterna'],
+    tip: 'Cosas que necesitas sin deshacer la mochila'
+  },
+  {
+    zone: 'Bolsillos laterales',
+    items: ['Botellas de agua', 'Snacks', 'Mapa'],
+    tip: 'Acceso sin quitarte la mochila'
+  },
+  {
+    zone: 'Bolsillo superior/frontal',
+    items: ['Documentos', 'Dinero', 'Teléfono', 'Llaves'],
+    tip: 'Objetos de valor y uso constante'
+  },
+  {
+    zone: 'Exterior (cintas/MOLLE)',
+    items: ['Esterilla', 'Bastones', 'Casco'],
+    tip: 'Solo lo que no cabe dentro o necesita secar'
+  }
+];
+
+const kitContents72h = [
+  { category: 'Agua', items: ['Botellas agua 3L', 'Pastillas potabilizadoras', 'Filtro portátil (opcional)'], weight: '3.5 kg' },
+  { category: 'Comida', items: ['Barritas energéticas x6', 'Frutos secos 200g', 'Conservas pequeñas x2'], weight: '1 kg' },
+  { category: 'Refugio', items: ['Manta térmica x2', 'Poncho lluvia', 'Cuerda 5m'], weight: '0.3 kg' },
+  { category: 'Iluminación', items: ['Linterna frontal', 'Pilas repuesto', 'Velas cortas x2'], weight: '0.3 kg' },
+  { category: 'Comunicación', items: ['Radio AM/FM', 'Silbato', 'Copia documentos'], weight: '0.3 kg' },
+  { category: 'Energía', items: ['Powerbank 10000mAh', 'Cables', 'Cargador'], weight: '0.3 kg' },
+  { category: 'Botiquín', items: ['Kit básico', 'Medicamentos personales'], weight: '0.5 kg' },
+  { category: 'Herramientas', items: ['Navaja multiuso', 'Cinta americana', 'Mechero x2'], weight: '0.3 kg' },
+  { category: 'Higiene', items: ['Papel higiénico', 'Toallitas', 'Jabón pequeño'], weight: '0.2 kg' },
+  { category: 'Ropa', items: ['Muda interior', 'Calcetines x2', 'Camiseta'], weight: '0.5 kg' },
+  { category: 'Dinero/docs', items: ['Efectivo 100-200€', 'Copias DNI', 'Contactos escritos'], weight: '0.1 kg' }
+];
+
+const weightGuidelines = [
+  { group: 'Adulto en forma', max: '15-20% peso corporal', example: '70kg → 10-14kg' },
+  { group: 'Adulto promedio', max: '10-15% peso corporal', example: '70kg → 7-10kg' },
+  { group: 'Persona mayor', max: '5-10% peso corporal', example: '65kg → 3-6kg' },
+  { group: 'Niño 8-12 años', max: '10% peso corporal', example: '30kg → 3kg' },
+  { group: 'Niño 12+ años', max: '10-15% peso corporal', example: '45kg → 4-6kg' }
+];
+
+const maintenanceTips = [
+  'Revisa costuras y cremalleras cada 6 meses',
+  'Limpia con paño húmedo, no lavadora',
+  'Guarda seca y sin comprimir',
+  'Renueva correas desgastadas',
+  'Impermeabiliza anualmente con spray',
+  'Prueba el ajuste con peso cada año',
+  'Revisa hebillas y clips de plástico',
+  'Ten parches de reparación por si acaso'
+];
+
+const commonMistakes = [
+  'Mochila demasiado grande (tiendes a llenarla innecesariamente)',
+  'Mochila demasiado pequeña (no cabe lo esencial)',
+  'Sin cinturón lumbar (todo el peso en hombros)',
+  'No ajustar las correas correctamente',
+  'Peso mal distribuido (lejos de la espalda)',
+  'No probar con peso antes de necesitarla',
+  'Guardar con las correas húmedas',
+  'No tener funda impermeable'
+];
+
+// Generate ItemList + Product schema for rich results
+const productSchema = {
+  '@type': 'ItemList',
+  itemListElement: amazonProducts.map((product, index) => ({
+    '@type': 'ListItem',
+    position: index + 1,
+    item: {
+      '@type': 'Product',
+      name: product.name,
+      description: product.description,
+      aggregateRating: {
+        '@type': 'AggregateRating',
+        ratingValue: product.rating,
+        bestRating: 5,
+        worstRating: 1,
+        ratingCount: 100
+      }
+    }
+  }))
+};
+---
+
+<BaseLayout
+  title="Mochila de emergencia: ¿Qué tamaño? Guía y contenido"
+  description="Guía completa de mochilas para tu kit 72 horas: tipos, capacidades, cómo cargar correctamente y qué incluir."
+  locale="es"
+  dateModified="2025-12-15"
+  schemaType="Article"
+  schemaData={productSchema}
+>
+  <section class="py-16">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6">
+      <!-- Header -->
+      <div class="mb-12">
+        <nav class="text-sm mb-4">
+          <ol class="flex items-center gap-2 text-[--color-text-muted]">
+            <li><a href="/es/" class="hover:text-[--color-accent-primary]">Inicio</a></li>
+            <li>/</li>
+            <li><a href="/es/componentes/" class="hover:text-[--color-accent-primary]">Componentes</a></li>
+            <li>/</li>
+            <li class="text-[--color-text-primary]">Mochilas</li>
+          </ol>
+        </nav>
+        <h1 class="mb-4 flex items-center gap-3">
+          <Icon name="Backpack" size={32} class="text-[--color-accent-primary]" />
+          Mochilas de Emergencia
+        </h1>
+        <p class="text-lg text-[--color-text-secondary]">
+          La mochila es el contenedor de todo tu kit de supervivencia. Elegir la correcta
+          y saber cargarla bien puede marcar la diferencia entre evacuación cómoda o agotadora.
+        </p>
+      </div>
+
+      <!-- Quick Recommendation -->
+      <div class="card p-6 mb-8 border-l-4 border-l-[--color-accent-primary]">
+        <h3 class="font-semibold mb-2 text-[--color-text-primary] flex items-center gap-2">
+          <Icon name="Backpack" size={20} class="text-[--color-accent-primary]" />
+          Recomendación rápida
+        </h3>
+        <p class="text-[--color-text-secondary] m-0">
+          <strong>Capacidad ideal:</strong> 35-45L por adulto para kit 72h completo.
+          <strong>Clave:</strong> Cinturón lumbar + funda impermeable.
+          <strong>Presupuesto:</strong> 50-100€ para una mochila de calidad.
+        </p>
+      </div>
+
+      <!-- Weight Warning -->
+      <div class="p-4 bg-[--color-status-warning]/10 border border-[--color-status-warning]/30 rounded-lg mb-8">
+        <p class="text-sm text-[--color-text-secondary] m-0 flex items-start gap-2">
+          <Icon name="AlertTriangle" size={18} class="text-[--color-status-warning] flex-shrink-0 mt-0.5" />
+          <span><strong class="text-[--color-status-warning]">Regla del peso:</strong> No cargues más del
+          <strong>15% de tu peso corporal</strong> si no estás en forma, o 20% máximo si lo estás.
+          Una mochila demasiado pesada te agotará rápidamente.</span>
+        </p>
+      </div>
+
+      <!-- Backpack Types -->
+      <div class="mb-12">
+        <h2 class="text-2xl font-bold mb-6 text-[--color-text-primary]">Tipos de mochilas</h2>
+
+        <div class="space-y-4">
+          {backpackTypes.map((type) => (
+            <div class="card p-6">
+              <div class="flex items-start gap-4">
+                <div class="w-12 h-12 flex items-center justify-center bg-[--color-bg-tertiary] rounded-lg flex-shrink-0">
+                  <Icon name={type.icon as any} size={28} class="text-[--color-accent-primary]" />
+                </div>
+                <div class="flex-1">
+                  <div class="flex items-center gap-3 mb-2">
+                    <h3 class="font-semibold text-[--color-text-primary]">{type.name}</h3>
+                    <span class="text-xs px-2 py-1 bg-[--color-bg-tertiary] text-[--color-text-muted] rounded">
+                      {type.capacity}
+                    </span>
+                  </div>
+                  <p class="text-sm text-[--color-text-secondary] mb-3">{type.description}</p>
+
+                  <div class="grid sm:grid-cols-3 gap-4 text-sm">
+                    <div>
+                      <span class="text-green-400 font-medium flex items-center gap-1">
+                        <Icon name="CircleCheck" size={14} />
+                        Pros
+                      </span>
+                      <ul class="mt-1 space-y-1 text-[--color-text-muted]">
+                        {type.pros.map((pro) => <li>• {pro}</li>)}
+                      </ul>
+                    </div>
+                    <div>
+                      <span class="text-red-400 font-medium flex items-center gap-1">
+                        <Icon name="CircleX" size={14} />
+                        Contras
+                      </span>
+                      <ul class="mt-1 space-y-1 text-[--color-text-muted]">
+                        {type.cons.map((con) => <li>• {con}</li>)}
+                      </ul>
+                    </div>
+                    <div>
+                      <span class="text-[--color-accent-primary] font-medium flex items-center gap-1">
+                        <Icon name="Star" size={14} />
+                        Ideal para
+                      </span>
+                      <p class="mt-1 text-[--color-text-muted]">{type.bestFor}</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <!-- Key Features -->
+      <div class="mb-12">
+        <h2 class="text-2xl font-bold mb-6 text-[--color-text-primary]">Características a buscar</h2>
+
+        <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          {keyFeatures.map((feature) => (
+            <div class="card p-4">
+              <div class="w-10 h-10 flex items-center justify-center bg-[--color-bg-tertiary] rounded-lg mb-2">
+                <Icon name={feature.icon as any} size={22} class="text-[--color-accent-primary]" />
+              </div>
+              <h3 class="font-semibold text-[--color-text-primary] mb-1">{feature.name}</h3>
+              <p class="text-sm text-[--color-text-secondary]">{feature.description}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <!-- Recommendations -->
+      <div class="mb-12">
+        <h2 class="text-2xl font-bold mb-6 text-[--color-text-primary]">Recomendaciones por presupuesto</h2>
+
+        <div class="space-y-4">
+          {recommendations.map((rec) => (
+            <div class={`card p-6 ${rec.priority === 'essential' ? 'border-l-4 border-l-red-500' : rec.priority === 'recommended' ? 'border-l-4 border-l-[--color-accent-primary]' : ''}`}>
+              <div class="flex items-start justify-between gap-4 mb-3">
+                <div>
+                  <span class={`text-xs px-2 py-1 rounded ${rec.priority === 'essential' ? 'bg-red-500/20 text-red-400' : rec.priority === 'recommended' ? 'bg-[--color-accent-primary]/20 text-[--color-accent-primary]' : 'bg-[--color-bg-tertiary] text-[--color-text-muted]'}`}>
+                    {rec.priority === 'essential' ? 'Esencial' : rec.priority === 'recommended' ? 'Recomendada' : 'Opcional'}
+                  </span>
+                  <span class="text-xs text-[--color-text-muted] ml-2">{rec.type}</span>
+                </div>
+                <span class="font-bold text-[--color-accent-primary]">{rec.price}</span>
+              </div>
+
+              <h3 class="font-semibold text-[--color-text-primary] mb-2">{rec.name}</h3>
+
+              <div class="flex flex-wrap gap-2 mb-3">
+                {rec.features.map((feature) => (
+                  <span class="text-xs px-2 py-1 bg-[--color-bg-tertiary] text-[--color-text-muted] rounded">
+                    {feature}
+                  </span>
+                ))}
+              </div>
+
+              <p class="text-sm text-[--color-text-secondary] m-0">
+                <strong>Veredicto:</strong> {rec.verdict}
+              </p>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <!-- Packing Order -->
+      <div class="mb-12">
+        <h2 class="text-2xl font-bold mb-6 text-[--color-text-primary]">Cómo cargar la mochila</h2>
+
+        <div class="card p-6">
+          <div class="space-y-4">
+            {packingOrder.map((zone, index) => (
+              <div class="flex items-start gap-4 border-b border-[--color-border] pb-4 last:border-0">
+                <div class="flex-shrink-0 w-8 h-8 bg-[--color-accent-primary] text-[--color-bg-primary] rounded-full flex items-center justify-center font-bold text-sm">
+                  {index + 1}
+                </div>
+                <div class="flex-1">
+                  <h4 class="font-semibold text-[--color-text-primary] mb-1">{zone.zone}</h4>
+                  <div class="flex flex-wrap gap-2 mb-2">
+                    {zone.items.map((item) => (
+                      <span class="text-xs px-2 py-1 bg-[--color-bg-tertiary] text-[--color-text-muted] rounded">
+                        {item}
+                      </span>
+                    ))}
+                  </div>
+                  <p class="text-sm text-[--color-text-secondary] flex items-start gap-1">
+                    <Icon name="Lightbulb" size={14} class="flex-shrink-0 mt-0.5" />
+                    {zone.tip}
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      <!-- Kit Contents -->
+      <div class="mb-12">
+        <h2 class="text-2xl font-bold mb-6 text-[--color-text-primary]">Contenido kit 72h (ejemplo)</h2>
+
+        <div class="card overflow-hidden">
+          <div class="overflow-x-auto">
+            <table class="w-full text-sm">
+              <thead class="bg-[--color-bg-tertiary]">
+                <tr>
+                  <th class="text-left py-3 px-4">Categoría</th>
+                  <th class="text-left py-3 px-4">Artículos</th>
+                  <th class="text-right py-3 px-4">Peso aprox.</th>
+                </tr>
+              </thead>
+              <tbody class="text-[--color-text-secondary]">
+                {kitContents72h.map((cat, i) => (
+                  <tr class={i % 2 === 0 ? 'bg-[--color-bg-secondary]' : ''}>
+                    <td class="py-3 px-4 font-medium text-[--color-text-primary]">{cat.category}</td>
+                    <td class="py-3 px-4 text-xs">{cat.items.join(', ')}</td>
+                    <td class="py-3 px-4 text-right font-mono">{cat.weight}</td>
+                  </tr>
+                ))}
+              </tbody>
+              <tfoot class="bg-[--color-bg-tertiary]">
+                <tr>
+                  <td colspan="2" class="py-3 px-4 font-bold text-[--color-text-primary]">Total aproximado</td>
+                  <td class="py-3 px-4 text-right font-bold text-[--color-accent-primary]">~7.3 kg</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div>
+          <div class="p-4 bg-[--color-bg-tertiary] text-xs text-[--color-text-muted]">
+            * El agua es lo más pesado. 3L = 3kg. Considera filtro + menos agua inicial si el peso es problema.
+          </div>
+        </div>
+      </div>
+
+      <!-- Weight Guidelines -->
+      <div class="mb-12">
+        <h2 class="text-2xl font-bold mb-6 text-[--color-text-primary]">Guía de peso máximo</h2>
+
+        <div class="card overflow-hidden">
+          <div class="overflow-x-auto">
+            <table class="w-full text-sm">
+              <thead class="bg-[--color-bg-tertiary]">
+                <tr>
+                  <th class="text-left py-3 px-4">Grupo</th>
+                  <th class="text-center py-3 px-4">Máximo recomendado</th>
+                  <th class="text-left py-3 px-4">Ejemplo</th>
+                </tr>
+              </thead>
+              <tbody class="text-[--color-text-secondary]">
+                {weightGuidelines.map((guide, i) => (
+                  <tr class={i % 2 === 0 ? 'bg-[--color-bg-secondary]' : ''}>
+                    <td class="py-3 px-4 font-medium text-[--color-text-primary]">{guide.group}</td>
+                    <td class="py-3 px-4 text-center">{guide.max}</td>
+                    <td class="py-3 px-4 font-mono text-[--color-accent-primary]">{guide.example}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- Maintenance -->
+      <div class="card p-6 mb-8">
+        <h3 class="font-semibold mb-4 text-[--color-text-primary] flex items-center gap-2">
+          <Icon name="Wrench" size={20} class="text-[--color-accent-primary]" />
+          Mantenimiento de la mochila
+        </h3>
+        <ul class="grid sm:grid-cols-2 gap-2 text-sm text-[--color-text-secondary]">
+          {maintenanceTips.map((tip) => (
+            <li>• {tip}</li>
+          ))}
+        </ul>
+      </div>
+
+      <!-- Product Recommendations -->
+      <div class="mb-12">
+        <h2 class="text-2xl font-bold mb-6 text-[--color-text-primary] flex items-center gap-2">
+          <Icon name="ShoppingCart" size={24} class="text-[--color-accent-primary]" />
+          Productos recomendados
+        </h2>
+        <ProductGrid products={amazonProducts} title="Mochilas para tu kit de emergencia" />
+      </div>
+
+      <!-- Common Mistakes -->
+      <div class="card p-6 mb-8 border-l-4 border-l-red-500">
+        <h3 class="font-semibold mb-4 text-[--color-text-primary] flex items-center gap-2">
+          <Icon name="CircleX" size={20} class="text-red-400" />
+          Errores comunes
+        </h3>
+        <ul class="grid sm:grid-cols-2 gap-2 text-sm text-[--color-text-secondary]">
+          {commonMistakes.map((mistake) => (
+            <li>• {mistake}</li>
+          ))}
+        </ul>
+      </div>
+
+      <!-- Pro Tips -->
+      <div class="card p-6 mb-8 bg-[--color-bg-tertiary]">
+        <h3 class="font-semibold mb-4 text-[--color-text-primary] flex items-center gap-2">
+          <Icon name="Lightbulb" size={20} class="text-[--color-accent-primary]" />
+          Consejos profesionales
+        </h3>
+        <div class="space-y-3 text-sm text-[--color-text-secondary]">
+          <p><strong>Prueba con peso:</strong> Carga la mochila y camina 30 minutos ANTES de necesitarla. Ajusta correas.</p>
+          <p><strong>Bolsas de organización:</strong> Usa bolsas de colores por categoría (rojo=botiquín, azul=agua, etc.).</p>
+          <p><strong>Acceso rápido:</strong> Lo más urgente (documentos, linterna, botiquín) debe ser accesible sin abrir todo.</p>
+          <p><strong>Lista pegada:</strong> Pon una lista del contenido dentro de la mochila para verificar rápidamente.</p>
+          <p><strong>Cada miembro:</strong> Cada adulto debe tener su propia mochila. Niños mayores de 8 años también pueden llevar una pequeña.</p>
+        </div>
+      </div>
+
+      <!-- Related Links -->
+      <div class="flex flex-wrap gap-4 justify-center">
+        <a
+          href="/es/escenarios/kit-evacuacion/"
+          class="inline-flex items-center gap-2 px-4 py-2 border border-[--color-border] text-sm font-medium rounded hover:border-[--color-accent-primary] hover:text-[--color-accent-primary] transition-colors"
+        >
+          Escenario: Kit de Evacuación
+        </a>
+        <a
+          href="/es/herramientas/configurador-kit/"
+          class="inline-flex items-center gap-2 px-4 py-2 bg-[--color-accent-primary] text-[--color-bg-primary] text-sm font-medium rounded hover:bg-[--color-accent-secondary] transition-colors"
+        >
+          Configurador de Kit →
+        </a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

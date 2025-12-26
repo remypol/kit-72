@@ -1,0 +1,157 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import Breadcrumb from '../components/layout/Breadcrumb.astro';
+import Icon from '../components/ui/Icon.astro';
+
+type Locale = 'es' | 'nl' | 'de';
+
+interface FAQItem {
+  question: string;
+  answer: string;
+}
+
+interface Props {
+  title: string;
+  description: string;
+  publishedDate?: string;
+  updatedDate?: string;
+  author?: string;
+  canonicalUrl?: string;
+  ogImage?: string;
+  breadcrumbs?: Array<{ label: string; href?: string }>;
+  readTime?: string;
+  locale?: Locale;
+  schemaType?: 'Article' | 'FAQPage' | 'HowTo';
+  schemaData?: Record<string, unknown>;
+  /** FAQ data for schema.org FAQPage markup */
+  faqData?: FAQItem[];
+}
+
+// Detect locale from URL path
+const pathParts = Astro.url.pathname.split('/').filter(Boolean);
+const detectedLocale = (['es', 'nl', 'de'].includes(pathParts[0]) ? pathParts[0] : 'es') as Locale;
+
+const {
+  title,
+  description,
+  publishedDate,
+  updatedDate,
+  author,
+  canonicalUrl,
+  ogImage,
+  breadcrumbs = [],
+  readTime,
+  locale = detectedLocale,
+  schemaType = 'Article',
+  schemaData,
+  faqData = [],
+} = Astro.props;
+
+// Default authors per locale
+const defaultAuthors: Record<Locale, string> = {
+  es: 'Equipo Kit-72',
+  nl: 'Team Kit-72',
+  de: 'Team Kit-72',
+};
+const displayAuthor = author || defaultAuthors[locale];
+
+// Date locales
+const dateLocales: Record<Locale, string> = {
+  es: 'es-ES',
+  nl: 'nl-NL',
+  de: 'de-DE',
+};
+
+// Format dates for display
+const formatDate = (dateStr: string) => {
+  const date = new Date(dateStr);
+  return date.toLocaleDateString(dateLocales[locale], {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric'
+  });
+};
+
+// Date labels per locale
+const dateLabels: Record<Locale, { updated: string; published: string }> = {
+  es: { updated: 'Actualizado:', published: 'Publicado:' },
+  nl: { updated: 'Bijgewerkt:', published: 'Gepubliceerd:' },
+  de: { updated: 'Aktualisiert:', published: 'Veröffentlicht:' },
+};
+
+// Filter out home labels from breadcrumbs (Breadcrumb component adds it automatically)
+const homeLabels = ['Inicio', 'Home', 'Startseite'];
+const filteredBreadcrumbs = breadcrumbs.filter(b => !homeLabels.includes(b.label));
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  canonicalUrl={canonicalUrl}
+  ogImage={ogImage}
+  schemaType={schemaType}
+  schemaData={schemaData}
+  faqData={faqData}
+  dateModified={updatedDate}
+  datePublished={publishedDate}
+  author={author}
+  locale={locale}
+>
+  <article class="py-12 md:py-16">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6">
+      <!-- Breadcrumbs -->
+      {filteredBreadcrumbs.length > 0 && (
+        <div class="mb-8">
+          <Breadcrumb items={filteredBreadcrumbs} locale={locale} />
+        </div>
+      )}
+
+      <!-- Article Header -->
+      <header class="mb-12">
+        <h1 class="animate-in mb-6">{title}</h1>
+
+        <p class="animate-in-delay-1 text-lg text-[--color-text-secondary] leading-relaxed mb-6">
+          {description}
+        </p>
+
+        <!-- Meta info -->
+        <div class="animate-in-delay-2 flex flex-wrap items-center gap-4 text-sm text-[--color-text-muted]">
+          {displayAuthor && (
+            <span class="flex items-center gap-2">
+              <Icon name="User" size={16} />
+              {displayAuthor}
+            </span>
+          )}
+
+          {updatedDate && (
+            <span class="flex items-center gap-2">
+              <Icon name="RefreshCw" size={16} />
+              {dateLabels[locale].updated} {formatDate(updatedDate)}
+            </span>
+          )}
+
+          {publishedDate && !updatedDate && (
+            <span class="flex items-center gap-2">
+              <Icon name="Calendar" size={16} />
+              {dateLabels[locale].published} {formatDate(publishedDate)}
+            </span>
+          )}
+        </div>
+      </header>
+
+      <!-- Table of Contents slot -->
+      <slot name="toc" />
+
+      <!-- Article Content -->
+      <div class="prose prose-lg max-w-none">
+        <slot />
+      </div>
+
+      <!-- Sources slot -->
+      <slot name="sources" />
+
+      <!-- CTA slot -->
+      <slot name="cta" />
+    </div>
+  </article>
+</BaseLayout>

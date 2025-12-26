@@ -1,0 +1,58 @@
+---
+import BaseLayout from '../../../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../../../components/ui/Breadcrumbs.astro';
+import PowerCalculator from '../../../../components/tools/PowerCalculator';
+---
+
+<BaseLayout
+  title="Energie Calculator — Kit-72"
+  description="Bereken welke powerbank capaciteit je nodig hebt voor je noodpakket. Interactieve tool met persoonlijke berekening."
+  locale="nl"
+  dateModified="2025-12-15"
+  schemaType="HowTo"
+  schemaData={{
+    name: 'Hoeveel powerbank capaciteit heb je nodig',
+    description: 'Bereken de mAh powerbank capaciteit die je nodig hebt om je apparaten 72 uur werkend te houden. Inclusief veiligheidsmarge.',
+    totalTime: 'PT3M',
+    step: [
+      {
+        '@type': 'HowToStep',
+        position: 1,
+        name: 'Kies de duur',
+        text: 'Selecteer voor hoeveel dagen je voorbereid wilt zijn: 24 uur, 72 uur (aanbevolen), 1 week of 2 weken.',
+      },
+      {
+        '@type': 'HowToStep',
+        position: 2,
+        name: 'Voeg je apparaten toe',
+        text: 'Selecteer de apparaten die je moet opladen: smartphones, tablets, smartwatches, zaklampen, noodradio\'s, of medische apparatuur zoals CPAP.',
+      },
+      {
+        '@type': 'HowToStep',
+        position: 3,
+        name: 'Stel de oplaadfrequentie in',
+        text: 'Geef aan hoe vaak je elk apparaat oplaadt. Bijvoorbeeld smartphone 1x per dag, zaklamp elke 3 dagen.',
+      },
+      {
+        '@type': 'HowToStep',
+        position: 4,
+        name: 'Kies de veiligheidsmarge',
+        text: 'Selecteer de veiligheidsmarge (20-50%). Batterijen verliezen efficiëntie bij kou en gebruik. Een marge van 30% is aanbevolen.',
+      },
+    ],
+  }}
+>
+  <section class="py-12 md:py-16">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6">
+      <div class="mb-8">
+        <Breadcrumbs locale="nl" />
+        <h1 class="text-4xl font-bold mb-4">Energie Calculator</h1>
+        <p class="text-xl text-[--color-text-secondary]">
+          Bereken precies welke powerbank capaciteit je nodig hebt voor je noodpakket. Voeg je apparaten toe en zie direct hoeveel mAh je nodig hebt.
+        </p>
+      </div>
+
+      <PowerCalculator locale="nl" client:load />
+    </div>
+  </section>
+</BaseLayout>

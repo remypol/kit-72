@@ -1,0 +1,88 @@
+---
+/**
+ * StarRating Component
+ *
+ * Visual star rating display for product reviews.
+ * Supports full stars, half stars, and empty stars.
+ *
+ * @example
+ * <StarRating rating={4.5} />
+ * <StarRating rating={3} size="lg" showNumber />
+ */
+
+import Icon from './Icon.astro';
+
+interface Props {
+  /** Rating value (0-5, supports 0.5 increments) */
+  rating: number;
+  /** Maximum stars to show */
+  max?: number;
+  /** Size variant */
+  size?: 'sm' | 'md' | 'lg';
+  /** Whether to show the numeric value */
+  showNumber?: boolean;
+  /** Additional CSS classes */
+  class?: string;
+}
+
+const {
+  rating,
+  max = 5,
+  size = 'md',
+  showNumber = false,
+  class: className = '',
+} = Astro.props;
+
+// Clamp rating between 0 and max
+const clampedRating = Math.min(Math.max(0, rating), max);
+
+// Calculate full, half, and empty stars
+const fullStars = Math.floor(clampedRating);
+const hasHalfStar = clampedRating % 1 >= 0.5;
+const emptyStars = max - fullStars - (hasHalfStar ? 1 : 0);
+
+// Icon sizes based on component size
+const iconSizes: Record<string, number> = {
+  sm: 14,
+  md: 18,
+  lg: 24,
+};
+
+const iconSize = iconSizes[size];
+
+const classes = [
+  'star-rating',
+  `star-rating-${size}`,
+  className,
+].filter(Boolean).join(' ');
+---
+
+<div class={classes} role="img" aria-label={`Puntuación: ${rating} de ${max} estrellas`}>
+  {/* Full stars */}
+  {Array(fullStars).fill(0).map((_, i) => (
+    <span class="star-rating-star filled" aria-hidden="true">
+      <Icon name="Star" size={iconSize} />
+    </span>
+  ))}
+
+  {/* Half star */}
+  {hasHalfStar && (
+    <span class="star-rating-star half" aria-hidden="true">
+      <Icon name="StarHalf" size={iconSize} />
+    </span>
+  )}
+
+  {/* Empty stars */}
+  {Array(emptyStars).fill(0).map((_, i) => (
+    <span class="star-rating-star" aria-hidden="true">
+      <Icon name="Star" size={iconSize} />
+    </span>
+  ))}
+
+  {/* Numeric display */}
+  {showNumber && (
+    <span class="star-rating-number ml-2 text-sm text-secondary">
+      {rating.toFixed(1)}
+    </span>
+  )}
+</div>

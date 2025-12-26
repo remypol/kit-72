@@ -1,0 +1,107 @@
+---
+/**
+ * ScenarioCard Component
+ *
+ * Card for linking to scenario pages (apagón, ola de calor, etc.)
+ *
+ * @example
+ * <ScenarioCard
+ *   title="Prepararse para un Apagón"
+ *   description="Guía completa para cortes de luz."
+ *   href="/es/escenarios/prepararse-apagon/"
+ *   icon="Zap"
+ *   readTime="12 min"
+ *   difficulty="Básico"
+ *   tags={['Hogar', 'Energía']}
+ * />
+ */
+
+import Icon from '../ui/Icon.astro';
+import Badge from '../ui/Badge.astro';
+
+interface Props {
+  title: string;
+  description: string;
+  href: string;
+  icon: string;
+  readTime?: string;
+  difficulty?: 'Básico' | 'Intermedio' | 'Avanzado';
+  tags?: string[];
+  isComingSoon?: boolean;
+  class?: string;
+}
+
+const {
+  title,
+  description,
+  href,
+  icon,
+  readTime,
+  difficulty,
+  tags = [],
+  isComingSoon = false,
+  class: className = '',
+} = Astro.props;
+
+// Map difficulty to badge variant
+const difficultyVariant = {
+  'Básico': 'success',
+  'Intermedio': 'important',
+  'Avanzado': 'critical',
+} as const;
+---
+
+{isComingSoon ? (
+  <div class={`card p-4 opacity-60 ${className}`}>
+    <div class="flex items-center gap-3 mb-2">
+      <span class="text-[--color-text-muted]">
+        <Icon name={icon as any} size={24} />
+      </span>
+      <h3 class="font-medium text-[--color-text-primary]">{title}</h3>
+    </div>
+    <p class="text-sm text-[--color-text-muted]">{description}</p>
+    <Badge variant="neutral" class="mt-2">Próximamente</Badge>
+  </div>
+) : (
+  <a
+    href={href}
+    class={`card card-interactive group p-6 flex flex-col ${className}`}
+  >
+    <div class="flex items-start justify-between mb-4">
+      <span class="text-[--color-accent-primary]">
+        <Icon name={icon as any} size={32} />
+      </span>
+      <div class="flex items-center gap-2">
+        {difficulty && (
+          <Badge variant={difficultyVariant[difficulty] || 'neutral'}>
+            {difficulty}
+          </Badge>
+        )}
+        {readTime && (
+          <span class="flex items-center gap-1 px-2 py-0.5 text-xs bg-[--color-bg-tertiary] text-[--color-text-muted] rounded">
+            <Icon name="Clock" size={12} />
+            {readTime}
+          </span>
+        )}
+      </div>
+    </div>
+    <h2 class="text-xl font-semibold mb-2 group-hover:text-[--color-accent-primary] transition-colors">
+      {title}
+    </h2>
+    <p class="text-[--color-text-secondary] mb-4 flex-1">
+      {description}
+    </p>
+    <div class="flex items-center justify-between">
+      <div class="flex flex-wrap gap-2">
+        {tags.map((tag) => (
+          <span class="px-2 py-0.5 text-xs bg-[--color-accent-subtle] text-[--color-accent-primary] rounded">
+            {tag}
+          </span>
+        ))}
+      </div>
+      <span class="text-[--color-accent-primary] group-hover:translate-x-1 transition-transform">
+        <Icon name="ArrowRight" size={20} />
+      </span>
+    </div>
+  </a>
+)}

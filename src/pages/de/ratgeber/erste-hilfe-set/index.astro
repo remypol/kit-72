@@ -1,0 +1,169 @@
+---
+import BaseLayout from '../../../../layouts/BaseLayout.astro';
+import Breadcrumb from '../../../../components/layout/Breadcrumb.astro';
+import Icon from '../../../../components/ui/Icon.astro';
+---
+
+<BaseLayout
+  title="Erste-Hilfe-Set — Kit-72"
+  description="Zusammenstellung und Wartung deines Erste-Hilfe-Sets für Notfälle. Was hineingehört und wie du es pflegst."
+  locale="de"
+  dateModified="2025-12-15"
+  schemaType="Article"
+>
+  <section class="py-16">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6">
+      <Breadcrumb items={[{ label: 'Ratgeber', href: '/de/ratgeber/' }, { label: 'Erste-Hilfe-Set' }]} class="mb-4" locale="de" />
+      <h1 class="text-4xl font-bold mb-6">Erste-Hilfe-Set</h1>
+
+      <div class="prose prose-lg">
+        <p class="lead">
+          Ein gutes Erste-Hilfe-Set kann bei kleinen Verletzungen den Unterschied machen —
+          und in einer Notlage, wenn der Rettungsdienst nicht erreichbar ist,
+          <strong>lebensrettend</strong> sein.
+        </p>
+
+        <!-- Key Message -->
+        <div class="card p-6 my-8 bg-[--color-bg-tertiary] not-prose">
+          <h3 class="text-lg font-semibold mb-3 flex items-center gap-2">
+            <Icon name="Heart" size={20} class="text-red-500" />
+            Das Wichtigste zuerst
+          </h3>
+          <p class="text-sm text-[--color-text-secondary]">
+            Ein Erste-Hilfe-Set ist nur so gut wie dein Wissen.
+            <strong>Besuche einen Erste-Hilfe-Kurs</strong> — das DRK und andere Anbieter bieten
+            regelmäßig Kurse an. Die Investition von wenigen Stunden kann Leben retten.
+          </p>
+        </div>
+
+        <h2>Grundausstattung</h2>
+        <p>Diese Dinge sollten in jedem Erste-Hilfe-Set sein:</p>
+
+        <h3>Verbandmaterial</h3>
+        <ul>
+          <li><strong>Pflaster</strong> — verschiedene Größen, wasserfest</li>
+          <li><strong>Sterile Kompressen</strong> — 10x10 cm, mindestens 10 Stück</li>
+          <li><strong>Mullbinden</strong> — 6 cm und 8 cm Breite</li>
+          <li><strong>Elastische Binden</strong> — für Verbände und Stützverbände</li>
+          <li><strong>Dreiecktuch</strong> — als Armschlinge oder Kopfverband</li>
+          <li><strong>Wundschnellverband</strong> — für größere Wunden</li>
+          <li><strong>Fixierpflaster/Leukoplast</strong> — zum Befestigen</li>
+        </ul>
+
+        <h3>Instrumente</h3>
+        <ul>
+          <li><strong>Verbandsschere</strong> — mit abgerundeten Spitzen</li>
+          <li><strong>Pinzette</strong> — für Splitter und Zecken</li>
+          <li><strong>Einmalhandschuhe</strong> — mindestens 4 Paar (Latex-frei!)</li>
+          <li><strong>Rettungsdecke</strong> — gegen Unterkühlung</li>
+          <li><strong>Kühlpack</strong> — Instant-Kältekompresse</li>
+        </ul>
+
+        <h3>Medikamente & Desinfektion</h3>
+        <ul>
+          <li><strong>Wunddesinfektionsmittel</strong> — Octenisept, Betaisodona o.ä.</li>
+          <li><strong>Schmerzmittel</strong> — Paracetamol, Ibuprofen</li>
+          <li><strong>Fieberthermometer</strong> — digital, batteriebetrieben</li>
+          <li><strong>Antihistaminikum</strong> — bei allergischen Reaktionen</li>
+          <li><strong>Durchfallmittel</strong> — Loperamid, Kohletabletten</li>
+          <li><strong>Elektrolytpulver</strong> — bei Durchfall und Erbrechen</li>
+        </ul>
+
+        <div class="card p-4 my-6 border-l-4 border-l-red-500 bg-red-50 dark:bg-red-950/30 not-prose">
+          <p class="text-sm">
+            <strong>⚠️ Medikamente:</strong> Beachte Unverträglichkeiten und Wechselwirkungen.
+            Lies den Beipackzettel und frage im Zweifel deinen Arzt oder Apotheker.
+          </p>
+        </div>
+
+        <h2>Persönliche Medikamente</h2>
+        <p>
+          <strong>Extrem wichtig:</strong> Wenn du oder Familienmitglieder regelmäßig Medikamente
+          nehmen, halte immer einen Vorrat für mindestens <strong>7-14 Tage</strong> bereit.
+        </p>
+        <ul>
+          <li>Blutdruckmedikamente</li>
+          <li>Insulin und Diabetiker-Bedarf</li>
+          <li>Herzmedikamente</li>
+          <li>Asthma-Spray</li>
+          <li>Schilddrüsenmedikamente</li>
+          <li>Psychopharmaka (nie abrupt absetzen!)</li>
+        </ul>
+
+        <div class="card p-6 my-8 bg-[--color-accent-subtle] not-prose">
+          <p class="font-medium mb-2">💡 Medikamentenliste</p>
+          <p class="text-sm text-[--color-text-secondary]">
+            Erstelle eine aktuelle Liste aller Medikamente mit Dosierung und Einnahmezeiten.
+            Bewahre sie im Erste-Hilfe-Set auf — auch für Rettungskräfte wichtig.
+          </p>
+        </div>
+
+        <h2>Wartung alle 3 Monate</h2>
+        <ol>
+          <li><strong>Verfallsdaten prüfen</strong> — abgelaufene Produkte sofort ersetzen</li>
+          <li><strong>Vollständigkeit checken</strong> — verbrauchte Artikel nachkaufen</li>
+          <li><strong>Medikamente kontrollieren</strong> — auf Verfärbungen, Geruch achten</li>
+          <li><strong>Verpackungen prüfen</strong> — beschädigte sterile Verpackungen ersetzen</li>
+        </ol>
+
+        <h2>Aufbewahrung</h2>
+        <ul>
+          <li><strong>Leicht zugänglich</strong> — alle Familienmitglieder wissen, wo es ist</li>
+          <li><strong>Trocken und kühl</strong> — nicht im Badezimmer (zu feucht)</li>
+          <li><strong>Kindersicher</strong> — außer Reichweite von kleinen Kindern</li>
+          <li><strong>Transportabel</strong> — bei Evakuierung schnell greifbar</li>
+        </ul>
+
+        <h2>Erweiterte Ausstattung</h2>
+        <p>Für Familien oder bei besonderer Vorbereitung:</p>
+        <ul>
+          <li><strong>SAM-Splint</strong> — formbare Schiene für Knochenbrüche</li>
+          <li><strong>Tourniquet</strong> — bei schweren Blutungen (nur mit Training!)</li>
+          <li><strong>Nahtmaterial/Steri-Strips</strong> — für tiefere Schnittwunden</li>
+          <li><strong>Beatmungsmaske</strong> — für Mund-zu-Mund-Beatmung</li>
+          <li><strong>Augenspüllösung</strong> — bei Fremdkörpern oder Chemikalien</li>
+        </ul>
+
+        <h2>Checkliste Erste-Hilfe-Set</h2>
+        <ul>
+          <li>☐ Grundausstattung vollständig</li>
+          <li>☐ Persönliche Medikamente für 7+ Tage</li>
+          <li>☐ Aktuelle Medikamentenliste beigelegt</li>
+          <li>☐ Alle Verfallsdaten geprüft</li>
+          <li>☐ Aufbewahrungsort allen bekannt</li>
+          <li>☐ Nächster Check-Termin notiert</li>
+        </ul>
+      </div>
+
+      <!-- CTA -->
+      <div class="mt-12 grid sm:grid-cols-2 gap-4">
+        <div class="card p-6 bg-[--color-bg-tertiary]">
+          <h3 class="font-semibold mb-2">Erste-Hilfe-Kasten kaufen</h3>
+          <p class="text-sm text-[--color-text-secondary] mb-4">
+            Empfehlungen für fertige Sets mit guter Grundausstattung.
+          </p>
+          <a
+            href="/de/produkte/erste-hilfe-kasten/"
+            class="inline-flex items-center gap-2 text-[--color-accent-primary] hover:underline"
+          >
+            Zu den Produkten →
+          </a>
+        </div>
+        <div class="card p-6 bg-[--color-bg-tertiary]">
+          <h3 class="font-semibold mb-2">Erste-Hilfe-Kurs finden</h3>
+          <p class="text-sm text-[--color-text-secondary] mb-4">
+            Das DRK bietet bundesweit Kurse an.
+          </p>
+          <a
+            href="https://www.drk.de/hilfe-in-deutschland/kurse-im-ueberblick/erste-hilfe/"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex items-center gap-2 text-[--color-accent-primary] hover:underline"
+          >
+            DRK-Kurse ansehen →
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

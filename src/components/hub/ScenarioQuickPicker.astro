@@ -1,0 +1,276 @@
+---
+/**
+ * ScenarioQuickPicker Component
+ *
+ * Compact horizontal scrolling cards for quick scenario selection.
+ * Designed to be above the fold on mobile for immediate action.
+ * Supports i18n via locale prop.
+ *
+ * Features:
+ * - 4-6 scenario cards with icon, title, and time estimate
+ * - Horizontal scroll on mobile
+ * - Grid on desktop
+ * - Large touch targets (80px+ height)
+ * - No descriptions (too long for mobile)
+ */
+
+import Icon from '../ui/Icon.astro';
+
+type Locale = 'es' | 'nl' | 'de';
+
+interface Props {
+  locale?: Locale;
+}
+
+interface Scenario {
+  title: string;
+  href: string;
+  icon: string;
+  time: string;
+  color: string;
+}
+
+const { locale = 'es' } = Astro.props;
+
+// Scenarios per locale
+const scenariosPerLocale: Record<Locale, Scenario[]> = {
+  es: [
+    {
+      title: 'Apagón',
+      href: '/es/escenarios/prepararse-apagon/',
+      icon: 'Zap',
+      time: '8 min',
+      color: 'amber',
+    },
+    {
+      title: 'Ola de Calor',
+      href: '/es/escenarios/prepararse-ola-calor/',
+      icon: 'Sun',
+      time: '7 min',
+      color: 'orange',
+    },
+    {
+      title: 'Corte de Agua',
+      href: '/es/escenarios/prepararse-corte-agua/',
+      icon: 'Droplet',
+      time: '6 min',
+      color: 'blue',
+    },
+    {
+      title: 'Evacuación',
+      href: '/es/escenarios/kit-evacuacion/',
+      icon: 'Car',
+      time: '10 min',
+      color: 'emerald',
+    },
+  ],
+  nl: [
+    {
+      title: 'Stroomstoring',
+      href: '/nl/scenario/stroomstoring/',
+      icon: 'Zap',
+      time: '8 min',
+      color: 'amber',
+    },
+    {
+      title: 'Overstroming',
+      href: '/nl/scenario/overstroming/',
+      icon: 'Waves',
+      time: '10 min',
+      color: 'blue',
+    },
+    {
+      title: 'Hittegolf',
+      href: '/nl/scenario/hittegolf/',
+      icon: 'Sun',
+      time: '6 min',
+      color: 'orange',
+    },
+    {
+      title: 'Evacuatie',
+      href: '/nl/scenario/evacuatie/',
+      icon: 'Car',
+      time: '10 min',
+      color: 'emerald',
+    },
+  ],
+  de: [
+    {
+      title: 'Stromausfall',
+      href: '/de/szenarien/stromausfall/',
+      icon: 'Zap',
+      time: '8 min',
+      color: 'amber',
+    },
+    {
+      title: 'Hitzewelle',
+      href: '/de/szenarien/hitzewelle/',
+      icon: 'Sun',
+      time: '7 min',
+      color: 'orange',
+    },
+    {
+      title: 'Wasserausfall',
+      href: '/de/szenarien/wasserausfall/',
+      icon: 'Droplet',
+      time: '6 min',
+      color: 'blue',
+    },
+    {
+      title: 'Evakuierung',
+      href: '/de/szenarien/evakuierung/',
+      icon: 'Car',
+      time: '10 min',
+      color: 'emerald',
+    },
+  ],
+};
+
+const scenarios = scenariosPerLocale[locale];
+
+const colorClasses: Record<string, { bg: string; icon: string; border: string }> = {
+  amber: {
+    bg: 'bg-amber-500/10',
+    icon: 'text-amber-400',
+    border: 'border-amber-500/20 hover:border-amber-500/40'
+  },
+  orange: {
+    bg: 'bg-orange-500/10',
+    icon: 'text-orange-400',
+    border: 'border-orange-500/20 hover:border-orange-500/40'
+  },
+  blue: {
+    bg: 'bg-blue-500/10',
+    icon: 'text-blue-400',
+    border: 'border-blue-500/20 hover:border-blue-500/40'
+  },
+  emerald: {
+    bg: 'bg-emerald-500/10',
+    icon: 'text-emerald-400',
+    border: 'border-emerald-500/20 hover:border-emerald-500/40'
+  },
+};
+---
+
+<div class="scenario-quick-picker">
+  <div class="scenario-scroll">
+    {scenarios.map((scenario) => {
+      const colors = colorClasses[scenario.color];
+      return (
+        <a
+          href={scenario.href}
+          class:list={[
+            'scenario-card',
+            colors.bg,
+            colors.border,
+          ]}
+        >
+          <div class:list={['scenario-icon', colors.bg]}>
+            <Icon name={scenario.icon as any} size={24} class={colors.icon} />
+          </div>
+          <div class="scenario-content">
+            <span class="scenario-title">{scenario.title}</span>
+            <span class="scenario-time">{scenario.time}</span>
+          </div>
+        </a>
+      );
+    })}
+  </div>
+</div>
+
+<style>
+  .scenario-quick-picker {
+    width: 100%;
+    overflow: hidden;
+  }
+
+  .scenario-scroll {
+    display: flex;
+    gap: 0.75rem;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    padding: 0.25rem;
+  }
+
+  .scenario-scroll::-webkit-scrollbar {
+    display: none;
+  }
+
+  .scenario-card {
+    flex: 0 0 auto;
+    width: calc(50% - 0.375rem);
+    min-width: 140px;
+    max-width: 180px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 1rem;
+    border-radius: 1rem;
+    border: 1px solid;
+    transition: all 0.2s ease;
+    scroll-snap-align: start;
+    text-decoration: none;
+  }
+
+  .scenario-card:hover {
+    transform: translateY(-2px);
+  }
+
+  .scenario-card:active {
+    transform: scale(0.98);
+  }
+
+  .scenario-icon {
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px;
+  }
+
+  .scenario-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.25rem;
+  }
+
+  .scenario-title {
+    font-weight: 600;
+    font-size: 0.875rem;
+    color: var(--color-text-primary);
+    text-align: center;
+    line-height: 1.2;
+  }
+
+  .scenario-time {
+    font-size: 0.75rem;
+    color: var(--color-text-muted);
+  }
+
+  /* Desktop: Grid layout */
+  @media (min-width: 640px) {
+    .scenario-scroll {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      overflow-x: visible;
+      padding: 0;
+    }
+
+    .scenario-card {
+      width: 100%;
+      max-width: none;
+    }
+  }
+
+  /* Large touch targets */
+  @media (pointer: coarse) {
+    .scenario-card {
+      min-height: 100px;
+    }
+  }
+</style>

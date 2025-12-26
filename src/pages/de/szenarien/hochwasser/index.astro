@@ -1,0 +1,335 @@
+---
+/**
+ * Hochwasser Scenario Page - Germany
+ *
+ * Context:
+ * - Ahrtal 2021 catastrophe (180+ deaths)
+ * - Increasing flash flood risk due to climate change
+ * - DWD warnings, Hochwasserzentralen
+ */
+import BaseLayout from '../../../../layouts/BaseLayout.astro';
+import TLDRBlock from '../../../../components/hub/TLDRBlock.astro';
+import InteractiveChecklist from '../../../../components/hub/InteractiveChecklist.tsx';
+import StickyActionBar from '../../../../components/hub/StickyActionBar.tsx';
+import Icon from '../../../../components/ui/Icon.astro';
+import HeroImage from '../../../../components/content/HeroImage.astro';
+
+const scenarioKey = 'hochwasser';
+
+const checklistCategories = [
+  {
+    id: 'notgepaeck',
+    name: 'Notgepäck Hochwasser',
+    icon: 'backpack',
+    items: [
+      { id: 'dokumente', name: 'Dokumentenmappe (wasserdicht)', quantity: '1 Stück', priority: 'critical' as const, notes: 'Kopien aller wichtigen Dokumente' },
+      { id: 'wasser', name: 'Trinkwasser', quantity: '3L pro Person', priority: 'critical' as const, notes: 'Für 24-48 Stunden' },
+      { id: 'taschenlampe', name: 'Taschenlampe + Batterien', quantity: '1 Stück', priority: 'critical' as const },
+      { id: 'powerbank', name: 'Powerbank (geladen)', quantity: '1 Stück', priority: 'critical' as const },
+      { id: 'radio', name: 'Batteriebetriebenes Radio', quantity: '1 Stück', priority: 'critical' as const },
+      { id: 'medikamente', name: 'Persönliche Medikamente', quantity: '7 Tage', priority: 'critical' as const },
+      { id: 'bargeld', name: 'Bargeld', quantity: '100-200€', priority: 'critical' as const, notes: 'Kleine Scheine' },
+      { id: 'kleidung', name: 'Wechselkleidung', quantity: '1 Set', priority: 'recommended' as const },
+      { id: 'gummistiefel', name: 'Gummistiefel', quantity: '1 Paar', priority: 'recommended' as const },
+    ]
+  },
+  {
+    id: 'haus',
+    name: 'Haus sichern',
+    icon: 'home',
+    items: [
+      { id: 'sandsaecke', name: 'Sandsäcke oder Wassersperre', quantity: 'Nach Bedarf', priority: 'recommended' as const },
+      { id: 'rueckstauklappe', name: 'Rückstauklappe installiert', quantity: '1 Stück', priority: 'recommended' as const, notes: 'Verhindert Rückfluss aus Kanalisation' },
+      { id: 'pumpe', name: 'Tauchpumpe', quantity: '1 Stück', priority: 'optional' as const, notes: 'Für Kellerentwässerung' },
+      { id: 'absperrventile', name: 'Absperrventile markiert', quantity: 'Alle', priority: 'critical' as const, notes: 'Wasser, Strom, Gas' },
+    ]
+  },
+];
+
+const warningLevels = [
+  { level: 1, name: 'Meldepegel', description: 'Erhöhte Wasserstände, Aufmerksamkeit geboten', color: 'yellow' },
+  { level: 2, name: 'Warnpegel', description: 'Überflutungen in Uferbereichen möglich', color: 'orange' },
+  { level: 3, name: 'Alarmpegel', description: 'Überflutungen in bebauten Gebieten, Evakuierung möglich', color: 'red' },
+  { level: 4, name: 'Katastrophenfall', description: 'Großflächige Überflutungen, Lebensgefahr', color: 'purple' },
+];
+
+const faqs = [
+  {
+    question: 'Deckt meine Versicherung Hochwasserschäden?',
+    answer: 'Standard-Hausrat- und Wohngebäudeversicherungen decken Hochwasser meist NICHT. Du brauchst eine Elementarschadenversicherung als Zusatz. Prüfe deine Police!'
+  },
+  {
+    question: 'Wie schnell kann ein Hochwasser kommen?',
+    answer: 'Bei Flusshochwasser oft Stunden bis Tage Vorwarnzeit. Bei Sturzfluten durch Starkregen kann es in Minuten gehen. Die Ahrtal-Katastrophe 2021 zeigte: Sturzfluten sind besonders gefährlich.'
+  },
+  {
+    question: 'Soll ich bei Hochwasserwarnung evakuieren?',
+    answer: 'Nur wenn die Behörden dazu auffordern! Zu frühe oder eigenmächtige Evakuierung kann gefährlicher sein. Folge den offiziellen Anweisungen über NINA-App und Durchsagen.'
+  },
+  {
+    question: 'Kann ich Hochwasser im Keller abpumpen?',
+    answer: 'Vorsicht! Solange draußen Hochwasser steht, kann das Abpumpen den Keller durch Auftrieb beschädigen. Warte bis der Außenpegel sinkt und pumpe dann langsam ab.'
+  },
+];
+---
+
+<BaseLayout
+  title="Hochwasser: Richtig reagieren bei Flut — Evakuierung & Checkliste"
+  description="Wie bereitest du dich auf Hochwasser vor? Verhalten vor, während und nach einer Überschwemmung. Mit Checkliste und Evakuierungstipps."
+  locale="de"
+  dateModified="2025-12-16"
+  schemaType="HowTo"
+  alternates={{
+    nl: '/nl/scenario/overstroming/',
+  }}
+  schemaData={{
+    step: [
+      { '@type': 'HowToStep', name: 'Hochwasserrisiko kennen', text: 'Prüfe auf hochwasserzentralen.de und bei deiner Kommune, ob du in einem Risikogebiet wohnst.' },
+      { '@type': 'HowToStep', name: 'NINA-App installieren', text: 'Die NINA Warn-App des BBK sendet Hochwasserwarnungen direkt aufs Handy.' },
+      { '@type': 'HowToStep', name: 'Evakuierungsplan erstellen', text: 'Wohin gehst du? Wie kommst du dorthin? Wo trefft ihr euch, wenn ihr getrennt werdet?' },
+      { '@type': 'HowToStep', name: 'Wichtige Dokumente sichern', text: 'Originale in wasserdichten Behältern oder digital in der Cloud speichern.' },
+      { '@type': 'HowToStep', name: 'Bei Warnung: Anweisungen folgen', text: 'Folge den Behördenanweisungen. Evakuiere nur wenn angeordnet.' },
+    ],
+    totalTime: 'P3D',
+  }}
+  faqData={faqs}
+>
+  <main class="scenario-page">
+    <header class="scenario-header">
+      <div class="scenario-title-row">
+        <div class="scenario-icon scenario-icon--blue">
+          <Icon name="Waves" size={28} />
+        </div>
+        <div class="scenario-title-content">
+          <h1 class="scenario-title">Hochwasser</h1>
+          <div class="scenario-meta">
+            <span class="meta-item">10 min</span>
+            <span class="meta-divider">·</span>
+            <span class="meta-item">Aktualisiert Dez 2025</span>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Hero Image -->
+    <section class="scenario-section">
+      <HeroImage
+        src="/images/shared/flood-street.webp"
+        alt="Überflutete Straße - Hochwasser Vorbereitung"
+        priority={true}
+      />
+    </section>
+
+    <!-- TL;DR -->
+    <section class="scenario-section">
+      <TLDRBlock
+        summary="Bei Hochwasserwarnung: Verfolge NINA-App und befolge Behördenanweisungen. Evakuiere NUR wenn angeordnet. Wenn Wasser steigt und Flucht nicht mehr möglich: nach oben gehen (vertikale Evakuierung). NIEMALS durch fließendes Wasser fahren - 30cm reichen, um ein Auto wegzureißen."
+        keyStat="30 cm"
+        keyStatLabel="Wasser reißt Auto weg"
+      />
+    </section>
+
+    <!-- Ahrtal Warning -->
+    <section class="scenario-section">
+      <div class="card p-6 border-l-4 border-l-red-500 bg-red-50 dark:bg-red-950/20">
+        <h2 class="text-lg font-semibold mb-2 flex items-center gap-2">
+          <Icon name="AlertTriangle" size={20} class="text-red-500" />
+          Lehren aus der Ahrtal-Katastrophe 2021
+        </h2>
+        <p class="text-[--color-text-secondary] mb-3">
+          Im Juli 2021 starben über 180 Menschen bei der Flutkatastrophe im Ahrtal.
+          Die wichtigsten Lehren:
+        </p>
+        <ul class="space-y-1 text-sm">
+          <li class="flex items-start gap-2">
+            <Icon name="AlertCircle" size={16} class="text-red-500 mt-1 flex-shrink-0" />
+            <span><strong>Warnungen ernst nehmen:</strong> Viele ignorierten frühe Warnungen</span>
+          </li>
+          <li class="flex items-start gap-2">
+            <Icon name="AlertCircle" size={16} class="text-red-500 mt-1 flex-shrink-0" />
+            <span><strong>Sturzfluten sind tödlich:</strong> Sie kommen schneller als Flusshochwasser</span>
+          </li>
+          <li class="flex items-start gap-2">
+            <Icon name="AlertCircle" size={16} class="text-red-500 mt-1 flex-shrink-0" />
+            <span><strong>Keller sind Todesfallen:</strong> Niemals bei steigendem Wasser in den Keller gehen</span>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Warning Levels -->
+    <section class="scenario-section">
+      <h2 class="section-title">Hochwasser-Warnstufen</h2>
+      <div class="grid gap-3">
+        {warningLevels.map((level) => (
+          <div class={`p-4 rounded-lg border-l-4 ${
+            level.color === 'yellow' ? 'border-l-yellow-500 bg-yellow-50 dark:bg-yellow-950/20' :
+            level.color === 'orange' ? 'border-l-orange-500 bg-orange-50 dark:bg-orange-950/20' :
+            level.color === 'red' ? 'border-l-red-500 bg-red-50 dark:bg-red-950/20' :
+            'border-l-purple-500 bg-purple-50 dark:bg-purple-950/20'
+          }`}>
+            <div class="flex items-center gap-2 mb-1">
+              <span class="font-bold">Stufe {level.level}:</span>
+              <span class="font-semibold">{level.name}</span>
+            </div>
+            <p class="text-sm text-[--color-text-secondary]">{level.description}</p>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <!-- Interactive Checklist -->
+    <section class="scenario-section">
+      <h2 class="section-title">
+        <Icon name="CheckSquare" size={24} />
+        Hochwasser-Checkliste
+      </h2>
+      <InteractiveChecklist client:idle scenarioKey={scenarioKey} categories={checklistCategories} />
+    </section>
+
+    <!-- FAQs -->
+    <section class="scenario-section">
+      <h2 class="section-title">Häufige Fragen</h2>
+      <div class="space-y-4">
+        {faqs.map((faq) => (
+          <details class="card p-4 group">
+            <summary class="font-semibold cursor-pointer list-none flex items-center justify-between">
+              {faq.question}
+              <Icon name="ChevronDown" size={20} class="transform group-open:rotate-180 transition-transform" />
+            </summary>
+            <p class="mt-3 text-[--color-text-secondary]">{faq.answer}</p>
+          </details>
+        ))}
+      </div>
+    </section>
+
+    <!-- Official Resources -->
+    <section class="scenario-section">
+      <h2 class="section-title">Offizielle Quellen</h2>
+      <div class="grid sm:grid-cols-2 gap-4">
+        <a href="https://www.hochwasserzentralen.de/" target="_blank" rel="noopener noreferrer" class="card p-4 hover:border-[--color-accent-primary] transition-colors group">
+          <h3 class="font-semibold group-hover:text-[--color-accent-primary]">Hochwasserzentralen</h3>
+          <p class="text-sm text-[--color-text-secondary]">Aktuelle Pegelstände und Vorhersagen</p>
+        </a>
+        <a href="https://www.bbk.bund.de/DE/Warnung-Vorsorge/Warn-App-NINA/warn-app-nina_node.html" target="_blank" rel="noopener noreferrer" class="card p-4 hover:border-[--color-accent-primary] transition-colors group">
+          <h3 class="font-semibold group-hover:text-[--color-accent-primary]">NINA Warn-App</h3>
+          <p class="text-sm text-[--color-text-secondary]">Offizielle Warn-App des Bundes</p>
+        </a>
+        <a href="https://www.dwd.de/DE/wetter/warnungen/warnungen_node.html" target="_blank" rel="noopener noreferrer" class="card p-4 hover:border-[--color-accent-primary] transition-colors group">
+          <h3 class="font-semibold group-hover:text-[--color-accent-primary]">DWD Warnungen</h3>
+          <p class="text-sm text-[--color-text-secondary]">Wetterwarnungen inkl. Starkregen</p>
+        </a>
+        <a href="https://www.elementar-versichern.de/" target="_blank" rel="noopener noreferrer" class="card p-4 hover:border-[--color-accent-primary] transition-colors group">
+          <h3 class="font-semibold group-hover:text-[--color-accent-primary]">Elementar-Versicherung</h3>
+          <p class="text-sm text-[--color-text-secondary]">Informationen zur Absicherung</p>
+        </a>
+      </div>
+    </section>
+
+    <!-- Recommended Products -->
+    <section class="scenario-section">
+      <h2 class="section-title">
+        <Icon name="ShoppingBag" size={20} />
+        Empfohlene Produkte
+      </h2>
+      <p class="text-sm text-[--color-text-secondary] mb-4">Unsere Ratgeber zu den wichtigsten Produkten für dieses Szenario:</p>
+      <div class="grid sm:grid-cols-2 gap-3">
+        <a href="/de/produkte/notfallrucksack/" class="card p-4 flex items-center gap-3 hover:border-green-500 transition-colors">
+          <Icon name="Backpack" size={24} class="text-green-500" />
+          <span class="font-semibold">Notfallrucksack</span>
+        </a>
+        <a href="/de/produkte/erste-hilfe-kasten/" class="card p-4 flex items-center gap-3 hover:border-green-500 transition-colors">
+          <Icon name="Heart" size={24} class="text-green-500" />
+          <span class="font-semibold">Erste-Hilfe-Kasten</span>
+        </a>
+        <a href="/de/produkte/powerbanks/" class="card p-4 flex items-center gap-3 hover:border-purple-500 transition-colors">
+          <Icon name="Battery" size={24} class="text-purple-500" />
+          <span class="font-semibold">Powerbanks</span>
+        </a>
+        <a href="/de/produkte/notfallradio/" class="card p-4 flex items-center gap-3 hover:border-purple-500 transition-colors">
+          <Icon name="Radio" size={24} class="text-purple-500" />
+          <span class="font-semibold">Notfallradio</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- Related Scenarios -->
+    <section class="scenario-section">
+      <h2 class="section-title">Verwandte Szenarien</h2>
+      <div class="grid sm:grid-cols-2 gap-3">
+        <a href="/de/szenarien/evakuierung/" class="card p-4 flex items-center gap-3 hover:border-emerald-500 transition-colors">
+          <Icon name="Car" size={24} class="text-emerald-500" />
+          <span class="font-semibold">Evakuierung</span>
+        </a>
+        <a href="/de/szenarien/stromausfall/" class="card p-4 flex items-center gap-3 hover:border-amber-500 transition-colors">
+          <Icon name="Zap" size={24} class="text-amber-500" />
+          <span class="font-semibold">Stromausfall</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- Sticky Action Bar -->
+    <StickyActionBar client:idle scenarioKey={scenarioKey} />
+  </main>
+</BaseLayout>
+
+<style>
+  .scenario-page {
+    max-width: 48rem;
+    margin: 0 auto;
+    padding: 2rem 1rem;
+  }
+
+  .scenario-header {
+    margin-bottom: 2rem;
+  }
+
+  .scenario-title-row {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .scenario-icon {
+    width: 3.5rem;
+    height: 3.5rem;
+    border-radius: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .scenario-icon--blue {
+    background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+    color: white;
+  }
+
+  .scenario-title {
+    font-size: 2rem;
+    font-weight: 700;
+    line-height: 1.2;
+  }
+
+  .scenario-meta {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--color-text-muted);
+    font-size: 0.875rem;
+    margin-top: 0.25rem;
+  }
+
+  .scenario-section {
+    margin-bottom: 2rem;
+  }
+
+  .section-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+</style>

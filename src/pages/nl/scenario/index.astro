@@ -1,0 +1,183 @@
+---
+/**
+ * NL Scenarios Hub Page
+ *
+ * Dutch scenarios with NL-specific priorities:
+ * - Stroomstoring (power outage) - Most relevant per Denk Vooruit
+ * - Overstroming (flooding) - NL-specific critical scenario
+ * - Hittegolf (heat wave)
+ * - Wateruitval (water disruption)
+ * - Evacuatie (evacuation)
+ * - Cyberaanval (cyber attack) - NL-specific emerging threat
+ */
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import Breadcrumb from '../../../components/layout/Breadcrumb.astro';
+import ScenarioCard from '../../../components/content/ScenarioCard.astro';
+import Button from '../../../components/ui/Button.astro';
+
+const scenarios = [
+  {
+    title: 'Stroomstoring',
+    description: 'Complete gids voor voor, tijdens en na een stroomuitval. Verlichting, noodstroom en voedsel bewaren.',
+    href: '/nl/scenario/stroomstoring/',
+    icon: 'Zap',
+    readTime: '10 min',
+    difficulty: 'Basis' as const,
+    tags: ['Thuis', 'Energie'],
+  },
+  {
+    title: 'Overstroming',
+    description: 'Voorbereiden op hoogwater en dijkdoorbraken. Evacuatieroutes, waterdichte opslag en Rijkswaterstaat waarschuwingen.',
+    href: '/nl/scenario/overstroming/',
+    icon: 'Waves',
+    readTime: '12 min',
+    difficulty: 'Basis' as const,
+    tags: ['Thuis', 'Evacuatie'],
+  },
+  {
+    title: 'Hittegolf',
+    description: 'Overleven bij extreme hitte. Hydratatie, koeling zonder stroom en kwetsbare groepen beschermen.',
+    href: '/nl/scenario/hittegolf/',
+    icon: 'Sun',
+    readTime: '8 min',
+    difficulty: 'Basis' as const,
+    tags: ['Gezondheid', 'Zomer'],
+  },
+  {
+    title: 'Wateruitval',
+    description: 'Wateropslag, prioriteiten en leven zonder kraanwater. Noodwaterbehandeling en hygiene.',
+    href: '/nl/scenario/wateruitval/',
+    icon: 'Droplet',
+    readTime: '8 min',
+    difficulty: 'Basis' as const,
+    tags: ['Thuis', 'Water'],
+  },
+  {
+    title: 'Evacuatie',
+    description: 'Wat meenemen als je snel weg moet. Gezinsplan, documenten en evacueren met kinderen of huisdieren.',
+    href: '/nl/scenario/evacuatie/',
+    icon: 'Car',
+    readTime: '10 min',
+    difficulty: 'Gemiddeld' as const,
+    tags: ['Evacuatie', 'Gezin'],
+  },
+  {
+    title: 'Cyberaanval',
+    description: 'Voorbereiden op digitale verstoringen. Betalingssystemen offline, communicatie en offline backup.',
+    href: '/nl/scenario/cyberaanval/',
+    icon: 'Shield',
+    readTime: '8 min',
+    difficulty: 'Gemiddeld' as const,
+    tags: ['Digitaal', 'Financien'],
+  },
+];
+
+const comingSoon = [
+  { title: 'Extreme Kou', icon: 'Snowflake', description: 'Voorbereiden op strenge vorst en sneeuwstormen' },
+  { title: 'Zware Storm', icon: 'CloudLightning', description: 'Schuilen en bescherming bij harde wind' },
+  { title: 'Gaslek', icon: 'Flame', description: 'Veiligheid bij gaslekken en evacuatie' },
+];
+---
+
+<BaseLayout
+  title="Noodscenario's: Stroomstoring, Overstroming, Evacuatie & meer"
+  description="Specifieke gidsen voor elk type noodsituatie: stroomstoring, overstroming, hittegolf, wateruitval en meer. Praktische voorbereiding stap voor stap."
+  locale="nl"
+  alternates={{
+    es: '/es/escenarios/',
+    de: '/de/szenarien/',
+  }}
+  schemaType="WebPage"
+  schemaData={{
+    "@type": "CollectionPage",
+    "name": "Noodscenario's",
+    "description": "Specifieke gidsen voor elk type noodsituatie: stroomstoring, overstroming, hittegolf, wateruitval en meer.",
+    "mainEntity": {
+      "@type": "ItemList",
+      "numberOfItems": scenarios.length,
+      "itemListElement": scenarios.map((s, i) => ({
+        "@type": "ListItem",
+        "position": i + 1,
+        "name": s.title,
+        "description": s.description,
+        "url": `https://kit-72.com${s.href}`
+      }))
+    }
+  }}
+>
+  <section class="py-16">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6">
+      <!-- Header -->
+      <div class="mb-12">
+        <Breadcrumb
+          items={[{ label: "Scenario's" }]}
+          locale="nl"
+          class="mb-4"
+        />
+        <h1 class="mb-4">Scenario's voor Noodsituaties</h1>
+        <p class="text-lg text-[--color-text-secondary] max-w-2xl">
+          Elke situatie vraagt om specifieke voorbereiding. Kies je scenario voor
+          een aangepaste checklist en praktische tips stap voor stap.
+        </p>
+      </div>
+
+      <!-- Priority Notice -->
+      <div class="mb-8 p-4 bg-amber-500/10 border border-amber-500/20 rounded-xl">
+        <div class="flex items-start gap-3">
+          <div class="w-10 h-10 flex items-center justify-center bg-amber-500/20 rounded-lg flex-shrink-0">
+            <svg class="w-5 h-5 text-amber-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+          </div>
+          <div>
+            <p class="text-sm text-[--color-text-secondary]">
+              <strong class="text-[--color-text-primary]">Denk Vooruit campagne:</strong> De
+              overheid adviseert elk huishouden om voorbereid te zijn op minimaal 72 uur
+              zelfvoorzienend. Begin met stroomstoring - het meest waarschijnlijke scenario.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Scenarios Grid -->
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
+        {scenarios.map((scenario) => (
+          <ScenarioCard {...scenario} />
+        ))}
+      </div>
+
+      <!-- Coming Soon -->
+      <div class="border-t border-[--color-border] pt-12">
+        <h2 class="text-xl font-semibold mb-6 text-[--color-text-secondary]">Binnenkort</h2>
+        <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          {comingSoon.map((item) => (
+            <ScenarioCard
+              title={item.title}
+              description={item.description}
+              href="#"
+              icon={item.icon}
+              isComingSoon
+            />
+          ))}
+        </div>
+      </div>
+
+      <!-- CTA -->
+      <div class="mt-16 card p-8 text-center bg-[--color-bg-tertiary]">
+        <h2 class="text-xl font-semibold mb-4">Weet je niet waar je moet beginnen?</h2>
+        <p class="text-[--color-text-secondary] mb-6 max-w-xl mx-auto">
+          Stel je eigen noodpakket samen op basis van je gezinssituatie. Onze tool
+          begeleidt je stap voor stap en genereert een afdrukbare checklist.
+        </p>
+        <Button
+          variant="primary"
+          size="lg"
+          href="/nl/tools/noodpakket-samenstellen/"
+          rightIcon="ArrowRight"
+        >
+          Mijn pakket samenstellen
+        </Button>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

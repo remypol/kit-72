@@ -1,0 +1,32 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import Breadcrumb from '../../../components/layout/Breadcrumb.astro';
+---
+
+<BaseLayout title="Affiliate-Hinweis — Kit-72" description="Informationen über Affiliate-Links." locale="de">
+  <section class="py-16">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6">
+      <Breadcrumb items={[{ label: 'Affiliate-Hinweis' }]} class="mb-4" locale="de" />
+      <h1 class="text-4xl font-bold mb-6">Affiliate-Hinweis</h1>
+
+      <div class="prose prose-lg">
+        <p><em>Zuletzt aktualisiert: Dezember 2025</em></p>
+
+        <h2>Was sind Affiliate-Links?</h2>
+        <p>Einige Links auf Kit-72.com sind Affiliate-Links zu Amazon.de und anderen Online-Shops. Wenn du über diese Links ein Produkt kaufst, erhalten wir eine kleine Provision.</p>
+
+        <h2>Kosten für dich</h2>
+        <p><strong>Du zahlst niemals mehr.</strong> Der Preis ist immer derselbe, egal ob du über unseren Link kaufst oder direkt zum Shop gehst.</p>
+
+        <h2>Unsere Empfehlungen</h2>
+        <p>Wir empfehlen nur Produkte, die wir selbst verwenden würden. Die Affiliate-Provision beeinflusst unsere Auswahl nicht – wir wählen immer das beste Preis-Leistungs-Verhältnis.</p>
+
+        <h2>Transparenz</h2>
+        <p>Wir glauben an vollständige Transparenz. Deshalb erklären wir dir genau, wie wir mit dieser Website Geld verdienen.</p>
+
+        <h2>Kennzeichnung</h2>
+        <p>Affiliate-Links sind entsprechend den deutschen Gesetzen gekennzeichnet. Du erkennst sie am Zusatz "Affiliate-Link" oder "Werbung".</p>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

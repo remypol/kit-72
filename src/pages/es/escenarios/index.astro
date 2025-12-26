@@ -1,0 +1,128 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import Breadcrumb from '../../../components/layout/Breadcrumb.astro';
+import ScenarioCard from '../../../components/content/ScenarioCard.astro';
+import Button from '../../../components/ui/Button.astro';
+
+const scenarios = [
+  {
+    title: 'Prepararse para un Apagón',
+    description: 'Guía completa para antes, durante y después de un corte de luz. Iluminación, energía de respaldo y conservación de alimentos.',
+    href: '/es/escenarios/prepararse-apagon/',
+    icon: 'Zap',
+    readTime: '12 min',
+    difficulty: 'Básico' as const,
+    tags: ['Hogar', 'Energía'],
+  },
+  {
+    title: 'Prepararse para una Ola de Calor',
+    description: 'Supervivencia ante calor extremo. Hidratación, refrigeración sin electricidad y cuidado de grupos vulnerables.',
+    href: '/es/escenarios/prepararse-ola-calor/',
+    icon: 'Sun',
+    readTime: '11 min',
+    difficulty: 'Básico' as const,
+    tags: ['Salud', 'Verano'],
+  },
+  {
+    title: 'Prepararse para un Corte de Agua',
+    description: 'Almacenamiento, prioridades de uso y cómo vivir sin agua corriente. Tratamiento de agua de emergencia.',
+    href: '/es/escenarios/prepararse-corte-agua/',
+    icon: 'Droplet',
+    readTime: '10 min',
+    difficulty: 'Básico' as const,
+    tags: ['Hogar', 'Agua'],
+  },
+  {
+    title: 'Kit de Evacuación',
+    description: 'Qué llevar si tienes que salir rápido. Plan familiar, documentos esenciales y evacuación con niños o mascotas.',
+    href: '/es/escenarios/kit-evacuacion/',
+    icon: 'Car',
+    readTime: '13 min',
+    difficulty: 'Intermedio' as const,
+    tags: ['Evacuación', 'Familia'],
+  },
+];
+
+const comingSoon = [
+  { title: 'Inundación', icon: 'Waves', description: 'Preparación y evacuación ante crecidas de agua' },
+  { title: 'Tormenta Severa', icon: 'CloudLightning', description: 'Refugio en casa y protección ante vientos fuertes' },
+  { title: 'Kit para el Coche', icon: 'Car', description: 'Todo lo que debes llevar en el maletero' },
+  { title: 'Terremoto', icon: 'AlertTriangle', description: 'Qué hacer antes, durante y después de un seísmo' },
+];
+---
+
+<BaseLayout
+  title="Emergencias: Apagón, Inundación, Evacuación — Guías Prácticas"
+  description="Guías específicas para cada tipo de emergencia: apagones, olas de calor, cortes de agua, evacuaciones y más. Preparación práctica paso a paso."
+  schemaType="WebPage"
+  schemaData={{
+    "@type": "CollectionPage",
+    "name": "Escenarios de Emergencia",
+    "description": "Guías específicas para cada tipo de emergencia: apagones, olas de calor, cortes de agua, evacuaciones y más.",
+    "mainEntity": {
+      "@type": "ItemList",
+      "numberOfItems": scenarios.length,
+      "itemListElement": scenarios.map((s, i) => ({
+        "@type": "ListItem",
+        "position": i + 1,
+        "name": s.title,
+        "description": s.description,
+        "url": `https://kit-72.com${s.href}`
+      }))
+    }
+  }}
+>
+  <section class="py-16">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6">
+      <!-- Header -->
+      <div class="mb-12">
+        <Breadcrumb items={[{ label: 'Escenarios' }]} class="mb-4" />
+        <h1 class="mb-4">Escenarios de Emergencia</h1>
+        <p class="text-lg text-[--color-text-secondary] max-w-2xl">
+          Cada situación requiere preparación específica. Elige tu escenario para obtener
+          un checklist adaptado y consejos prácticos paso a paso.
+        </p>
+      </div>
+
+      <!-- Scenarios Grid -->
+      <div class="grid md:grid-cols-2 gap-6 mb-16">
+        {scenarios.map((scenario) => (
+          <ScenarioCard {...scenario} />
+        ))}
+      </div>
+
+      <!-- Coming Soon -->
+      <div class="border-t border-[--color-border] pt-12">
+        <h2 class="text-xl font-semibold mb-6 text-[--color-text-secondary]">Próximamente</h2>
+        <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          {comingSoon.map((item) => (
+            <ScenarioCard
+              title={item.title}
+              description={item.description}
+              href="#"
+              icon={item.icon}
+              isComingSoon
+            />
+          ))}
+        </div>
+      </div>
+
+      <!-- CTA -->
+      <div class="mt-16 card p-8 text-center bg-[--color-bg-tertiary]">
+        <h2 class="text-xl font-semibold mb-4">¿No sabes por dónde empezar?</h2>
+        <p class="text-[--color-text-secondary] mb-6 max-w-xl mx-auto">
+          Crea tu kit personalizado según tu situación familiar. Nuestro configurador
+          te guía paso a paso y genera un checklist imprimible.
+        </p>
+        <Button
+          variant="primary"
+          size="lg"
+          href="/es/herramientas/configurador-kit/"
+          rightIcon="ArrowRight"
+        >
+          Crear mi kit personalizado
+        </Button>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

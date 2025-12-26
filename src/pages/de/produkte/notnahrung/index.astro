@@ -1,0 +1,164 @@
+---
+import BaseLayout from '../../../../layouts/BaseLayout.astro';
+import Breadcrumb from '../../../../components/layout/Breadcrumb.astro';
+import Icon from '../../../../components/ui/Icon.astro';
+import HeroImage from '../../../../components/content/HeroImage.astro';
+---
+
+<BaseLayout
+  title="Notnahrung: Was kaufen? Haltbarkeit & Kalorien — Ratgeber"
+  description="Die richtige Notnahrung für dein Notfallpaket. Konserven, Trockennahrung, Kalorien und Lagerung."
+  locale="de"
+  dateModified="2025-12-15"
+  schemaType="Article"
+>
+  <section class="py-16">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6">
+      <Breadcrumb items={[{ label: 'Produkte', href: '/de/produkte/' }, { label: 'Notnahrung' }]} class="mb-4" locale="de" />
+      <h1 class="text-4xl font-bold mb-6">Notnahrung</h1>
+
+      <div class="mb-8">
+        <HeroImage
+          src="/images/shared/emergency-kit-flatlay.webp"
+          alt="Notnahrung und Lebensmittelvorrat für Notfälle"
+          priority={true}
+        />
+      </div>
+
+      <div class="prose prose-lg">
+        <p class="lead">
+          Du überlebst Wochen ohne Essen — aber für 72 Stunden brauchst du Energie,
+          um handlungsfähig zu bleiben. Wähle Nahrung, die <strong>keine Kühlung
+          und wenig Zubereitung</strong> benötigt.
+        </p>
+
+        <!-- Calorie Guide -->
+        <div class="card p-6 my-8 bg-[--color-bg-tertiary] not-prose">
+          <h3 class="text-lg font-semibold mb-4 flex items-center gap-2">
+            <Icon name="UtensilsCrossed" size={20} class="text-[--color-accent-primary]" />
+            Kalorienbedarf
+          </h3>
+          <div class="grid sm:grid-cols-2 gap-4">
+            <div class="p-4 bg-[--color-bg-secondary] rounded-lg">
+              <p class="text-2xl font-bold text-[--color-accent-primary]">1.500-2.000</p>
+              <p class="text-sm text-[--color-text-secondary]">kcal pro Tag (Minimum)</p>
+            </div>
+            <div class="p-4 bg-[--color-bg-secondary] rounded-lg">
+              <p class="text-2xl font-bold text-[--color-accent-primary]">4.500-6.000</p>
+              <p class="text-sm text-[--color-text-secondary]">kcal pro Person für 72 Std.</p>
+            </div>
+          </div>
+        </div>
+
+        <h2>Arten von Notnahrung</h2>
+
+        <h3>Sofort essbar (kein Kochen)</h3>
+        <ul>
+          <li><strong>Energieriegel, Müsliriegel:</strong> Kompakt, kalorienreich</li>
+          <li><strong>Nüsse und Trockenfrüchte:</strong> Lange haltbar, nährstoffreich</li>
+          <li><strong>Knäckebrot, Zwieback:</strong> Kein Schimmelrisiko</li>
+          <li><strong>Erdnussbutter:</strong> Hohe Energiedichte</li>
+          <li><strong>Honig:</strong> Unbegrenzt haltbar</li>
+        </ul>
+
+        <h3>Konserven</h3>
+        <ul>
+          <li><strong>Thunfisch, Sardinen:</strong> Proteinreich, lange haltbar</li>
+          <li><strong>Bohnen, Linsen:</strong> Protein und Ballaststoffe</li>
+          <li><strong>Obst in Sirup:</strong> Vitamine und Zucker</li>
+          <li><strong>Gemüse:</strong> Mais, Erbsen, Möhren</li>
+          <li><strong>Fertiggerichte:</strong> Ravioli, Gulasch (ohne Kochen essbar)</li>
+        </ul>
+
+        <div class="card p-4 my-6 border-l-4 border-l-amber-500 bg-amber-50 dark:bg-amber-950/30 not-prose">
+          <p class="text-sm">
+            <strong>⚠️ Wichtig:</strong> Ein <strong>manueller Dosenöffner</strong> ist
+            unverzichtbar! Ohne Strom funktioniert dein elektrischer nicht.
+          </p>
+        </div>
+
+        <h3>Trockennahrung (mit Wasser)</h3>
+        <ul>
+          <li><strong>Haferflocken:</strong> Mit kaltem Wasser essbar (Overnight Oats)</li>
+          <li><strong>Instant-Nudeln:</strong> Schnell zubereitet</li>
+          <li><strong>Couscous:</strong> Quellt in warmem Wasser</li>
+          <li><strong>Milchpulver:</strong> Für Getränke und Müsli</li>
+        </ul>
+
+        <h3>Spezielle Notfallnahrung</h3>
+        <ul>
+          <li><strong>NRG-5, BP-WR:</strong> Kompakte Notfallriegel, 15-20 Jahre haltbar</li>
+          <li><strong>Gefriergetrocknete Mahlzeiten:</strong> Leicht, lange haltbar</li>
+          <li><strong>Astronautennahrung:</strong> Kompakt, kalorienreich</li>
+        </ul>
+
+        <h2>Das Rotationsprinzip</h2>
+        <p>
+          Clever: Integriere deinen Notvorrat in den Alltag, statt ihn vergessen zu lassen.
+        </p>
+        <ol>
+          <li><strong>FIFO:</strong> First In, First Out — Ältestes zuerst verbrauchen</li>
+          <li><strong>Regelmäßig kochen:</strong> Konserven in normale Mahlzeiten einbauen</li>
+          <li><strong>Sofort nachkaufen:</strong> Verbrauchtes direkt ersetzen</li>
+          <li><strong>Verfallsdaten prüfen:</strong> Alle 3 Monate kontrollieren</li>
+        </ol>
+
+        <h2>Lagerung</h2>
+        <ul>
+          <li><strong>Kühl:</strong> Unter 20°C — Hitze verkürzt Haltbarkeit</li>
+          <li><strong>Dunkel:</strong> Licht beschleunigt Vitaminabbau</li>
+          <li><strong>Trocken:</strong> Feuchtigkeit führt zu Schimmel</li>
+          <li><strong>Schädlingssicher:</strong> Behälter gegen Motten und Mäuse</li>
+        </ul>
+
+        <div class="card p-6 my-8 bg-[--color-accent-subtle] not-prose">
+          <p class="font-medium mb-2">💡 Campingkocher als Option</p>
+          <p class="text-sm text-[--color-text-secondary]">
+            Ein kleiner Gaskocher ermöglicht warme Mahlzeiten.
+            <strong>Nur im Freien oder bei sehr guter Belüftung verwenden!</strong>
+            Gasgeruch = sofort lüften und nicht benutzen.
+          </p>
+        </div>
+
+        <h2>Spezielle Bedürfnisse</h2>
+        <ul>
+          <li><strong>Säuglinge:</strong> Fertige Säuglingsnahrung (keine Pulvermilch ohne sicheres Wasser)</li>
+          <li><strong>Allergien:</strong> Alternativen für Nuss-, Gluten-, Laktose-Unverträglichkeit</li>
+          <li><strong>Diabetiker:</strong> Traubenzucker für Unterzuckerung, kohlenhydratkontrollierte Snacks</li>
+          <li><strong>Haustiere:</strong> Separaten Futtervorrat anlegen</li>
+        </ul>
+
+        <h2>Checkliste</h2>
+        <ul>
+          <li>☐ Mindestens 4.500 kcal pro Person (72 Std.)</li>
+          <li>☐ Mix aus sofort essbaren und Konserven</li>
+          <li>☐ Manueller Dosenöffner</li>
+          <li>☐ Einweggeschirr/-besteck</li>
+          <li>☐ Spezialnahrung für Familienmitglieder</li>
+          <li>☐ Verfallsdaten kontrolliert</li>
+          <li>☐ Rotationsplan aufgestellt</li>
+        </ul>
+      </div>
+
+      <!-- Amazon Link -->
+      <div class="mt-12 card p-6 bg-[--color-bg-tertiary]">
+        <h3 class="font-semibold mb-2">Notnahrung auf Amazon.de</h3>
+        <p class="text-sm text-[--color-text-secondary] mb-4">
+          Empfohlene Notfallnahrung mit langer Haltbarkeit.
+        </p>
+        <a
+          href="https://www.amazon.de/s?k=notfallnahrung+langzeit&tag=kit72de-21"
+          target="_blank"
+          rel="noopener noreferrer sponsored"
+          class="inline-flex items-center gap-2 px-4 py-2 bg-[--color-accent-primary] text-[--color-bg-primary] font-medium rounded hover:bg-[--color-accent-hover] transition-colors"
+        >
+          Auf Amazon ansehen
+          <Icon name="ExternalLink" size={16} />
+        </a>
+        <p class="text-xs text-[--color-text-muted] mt-3">
+          * Affiliate-Link — du zahlst nicht mehr, wir erhalten eine kleine Provision.
+        </p>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

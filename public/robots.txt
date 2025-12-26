@@ -1,0 +1,35 @@
+# Kit-72.com Robots.txt
+# https://kit-72.com
+
+# Allow all crawlers full access
+User-agent: *
+Allow: /
+
+# Block utility/internal paths
+Disallow: /_astro/
+Disallow: /api/
+
+# AI crawlers - allow access for AI search inclusion
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Anthropic-AI
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+# Sitemap location (Astro generates sitemap-index.xml)
+Sitemap: https://kit-72.com/sitemap-index.xml
+
+# Host directive for search engines
+Host: https://kit-72.com

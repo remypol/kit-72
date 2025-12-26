@@ -1,0 +1,1031 @@
+---
+/**
+ * Wasserausfall Scenario Page (DE)
+ *
+ * German water disruption preparation guide with:
+ * - German water supply context
+ * - Amazon.de product links
+ * - BBK guidance references
+ */
+import BaseLayout from '../../../../layouts/BaseLayout.astro';
+import TLDRBlock from '../../../../components/hub/TLDRBlock.astro';
+import CollapsibleSection from '../../../../components/hub/CollapsibleSection.astro';
+import PhaseTabs from '../../../../components/hub/PhaseTabs.tsx';
+import InteractiveChecklist from '../../../../components/hub/InteractiveChecklist.tsx';
+import StickyActionBar from '../../../../components/hub/StickyActionBar.tsx';
+import Icon from '../../../../components/ui/Icon.astro';
+import HeroImage from '../../../../components/content/HeroImage.astro';
+
+const scenarioKey = 'wasserausfall';
+
+// Phase content - German specific
+const phases = {
+  vor: [
+    {
+      title: 'Lege Trinkwasservorrat an',
+      detail: 'Mindestens 2 Liter pro Person pro Tag. Für 3 Tage: 6 Liter pro Person.',
+      tip: 'Eine 4-köpfige Familie braucht mindestens 24 Liter für 3 Tage'
+    },
+    {
+      title: 'Kaufe Wasserkanister',
+      detail: 'Lebensmittelechte Kanister von 10-20 Litern. Wechsle das Wasser alle 6 Monate.',
+      tip: 'An einem kühlen, dunklen Ort lagern'
+    },
+    {
+      title: 'Besorge Wasserentkeimungstabletten',
+      detail: 'Für Notfälle, wenn du Wasser aus unbekannten Quellen nutzen musst.',
+      tip: null
+    },
+    {
+      title: 'Bereite Hygiene ohne Wasser vor',
+      detail: 'Feuchttücher, Handgel, Trockenshampoo. 2-3 Packungen Tücher pro Person.',
+      tip: null
+    },
+    {
+      title: 'Besorge Eimer für die Toilette',
+      detail: 'Eimer mit 8-10 Litern für manuelles Spülen der Toilette.',
+      tip: null
+    },
+    {
+      title: 'Kenne deinen Wasserversorger',
+      detail: 'Finde die Störungshotline deines lokalen Wasserwerks heraus.',
+      tip: 'Bei geplantem Wartung wirst du meist vorab informiert'
+    },
+  ],
+  waehrend: [
+    {
+      title: 'Priorisiere Trinkwasser',
+      detail: 'Nutze deinen Trinkwasservorrat niemals für andere Zwecke. Das ist Priorität #1.',
+      tip: null
+    },
+    {
+      title: 'Öffne keine Wasserhähne unnötig',
+      detail: 'Wenn das Wasser zurückkommt kann es zunächst trüb oder mit Luft sein.',
+      tip: null
+    },
+    {
+      title: 'Nutze manuelle WC-Spülung',
+      detail: 'Gieße 6-8 Liter Wasser direkt in die Toilettenschüssel zum Spülen.',
+      tip: 'Nutze Waschwasser für die Toilette wieder'
+    },
+    {
+      title: 'Körperhygiene mit Tüchern',
+      detail: 'Körper mit Feuchttüchern. Hände mit Handgel.',
+      tip: null
+    },
+    {
+      title: 'Spüle mit zwei Schüsseln ab',
+      detail: 'Eine mit Seifenwasser, eine mit sauberem Spülwasser.',
+      tip: 'Nutze das Wasser danach für Pflanzen oder Toilette'
+    },
+    {
+      title: 'Rationiere nach Priorität',
+      detail: 'Trinken (40%) > Kochen (15%) > Hygiene (25%) > WC (15%) > Sonstiges (5%).',
+      tip: null
+    },
+  ],
+  nach: [
+    {
+      title: 'Lass das Wasser erst laufen',
+      detail: 'Lass den Wasserhahn 2-3 Minuten laufen bevor du das Wasser nutzt. Es kann trüb sein.',
+      tip: null
+    },
+    {
+      title: 'Kontrolliere Geruch und Geschmack',
+      detail: 'Deutsches Leitungswasser ist normalerweise geruchlos. Riecht oder schmeckt es seltsam? Nutze Flaschenwasser.',
+      tip: 'Bei Zweifel noch einen Tag Flaschenwasser trinken'
+    },
+    {
+      title: 'Fülle deinen Vorrat auf',
+      detail: 'Kanister wieder füllen, Flaschenwasser nachkaufen, Tücher auffüllen.',
+      tip: null
+    },
+    {
+      title: 'Reinige Wasserhahnfilter',
+      detail: 'Es können Sedimente zurückgeblieben sein. Reinige die Perlstrahler.',
+      tip: null
+    },
+  ],
+};
+
+// Checklist categories - DE products with Amazon.de links
+const checklistCategories = [
+  {
+    id: 'lagerung',
+    name: 'Wasserlagerung',
+    icon: 'droplet',
+    items: [
+      { id: 'flaschenwasser', name: 'Flaschenwasser', quantity: '2L/Person/Tag × 3 Tage', priority: 'critical' as const, notes: 'Trinkwasser', affiliateUrl: 'https://www.amazon.de/s?k=wasser+6+liter' },
+      { id: 'grosse-flaschen', name: 'Große Flaschen (5-6L)', quantity: '2-4 Stück', priority: 'critical' as const, notes: 'Einfacher zu handhaben' },
+      { id: 'kanister', name: 'Lebensmittelechter Kanister 10-20L', quantity: '1 pro Familie', priority: 'recommended' as const, notes: 'Für längere Lagerung', affiliateUrl: 'https://www.amazon.de/s?k=wasserkanister+lebensmittelecht' },
+      { id: 'leere-flaschen', name: 'Leere saubere Flaschen', quantity: '10+ Stück', priority: 'recommended' as const, notes: 'Zum Füllen bei Warnung' },
+    ]
+  },
+  {
+    id: 'aufbereitung',
+    name: 'Wasseraufbereitung',
+    icon: 'beaker',
+    items: [
+      { id: 'entkeimungstabletten', name: 'Wasserentkeimungstabletten', quantity: '2 Packungen', priority: 'critical' as const, notes: 'Für Notfälle', affiliateUrl: 'https://www.amazon.de/s?k=wasserentkeimungstabletten' },
+      { id: 'wasserfilter', name: 'Tragbarer Wasserfilter', quantity: '1 Stück', priority: 'recommended' as const, notes: 'Entfernt Bakterien', affiliateUrl: 'https://www.amazon.de/s?k=wasserfilter+outdoor' },
+    ]
+  },
+  {
+    id: 'hygiene',
+    name: 'Hygiene ohne Wasser',
+    icon: 'sparkles',
+    items: [
+      { id: 'feuchttuecher', name: 'Feuchttücher', quantity: '3-4 große Packungen', priority: 'critical' as const, notes: 'Für Körperpflege', affiliateUrl: 'https://www.amazon.de/s?k=feuchttuecher+koerperpflege' },
+      { id: 'handgel', name: 'Desinfektions-Handgel', quantity: '2-3 Flaschen', priority: 'critical' as const, notes: 'Für Hände', affiliateUrl: 'https://www.amazon.de/s?k=desinfektionsgel+haende' },
+      { id: 'trockenshampoo', name: 'Trockenshampoo', quantity: '1 Dose', priority: 'recommended' as const, notes: 'Für Haare', affiliateUrl: 'https://www.amazon.de/s?k=trockenshampoo' },
+      { id: 'deo', name: 'Extra Deodorant', quantity: '1 Stück', priority: 'recommended' as const, notes: 'Praktisch ohne Dusche' },
+    ]
+  },
+  {
+    id: 'sanitaer',
+    name: 'Sanitär',
+    icon: 'home',
+    items: [
+      { id: 'eimer', name: 'Eimer für Wasser', quantity: '2-3 (8-10L)', priority: 'critical' as const, notes: 'Für manuelle WC-Spülung' },
+      { id: 'muellbeutel', name: 'Stabile Müllbeutel', quantity: '1 Rolle', priority: 'critical' as const, notes: 'Für Nottoilette' },
+      { id: 'katzenstreu', name: 'Katzenstreu oder Sägespäne', quantity: '1 Sack', priority: 'optional' as const, notes: 'Falls WC gar nicht geht' },
+    ]
+  },
+  {
+    id: 'kueche',
+    name: 'Küche',
+    icon: 'utensils',
+    items: [
+      { id: 'einweggeschirr', name: 'Einweggeschirr und -becher', quantity: 'Vorrat für 3 Tage', priority: 'recommended' as const, notes: 'Vermeidet Abspülen' },
+      { id: 'konserven', name: 'Essen das kein Wasser braucht', quantity: 'Konserven, Snacks', priority: 'critical' as const, notes: 'Kochen vermeiden' },
+      { id: 'schuesseln', name: 'Kleine Schüsseln', quantity: '2 Stück', priority: 'recommended' as const, notes: 'Zum Abwaschen mit wenig Wasser' },
+    ]
+  },
+];
+
+// Water needs table - German
+const waterNeeds = [
+  { use: 'Trinken', amount: '2L', notes: 'Mindestens lebensnotwendig' },
+  { use: 'Kochen', amount: '0,5-1L', notes: 'Falls du kochst' },
+  { use: 'Hygiene', amount: '2-4L', notes: 'Gesicht, Hände' },
+  { use: 'WC', amount: '3-6L', notes: 'Pro Spülung' },
+];
+
+// FAQs - German context
+const faqs = [
+  {
+    question: 'Wie viel Wasser soll ich lagern?',
+    answer: 'Das BBK empfiehlt mindestens 2 Liter pro Person pro Tag. Eine 4-köpfige Familie braucht 24 Liter für 3 Tage. Ideal sind eher 2,5-3 Liter für mehr Komfort.'
+  },
+  {
+    question: 'Wie lange bleibt gelagertes Wasser gut?',
+    answer: 'Flaschenwasser: 1-2 Jahre ungeöffnet. Leitungswasser in Kanistern: alle 6 Monate wechseln. Riecht oder schmeckt es seltsam? Erst aufbereiten.'
+  },
+  {
+    question: 'Kann ich Badewannenwasser trinken?',
+    answer: 'Nicht direkt. Nutze es zum Reinigen, für die Toilette und zum Waschen. Zum Trinken nur Flaschenwasser oder aufbereitetes Wasser.'
+  },
+  {
+    question: 'Woran erkenne ich ob Wasser sicher ist?',
+    answer: 'Bei Zweifel: mindestens 3 Minuten abkochen oder Entkeimungstabletten nutzen. Trübes Wasser, Verfärbung oder seltsamer Geruch = ohne Behandlung nicht trinken.'
+  },
+  {
+    question: 'Was wenn die Störung länger als 3 Tage dauert?',
+    answer: 'Reduziere den Verbrauch auf das Minimum. Gemeinden richten oft Wasserausgabestellen ein. Scheue dich nicht um Hilfe zu bitten.'
+  },
+];
+---
+
+<BaseLayout
+  title="Wasserausfall: Was tun ohne Trinkwasser? Notfall-Checkliste"
+  description="Vollständiger Ratgeber für Wasserausfall in Deutschland. Wie viel Wasser lagern, Leben ohne Leitungswasser und praktische Checkliste."
+  locale="de"
+  schemaType="HowTo"
+  dateModified="2025-12-15"
+  datePublished="2025-12-15"
+  alternates={{
+    es: '/es/escenarios/prepararse-corte-agua/',
+    nl: '/nl/scenario/wateruitval/',
+  }}
+  schemaData={{
+    step: [
+      { '@type': 'HowToStep', name: 'Lege Trinkwasservorrat an', text: 'Mindestens 2 Liter pro Person pro Tag. Eine 4-köpfige Familie braucht mindestens 24 Liter für 3 Tage.' },
+      { '@type': 'HowToStep', name: 'Kaufe Wasserkanister', text: 'Lebensmittelechte Kanister von 10-20 Litern. Wechsle das Wasser alle 6 Monate. An kühlem, dunklen Ort lagern.' },
+      { '@type': 'HowToStep', name: 'Besorge Wasserentkeimungstabletten', text: 'Für Notfälle wenn du Wasser aus unbekannten Quellen nutzen musst.' },
+      { '@type': 'HowToStep', name: 'Bereite Hygiene ohne Wasser vor', text: 'Feuchttücher, Handgel, Trockenshampoo. 2-3 Packungen Tücher pro Person.' },
+      { '@type': 'HowToStep', name: 'Priorisiere Trinkwasser', text: 'Nutze deinen Trinkwasservorrat niemals für andere Zwecke. Das ist Priorität #1.' },
+      { '@type': 'HowToStep', name: 'Nutze manuelle WC-Spülung', text: 'Gieße 6-8 Liter Wasser direkt in die Toilettenschüssel. Nutze Waschwasser wieder.' },
+    ],
+    totalTime: 'P3D',
+    supply: [
+      { '@type': 'HowToSupply', name: 'Flaschenwasser (2L/Person/Tag × 3 Tage)' },
+      { '@type': 'HowToSupply', name: 'Lebensmittelechter Kanister 10-20L' },
+      { '@type': 'HowToSupply', name: 'Wasserentkeimungstabletten' },
+      { '@type': 'HowToSupply', name: 'Feuchttücher (3-4 Packungen)' },
+      { '@type': 'HowToSupply', name: 'Desinfektions-Handgel' },
+      { '@type': 'HowToSupply', name: 'Eimer für Wasser (8-10L)' },
+    ],
+  }}
+  faqData={faqs}
+>
+  <main class="scenario-page">
+    <!-- Header -->
+    <header class="scenario-header">
+      <nav class="scenario-breadcrumb">
+        <a href="/de/szenarien/" class="breadcrumb-back">
+          <Icon name="ChevronLeft" size={20} />
+        </a>
+        <span class="breadcrumb-current">Wasserausfall</span>
+      </nav>
+
+      <div class="scenario-title-row">
+        <div class="scenario-icon scenario-icon--blue">
+          <Icon name="Droplet" size={28} />
+        </div>
+        <div class="scenario-title-content">
+          <h1 class="scenario-title">Vorbereitung auf Wasserausfall</h1>
+          <div class="scenario-meta">
+            <span class="meta-item">6 min</span>
+            <span class="meta-divider">·</span>
+            <span class="meta-item">Aktualisiert Dez 2025</span>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Hero Image -->
+    <section class="scenario-section">
+      <HeroImage
+        src="/images/shared/water-storage-containers.webp"
+        alt="Wasservorrat in Kanistern für Notfälle"
+        priority={true}
+      />
+    </section>
+
+    <!-- TL;DR -->
+    <section class="scenario-section">
+      <TLDRBlock
+        summary="Ein Erwachsener braucht mindestens 2 Liter pro Tag für Trinken und Basishygiene. Bei Vorankündigung: Badewanne und alle Behälter füllen. Ohne Warnung bist du auf deinen Vorrat angewiesen. Priorisiere immer Trinkwasser vor jedem anderen Gebrauch."
+        keyStat="2L/Tag/Person"
+        keyStatLabel="Mindestens"
+        locale="de"
+      />
+    </section>
+
+    <!-- Government Notice -->
+    <section class="scenario-section">
+      <div class="gov-notice">
+        <div class="gov-notice-icon">
+          <Icon name="Shield" size={20} />
+        </div>
+        <div class="gov-notice-content">
+          <strong>BBK-Empfehlung:</strong> Lege einen Vorrat von mindestens 2 Litern Trinkwasser pro Person und Tag an.
+          Mehr Infos auf <a href="https://www.bbk.bund.de/DE/Warnung-Vorsorge/Vorsorge/Vorrat/vorrat_node.html" target="_blank" rel="noopener">bbk.bund.de</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Water Needs Quick Reference -->
+    <section class="scenario-section">
+      <div class="water-needs-card">
+        <h3 class="water-needs-title">Wie viel Wasser brauchst du?</h3>
+        <div class="water-needs-grid">
+          {waterNeeds.map((need) => (
+            <div class="water-need-item">
+              <span class="water-need-amount">{need.amount}</span>
+              <span class="water-need-use">{need.use}</span>
+              <span class="water-need-notes">{need.notes}</span>
+            </div>
+          ))}
+        </div>
+        <p class="water-needs-total">
+          <strong>Gesamt mindestens:</strong> 8-15L/Person/Tag (im Notfall auf 2-5L reduzierbar)
+        </p>
+      </div>
+    </section>
+
+    <!-- Phase Tabs -->
+    <PhaseTabs
+      client:idle
+      scenarioKey={scenarioKey}
+      locale="de"
+    />
+
+    <!-- Phase: Vor -->
+    <section id="vor" class="phase-section">
+      <div class="phase-header">
+        <span class="phase-number">1</span>
+        <div class="phase-title-group">
+          <h2 class="phase-title">Vor dem Wasserausfall</h2>
+          <p class="phase-subtitle">Vorbereitung und Lagerung</p>
+        </div>
+      </div>
+
+      <div class="phase-steps">
+        {phases.vor.map((step, index) => (
+          <CollapsibleSection
+            title={step.title}
+            summary={step.detail}
+            step={index + 1}
+            variant="card"
+          >
+            <p>{step.detail}</p>
+            {step.tip && (
+              <div class="step-tip">
+                <Icon name="Lightbulb" size={16} />
+                <span>{step.tip}</span>
+              </div>
+            )}
+          </CollapsibleSection>
+        ))}
+      </div>
+    </section>
+
+    <!-- Phase: Während -->
+    <section id="waehrend" class="phase-section">
+      <div class="phase-header">
+        <span class="phase-number phase-number--warning">2</span>
+        <div class="phase-title-group">
+          <h2 class="phase-title">Während des Wasserausfalls</h2>
+          <p class="phase-subtitle">Verwaltung und Rationierung</p>
+        </div>
+      </div>
+
+      <!-- Priority Warning -->
+      <div class="priority-box">
+        <div class="priority-icon">
+          <Icon name="AlertCircle" size={24} />
+        </div>
+        <div class="priority-content">
+          <strong>Prioritätsreihenfolge</strong>
+          <div class="priority-list">
+            <span class="priority-item priority-1">1. Trinken</span>
+            <span class="priority-item priority-2">2. Kochen</span>
+            <span class="priority-item priority-3">3. Hygiene</span>
+            <span class="priority-item priority-4">4. WC</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="phase-steps">
+        {phases.waehrend.map((step, index) => (
+          <CollapsibleSection
+            title={step.title}
+            summary={step.detail}
+            step={index + 1}
+            variant="card"
+          >
+            <p>{step.detail}</p>
+            {step.tip && (
+              <div class="step-tip">
+                <Icon name="Lightbulb" size={16} />
+                <span>{step.tip}</span>
+              </div>
+            )}
+          </CollapsibleSection>
+        ))}
+      </div>
+    </section>
+
+    <!-- Phase: Nach -->
+    <section id="nach" class="phase-section">
+      <div class="phase-header">
+        <span class="phase-number phase-number--success">3</span>
+        <div class="phase-title-group">
+          <h2 class="phase-title">Nach dem Wasserausfall</h2>
+          <p class="phase-subtitle">Wiederherstellung und Auffüllen</p>
+        </div>
+      </div>
+
+      <div class="phase-steps">
+        {phases.nach.map((step, index) => (
+          <CollapsibleSection
+            title={step.title}
+            summary={step.detail}
+            step={index + 1}
+            variant="card"
+          >
+            <p>{step.detail}</p>
+            {step.tip && (
+              <div class="step-tip">
+                <Icon name="Lightbulb" size={16} />
+                <span>{step.tip}</span>
+              </div>
+            )}
+          </CollapsibleSection>
+        ))}
+      </div>
+    </section>
+
+    <!-- Interactive Checklist -->
+    <section class="scenario-section">
+      <h2 class="section-title">
+        <Icon name="CheckSquare" size={24} />
+        Deine Wasserausfall-Checkliste
+      </h2>
+      <p class="section-intro">
+        Hake ab was du schon hast. Dein Fortschritt wird automatisch gespeichert.
+      </p>
+      <InteractiveChecklist
+        client:idle
+        storageKey={`${scenarioKey}_de`}
+        categories={checklistCategories}
+        title="Artikel für Wasserausfall"
+        locale="de"
+      />
+    </section>
+
+    <!-- FAQs -->
+    <section class="scenario-section">
+      <h2 class="section-title">Häufig gestellte Fragen</h2>
+      <div class="faq-list">
+        {faqs.map((faq) => (
+          <details class="faq-item">
+            <summary class="faq-question">
+              <span>{faq.question}</span>
+              <Icon name="ChevronDown" size={20} />
+            </summary>
+            <div class="faq-answer">
+              <p>{faq.answer}</p>
+            </div>
+          </details>
+        ))}
+      </div>
+    </section>
+
+    <!-- Sources -->
+    <section class="scenario-section">
+      <details class="sources-block">
+        <summary class="sources-header">
+          <Icon name="BookOpen" size={18} />
+          <span>Quellen und Referenzen</span>
+          <Icon name="ChevronDown" size={16} />
+        </summary>
+        <div class="sources-content">
+          <ul>
+            <li><a href="https://www.bbk.bund.de/DE/Warnung-Vorsorge/Vorsorge/Vorrat/vorrat_node.html" target="_blank" rel="noopener">BBK - Bevorraten</a></li>
+            <li><a href="https://www.umweltbundesamt.de/themen/wasser/trinkwasser" target="_blank" rel="noopener">Umweltbundesamt - Trinkwasser</a></li>
+            <li><a href="https://www.who.int/water_sanitation_health/dwq/en/" target="_blank" rel="noopener">WHO - Wasserqualität</a></li>
+          </ul>
+        </div>
+      </details>
+    </section>
+
+    <!-- Recommended Products -->
+    <section class="scenario-section">
+      <h2 class="section-title">
+        <Icon name="ShoppingBag" size={20} />
+        Empfohlene Produkte
+      </h2>
+      <p class="section-intro">Unsere Ratgeber zu den wichtigsten Produkten für dieses Szenario:</p>
+      <div class="related-grid">
+        <a href="/de/produkte/wasserspeicher/" class="related-card related-card--green">
+          <Icon name="Droplet" size={24} />
+          <span>Wasserspeicher</span>
+        </a>
+        <a href="/de/produkte/notnahrung/" class="related-card related-card--green">
+          <Icon name="UtensilsCrossed" size={24} />
+          <span>Notnahrung</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- Related Scenarios -->
+    <section class="scenario-section">
+      <h2 class="section-title">Verwandte Szenarien</h2>
+      <div class="related-grid">
+        <a href="/de/szenarien/stromausfall/" class="related-card related-card--amber">
+          <Icon name="Zap" size={24} />
+          <span>Stromausfall</span>
+        </a>
+        <a href="/de/szenarien/hitzewelle/" class="related-card related-card--orange">
+          <Icon name="Sun" size={24} />
+          <span>Hitzewelle</span>
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <!-- Sticky Action Bar -->
+  <StickyActionBar
+    client:idle
+    actionText="Wasser berechnen"
+    actionUrl="/de/tools/wasser-rechner/"
+    dismissKey={`scenario_${scenarioKey}_de`}
+    label="Nächster Schritt:"
+    locale="de"
+  />
+</BaseLayout>
+
+<style>
+  .scenario-page {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 0 16px 120px;
+  }
+
+  .scenario-header {
+    padding: 16px 0 24px;
+  }
+
+  .scenario-breadcrumb {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 16px;
+  }
+
+  .breadcrumb-back {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    background: var(--color-bg-secondary);
+    border-radius: 10px;
+    color: var(--color-text-secondary);
+    transition: all 0.15s ease;
+  }
+
+  .breadcrumb-back:hover {
+    background: var(--color-bg-tertiary);
+    color: var(--color-text-primary);
+  }
+
+  .breadcrumb-current {
+    font-size: 14px;
+    color: var(--color-text-muted);
+  }
+
+  .scenario-title-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+  }
+
+  .scenario-icon {
+    flex-shrink: 0;
+    width: 56px;
+    height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 16px;
+  }
+
+  .scenario-icon--blue {
+    background: rgba(59, 130, 246, 0.15);
+    color: #3b82f6;
+  }
+
+  .scenario-title-content {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .scenario-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--color-text-primary);
+    margin: 0 0 6px;
+    line-height: 1.2;
+  }
+
+  .scenario-meta {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    color: var(--color-text-muted);
+  }
+
+  .meta-divider {
+    opacity: 0.5;
+  }
+
+  /* Government Notice */
+  .gov-notice {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 14px 16px;
+    background: rgba(59, 130, 246, 0.1);
+    border: 1px solid rgba(59, 130, 246, 0.2);
+    border-radius: 12px;
+    margin-bottom: 8px;
+  }
+
+  .gov-notice-icon {
+    flex-shrink: 0;
+    color: #3b82f6;
+  }
+
+  .gov-notice-content {
+    font-size: 14px;
+    color: var(--color-text-secondary);
+    line-height: 1.5;
+  }
+
+  .gov-notice-content strong {
+    color: var(--color-text-primary);
+  }
+
+  .gov-notice-content a {
+    color: #3b82f6;
+    text-decoration: none;
+  }
+
+  .gov-notice-content a:hover {
+    text-decoration: underline;
+  }
+
+  .scenario-section {
+    margin-bottom: 32px;
+  }
+
+  .section-title {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: var(--color-text-primary);
+    margin: 0 0 12px;
+  }
+
+  .section-intro {
+    font-size: 14px;
+    color: var(--color-text-muted);
+    margin: 0 0 16px;
+  }
+
+  /* Water Needs Card */
+  .water-needs-card {
+    background: var(--color-bg-secondary);
+    border: 1px solid var(--color-border);
+    border-radius: 16px;
+    padding: 20px;
+  }
+
+  .water-needs-title {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--color-text-primary);
+    margin: 0 0 16px;
+  }
+
+  .water-needs-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    margin-bottom: 16px;
+  }
+
+  .water-need-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 12px 8px;
+    background: var(--color-bg-tertiary);
+    border-radius: 12px;
+  }
+
+  .water-need-amount {
+    font-size: 18px;
+    font-weight: 700;
+    color: #3b82f6;
+    margin-bottom: 4px;
+  }
+
+  .water-need-use {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--color-text-primary);
+    margin-bottom: 2px;
+  }
+
+  .water-need-notes {
+    font-size: 11px;
+    color: var(--color-text-muted);
+  }
+
+  .water-needs-total {
+    font-size: 13px;
+    color: var(--color-text-secondary);
+    margin: 0;
+    padding-top: 12px;
+    border-top: 1px solid var(--color-border);
+  }
+
+  .phase-section {
+    padding: 24px 0;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .phase-section:last-of-type {
+    border-bottom: none;
+  }
+
+  .phase-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    margin-bottom: 20px;
+  }
+
+  .phase-number {
+    flex-shrink: 0;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--color-accent-subtle);
+    color: var(--color-accent-primary);
+    font-size: 18px;
+    font-weight: 700;
+    border-radius: 12px;
+  }
+
+  .phase-number--warning {
+    background: rgba(59, 130, 246, 0.15);
+    color: #3b82f6;
+  }
+
+  .phase-number--success {
+    background: rgba(34, 197, 94, 0.15);
+    color: #22c55e;
+  }
+
+  .phase-title-group {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .phase-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--color-text-primary);
+    margin: 0 0 4px;
+  }
+
+  .phase-subtitle {
+    font-size: 14px;
+    color: var(--color-text-muted);
+    margin: 0;
+  }
+
+  .phase-steps {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .step-tip {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    margin-top: 12px;
+    padding: 10px 12px;
+    background: var(--color-accent-subtle);
+    border-radius: 8px;
+    font-size: 13px;
+    color: var(--color-accent-primary);
+  }
+
+  .step-tip svg {
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  /* Priority Box */
+  .priority-box {
+    display: flex;
+    gap: 16px;
+    padding: 16px;
+    margin-bottom: 20px;
+    background: rgba(59, 130, 246, 0.1);
+    border: 1px solid rgba(59, 130, 246, 0.3);
+    border-radius: 12px;
+  }
+
+  .priority-icon {
+    flex-shrink: 0;
+    color: #3b82f6;
+  }
+
+  .priority-content {
+    flex: 1;
+  }
+
+  .priority-content strong {
+    display: block;
+    font-size: 14px;
+    color: #3b82f6;
+    margin-bottom: 10px;
+  }
+
+  .priority-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .priority-item {
+    padding: 4px 10px;
+    font-size: 12px;
+    font-weight: 600;
+    border-radius: 6px;
+  }
+
+  .priority-1 {
+    background: rgba(239, 68, 68, 0.2);
+    color: #ef4444;
+  }
+
+  .priority-2 {
+    background: rgba(249, 115, 22, 0.2);
+    color: #f97316;
+  }
+
+  .priority-3 {
+    background: rgba(234, 179, 8, 0.2);
+    color: #eab308;
+  }
+
+  .priority-4 {
+    background: rgba(59, 130, 246, 0.2);
+    color: #3b82f6;
+  }
+
+  /* FAQs */
+  .faq-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .faq-item {
+    background: var(--color-bg-secondary);
+    border: 1px solid var(--color-border);
+    border-radius: 12px;
+    overflow: hidden;
+  }
+
+  .faq-question {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 14px 16px;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--color-text-primary);
+    cursor: pointer;
+    list-style: none;
+  }
+
+  .faq-question::-webkit-details-marker {
+    display: none;
+  }
+
+  .faq-question svg {
+    flex-shrink: 0;
+    color: var(--color-text-muted);
+    transition: transform 0.2s ease;
+  }
+
+  .faq-item[open] .faq-question svg {
+    transform: rotate(180deg);
+  }
+
+  .faq-answer {
+    padding: 0 16px 14px;
+  }
+
+  .faq-answer p {
+    font-size: 14px;
+    color: var(--color-text-secondary);
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  /* Sources */
+  .sources-block {
+    background: var(--color-bg-secondary);
+    border-radius: 12px;
+    overflow: hidden;
+  }
+
+  .sources-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 16px;
+    font-size: 14px;
+    color: var(--color-text-muted);
+    cursor: pointer;
+    list-style: none;
+  }
+
+  .sources-header::-webkit-details-marker {
+    display: none;
+  }
+
+  .sources-header svg:last-child {
+    margin-left: auto;
+    transition: transform 0.2s ease;
+  }
+
+  .sources-block[open] .sources-header svg:last-child {
+    transform: rotate(180deg);
+  }
+
+  .sources-content {
+    padding: 0 16px 14px;
+  }
+
+  .sources-content ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .sources-content li {
+    margin-bottom: 8px;
+  }
+
+  .sources-content a {
+    font-size: 13px;
+    color: var(--color-accent-primary);
+    text-decoration: none;
+  }
+
+  .sources-content a:hover {
+    text-decoration: underline;
+  }
+
+  /* Related Scenarios */
+  .related-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+
+  .related-card {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 16px;
+    border-radius: 12px;
+    text-decoration: none;
+    transition: transform 0.15s ease;
+  }
+
+  .related-card:hover {
+    transform: translateY(-2px);
+  }
+
+  .related-card span {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--color-text-primary);
+  }
+
+  .related-card--amber {
+    background: rgba(245, 158, 11, 0.1);
+    border: 1px solid rgba(245, 158, 11, 0.2);
+    color: #f59e0b;
+  }
+
+  .related-card--orange {
+    background: rgba(249, 115, 22, 0.1);
+    border: 1px solid rgba(249, 115, 22, 0.2);
+    color: #f97316;
+  }
+
+  .related-card--green {
+    background: rgba(34, 197, 94, 0.1);
+    border: 1px solid rgba(34, 197, 94, 0.2);
+    color: #22c55e;
+  }
+
+  @media (max-width: 480px) {
+    .scenario-page {
+      padding: 0 12px 120px;
+    }
+
+    .scenario-title {
+      font-size: 1.25rem;
+    }
+
+    .water-needs-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .related-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

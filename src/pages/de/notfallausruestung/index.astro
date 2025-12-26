@@ -1,0 +1,396 @@
+---
+import ArticleLayout from '../../../layouts/ArticleLayout.astro';
+
+const title = 'Notfallausrüstung: Kompletter Ratgeber 2025';
+const description = 'Alles, was du für eine vollständige Notfallausrüstung wissen musst. Detaillierte Checkliste, empfohlene Mengen und praktische Tipps zum Schutz deiner Familie.';
+
+const essentialItems = [
+  { category: 'Wasser', items: ['2-3 Liter pro Person/Tag', 'Kanister oder Flaschen', 'Wasserentkeimungstabletten'], priority: 'critical' },
+  { category: 'Ernährung', items: ['Haltbare Lebensmittel (3 Tage)', 'Manueller Dosenöffner', 'Einwegbesteck und -geschirr'], priority: 'critical' },
+  { category: 'Beleuchtung', items: ['Taschenlampe (idealerweise Dynamo)', 'Notkerzen', 'Feuerzeug oder Streichhölzer'], priority: 'critical' },
+  { category: 'Kommunikation', items: ['Radio AM/FM (idealerweise Dynamo)', 'Ersatzbatterien', 'Notfallpfeife'], priority: 'critical' },
+  { category: 'Energie', items: ['Geladene Powerbank', 'Solarlader (optional)', 'Batterien für alle Geräte'], priority: 'warning' },
+  { category: 'Erste Hilfe', items: ['Basis-Verbandkasten', 'Persönliche Medikamente', 'Rettungsdecke'], priority: 'warning' },
+  { category: 'Dokumente', items: ['Kopien von Ausweis/Pass', 'Versicherungspolicen', 'Notfallkontakte'], priority: 'warning' },
+  { category: 'Hygiene', items: ['Toilettenpapier', 'Feuchttücher', 'Desinfektionsgel'], priority: 'info' },
+];
+
+const faqs = [
+  {
+    question: 'Wie lange sollte eine Notfallausrüstung reichen?',
+    answer: 'Der internationale Standard ist 72 Stunden (3 Tage). Dieser Zeitraum deckt die meisten städtischen Notfälle wie Stromausfälle, Wasserunterbrechungen oder vorübergehende Evakuierungen ab. Für ländliche Gebiete oder Zonen mit höherem Risiko wird empfohlen, auf 7-10 Tage zu erweitern.'
+  },
+  {
+    question: 'Wie viel Wasser sollte ich pro Person lagern?',
+    answer: 'Das BBK empfiehlt mindestens 2 Liter Trinkwasser pro Person und Tag. Bei warmem Wetter oder für Personen mit besonderen Bedürfnissen erhöhe auf 3-4 Liter. Für 72 Stunden brauchst du mindestens 6-9 Liter pro Person.'
+  },
+  {
+    question: 'Wo sollte ich die Notfallausrüstung aufbewahren?',
+    answer: 'An einem zugänglichen, kühlen und trockenen Ort. Vermeide Keller, die überflutet werden können, oder Dachböden mit extremen Temperaturen. Idealerweise in der Nähe eines Ausgangs. Wenn du ein Auto hast, erwäge eine zweite Ausrüstung im Kofferraum.'
+  },
+  {
+    question: 'Wie oft sollte ich die Ausrüstung überprüfen?',
+    answer: 'Überprüfe deine Ausrüstung alle 6 Monate. Kontrolliere die Verfallsdaten von Wasser und Lebensmitteln, den Zustand der Batterien und ob Medikamente abgelaufen sind. Ein guter Zeitpunkt ist die Zeitumstellung (März und Oktober).'
+  },
+  {
+    question: 'Brauche ich für jedes Szenario eine andere Ausrüstung?',
+    answer: 'Eine gut vorbereitete Basisausrüstung deckt die meisten Situationen ab. Du kannst je nach Region spezifische Elemente hinzufügen: mehr Wasser für Hitzewellen, warme Kleidung für kalte Winter oder zusätzliche Dokumentation, wenn du in einem Evakuierungsgebiet lebst.'
+  },
+  {
+    question: 'Was kostet eine Basisausrüstung?',
+    answer: 'Eine Basisausrüstung für eine Person kann für 50-100€ zusammengestellt werden. Darin enthalten: Wasser, haltbare Lebensmittel, Taschenlampe, Radio, Erste-Hilfe-Set und Powerbank. Es ist nicht nötig, alles auf einmal zu kaufen: Du kannst jeden Monat Artikel hinzufügen.'
+  },
+];
+
+const scenarios = [
+  { name: 'Stromausfall', href: '/de/szenarien/stromausfall/', description: 'Stromausfälle von Stunden bis Tagen' },
+  { name: 'Hitzewelle', href: '/de/szenarien/hitzewelle/', description: 'Extreme Temperaturen ohne Klimaanlage' },
+  { name: 'Wasserausfall', href: '/de/szenarien/wasserausfall/', description: 'Ohne Leitungswasser' },
+  { name: 'Evakuierung', href: '/de/szenarien/evakuierung/', description: 'Mit dem Nötigsten das Haus verlassen' },
+];
+---
+
+<ArticleLayout
+  faqData={faqs}
+  title={title}
+  description={description}
+  updatedDate="2025-12-15"
+  breadcrumbs={[{ label: 'Notfallausrüstung', href: '/de/notfallausruestung/' }]}
+  locale="de"
+>
+  <!-- Table of Contents -->
+  <nav slot="toc" class="card p-6 mb-12">
+    <h2 class="text-lg font-semibold mb-4">In diesem Ratgeber</h2>
+    <ul class="space-y-2 text-sm">
+      <li><a href="#was-ist" class="text-[--color-text-secondary] hover:text-[--color-accent-primary]">Was ist eine Notfallausrüstung?</a></li>
+      <li><a href="#wichtige-artikel" class="text-[--color-text-secondary] hover:text-[--color-accent-primary]">Wichtige Artikel</a></li>
+      <li><a href="#vorbereitung" class="text-[--color-text-secondary] hover:text-[--color-accent-primary]">Schritt für Schritt vorbereiten</a></li>
+      <li><a href="#szenarien" class="text-[--color-text-secondary] hover:text-[--color-accent-primary]">Spezifische Szenarien</a></li>
+      <li><a href="#wartung" class="text-[--color-text-secondary] hover:text-[--color-accent-primary]">Wartung und Rotation</a></li>
+      <li><a href="#faq" class="text-[--color-text-secondary] hover:text-[--color-accent-primary]">Häufige Fragen</a></li>
+    </ul>
+  </nav>
+
+  <!-- Introduction -->
+  <section id="was-ist" class="mb-16">
+    <h2>Was ist eine Notfallausrüstung?</h2>
+
+    <p>
+      Eine Notfallausrüstung ist eine Sammlung grundlegender Vorräte, die es dir ermöglicht,
+      deine Familie während einer Notfallsituation sicher und mit dem Wesentlichen versorgt zu halten.
+      Ob längerer Stromausfall, Hitzewelle, Wasserunterbrechung oder Evakuierung —
+      eine vorbereitete Ausrüstung macht den Unterschied zwischen Chaos und Ruhe.
+    </p>
+
+    <p>
+      Die allgemeine Regel ist, sich auf <strong>72 Stunden Autonomie</strong> vorzubereiten.
+      Dieser Zeitraum deckt die meisten städtischen Notfälle ab und gibt den Rettungsdiensten
+      genug Zeit zu handeln oder dir zu ermöglichen, einen sicheren Ort zu erreichen.
+    </p>
+
+    <div class="card p-6 my-8">
+      <div class="flex items-start gap-4">
+        <div class="w-12 h-12 flex-shrink-0 flex items-center justify-center bg-[--color-accent-subtle] rounded">
+          <svg class="w-6 h-6 text-[--color-accent-primary]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
+        </div>
+        <div>
+          <h3 class="font-semibold mb-2 text-base">Warum 72 Stunden?</h3>
+          <p class="text-sm text-[--color-text-secondary] m-0">
+            Dies ist der vom Bundesamt für Bevölkerungsschutz und Katastrophenhilfe (BBK) und
+            internationalen Organisationen empfohlene Standard. Er deckt die meisten städtischen
+            Versorgungsunterbrechungen ab und ermöglicht den Rettungsdiensten, die Situation zu stabilisieren.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Essential Items -->
+  <section id="wichtige-artikel" class="mb-16">
+    <h2>Wichtige Artikel</h2>
+
+    <p>
+      Dies sind die grundlegenden Elemente, die deine Ausrüstung enthalten sollte.
+      Wir haben sie nach Kategorie und Prioritätsstufe organisiert, damit du mit dem
+      Wichtigsten beginnen kannst.
+    </p>
+
+    <div class="grid md:grid-cols-2 gap-4 my-8 not-prose">
+      {essentialItems.map((category) => (
+        <div class="card p-5">
+          <div class="flex items-center gap-3 mb-3">
+            <span class:list={[
+              'px-2 py-0.5 text-xs font-medium rounded',
+              category.priority === 'critical' && 'badge-critical',
+              category.priority === 'warning' && 'badge-warning',
+              category.priority === 'info' && 'badge-info',
+            ]}>
+              {category.priority === 'critical' ? 'Kritisch' : category.priority === 'warning' ? 'Wichtig' : 'Empfohlen'}
+            </span>
+            <h3 class="font-semibold text-[--color-text-primary] text-base">{category.category}</h3>
+          </div>
+          <ul class="space-y-1.5">
+            {category.items.map((item) => (
+              <li class="flex items-center gap-2 text-sm text-[--color-text-secondary]">
+                <svg class="w-4 h-4 text-[--color-accent-primary] flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                </svg>
+                {item}
+              </li>
+            ))}
+          </ul>
+        </div>
+      ))}
+    </div>
+
+    <div class="card p-6 border-[--color-accent-primary]/30 my-8">
+      <p class="text-sm text-[--color-text-secondary] m-0">
+        <strong class="text-[--color-accent-primary]">Personalisiere deine Ausrüstung:</strong> Nutze unseren
+        <a href="/de/tools/notfallpaket-zusammenstellen/" class="text-[--color-accent-primary] hover:underline">Notfallpaket-Konfigurator</a>,
+        um eine Liste zu erhalten, die an deine Familie, Haustiere und spezifische Situation angepasst ist.
+      </p>
+    </div>
+  </section>
+
+  <!-- How to Prepare -->
+  <section id="vorbereitung" class="mb-16">
+    <h2>Schritt für Schritt vorbereiten</h2>
+
+    <p>
+      Du musst nicht alles auf einmal kaufen. Folge diesen Schritten, um deine Ausrüstung
+      schrittweise und ohne Stress aufzubauen.
+    </p>
+
+    <div class="space-y-6 my-8 not-prose">
+      <div class="flex gap-4">
+        <div class="w-10 h-10 flex-shrink-0 flex items-center justify-center bg-[--color-accent-primary] text-[--color-bg-primary] font-bold rounded">
+          1
+        </div>
+        <div>
+          <h3 class="font-semibold text-[--color-text-primary] mb-2 text-base">Bewerte deine Situation</h3>
+          <p class="text-[--color-text-secondary] text-sm">
+            Wie viele Personen leben in deinem Haushalt? Hast du Haustiere? Hat jemand
+            besondere medizinische Bedürfnisse? Wohnst du in einer Wohnung oder einem Haus?
+            Diese Antworten bestimmen Größe und Inhalt deiner Ausrüstung.
+          </p>
+        </div>
+      </div>
+
+      <div class="flex gap-4">
+        <div class="w-10 h-10 flex-shrink-0 flex items-center justify-center bg-[--color-accent-primary] text-[--color-bg-primary] font-bold rounded">
+          2
+        </div>
+        <div>
+          <h3 class="font-semibold text-[--color-text-primary] mb-2 text-base">Beginne mit dem Kritischen</h3>
+          <p class="text-[--color-text-secondary] text-sm">
+            Wasser, haltbare Lebensmittel, Taschenlampe und Erste-Hilfe-Set. Mit diesen vier
+            Elementen deckst du die grundlegendsten Bedürfnisse ab. Ungefähre Kosten: 30-50€.
+          </p>
+        </div>
+      </div>
+
+      <div class="flex gap-4">
+        <div class="w-10 h-10 flex-shrink-0 flex items-center justify-center bg-[--color-accent-primary] text-[--color-bg-primary] font-bold rounded">
+          3
+        </div>
+        <div>
+          <h3 class="font-semibold text-[--color-text-primary] mb-2 text-base">Füge Kommunikation und Energie hinzu</h3>
+          <p class="text-[--color-text-secondary] text-sm">
+            Notfallradio, Powerbank und Batterien. Informiert zu bleiben und dein Handy
+            funktionsfähig zu halten ist in jeder Notfallsituation fundamental.
+          </p>
+        </div>
+      </div>
+
+      <div class="flex gap-4">
+        <div class="w-10 h-10 flex-shrink-0 flex items-center justify-center bg-[--color-accent-primary] text-[--color-bg-primary] font-bold rounded">
+          4
+        </div>
+        <div>
+          <h3 class="font-semibold text-[--color-text-primary] mb-2 text-base">Vervollständige mit Dokumenten und Hygiene</h3>
+          <p class="text-[--color-text-secondary] text-sm">
+            Kopien wichtiger Dokumente in einer wasserdichten Tasche, grundlegende
+            Hygieneartikel und Bargeld (Geldautomaten funktionieren möglicherweise nicht).
+          </p>
+        </div>
+      </div>
+
+      <div class="flex gap-4">
+        <div class="w-10 h-10 flex-shrink-0 flex items-center justify-center bg-[--color-accent-primary] text-[--color-bg-primary] font-bold rounded">
+          5
+        </div>
+        <div>
+          <h3 class="font-semibold text-[--color-text-primary] mb-2 text-base">Personalisiere nach Bedürfnissen</h3>
+          <p class="text-[--color-text-secondary] text-sm">
+            Füge Artikel für Babys, Haustiere, ältere Menschen oder Personen mit
+            medizinischen Bedingungen hinzu. Berücksichtige das Klima deiner Region
+            und die wahrscheinlichsten Szenarien.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Scenarios -->
+  <section id="szenarien" class="mb-16">
+    <h2>Spezifische Szenarien</h2>
+
+    <p>
+      Obwohl eine gut vorbereitete Basisausrüstung die meisten Situationen abdeckt,
+      hat jedes Szenario seine Besonderheiten. Konsultiere unsere spezifischen
+      Ratgeber, um deine Vorbereitung anzupassen.
+    </p>
+
+    <div class="grid sm:grid-cols-2 gap-4 my-8 not-prose">
+      {scenarios.map((scenario) => (
+        <a href={scenario.href} class="card p-5 group hover:-translate-y-1 transition-all duration-200">
+          <h3 class="font-semibold text-[--color-text-primary] group-hover:text-[--color-accent-primary] transition-colors mb-1 text-base">
+            {scenario.name}
+          </h3>
+          <p class="text-sm text-[--color-text-secondary] m-0">{scenario.description}</p>
+        </a>
+      ))}
+    </div>
+  </section>
+
+  <!-- Maintenance -->
+  <section id="wartung" class="mb-16">
+    <h2>Wartung und Rotation</h2>
+
+    <p>
+      Eine Notfallausrüstung ist nichts, was du einmal vorbereitest und dann vergisst.
+      Sie erfordert regelmäßige Überprüfungen, um sicherzustellen, dass alles in gutem
+      Zustand ist, wenn du es brauchst.
+    </p>
+
+    <div class="overflow-x-auto my-8">
+      <table>
+        <thead>
+          <tr>
+            <th>Element</th>
+            <th>Überprüfungshäufigkeit</th>
+            <th>Was zu kontrollieren ist</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Abgefülltes Wasser</td>
+            <td>Alle 6 Monate</td>
+            <td>Verfallsdatum, Zustand der Verpackung</td>
+          </tr>
+          <tr>
+            <td>Haltbare Lebensmittel</td>
+            <td>Alle 6 Monate</td>
+            <td>Verfallsdaten, Zustand der Dosen</td>
+          </tr>
+          <tr>
+            <td>Batterien</td>
+            <td>Alle 6 Monate</td>
+            <td>Ladung, mögliche Lecks</td>
+          </tr>
+          <tr>
+            <td>Medikamente</td>
+            <td>Alle 3 Monate</td>
+            <td>Verfallsdaten</td>
+          </tr>
+          <tr>
+            <td>Powerbank</td>
+            <td>Alle 3 Monate</td>
+            <td>Ladezustand (über 50% halten)</td>
+          </tr>
+          <tr>
+            <td>Dokumente</td>
+            <td>Jährlich</td>
+            <td>Bei Änderungen aktualisieren</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="card p-6 my-8">
+      <div class="flex items-start gap-4">
+        <div class="w-12 h-12 flex-shrink-0 flex items-center justify-center bg-[--color-status-success-bg] rounded">
+          <svg class="w-6 h-6 text-[--color-status-success]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
+        </div>
+        <div>
+          <h3 class="font-semibold mb-2 text-base">Tipp: Nutze die Zeitumstellung</h3>
+          <p class="text-sm text-[--color-text-secondary] m-0">
+            Überprüfe deine Ausrüstung bei jeder Zeitumstellung (März und Oktober).
+            Das ist leicht zu merken und entspricht der empfohlenen Häufigkeit von 6 Monaten.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq" class="mb-16">
+    <h2>Häufige Fragen</h2>
+
+    <div class="space-y-4 my-8 not-prose">
+      {faqs.map((faq, index) => (
+        <details class="card group" id={`faq-${index}`}>
+          <summary class="p-5 cursor-pointer list-none flex items-center justify-between gap-4">
+            <h3 class="font-semibold text-[--color-text-primary] text-base m-0">{faq.question}</h3>
+            <svg class="w-5 h-5 text-[--color-text-muted] group-open:rotate-180 transition-transform flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+            </svg>
+          </summary>
+          <div class="px-5 pb-5 pt-0 text-[--color-text-secondary] border-t border-[--color-border]">
+            <p class="mt-4 mb-0">{faq.answer}</p>
+          </div>
+        </details>
+      ))}
+    </div>
+  </section>
+
+  <!-- Sources -->
+  <aside slot="sources" class="mt-16 pt-8 border-t border-[--color-border]">
+    <h3 class="text-lg font-semibold mb-4">Quellen und Methodik</h3>
+    <p class="text-sm text-[--color-text-secondary] mb-4">
+      Dieser Ratgeber basiert auf offiziellen Empfehlungen von:
+    </p>
+    <ul class="text-sm text-[--color-text-secondary] space-y-2">
+      <li>
+        <a href="https://www.bbk.bund.de" target="_blank" rel="noopener" class="text-[--color-accent-primary] hover:underline">
+          Bundesamt für Bevölkerungsschutz und Katastrophenhilfe (BBK)
+        </a> — Ratgeber für Notfallvorsorge
+      </li>
+      <li>
+        <a href="https://www.drk.de" target="_blank" rel="noopener" class="text-[--color-accent-primary] hover:underline">
+          Deutsches Rotes Kreuz
+        </a> — Empfehlungen zur Ersten Hilfe
+      </li>
+      <li>
+        <a href="https://www.thw.de" target="_blank" rel="noopener" class="text-[--color-accent-primary] hover:underline">
+          Technisches Hilfswerk (THW)
+        </a> — Katastrophenschutz-Standards
+      </li>
+    </ul>
+    <p class="text-xs text-[--color-text-muted] mt-4">
+      Letzte Aktualisierung: Dezember 2025 · Nächste Überprüfung: März 2026
+    </p>
+  </aside>
+
+  <!-- CTA -->
+  <div slot="cta" class="mt-12 p-8 card border-[--color-accent-primary]/30 text-center">
+    <h3 class="text-xl font-semibold mb-3">Bereit, deine Ausrüstung vorzubereiten?</h3>
+    <p class="text-[--color-text-secondary] mb-6 max-w-lg mx-auto">
+      Nutze unseren Konfigurator, um eine personalisierte Checkliste
+      nach deiner Familie, Haustieren und Situation zu erstellen.
+    </p>
+    <a
+      href="/de/tools/notfallpaket-zusammenstellen/"
+      class="inline-flex items-center gap-2 px-6 py-3 bg-[--color-accent-primary] text-[--color-bg-primary] font-semibold rounded hover:bg-[--color-accent-hover] transition-colors"
+    >
+      Mein personalisiertes Paket erstellen
+      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+      </svg>
+    </a>
+  </div>
+</ArticleLayout>

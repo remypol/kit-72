@@ -1,0 +1,637 @@
+{
+  "meta": {
+    "locale": "es",
+    "currency": "EUR",
+    "lastUpdated": "2025-12-15",
+    "source": "Kit-72 original Spanish content",
+    "affiliateProgram": "Amazon Associates ES"
+  },
+  "scenarios": {
+    "general": {
+      "id": "general",
+      "label": "Kit General",
+      "icon": "Backpack",
+      "description": "Preparacion basica 72h",
+      "color": "from-[--color-accent-primary]/20 to-[--color-accent-secondary]/10",
+      "time": "10 min"
+    },
+    "apagon": {
+      "id": "apagon",
+      "label": "Apagon",
+      "icon": "Zap",
+      "description": "Corte de electricidad",
+      "color": "from-purple-500/20 to-purple-600/10",
+      "time": "8 min"
+    },
+    "calor": {
+      "id": "calor",
+      "label": "Ola de Calor",
+      "icon": "Sun",
+      "description": "Temperaturas extremas",
+      "color": "from-orange-500/20 to-orange-600/10",
+      "time": "6 min"
+    },
+    "agua": {
+      "id": "agua",
+      "label": "Corte de Agua",
+      "icon": "Droplet",
+      "description": "Sin suministro de agua",
+      "color": "from-blue-500/20 to-blue-600/10",
+      "time": "5 min"
+    },
+    "evacuacion": {
+      "id": "evacuacion",
+      "label": "Evacuacion",
+      "icon": "LogOut",
+      "description": "Salida de emergencia",
+      "color": "from-rose-500/20 to-rose-600/10",
+      "time": "12 min"
+    }
+  },
+  "quickPresets": [
+    {
+      "id": "solo",
+      "label": "Vivo solo",
+      "description": "Kit individual basico",
+      "scenario": "general",
+      "hasBabies": false,
+      "hasPets": false,
+      "icon": "Backpack",
+      "color": "from-emerald-500/20 to-emerald-600/10"
+    },
+    {
+      "id": "familia",
+      "label": "Familia con ninos",
+      "description": "Kit familiar completo",
+      "scenario": "general",
+      "hasBabies": true,
+      "hasPets": false,
+      "icon": "Users",
+      "color": "from-blue-500/20 to-blue-600/10"
+    },
+    {
+      "id": "mascotas",
+      "label": "Con mascotas",
+      "description": "Kit incluyendo perro/gato",
+      "scenario": "general",
+      "hasBabies": false,
+      "hasPets": true,
+      "icon": "PawPrint",
+      "color": "from-amber-500/20 to-amber-600/10"
+    },
+    {
+      "id": "evacuacion",
+      "label": "Mochila de huida",
+      "description": "15 min para salir",
+      "scenario": "evacuacion",
+      "hasBabies": false,
+      "hasPets": false,
+      "icon": "LogOut",
+      "color": "from-rose-500/20 to-rose-600/10"
+    }
+  ],
+  "categories": [
+    "Agua",
+    "Alimentacion",
+    "Iluminacion",
+    "Energia",
+    "Botiquin",
+    "Higiene",
+    "Documentacion",
+    "Herramientas",
+    "Proteccion",
+    "Refrigeracion",
+    "Bebes",
+    "Mascotas"
+  ],
+  "items": [
+    {
+      "id": "agua-1",
+      "name": "Agua embotellada",
+      "category": "Agua",
+      "quantity": "3L x personas x dias",
+      "priority": "critical",
+      "scenarios": ["general", "apagon", "calor", "agua", "evacuacion"],
+      "affiliateUrl": "https://www.amazon.es/s?k=garrafa+agua+5+litros",
+      "affiliateSource": "amazon"
+    },
+    {
+      "id": "agua-2",
+      "name": "Pastillas potabilizadoras",
+      "category": "Agua",
+      "quantity": "1 paquete",
+      "priority": "recommended",
+      "scenarios": ["general", "agua", "evacuacion"],
+      "affiliateUrl": "https://www.amazon.es/s?k=pastillas+potabilizadoras+agua",
+      "affiliateSource": "amazon"
+    },
+    {
+      "id": "agua-3",
+      "name": "Filtro de agua portatil",
+      "category": "Agua",
+      "quantity": "1 unidad",
+      "priority": "optional",
+      "scenarios": ["agua", "evacuacion"],
+      "affiliateUrl": "https://www.amazon.es/s?k=lifestraw+filtro+agua",
+      "affiliateSource": "amazon"
+    },
+    {
+      "id": "comida-1",
+      "name": "Barritas energeticas",
+      "category": "Alimentacion",
+      "quantity": "6-9 por persona",
+      "priority": "critical",
+      "scenarios": ["general", "apagon", "evacuacion"],
+      "affiliateUrl": "https://www.amazon.es/s?k=barritas+energeticas+emergencia",
+      "affiliateSource": "amazon"
+    },
+    {
+      "id": "comida-2",
+      "name": "Frutos secos",
+      "category": "Alimentacion",
+      "quantity": "200g por persona",
+      "priority": "critical",
+      "scenarios": ["general", "apagon", "evacuacion"],
+      "affiliateUrl": "https://www.amazon.es/s?k=frutos+secos+mix",
+      "affiliateSource": "amazon"
+    },
+    {
+      "id": "comida-3",
+      "name": "Conservas (latas)",
+      "category": "Alimentacion",
+      "quantity": "3-6 por persona",
+      "priority": "recommended",
+      "scenarios": ["general", "apagon", "agua"]
+    },
+    {
+      "id": "comida-4",
+      "name": "Abrelatas manual",
+      "category": "Alimentacion",
+      "quantity": "1 unidad",
+      "priority": "critical",
+      "scenarios": ["general", "apagon"],
+      "affiliateUrl": "https://www.amazon.es/s?k=abrelatas+manual",
+      "affiliateSource": "amazon"
+    },
+    {
+      "id": "comida-5",
+      "name": "Sales de rehidratacion oral",
+      "category": "Alimentacion",
+      "quantity": "10+ sobres",
+      "priority": "critical",
+      "scenarios": ["calor"],
+      "affiliateUrl": "https://www.amazon.es/s?k=sales+rehidratacion+oral",
+      "affiliateSource": "amazon"
+    },
+    {
+      "id": "comida-6",
+      "name": "Bebidas isotonicas",
+      "category": "Alimentacion",
+      "quantity": "6-12 unidades",
+      "priority": "recommended",
+      "scenarios": ["calor"]
+    },
+    {
+      "id": "luz-1",
+      "name": "Linterna LED",
+      "category": "Iluminacion",
+      "quantity": "1-2 unidades",
+      "priority": "critical",
+      "scenarios": ["general", "apagon", "evacuacion"],
+      "affiliateUrl": "https://www.amazon.es/s?k=linterna+led+potente+recargable",
+      "affiliateSource": "amazon"
+    },
+    {
+      "id": "luz-2",
+      "name": "Pilas de repuesto",
+      "category": "Iluminacion",
+      "quantity": "2-3 sets",
+      "priority": "critical",
+      "scenarios": ["general", "apagon"],
+      "affiliateUrl": "https://www.amazon.es/s?k=pilas+aa+aaa+pack",
+      "affiliateSource": "amazon"
+    },
+    {
+      "id": "luz-3",
+      "name": "Velas y mechero",
+      "category": "Iluminacion",
+      "quantity": "10-20 velas",
+      "priority": "recommended",
+      "scenarios": ["apagon"],
+      "affiliateUrl": "https://www.amazon.es/s?k=velas+emergencia+larga+duracion",
+      "affiliateSource": "amazon"
+    },
+    {
+      "id": "luz-4",
+      "name": "Linterna frontal",
+      "category": "Iluminacion",
+      "quantity": "1 por persona",
+      "priority": "recommended",
+      "scenarios": ["apagon", "evacuacion"],
+      "affiliateUrl": "https://www.amazon.es/s?k=linterna+frontal+led+recargable",
+      "affiliateSource": "amazon"
+    },
+    {
+      "id": "energia-1",
+      "name": "Powerbank (10.000mAh+)",
+      "category": "Energia",
+      "quantity": "1 por persona",
+      "priority": "critical",
+      "scenarios": ["general", "apagon", "evacuacion"],
+      "affiliateUrl": "https://www.amazon.es/s?k=anker+powercore+20000",
+      "affiliateSource": "amazon"
+    },
+    {
+      "id": "energia-2",
+      "name": "Radio con pilas/dinamo",
+      "category": "Energia",
+      "quantity": "1 unidad",
+      "priority": "recommended",
+      "scenarios": ["general", "apagon", "evacuacion"],
+      "affiliateUrl": "https://www.amazon.es/s?k=radio+emergencia+dinamo+solar",
+      "affiliateSource": "amazon"
+    },
+    {
+      "id": "energia-3",
+      "name": "Cargador de coche",
+      "category": "Energia",
+      "quantity": "1 unidad",
+      "priority": "recommended",
+      "scenarios": ["apagon", "evacuacion"],
+      "affiliateUrl": "https://www.amazon.es/s?k=cargador+coche+usb+rapido",
+      "affiliateSource": "amazon"
+    },
+    {
+      "id": "energia-4",
+      "name": "Estacion energia portatil",
+      "category": "Energia",
+      "quantity": "300-500Wh",
+      "priority": "optional",
+      "scenarios": ["apagon"],
+      "notes": "Para apagones largos",
+      "affiliateUrl": "https://www.amazon.es/s?k=estacion+energia+portatil+500wh",
+      "affiliateSource": "amazon"
+    },
+    {
+      "id": "botiquin-1",
+      "name": "Tiritas variadas",
+      "category": "Botiquin",
+      "quantity": "20+ unidades",
+      "priority": "critical",
+      "scenarios": ["general", "evacuacion"],
+      "affiliateUrl": "https://www.amazon.es/s?k=tiritas+surtidas",
+      "affiliateSource": "amazon"
+    },
+    {
+      "id": "botiquin-2",
+      "name": "Gasas esteriles",
+      "category": "Botiquin",
+      "quantity": "1 paquete",
+      "priority": "critical",
+      "scenarios": ["general", "evacuacion"],
+      "affiliateUrl": "https://www.amazon.es/s?k=gasas+esteriles",
+      "affiliateSource": "amazon"
+    },
+    {
+      "id": "botiquin-3",
+      "name": "Antiseptico",
+      "category": "Botiquin",
+      "quantity": "1 bote",
+      "priority": "critical",
+      "scenarios": ["general", "evacuacion"],
+      "affiliateUrl": "https://www.amazon.es/s?k=betadine+clorhexidina",
+      "affiliateSource": "amazon"
+    },
+    {
+      "id": "botiquin-4",
+      "name": "Analgesicos",
+      "category": "Botiquin",
+      "quantity": "1 caja",
+      "priority": "recommended",
+      "scenarios": ["general", "evacuacion"]
+    },
+    {
+      "id": "botiquin-5",
+      "name": "Medicacion personal",
+      "category": "Botiquin",
+      "quantity": "7+ dias",
+      "priority": "critical",
+      "scenarios": ["general", "apagon", "calor", "agua", "evacuacion"]
+    },
+    {
+      "id": "higiene-1",
+      "name": "Toallitas humedas",
+      "category": "Higiene",
+      "quantity": "2-3 paquetes",
+      "priority": "critical",
+      "scenarios": ["general", "agua", "evacuacion"],
+      "affiliateUrl": "https://www.amazon.es/s?k=toallitas+humedas+adulto",
+      "affiliateSource": "amazon"
+    },
+    {
+      "id": "higiene-2",
+      "name": "Gel desinfectante",
+      "category": "Higiene",
+      "quantity": "2 botes",
+      "priority": "critical",
+      "scenarios": ["general", "agua", "evacuacion"],
+      "affiliateUrl": "https://www.amazon.es/s?k=gel+hidroalcoholico",
+      "affiliateSource": "amazon"
+    },
+    {
+      "id": "higiene-3",
+      "name": "Papel higienico",
+      "category": "Higiene",
+      "quantity": "2-4 rollos",
+      "priority": "critical",
+      "scenarios": ["general", "agua"]
+    },
+    {
+      "id": "higiene-4",
+      "name": "Bolsas de basura",
+      "category": "Higiene",
+      "quantity": "10 unidades",
+      "priority": "recommended",
+      "scenarios": ["general", "agua"],
+      "affiliateUrl": "https://www.amazon.es/s?k=bolsas+basura+resistentes",
+      "affiliateSource": "amazon"
+    },
+    {
+      "id": "higiene-5",
+      "name": "Productos menstruales",
+      "category": "Higiene",
+      "quantity": "Segun necesidad",
+      "priority": "critical",
+      "scenarios": ["general", "evacuacion"]
+    },
+    {
+      "id": "docs-1",
+      "name": "Copias DNI/Pasaporte",
+      "category": "Documentacion",
+      "quantity": "Todos los miembros",
+      "priority": "critical",
+      "scenarios": ["general", "evacuacion"]
+    },
+    {
+      "id": "docs-2",
+      "name": "Tarjeta sanitaria",
+      "category": "Documentacion",
+      "quantity": "Copias",
+      "priority": "critical",
+      "scenarios": ["general", "evacuacion"]
+    },
+    {
+      "id": "docs-3",
+      "name": "Lista contactos",
+      "category": "Documentacion",
+      "quantity": "Impresa",
+      "priority": "critical",
+      "scenarios": ["general", "apagon", "evacuacion"]
+    },
+    {
+      "id": "docs-4",
+      "name": "Efectivo",
+      "category": "Documentacion",
+      "quantity": "100-200 EUR",
+      "priority": "critical",
+      "scenarios": ["general", "apagon", "evacuacion"]
+    },
+    {
+      "id": "herr-1",
+      "name": "Navaja multiusos",
+      "category": "Herramientas",
+      "quantity": "1 unidad",
+      "priority": "critical",
+      "scenarios": ["general", "evacuacion"],
+      "affiliateUrl": "https://www.amazon.es/s?k=victorinox+navaja+multiusos",
+      "affiliateSource": "amazon"
+    },
+    {
+      "id": "herr-2",
+      "name": "Silbato",
+      "category": "Herramientas",
+      "quantity": "1 por persona",
+      "priority": "recommended",
+      "scenarios": ["general", "evacuacion"],
+      "affiliateUrl": "https://www.amazon.es/s?k=silbato+emergencia",
+      "affiliateSource": "amazon"
+    },
+    {
+      "id": "herr-3",
+      "name": "Cinta americana",
+      "category": "Herramientas",
+      "quantity": "1 rollo",
+      "priority": "recommended",
+      "scenarios": ["general"],
+      "affiliateUrl": "https://www.amazon.es/s?k=cinta+americana+resistente",
+      "affiliateSource": "amazon"
+    },
+    {
+      "id": "prot-1",
+      "name": "Manta termica",
+      "category": "Proteccion",
+      "quantity": "1 por persona",
+      "priority": "critical",
+      "scenarios": ["general", "apagon", "evacuacion"],
+      "affiliateUrl": "https://www.amazon.es/s?k=manta+termica+emergencia",
+      "affiliateSource": "amazon"
+    },
+    {
+      "id": "prot-2",
+      "name": "Chubasquero",
+      "category": "Proteccion",
+      "quantity": "1 por persona",
+      "priority": "recommended",
+      "scenarios": ["evacuacion"],
+      "affiliateUrl": "https://www.amazon.es/s?k=chubasquero+emergencia+poncho",
+      "affiliateSource": "amazon"
+    },
+    {
+      "id": "prot-3",
+      "name": "Mascarillas",
+      "category": "Proteccion",
+      "quantity": "5-10 unidades",
+      "priority": "recommended",
+      "scenarios": ["general", "evacuacion"],
+      "affiliateUrl": "https://www.amazon.es/s?k=mascarillas+ffp2",
+      "affiliateSource": "amazon"
+    },
+    {
+      "id": "calor-1",
+      "name": "Ventilador de pilas",
+      "category": "Refrigeracion",
+      "quantity": "1-2 unidades",
+      "priority": "recommended",
+      "scenarios": ["calor"],
+      "affiliateUrl": "https://www.amazon.es/s?k=ventilador+portatil+pilas",
+      "affiliateSource": "amazon"
+    },
+    {
+      "id": "calor-2",
+      "name": "Toallas de microfibra",
+      "category": "Refrigeracion",
+      "quantity": "2 por persona",
+      "priority": "critical",
+      "scenarios": ["calor"],
+      "affiliateUrl": "https://www.amazon.es/s?k=toalla+microfibra+deportes",
+      "affiliateSource": "amazon"
+    },
+    {
+      "id": "calor-3",
+      "name": "Pulverizador de agua",
+      "category": "Refrigeracion",
+      "quantity": "1-2 unidades",
+      "priority": "recommended",
+      "scenarios": ["calor"],
+      "affiliateUrl": "https://www.amazon.es/s?k=pulverizador+agua+spray",
+      "affiliateSource": "amazon"
+    },
+    {
+      "id": "calor-4",
+      "name": "Acumuladores de frio",
+      "category": "Refrigeracion",
+      "quantity": "4-6 unidades",
+      "priority": "critical",
+      "scenarios": ["calor", "apagon"],
+      "affiliateUrl": "https://www.amazon.es/s?k=acumulador+frio+nevera",
+      "affiliateSource": "amazon"
+    },
+    {
+      "id": "calor-5",
+      "name": "Protector solar SPF50+",
+      "category": "Refrigeracion",
+      "quantity": "1 bote",
+      "priority": "critical",
+      "scenarios": ["calor"],
+      "affiliateUrl": "https://www.amazon.es/s?k=protector+solar+spf50",
+      "affiliateSource": "amazon"
+    },
+    {
+      "id": "calor-6",
+      "name": "Sombrero de ala ancha",
+      "category": "Refrigeracion",
+      "quantity": "1 por persona",
+      "priority": "critical",
+      "scenarios": ["calor"],
+      "affiliateUrl": "https://www.amazon.es/s?k=sombrero+sol+ala+ancha",
+      "affiliateSource": "amazon"
+    },
+    {
+      "id": "bebe-1",
+      "name": "Panales",
+      "category": "Bebes",
+      "quantity": "3+ dias",
+      "priority": "critical",
+      "scenarios": ["general", "evacuacion"],
+      "notes": "Si hay bebes"
+    },
+    {
+      "id": "bebe-2",
+      "name": "Leche de formula / potitos",
+      "category": "Bebes",
+      "quantity": "3+ dias",
+      "priority": "critical",
+      "scenarios": ["general", "evacuacion"],
+      "notes": "Si hay bebes"
+    },
+    {
+      "id": "bebe-3",
+      "name": "Biberones",
+      "category": "Bebes",
+      "quantity": "2-3 unidades",
+      "priority": "critical",
+      "scenarios": ["general", "evacuacion"],
+      "notes": "Si hay bebes"
+    },
+    {
+      "id": "pet-1",
+      "name": "Comida para mascotas",
+      "category": "Mascotas",
+      "quantity": "3+ dias",
+      "priority": "critical",
+      "scenarios": ["general", "evacuacion"],
+      "notes": "Si hay mascotas"
+    },
+    {
+      "id": "pet-2",
+      "name": "Agua extra mascotas",
+      "category": "Mascotas",
+      "quantity": "1L/perro/dia",
+      "priority": "critical",
+      "scenarios": ["general", "calor", "evacuacion"],
+      "notes": "Si hay mascotas"
+    },
+    {
+      "id": "pet-3",
+      "name": "Transportin",
+      "category": "Mascotas",
+      "quantity": "1 por mascota",
+      "priority": "critical",
+      "scenarios": ["evacuacion"],
+      "notes": "Si hay mascotas",
+      "affiliateUrl": "https://www.amazon.es/s?k=transportin+perro+gato",
+      "affiliateSource": "amazon"
+    },
+    {
+      "id": "pet-4",
+      "name": "Correa / arnes",
+      "category": "Mascotas",
+      "quantity": "1 por mascota",
+      "priority": "critical",
+      "scenarios": ["evacuacion"],
+      "notes": "Si hay mascotas",
+      "affiliateUrl": "https://www.amazon.es/s?k=arnes+perro+seguridad",
+      "affiliateSource": "amazon"
+    }
+  ],
+  "ui": {
+    "title": "Configurador de Kit",
+    "subtitle": "Tu checklist personalizada",
+    "scenarioSectionTitle": "Elige tu escenario",
+    "familySectionTitle": "Tu familia",
+    "babiesOption": "Bebes o ninos pequenos",
+    "babiesDescription": "Anade panales, biberones, etc.",
+    "petsOption": "Mascotas",
+    "petsDescription": "Anade comida, transportin, etc.",
+    "progressTitle": "Progreso de tu Kit",
+    "progressComplete": "Kit Completo!",
+    "itemsLabel": "Items",
+    "criticalLabel": "Criticos",
+    "criticalMissing": "Te faltan {count} items criticos",
+    "criticalComplete": "Todos los items criticos completados",
+    "congratulations": "Felicidades! Tu kit esta listo",
+    "priorityLegend": {
+      "critical": "Critico",
+      "recommended": "Recomendado",
+      "optional": "Opcional"
+    },
+    "categoryComplete": "Completo",
+    "printButton": "Imprimir",
+    "shareButton": "Compartir",
+    "resetButton": "Reiniciar",
+    "buyButton": "Comprar",
+    "autoSaveMessage": "Tu progreso se guarda automaticamente",
+    "resumeBanner": {
+      "title": "Progreso guardado",
+      "itemsMarked": "{count} items marcados",
+      "startOver": "Empezar de nuevo"
+    },
+    "quickStartTitle": "Empieza rapido",
+    "printHeader": {
+      "title": "Kit-72.com - Preparacion para emergencias",
+      "generated": "Generado",
+      "scenario": "Escenario",
+      "withBabies": "Con bebes",
+      "withPets": "Con mascotas",
+      "scanQR": "Escanea para ver online"
+    },
+    "milestones": {
+      "25": "25% completado - Buen comienzo!",
+      "50": "50% - Vas por la mitad!",
+      "75": "75% - Ya casi lo tienes!",
+      "100": "100% - Kit completo!"
+    },
+    "linkCopied": "Enlace copiado"
+  },
+  "storageKey": "kit72_builder"
+}

@@ -1,0 +1,144 @@
+---
+import BaseLayout from '../../../../layouts/BaseLayout.astro';
+import Breadcrumb from '../../../../components/layout/Breadcrumb.astro';
+import Icon from '../../../../components/ui/Icon.astro';
+---
+
+<BaseLayout
+  title="Lebensmittel Lagern — Kit-72"
+  description="Langlebige Lebensmittel für Notfälle. Was du brauchst, wie viel und wie du richtig lagerst."
+  locale="de"
+  dateModified="2025-12-15"
+  schemaType="Article"
+>
+  <section class="py-16">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6">
+      <Breadcrumb items={[{ label: 'Ratgeber', href: '/de/ratgeber/' }, { label: 'Lebensmittel Lagern' }]} class="mb-4" locale="de" />
+      <h1 class="text-4xl font-bold mb-6">Lebensmittel Lagern</h1>
+
+      <div class="prose prose-lg">
+        <p class="lead">
+          Wähle Lebensmittel, die lange haltbar sind und <strong>keine Kühlung oder aufwendige
+          Zubereitung</strong> benötigen. Das BBK empfiehlt einen Vorrat für mindestens 10 Tage.
+        </p>
+
+        <!-- Calorie Reference -->
+        <div class="card p-6 my-8 bg-[--color-bg-tertiary] not-prose">
+          <h3 class="text-lg font-semibold mb-4 flex items-center gap-2">
+            <Icon name="UtensilsCrossed" size={20} class="text-[--color-accent-primary]" />
+            Kalorienbedarf in Notfällen
+          </h3>
+          <div class="grid sm:grid-cols-2 gap-4">
+            <div class="p-4 bg-[--color-bg-secondary] rounded-lg">
+              <p class="text-2xl font-bold text-[--color-accent-primary]">1.500-2.000</p>
+              <p class="text-sm text-[--color-text-secondary]">kcal pro Erwachsener pro Tag (Minimum)</p>
+            </div>
+            <div class="p-4 bg-[--color-bg-secondary] rounded-lg">
+              <p class="text-2xl font-bold text-[--color-accent-primary]">4.500-6.000</p>
+              <p class="text-sm text-[--color-text-secondary]">kcal pro Person für 72 Stunden</p>
+            </div>
+          </div>
+        </div>
+
+        <h2>Empfohlene Lebensmittel</h2>
+
+        <h3>Kohlenhydrate (Energie)</h3>
+        <ul>
+          <li><strong>Knäckebrot, Zwieback</strong> — lange haltbar, kein Schimmelrisiko</li>
+          <li><strong>Haferflocken</strong> — vielseitig, mit kaltem Wasser essbar</li>
+          <li><strong>Nudeln, Reis</strong> — benötigen Wasser und Wärme zum Kochen</li>
+          <li><strong>Müsliriegel, Energieriegel</strong> — sofort essbar, kompakt</li>
+        </ul>
+
+        <h3>Proteine</h3>
+        <ul>
+          <li><strong>Konserven</strong> — Thunfisch, Bohnen, Linsen, Erbsen</li>
+          <li><strong>Nüsse und Samen</strong> — kalorienreich, lange haltbar</li>
+          <li><strong>Erdnussbutter</strong> — hohe Energiedichte, lecker</li>
+          <li><strong>Hartkäse (vakuumiert)</strong> — monatelang haltbar ohne Kühlung</li>
+        </ul>
+
+        <h3>Vitamine & Mineralien</h3>
+        <ul>
+          <li><strong>Obst-Konserven</strong> — Pfirsiche, Ananas, Mandarinen</li>
+          <li><strong>Trockenfrüchte</strong> — Rosinen, Aprikosen, Datteln</li>
+          <li><strong>Gemüse-Konserven</strong> — Mais, Erbsen, Möhren</li>
+        </ul>
+
+        <h3>Süßes & Komfort</h3>
+        <ul>
+          <li><strong>Honig</strong> — unbegrenzt haltbar, antibakteriell</li>
+          <li><strong>Marmelade</strong> — Zucker konserviert natürlich</li>
+          <li><strong>Schokolade</strong> — Energie und Moralbooster</li>
+        </ul>
+
+        <div class="card p-4 my-6 border-l-4 border-l-amber-500 bg-amber-50 dark:bg-amber-950/30 not-prose">
+          <p class="text-sm">
+            <strong>⚠️ Wichtig:</strong> Vergiss keinen <strong>manuellen Dosenöffner</strong>!
+            Ohne Strom funktioniert dein elektrischer nicht.
+          </p>
+        </div>
+
+        <h2>Richtig lagern</h2>
+        <ul>
+          <li><strong>Kühl:</strong> Unter 20°C, idealerweise 10-15°C</li>
+          <li><strong>Dunkel:</strong> Licht beschleunigt den Abbau von Vitaminen</li>
+          <li><strong>Trocken:</strong> Feuchtigkeit führt zu Schimmel</li>
+          <li><strong>Luftdicht:</strong> Offene Packungen in Behälter umfüllen</li>
+        </ul>
+
+        <h2>Das Rotationsprinzip</h2>
+        <p>
+          Die clevere Methode: Integriere deinen Notvorrat in den Alltag.
+        </p>
+        <ol>
+          <li><strong>FIFO-Prinzip:</strong> First In, First Out — älteste Produkte zuerst verbrauchen</li>
+          <li><strong>Neue Einkäufe nach hinten:</strong> Alte Produkte nach vorne stellen</li>
+          <li><strong>Regelmäßig kochen:</strong> Konserven in normale Mahlzeiten einbauen</li>
+          <li><strong>Ersetzen:</strong> Verbrauchtes sofort nachkaufen</li>
+        </ol>
+
+        <div class="card p-6 my-8 bg-[--color-accent-subtle] not-prose">
+          <p class="font-medium mb-2">💡 Tipp: Notfallkocher</p>
+          <p class="text-sm text-[--color-text-secondary]">
+            Ein kleiner Campingkocher mit Gaskartuschen ermöglicht warme Mahlzeiten auch ohne Strom.
+            <strong>Nur im Freien oder bei guter Belüftung verwenden!</strong>
+          </p>
+        </div>
+
+        <h2>Spezielle Bedürfnisse beachten</h2>
+        <ul>
+          <li><strong>Säuglinge:</strong> Fertige Säuglingsnahrung (Pre-Milch), keine Pulvernahrung ohne sicheres Wasser</li>
+          <li><strong>Allergien:</strong> Auf Inhaltsstoffe achten, Alternativen bevorraten</li>
+          <li><strong>Diabetiker:</strong> Kohlenhydrate und Snacks für Unterzuckerung einplanen</li>
+          <li><strong>Haustiere:</strong> Separaten Futtervorrat anlegen</li>
+        </ul>
+
+        <h2>Checkliste 72-Stunden-Vorrat</h2>
+        <ul>
+          <li>☐ Mindestens 4.500 kcal pro Person</li>
+          <li>☐ Keine verderblichen Lebensmittel ohne Kühlung</li>
+          <li>☐ Manueller Dosenöffner vorhanden</li>
+          <li>☐ Essgeschirr und Besteck (ohne Spülen nutzbar)</li>
+          <li>☐ Datum der Einlagerung notiert</li>
+          <li>☐ Rotationsplan erstellt</li>
+        </ul>
+      </div>
+
+      <!-- CTA -->
+      <div class="mt-12 card p-6 bg-[--color-bg-tertiary]">
+        <h3 class="font-semibold mb-2">Komplettes Notfallpaket planen?</h3>
+        <p class="text-sm text-[--color-text-secondary] mb-4">
+          Erstelle eine personalisierte Checkliste mit unserem Konfigurator.
+        </p>
+        <a
+          href="/de/tools/notfallpaket-zusammenstellen/"
+          class="inline-flex items-center gap-2 px-4 py-2 bg-[--color-accent-primary] text-[--color-bg-primary] font-medium rounded hover:bg-[--color-accent-hover] transition-colors"
+        >
+          <Icon name="Settings" size={16} />
+          Paket zusammenstellen
+        </a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

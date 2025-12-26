@@ -1,0 +1,232 @@
+---
+/**
+ * ComparisonTable Component
+ *
+ * Collapsible comparison table for product pages.
+ * Shows key specs across multiple products.
+ */
+
+interface Product {
+  name: string;
+  specs: Record<string, string>;
+  badge?: 'recommended' | 'best-value' | 'premium';
+  amazonUrl?: string;
+}
+
+interface Props {
+  /** Table title */
+  title?: string;
+  /** Column headers (spec names) */
+  columns: string[];
+  /** Products to compare */
+  products: Product[];
+  /** Start collapsed? */
+  collapsed?: boolean;
+}
+
+const { title = 'Comparativa', columns, products, collapsed = true } = Astro.props;
+
+const badgeLabels = {
+  recommended: 'Recomendado',
+  'best-value': 'Mejor precio',
+  premium: 'Premium',
+};
+
+const badgeColors = {
+  recommended: 'bg-emerald-500/20 text-emerald-400',
+  'best-value': 'bg-amber-500/20 text-amber-400',
+  premium: 'bg-purple-500/20 text-purple-400',
+};
+---
+
+<details class="comparison-table" open={!collapsed}>
+  <summary class="comparison-header">
+    <div class="comparison-title">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M3 3h18"/><path d="M3 9h18"/><path d="M3 15h18"/><path d="M3 21h18"/>
+      </svg>
+      {title}
+    </div>
+    <svg class="chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="m6 9 6 6 6-6"/>
+    </svg>
+  </summary>
+
+  <div class="comparison-content">
+    <div class="table-wrapper">
+      <table>
+        <thead>
+          <tr>
+            <th class="product-col">Producto</th>
+            {columns.map((col) => (
+              <th>{col}</th>
+            ))}
+          </tr>
+        </thead>
+        <tbody>
+          {products.map((product) => (
+            <tr>
+              <td class="product-cell">
+                <div class="product-name">
+                  {product.name}
+                  {product.badge && (
+                    <span class={`product-badge ${badgeColors[product.badge]}`}>
+                      {badgeLabels[product.badge]}
+                    </span>
+                  )}
+                </div>
+                {product.amazonUrl && (
+                  <a
+                    href={product.amazonUrl}
+                    target="_blank"
+                    rel="noopener noreferrer nofollow"
+                    class="product-link"
+                  >
+                    Ver precio
+                  </a>
+                )}
+              </td>
+              {columns.map((col) => (
+                <td>{product.specs[col] || '-'}</td>
+              ))}
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</details>
+
+<style>
+  .comparison-table {
+    background: var(--color-bg-secondary);
+    border-radius: 12px;
+    overflow: hidden;
+    margin-bottom: 24px;
+  }
+
+  .comparison-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 20px;
+    background: var(--color-bg-tertiary);
+    cursor: pointer;
+    user-select: none;
+    list-style: none;
+  }
+
+  .comparison-header::-webkit-details-marker {
+    display: none;
+  }
+
+  .comparison-title {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--color-text-primary);
+  }
+
+  .comparison-title svg {
+    color: var(--color-accent-primary);
+  }
+
+  .chevron {
+    color: var(--color-text-muted);
+    transition: transform 0.2s ease;
+  }
+
+  details[open] .chevron {
+    transform: rotate(180deg);
+  }
+
+  .comparison-content {
+    padding: 0;
+  }
+
+  .table-wrapper {
+    overflow-x: auto;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+  }
+
+  th, td {
+    padding: 12px 16px;
+    text-align: left;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  th {
+    background: var(--color-bg-tertiary);
+    font-weight: 600;
+    color: var(--color-text-primary);
+    white-space: nowrap;
+  }
+
+  td {
+    color: var(--color-text-secondary);
+  }
+
+  .product-col {
+    min-width: 180px;
+  }
+
+  .product-cell {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .product-name {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+    font-weight: 600;
+    color: var(--color-text-primary);
+  }
+
+  .product-badge {
+    padding: 2px 8px;
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    border-radius: 4px;
+  }
+
+  .product-link {
+    font-size: 12px;
+    color: var(--color-accent-primary);
+    text-decoration: none;
+  }
+
+  .product-link:hover {
+    text-decoration: underline;
+  }
+
+  tbody tr:last-child td {
+    border-bottom: none;
+  }
+
+  tbody tr:hover {
+    background: var(--color-bg-tertiary);
+  }
+
+  @media (max-width: 640px) {
+    th, td {
+      padding: 10px 12px;
+      font-size: 13px;
+    }
+
+    .product-col {
+      min-width: 140px;
+    }
+  }
+</style>

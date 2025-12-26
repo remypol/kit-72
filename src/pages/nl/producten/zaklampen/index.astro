@@ -1,0 +1,161 @@
+---
+import BaseLayout from '../../../../layouts/BaseLayout.astro';
+import Breadcrumb from '../../../../components/layout/Breadcrumb.astro';
+import Icon from '../../../../components/ui/Icon.astro';
+import HeroImage from '../../../../components/content/HeroImage.astro';
+---
+
+<BaseLayout
+  title="Beste zaklamp voor noodsituaties: Waar op letten? Koopgids"
+  description="De beste zaklamp voor je noodpakket. Lumen, batterijen, waterdicht — waar je op moet letten."
+  locale="nl"
+  dateModified="2025-12-16"
+  schemaType="Article"
+  alternates={{
+    de: '/de/produkte/taschenlampen/',
+  }}
+>
+  <section class="py-16">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6">
+      <Breadcrumb items={[{ label: 'Producten', href: '/nl/producten/' }, { label: 'Zaklampen' }]} class="mb-4" locale="nl" />
+      <h1 class="text-4xl font-bold mb-6">Zaklampen</h1>
+
+      <div class="mb-8">
+        <HeroImage
+          src="/images/shared/flashlights-comparison.webp"
+          alt="Zaklampen vergelijking voor noodvoorbereiding"
+          priority={true}
+        />
+      </div>
+
+      <div class="prose prose-lg">
+        <p class="lead">
+          Een betrouwbare zaklamp is na water het <strong>op één na belangrijkste element</strong>
+          van je noodpakket. Zonder licht ben je 's nachts volledig hulpeloos.
+        </p>
+
+        <!-- Quick Specs -->
+        <div class="card p-6 my-8 bg-[--color-bg-tertiary] not-prose">
+          <h3 class="text-lg font-semibold mb-4 flex items-center gap-2">
+            <Icon name="Flashlight" size={20} class="text-[--color-accent-primary]" />
+            Aanbevolen Specificaties
+          </h3>
+          <div class="grid sm:grid-cols-3 gap-4 text-center">
+            <div class="p-3 bg-[--color-bg-secondary] rounded-lg">
+              <p class="text-2xl font-bold text-[--color-accent-primary]">200-500</p>
+              <p class="text-xs text-[--color-text-secondary]">Lumen (helderheid)</p>
+            </div>
+            <div class="p-3 bg-[--color-bg-secondary] rounded-lg">
+              <p class="text-2xl font-bold text-[--color-accent-primary]">IPX4+</p>
+              <p class="text-xs text-[--color-text-secondary]">Waterbescherming</p>
+            </div>
+            <div class="p-3 bg-[--color-bg-secondary] rounded-lg">
+              <p class="text-2xl font-bold text-[--color-accent-primary]">10+ uur</p>
+              <p class="text-xs text-[--color-text-secondary]">Gebruiksduur</p>
+            </div>
+          </div>
+        </div>
+
+        <h2>Hoeveel heb je nodig?</h2>
+        <ul>
+          <li><strong>Minimum:</strong> 2 zaklampen (hoofd + backup)</li>
+          <li><strong>Aanbevolen:</strong> 1 per kamer + 1 hoofdlamp per persoon</li>
+          <li><strong>Gezin:</strong> 3-4 zaklampen + hoofdlampen</li>
+        </ul>
+
+        <h2>LED vs. andere technologieën</h2>
+        <p>
+          <strong>LED is de standaard.</strong> Gloeilampen zijn verouderd. LED-voordelen:
+        </p>
+        <ul>
+          <li>90% minder energieverbruik</li>
+          <li>Tot 50.000 uur levensduur</li>
+          <li>Robuust tegen schokken</li>
+          <li>Direct volle helderheid</li>
+        </ul>
+
+        <h2>Batterij-opties</h2>
+
+        <h3>AA/AAA-batterijen</h3>
+        <ul>
+          <li>✓ Overal verkrijgbaar</li>
+          <li>✓ Lange houdbaarheid (5-10 jaar)</li>
+          <li>✗ Moeten regelmatig vervangen worden</li>
+        </ul>
+
+        <h3>Oplaadbaar (18650, USB-C)</h3>
+        <ul>
+          <li>✓ Voordelig op de lange termijn</li>
+          <li>✓ Kan via powerbank worden opgeladen</li>
+          <li>✗ Vereist toegang tot stroom om op te laden</li>
+        </ul>
+
+        <div class="card p-6 my-8 bg-[--color-accent-subtle] not-prose">
+          <p class="font-medium mb-2">💡 Tip: Beide hebben</p>
+          <p class="text-sm text-[--color-text-secondary]">
+            Ideaal: Een oplaadbare hoofdzaklamp + een batterij-backup lamp.
+            Bewaar minimaal <strong>2 sets reservebatterijen</strong>.
+          </p>
+        </div>
+
+        <h2>Belangrijke functies</h2>
+        <ul>
+          <li><strong>Meerdere standen:</strong> Hoog, laag, SOS-knipperen</li>
+          <li><strong>Waterdicht (IPX4+):</strong> Spatwaterbescherming minimaal</li>
+          <li><strong>Focusseerbaar:</strong> Brede lichtbundel voor kamerverlichting, spot voor afstand</li>
+          <li><strong>Stevige behuizing:</strong> Aluminium of versterkt kunststof</li>
+          <li><strong>Draaglus:</strong> Om op te hangen of te dragen</li>
+        </ul>
+
+        <h2>Hoofdlampen — onderschat maar essentieel</h2>
+        <p>
+          Met een hoofdlamp heb je <strong>beide handen vrij</strong> voor:
+        </p>
+        <ul>
+          <li>Koken zonder stroom</li>
+          <li>Eerste hulp verlenen</li>
+          <li>Reparaties uitvoeren</li>
+          <li>Kinderen verzorgen</li>
+        </ul>
+
+        <h2>Aanbevolen merken</h2>
+        <p>Kwaliteitsmerken voor nood-zaklampen:</p>
+        <ul>
+          <li><strong>Fenix</strong> — professionele kwaliteit</li>
+          <li><strong>Ledlenser</strong> — Duitse kwaliteit</li>
+          <li><strong>Olight</strong> — goede prijs-kwaliteit</li>
+          <li><strong>Nitecore</strong> — voor enthousiastelingen</li>
+          <li><strong>Petzl</strong> — beste hoofdlampen</li>
+        </ul>
+
+        <h2>Checklist</h2>
+        <ul>
+          <li>☐ Minimaal 2 zaklampen</li>
+          <li>☐ LED-technologie</li>
+          <li>☐ 200+ lumen</li>
+          <li>☐ Waterdicht (IPX4+)</li>
+          <li>☐ Reservebatterijen (2 sets)</li>
+          <li>☐ 1 hoofdlamp per persoon</li>
+          <li>☐ Functietest elke 6 maanden</li>
+        </ul>
+      </div>
+
+      <!-- Amazon Link -->
+      <div class="mt-12 card p-6 bg-[--color-bg-tertiary]">
+        <h3 class="font-semibold mb-2">Zaklampen op Bol.com</h3>
+        <p class="text-sm text-[--color-text-secondary] mb-4">
+          Aanbevolen LED-zaklampen voor noodsituaties.
+        </p>
+        <a
+          href="https://www.bol.com/nl/nl/s/?searchtext=led+zaklamp+nood"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex items-center gap-2 px-4 py-2 bg-[--color-accent-primary] text-[--color-bg-primary] font-medium rounded hover:bg-[--color-accent-hover] transition-colors"
+        >
+          Bekijk op Bol.com
+          <Icon name="ExternalLink" size={16} />
+        </a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

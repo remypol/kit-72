@@ -1,0 +1,552 @@
+---
+import BaseLayout from '../../../../layouts/BaseLayout.astro';
+import ProductGrid from '../../../../components/content/ProductGrid.astro';
+import Icon from '../../../../components/ui/Icon.astro';
+import QuickRecommendation from '../../../../components/content/QuickRecommendation.astro';
+import ComparisonTable from '../../../../components/content/ComparisonTable.astro';
+import AddToKitButton from '../../../../components/tools/AddToKitButton';
+
+// Kit item IDs that relate to powerbanks
+const relatedKitItems = [
+  { id: 'energia-1', name: 'Powerbank 10.000mAh+' },
+  { id: 'energia-2', name: 'Radio con pilas/dinamo' },
+  { id: 'energia-3', name: 'Cargador de coche' },
+];
+
+// Comparison table data
+const comparisonProducts = [
+  {
+    name: 'Xiaomi Power Bank 3',
+    specs: { 'Capacidad': '20.000 mAh', 'Salida': '18W', 'Puertos': '2 USB + 1 USB-C', 'Peso': '434g' },
+    badge: 'best-value' as const,
+    amazonUrl: 'https://www.amazon.es/s?k=xiaomi+power+bank+20000',
+  },
+  {
+    name: 'Anker PowerCore 20K',
+    specs: { 'Capacidad': '20.000 mAh', 'Salida': '22.5W', 'Puertos': '2 USB + 1 USB-C', 'Peso': '343g' },
+    badge: 'recommended' as const,
+    amazonUrl: 'https://www.amazon.es/s?k=anker+powercore+20000',
+  },
+  {
+    name: 'Anker 737 PowerCore',
+    specs: { 'Capacidad': '26.000 mAh', 'Salida': '140W', 'Puertos': '2 USB-C + 1 USB', 'Peso': '632g' },
+    badge: 'premium' as const,
+    amazonUrl: 'https://www.amazon.es/s?k=anker+737+powercore',
+  },
+  {
+    name: 'INIU Power Bank',
+    specs: { 'Capacidad': '10.000 mAh', 'Salida': '22.5W', 'Puertos': '3 USB', 'Peso': '198g' },
+    amazonUrl: 'https://www.amazon.es/s?k=iniu+power+bank+10000',
+  },
+];
+
+const amazonProducts = [
+  {
+    name: 'Anker PowerCore 20000mAh',
+    description: 'Powerbank fiable con carga rápida PowerIQ, 2 puertos USB',
+    amazonUrl: 'https://www.amazon.es/s?k=anker+powercore+20000',
+    price: '~40€',
+    rating: 4.7,
+    features: ['20000 mAh', '2 puertos USB', 'PowerIQ'],
+    badge: 'recommended' as const
+  },
+  {
+    name: 'Xiaomi Power Bank 3 20000mAh',
+    description: 'Excelente relación calidad-precio, USB-C bidireccional',
+    amazonUrl: 'https://www.amazon.es/s?k=xiaomi+power+bank+20000',
+    price: '~30€',
+    rating: 4.6,
+    features: ['20000 mAh', 'USB-C', 'Carga rápida 18W'],
+    badge: 'best-value' as const
+  },
+  {
+    name: 'Anker 737 PowerCore 26K',
+    description: 'Alta capacidad con pantalla, carga rápida 140W para laptops',
+    amazonUrl: 'https://www.amazon.es/s?k=anker+737+powercore',
+    price: '~130€',
+    rating: 4.8,
+    features: ['26000 mAh', 'USB-C PD 140W', 'Pantalla'],
+    badge: 'premium' as const
+  },
+  {
+    name: 'Panel Solar Plegable 21W',
+    description: 'Cargador solar portátil con 2 puertos USB',
+    amazonUrl: 'https://www.amazon.es/s?k=panel+solar+plegable+21w+usb',
+    price: '~45€',
+    rating: 4.3,
+    features: ['21W solar', '2x USB', 'Plegable']
+  }
+];
+
+const powerbankTypes = [
+  {
+    name: 'Compacto (5.000-10.000 mAh)',
+    description: 'Cabe en el bolsillo, ideal para llevar siempre encima',
+    pros: ['Muy ligero (100-200g)', 'Fácil de transportar', 'Económico'],
+    cons: ['1-2 cargas de móvil', 'No sirve para tablets'],
+    bestFor: 'Mochila de evacuación, uso diario',
+    charges: '1-2 móviles',
+    icon: 'Smartphone'
+  },
+  {
+    name: 'Estándar (10.000-20.000 mAh)',
+    description: 'El equilibrio perfecto entre capacidad y portabilidad',
+    pros: ['3-5 cargas de móvil', 'Carga tablets', 'Precio razonable'],
+    cons: ['Más pesado (300-400g)', 'Tarda más en recargarse'],
+    bestFor: 'Kit 72 horas principal',
+    charges: '3-5 móviles',
+    icon: 'Battery'
+  },
+  {
+    name: 'Alta capacidad (20.000-30.000 mAh)',
+    description: 'Para familias o múltiples dispositivos',
+    pros: ['Muchas cargas', 'Múltiples puertos', 'Carga laptops (algunos)'],
+    cons: ['Pesado (400-600g)', 'Caro', 'Restricciones en aviones'],
+    bestFor: 'Familias, estancias prolongadas',
+    charges: '6-10 móviles',
+    icon: 'Zap'
+  },
+  {
+    name: 'Solar',
+    description: 'Se recarga con el sol, independencia total',
+    pros: ['Energía infinita con sol', 'No depende de red', 'Ecológico'],
+    cons: ['Carga solar lenta', 'Necesita sol directo', 'Más caro'],
+    bestFor: 'Emergencias prolongadas, outdoor',
+    charges: 'Variable (panel)',
+    icon: 'Sun'
+  },
+  {
+    name: 'Estación de energía portátil',
+    description: 'Mini generador eléctrico, el "powerbank gigante"',
+    pros: ['Enchufes AC', 'Carga todo', 'Puede alimentar pequeños electrodomésticos'],
+    cons: ['Muy pesado (3-10kg)', 'Caro (200€+)', 'Voluminoso'],
+    bestFor: 'Equipamiento médico, trabajo en casa',
+    charges: '30-100+ móviles',
+    icon: 'Plug'
+  }
+];
+
+const features = [
+  { name: 'Capacidad (mAh)', description: '10.000 mAh = ~2.5 cargas de iPhone. 20.000 mAh = ~5 cargas', icon: 'BarChart3' },
+  { name: 'Salida (W/A)', description: '18W+ para carga rápida. 2.4A mínimo por puerto', icon: 'Zap' },
+  { name: 'Puertos', description: 'Mínimo 2 USB-A. USB-C PD es ideal para carga rápida', icon: 'Plug' },
+  { name: 'Entrada', description: 'USB-C PD recarga más rápido que micro-USB', icon: 'ArrowDownToLine' },
+  { name: 'Indicador', description: 'LED o pantalla digital para ver carga restante', icon: 'Gauge' },
+  { name: 'Linterna', description: 'Bonus útil en emergencias. Algunos tienen modo SOS', icon: 'Flashlight' }
+];
+
+const recommendations = [
+  {
+    type: 'Básico económico',
+    name: 'Powerbank 10.000 mAh',
+    price: '15-25€',
+    features: ['10.000 mAh', '2x USB-A', '2.4A salida', 'LED indicador'],
+    verdict: 'Uno por persona. El mínimo aceptable.',
+    priority: 'essential'
+  },
+  {
+    type: 'Recomendado hogar',
+    name: 'Powerbank 20.000 mAh USB-C PD',
+    price: '30-50€',
+    features: ['20.000 mAh', 'USB-C PD 18W+', 'Carga rápida', '2-3 puertos'],
+    verdict: 'La mejor relación calidad-precio. Carga rápido.',
+    priority: 'essential'
+  },
+  {
+    type: 'Familiar/grupal',
+    name: 'Powerbank 26.800 mAh',
+    price: '40-70€',
+    features: ['26.800 mAh', '3+ puertos', 'Carga simultánea', 'Pantalla digital'],
+    verdict: 'Para familias de 3+ personas o estancias largas.',
+    priority: 'recommended'
+  },
+  {
+    type: 'Solar backup',
+    name: 'Panel solar plegable 21W',
+    price: '40-80€',
+    features: ['21W salida', 'Plegable', 'USB directo', 'Resistente agua'],
+    verdict: 'Complemento, no sustituto. Carga 1 móvil en 3-4h sol directo.',
+    priority: 'recommended'
+  },
+  {
+    type: 'Profesional/médico',
+    name: 'Estación portátil 300Wh+',
+    price: '200-500€',
+    features: ['300Wh+', 'Enchufes AC', 'Carga laptop', 'CPAP, nevera pequeña'],
+    verdict: 'Si dependes de equipamiento médico o trabajas desde casa.',
+    priority: 'optional'
+  }
+];
+
+const deviceCharges = [
+  { device: 'iPhone 14/15', battery: '~3.200 mAh', with10k: '~2.5', with20k: '~5' },
+  { device: 'Samsung Galaxy S23', battery: '~3.900 mAh', with10k: '~2', with20k: '~4' },
+  { device: 'iPad mini', battery: '~5.100 mAh', with10k: '~1.5', with20k: '~3' },
+  { device: 'iPad Pro 11"', battery: '~7.500 mAh', with10k: '~1', with20k: '~2' },
+  { device: 'Nintendo Switch', battery: '~4.310 mAh', with10k: '~1.8', with20k: '~3.5' },
+  { device: 'AirPods Pro', battery: '~500 mAh', with10k: '~15', with20k: '~30' },
+  { device: 'Apple Watch', battery: '~300 mAh', with10k: '~25', with20k: '~50' }
+];
+
+const kitSuggestion = [
+  { item: 'Powerbank 20.000 mAh USB-C PD', qty: 1, notes: 'Principal, para dispositivos críticos' },
+  { item: 'Powerbank 10.000 mAh', qty: 2, notes: 'Uno por persona adulta adicional' },
+  { item: 'Cables USB-C (1m)', qty: 3, notes: 'Siempre de sobra, se pierden' },
+  { item: 'Cables Lightning (si Apple)', qty: 2, notes: 'O USB-C según dispositivos' },
+  { item: 'Adaptador multi-USB coche', qty: 1, notes: 'Para recargar en vehículo' },
+  { item: 'Panel solar 21W (opcional)', qty: 1, notes: 'Para emergencias prolongadas' }
+];
+
+const chargingTips = [
+  'Mantén los powerbanks al 80% (ni 100% ni vacíos) para máxima vida útil',
+  'Recárgalos cada 3-4 meses aunque no los uses',
+  'Evita temperaturas extremas: no dejar en el coche en verano',
+  'Carga primero los dispositivos críticos (teléfono, radio)',
+  'Pon el móvil en modo avión para cargar más rápido',
+  'Desactiva WiFi, Bluetooth y GPS si no los necesitas',
+  'Reduce brillo de pantalla al mínimo necesario',
+  'Las baterías externas pierden capacidad con el frío intenso'
+];
+
+// Generate ItemList + Product schema for rich results
+const productSchema = {
+  '@type': 'ItemList',
+  itemListElement: amazonProducts.map((product, index) => ({
+    '@type': 'ListItem',
+    position: index + 1,
+    item: {
+      '@type': 'Product',
+      name: product.name,
+      description: product.description,
+      aggregateRating: {
+        '@type': 'AggregateRating',
+        ratingValue: product.rating,
+        bestRating: 5,
+        worstRating: 1,
+        ratingCount: 100
+      }
+    }
+  }))
+};
+---
+
+<BaseLayout
+  title="Powerbank para emergencias: ¿Qué capacidad? Guía de compra"
+  description="Guía completa de powerbanks para emergencias: capacidades, tipos, recomendaciones y cuánta energía necesitas para 72 horas."
+  locale="es"
+  dateModified="2025-12-15"
+  schemaType="Article"
+  schemaData={productSchema}
+>
+  <section class="py-16">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6">
+      <!-- Header -->
+      <div class="mb-12">
+        <nav class="text-sm mb-4">
+          <ol class="flex items-center gap-2 text-[--color-text-muted]">
+            <li><a href="/es/" class="hover:text-[--color-accent-primary]">Inicio</a></li>
+            <li>/</li>
+            <li><a href="/es/componentes/" class="hover:text-[--color-accent-primary]">Componentes</a></li>
+            <li>/</li>
+            <li class="text-[--color-text-primary]">Powerbanks</li>
+          </ol>
+        </nav>
+        <h1 class="mb-4 flex items-center gap-3">
+          <Icon name="Battery" size={32} class="text-[--color-accent-primary]" />
+          Powerbanks y Baterías Externas
+        </h1>
+        <p class="text-lg text-[--color-text-secondary]">
+          En emergencias, tu teléfono es linterna, radio, mapa y comunicación con el mundo.
+          Sin batería, te quedas incomunicado. Los powerbanks son esenciales.
+        </p>
+      </div>
+
+      <!-- Quick Recommendation -->
+      <QuickRecommendation
+        name="Anker PowerCore 20000mAh"
+        reason="La combinación perfecta de capacidad, fiabilidad y precio. Suficiente para 5 cargas completas de móvil, con carga rápida USB-C."
+        price="~40€"
+        amazonUrl="https://www.amazon.es/s?k=anker+powercore+20000"
+        badge="Mejor opción"
+        features={['20.000 mAh', 'USB-C PD', '2 puertos', 'Carga rápida']}
+      />
+
+      <!-- How much do I need? -->
+      <div class="card p-6 mb-8 bg-[--color-bg-tertiary]">
+        <h3 class="font-semibold mb-4 text-[--color-text-primary] flex items-center gap-2">
+          <Icon name="Calculator" size={20} class="text-[--color-accent-primary]" />
+          ¿Cuánta capacidad necesito?
+        </h3>
+        <div class="space-y-3 text-sm text-[--color-text-secondary]">
+          <p><strong>Regla simple:</strong> Multiplica la batería de tu móvil × 3 × días × personas</p>
+          <p><strong>Ejemplo:</strong> 2 personas, 3 días, móviles de 4.000 mAh cada uno:</p>
+          <p class="font-mono bg-[--color-bg-primary] p-2 rounded">4.000 × 3 × 3 × 2 = 72.000 mAh teóricos</p>
+          <p>Con pérdidas por conversión (~30%), necesitas: <strong class="text-[--color-accent-primary]">~50.000 mAh reales</strong></p>
+          <p class="text-xs text-[--color-text-muted]">Esto equivale a 2x powerbanks de 26.000 mAh o 3x de 20.000 mAh</p>
+        </div>
+      </div>
+
+      <!-- Types -->
+      <div class="mb-12">
+        <h2 class="text-2xl font-bold mb-6 text-[--color-text-primary]">Tipos de powerbanks</h2>
+
+        <div class="space-y-4">
+          {powerbankTypes.map((type) => (
+            <div class="card p-6">
+              <div class="flex items-start gap-4">
+                <div class="w-12 h-12 flex items-center justify-center bg-[--color-bg-tertiary] rounded-lg flex-shrink-0">
+                  <Icon name={type.icon as any} size={28} class="text-[--color-accent-primary]" />
+                </div>
+                <div class="flex-1">
+                  <div class="flex items-center gap-3 mb-2">
+                    <h3 class="font-semibold text-[--color-text-primary]">{type.name}</h3>
+                    <span class="text-xs px-2 py-1 bg-[--color-bg-tertiary] text-[--color-text-muted] rounded">
+                      {type.charges}
+                    </span>
+                  </div>
+                  <p class="text-sm text-[--color-text-secondary] mb-3">{type.description}</p>
+
+                  <div class="grid sm:grid-cols-3 gap-4 text-sm">
+                    <div>
+                      <span class="text-green-400 font-medium flex items-center gap-1">
+                        <Icon name="CircleCheck" size={14} />
+                        Pros
+                      </span>
+                      <ul class="mt-1 space-y-1 text-[--color-text-muted]">
+                        {type.pros.map((pro) => <li>• {pro}</li>)}
+                      </ul>
+                    </div>
+                    <div>
+                      <span class="text-red-400 font-medium flex items-center gap-1">
+                        <Icon name="CircleX" size={14} />
+                        Contras
+                      </span>
+                      <ul class="mt-1 space-y-1 text-[--color-text-muted]">
+                        {type.cons.map((con) => <li>• {con}</li>)}
+                      </ul>
+                    </div>
+                    <div>
+                      <span class="text-[--color-accent-primary] font-medium flex items-center gap-1">
+                        <Icon name="Star" size={14} />
+                        Ideal para
+                      </span>
+                      <p class="mt-1 text-[--color-text-muted]">{type.bestFor}</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <!-- Key Features -->
+      <div class="mb-12">
+        <h2 class="text-2xl font-bold mb-6 text-[--color-text-primary]">Características a buscar</h2>
+
+        <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          {features.map((feature) => (
+            <div class="card p-4">
+              <div class="flex items-start gap-3">
+                <div class="w-10 h-10 flex items-center justify-center bg-[--color-bg-tertiary] rounded-lg flex-shrink-0">
+                  <Icon name={feature.icon as any} size={22} class="text-[--color-accent-primary]" />
+                </div>
+                <div>
+                  <h3 class="font-semibold text-[--color-text-primary]">{feature.name}</h3>
+                  <p class="text-sm text-[--color-text-secondary]">{feature.description}</p>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <!-- Device Charges Table -->
+      <div class="mb-12">
+        <h2 class="text-2xl font-bold mb-6 text-[--color-text-primary]">¿Cuántas cargas por dispositivo?</h2>
+
+        <div class="card overflow-hidden">
+          <div class="overflow-x-auto">
+            <table class="w-full text-sm">
+              <thead class="bg-[--color-bg-tertiary]">
+                <tr>
+                  <th class="text-left py-3 px-4">Dispositivo</th>
+                  <th class="text-center py-3 px-4">Batería</th>
+                  <th class="text-center py-3 px-4">Con 10K mAh</th>
+                  <th class="text-center py-3 px-4">Con 20K mAh</th>
+                </tr>
+              </thead>
+              <tbody class="text-[--color-text-secondary]">
+                {deviceCharges.map((device, i) => (
+                  <tr class={i % 2 === 0 ? 'bg-[--color-bg-secondary]' : ''}>
+                    <td class="py-3 px-4 font-medium text-[--color-text-primary]">{device.device}</td>
+                    <td class="py-3 px-4 text-center">{device.battery}</td>
+                    <td class="py-3 px-4 text-center">{device.with10k}x</td>
+                    <td class="py-3 px-4 text-center font-bold text-[--color-accent-primary]">{device.with20k}x</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+          <div class="p-4 bg-[--color-bg-tertiary] text-xs text-[--color-text-muted]">
+            * Valores aproximados. La eficiencia real es ~70% por pérdidas en conversión de voltaje.
+          </div>
+        </div>
+      </div>
+
+      <!-- Comparison Table -->
+      <ComparisonTable
+        title="Comparativa de powerbanks"
+        columns={['Capacidad', 'Salida', 'Puertos', 'Peso']}
+        products={comparisonProducts}
+        collapsed={true}
+      />
+
+      <!-- Recommendations -->
+      <div class="mb-12">
+        <h2 class="text-2xl font-bold mb-6 text-[--color-text-primary]">Recomendaciones por uso</h2>
+
+        <div class="space-y-4">
+          {recommendations.map((rec) => (
+            <div class={`card p-6 ${rec.priority === 'essential' ? 'border-l-4 border-l-red-500' : rec.priority === 'recommended' ? 'border-l-4 border-l-[--color-accent-primary]' : ''}`}>
+              <div class="flex items-start justify-between gap-4 mb-3">
+                <div>
+                  <span class={`text-xs px-2 py-1 rounded ${rec.priority === 'essential' ? 'bg-red-500/20 text-red-400' : rec.priority === 'recommended' ? 'bg-[--color-accent-primary]/20 text-[--color-accent-primary]' : 'bg-[--color-bg-tertiary] text-[--color-text-muted]'}`}>
+                    {rec.priority === 'essential' ? 'Esencial' : rec.priority === 'recommended' ? 'Recomendado' : 'Opcional'}
+                  </span>
+                  <span class="text-xs text-[--color-text-muted] ml-2">{rec.type}</span>
+                </div>
+                <span class="font-bold text-[--color-accent-primary]">{rec.price}</span>
+              </div>
+
+              <h3 class="font-semibold text-[--color-text-primary] mb-2">{rec.name}</h3>
+
+              <div class="flex flex-wrap gap-2 mb-3">
+                {rec.features.map((feature) => (
+                  <span class="text-xs px-2 py-1 bg-[--color-bg-tertiary] text-[--color-text-muted] rounded">
+                    {feature}
+                  </span>
+                ))}
+              </div>
+
+              <p class="text-sm text-[--color-text-secondary] m-0">
+                <strong>Veredicto:</strong> {rec.verdict}
+              </p>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <!-- Suggested Kit -->
+      <div class="mb-12">
+        <h2 class="text-2xl font-bold mb-6 text-[--color-text-primary]">Kit de energía sugerido</h2>
+
+        <div class="card p-6">
+          <p class="text-sm text-[--color-text-secondary] mb-4">
+            Para una familia de 2 adultos + 1 niño:
+          </p>
+
+          <div class="overflow-x-auto">
+            <table class="w-full text-sm">
+              <thead>
+                <tr class="border-b border-[--color-border]">
+                  <th class="text-left py-2">Artículo</th>
+                  <th class="text-center py-2">Cantidad</th>
+                  <th class="text-left py-2">Notas</th>
+                </tr>
+              </thead>
+              <tbody class="text-[--color-text-secondary]">
+                {kitSuggestion.map((item) => (
+                  <tr class="border-b border-[--color-border]">
+                    <td class="py-2">{item.item}</td>
+                    <td class="py-2 text-center font-bold text-[--color-accent-primary]">{item.qty}</td>
+                    <td class="py-2 text-xs text-[--color-text-muted]">{item.notes}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+
+          <div class="mt-4 pt-4 border-t border-[--color-border] text-center">
+            <p class="text-sm text-[--color-text-muted]">
+              Inversión aproximada: <strong class="text-[--color-accent-primary]">80-150€</strong>
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Product Recommendations -->
+      <div class="mb-12">
+        <h2 class="text-2xl font-bold mb-6 text-[--color-text-primary] flex items-center gap-2">
+          <Icon name="ShoppingCart" size={24} class="text-[--color-accent-primary]" />
+          Productos recomendados
+        </h2>
+        <ProductGrid products={amazonProducts} title="Powerbanks para tu kit de emergencia" />
+      </div>
+
+      <!-- Tips -->
+      <div class="card p-6 mb-8">
+        <h3 class="font-semibold mb-4 text-[--color-text-primary] flex items-center gap-2">
+          <Icon name="Lightbulb" size={20} class="text-[--color-accent-primary]" />
+          Consejos para maximizar la batería
+        </h3>
+        <ul class="grid sm:grid-cols-2 gap-2 text-sm text-[--color-text-secondary]">
+          {chargingTips.map((tip) => (
+            <li>• {tip}</li>
+          ))}
+        </ul>
+      </div>
+
+      <!-- Warning -->
+      <div class="p-4 bg-[--color-status-warning]/10 border border-[--color-status-warning]/30 rounded-lg mb-8">
+        <p class="text-sm text-[--color-text-secondary] m-0 flex items-start gap-2">
+          <Icon name="AlertTriangle" size={18} class="text-[--color-status-warning] flex-shrink-0 mt-0.5" />
+          <span><strong class="text-[--color-status-warning]">Aviso de seguridad:</strong> No compres
+          powerbanks de marcas desconocidas muy baratos. Las baterías de mala calidad pueden
+          sobrecalentarse o incluso incendiarse. Marcas fiables: Anker, Xiaomi, Samsung, RAVPower.</span>
+        </p>
+      </div>
+
+      <!-- Add to Kit Section -->
+      <div class="card p-6 mb-8 bg-gradient-to-r from-[--color-accent-primary]/10 to-[--color-accent-secondary]/5 border border-[--color-accent-primary]/20">
+        <h3 class="font-semibold mb-4 text-[--color-text-primary] flex items-center gap-2">
+          <Icon name="CheckSquare" size={20} class="text-[--color-accent-primary]" />
+          Añadir a tu checklist
+        </h3>
+        <p class="text-sm text-[--color-text-secondary] mb-4">
+          Marca estos items en tu Kit Builder para llevar un seguimiento de tu preparación.
+        </p>
+        <div class="flex flex-wrap gap-3">
+          {relatedKitItems.map((item) => (
+            <div class="flex items-center gap-2 bg-[--color-bg-secondary] rounded-lg px-3 py-2">
+              <span class="text-sm text-[--color-text-primary]">{item.name}</span>
+              <AddToKitButton client:idle itemId={item.id} size="sm" />
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <!-- Related Links -->
+      <div class="flex flex-wrap gap-4 justify-center">
+        <a
+          href="/es/componentes/radios-emergencia/"
+          class="inline-flex items-center gap-2 px-4 py-2 border border-[--color-border] text-sm font-medium rounded hover:border-[--color-accent-primary] hover:text-[--color-accent-primary] transition-colors"
+        >
+          Ver Radios de Emergencia →
+        </a>
+        <a
+          href="/es/guias/energia-comunicacion/"
+          class="inline-flex items-center gap-2 px-4 py-2 border border-[--color-border] text-sm font-medium rounded hover:border-[--color-accent-primary] hover:text-[--color-accent-primary] transition-colors"
+        >
+          Guía: Energía y Comunicación
+        </a>
+        <a
+          href="/es/herramientas/calculadora-energia/"
+          class="inline-flex items-center gap-2 px-4 py-2 bg-[--color-accent-primary] text-[--color-bg-primary] text-sm font-medium rounded hover:bg-[--color-accent-secondary] transition-colors"
+        >
+          Calculadora de Energía
+        </a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

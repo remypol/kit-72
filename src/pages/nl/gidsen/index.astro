@@ -1,0 +1,66 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import Breadcrumb from '../../../components/layout/Breadcrumb.astro';
+import Icon from '../../../components/ui/Icon.astro';
+
+const guides = [
+  {
+    title: 'Water Opslaan',
+    description: 'Hoe je veilig drinkwater opslaat voor noodsituaties.',
+    href: '/nl/gidsen/water-opslaan/',
+    icon: 'Droplet',
+  },
+  {
+    title: 'Voedsel Opslaan',
+    description: 'Langdurig houdbaar voedsel en juiste opslag.',
+    href: '/nl/gidsen/voedsel-opslaan/',
+    icon: 'UtensilsCrossed',
+  },
+  {
+    title: 'EHBO-kit',
+    description: 'Samenstellen en onderhouden van je EHBO-voorraad.',
+    href: '/nl/gidsen/ehbo-kit/',
+    icon: 'Heart',
+  },
+  {
+    title: 'Energie & Communicatie',
+    description: 'Blijf verbonden en geïnformeerd zonder stroom.',
+    href: '/nl/gidsen/energie-communicatie/',
+    icon: 'Radio',
+  },
+];
+---
+
+<BaseLayout
+  title="Gidsen — Kit-72"
+  description="Uitgebreide gidsen voor het samenstellen van je noodpakket: water, voedsel, EHBO en communicatie."
+  locale="nl"
+>
+  <section class="py-16">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6">
+      <div class="mb-12">
+        <Breadcrumb items={[{ label: 'Gidsen' }]} class="mb-4" locale="nl" />
+        <h1 class="text-4xl font-bold mb-4">Gidsen</h1>
+        <p class="text-xl text-[--color-text-secondary]">
+          Uitgebreide informatie over elk onderdeel van je noodvoorbereiding.
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-6">
+        {guides.map((guide) => (
+          <a href={guide.href} class="card p-6 hover:border-[--color-accent-primary] transition-colors group block">
+            <div class="flex items-start gap-4">
+              <div class="w-12 h-12 flex-shrink-0 flex items-center justify-center bg-[--color-bg-tertiary] rounded-lg text-[--color-accent-primary] group-hover:bg-[--color-accent-primary] group-hover:text-[--color-bg-primary] transition-colors">
+                <Icon name={guide.icon} size={24} />
+              </div>
+              <div>
+                <h2 class="text-lg font-semibold text-[--color-text-primary] mb-1">{guide.title}</h2>
+                <p class="text-sm text-[--color-text-secondary]">{guide.description}</p>
+              </div>
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+</BaseLayout>

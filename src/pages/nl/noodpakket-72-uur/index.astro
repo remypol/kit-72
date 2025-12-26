@@ -1,0 +1,587 @@
+---
+import ArticleLayout from '../../../layouts/ArticleLayout.astro';
+
+const tocItems = [
+  { id: 'wat-is', label: 'Wat is een noodpakket?' },
+  { id: 'waarom-72-uur', label: 'Waarom 72 uur?' },
+  { id: 'inhoud', label: 'Essentiële inhoud' },
+  { id: 'organisatie', label: 'Hoe organiseren' },
+  { id: 'opbergen', label: 'Waar bewaren' },
+  { id: 'aanpassingen', label: 'Speciale aanpassingen' },
+  { id: 'onderhoud', label: 'Onderhoud' },
+  { id: 'fouten', label: 'Veelgemaakte fouten' },
+  { id: 'faq', label: 'Veelgestelde vragen' },
+];
+
+const breadcrumbs = [
+  { label: 'Home', href: '/nl/' },
+  { label: 'Noodpakket 72 uur' },
+];
+
+const essentialCategories = [
+  {
+    name: 'Water',
+    icon: '💧',
+    items: [
+      { name: 'Flessenwater', quantity: '3L per persoon/dag = 9L totaal', priority: 'critical' },
+      { name: 'Waterzuiveringstabletten', quantity: '1 verpakking', priority: 'recommended' },
+      { name: 'Waterfles met filter', quantity: '1 per persoon', priority: 'optional' },
+    ]
+  },
+  {
+    name: 'Voeding',
+    icon: '🍫',
+    items: [
+      { name: 'Energierepen', quantity: '6-9 per persoon', priority: 'critical' },
+      { name: 'Noten en gedroogd fruit', quantity: '200g per persoon', priority: 'critical' },
+      { name: 'Blikvoedsel', quantity: '3-6 blikken per persoon', priority: 'recommended' },
+      { name: 'Handmatige blikopener', quantity: '1 stuks', priority: 'critical' },
+      { name: 'Bestek', quantity: '1 set per persoon', priority: 'recommended' },
+    ]
+  },
+  {
+    name: 'Verlichting en energie',
+    icon: '🔦',
+    items: [
+      { name: 'LED-zaklamp', quantity: '1-2 stuks', priority: 'critical' },
+      { name: 'Reserve batterijen', quantity: '2 sets', priority: 'critical' },
+      { name: 'Opgeladen powerbank', quantity: '10.000+ mAh', priority: 'critical' },
+      { name: 'Noodradio (batterij/dynamo)', quantity: '1 stuks', priority: 'recommended' },
+      { name: 'Kaarsen en aansteker', quantity: '4-6 kaarsen', priority: 'recommended' },
+    ]
+  },
+  {
+    name: 'Documenten',
+    icon: '📄',
+    items: [
+      { name: 'Kopieën identiteitsbewijs', quantity: 'Alle gezinsleden', priority: 'critical' },
+      { name: 'Zorgpas/verzekeringsbewijs', quantity: 'Kopieën', priority: 'critical' },
+      { name: 'Noodnummers', quantity: 'Uitgeprinte lijst', priority: 'critical' },
+      { name: 'Contant geld', quantity: '€70 volwassene / €30 kind', priority: 'critical' },
+      { name: 'Contactgegevens familie', quantity: 'Uitgeprinte lijst', priority: 'recommended' },
+    ]
+  },
+  {
+    name: 'EHBO-kit',
+    icon: '🩹',
+    items: [
+      { name: 'Pleisters (diverse maten)', quantity: '20+ stuks', priority: 'critical' },
+      { name: 'Steriele gaasjes', quantity: '1 verpakking', priority: 'critical' },
+      { name: 'Elastische zwachtels', quantity: '2 rollen', priority: 'recommended' },
+      { name: 'Ontsmettingsmiddel', quantity: '1 flesje', priority: 'critical' },
+      { name: 'Persoonlijke medicijnen', quantity: 'Voor 3+ dagen', priority: 'critical' },
+      { name: 'Pijnstillers', quantity: '1 doosje', priority: 'recommended' },
+    ]
+  },
+  {
+    name: 'Hygiëne',
+    icon: '🧴',
+    items: [
+      { name: 'Toiletpapier (compact)', quantity: '1-2 rollen', priority: 'critical' },
+      { name: 'Vochtige doekjes', quantity: '2 verpakkingen', priority: 'critical' },
+      { name: 'Handgel', quantity: '1-2 flesjes', priority: 'critical' },
+      { name: 'Vuilniszakken', quantity: '5-10 stuks', priority: 'recommended' },
+      { name: 'Menstruatieproducten', quantity: 'Naar behoefte', priority: 'critical' },
+    ]
+  },
+  {
+    name: 'Gereedschap',
+    icon: '🔧',
+    items: [
+      { name: 'Zakmes/multitool', quantity: '1 stuks', priority: 'critical' },
+      { name: 'Ducttape', quantity: '1 kleine rol', priority: 'recommended' },
+      { name: 'Fluitje', quantity: '1 per persoon', priority: 'critical' },
+      { name: 'Werkhandschoenen', quantity: '1 paar', priority: 'recommended' },
+      { name: 'Touw', quantity: '5-10 meter', priority: 'optional' },
+    ]
+  },
+  {
+    name: 'Bescherming',
+    icon: '🧥',
+    items: [
+      { name: 'Reddingsdeken', quantity: '1 per persoon', priority: 'critical' },
+      { name: 'Regenponcho', quantity: '1 per persoon', priority: 'recommended' },
+      { name: 'Wisselkleding', quantity: '1 set', priority: 'recommended' },
+      { name: 'Mondkapjes', quantity: '5-10 stuks', priority: 'recommended' },
+    ]
+  },
+];
+
+const adaptations = [
+  {
+    group: "Baby's en jonge kinderen",
+    icon: '👶',
+    items: ['Luiers voor 3+ dagen', 'Flesvoeding / potjes', 'Flesjes', 'Reserve speen', 'Speciaal dekentje', 'Klein knuffeldier']
+  },
+  {
+    group: 'Ouderen',
+    icon: '👴',
+    items: ['Extra medicatie (minimaal 7 dagen)', 'Reserve bril', 'Gehoorapparaat en batterijen', 'Actuele medicatielijst', 'Contactgegevens huisarts']
+  },
+  {
+    group: 'Huisdieren',
+    icon: '🐕',
+    items: ['Voer voor 3+ dagen', 'Extra water', 'Riem en transportbox', 'Dierenartsdocumenten', 'Eventuele medicatie', 'Poepzakjes']
+  },
+  {
+    group: 'Medische aandoeningen',
+    icon: '💊',
+    items: ['Insuline en koeltas', 'Inhalatoren', 'EpiPens', 'Glucosemeter', 'Draagbare bloeddrukmeter', 'Draagbare zuurstof indien nodig']
+  },
+];
+
+const maintenanceSchedule = [
+  { task: 'Houdbaarheidsdatums controleren', frequency: 'Elke 3 maanden' },
+  { task: 'Flessenwater vervangen', frequency: 'Elke 6 maanden' },
+  { task: 'Batterijen en powerbanks controleren', frequency: 'Elke 3 maanden' },
+  { task: 'Documenten bijwerken', frequency: 'Bij wijzigingen' },
+  { task: 'Kleding controleren (kindermaten)', frequency: 'Elke 6 maanden' },
+  { task: 'Medicijnen vernieuwen', frequency: 'Vóór vervaldatum' },
+  { task: 'Zaklampen en radio testen', frequency: 'Elke 3 maanden' },
+  { task: 'Complete controle noodpakket', frequency: '2x per jaar' },
+];
+
+const commonMistakes = [
+  {
+    mistake: 'Te zwaar pakket',
+    why: 'Als je het niet kunt dragen, is het nutteloos bij evacuatie',
+    solution: 'Beperk gewicht tot 10-15 kg. Prioriteer het essentiële.',
+  },
+  {
+    mistake: 'Water vergeten',
+    why: 'Dit is het eerste wat je nodig hebt en neemt de meeste ruimte in',
+    solution: 'Bereken 3L/persoon/dag. Water is niet onderhandelbaar.',
+  },
+  {
+    mistake: 'Houdbaarheidsdatums niet controleren',
+    why: 'Verlopen voedsel en medicijnen werken niet',
+    solution: 'Zet een driemaandelijkse herinnering in je agenda.',
+  },
+  {
+    mistake: 'Onbereikbare opbergplek',
+    why: 'Bij een noodsituatie telt elke seconde',
+    solution: 'Locatie moet bekend zijn bij iedereen en snel toegankelijk.',
+  },
+  {
+    mistake: 'Geen contant geld',
+    why: 'Pinautomaten en betaalterminals kunnen uitvallen',
+    solution: 'Neem €70 (volwassene) of €30 (kind) in kleine coupures mee.',
+  },
+  {
+    mistake: 'Documenten vergeten',
+    why: 'Je moet je kunnen identificeren en familie kunnen bereiken',
+    solution: 'Kopieën van ID, zorgpas, contactenlijst meenemen.',
+  },
+];
+
+const faqs = [
+  {
+    question: 'Waarom precies 72 uur?',
+    answer: 'Dit is de tijd die hulpdiensten gemiddeld nodig hebben om basisdiensten te herstellen of getroffen gebieden te bereiken. De Rijksoverheid en internationale organisaties zoals het Rode Kruis hanteren deze standaard. Het betekent niet dat alle noodsituaties 72 uur duren, maar het is een redelijke periode van zelfredzaamheid voor de meeste situaties.'
+  },
+  {
+    question: 'Wat is het verschil tussen een noodpakket en een evacuatietas?',
+    answer: 'Een noodpakket is bedoeld om 72 uur thuis te kunnen overleven zonder basisdiensten. Een evacuatietas (ook wel noodtas of grab-and-go bag) is specifiek om mee te nemen als je snel moet vertrekken. Ideaal is om beide te hebben: een uitgebreider thuispakket en een compacte tas om mee te nemen.'
+  },
+  {
+    question: 'Hoeveel moet mijn noodpakket wegen?',
+    answer: 'Ideaal tussen 10-15 kg voor een volwassene. Als het zwaarder is, kun je het waarschijnlijk niet lang dragen bij evacuatie. Prioriteer water, voedsel, documenten en EHBO. De rest is secundair als gewicht een probleem is.'
+  },
+  {
+    question: 'Heb ik per persoon een pakket nodig?',
+    answer: 'Dat hangt af van je situatie. Een gedeeld gezinspakket werkt als jullie altijd samen zijn. Maar overweeg individuele (kleinere) pakketten als: er oudere kinderen zijn die kunnen dragen, gezinsleden gescheiden kunnen raken, of je in een gebied woont met hoog risico op snelle evacuatie.'
+  },
+  {
+    question: 'Wat voor tas heb ik nodig?',
+    answer: 'Een stevige rugzak met meerdere compartimenten. Geen dure of tactische tas nodig. Belangrijk is: verstevigde naden, gewatteerde schouderbanden, waterafstotend materiaal of regenhoes, en passende grootte (40-60L voor gezinspakket, 25-35L individueel).'
+  },
+  {
+    question: 'Waar kan ik de officiële Rijksoverheid checklist vinden?',
+    answer: 'De Rijksoverheid heeft een officiële noodpakketlijst op rijksoverheid.nl. Zoek naar "Denk Vooruit" of "noodpakket" op de website. Onze checklist is gebaseerd op deze officiële richtlijnen, aangevuld met praktische tips.'
+  },
+];
+---
+
+<ArticleLayout
+  faqData={faqs}
+  title="Noodpakket 72 uur: Complete Gids voor je Noodtas"
+  description="Alles wat je moet weten om een noodpakket voor 72 uur samen te stellen. Complete checklist, exacte hoeveelheden en praktische tips volgens Rijksoverheid richtlijnen."
+  updatedDate="2025-12-15"
+  author="Team Kit-72"
+  readTime="14 min"
+  breadcrumbs={breadcrumbs}
+  locale="nl"
+>
+  <!-- TOC Slot -->
+  <nav slot="toc" class="p-4 bg-[--color-bg-tertiary] rounded-lg">
+    <h2 class="text-sm font-semibold mb-3 text-[--color-text-primary]">Op deze pagina</h2>
+    <ul class="space-y-2 text-sm">
+      {tocItems.map((item) => (
+        <li>
+          <a
+            href={`#${item.id}`}
+            class="text-[--color-text-secondary] hover:text-[--color-accent-primary] transition-colors"
+          >
+            {item.label}
+          </a>
+        </li>
+      ))}
+    </ul>
+  </nav>
+
+  <!-- Main Content -->
+  <section id="wat-is" class="mb-12">
+    <h2>Wat is een noodpakket 72 uur?</h2>
+    <p>
+      Een <strong>noodpakket</strong> (ook wel noodtas, evacuatietas of grab-and-go bag genoemd)
+      is een verzameling essentiële benodigdheden waarmee je 3 dagen zelfstandig kunt overleven
+      zonder toegang tot basisdiensten zoals stromend water, elektriciteit of winkels.
+    </p>
+    <p>
+      Het idee is eenvoudig: als er een noodsituatie ontstaat waardoor je moet evacueren of
+      waardoor diensten dagenlang uitvallen, heb je alles wat je nodig hebt al klaarliggen.
+    </p>
+
+    <div class="card p-6 my-6 not-prose">
+      <div class="flex items-start gap-4">
+        <span class="text-3xl">🎒</span>
+        <div>
+          <h3 class="font-semibold mb-2 text-[--color-text-primary] text-base">Het concept in één zin</h3>
+          <p class="text-[--color-text-secondary] m-0">
+            Een tas die je binnen 5 minuten kunt pakken en vertrekken, wetende dat je alles hebt
+            wat je en je gezin de komende 3 dagen nodig hebben.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="card p-6 my-6 not-prose bg-[--color-accent-subtle] border-[--color-border-accent]">
+      <p class="text-sm text-[--color-text-primary] m-0">
+        <strong>📋 Denk Vooruit:</strong> In november 2025 stuurt de Rijksoverheid een noodpakket-folder
+        naar alle 8,5 miljoen huishoudens in Nederland. Deze pagina volgt de officiële richtlijnen
+        en vult aan met praktische tips.
+      </p>
+    </div>
+  </section>
+
+  <section id="waarom-72-uur" class="mb-12">
+    <h2>Waarom 72 uur?</h2>
+    <p>
+      De periode van 72 uur (3 dagen) is geen willekeurige keuze. Het is de internationale standaard
+      aanbevolen door:
+    </p>
+    <ul>
+      <li><strong>Rijksoverheid</strong> (Nederland)</li>
+      <li><strong>Rode Kruis</strong> internationaal</li>
+      <li><strong>Veiligheidsregio's</strong></li>
+      <li><strong>FEMA</strong> (Verenigde Staten)</li>
+    </ul>
+
+    <p>Waarom precies deze periode?</p>
+
+    <div class="grid md:grid-cols-3 gap-4 my-6 not-prose">
+      <div class="card p-4">
+        <div class="text-2xl mb-2">⏱️</div>
+        <h3 class="font-semibold mb-1 text-[--color-text-primary] text-base">Responstijd</h3>
+        <p class="text-sm text-[--color-text-secondary] m-0">
+          72 uur is de typische maximale tijd voor hulpdiensten om basisdiensten
+          te herstellen in de meeste situaties.
+        </p>
+      </div>
+      <div class="card p-4">
+        <div class="text-2xl mb-2">⚖️</div>
+        <h3 class="font-semibold mb-1 text-[--color-text-primary] text-base">Praktisch evenwicht</h3>
+        <p class="text-sm text-[--color-text-secondary] m-0">
+          Voldoende om de meeste noodsituaties te overbruggen, maar het pakket
+          blijft draagbaar qua gewicht en grootte.
+        </p>
+      </div>
+      <div class="card p-4">
+        <div class="text-2xl mb-2">📊</div>
+        <h3 class="font-semibold mb-1 text-[--color-text-primary] text-base">Statistisch gegeven</h3>
+        <p class="text-sm text-[--color-text-secondary] m-0">
+          95% van de noodsituaties die burgers treffen wordt binnen
+          72 uur opgelost of gestabiliseerd.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section id="inhoud" class="mb-12">
+    <h2>Essentiële inhoud van het noodpakket</h2>
+    <p>
+      Hier vind je de complete checklist georganiseerd per categorie. Elk item is gemarkeerd
+      met prioriteitsniveau:
+    </p>
+
+    <div class="flex flex-wrap gap-3 my-4 not-prose">
+      <span class="inline-flex items-center gap-2 px-3 py-1 badge-critical text-xs font-medium rounded">
+        <span class="w-2 h-2 bg-[--color-status-critical] rounded-full"></span>
+        Kritiek — Onmisbaar
+      </span>
+      <span class="inline-flex items-center gap-2 px-3 py-1 badge-warning text-xs font-medium rounded">
+        <span class="w-2 h-2 bg-[--color-status-warning] rounded-full"></span>
+        Aanbevolen — Zeer nuttig
+      </span>
+      <span class="inline-flex items-center gap-2 px-3 py-1 badge-info text-xs font-medium rounded">
+        <span class="w-2 h-2 bg-[--color-status-info] rounded-full"></span>
+        Optioneel — Als er ruimte is
+      </span>
+    </div>
+
+    <div class="space-y-8 my-8">
+      {essentialCategories.map((category) => (
+        <div class="card overflow-hidden">
+          <div class="px-6 py-4 bg-[--color-bg-tertiary] border-b border-[--color-border]">
+            <h3 class="flex items-center gap-3 text-lg font-semibold m-0">
+              <span class="text-2xl">{category.icon}</span>
+              {category.name}
+            </h3>
+          </div>
+          <div class="divide-y divide-[--color-border]">
+            {category.items.map((item) => (
+              <div class="px-6 py-3 flex items-center justify-between">
+                <div class="flex items-center gap-3">
+                  <span class={`w-2 h-2 rounded-full ${
+                    item.priority === 'critical' ? 'bg-[--color-status-critical]' :
+                    item.priority === 'recommended' ? 'bg-[--color-status-warning]' :
+                    'bg-[--color-status-info]'
+                  }`}></span>
+                  <span class="font-medium text-[--color-text-primary]">{item.name}</span>
+                </div>
+                <span class="text-sm text-[--color-text-secondary]">{item.quantity}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <section id="organisatie" class="mb-12">
+    <h2>Hoe je noodpakket organiseren</h2>
+    <p>
+      Organisatie is bijna net zo belangrijk als de inhoud. Een slecht georganiseerd pakket
+      kost je kostbare tijd bij het zoeken naar spullen wanneer je ze het hardst nodig hebt.
+    </p>
+
+    <h3>Lagensysteem</h3>
+    <p>Organiseer je rugzak in "lagen" op basis van gebruiksfrequentie:</p>
+
+    <div class="card p-6 my-6 not-prose">
+      <div class="space-y-4">
+        <div class="flex items-start gap-4">
+          <span class="flex-shrink-0 w-8 h-8 flex items-center justify-center bg-[--color-status-critical] text-white rounded-full font-bold text-sm">1</span>
+          <div>
+            <h3 class="font-semibold text-[--color-text-primary] text-base">Buitenvakken en zijvakken</h3>
+            <p class="text-sm text-[--color-text-secondary] m-0">
+              Zaklamp, fluitje, snacks, waterfles, documenten. Wat je nodig hebt zonder de rugzak te openen.
+            </p>
+          </div>
+        </div>
+        <div class="flex items-start gap-4">
+          <span class="flex-shrink-0 w-8 h-8 flex items-center justify-center bg-[--color-status-warning] text-white rounded-full font-bold text-sm">2</span>
+          <div>
+            <h3 class="font-semibold text-[--color-text-primary] text-base">Bovenkant hoofdcompartiment</h3>
+            <p class="text-sm text-[--color-text-secondary] m-0">
+              EHBO-kit, powerbank, eten voor eerste dag, regenponcho. Snelle toegang maar beschermd.
+            </p>
+          </div>
+        </div>
+        <div class="flex items-start gap-4">
+          <span class="flex-shrink-0 w-8 h-8 flex items-center justify-center bg-[--color-status-info] text-white rounded-full font-bold text-sm">3</span>
+          <div>
+            <h3 class="font-semibold text-[--color-text-primary] text-base">Onderkant rugzak</h3>
+            <p class="text-sm text-[--color-text-secondary] m-0">
+              Wisselkleding, reddingsdeken, gereedschap, eten voor dag 2-3. Wat je minder vaak gebruikt.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="opbergen" class="mb-12">
+    <h2>Waar je noodpakket bewaren</h2>
+    <p>
+      Het beste noodpakket ter wereld is nutteloos als je er niet bij kunt. Kies de locatie zorgvuldig.
+    </p>
+
+    <div class="grid md:grid-cols-2 gap-6 my-6 not-prose">
+      <div class="card p-6 border-l-4 border-l-[--color-status-success]">
+        <h3 class="font-semibold mb-3 text-[--color-status-success] text-base">✓ Goede locaties</h3>
+        <ul class="space-y-2 text-sm text-[--color-text-secondary]">
+          <li>Gangkast (snelle toegang)</li>
+          <li>Bij de garagedeur</li>
+          <li>In de kofferbak (tweede pakket)</li>
+          <li>Onder de trap als toegankelijk</li>
+          <li>In de route naar de uitgang</li>
+        </ul>
+      </div>
+      <div class="card p-6 border-l-4 border-l-[--color-status-critical]">
+        <h3 class="font-semibold mb-3 text-[--color-status-critical] text-base">✗ Slechte locaties</h3>
+        <ul class="space-y-2 text-sm text-[--color-text-secondary]">
+          <li>Kelder zonder alternatieve uitgang</li>
+          <li>Berging ver van de woning</li>
+          <li>Hoge kasten die moeilijk bereikbaar zijn</li>
+          <li>Vochtige of extreem warme plekken</li>
+          <li>Achter zware meubels</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="aanpassingen" class="mb-12">
+    <h2>Speciale aanpassingen</h2>
+    <p>
+      Het basispakket is een startpunt. Afhankelijk van je gezinssituatie moet je
+      specifieke items toevoegen.
+    </p>
+
+    <div class="grid md:grid-cols-2 gap-6 my-8">
+      {adaptations.map((group) => (
+        <div class="card p-6">
+          <h3 class="flex items-center gap-3 text-lg font-semibold mb-4">
+            <span class="text-2xl">{group.icon}</span>
+            {group.group}
+          </h3>
+          <ul class="space-y-2 text-sm">
+            {group.items.map((item) => (
+              <li class="flex items-center gap-2 text-[--color-text-secondary]">
+                <span class="w-1.5 h-1.5 bg-[--color-accent-primary] rounded-full flex-shrink-0"></span>
+                {item}
+              </li>
+            ))}
+          </ul>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <section id="onderhoud" class="mb-12">
+    <h2>Onderhoud van je noodpakket</h2>
+    <p>
+      Een vergeten noodpakket is een nutteloos noodpakket. Stel een controle-agenda op en houd je eraan.
+    </p>
+
+    <div class="overflow-x-auto my-6">
+      <table>
+        <thead>
+          <tr>
+            <th>Taak</th>
+            <th>Frequentie</th>
+          </tr>
+        </thead>
+        <tbody>
+          {maintenanceSchedule.map((item) => (
+            <tr>
+              <td>{item.task}</td>
+              <td><code>{item.frequency}</code></td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section id="fouten" class="mb-12">
+    <h2>Veelgemaakte fouten (en hoe ze te vermijden)</h2>
+
+    <div class="space-y-4 my-8">
+      {commonMistakes.map((item) => (
+        <div class="card p-6">
+          <div class="flex items-start gap-4">
+            <span class="text-2xl flex-shrink-0">⚠️</span>
+            <div>
+              <h3 class="font-semibold text-[--color-text-primary] mb-1 text-base">{item.mistake}</h3>
+              <p class="text-sm text-[--color-text-secondary] mb-2">
+                <strong>Waarom een probleem:</strong> {item.why}
+              </p>
+              <p class="text-sm text-[--color-accent-primary] m-0">
+                <strong>Oplossing:</strong> {item.solution}
+              </p>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <section id="faq" class="mb-12">
+    <h2>Veelgestelde vragen</h2>
+
+    <div class="space-y-4 my-8">
+      {faqs.map((faq) => (
+        <details class="card group">
+          <summary class="px-6 py-4 cursor-pointer list-none flex items-center justify-between hover:bg-[--color-bg-tertiary] transition-colors">
+            <span class="font-medium text-[--color-text-primary] pr-4">{faq.question}</span>
+            <svg
+              class="w-5 h-5 text-[--color-text-muted] transform transition-transform group-open:rotate-180 flex-shrink-0"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+            </svg>
+          </summary>
+          <div class="px-6 pb-4">
+            <p class="text-[--color-text-secondary] m-0">{faq.answer}</p>
+          </div>
+        </details>
+      ))}
+    </div>
+  </section>
+
+  <!-- Sources Slot -->
+  <div slot="sources">
+    <h2 id="bronnen">Bronnen en referenties</h2>
+    <ul class="text-sm space-y-2">
+      <li>
+        <a href="https://www.rijksoverheid.nl/onderwerpen/veiligheidsregios-en-crisisbeheersing/vraag-en-antwoord/wat-zit-er-in-een-noodpakket" target="_blank" rel="noopener">
+          Rijksoverheid — Wat zit er in een noodpakket?
+        </a>
+      </li>
+      <li>
+        <a href="https://www.rodekruis.nl/" target="_blank" rel="noopener">
+          Rode Kruis Nederland — Noodhulp en preparatie
+        </a>
+      </li>
+      <li>
+        <a href="https://crisis.nl/" target="_blank" rel="noopener">
+          Crisis.nl — Officiële crisisinformatie
+        </a>
+      </li>
+      <li>
+        <a href="https://www.ready.gov/" target="_blank" rel="noopener">
+          Ready.gov (FEMA) — Build a Kit
+        </a>
+      </li>
+    </ul>
+  </div>
+
+  <!-- CTA Slot -->
+  <div slot="cta" class="card p-8 text-center bg-[--color-bg-tertiary]">
+    <h3 class="text-xl font-semibold mb-4">Wil je je pakket personaliseren?</h3>
+    <p class="text-[--color-text-secondary] mb-6">
+      Gebruik onze interactieve configurator om een checklist te maken die is aangepast aan
+      jouw gezin, huisdieren en specifieke situatie.
+    </p>
+    <div class="flex flex-wrap gap-4 justify-center">
+      <a
+        href="/nl/tools/noodpakket-samenstellen/"
+        class="inline-flex items-center gap-2 px-6 py-3 bg-[--color-accent-primary] text-[--color-bg-primary] font-semibold rounded hover:bg-[--color-accent-hover] transition-colors"
+      >
+        Mijn pakket samenstellen
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+        </svg>
+      </a>
+      <a
+        href="/nl/noodpakket-samenstellen/"
+        class="inline-flex items-center gap-2 px-6 py-3 border border-[--color-border] text-[--color-text-primary] font-medium rounded hover:border-[--color-accent-primary] hover:text-[--color-accent-primary] transition-colors"
+      >
+        Complete noodpakket gids
+      </a>
+    </div>
+  </div>
+</ArticleLayout>

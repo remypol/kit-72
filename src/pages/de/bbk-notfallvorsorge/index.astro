@@ -1,0 +1,343 @@
+---
+/**
+ * BBK Notfallvorsorge - German Federal Office for Civil Protection
+ *
+ * The BBK (Bundesamt für Bevölkerungsschutz und Katastrophenhilfe) is Germany's
+ * federal agency for civil protection. This page explains their recommendations
+ * and how Kit-72 helps implement them.
+ */
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import Breadcrumb from '../../../components/layout/Breadcrumb.astro';
+import Icon from '../../../components/ui/Icon.astro';
+import HeroImage from '../../../components/content/HeroImage.astro';
+
+const bbkChecklist = [
+  {
+    category: 'Getränke',
+    items: ['2 Liter Wasser pro Person pro Tag', 'Für mindestens 10 Tage', 'Auch stilles Wasser lagern'],
+    icon: 'Droplet',
+    kitLink: '/de/produkte/wasserspeicher/',
+    bbkNote: 'Das BBK empfiehlt 20 Liter pro Person für 10 Tage'
+  },
+  {
+    category: 'Lebensmittel',
+    items: ['2.200 kcal pro Person pro Tag', 'Haltbare Lebensmittel für 10 Tage', 'Keine Kühlung erforderlich'],
+    icon: 'UtensilsCrossed',
+    kitLink: '/de/produkte/notnahrung/',
+    bbkNote: 'Rotationsprinzip: In den Alltag einbauen'
+  },
+  {
+    category: 'Hausapotheke',
+    items: ['Verbandskasten DIN 13164', 'Persönliche Medikamente', 'Fieberthermometer', 'Desinfektionsmittel'],
+    icon: 'Heart',
+    kitLink: '/de/produkte/erste-hilfe-kasten/',
+    bbkNote: 'Regelmäßig Verfallsdaten prüfen'
+  },
+  {
+    category: 'Hygiene',
+    items: ['Seife, Zahnpasta', 'Toilettenpapier', 'Müllbeutel', 'Desinfektionsmittel'],
+    icon: 'Sparkles',
+    kitLink: null,
+    bbkNote: 'Für 10 Tage einplanen'
+  },
+  {
+    category: 'Notgepäck',
+    items: ['Dokumentenmappe', 'Bargeld', 'Wechselkleidung', 'Schlafsack oder Decke'],
+    icon: 'Backpack',
+    kitLink: '/de/produkte/notfallrucksack/',
+    bbkNote: 'Griffbereit für schnelle Evakuierung'
+  },
+  {
+    category: 'Energieversorgung',
+    items: ['Batteriebetriebenes Radio', 'Taschenlampen mit Batterien', 'Kerzen und Streichhölzer', 'Powerbank'],
+    icon: 'Battery',
+    kitLink: '/de/produkte/powerbanks/',
+    bbkNote: 'NINA-App als Ergänzung zum Radio'
+  },
+];
+
+const ninaFeatures = [
+  'Warnmeldungen des Bundes und der Länder',
+  'Wetterwarnungen vom DWD',
+  'Hochwasserwarnungen',
+  'Standortbezogene Benachrichtigungen',
+  'Notfalltipps und Verhaltenshinweise',
+];
+
+const bbkResources = [
+  { title: 'BBK Ratgeber für Notfallvorsorge', url: 'https://www.bbk.bund.de/DE/Warnung-Vorsorge/Vorsorge/Ratgeber/ratgeber_node.html', description: 'Offizielle Checklisten und Empfehlungen' },
+  { title: 'NINA Warn-App', url: 'https://www.bbk.bund.de/DE/Warnung-Vorsorge/Warn-App-NINA/warn-app-nina_node.html', description: 'Die offizielle Warn-App des Bundes' },
+  { title: 'Ernährungsnotfallvorsorge', url: 'https://www.ernaehrungsvorsorge.de/', description: 'Detaillierte Lebensmittelplanung' },
+  { title: 'Bundesweite Warntage', url: 'https://warnung-der-bevoelkerung.de/', description: 'Informationen zu Sirenensignalen und Warnsystemen' },
+];
+
+const threats2025 = [
+  {
+    threat: 'Stromausfall',
+    likelihood: 'Mittel',
+    description: 'Durch Extremwetter, Netzüberlastung oder Cyberangriffe',
+    icon: 'Zap',
+    link: '/de/szenarien/stromausfall/'
+  },
+  {
+    threat: 'Hochwasser',
+    likelihood: 'Hoch',
+    description: 'Klimawandel erhöht Risiko von Starkregenereignissen',
+    icon: 'Waves',
+    link: null
+  },
+  {
+    threat: 'Cyberangriff',
+    likelihood: 'Steigend',
+    description: 'Kritische Infrastruktur zunehmend bedroht',
+    icon: 'Shield',
+    link: null
+  },
+  {
+    threat: 'Hitzewelle',
+    likelihood: 'Hoch',
+    description: 'Sommer 2022/2023 als Vorgeschmack',
+    icon: 'Sun',
+    link: '/de/szenarien/hitzewelle/'
+  },
+];
+---
+
+<BaseLayout
+  title="BBK Notfallvorsorge: Offizielle Empfehlungen für Deutschland — Kit-72"
+  description="Das BBK empfiehlt Vorräte für 10 Tage. Hier findest du die offiziellen Empfehlungen des Bundesamts für Bevölkerungsschutz und wie du sie umsetzt."
+  locale="de"
+  dateModified="2025-12-16"
+  schemaType="Article"
+>
+  <section class="py-16">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6">
+      <Breadcrumb
+        items={[{ label: 'BBK Notfallvorsorge' }]}
+        class="mb-4"
+        locale="de"
+      />
+
+      <header class="mb-8">
+        <div class="inline-flex items-center gap-2 px-3 py-1 bg-red-100 dark:bg-red-950/30 text-red-700 dark:text-red-400 rounded-full text-sm font-medium mb-4">
+          <Icon name="Flag" size={16} />
+          Offizielle Bundesempfehlungen
+        </div>
+        <h1 class="text-4xl font-bold mb-4">
+          BBK Notfallvorsorge: Was empfiehlt der Bund?
+        </h1>
+        <p class="text-xl text-[--color-text-secondary]">
+          Das Bundesamt für Bevölkerungsschutz und Katastrophenhilfe (BBK) empfiehlt
+          allen Haushalten, Vorräte für <strong>mindestens 10 Tage</strong> anzulegen.
+          Hier erfährst du, was das konkret bedeutet.
+        </p>
+      </header>
+
+      <HeroImage
+        src="/images/shared/emergency-kit-flatlay.webp"
+        alt="Notfallvorsorge nach BBK-Empfehlungen"
+        priority={true}
+      />
+
+      <div class="prose prose-lg mt-8">
+
+        <!-- Key Stats -->
+        <div class="not-prose grid sm:grid-cols-3 gap-4 my-8">
+          <div class="card p-4 text-center">
+            <p class="text-3xl font-bold text-[--color-accent-primary]">10</p>
+            <p class="text-sm text-[--color-text-secondary]">Tage Vorrat empfohlen</p>
+          </div>
+          <div class="card p-4 text-center">
+            <p class="text-3xl font-bold text-[--color-accent-primary]">20L</p>
+            <p class="text-sm text-[--color-text-secondary]">Wasser pro Person</p>
+          </div>
+          <div class="card p-4 text-center">
+            <p class="text-3xl font-bold text-[--color-accent-primary]">2.200</p>
+            <p class="text-sm text-[--color-text-secondary]">kcal pro Tag</p>
+          </div>
+        </div>
+
+        <h2>Warum 10 Tage?</h2>
+        <p>
+          Das BBK hat seine Empfehlungen nach der COVID-Pandemie und den Hochwasserkatastrophen
+          2021 aktualisiert. Die Erfahrung zeigt: In schweren Krisen können Versorgungsketten
+          tagelang unterbrochen sein. 10 Tage Selbstversorgung geben Behörden Zeit, Hilfe
+          zu organisieren.
+        </p>
+
+        <div class="not-prose card p-6 my-8 bg-amber-50 dark:bg-amber-950/20 border-l-4 border-l-amber-500">
+          <h3 class="font-semibold mb-2 flex items-center gap-2">
+            <Icon name="AlertTriangle" size={20} class="text-amber-500" />
+            Wichtige Änderung
+          </h3>
+          <p class="text-[--color-text-secondary]">
+            Das BBK empfiehlt inzwischen <strong>10 Tage</strong> statt der früher üblichen
+            3 Tage (72 Stunden). Kit-72 hilft dir beim Einstieg — du kannst später erweitern.
+          </p>
+        </div>
+
+        <h2>Offizielle BBK-Checkliste</h2>
+        <p>
+          Diese Empfehlungen stammen direkt vom Bundesamt für Bevölkerungsschutz:
+        </p>
+
+        <div class="not-prose grid gap-4 my-8">
+          {bbkChecklist.map((category) => (
+            <div class="card p-4">
+              <div class="flex items-start gap-4">
+                <div class="flex-shrink-0 w-12 h-12 rounded-lg bg-[--color-accent-subtle] flex items-center justify-center">
+                  <Icon name={category.icon} size={24} class="text-[--color-accent-primary]" />
+                </div>
+                <div class="flex-1">
+                  <h3 class="font-semibold text-lg mb-2">{category.category}</h3>
+                  <ul class="space-y-1 mb-2">
+                    {category.items.map((item) => (
+                      <li class="flex items-center gap-2 text-sm text-[--color-text-secondary]">
+                        <Icon name="Check" size={16} class="text-green-500 flex-shrink-0" />
+                        {item}
+                      </li>
+                    ))}
+                  </ul>
+                  <p class="text-xs text-[--color-text-muted] italic">{category.bbkNote}</p>
+                  {category.kitLink && (
+                    <a href={category.kitLink} class="inline-flex items-center gap-1 mt-2 text-sm text-[--color-accent-primary] hover:underline">
+                      Unsere Produktempfehlungen
+                      <Icon name="ArrowRight" size={14} />
+                    </a>
+                  )}
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <h2>NINA: Die Warn-App des Bundes</h2>
+        <p>
+          Die <strong>NINA-App</strong> (Notfall-Informations- und Nachrichten-App) ist
+          das zentrale Warnsystem des Bundes. Sie sendet Push-Nachrichten bei:
+        </p>
+
+        <div class="not-prose my-6">
+          <ul class="space-y-2">
+            {ninaFeatures.map((feature) => (
+              <li class="flex items-center gap-3 p-3 bg-[--color-bg-tertiary] rounded-lg">
+                <Icon name="Bell" size={18} class="text-[--color-accent-primary] flex-shrink-0" />
+                <span>{feature}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <div class="not-prose card p-4 my-6 border-l-4 border-l-blue-500 bg-blue-50 dark:bg-blue-950/20">
+          <p class="text-sm">
+            <strong>Wichtig:</strong> NINA funktioniert nur bei Strom und Mobilfunknetz.
+            Bei großflächigen Ausfällen ist ein <strong>batteriebetriebenes Radio</strong>
+            die zuverlässigste Informationsquelle.
+          </p>
+        </div>
+
+        <h2>Bedrohungsszenarien 2025</h2>
+        <p>
+          Das BBK und andere Behörden identifizieren folgende Szenarien als relevant:
+        </p>
+
+        <div class="not-prose grid sm:grid-cols-2 gap-4 my-8">
+          {threats2025.map((item) => (
+            <div class="card p-4">
+              <div class="flex items-center gap-3 mb-2">
+                <div class="w-10 h-10 rounded-full bg-[--color-bg-tertiary] flex items-center justify-center">
+                  <Icon name={item.icon} size={20} class="text-[--color-accent-primary]" />
+                </div>
+                <div>
+                  <h3 class="font-semibold">{item.threat}</h3>
+                  <span class="text-xs text-[--color-text-muted]">Wahrscheinlichkeit: {item.likelihood}</span>
+                </div>
+              </div>
+              <p class="text-sm text-[--color-text-secondary]">{item.description}</p>
+              {item.link && (
+                <a href={item.link} class="inline-flex items-center gap-1 mt-2 text-sm text-[--color-accent-primary] hover:underline">
+                  Mehr erfahren
+                  <Icon name="ArrowRight" size={14} />
+                </a>
+              )}
+            </div>
+          ))}
+        </div>
+
+        <h2>Von 72 Stunden zu 10 Tagen</h2>
+        <p>
+          Du musst nicht sofort für 10 Tage vorsorgen. Ein sinnvoller Ansatz:
+        </p>
+        <ol>
+          <li><strong>Start:</strong> 72 Stunden (3 Tage) — das Minimum für akute Notfälle</li>
+          <li><strong>Ausbau:</strong> Schrittweise auf 7 Tage erweitern</li>
+          <li><strong>Ziel:</strong> 10 Tage nach BBK-Empfehlung</li>
+        </ol>
+        <p>
+          Kit-72 hilft dir beim <strong>Einstieg mit 72 Stunden</strong>. Danach kannst du
+          deinen Vorrat Schritt für Schritt erweitern.
+        </p>
+
+        <!-- CTA Box -->
+        <div class="not-prose card p-6 my-8 bg-[--color-accent-subtle] border-2 border-[--color-accent-primary]">
+          <h3 class="font-semibold text-xl mb-3">Jetzt starten</h3>
+          <p class="text-[--color-text-secondary] mb-4">
+            Nutze unsere Tools, um dein Notfallpaket nach den offiziellen Empfehlungen zusammenzustellen.
+          </p>
+          <div class="flex flex-wrap gap-3">
+            <a
+              href="/de/tools/notfallpaket-zusammenstellen/"
+              class="inline-flex items-center gap-2 px-4 py-2 bg-[--color-accent-primary] text-[--color-bg-primary] font-medium rounded hover:bg-[--color-accent-hover] transition-colors"
+            >
+              <Icon name="Package" size={18} />
+              Notfallpaket zusammenstellen
+            </a>
+            <a
+              href="/de/notfallpaket-72-stunden/"
+              class="inline-flex items-center gap-2 px-4 py-2 border border-[--color-accent-primary] text-[--color-accent-primary] font-medium rounded hover:bg-[--color-accent-subtle] transition-colors"
+            >
+              Kompletter Ratgeber
+            </a>
+          </div>
+        </div>
+
+        <h2>Offizielle BBK-Ressourcen</h2>
+        <p>
+          Nutze diese offiziellen Quellen für weitere Informationen:
+        </p>
+
+        <div class="not-prose grid sm:grid-cols-2 gap-4 my-8">
+          {bbkResources.map((resource) => (
+            <a
+              href={resource.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="card p-4 hover:border-[--color-accent-primary] transition-colors group"
+            >
+              <div class="flex items-start justify-between gap-2">
+                <div>
+                  <h3 class="font-medium group-hover:text-[--color-accent-primary]">{resource.title}</h3>
+                  <p class="text-sm text-[--color-text-secondary] mt-1">{resource.description}</p>
+                </div>
+                <Icon name="ExternalLink" size={16} class="text-[--color-text-muted] flex-shrink-0" />
+              </div>
+            </a>
+          ))}
+        </div>
+
+        <h2>Fazit: Vorsorge ist Bürgerpflicht</h2>
+        <p>
+          Das BBK macht klar: <strong>Eigenverantwortung ist gefragt</strong>. Der Staat kann
+          nicht überall gleichzeitig helfen. Wer vorbereitet ist, entlastet die Rettungskräfte
+          und kann anderen helfen.
+        </p>
+        <p>
+          Die gute Nachricht: Vorsorge muss nicht teuer sein. Mit einem Budget von 100-200€
+          bist du für die meisten Szenarien gerüstet. Und das meiste davon verbrauchst du
+          ohnehin im Alltag — durch das Rotationsprinzip.
+        </p>
+
+      </div>
+    </div>
+  </section>
+</BaseLayout>

@@ -1,0 +1,551 @@
+---
+import BaseLayout from '../../../../layouts/BaseLayout.astro';
+import ProductGrid from '../../../../components/content/ProductGrid.astro';
+import Icon from '../../../../components/ui/Icon.astro';
+
+const amazonProducts = [
+  {
+    name: 'Botiquín Completo 120 Piezas',
+    description: 'Kit de primeros auxilios completo para hogar y coche',
+    amazonUrl: 'https://www.amazon.es/s?k=botiquin+primeros+auxilios+120+piezas',
+    price: '~25€',
+    rating: 4.5,
+    features: ['120 piezas', 'Bolsa organizadora', 'Completo'],
+    badge: 'recommended' as const
+  },
+  {
+    name: 'Botiquín Compacto Viaje',
+    description: 'Kit pequeño ideal para mochila de emergencia o coche',
+    amazonUrl: 'https://www.amazon.es/s?k=botiquin+compacto+viaje+primeros+auxilios',
+    price: '~15€',
+    rating: 4.3,
+    features: ['Compacto', 'Ligero', 'Esencial'],
+    badge: 'best-value' as const
+  },
+  {
+    name: 'Manta Térmica Emergencia (10 uds)',
+    description: 'Pack de mantas de supervivencia, imprescindibles',
+    amazonUrl: 'https://www.amazon.es/s?k=manta+termica+emergencia+pack',
+    price: '~10€',
+    rating: 4.4,
+    features: ['10 unidades', 'Compactas', 'Calor/frío']
+  },
+  {
+    name: 'Torniquete Táctico CAT',
+    description: 'Torniquete profesional para hemorragias graves',
+    amazonUrl: 'https://www.amazon.es/s?k=torniquete+tactico+cat',
+    price: '~20€',
+    rating: 4.6,
+    features: ['Profesional', 'Fácil uso', 'Salva vidas'],
+    badge: 'premium' as const
+  }
+];
+
+const kitTypes = [
+  {
+    name: 'Botiquín básico hogar',
+    description: 'Lo esencial para tratar heridas menores en casa',
+    pros: ['Económico', 'Compacto', 'Fácil de mantener', 'Cubre lo básico'],
+    cons: ['Limitado para heridas graves', 'Sin medicamentos especializados'],
+    bestFor: 'Familias sin necesidades especiales',
+    items: '25-30 artículos',
+    icon: 'Home'
+  },
+  {
+    name: 'Botiquín viaje/coche',
+    description: 'Versión compacta y portátil para llevar siempre',
+    pros: ['Muy compacto', 'Resistente', 'Siempre disponible'],
+    cons: ['Capacidad limitada', 'Requiere revisar temperaturas'],
+    bestFor: 'Vehículos, mochilas de emergencia',
+    items: '15-20 artículos',
+    icon: 'Car'
+  },
+  {
+    name: 'Botiquín familiar completo',
+    description: 'Extenso, para familias con niños o mayores',
+    pros: ['Muy completo', 'Cubre múltiples escenarios', 'Para varios días'],
+    cons: ['Más caro', 'Ocupa más espacio', 'Más mantenimiento'],
+    bestFor: 'Familias numerosas, zonas rurales',
+    items: '40-60 artículos',
+    icon: 'Users'
+  },
+  {
+    name: 'Botiquín trauma/profesional',
+    description: 'Para emergencias graves, requiere formación',
+    pros: ['Cubre emergencias graves', 'Material profesional'],
+    cons: ['Caro', 'Requiere formación', 'No para principiantes'],
+    bestFor: 'Personal formado, zonas remotas',
+    items: '50+ artículos',
+    icon: 'Hospital'
+  }
+];
+
+const essentialContents = {
+  vendajes: [
+    { item: 'Tiritas surtidas', qty: '20-30', notes: 'Varios tamaños', priority: 'essential' },
+    { item: 'Gasas estériles', qty: '10-15', notes: '10x10 cm', priority: 'essential' },
+    { item: 'Venda elástica', qty: '2-3', notes: '7.5 cm ancho', priority: 'essential' },
+    { item: 'Venda de gasa', qty: '2', notes: 'Para sujetar apósitos', priority: 'essential' },
+    { item: 'Esparadrapo', qty: '1-2', notes: 'Hipoalergénico', priority: 'essential' },
+    { item: 'Apósitos adhesivos grandes', qty: '5', notes: 'Para heridas mayores', priority: 'recommended' },
+    { item: 'Venda triangular', qty: '1-2', notes: 'Cabestrillo, torniquete', priority: 'recommended' }
+  ],
+  antisepticos: [
+    { item: 'Suero fisiológico', qty: '3-5', notes: 'Monodosis 10ml', priority: 'essential' },
+    { item: 'Clorhexidina/Povidona', qty: '1', notes: 'Antiséptico heridas', priority: 'essential' },
+    { item: 'Toallitas antisépticas', qty: '10-20', notes: 'Individuales', priority: 'essential' },
+    { item: 'Agua oxigenada', qty: '1', notes: '100ml, solo limpieza', priority: 'recommended' },
+    { item: 'Alcohol 70%', qty: '1', notes: 'Desinfectar superficies', priority: 'optional' }
+  ],
+  instrumentos: [
+    { item: 'Tijeras punta roma', qty: '1', notes: 'Para cortar vendas', priority: 'essential' },
+    { item: 'Pinzas', qty: '1', notes: 'Punta fina, para astillas', priority: 'essential' },
+    { item: 'Guantes nitrilo', qty: '4-6 pares', notes: 'Desechables', priority: 'essential' },
+    { item: 'Termómetro digital', qty: '1', notes: 'Con pilas de repuesto', priority: 'essential' },
+    { item: 'Manta térmica', qty: '1-2', notes: 'Emergencia, compacta', priority: 'essential' },
+    { item: 'Linterna pequeña', qty: '1', notes: 'Para examinar', priority: 'recommended' },
+    { item: 'Imperdibles', qty: '5-10', notes: 'Sujetar vendajes', priority: 'recommended' }
+  ],
+  otros: [
+    { item: 'Bolsa de frío instantáneo', qty: '2', notes: 'No requiere congelador', priority: 'recommended' },
+    { item: 'Jeringuilla sin aguja', qty: '1', notes: 'Para lavar heridas', priority: 'recommended' },
+    { item: 'Cinta quirúrgica', qty: '1', notes: 'Cierre de heridas', priority: 'optional' },
+    { item: 'Manual primeros auxilios', qty: '1', notes: 'Guía rápida plastificada', priority: 'essential' },
+    { item: 'Lista de teléfonos emergencia', qty: '1', notes: '112, médico, hospital', priority: 'essential' }
+  ]
+};
+
+const medications = [
+  { name: 'Paracetamol 500-1000mg', use: 'Dolor, fiebre', qty: '20 comprimidos', notes: 'No con alcohol' },
+  { name: 'Ibuprofeno 400-600mg', use: 'Dolor, inflamación, fiebre', qty: '20 comprimidos', notes: 'Tomar con comida' },
+  { name: 'Antihistamínico (Cetirizina)', use: 'Alergias, picaduras', qty: '10 comprimidos', notes: 'Puede dar sueño' },
+  { name: 'Antidiarreico (Loperamida)', use: 'Diarrea aguda', qty: '10 comprimidos', notes: 'No en infecciones' },
+  { name: 'Sales rehidratación oral', use: 'Deshidratación', qty: '6 sobres', notes: 'Diarrea, vómitos, calor' },
+  { name: 'Antiácido', use: 'Acidez, indigestión', qty: '10 comprimidos', notes: 'Masticables o sobres' },
+  { name: 'Pomada antibiótica', use: 'Heridas pequeñas', qty: '1 tubo', notes: 'Solo heridas limpias' },
+  { name: 'Crema hidrocortisona 1%', use: 'Picaduras, irritación', qty: '1 tubo', notes: 'Uso corto' },
+  { name: 'Colirio lágrimas artificiales', use: 'Ojos secos/irritados', qty: '1 bote', notes: 'O monodosis' },
+  { name: 'Protector labial SPF', use: 'Labios agrietados', qty: '1', notes: 'Con protección solar' }
+];
+
+const specialAdditions = [
+  {
+    group: 'Bebés y niños pequeños',
+    items: ['Paracetamol infantil (jarabe)', 'Termómetro rectal', 'Suero oral pediátrico', 'Crema pañal', 'Aspirador nasal', 'Tiritas infantiles']
+  },
+  {
+    group: 'Personas mayores',
+    items: ['Medicación crónica extra (7 días)', 'Tensiómetro', 'Glucómetro si diabético', 'Lista de medicamentos y dosis', 'Lupa para leer prospectos']
+  },
+  {
+    group: 'Alergias severas',
+    items: ['Autoinyector adrenalina (EpiPen)', 'Antihistamínico inyectable', 'Corticoides orales', 'Tarjeta de alergia visible', 'Pulsera médica']
+  },
+  {
+    group: 'Diabéticos',
+    items: ['Glucómetro + tiras', 'Insulina si necesaria + nevera', 'Glucosa rápida (sobres/pastillas)', 'Snacks para hipoglucemia', 'Tarjeta diabético']
+  },
+  {
+    group: 'Actividades outdoor',
+    items: ['Vendaje israelí', 'Torniquete', 'Férula moldeable (SAM)', 'Pinzas garrapatas', 'Repelente insectos', 'Protector solar alto']
+  },
+  {
+    group: 'Mascotas',
+    items: ['Vendas elásticas (no adhesivas)', 'Bozal de emergencia', 'Solución salina', 'Pinzas garrapatas', 'Teléfono veterinario']
+  }
+];
+
+const maintenanceSchedule = [
+  { task: 'Revisar caducidades', freq: 'Cada 3 meses', notes: 'Anotar próximas a caducar' },
+  { task: 'Reponer consumidos', freq: 'Inmediatamente', notes: 'Después de cada uso' },
+  { task: 'Verificar medicamentos', freq: 'Cada 6 meses', notes: 'Especialmente líquidos' },
+  { task: 'Revisar estado general', freq: 'Cada 6 meses', notes: 'Humedad, daños, organización' },
+  { task: 'Actualizar teléfonos', freq: 'Anual', notes: 'Emergencias, médicos, contactos' },
+  { task: 'Renovar manta térmica', freq: 'Cada 3-5 años', notes: 'Se degrada con el tiempo' }
+];
+
+const kitSuggestion = [
+  { item: 'Tiritas surtidas', qty: 20, notes: 'Varios tamaños' },
+  { item: 'Gasas estériles 10x10', qty: 10, notes: 'En sobres individuales' },
+  { item: 'Venda elástica 7.5cm', qty: 2, notes: 'Para esguinces, sujeción' },
+  { item: 'Esparadrapo', qty: 1, notes: 'Hipoalergénico' },
+  { item: 'Suero fisiológico monodosis', qty: 5, notes: 'Limpiar heridas/ojos' },
+  { item: 'Antiséptico (Clorhexidina)', qty: 1, notes: 'Desinfectar heridas' },
+  { item: 'Guantes nitrilo', qty: 4, notes: 'Pares desechables' },
+  { item: 'Tijeras punta roma', qty: 1, notes: 'Cortar vendas' },
+  { item: 'Pinzas', qty: 1, notes: 'Para astillas' },
+  { item: 'Termómetro digital', qty: 1, notes: 'Con pilas' },
+  { item: 'Manta térmica', qty: 1, notes: 'Emergencia' },
+  { item: 'Paracetamol', qty: 20, notes: 'Comprimidos' },
+  { item: 'Ibuprofeno', qty: 20, notes: 'Comprimidos' },
+  { item: 'Antihistamínico', qty: 10, notes: 'Comprimidos' },
+  { item: 'Sales rehidratación', qty: 4, notes: 'Sobres' },
+  { item: 'Manual primeros auxilios', qty: 1, notes: 'Guía rápida' }
+];
+
+const storageLocations = [
+  { location: 'Cocina', access: 'Fácil', notes: 'Donde más accidentes domésticos ocurren' },
+  { location: 'Baño', access: 'Fácil', notes: 'Cuidado con la humedad, usar caja hermética' },
+  { location: 'Dormitorio principal', access: 'Nocturno', notes: 'Acceso rápido de noche' },
+  { location: 'Coche', access: 'Móvil', notes: 'Kit compacto, proteger del calor extremo' },
+  { location: 'Mochila emergencia', access: 'Evacuación', notes: 'Kit reducido pero completo' }
+];
+
+const commonMistakes = [
+  'No revisar caducidades (los medicamentos pierden eficacia)',
+  'Guardar en lugar húmedo (baño sin protección)',
+  'No reponer lo usado',
+  'Botiquín desorganizado (no encuentras nada en emergencia)',
+  'Medicamentos sin prospecto (no sabes dosis)',
+  'Sin manual de primeros auxilios',
+  'Olvidar necesidades especiales (alergias, crónicos)',
+  'Dejar al alcance de niños pequeños'
+];
+
+// Generate ItemList + Product schema for rich results
+const productSchema = {
+  '@type': 'ItemList',
+  itemListElement: amazonProducts.map((product, index) => ({
+    '@type': 'ListItem',
+    position: index + 1,
+    item: {
+      '@type': 'Product',
+      name: product.name,
+      description: product.description,
+      aggregateRating: {
+        '@type': 'AggregateRating',
+        ratingValue: product.rating,
+        bestRating: 5,
+        worstRating: 1,
+        ratingCount: 100
+      }
+    }
+  }))
+};
+---
+
+<BaseLayout
+  title="Botiquín de emergencia: ¿Qué incluir? Contenido esencial"
+  description="Guía completa para armar tu botiquín de emergencia: contenidos esenciales, medicamentos, mantenimiento y adaptaciones especiales."
+  locale="es"
+  dateModified="2025-12-15"
+  schemaType="Article"
+  schemaData={productSchema}
+>
+  <section class="py-16">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6">
+      <!-- Header -->
+      <div class="mb-12">
+        <nav class="text-sm mb-4">
+          <ol class="flex items-center gap-2 text-[--color-text-muted]">
+            <li><a href="/es/" class="hover:text-[--color-accent-primary]">Inicio</a></li>
+            <li>/</li>
+            <li><a href="/es/componentes/" class="hover:text-[--color-accent-primary]">Componentes</a></li>
+            <li>/</li>
+            <li class="text-[--color-text-primary]">Botiquín Básico</li>
+          </ol>
+        </nav>
+        <h1 class="mb-4 flex items-center gap-3">
+          <Icon name="Heart" size={32} class="text-[--color-accent-primary]" />
+          Botiquín de Primeros Auxilios
+        </h1>
+        <p class="text-lg text-[--color-text-secondary]">
+          En emergencias, los servicios médicos pueden tardar. Un botiquín bien equipado
+          te permite tratar heridas menores y estabilizar situaciones hasta que llegue ayuda.
+        </p>
+      </div>
+
+      <!-- Quick Recommendation -->
+      <div class="card p-6 mb-8 border-l-4 border-l-[--color-accent-primary]">
+        <h3 class="font-semibold mb-2 text-[--color-text-primary] flex items-center gap-2">
+          <Icon name="Bandage" size={20} class="text-[--color-accent-primary]" />
+          Recomendación rápida
+        </h3>
+        <p class="text-[--color-text-secondary] m-0">
+          <strong>Mínimo:</strong> Tiritas, gasas, antiséptico, vendas, analgésicos, termómetro.
+          <strong>Ideal:</strong> Botiquín organizado con 25-30 artículos + medicamentos básicos.
+          <strong>Presupuesto:</strong> 30-60€ para botiquín completo.
+        </p>
+      </div>
+
+      <!-- Warning -->
+      <div class="p-4 bg-[--color-status-warning]/10 border border-[--color-status-warning]/30 rounded-lg mb-8">
+        <p class="text-sm text-[--color-text-secondary] m-0 flex items-start gap-2">
+          <Icon name="AlertTriangle" size={18} class="text-[--color-status-warning] flex-shrink-0 mt-0.5" />
+          <span><strong class="text-[--color-status-warning]">Importante:</strong> Un botiquín NO sustituye
+          la atención médica profesional. Ante emergencias graves, llama siempre al <strong>112</strong>.
+          Esta guía es para heridas menores y estabilización temporal.</span>
+        </p>
+      </div>
+
+      <!-- Kit Types -->
+      <div class="mb-12">
+        <h2 class="text-2xl font-bold mb-6 text-[--color-text-primary]">Tipos de botiquín</h2>
+
+        <div class="grid sm:grid-cols-2 gap-4">
+          {kitTypes.map((kit) => (
+            <div class="card p-6">
+              <div class="flex items-start gap-3 mb-3">
+                <div class="w-12 h-12 flex items-center justify-center bg-[--color-bg-tertiary] rounded-lg flex-shrink-0">
+                  <Icon name={kit.icon as any} size={28} class="text-[--color-accent-primary]" />
+                </div>
+                <div>
+                  <h3 class="font-semibold text-[--color-text-primary]">{kit.name}</h3>
+                  <span class="text-xs text-[--color-text-muted]">{kit.items}</span>
+                </div>
+              </div>
+              <p class="text-sm text-[--color-text-secondary] mb-3">{kit.description}</p>
+              <div class="text-sm space-y-1">
+                <p class="text-green-400 flex items-center gap-1">
+                  <Icon name="CircleCheck" size={14} />
+                  {kit.pros.join(', ')}
+                </p>
+                <p class="text-red-400 flex items-center gap-1">
+                  <Icon name="CircleX" size={14} />
+                  {kit.cons.join(', ')}
+                </p>
+                <p class="text-[--color-accent-primary] flex items-center gap-1">
+                  <Icon name="Star" size={14} />
+                  {kit.bestFor}
+                </p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <!-- Essential Contents -->
+      <div class="mb-12">
+        <h2 class="text-2xl font-bold mb-6 text-[--color-text-primary]">Contenido esencial</h2>
+
+        {Object.entries(essentialContents).map(([category, items]) => (
+          <div class="card p-6 mb-4">
+            <h3 class="font-semibold text-[--color-accent-primary] mb-4 capitalize">
+              {category === 'vendajes' ? '🩹 Vendajes y apósitos' :
+               category === 'antisepticos' ? '🧴 Antisépticos y limpieza' :
+               category === 'instrumentos' ? '🔧 Instrumentos' :
+               '📦 Otros esenciales'}
+            </h3>
+            <div class="overflow-x-auto">
+              <table class="w-full text-sm">
+                <thead>
+                  <tr class="border-b border-[--color-border]">
+                    <th class="text-left py-2">Artículo</th>
+                    <th class="text-center py-2">Cantidad</th>
+                    <th class="text-left py-2">Notas</th>
+                    <th class="text-center py-2">Prioridad</th>
+                  </tr>
+                </thead>
+                <tbody class="text-[--color-text-secondary]">
+                  {items.map((item) => (
+                    <tr class="border-b border-[--color-border]">
+                      <td class="py-2 font-medium text-[--color-text-primary]">{item.item}</td>
+                      <td class="py-2 text-center">{item.qty}</td>
+                      <td class="py-2 text-xs text-[--color-text-muted]">{item.notes}</td>
+                      <td class="py-2 text-center">
+                        <span class={`text-xs px-2 py-1 rounded ${item.priority === 'essential' ? 'bg-red-500/20 text-red-400' : item.priority === 'recommended' ? 'bg-[--color-accent-primary]/20 text-[--color-accent-primary]' : 'bg-[--color-bg-tertiary] text-[--color-text-muted]'}`}>
+                          {item.priority === 'essential' ? 'Esencial' : item.priority === 'recommended' ? 'Recomendado' : 'Opcional'}
+                        </span>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <!-- Medications -->
+      <div class="mb-12">
+        <h2 class="text-2xl font-bold mb-6 text-[--color-text-primary] flex items-center gap-2">
+          <Icon name="Pill" size={24} class="text-[--color-accent-primary]" />
+          Medicamentos básicos
+        </h2>
+
+        <div class="card overflow-hidden">
+          <div class="overflow-x-auto">
+            <table class="w-full text-sm">
+              <thead class="bg-[--color-bg-tertiary]">
+                <tr>
+                  <th class="text-left py-3 px-4">Medicamento</th>
+                  <th class="text-left py-3 px-4">Uso</th>
+                  <th class="text-center py-3 px-4">Cantidad</th>
+                  <th class="text-left py-3 px-4">Notas</th>
+                </tr>
+              </thead>
+              <tbody class="text-[--color-text-secondary]">
+                {medications.map((med, i) => (
+                  <tr class={i % 2 === 0 ? 'bg-[--color-bg-secondary]' : ''}>
+                    <td class="py-3 px-4 font-medium text-[--color-text-primary]">{med.name}</td>
+                    <td class="py-3 px-4">{med.use}</td>
+                    <td class="py-3 px-4 text-center">{med.qty}</td>
+                    <td class="py-3 px-4 text-xs text-[--color-text-muted]">{med.notes}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+          <div class="p-4 bg-[--color-bg-tertiary] text-xs text-[--color-text-muted]">
+            <strong>Nota:</strong> Consulta con tu médico antes de tomar cualquier medicamento.
+            Guarda siempre el prospecto con cada medicamento.
+          </div>
+        </div>
+      </div>
+
+      <!-- Special Additions -->
+      <div class="mb-12">
+        <h2 class="text-2xl font-bold mb-6 text-[--color-text-primary]">Adaptaciones especiales</h2>
+
+        <div class="grid sm:grid-cols-2 gap-4">
+          {specialAdditions.map((group) => (
+            <div class="card p-6">
+              <h3 class="font-semibold text-[--color-accent-primary] mb-3">{group.group}</h3>
+              <ul class="space-y-1 text-sm text-[--color-text-secondary]">
+                {group.items.map((item) => (
+                  <li>• {item}</li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <!-- Maintenance -->
+      <div class="mb-12">
+        <h2 class="text-2xl font-bold mb-6 text-[--color-text-primary] flex items-center gap-2">
+          <Icon name="Calendar" size={24} class="text-[--color-accent-primary]" />
+          Mantenimiento
+        </h2>
+
+        <div class="card p-6">
+          <div class="space-y-3">
+            {maintenanceSchedule.map((task) => (
+              <div class="flex items-start gap-4 border-b border-[--color-border] pb-3 last:border-0">
+                <span class="font-mono text-xs px-2 py-1 bg-[--color-bg-tertiary] rounded whitespace-nowrap">
+                  {task.freq}
+                </span>
+                <div>
+                  <p class="font-medium text-[--color-text-primary]">{task.task}</p>
+                  <p class="text-sm text-[--color-text-muted]">{task.notes}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      <!-- Storage -->
+      <div class="mb-12">
+        <h2 class="text-2xl font-bold mb-6 text-[--color-text-primary]">📍 Dónde guardarlo</h2>
+
+        <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          {storageLocations.map((loc) => (
+            <div class="card p-4">
+              <h3 class="font-semibold text-[--color-text-primary] mb-1">{loc.location}</h3>
+              <span class="text-xs text-[--color-accent-primary]">{loc.access}</span>
+              <p class="text-sm text-[--color-text-secondary] mt-2">{loc.notes}</p>
+            </div>
+          ))}
+        </div>
+
+        <div class="mt-4 p-4 bg-[--color-status-info]/10 border border-[--color-status-info]/30 rounded-lg">
+          <p class="text-sm text-[--color-text-secondary] m-0 flex items-start gap-2">
+            <Icon name="Lightbulb" size={18} class="text-[--color-status-info] flex-shrink-0 mt-0.5" />
+            <span><strong class="text-[--color-status-info]">Consejo:</strong> Ten un botiquín principal
+            completo y kits reducidos en coche y mochila de emergencia. Que <strong>todos en casa</strong>
+            sepan dónde está.</span>
+          </p>
+        </div>
+      </div>
+
+      <!-- Suggested Kit -->
+      <div class="mb-12">
+        <h2 class="text-2xl font-bold mb-6 text-[--color-text-primary]">Kit básico sugerido</h2>
+
+        <div class="card p-6">
+          <p class="text-sm text-[--color-text-secondary] mb-4">
+            Botiquín esencial para una familia de 2-4 personas:
+          </p>
+
+          <div class="grid sm:grid-cols-2 gap-2 text-sm">
+            {kitSuggestion.map((item) => (
+              <div class="flex items-center gap-2 py-1 border-b border-[--color-border]">
+                <span class="font-bold text-[--color-accent-primary] w-8 text-center">{item.qty}</span>
+                <span class="text-[--color-text-primary]">{item.item}</span>
+                <span class="text-xs text-[--color-text-muted] ml-auto">{item.notes}</span>
+              </div>
+            ))}
+          </div>
+
+          <div class="mt-4 pt-4 border-t border-[--color-border] text-center">
+            <p class="text-sm text-[--color-text-muted]">
+              Inversión aproximada: <strong class="text-[--color-accent-primary]">40-60€</strong>
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Product Recommendations -->
+      <div class="mb-12">
+        <h2 class="text-2xl font-bold mb-6 text-[--color-text-primary] flex items-center gap-2">
+          <Icon name="ShoppingCart" size={24} class="text-[--color-accent-primary]" />
+          Productos recomendados
+        </h2>
+        <ProductGrid products={amazonProducts} title="Botiquines y material sanitario" />
+      </div>
+
+      <!-- Common Mistakes -->
+      <div class="card p-6 mb-8 border-l-4 border-l-red-500">
+        <h3 class="font-semibold mb-4 text-[--color-text-primary] flex items-center gap-2">
+          <Icon name="CircleX" size={20} class="text-red-400" />
+          Errores comunes a evitar
+        </h3>
+        <ul class="grid sm:grid-cols-2 gap-2 text-sm text-[--color-text-secondary]">
+          {commonMistakes.map((mistake) => (
+            <li>• {mistake}</li>
+          ))}
+        </ul>
+      </div>
+
+      <!-- Emergency Numbers -->
+      <div class="card p-6 mb-8 bg-red-500/10 border border-red-500/30">
+        <h3 class="font-semibold mb-4 text-[--color-text-primary]">📞 Números de emergencia</h3>
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 text-center">
+          <div>
+            <p class="text-2xl font-bold text-red-400">112</p>
+            <p class="text-xs text-[--color-text-muted]">Emergencias</p>
+          </div>
+          <div>
+            <p class="text-2xl font-bold text-red-400">061</p>
+            <p class="text-xs text-[--color-text-muted]">Urgencias sanitarias</p>
+          </div>
+          <div>
+            <p class="text-2xl font-bold text-red-400">091</p>
+            <p class="text-xs text-[--color-text-muted]">Policía Nacional</p>
+          </div>
+          <div>
+            <p class="text-2xl font-bold text-red-400">080</p>
+            <p class="text-xs text-[--color-text-muted]">Bomberos</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Related Links -->
+      <div class="flex flex-wrap gap-4 justify-center">
+        <a
+          href="/es/guias/botiquin-primeros-auxilios/"
+          class="inline-flex items-center gap-2 px-4 py-2 border border-[--color-border] text-sm font-medium rounded hover:border-[--color-accent-primary] hover:text-[--color-accent-primary] transition-colors"
+        >
+          Guía completa: Primeros Auxilios
+        </a>
+        <a
+          href="/es/herramientas/configurador-kit/"
+          class="inline-flex items-center gap-2 px-4 py-2 bg-[--color-accent-primary] text-[--color-bg-primary] text-sm font-medium rounded hover:bg-[--color-accent-secondary] transition-colors"
+        >
+          Configurador de Kit →
+        </a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

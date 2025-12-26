@@ -1,0 +1,1062 @@
+---
+/**
+ * Kit Evacuación Scenario Page - Guided Flow Template
+ */
+import BaseLayout from '../../../../layouts/BaseLayout.astro';
+import TLDRBlock from '../../../../components/hub/TLDRBlock.astro';
+import CollapsibleSection from '../../../../components/hub/CollapsibleSection.astro';
+import PhaseTabs from '../../../../components/hub/PhaseTabs.tsx';
+import InteractiveChecklist from '../../../../components/hub/InteractiveChecklist.tsx';
+import StickyActionBar from '../../../../components/hub/StickyActionBar.tsx';
+import Icon from '../../../../components/ui/Icon.astro';
+import HeroImage from '../../../../components/content/HeroImage.astro';
+
+const scenarioKey = 'evacuacion';
+
+// Custom phases for evacuation (different from antes/durante/después)
+const customPhases = [
+  { id: 'preparar', label: 'Preparar', icon: 'shield' },
+  { id: 'evacuar', label: 'Evacuar', icon: 'activity' },
+  { id: 'despues', label: 'Después', icon: 'check-circle' },
+];
+
+// Phase content
+const phases = {
+  preparar: [
+    {
+      title: 'Prepara tu mochila de evacuación',
+      detail: 'Go bag lista y accesible. No más de 10-15kg. Debe estar siempre preparada.',
+      tip: 'Revisarla cada 6 meses: medicinas caducadas, ropa que ya no vale...'
+    },
+    {
+      title: 'Establece puntos de encuentro',
+      detail: 'Dos puntos: uno cerca de casa, otro fuera del barrio. Toda la familia los conoce.',
+      tip: null
+    },
+    {
+      title: 'Designa un contacto fuera de la zona',
+      detail: 'Un familiar lejano al que todos llaman para confirmar que están bien.',
+      tip: 'Es más fácil llamar fuera de la zona que dentro durante emergencias'
+    },
+    {
+      title: 'Conoce 2 rutas de evacuación',
+      detail: 'La principal puede estar bloqueada. Practica ambas en coche y a pie.',
+      tip: null
+    },
+    {
+      title: 'Asigna responsabilidades',
+      detail: 'Quién coge la mochila, quién las mascotas, quién ayuda a niños/mayores.',
+      tip: 'Haz un simulacro al menos una vez al año'
+    },
+    {
+      title: 'Ten documentos preparados',
+      detail: 'DNI, tarjeta sanitaria, seguro del hogar. Copias en bolsa estanca.',
+      tip: 'Fotos de documentos en el móvil también'
+    },
+  ],
+  evacuar: [
+    {
+      title: 'Si hay orden oficial, sal YA',
+      detail: 'No esperes. Las autoridades no dan esta orden a la ligera.',
+      tip: null
+    },
+    {
+      title: 'Coge la mochila y sal',
+      detail: 'No pierdas tiempo buscando cosas. La mochila ya está lista.',
+      tip: 'Los objetos se reemplazan, las personas no'
+    },
+    {
+      title: 'Si tienes tiempo, cierra gas y luz',
+      detail: 'Llave de paso del gas, baja el diferencial. Solo si tienes tiempo.',
+      tip: null
+    },
+    {
+      title: 'Sigue las rutas oficiales',
+      detail: 'Las autoridades conocen qué zonas son seguras. No tomes atajos.',
+      tip: null
+    },
+    {
+      title: 'Lleva a las mascotas',
+      detail: 'NUNCA las dejes atrás. Transportín y comida en la mochila.',
+      tip: 'Muchas personas vuelven a por ellas, poniéndose en peligro'
+    },
+    {
+      title: 'Contacta al punto de encuentro',
+      detail: 'Llama al contacto fuera de la zona. Mensaje corto: "Estoy bien, voy a [lugar]".',
+      tip: null
+    },
+  ],
+  despues: [
+    {
+      title: 'No vuelvas hasta que digan que es seguro',
+      detail: 'Las autoridades informarán cuándo se puede regresar.',
+      tip: null
+    },
+    {
+      title: 'Documenta daños',
+      detail: 'Fotos de todo antes de tocar nada. Para el seguro y reclamaciones.',
+      tip: null
+    },
+    {
+      title: 'Comprueba la seguridad de la vivienda',
+      detail: 'Gas, electricidad, estructura. En caso de duda, no entres.',
+      tip: 'Si huele a gas, no enciendas nada, ventila y avisa'
+    },
+    {
+      title: 'Repón el kit',
+      detail: 'Todo lo consumido o dañado. La próxima emergencia puede ser pronto.',
+      tip: null
+    },
+  ],
+};
+
+// When to evacuate
+const evacuationTriggers = [
+  { trigger: 'Orden oficial de evacuación', action: 'EVACUAR INMEDIATAMENTE', severity: 'critical' },
+  { trigger: 'Incendio cercano (humo visible)', action: 'Prepararse/Evacuar si se acerca', severity: 'warning' },
+  { trigger: 'Inundación inminente', action: 'Evacuar a zona alta ANTES del agua', severity: 'critical' },
+  { trigger: 'Fuga de sustancias peligrosas', action: 'Evacuar dirección contraria al viento', severity: 'critical' },
+  { trigger: 'Tu instinto dice peligro', action: 'Confía en tu instinto, evacúa', severity: 'warning' },
+];
+
+// Checklist categories
+const checklistCategories = [
+  {
+    id: 'documentos',
+    name: 'Documentos',
+    icon: 'file',
+    items: [
+      { id: 'dni', name: 'DNI/Pasaporte originales', priority: 'critical' as const },
+      { id: 'tarjeta-sanitaria', name: 'Tarjeta sanitaria', priority: 'critical' as const },
+      { id: 'copias-estancas', name: 'Copias de documentos en bolsa estanca', priority: 'critical' as const },
+      { id: 'dinero', name: 'Dinero en efectivo (100-200€)', priority: 'critical' as const, notes: 'Billetes pequeños' },
+      { id: 'lista-contactos', name: 'Lista de contactos impresa', priority: 'critical' as const },
+    ]
+  },
+  {
+    id: 'supervivencia',
+    name: 'Supervivencia básica',
+    icon: 'backpack',
+    items: [
+      { id: 'agua', name: 'Agua (1.5L mínimo/persona)', priority: 'critical' as const },
+      { id: 'comida', name: 'Comida no perecedera', priority: 'critical' as const, notes: 'Barritas, frutos secos' },
+      { id: 'linterna', name: 'Linterna + pilas extra', priority: 'critical' as const },
+      { id: 'manta', name: 'Manta térmica', priority: 'critical' as const },
+      { id: 'silbato', name: 'Silbato', priority: 'recommended' as const, notes: 'Para pedir ayuda' },
+      { id: 'navaja', name: 'Navaja multiusos', priority: 'recommended' as const },
+    ]
+  },
+  {
+    id: 'comunicacion',
+    name: 'Comunicación y energía',
+    icon: 'smartphone',
+    items: [
+      { id: 'movil', name: 'Móvil cargado', priority: 'critical' as const },
+      { id: 'cargador', name: 'Cargador + cable', priority: 'critical' as const },
+      { id: 'powerbank', name: 'Powerbank (10.000mAh+)', priority: 'critical' as const },
+      { id: 'radio', name: 'Radio con pilas', priority: 'recommended' as const },
+    ]
+  },
+  {
+    id: 'salud',
+    name: 'Salud',
+    icon: 'heart',
+    items: [
+      { id: 'medicacion', name: 'Medicación personal (7+ días)', priority: 'critical' as const },
+      { id: 'botiquin', name: 'Botiquín básico', priority: 'critical' as const },
+      { id: 'gafas', name: 'Gafas/lentillas de repuesto', priority: 'recommended' as const },
+    ]
+  },
+  {
+    id: 'higiene',
+    name: 'Higiene',
+    icon: 'sparkles',
+    items: [
+      { id: 'toallitas', name: 'Toallitas húmedas', priority: 'critical' as const },
+      { id: 'gel', name: 'Gel desinfectante', priority: 'critical' as const },
+      { id: 'cepillo', name: 'Cepillo de dientes + pasta', priority: 'recommended' as const },
+      { id: 'productos-menstruales', name: 'Productos menstruales', priority: 'critical' as const, notes: 'Si aplica' },
+    ]
+  },
+  {
+    id: 'ropa',
+    name: 'Ropa y protección',
+    icon: 'shirt',
+    items: [
+      { id: 'muda', name: 'Muda de ropa completa', priority: 'recommended' as const },
+      { id: 'calzado', name: 'Calzado cómodo para caminar', priority: 'critical' as const },
+      { id: 'chubasquero', name: 'Chubasquero', priority: 'recommended' as const },
+    ]
+  },
+];
+
+// Special needs groups
+const specialNeeds = [
+  { group: 'Niños', icon: 'Baby', essentials: 'Pañales, biberón, comida, juguete reconfortante' },
+  { group: 'Mayores', icon: 'Users', essentials: 'Medicación extra, gafas, audífonos, contacto médico' },
+  { group: 'Mascotas', icon: 'Dog', essentials: 'Transportín, comida 3-5 días, documentación veterinaria' },
+];
+
+// Common mistakes
+const mistakes = [
+  { error: 'Esperar demasiado', fix: 'Si hay orden o duda seria, evacúa ANTES' },
+  { error: 'Intentar salvar muchas cosas', fix: 'La mochila ya está lista. Cógela y sal' },
+  { error: 'No tener punto de encuentro', fix: 'Establecer 2 puntos antes de la emergencia' },
+  { error: 'Dejar mascotas atrás', fix: 'Van EN el plan. Transportín preparado' },
+];
+
+// FAQs
+const faqs = [
+  {
+    question: '¿Cuánto tiempo tengo para evacuar?',
+    answer: 'Depende: un incendio puede darte minutos, una orden oficial generalmente más. Actúa como si tuvieras 15 minutos.'
+  },
+  {
+    question: '¿Debo cerrar gas y electricidad?',
+    answer: 'Si tienes tiempo, sí. Si la evacuación es urgente, SAL. Tu vida vale más.'
+  },
+  {
+    question: '¿Puedo volver a por algo que olvidé?',
+    answer: 'NUNCA vuelvas a zona de peligro por objetos. Las pertenencias se reemplazan.'
+  },
+  {
+    question: '¿Dónde me refugio sin familia ni amigos fuera?',
+    answer: 'Las autoridades habilitan refugios (polideportivos, colegios). Escucha la radio para ubicaciones.'
+  },
+  {
+    question: '¿Y si tengo que evacuar a pie?',
+    answer: 'Por eso la mochila debe pesar máx 10-15kg. Conoce rutas peatonales de salida.'
+  },
+];
+---
+
+<BaseLayout
+  title="Evacuación: ¿Qué llevar? Mochila lista en 10 minutos"
+  description="Guía completa para preparar tu mochila de evacuación. Qué llevar, plan familiar y checklist interactivo."
+  schemaType="HowTo"
+  dateModified="2025-12-15"
+  schemaData={{
+    step: [
+      { '@type': 'HowToStep', name: 'Prepara tu mochila de evacuación', text: 'Go bag lista y accesible. No más de 10-15kg. Debe estar siempre preparada. Revisarla cada 6 meses.' },
+      { '@type': 'HowToStep', name: 'Establece puntos de encuentro', text: 'Dos puntos: uno cerca de casa, otro fuera del barrio. Toda la familia los conoce.' },
+      { '@type': 'HowToStep', name: 'Designa un contacto fuera de la zona', text: 'Un familiar lejano al que todos llaman para confirmar que están bien. Es más fácil llamar fuera de la zona.' },
+      { '@type': 'HowToStep', name: 'Conoce 2 rutas de evacuación', text: 'La principal puede estar bloqueada. Practica ambas en coche y a pie.' },
+      { '@type': 'HowToStep', name: 'Si hay orden oficial, sal YA', text: 'No esperes. Las autoridades no dan esta orden a la ligera.' },
+      { '@type': 'HowToStep', name: 'Coge la mochila y sal', text: 'No pierdas tiempo buscando cosas. La mochila ya está lista. Los objetos se reemplazan, las personas no.' },
+      { '@type': 'HowToStep', name: 'Sigue las rutas oficiales', text: 'Las autoridades conocen qué zonas son seguras. No tomes atajos.' },
+    ],
+    totalTime: 'PT30M',
+    supply: [
+      { '@type': 'HowToSupply', name: 'DNI/Pasaporte originales' },
+      { '@type': 'HowToSupply', name: 'Agua (1.5L mínimo/persona)' },
+      { '@type': 'HowToSupply', name: 'Comida no perecedera' },
+      { '@type': 'HowToSupply', name: 'Linterna + pilas extra' },
+      { '@type': 'HowToSupply', name: 'Powerbank (10.000mAh+)' },
+      { '@type': 'HowToSupply', name: 'Medicación personal (7+ días)' },
+      { '@type': 'HowToSupply', name: 'Manta térmica' },
+    ],
+  }}
+  faqData={faqs}
+>
+  <main class="scenario-page">
+    <!-- Header -->
+    <header class="scenario-header">
+      <nav class="scenario-breadcrumb">
+        <a href="/es/" class="breadcrumb-back">
+          <Icon name="ChevronLeft" size={20} />
+        </a>
+        <span class="breadcrumb-current">Kit Evacuación</span>
+      </nav>
+
+      <div class="scenario-title-row">
+        <div class="scenario-icon scenario-icon--emerald">
+          <Icon name="Car" size={28} />
+        </div>
+        <div class="scenario-title-content">
+          <h1 class="scenario-title">Kit de Evacuación</h1>
+          <div class="scenario-meta">
+            <span class="meta-item">10 min</span>
+            <span class="meta-divider">·</span>
+            <span class="meta-item">Actualizado dic 2025</span>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Hero Image -->
+    <section class="scenario-section">
+      <HeroImage
+        src="/images/shared/family-evacuation.webp"
+        alt="Familia con mochilas de emergencia durante evacuación"
+        priority={true}
+      />
+    </section>
+
+    <!-- TL;DR -->
+    <section class="scenario-section">
+      <TLDRBlock
+        summary="Si dudas si evacuar, evacúa. Es mejor una noche fuera innecesaria que quedarse en peligro. Tu mochila debe estar preparada para salir en 5 minutos. No más de 10-15kg."
+        keyStat="5 minutos"
+        keyStatLabel="Sal en menos de"
+      />
+    </section>
+
+    <!-- When to Evacuate -->
+    <section class="scenario-section">
+      <h2 class="section-title">
+        <Icon name="AlertTriangle" size={24} />
+        ¿Cuándo evacuar?
+      </h2>
+      <div class="triggers-list">
+        {evacuationTriggers.map((item) => (
+          <div class={`trigger-item trigger-item--${item.severity}`}>
+            <div class="trigger-content">
+              <span class="trigger-text">{item.trigger}</span>
+              <span class={`trigger-action trigger-action--${item.severity}`}>{item.action}</span>
+            </div>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <!-- Phase Tabs -->
+    <PhaseTabs client:idle scenarioKey={scenarioKey} phases={customPhases} />
+
+    <!-- Phase: Preparar -->
+    <section id="preparar" class="phase-section">
+      <div class="phase-header">
+        <span class="phase-number">1</span>
+        <div class="phase-title-group">
+          <h2 class="phase-title">Preparar la evacuación</h2>
+          <p class="phase-subtitle">Antes de que ocurra nada</p>
+        </div>
+      </div>
+
+      <div class="phase-steps">
+        {phases.preparar.map((step, index) => (
+          <CollapsibleSection
+            title={step.title}
+            summary={step.detail}
+            step={index + 1}
+            variant="card"
+          >
+            <p>{step.detail}</p>
+            {step.tip && (
+              <div class="step-tip">
+                <Icon name="Lightbulb" size={16} />
+                <span>{step.tip}</span>
+              </div>
+            )}
+          </CollapsibleSection>
+        ))}
+      </div>
+    </section>
+
+    <!-- Phase: Evacuar -->
+    <section id="evacuar" class="phase-section">
+      <div class="phase-header">
+        <span class="phase-number phase-number--warning">2</span>
+        <div class="phase-title-group">
+          <h2 class="phase-title">Durante la evacuación</h2>
+          <p class="phase-subtitle">Cuando llega el momento</p>
+        </div>
+      </div>
+
+      <!-- Critical Warning -->
+      <div class="warning-box">
+        <div class="warning-icon">
+          <Icon name="AlertTriangle" size={24} />
+        </div>
+        <div class="warning-content">
+          <strong>Regla de oro</strong>
+          <p>Los objetos se reemplazan, las personas NO. No pierdas tiempo salvando cosas.</p>
+        </div>
+      </div>
+
+      <div class="phase-steps">
+        {phases.evacuar.map((step, index) => (
+          <CollapsibleSection
+            title={step.title}
+            summary={step.detail}
+            step={index + 1}
+            variant="card"
+          >
+            <p>{step.detail}</p>
+            {step.tip && (
+              <div class="step-tip">
+                <Icon name="Lightbulb" size={16} />
+                <span>{step.tip}</span>
+              </div>
+            )}
+          </CollapsibleSection>
+        ))}
+      </div>
+    </section>
+
+    <!-- Phase: Después -->
+    <section id="despues" class="phase-section">
+      <div class="phase-header">
+        <span class="phase-number phase-number--success">3</span>
+        <div class="phase-title-group">
+          <h2 class="phase-title">Después de la evacuación</h2>
+          <p class="phase-subtitle">Cuando todo pasa</p>
+        </div>
+      </div>
+
+      <div class="phase-steps">
+        {phases.despues.map((step, index) => (
+          <CollapsibleSection
+            title={step.title}
+            summary={step.detail}
+            step={index + 1}
+            variant="card"
+          >
+            <p>{step.detail}</p>
+            {step.tip && (
+              <div class="step-tip">
+                <Icon name="Lightbulb" size={16} />
+                <span>{step.tip}</span>
+              </div>
+            )}
+          </CollapsibleSection>
+        ))}
+      </div>
+    </section>
+
+    <!-- Special Needs -->
+    <section class="scenario-section">
+      <h2 class="section-title">Necesidades especiales</h2>
+      <div class="special-needs-grid">
+        {specialNeeds.map((item) => (
+          <div class="special-need-card">
+            <div class="special-need-icon">
+              <Icon name={item.icon as any} size={20} />
+            </div>
+            <div class="special-need-content">
+              <h3 class="special-need-title">{item.group}</h3>
+              <p class="special-need-text">{item.essentials}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <!-- Common Mistakes -->
+    <section class="scenario-section">
+      <h2 class="section-title">Errores comunes</h2>
+      <div class="mistakes-list">
+        {mistakes.map((item) => (
+          <div class="mistake-item">
+            <div class="mistake-error">
+              <Icon name="X" size={16} />
+              <span>{item.error}</span>
+            </div>
+            <div class="mistake-fix">
+              <Icon name="Check" size={16} />
+              <span>{item.fix}</span>
+            </div>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <!-- Interactive Checklist -->
+    <section class="scenario-section">
+      <h2 class="section-title">
+        <Icon name="CheckSquare" size={24} />
+        Tu checklist de evacuación
+      </h2>
+      <p class="section-intro">
+        Marca los items que ya tienes en tu mochila. Tu progreso se guarda automáticamente.
+      </p>
+      <InteractiveChecklist
+        client:idle
+        storageKey={scenarioKey}
+        categories={checklistCategories}
+        title="Mochila de evacuación"
+      />
+    </section>
+
+    <!-- FAQs -->
+    <section class="scenario-section">
+      <h2 class="section-title">Preguntas frecuentes</h2>
+      <div class="faq-list">
+        {faqs.map((faq) => (
+          <details class="faq-item">
+            <summary class="faq-question">
+              <span>{faq.question}</span>
+              <Icon name="ChevronDown" size={20} />
+            </summary>
+            <div class="faq-answer">
+              <p>{faq.answer}</p>
+            </div>
+          </details>
+        ))}
+      </div>
+    </section>
+
+    <!-- Sources -->
+    <section class="scenario-section">
+      <details class="sources-block">
+        <summary class="sources-header">
+          <Icon name="BookOpen" size={18} />
+          <span>Ver fuentes y referencias</span>
+          <Icon name="ChevronDown" size={16} />
+        </summary>
+        <div class="sources-content">
+          <ul>
+            <li><a href="https://www.proteccioncivil.es/" target="_blank" rel="noopener">Protección Civil</a></li>
+            <li><a href="https://www.cruzroja.es/" target="_blank" rel="noopener">Cruz Roja Española</a></li>
+            <li><a href="https://www.ready.gov/evacuation" target="_blank" rel="noopener">Ready.gov - Evacuation</a></li>
+          </ul>
+        </div>
+      </details>
+    </section>
+
+    <!-- Related Scenarios -->
+    <section class="scenario-section">
+      <h2 class="section-title">Escenarios relacionados</h2>
+      <div class="related-grid">
+        <a href="/es/escenarios/prepararse-apagon/" class="related-card related-card--amber">
+          <Icon name="Zap" size={24} />
+          <span>Apagón</span>
+        </a>
+        <a href="/es/escenarios/prepararse-ola-calor/" class="related-card related-card--orange">
+          <Icon name="Sun" size={24} />
+          <span>Ola de Calor</span>
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <!-- Sticky Action Bar -->
+  <StickyActionBar
+    client:idle
+    actionText="Crear mi kit"
+    actionUrl="/es/herramientas/configurador-kit/"
+    dismissKey={`scenario_${scenarioKey}`}
+    label="Próximo paso:"
+  />
+</BaseLayout>
+
+<style>
+  .scenario-page {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 0 16px 120px;
+  }
+
+  .scenario-header {
+    padding: 16px 0 24px;
+  }
+
+  .scenario-breadcrumb {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 16px;
+  }
+
+  .breadcrumb-back {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    background: var(--color-bg-secondary);
+    border-radius: 10px;
+    color: var(--color-text-secondary);
+    transition: all 0.15s ease;
+  }
+
+  .breadcrumb-back:hover {
+    background: var(--color-bg-tertiary);
+    color: var(--color-text-primary);
+  }
+
+  .breadcrumb-current {
+    font-size: 14px;
+    color: var(--color-text-muted);
+  }
+
+  .scenario-title-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+  }
+
+  .scenario-icon {
+    flex-shrink: 0;
+    width: 56px;
+    height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 16px;
+  }
+
+  .scenario-icon--emerald {
+    background: rgba(16, 185, 129, 0.15);
+    color: #10b981;
+  }
+
+  .scenario-title-content {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .scenario-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--color-text-primary);
+    margin: 0 0 6px;
+    line-height: 1.2;
+  }
+
+  .scenario-meta {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    color: var(--color-text-muted);
+  }
+
+  .meta-divider {
+    opacity: 0.5;
+  }
+
+  .scenario-section {
+    margin-bottom: 32px;
+  }
+
+  .section-title {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: var(--color-text-primary);
+    margin: 0 0 12px;
+  }
+
+  .section-intro {
+    font-size: 14px;
+    color: var(--color-text-muted);
+    margin: 0 0 16px;
+  }
+
+  /* Triggers */
+  .triggers-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .trigger-item {
+    display: flex;
+    align-items: center;
+    padding: 12px 16px;
+    background: var(--color-bg-secondary);
+    border-radius: 12px;
+    border-left: 4px solid;
+  }
+
+  .trigger-item--critical {
+    border-left-color: #ef4444;
+  }
+
+  .trigger-item--warning {
+    border-left-color: #f59e0b;
+  }
+
+  .trigger-content {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .trigger-text {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--color-text-primary);
+  }
+
+  .trigger-action {
+    font-size: 12px;
+    font-weight: 600;
+  }
+
+  .trigger-action--critical {
+    color: #ef4444;
+  }
+
+  .trigger-action--warning {
+    color: #f59e0b;
+  }
+
+  /* Phase sections */
+  .phase-section {
+    padding: 24px 0;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .phase-section:last-of-type {
+    border-bottom: none;
+  }
+
+  .phase-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    margin-bottom: 20px;
+  }
+
+  .phase-number {
+    flex-shrink: 0;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--color-accent-subtle);
+    color: var(--color-accent-primary);
+    font-size: 18px;
+    font-weight: 700;
+    border-radius: 12px;
+  }
+
+  .phase-number--warning {
+    background: rgba(239, 68, 68, 0.15);
+    color: #ef4444;
+  }
+
+  .phase-number--success {
+    background: rgba(34, 197, 94, 0.15);
+    color: #22c55e;
+  }
+
+  .phase-title-group {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .phase-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--color-text-primary);
+    margin: 0 0 4px;
+  }
+
+  .phase-subtitle {
+    font-size: 14px;
+    color: var(--color-text-muted);
+    margin: 0;
+  }
+
+  .phase-steps {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .step-tip {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    margin-top: 12px;
+    padding: 10px 12px;
+    background: var(--color-accent-subtle);
+    border-radius: 8px;
+    font-size: 13px;
+    color: var(--color-accent-primary);
+  }
+
+  .step-tip svg {
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  /* Warning Box */
+  .warning-box {
+    display: flex;
+    gap: 16px;
+    padding: 16px;
+    margin-bottom: 20px;
+    background: rgba(239, 68, 68, 0.1);
+    border: 1px solid rgba(239, 68, 68, 0.3);
+    border-radius: 12px;
+  }
+
+  .warning-icon {
+    flex-shrink: 0;
+    color: #ef4444;
+  }
+
+  .warning-content {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .warning-content strong {
+    display: block;
+    font-size: 14px;
+    color: #ef4444;
+    margin-bottom: 4px;
+  }
+
+  .warning-content p {
+    font-size: 13px;
+    color: var(--color-text-secondary);
+    margin: 0;
+  }
+
+  /* Special Needs */
+  .special-needs-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+  }
+
+  .special-need-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 16px 12px;
+    background: var(--color-bg-secondary);
+    border: 1px solid var(--color-border);
+    border-radius: 12px;
+  }
+
+  .special-need-icon {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(16, 185, 129, 0.1);
+    color: #10b981;
+    border-radius: 10px;
+    margin-bottom: 10px;
+  }
+
+  .special-need-title {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--color-text-primary);
+    margin: 0 0 6px;
+  }
+
+  .special-need-text {
+    font-size: 12px;
+    color: var(--color-text-muted);
+    line-height: 1.4;
+    margin: 0;
+  }
+
+  /* Mistakes */
+  .mistakes-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .mistake-item {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    padding: 14px;
+    background: var(--color-bg-secondary);
+    border-radius: 12px;
+  }
+
+  .mistake-error,
+  .mistake-fix {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    font-size: 13px;
+  }
+
+  .mistake-error {
+    color: #ef4444;
+  }
+
+  .mistake-fix {
+    color: #22c55e;
+  }
+
+  .mistake-error svg,
+  .mistake-fix svg {
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  /* FAQs */
+  .faq-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .faq-item {
+    background: var(--color-bg-secondary);
+    border: 1px solid var(--color-border);
+    border-radius: 12px;
+    overflow: hidden;
+  }
+
+  .faq-question {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 14px 16px;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--color-text-primary);
+    cursor: pointer;
+    list-style: none;
+  }
+
+  .faq-question::-webkit-details-marker {
+    display: none;
+  }
+
+  .faq-question svg {
+    flex-shrink: 0;
+    color: var(--color-text-muted);
+    transition: transform 0.2s ease;
+  }
+
+  .faq-item[open] .faq-question svg {
+    transform: rotate(180deg);
+  }
+
+  .faq-answer {
+    padding: 0 16px 14px;
+  }
+
+  .faq-answer p {
+    font-size: 14px;
+    color: var(--color-text-secondary);
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  /* Sources */
+  .sources-block {
+    background: var(--color-bg-secondary);
+    border-radius: 12px;
+    overflow: hidden;
+  }
+
+  .sources-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 16px;
+    font-size: 14px;
+    color: var(--color-text-muted);
+    cursor: pointer;
+    list-style: none;
+  }
+
+  .sources-header::-webkit-details-marker {
+    display: none;
+  }
+
+  .sources-header svg:last-child {
+    margin-left: auto;
+    transition: transform 0.2s ease;
+  }
+
+  .sources-block[open] .sources-header svg:last-child {
+    transform: rotate(180deg);
+  }
+
+  .sources-content {
+    padding: 0 16px 14px;
+  }
+
+  .sources-content ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .sources-content li {
+    margin-bottom: 8px;
+  }
+
+  .sources-content a {
+    font-size: 13px;
+    color: var(--color-accent-primary);
+    text-decoration: none;
+  }
+
+  .sources-content a:hover {
+    text-decoration: underline;
+  }
+
+  /* Related Scenarios */
+  .related-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+
+  .related-card {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 16px;
+    border-radius: 12px;
+    text-decoration: none;
+    transition: transform 0.15s ease;
+  }
+
+  .related-card:hover {
+    transform: translateY(-2px);
+  }
+
+  .related-card span {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--color-text-primary);
+  }
+
+  .related-card--amber {
+    background: rgba(245, 158, 11, 0.1);
+    border: 1px solid rgba(245, 158, 11, 0.2);
+    color: #f59e0b;
+  }
+
+  .related-card--orange {
+    background: rgba(249, 115, 22, 0.1);
+    border: 1px solid rgba(249, 115, 22, 0.2);
+    color: #f97316;
+  }
+
+  @media (max-width: 480px) {
+    .scenario-page {
+      padding: 0 12px 120px;
+    }
+
+    .scenario-title {
+      font-size: 1.25rem;
+    }
+
+    .special-needs-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .mistake-item {
+      grid-template-columns: 1fr;
+    }
+
+    .related-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

@@ -1,0 +1,1085 @@
+---
+/**
+ * Cyberangriff Scenario Page - DE
+ *
+ * Context:
+ * - BSI Lagebericht 2024: Cyber threats at all-time high
+ * - Colonial Pipeline 2021, Anhalt-Bitterfeld 2021 - ransomware precedents
+ * - German critical infrastructure increasingly targeted
+ * - Payment systems, healthcare, government services at risk
+ */
+import BaseLayout from '../../../../layouts/BaseLayout.astro';
+import TLDRBlock from '../../../../components/hub/TLDRBlock.astro';
+import CollapsibleSection from '../../../../components/hub/CollapsibleSection.astro';
+import PhaseTabs from '../../../../components/hub/PhaseTabs.tsx';
+import InteractiveChecklist from '../../../../components/hub/InteractiveChecklist.tsx';
+import StickyActionBar from '../../../../components/hub/StickyActionBar.tsx';
+import Icon from '../../../../components/ui/Icon.astro';
+import HeroImage from '../../../../components/content/HeroImage.astro';
+
+const scenarioKey = 'cyberangriff';
+
+// Phase content
+const phases = {
+  vor: [
+    {
+      title: 'Bargeld bereithalten',
+      detail: '50-100€ pro Erwachsenem, 20-30€ pro Kind. In kleinen Scheinen (5€, 10€, 20€).',
+      tip: 'An verschiedenen Orten im Haus aufbewahren'
+    },
+    {
+      title: 'Offline-Backups erstellen',
+      detail: 'Wichtige Dateien auf USB-Stick oder externer Festplatte. Nicht nur in der Cloud.',
+      tip: 'Backups monatlich aktualisieren'
+    },
+    {
+      title: 'Wichtige Kontakte ausdrucken',
+      detail: 'Telefonnummern von Familie, Freunden, Hausarzt, Versicherung. Auf Papier.',
+      tip: 'Im Notgepäck und zu Hause aufbewahren'
+    },
+    {
+      title: 'Wichtige Nummern auswendig kennen',
+      detail: 'Mindestens: 1 Familienmitglied, 112. Wir verlassen uns zu sehr auf Handy-Speicher.',
+      tip: null
+    },
+    {
+      title: 'Notfallradio mit Batterien',
+      detail: 'Bei Internetausfall bleibt Radio die Hauptinformationsquelle.',
+      tip: 'Kurbelradio benötigt keine Batterien'
+    },
+    {
+      title: 'Powerbank aufgeladen halten',
+      detail: 'Mindestens 10.000mAh, besser 20.000mAh. Regelmäßig nachladen.',
+      tip: 'Solar-Powerbank als Backup'
+    },
+  ],
+  wahrend: [
+    {
+      title: 'Ruhe bewahren, digitale Nutzung einschränken',
+      detail: 'Überlastung erschwert die Wiederherstellung. Nur das Nötigste nutzen.',
+      tip: null
+    },
+    {
+      title: 'Bar bezahlen',
+      detail: 'EC-Karten und Online-Banking können ausfallen. Bargeld funktioniert immer.',
+      tip: 'Supermärkte können begrenzte Vorräte haben bei längeren Störungen'
+    },
+    {
+      title: 'Digitalen Informationen nicht blind vertrauen',
+      detail: 'Phishing und Desinformation nehmen während Krisen zu. Mehrere Quellen prüfen.',
+      tip: null
+    },
+    {
+      title: 'Konten schützen',
+      detail: 'Passwörter während des Angriffs NICHT ändern - könnten abgefangen werden.',
+      tip: 'Warten bis Systeme wiederhergestellt sind'
+    },
+    {
+      title: 'Alternative Kommunikation nutzen',
+      detail: 'SMS funktioniert oft noch wenn Internet ausfällt. Radio für Nachrichten.',
+      tip: null
+    },
+    {
+      title: 'Offizielle Kanäle verfolgen',
+      detail: 'BSI, Tagesschau, lokale Radiosender. Vorsicht bei Social Media.',
+      tip: null
+    },
+  ],
+  nach: [
+    {
+      title: 'Bankkonto prüfen',
+      detail: 'Transaktionen kontrollieren sobald Systeme wiederhergestellt sind. Abweichungen sofort melden.',
+      tip: null
+    },
+    {
+      title: 'Alle Passwörter aktualisieren',
+      detail: 'Besonders wenn sie während der Störung verwendet wurden. Einzigartige Passwörter nutzen.',
+      tip: 'Passwort-Manager in Betracht ziehen'
+    },
+    {
+      title: 'Backups überprüfen',
+      detail: 'Sind die Dateien intakt? Neue Backups erstellen wenn alles funktioniert.',
+      tip: null
+    },
+    {
+      title: 'Bargeld auffüllen',
+      detail: 'Zurück auf 50-100€ pro Person für das nächste Mal.',
+      tip: null
+    },
+    {
+      title: 'Probleme dokumentieren',
+      detail: 'Notieren was gefehlt hat oder verloren ging. Nützlich für Versicherung oder Verbesserung.',
+      tip: null
+    },
+  ],
+};
+
+// Cyber disruption impacts
+const cyberImpacts = [
+  { system: 'Zahlungssysteme (EC/Girocard)', impact: 'Nur Barzahlung möglich', severity: 'critical' },
+  { system: 'Mobilfunknetz', impact: 'Kein Telefonieren/SMS/Internet', severity: 'critical' },
+  { system: 'Banken (Apps/Websites)', impact: 'Kein Zugang zum Konto', severity: 'warning' },
+  { system: 'Krankenhäuser/Apotheken', impact: 'Verzögerungen, kein E-Rezept', severity: 'warning' },
+  { system: 'ÖPNV (Züge/Busse)', impact: 'Gestörter Betrieb', severity: 'warning' },
+  { system: 'Supermärkte', impact: 'Kassenausfall, nur Bargeld', severity: 'warning' },
+];
+
+// Checklist categories
+const checklistCategories = [
+  {
+    id: 'geld',
+    name: 'Geld und Bezahlen',
+    icon: 'wallet',
+    items: [
+      { id: 'bargeld', name: 'Bargeld', quantity: '50-100€/Erw., 20-30€/Kind', priority: 'critical' as const, notes: 'Kleine Scheine (5€, 10€, 20€)' },
+      { id: 'fahrkarte', name: 'Aufgeladene Fahrkarte/Ticket', quantity: 'Guthaben prüfen', priority: 'recommended' as const, notes: 'Falls EC nicht funktioniert' },
+      { id: 'kontoauszug', name: 'Aktueller Kontoauszug (Papier)', quantity: '1 Stück', priority: 'recommended' as const, notes: 'Nachweis bei Bankproblemen' },
+    ]
+  },
+  {
+    id: 'kommunikation',
+    name: 'Kommunikation',
+    icon: 'smartphone',
+    items: [
+      { id: 'kontaktliste', name: 'Gedruckte Kontaktliste', quantity: '2 Exemplare', priority: 'critical' as const, notes: 'Zu Hause und im Notgepäck' },
+      { id: 'radio', name: 'Kurbelradio oder Radio mit Batterien', quantity: '1 Stück', priority: 'critical' as const, notes: 'Nachrichten bei Internetausfall', affiliateUrl: 'https://www.amazon.de/s?k=kurbelradio' },
+      { id: 'powerbank', name: 'Powerbank (10.000mAh+)', quantity: '1 Stück', priority: 'critical' as const, notes: 'Handy aufladen', affiliateUrl: 'https://www.amazon.de/s?k=powerbank+20000mah' },
+      { id: 'nummern-kopf', name: 'Wichtige Nummern auswendig', quantity: 'Mind. 3', priority: 'critical' as const, notes: '112, Familienmitglied, Hausarzt' },
+    ]
+  },
+  {
+    id: 'daten',
+    name: 'Daten und Backups',
+    icon: 'hard-drive',
+    items: [
+      { id: 'usb-backup', name: 'USB-Stick mit Backup', quantity: '1-2 Stück', priority: 'critical' as const, notes: 'Dokumente, Fotos, Passwörter', affiliateUrl: 'https://www.amazon.de/s?k=usb+stick+64gb' },
+      { id: 'externe-hdd', name: 'Externe Festplatte', quantity: '1 Stück', priority: 'recommended' as const, notes: 'Für größere Backups', affiliateUrl: 'https://www.amazon.de/s?k=externe+festplatte' },
+      { id: 'passwoerter-papier', name: 'Passwörter auf Papier (gesichert)', quantity: '1 Liste', priority: 'recommended' as const, notes: 'An sicherem Ort aufbewahrt' },
+    ]
+  },
+  {
+    id: 'dokumente',
+    name: 'Dokumente offline',
+    icon: 'file',
+    items: [
+      { id: 'ausweis-kopie', name: 'Kopie Personalausweis/Reisepass', quantity: 'Papier + digital', priority: 'critical' as const },
+      { id: 'versicherung', name: 'Versicherungsunterlagen', quantity: 'Kopien', priority: 'recommended' as const },
+      { id: 'medizinisch', name: 'Medizinische Info (Blutgruppe, Allergien)', quantity: '1 Karte', priority: 'critical' as const },
+    ]
+  },
+  {
+    id: 'vorrat',
+    name: 'Grundvorrat',
+    icon: 'package',
+    items: [
+      { id: 'wasser', name: 'Trinkwasser', quantity: '2L/Person/Tag × 10 Tage', priority: 'critical' as const },
+      { id: 'essen', name: 'Haltbare Lebensmittel', quantity: '10 Tage', priority: 'critical' as const },
+      { id: 'medikamente', name: 'Medikamente (7+ Tage extra)', quantity: 'Laut Rezept', priority: 'critical' as const, notes: 'Apotheke kann offline sein' },
+      { id: 'taschenlampe', name: 'Taschenlampe + Batterien', quantity: '1-2 Stück', priority: 'critical' as const, affiliateUrl: 'https://www.amazon.de/s?k=led+taschenlampe' },
+    ]
+  },
+];
+
+// Cascade effects
+const cascadeEffects = [
+  { stage: 1, title: 'Erste Stunden', effects: 'EC-Störungen, Websites nicht erreichbar, Mobilnetz überlastet' },
+  { stage: 2, title: 'Tag 1', effects: 'Läden nur Barzahlung, ÖPNV gestört, Krankenhäuser im Notmodus' },
+  { stage: 3, title: 'Tag 2-3', effects: 'Vorräte in Läden werden knapp, Treibstoffengpässe möglich' },
+];
+
+// Recent examples
+const realExamples = [
+  { date: 'Juli 2021', event: 'Ransomware-Angriff Landkreis Anhalt-Bitterfeld', impact: 'Verwaltung 6 Monate lahmgelegt, Katastrophenfall ausgerufen' },
+  { date: 'Mai 2021', event: 'Colonial Pipeline (USA)', impact: 'Größte Treibstoff-Pipeline 6 Tage offline, Panik an Tankstellen' },
+  { date: 'Juli 2024', event: 'CrowdStrike-Ausfall (weltweit)', impact: 'Flughäfen, Krankenhäuser, Banken stundenlang gestört' },
+];
+
+// FAQs
+const faqs = [
+  {
+    question: 'Wie wahrscheinlich ist ein großer Cyberangriff?',
+    answer: 'Das BSI stuft die Bedrohungslage als "so hoch wie nie" ein. Ransomware-Angriffe auf Kommunen, Krankenhäuser und Unternehmen nehmen zu. Vorbereitung ist keine Panikmache, sondern Vernunft.'
+  },
+  {
+    question: 'Wie viel Bargeld sollte ich zu Hause haben?',
+    answer: 'Das BBK empfiehlt 50-100€ pro Erwachsenem in kleinen Scheinen (5€, 10€, 20€). Bei längeren Ausfällen können Geschäfte kein Wechselgeld geben.'
+  },
+  {
+    question: 'Funktioniert 112 noch bei einem Cyberangriff?',
+    answer: '112 hat Priorität und ist besonders geschützt. Aber Mobilfunknetze können überlastet sein - weiter versuchen oder Festnetz nutzen falls vorhanden.'
+  },
+  {
+    question: 'Soll ich meine Passwörter während eines Angriffs ändern?',
+    answer: 'Nein, warten Sie bis die Systeme wiederhergestellt sind. Während eines Angriffs könnten neue Passwörter abgefangen werden.'
+  },
+  {
+    question: 'Wie lange kann so eine Störung dauern?',
+    answer: 'Stunden bis Wochen, je nach Ursache. Der Landkreis Anhalt-Bitterfeld war 6 Monate beeinträchtigt. Planen Sie für mindestens 72 Stunden autark zu sein.'
+  },
+  {
+    question: 'Ist mein Geld bei einem Cyberangriff auf Banken sicher?',
+    answer: 'Ja, Ihr Geld verschwindet nicht. Die Einlagensicherung schützt bis 100.000€. Sie haben nur vorübergehend keinen Zugang.'
+  },
+];
+---
+
+<BaseLayout
+  title="Cyberangriff: Wenn Internet & EC ausfallen — Notfall-Checkliste"
+  description="Wie bereiten Sie sich auf Cyberangriffe und digitale Störungen vor? Bargeld, Offline-Backups, Kommunikation und Checkliste für wenn EC-Karten und Internet ausfallen."
+  locale="de"
+  schemaType="HowTo"
+  dateModified="2025-12-16"
+  alternates={{
+    nl: '/nl/scenario/cyberaanval/',
+  }}
+  schemaData={{
+    step: [
+      { '@type': 'HowToStep', name: 'Bargeld bereithalten', text: '50-100€ pro Erwachsenem in kleinen Scheinen. An verschiedenen Orten im Haus aufbewahren.' },
+      { '@type': 'HowToStep', name: 'Offline-Backups erstellen', text: 'Wichtige Dateien auf USB-Stick oder externer Festplatte. Nicht nur in der Cloud.' },
+      { '@type': 'HowToStep', name: 'Wichtige Kontakte ausdrucken', text: 'Telefonnummern von Familie, Freunden, Hausarzt, Versicherung auf Papier.' },
+      { '@type': 'HowToStep', name: 'Notfallradio bereithalten', text: 'Kurbelradio oder Radio mit Batterien für Nachrichten bei Internetausfall.' },
+      { '@type': 'HowToStep', name: 'Bar bezahlen bei Störung', text: 'EC-Karten und Online-Banking können ausfallen. Bargeld funktioniert immer.' },
+      { '@type': 'HowToStep', name: 'Passwörter NACH Störung ändern', text: 'Während des Angriffs keine Passwörter ändern - könnten abgefangen werden.' },
+    ],
+    totalTime: 'P3D',
+    supply: [
+      { '@type': 'HowToSupply', name: 'Bargeld (50-100€/Erw.)' },
+      { '@type': 'HowToSupply', name: 'USB-Stick mit Backup' },
+      { '@type': 'HowToSupply', name: 'Gedruckte Kontaktliste' },
+      { '@type': 'HowToSupply', name: 'Kurbelradio' },
+      { '@type': 'HowToSupply', name: 'Powerbank' },
+    ],
+  }}
+  faqData={faqs}
+>
+  <main class="scenario-page">
+    <!-- Header -->
+    <header class="scenario-header">
+      <nav class="scenario-breadcrumb">
+        <a href="/de/szenarien/" class="breadcrumb-back">
+          <Icon name="ChevronLeft" size={20} />
+        </a>
+        <span class="breadcrumb-current">Cyberangriff</span>
+      </nav>
+
+      <div class="scenario-title-row">
+        <div class="scenario-icon scenario-icon--purple">
+          <Icon name="Shield" size={28} />
+        </div>
+        <div class="scenario-title-content">
+          <h1 class="scenario-title">Vorbereitung auf Cyberangriff</h1>
+          <div class="scenario-meta">
+            <span class="meta-item">8 Min. Lesezeit</span>
+            <span class="meta-divider">·</span>
+            <span class="meta-item">Aktualisiert Dez. 2025</span>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Hero Image -->
+    <section class="scenario-section">
+      <HeroImage
+        src="/images/shared/power-outage-candles.webp"
+        alt="Vorbereitung auf Cyberangriff und digitale Störung"
+        priority={true}
+      />
+    </section>
+
+    <!-- TL;DR -->
+    <section class="scenario-section">
+      <TLDRBlock
+        summary="Ein Cyberangriff oder große digitale Störung kann EC-Karten, Internet und Mobilfunk lahmlegen. Die Lösung ist einfach: Bargeld (50-100€), Offline-Backups und wichtige Nummern auf Papier. Wir sind zu abhängig von Systemen geworden, die ausfallen können."
+        keyStat="50-100€"
+        keyStatLabel="Bargeld pro Person"
+        locale="de"
+      />
+    </section>
+
+    <!-- Real Examples -->
+    <section class="scenario-section">
+      <h2 class="section-title">
+        <Icon name="History" size={24} />
+        Das ist bereits passiert
+      </h2>
+      <div class="examples-list">
+        {realExamples.map((example) => (
+          <div class="example-item">
+            <div class="example-date">{example.date}</div>
+            <div class="example-content">
+              <span class="example-event">{example.event}</span>
+              <span class="example-impact">{example.impact}</span>
+            </div>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <!-- Impact Overview -->
+    <section class="scenario-section">
+      <h2 class="section-title">
+        <Icon name="AlertTriangle" size={24} />
+        Was kann ausfallen?
+      </h2>
+      <div class="impacts-list">
+        {cyberImpacts.map((item) => (
+          <div class={`impact-item impact-item--${item.severity}`}>
+            <div class="impact-content">
+              <span class="impact-system">{item.system}</span>
+              <span class="impact-effect">{item.impact}</span>
+            </div>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <!-- Cascade Timeline -->
+    <section class="scenario-section">
+      <h2 class="section-title">Wie eskaliert es?</h2>
+      <div class="cascade-timeline">
+        {cascadeEffects.map((item) => (
+          <div class="cascade-item">
+            <div class="cascade-stage">{item.stage}</div>
+            <div class="cascade-content">
+              <span class="cascade-title">{item.title}</span>
+              <span class="cascade-effects">{item.effects}</span>
+            </div>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <!-- Phase Tabs -->
+    <PhaseTabs
+      client:idle
+      scenarioKey={scenarioKey}
+      locale="de"
+    />
+
+    <!-- Phase: Vor -->
+    <section id="vor" class="phase-section">
+      <div class="phase-header">
+        <span class="phase-number">1</span>
+        <div class="phase-title-group">
+          <h2 class="phase-title">Vor dem Cyberangriff</h2>
+          <p class="phase-subtitle">Digitale Widerstandsfähigkeit aufbauen</p>
+        </div>
+      </div>
+
+      <div class="phase-steps">
+        {phases.vor.map((step, index) => (
+          <CollapsibleSection
+            title={step.title}
+            summary={step.detail}
+            step={index + 1}
+            variant="card"
+          >
+            <p>{step.detail}</p>
+            {step.tip && (
+              <div class="step-tip">
+                <Icon name="Lightbulb" size={16} />
+                <span>{step.tip}</span>
+              </div>
+            )}
+          </CollapsibleSection>
+        ))}
+      </div>
+    </section>
+
+    <!-- Phase: Während -->
+    <section id="wahrend" class="phase-section">
+      <div class="phase-header">
+        <span class="phase-number phase-number--warning">2</span>
+        <div class="phase-title-group">
+          <h2 class="phase-title">Während der Störung</h2>
+          <p class="phase-subtitle">Mit digitalem Ausfall umgehen</p>
+        </div>
+      </div>
+
+      <!-- Security Warning -->
+      <div class="warning-box">
+        <div class="warning-icon">
+          <Icon name="ShieldAlert" size={24} />
+        </div>
+        <div class="warning-content">
+          <strong>Achtung: Phishing nimmt zu</strong>
+          <p>Kriminelle nutzen Verwirrung aus. Keine verdächtigen Links öffnen, auch nicht von "Ihrer Bank".</p>
+        </div>
+      </div>
+
+      <div class="phase-steps">
+        {phases.wahrend.map((step, index) => (
+          <CollapsibleSection
+            title={step.title}
+            summary={step.detail}
+            step={index + 1}
+            variant="card"
+          >
+            <p>{step.detail}</p>
+            {step.tip && (
+              <div class="step-tip">
+                <Icon name="Lightbulb" size={16} />
+                <span>{step.tip}</span>
+              </div>
+            )}
+          </CollapsibleSection>
+        ))}
+      </div>
+    </section>
+
+    <!-- Phase: Nach -->
+    <section id="nach" class="phase-section">
+      <div class="phase-header">
+        <span class="phase-number phase-number--success">3</span>
+        <div class="phase-title-group">
+          <h2 class="phase-title">Nach der Störung</h2>
+          <p class="phase-subtitle">Wiederherstellung und Kontrolle</p>
+        </div>
+      </div>
+
+      <div class="phase-steps">
+        {phases.nach.map((step, index) => (
+          <CollapsibleSection
+            title={step.title}
+            summary={step.detail}
+            step={index + 1}
+            variant="card"
+          >
+            <p>{step.detail}</p>
+            {step.tip && (
+              <div class="step-tip">
+                <Icon name="Lightbulb" size={16} />
+                <span>{step.tip}</span>
+              </div>
+            )}
+          </CollapsibleSection>
+        ))}
+      </div>
+    </section>
+
+    <!-- Interactive Checklist -->
+    <section class="scenario-section">
+      <h2 class="section-title">
+        <Icon name="CheckSquare" size={24} />
+        Ihre Cyber-Vorsorge Checkliste
+      </h2>
+      <p class="section-intro">
+        Haken Sie ab, was Sie bereits erledigt haben. Ihr Fortschritt wird automatisch gespeichert.
+      </p>
+      <InteractiveChecklist
+        client:idle
+        storageKey={`${scenarioKey}_de`}
+        categories={checklistCategories}
+        title="Vorbereitet auf digitale Ausfälle"
+      />
+    </section>
+
+    <!-- FAQs -->
+    <section class="scenario-section">
+      <h2 class="section-title">Häufig gestellte Fragen</h2>
+      <div class="faq-list">
+        {faqs.map((faq) => (
+          <details class="faq-item">
+            <summary class="faq-question">
+              <span>{faq.question}</span>
+              <Icon name="ChevronDown" size={20} />
+            </summary>
+            <div class="faq-answer">
+              <p>{faq.answer}</p>
+            </div>
+          </details>
+        ))}
+      </div>
+    </section>
+
+    <!-- Sources -->
+    <section class="scenario-section">
+      <details class="sources-block">
+        <summary class="sources-header">
+          <Icon name="BookOpen" size={18} />
+          <span>Quellen und Referenzen</span>
+          <Icon name="ChevronDown" size={16} />
+        </summary>
+        <div class="sources-content">
+          <ul>
+            <li><a href="https://www.bsi.bund.de/" target="_blank" rel="noopener">BSI - Bundesamt für Sicherheit in der Informationstechnik</a></li>
+            <li><a href="https://www.bbk.bund.de/" target="_blank" rel="noopener">BBK - Bundesamt für Bevölkerungsschutz</a></li>
+            <li><a href="https://www.tagesschau.de/" target="_blank" rel="noopener">Tagesschau - Aktuelle Nachrichten</a></li>
+            <li><a href="https://www.verbraucherzentrale.de/wissen/digitale-welt/datenschutz" target="_blank" rel="noopener">Verbraucherzentrale - Digitaler Schutz</a></li>
+          </ul>
+        </div>
+      </details>
+    </section>
+
+    <!-- Recommended Products -->
+    <section class="scenario-section">
+      <h2 class="section-title">
+        <Icon name="ShoppingBag" size={20} />
+        Empfohlene Produkte
+      </h2>
+      <p class="section-intro">Unsere Ratgeber zu den wichtigsten Produkten für dieses Szenario:</p>
+      <div class="related-grid">
+        <a href="/de/produkte/notfallradio/" class="related-card related-card--green">
+          <Icon name="Radio" size={24} />
+          <span>Notfallradio</span>
+        </a>
+        <a href="/de/produkte/powerbanks/" class="related-card related-card--green">
+          <Icon name="Battery" size={24} />
+          <span>Powerbanks</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- Related Scenarios -->
+    <section class="scenario-section">
+      <h2 class="section-title">Verwandte Szenarien</h2>
+      <div class="related-grid">
+        <a href="/de/szenarien/stromausfall/" class="related-card related-card--amber">
+          <Icon name="Zap" size={24} />
+          <span>Stromausfall</span>
+        </a>
+        <a href="/de/szenarien/evakuierung/" class="related-card related-card--emerald">
+          <Icon name="Car" size={24} />
+          <span>Evakuierung</span>
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <!-- Sticky Action Bar -->
+  <StickyActionBar
+    client:idle
+    actionText="Notfallkit zusammenstellen"
+    actionUrl="/de/tools/kit-konfigurator/"
+    dismissKey={`scenario_${scenarioKey}_de`}
+    label="Nächster Schritt:"
+    locale="de"
+  />
+</BaseLayout>
+
+<style>
+  .scenario-page {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 0 16px 120px;
+  }
+
+  .scenario-header {
+    padding: 16px 0 24px;
+  }
+
+  .scenario-breadcrumb {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 16px;
+  }
+
+  .breadcrumb-back {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    background: var(--color-bg-secondary);
+    border-radius: 10px;
+    color: var(--color-text-secondary);
+    transition: all 0.15s ease;
+  }
+
+  .breadcrumb-back:hover {
+    background: var(--color-bg-tertiary);
+    color: var(--color-text-primary);
+  }
+
+  .breadcrumb-current {
+    font-size: 14px;
+    color: var(--color-text-muted);
+  }
+
+  .scenario-title-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+  }
+
+  .scenario-icon {
+    flex-shrink: 0;
+    width: 56px;
+    height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 16px;
+  }
+
+  .scenario-icon--purple {
+    background: rgba(139, 92, 246, 0.15);
+    color: #8b5cf6;
+  }
+
+  .scenario-title-content {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .scenario-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--color-text-primary);
+    margin: 0 0 6px;
+    line-height: 1.2;
+  }
+
+  .scenario-meta {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    color: var(--color-text-muted);
+  }
+
+  .meta-divider {
+    opacity: 0.5;
+  }
+
+  .scenario-section {
+    margin-bottom: 32px;
+  }
+
+  .section-title {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: var(--color-text-primary);
+    margin: 0 0 12px;
+  }
+
+  .section-intro {
+    font-size: 14px;
+    color: var(--color-text-muted);
+    margin: 0 0 16px;
+  }
+
+  /* Examples List */
+  .examples-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .example-item {
+    display: flex;
+    gap: 16px;
+    padding: 16px;
+    background: var(--color-bg-secondary);
+    border-radius: 12px;
+    border-left: 4px solid #8b5cf6;
+  }
+
+  .example-date {
+    flex-shrink: 0;
+    font-size: 13px;
+    font-weight: 600;
+    color: #8b5cf6;
+    min-width: 80px;
+  }
+
+  .example-content {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .example-event {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--color-text-primary);
+  }
+
+  .example-impact {
+    font-size: 13px;
+    color: var(--color-text-muted);
+  }
+
+  /* Impacts List */
+  .impacts-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .impact-item {
+    display: flex;
+    align-items: center;
+    padding: 12px 16px;
+    background: var(--color-bg-secondary);
+    border-radius: 12px;
+    border-left: 4px solid;
+  }
+
+  .impact-item--critical {
+    border-left-color: #ef4444;
+  }
+
+  .impact-item--warning {
+    border-left-color: #f59e0b;
+  }
+
+  .impact-content {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .impact-system {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--color-text-primary);
+  }
+
+  .impact-effect {
+    font-size: 13px;
+    color: var(--color-text-muted);
+  }
+
+  /* Cascade Timeline */
+  .cascade-timeline {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .cascade-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    padding: 16px;
+    background: var(--color-bg-secondary);
+    border-radius: 12px;
+  }
+
+  .cascade-stage {
+    flex-shrink: 0;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(139, 92, 246, 0.15);
+    color: #8b5cf6;
+    font-size: 14px;
+    font-weight: 700;
+    border-radius: 8px;
+  }
+
+  .cascade-content {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .cascade-title {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--color-text-primary);
+  }
+
+  .cascade-effects {
+    font-size: 13px;
+    color: var(--color-text-muted);
+  }
+
+  /* Phase sections */
+  .phase-section {
+    padding: 24px 0;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .phase-section:last-of-type {
+    border-bottom: none;
+  }
+
+  .phase-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    margin-bottom: 20px;
+  }
+
+  .phase-number {
+    flex-shrink: 0;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--color-accent-subtle);
+    color: var(--color-accent-primary);
+    font-size: 18px;
+    font-weight: 700;
+    border-radius: 12px;
+  }
+
+  .phase-number--warning {
+    background: rgba(139, 92, 246, 0.15);
+    color: #8b5cf6;
+  }
+
+  .phase-number--success {
+    background: rgba(34, 197, 94, 0.15);
+    color: #22c55e;
+  }
+
+  .phase-title-group {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .phase-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--color-text-primary);
+    margin: 0 0 4px;
+  }
+
+  .phase-subtitle {
+    font-size: 14px;
+    color: var(--color-text-muted);
+    margin: 0;
+  }
+
+  .phase-steps {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .step-tip {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    margin-top: 12px;
+    padding: 10px 12px;
+    background: var(--color-accent-subtle);
+    border-radius: 8px;
+    font-size: 13px;
+    color: var(--color-accent-primary);
+  }
+
+  .step-tip svg {
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  /* Warning Box */
+  .warning-box {
+    display: flex;
+    gap: 16px;
+    padding: 16px;
+    margin-bottom: 20px;
+    background: rgba(139, 92, 246, 0.1);
+    border: 1px solid rgba(139, 92, 246, 0.3);
+    border-radius: 12px;
+  }
+
+  .warning-icon {
+    flex-shrink: 0;
+    color: #8b5cf6;
+  }
+
+  .warning-content {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .warning-content strong {
+    display: block;
+    font-size: 14px;
+    color: #8b5cf6;
+    margin-bottom: 4px;
+  }
+
+  .warning-content p {
+    font-size: 13px;
+    color: var(--color-text-secondary);
+    margin: 0;
+  }
+
+  /* FAQs */
+  .faq-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .faq-item {
+    background: var(--color-bg-secondary);
+    border: 1px solid var(--color-border);
+    border-radius: 12px;
+    overflow: hidden;
+  }
+
+  .faq-question {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 14px 16px;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--color-text-primary);
+    cursor: pointer;
+    list-style: none;
+  }
+
+  .faq-question::-webkit-details-marker {
+    display: none;
+  }
+
+  .faq-question svg {
+    flex-shrink: 0;
+    color: var(--color-text-muted);
+    transition: transform 0.2s ease;
+  }
+
+  .faq-item[open] .faq-question svg {
+    transform: rotate(180deg);
+  }
+
+  .faq-answer {
+    padding: 0 16px 14px;
+  }
+
+  .faq-answer p {
+    font-size: 14px;
+    color: var(--color-text-secondary);
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  /* Sources */
+  .sources-block {
+    background: var(--color-bg-secondary);
+    border-radius: 12px;
+    overflow: hidden;
+  }
+
+  .sources-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 16px;
+    font-size: 14px;
+    color: var(--color-text-muted);
+    cursor: pointer;
+    list-style: none;
+  }
+
+  .sources-header::-webkit-details-marker {
+    display: none;
+  }
+
+  .sources-header svg:last-child {
+    margin-left: auto;
+    transition: transform 0.2s ease;
+  }
+
+  .sources-block[open] .sources-header svg:last-child {
+    transform: rotate(180deg);
+  }
+
+  .sources-content {
+    padding: 0 16px 14px;
+  }
+
+  .sources-content ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .sources-content li {
+    margin-bottom: 8px;
+  }
+
+  .sources-content a {
+    font-size: 13px;
+    color: var(--color-accent-primary);
+    text-decoration: none;
+  }
+
+  .sources-content a:hover {
+    text-decoration: underline;
+  }
+
+  /* Related Scenarios */
+  .related-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+
+  .related-card {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 16px;
+    border-radius: 12px;
+    text-decoration: none;
+    transition: transform 0.15s ease;
+  }
+
+  .related-card:hover {
+    transform: translateY(-2px);
+  }
+
+  .related-card span {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--color-text-primary);
+  }
+
+  .related-card--amber {
+    background: rgba(245, 158, 11, 0.1);
+    border: 1px solid rgba(245, 158, 11, 0.2);
+    color: #f59e0b;
+  }
+
+  .related-card--emerald {
+    background: rgba(16, 185, 129, 0.1);
+    border: 1px solid rgba(16, 185, 129, 0.2);
+    color: #10b981;
+  }
+
+  .related-card--green {
+    background: rgba(34, 197, 94, 0.1);
+    border: 1px solid rgba(34, 197, 94, 0.2);
+    color: #22c55e;
+  }
+
+  @media (max-width: 480px) {
+    .scenario-page {
+      padding: 0 12px 120px;
+    }
+
+    .scenario-title {
+      font-size: 1.25rem;
+    }
+
+    .related-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .example-item {
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .example-date {
+      min-width: auto;
+    }
+  }
+</style>

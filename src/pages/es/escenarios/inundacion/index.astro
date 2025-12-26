@@ -1,0 +1,1090 @@
+---
+/**
+ * Inundación Scenario Page - ES
+ *
+ * Context:
+ * - Spain experiences regular flooding (gota fría/DANA)
+ * - Valencia, Murcia, Andalucía particularly affected
+ * - DANA October 2024 caused major damage
+ * - Flash floods are increasing due to climate change
+ */
+import BaseLayout from '../../../../layouts/BaseLayout.astro';
+import TLDRBlock from '../../../../components/hub/TLDRBlock.astro';
+import CollapsibleSection from '../../../../components/hub/CollapsibleSection.astro';
+import PhaseTabs from '../../../../components/hub/PhaseTabs.tsx';
+import InteractiveChecklist from '../../../../components/hub/InteractiveChecklist.tsx';
+import StickyActionBar from '../../../../components/hub/StickyActionBar.tsx';
+import Icon from '../../../../components/ui/Icon.astro';
+import HeroImage from '../../../../components/content/HeroImage.astro';
+
+const scenarioKey = 'inundacion';
+
+// Warning levels
+const warningLevels = [
+  { level: 'Verde', description: 'Sin riesgo significativo', action: 'Situación normal', color: '#22c55e' },
+  { level: 'Amarillo', description: 'Posibles lluvias fuertes', action: 'Mantente informado, prepara kit', color: '#eab308' },
+  { level: 'Naranja', description: 'Lluvias muy fuertes, posibles inundaciones', action: 'Evita desplazamientos, prepara evacuación', color: '#f97316' },
+  { level: 'Rojo', description: 'Riesgo extremo, peligro para la vida', action: 'Sigue instrucciones de emergencias, evacúa si te lo indican', color: '#ef4444' },
+];
+
+// Phase content
+const phases = {
+  antes: [
+    {
+      title: 'Conoce el riesgo de tu zona',
+      detail: 'Comprueba si vives en zona inundable. Consulta el mapa de riesgos de Protección Civil o tu ayuntamiento.',
+      tip: 'Las zonas cerca de ríos, barrancos o zonas bajas tienen mayor riesgo'
+    },
+    {
+      title: 'Prepara un kit de evacuación',
+      detail: 'Mochila con agua, comida, documentos, medicinas, linterna, cargador. Lista para coger en 5 minutos.',
+      tip: 'Incluye ropa de recambio en bolsa impermeable'
+    },
+    {
+      title: 'Planifica rutas de evacuación',
+      detail: 'Conoce al menos 2 rutas para salir de tu zona hacia terreno alto. Practica con tu familia.',
+      tip: 'Evita rutas que pasen por puentes bajos o zonas inundables'
+    },
+    {
+      title: 'Asegura tu vivienda',
+      detail: 'Revisa desagües y canalones. Guarda objetos de valor en zonas altas. Ten sacos de arena si es zona de riesgo.',
+      tip: null
+    },
+    {
+      title: 'Documenta tus pertenencias',
+      detail: 'Fotos y vídeo de casa y pertenencias para el seguro. Guarda copias en la nube.',
+      tip: null
+    },
+    {
+      title: 'Mantén el coche preparado',
+      detail: 'Depósito siempre a medio llenar. Kit de emergencia en el maletero.',
+      tip: 'Aparca en zona alta si hay alerta'
+    },
+  ],
+  durante: [
+    {
+      title: 'Sigue las alertas oficiales',
+      detail: 'AEMET, Protección Civil, 112. Activa las alertas en tu móvil.',
+      tip: 'No te fíes solo de apps meteorológicas comerciales'
+    },
+    {
+      title: 'Evita zonas inundables',
+      detail: 'No camines ni conduzcas por agua. 15 cm de agua en movimiento pueden derribarte. 30 cm arrastran un coche.',
+      tip: null
+    },
+    {
+      title: 'Si estás en casa',
+      detail: 'Sube a plantas altas. Corta la luz si el agua sube. No bajes al sótano ni garaje.',
+      tip: 'NUNCA intentes salvar el coche de un garaje inundado'
+    },
+    {
+      title: 'Si estás en el coche',
+      detail: 'Da la vuelta si ves agua en la carretera. Si el agua te atrapa, sal del coche inmediatamente.',
+      tip: 'El coche puede flotar con solo 60 cm de agua'
+    },
+    {
+      title: 'Si te atrapan las aguas',
+      detail: 'Sube al punto más alto posible. Señala tu posición. Llama al 112.',
+      tip: 'No nades contra la corriente - busca algo flotante'
+    },
+    {
+      title: 'Evacúa si te lo ordenan',
+      detail: 'No ignores las órdenes de evacuación. Coge tu kit y sigue las rutas indicadas.',
+      tip: 'Corta agua, luz y gas antes de salir'
+    },
+  ],
+  despues: [
+    {
+      title: 'Espera el aviso oficial',
+      detail: 'No vuelvas a casa hasta que Protección Civil diga que es seguro.',
+      tip: null
+    },
+    {
+      title: 'Cuidado al entrar en casa',
+      detail: 'Puede haber daños estructurales, animales peligrosos, cables eléctricos.',
+      tip: 'Haz fotos de todo para el seguro antes de tocar nada'
+    },
+    {
+      title: 'No bebas el agua del grifo',
+      detail: 'Puede estar contaminada. Usa agua embotellada hasta que se confirme que es segura.',
+      tip: null
+    },
+    {
+      title: 'Desecha alimentos en contacto con agua',
+      detail: 'Cualquier comida que haya tocado el agua de inundación no es segura.',
+      tip: 'Esto incluye conservas si el agua ha tocado la tapa'
+    },
+    {
+      title: 'Limpia y desinfecta',
+      detail: 'El barro de inundación puede contener bacterias y químicos. Usa lejía diluida.',
+      tip: 'Usa mascarilla y guantes'
+    },
+    {
+      title: 'Busca apoyo',
+      detail: 'Contacta con tu seguro. Solicita ayudas oficiales si existen. Cuida tu salud mental.',
+      tip: null
+    },
+  ],
+};
+
+// Checklist categories
+const checklistCategories = [
+  {
+    id: 'kit-evacuacion',
+    name: 'Kit de evacuación',
+    icon: 'backpack',
+    items: [
+      { id: 'mochila', name: 'Mochila impermeable', quantity: '30-40L', priority: 'critical' as const },
+      { id: 'agua', name: 'Agua potable', quantity: '1.5L/persona', priority: 'critical' as const, notes: 'Para las primeras horas' },
+      { id: 'comida', name: 'Comida no perecedera', quantity: '24h/persona', priority: 'critical' as const, notes: 'Barritas, frutos secos' },
+      { id: 'documentos', name: 'Copias de documentos', quantity: 'En bolsa impermeable', priority: 'critical' as const },
+      { id: 'medicinas', name: 'Medicamentos esenciales', quantity: '1 semana', priority: 'critical' as const },
+      { id: 'dinero', name: 'Efectivo', quantity: '100-200€', priority: 'critical' as const, notes: 'Billetes pequeños' },
+    ]
+  },
+  {
+    id: 'iluminacion',
+    name: 'Iluminación y comunicación',
+    icon: 'flashlight',
+    items: [
+      { id: 'linterna', name: 'Linterna LED impermeable', quantity: '1-2 unidades', priority: 'critical' as const },
+      { id: 'pilas', name: 'Pilas de repuesto', quantity: '2 sets', priority: 'critical' as const },
+      { id: 'powerbank', name: 'Powerbank cargada', quantity: '10.000mAh+', priority: 'critical' as const },
+      { id: 'radio', name: 'Radio con pilas/dinamo', quantity: '1 unidad', priority: 'critical' as const },
+      { id: 'silbato', name: 'Silbato', quantity: '1/persona', priority: 'recommended' as const, notes: 'Para pedir ayuda' },
+    ]
+  },
+  {
+    id: 'proteccion',
+    name: 'Protección personal',
+    icon: 'shield',
+    items: [
+      { id: 'ropa', name: 'Ropa de recambio', quantity: '1 muda', priority: 'critical' as const, notes: 'En bolsa impermeable' },
+      { id: 'calzado', name: 'Calzado resistente al agua', quantity: '1 par', priority: 'recommended' as const },
+      { id: 'chubasquero', name: 'Chubasquero/poncho', quantity: '1/persona', priority: 'critical' as const },
+      { id: 'guantes', name: 'Guantes de trabajo', quantity: '1 par', priority: 'recommended' as const },
+      { id: 'mascarilla', name: 'Mascarillas FFP2', quantity: '5-10', priority: 'recommended' as const, notes: 'Para limpieza posterior' },
+    ]
+  },
+  {
+    id: 'vehiculo',
+    name: 'Preparación del vehículo',
+    icon: 'car',
+    items: [
+      { id: 'deposito', name: 'Depósito mínimo medio lleno', quantity: 'Siempre', priority: 'critical' as const },
+      { id: 'kit-coche', name: 'Kit emergencia en maletero', quantity: '1 kit', priority: 'recommended' as const },
+      { id: 'martillo', name: 'Martillo rompe cristales', quantity: '1 unidad', priority: 'critical' as const, notes: 'Puede salvar tu vida' },
+      { id: 'manta', name: 'Manta térmica', quantity: '1-2', priority: 'recommended' as const },
+    ]
+  },
+  {
+    id: 'hogar',
+    name: 'Preparación del hogar',
+    icon: 'home',
+    items: [
+      { id: 'desagues', name: 'Desagües y canalones limpios', quantity: 'Revisar', priority: 'critical' as const },
+      { id: 'objetos-altos', name: 'Objetos de valor en zonas altas', quantity: 'Organizar', priority: 'recommended' as const },
+      { id: 'fotos-seguro', name: 'Fotos/vídeo de pertenencias', quantity: 'Actualizado', priority: 'recommended' as const },
+      { id: 'sacos', name: 'Sacos de arena (zona riesgo)', quantity: '10-20', priority: 'recommended' as const },
+    ]
+  },
+];
+
+// Recent flood events in Spain
+const recentFloods = [
+  { date: 'Oct 2024', event: 'DANA Valencia', impact: 'Devastación histórica, múltiples víctimas, pueblos aislados' },
+  { date: 'Sep 2023', event: 'DANA Comunidad Valenciana', impact: 'Carreteras cortadas, evacuaciones' },
+  { date: 'Sep 2022', event: 'DANA Murcia y Almería', impact: 'Inundaciones graves, daños agrícolas' },
+  { date: 'Sep 2019', event: 'DANA Alicante y Murcia', impact: '6 fallecidos, miles de desplazados' },
+];
+
+// FAQs
+const faqs = [
+  {
+    question: '¿Qué es una DANA?',
+    answer: 'DANA (Depresión Aislada en Niveles Altos) es una masa de aire frío que se separa de la corriente polar y puede provocar lluvias torrenciales, especialmente en el Mediterráneo. Antes se llamaba "gota fría".'
+  },
+  {
+    question: '¿Cuánta agua puede arrastrar un coche?',
+    answer: 'Solo 30 cm de agua en movimiento pueden arrastrar un coche. Con 60 cm el vehículo flota y pierde todo el control. NUNCA intentes cruzar una carretera inundada.'
+  },
+  {
+    question: '¿Debo bajar al garaje a por mi coche?',
+    answer: 'NUNCA. Los garajes son trampas mortales durante inundaciones. El agua puede subir muy rápido y las puertas pueden bloquearse. Tu vida vale más que cualquier coche.'
+  },
+  {
+    question: '¿Cuándo debo evacuar?',
+    answer: 'Evacúa inmediatamente si: te lo ordenan las autoridades, el agua empieza a entrar en tu casa, o estás en zona baja junto a río/barranco y hay alerta roja. No esperes a que sea demasiado tarde.'
+  },
+  {
+    question: '¿Cómo sé si mi zona es inundable?',
+    answer: 'Consulta el Sistema Nacional de Cartografía de Zonas Inundables (SNCZI) del MITECO, o pregunta en tu ayuntamiento. Las zonas cerca de ríos, barrancos o depresiones tienen más riesgo.'
+  },
+  {
+    question: '¿Puedo beber el agua del grifo después de una inundación?',
+    answer: 'No hasta que las autoridades confirmen que es segura. La red de agua puede haberse contaminado. Usa solo agua embotellada.'
+  },
+];
+---
+
+<BaseLayout
+  title="Inundación y DANA: Cómo actuar y evacuar — Checklist de Emergencia"
+  description="Cómo prepararse antes, durante y después de una inundación o DANA. Checklist de evacuación, consejos de seguridad y qué hacer si el agua te atrapa."
+  locale="es"
+  schemaType="HowTo"
+  dateModified="2025-12-16"
+  alternates={{
+    de: '/de/szenarien/hochwasser/',
+    nl: '/nl/scenario/overstroming/',
+  }}
+  schemaData={{
+    step: [
+      { '@type': 'HowToStep', name: 'Conoce el riesgo de tu zona', text: 'Comprueba si vives en zona inundable. Consulta el mapa de riesgos de Protección Civil.' },
+      { '@type': 'HowToStep', name: 'Prepara un kit de evacuación', text: 'Mochila con agua, comida, documentos, medicinas, linterna. Lista para coger en 5 minutos.' },
+      { '@type': 'HowToStep', name: 'Planifica rutas de evacuación', text: 'Conoce al menos 2 rutas para salir hacia terreno alto.' },
+      { '@type': 'HowToStep', name: 'Evita zonas inundables durante la alerta', text: 'No camines ni conduzcas por agua. 30 cm arrastran un coche.' },
+      { '@type': 'HowToStep', name: 'Sube a plantas altas si el agua sube', text: 'Corta la luz. No bajes al sótano ni garaje bajo ningún concepto.' },
+      { '@type': 'HowToStep', name: 'Evacúa si te lo ordenan', text: 'Coge tu kit y sigue las rutas indicadas. Corta agua, luz y gas.' },
+    ],
+    totalTime: 'P3D',
+    supply: [
+      { '@type': 'HowToSupply', name: 'Mochila impermeable con kit de evacuación' },
+      { '@type': 'HowToSupply', name: 'Agua potable (1.5L/persona)' },
+      { '@type': 'HowToSupply', name: 'Comida no perecedera (24h)' },
+      { '@type': 'HowToSupply', name: 'Documentos en bolsa impermeable' },
+      { '@type': 'HowToSupply', name: 'Linterna y powerbank' },
+      { '@type': 'HowToSupply', name: 'Martillo rompe cristales para el coche' },
+    ],
+  }}
+  faqData={faqs}
+>
+  <main class="scenario-page">
+    <!-- Header -->
+    <header class="scenario-header">
+      <nav class="scenario-breadcrumb">
+        <a href="/es/escenarios/" class="breadcrumb-back">
+          <Icon name="ChevronLeft" size={20} />
+        </a>
+        <span class="breadcrumb-current">Inundación</span>
+      </nav>
+
+      <div class="scenario-title-row">
+        <div class="scenario-icon scenario-icon--blue">
+          <Icon name="Waves" size={28} />
+        </div>
+        <div class="scenario-title-content">
+          <h1 class="scenario-title">Prepararse para Inundaciones</h1>
+          <div class="scenario-meta">
+            <span class="meta-item">10 min</span>
+            <span class="meta-divider">·</span>
+            <span class="meta-item">Actualizado dic 2025</span>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Hero Image -->
+    <section class="scenario-section">
+      <HeroImage
+        src="/images/shared/flood-street.webp"
+        alt="Calle inundada durante una DANA - preparación ante inundaciones"
+        priority={true}
+      />
+    </section>
+
+    <!-- TL;DR -->
+    <section class="scenario-section">
+      <TLDRBlock
+        summary="Las inundaciones por DANA matan cada año en España. La preparación salva vidas: conoce si vives en zona de riesgo, ten un kit de evacuación listo, y NUNCA intentes cruzar agua en movimiento. 30 cm de agua arrastran un coche."
+        keyStat="30 cm"
+        keyStatLabel="de agua arrastran un coche"
+        locale="es"
+      />
+    </section>
+
+    <!-- Recent Floods -->
+    <section class="scenario-section">
+      <h2 class="section-title">
+        <Icon name="History" size={24} />
+        Inundaciones recientes en España
+      </h2>
+      <div class="examples-list">
+        {recentFloods.map((flood) => (
+          <div class="example-item">
+            <div class="example-date">{flood.date}</div>
+            <div class="example-content">
+              <span class="example-event">{flood.event}</span>
+              <span class="example-impact">{flood.impact}</span>
+            </div>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <!-- Warning Levels -->
+    <section class="scenario-section">
+      <h2 class="section-title">
+        <Icon name="AlertTriangle" size={24} />
+        Niveles de alerta
+      </h2>
+      <div class="warning-levels">
+        {warningLevels.map((level) => (
+          <div class="warning-level" style={`border-left-color: ${level.color}`}>
+            <div class="warning-level-header">
+              <span class="warning-level-name" style={`color: ${level.color}`}>{level.level}</span>
+              <span class="warning-level-desc">{level.description}</span>
+            </div>
+            <div class="warning-level-action">{level.action}</div>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <!-- Critical Warning -->
+    <section class="scenario-section">
+      <div class="critical-warning">
+        <div class="critical-warning-icon">
+          <Icon name="AlertOctagon" size={32} />
+        </div>
+        <div class="critical-warning-content">
+          <h3>Regla de oro: NUNCA cruces agua en movimiento</h3>
+          <ul>
+            <li><strong>15 cm</strong> de agua te pueden derribar</li>
+            <li><strong>30 cm</strong> arrastran un coche</li>
+            <li><strong>60 cm</strong> hacen flotar cualquier vehículo</li>
+          </ul>
+          <p>Si el agua sube, sube tú. NUNCA bajes a sótanos o garajes.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Phase Tabs -->
+    <PhaseTabs
+      client:idle
+      scenarioKey={scenarioKey}
+      locale="es"
+    />
+
+    <!-- Phase: Antes -->
+    <section id="antes" class="phase-section">
+      <div class="phase-header">
+        <span class="phase-number">1</span>
+        <div class="phase-title-group">
+          <h2 class="phase-title">Antes de la inundación</h2>
+          <p class="phase-subtitle">Preparación preventiva</p>
+        </div>
+      </div>
+
+      <div class="phase-steps">
+        {phases.antes.map((step, index) => (
+          <CollapsibleSection
+            title={step.title}
+            summary={step.detail}
+            step={index + 1}
+            variant="card"
+          >
+            <p>{step.detail}</p>
+            {step.tip && (
+              <div class="step-tip">
+                <Icon name="Lightbulb" size={16} />
+                <span>{step.tip}</span>
+              </div>
+            )}
+          </CollapsibleSection>
+        ))}
+      </div>
+    </section>
+
+    <!-- Phase: Durante -->
+    <section id="durante" class="phase-section">
+      <div class="phase-header">
+        <span class="phase-number phase-number--warning">2</span>
+        <div class="phase-title-group">
+          <h2 class="phase-title">Durante la inundación</h2>
+          <p class="phase-subtitle">Supervivencia activa</p>
+        </div>
+      </div>
+
+      <!-- Warning Box -->
+      <div class="warning-box">
+        <div class="warning-icon">
+          <Icon name="AlertTriangle" size={24} />
+        </div>
+        <div class="warning-content">
+          <strong>Errores mortales a evitar</strong>
+          <ul>
+            <li>Cruzar agua en movimiento (a pie o en coche)</li>
+            <li>Bajar al garaje o sótano</li>
+            <li>Quedarse en coche atrapado</li>
+            <li>Ignorar órdenes de evacuación</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="phase-steps">
+        {phases.durante.map((step, index) => (
+          <CollapsibleSection
+            title={step.title}
+            summary={step.detail}
+            step={index + 1}
+            variant="card"
+          >
+            <p>{step.detail}</p>
+            {step.tip && (
+              <div class="step-tip">
+                <Icon name="Lightbulb" size={16} />
+                <span>{step.tip}</span>
+              </div>
+            )}
+          </CollapsibleSection>
+        ))}
+      </div>
+    </section>
+
+    <!-- Phase: Después -->
+    <section id="despues" class="phase-section">
+      <div class="phase-header">
+        <span class="phase-number phase-number--success">3</span>
+        <div class="phase-title-group">
+          <h2 class="phase-title">Después de la inundación</h2>
+          <p class="phase-subtitle">Regreso y recuperación</p>
+        </div>
+      </div>
+
+      <div class="phase-steps">
+        {phases.despues.map((step, index) => (
+          <CollapsibleSection
+            title={step.title}
+            summary={step.detail}
+            step={index + 1}
+            variant="card"
+          >
+            <p>{step.detail}</p>
+            {step.tip && (
+              <div class="step-tip">
+                <Icon name="Lightbulb" size={16} />
+                <span>{step.tip}</span>
+              </div>
+            )}
+          </CollapsibleSection>
+        ))}
+      </div>
+    </section>
+
+    <!-- Interactive Checklist -->
+    <section class="scenario-section">
+      <h2 class="section-title">
+        <Icon name="CheckSquare" size={24} />
+        Tu checklist de inundación
+      </h2>
+      <p class="section-intro">
+        Marca lo que ya tienes preparado. Tu progreso se guarda automáticamente.
+      </p>
+      <InteractiveChecklist
+        client:idle
+        storageKey={`${scenarioKey}_es`}
+        categories={checklistCategories}
+        title="Preparado para inundaciones"
+      />
+    </section>
+
+    <!-- FAQs -->
+    <section class="scenario-section">
+      <h2 class="section-title">Preguntas frecuentes</h2>
+      <div class="faq-list">
+        {faqs.map((faq) => (
+          <details class="faq-item">
+            <summary class="faq-question">
+              <span>{faq.question}</span>
+              <Icon name="ChevronDown" size={20} />
+            </summary>
+            <div class="faq-answer">
+              <p>{faq.answer}</p>
+            </div>
+          </details>
+        ))}
+      </div>
+    </section>
+
+    <!-- Sources -->
+    <section class="scenario-section">
+      <details class="sources-block">
+        <summary class="sources-header">
+          <Icon name="BookOpen" size={18} />
+          <span>Fuentes y referencias</span>
+          <Icon name="ChevronDown" size={16} />
+        </summary>
+        <div class="sources-content">
+          <ul>
+            <li><a href="https://www.aemet.es/" target="_blank" rel="noopener">AEMET - Agencia Estatal de Meteorología</a></li>
+            <li><a href="https://www.proteccioncivil.es/" target="_blank" rel="noopener">Protección Civil</a></li>
+            <li><a href="https://www.miteco.gob.es/es/agua/temas/gestion-de-los-riesgos-de-inundacion/" target="_blank" rel="noopener">MITECO - Gestión de Riesgos de Inundación</a></li>
+            <li><a href="https://sig.mapama.gob.es/snczi/" target="_blank" rel="noopener">SNCZI - Sistema Nacional de Cartografía de Zonas Inundables</a></li>
+          </ul>
+        </div>
+      </details>
+    </section>
+
+    <!-- Related Scenarios -->
+    <section class="scenario-section">
+      <h2 class="section-title">Escenarios relacionados</h2>
+      <div class="related-grid">
+        <a href="/es/escenarios/prepararse-apagon/" class="related-card related-card--amber">
+          <Icon name="Zap" size={24} />
+          <span>Apagón</span>
+        </a>
+        <a href="/es/kit-evacuacion/" class="related-card related-card--emerald">
+          <Icon name="Backpack" size={24} />
+          <span>Kit de Evacuación</span>
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <!-- Sticky Action Bar -->
+  <StickyActionBar
+    client:idle
+    actionText="Prepara tu kit de evacuación"
+    actionUrl="/es/kit-evacuacion/"
+    dismissKey={`scenario_${scenarioKey}_es`}
+    label="Próximo paso:"
+    locale="es"
+  />
+</BaseLayout>
+
+<style>
+  .scenario-page {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 0 16px 120px;
+  }
+
+  .scenario-header {
+    padding: 16px 0 24px;
+  }
+
+  .scenario-breadcrumb {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 16px;
+  }
+
+  .breadcrumb-back {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    background: var(--color-bg-secondary);
+    border-radius: 10px;
+    color: var(--color-text-secondary);
+    transition: all 0.15s ease;
+  }
+
+  .breadcrumb-back:hover {
+    background: var(--color-bg-tertiary);
+    color: var(--color-text-primary);
+  }
+
+  .breadcrumb-current {
+    font-size: 14px;
+    color: var(--color-text-muted);
+  }
+
+  .scenario-title-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+  }
+
+  .scenario-icon {
+    flex-shrink: 0;
+    width: 56px;
+    height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 16px;
+  }
+
+  .scenario-icon--blue {
+    background: rgba(59, 130, 246, 0.15);
+    color: #3b82f6;
+  }
+
+  .scenario-title-content {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .scenario-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--color-text-primary);
+    margin: 0 0 6px;
+    line-height: 1.2;
+  }
+
+  .scenario-meta {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    color: var(--color-text-muted);
+  }
+
+  .meta-divider {
+    opacity: 0.5;
+  }
+
+  .scenario-section {
+    margin-bottom: 32px;
+  }
+
+  .section-title {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: var(--color-text-primary);
+    margin: 0 0 12px;
+  }
+
+  .section-intro {
+    font-size: 14px;
+    color: var(--color-text-muted);
+    margin: 0 0 16px;
+  }
+
+  /* Examples List */
+  .examples-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .example-item {
+    display: flex;
+    gap: 16px;
+    padding: 16px;
+    background: var(--color-bg-secondary);
+    border-radius: 12px;
+    border-left: 4px solid #3b82f6;
+  }
+
+  .example-date {
+    flex-shrink: 0;
+    font-size: 13px;
+    font-weight: 600;
+    color: #3b82f6;
+    min-width: 70px;
+  }
+
+  .example-content {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .example-event {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--color-text-primary);
+  }
+
+  .example-impact {
+    font-size: 13px;
+    color: var(--color-text-muted);
+  }
+
+  /* Warning Levels */
+  .warning-levels {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .warning-level {
+    padding: 12px 16px;
+    background: var(--color-bg-secondary);
+    border-radius: 12px;
+    border-left: 4px solid;
+  }
+
+  .warning-level-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 4px;
+  }
+
+  .warning-level-name {
+    font-size: 14px;
+    font-weight: 700;
+    text-transform: uppercase;
+  }
+
+  .warning-level-desc {
+    font-size: 13px;
+    color: var(--color-text-secondary);
+  }
+
+  .warning-level-action {
+    font-size: 13px;
+    color: var(--color-text-muted);
+    font-style: italic;
+  }
+
+  /* Critical Warning */
+  .critical-warning {
+    display: flex;
+    gap: 16px;
+    padding: 20px;
+    background: rgba(239, 68, 68, 0.1);
+    border: 2px solid rgba(239, 68, 68, 0.3);
+    border-radius: 16px;
+  }
+
+  .critical-warning-icon {
+    flex-shrink: 0;
+    color: #ef4444;
+  }
+
+  .critical-warning-content {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .critical-warning-content h3 {
+    font-size: 16px;
+    font-weight: 700;
+    color: #ef4444;
+    margin: 0 0 12px;
+  }
+
+  .critical-warning-content ul {
+    margin: 0 0 12px;
+    padding: 0;
+    list-style: none;
+  }
+
+  .critical-warning-content li {
+    font-size: 14px;
+    color: var(--color-text-primary);
+    margin-bottom: 6px;
+  }
+
+  .critical-warning-content p {
+    font-size: 14px;
+    font-weight: 600;
+    color: #ef4444;
+    margin: 0;
+  }
+
+  /* Phase sections */
+  .phase-section {
+    padding: 24px 0;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .phase-section:last-of-type {
+    border-bottom: none;
+  }
+
+  .phase-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    margin-bottom: 20px;
+  }
+
+  .phase-number {
+    flex-shrink: 0;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--color-accent-subtle);
+    color: var(--color-accent-primary);
+    font-size: 18px;
+    font-weight: 700;
+    border-radius: 12px;
+  }
+
+  .phase-number--warning {
+    background: rgba(59, 130, 246, 0.15);
+    color: #3b82f6;
+  }
+
+  .phase-number--success {
+    background: rgba(34, 197, 94, 0.15);
+    color: #22c55e;
+  }
+
+  .phase-title-group {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .phase-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--color-text-primary);
+    margin: 0 0 4px;
+  }
+
+  .phase-subtitle {
+    font-size: 14px;
+    color: var(--color-text-muted);
+    margin: 0;
+  }
+
+  .phase-steps {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .step-tip {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    margin-top: 12px;
+    padding: 10px 12px;
+    background: var(--color-accent-subtle);
+    border-radius: 8px;
+    font-size: 13px;
+    color: var(--color-accent-primary);
+  }
+
+  .step-tip svg {
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  /* Warning Box */
+  .warning-box {
+    display: flex;
+    gap: 16px;
+    padding: 16px;
+    margin-bottom: 20px;
+    background: rgba(239, 68, 68, 0.1);
+    border: 1px solid rgba(239, 68, 68, 0.3);
+    border-radius: 12px;
+  }
+
+  .warning-icon {
+    flex-shrink: 0;
+    color: #ef4444;
+  }
+
+  .warning-content {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .warning-content strong {
+    display: block;
+    font-size: 14px;
+    color: #ef4444;
+    margin-bottom: 8px;
+  }
+
+  .warning-content ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .warning-content li {
+    position: relative;
+    padding-left: 16px;
+    font-size: 13px;
+    color: var(--color-text-secondary);
+    line-height: 1.6;
+  }
+
+  .warning-content li::before {
+    content: '•';
+    position: absolute;
+    left: 0;
+    color: #ef4444;
+  }
+
+  /* FAQs */
+  .faq-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .faq-item {
+    background: var(--color-bg-secondary);
+    border: 1px solid var(--color-border);
+    border-radius: 12px;
+    overflow: hidden;
+  }
+
+  .faq-question {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 14px 16px;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--color-text-primary);
+    cursor: pointer;
+    list-style: none;
+  }
+
+  .faq-question::-webkit-details-marker {
+    display: none;
+  }
+
+  .faq-question svg {
+    flex-shrink: 0;
+    color: var(--color-text-muted);
+    transition: transform 0.2s ease;
+  }
+
+  .faq-item[open] .faq-question svg {
+    transform: rotate(180deg);
+  }
+
+  .faq-answer {
+    padding: 0 16px 14px;
+  }
+
+  .faq-answer p {
+    font-size: 14px;
+    color: var(--color-text-secondary);
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  /* Sources */
+  .sources-block {
+    background: var(--color-bg-secondary);
+    border-radius: 12px;
+    overflow: hidden;
+  }
+
+  .sources-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 16px;
+    font-size: 14px;
+    color: var(--color-text-muted);
+    cursor: pointer;
+    list-style: none;
+  }
+
+  .sources-header::-webkit-details-marker {
+    display: none;
+  }
+
+  .sources-header svg:last-child {
+    margin-left: auto;
+    transition: transform 0.2s ease;
+  }
+
+  .sources-block[open] .sources-header svg:last-child {
+    transform: rotate(180deg);
+  }
+
+  .sources-content {
+    padding: 0 16px 14px;
+  }
+
+  .sources-content ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .sources-content li {
+    margin-bottom: 8px;
+  }
+
+  .sources-content a {
+    font-size: 13px;
+    color: var(--color-accent-primary);
+    text-decoration: none;
+  }
+
+  .sources-content a:hover {
+    text-decoration: underline;
+  }
+
+  /* Related Scenarios */
+  .related-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+
+  .related-card {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 16px;
+    border-radius: 12px;
+    text-decoration: none;
+    transition: transform 0.15s ease;
+  }
+
+  .related-card:hover {
+    transform: translateY(-2px);
+  }
+
+  .related-card span {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--color-text-primary);
+  }
+
+  .related-card--amber {
+    background: rgba(245, 158, 11, 0.1);
+    border: 1px solid rgba(245, 158, 11, 0.2);
+    color: #f59e0b;
+  }
+
+  .related-card--emerald {
+    background: rgba(16, 185, 129, 0.1);
+    border: 1px solid rgba(16, 185, 129, 0.2);
+    color: #10b981;
+  }
+
+  @media (max-width: 480px) {
+    .scenario-page {
+      padding: 0 12px 120px;
+    }
+
+    .scenario-title {
+      font-size: 1.25rem;
+    }
+
+    .related-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .example-item {
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .example-date {
+      min-width: auto;
+    }
+
+    .critical-warning {
+      flex-direction: column;
+      gap: 12px;
+    }
+  }
+</style>

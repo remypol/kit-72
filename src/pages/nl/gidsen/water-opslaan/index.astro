@@ -1,0 +1,163 @@
+---
+import BaseLayout from '../../../../layouts/BaseLayout.astro';
+import Breadcrumb from '../../../../components/layout/Breadcrumb.astro';
+import Icon from '../../../../components/ui/Icon.astro';
+import RelatedContent from '../../../../components/content/RelatedContent.astro';
+
+const relatedItems = [
+  {
+    title: 'Voedsel opslaan',
+    href: '/nl/gidsen/voedsel-opslaan/',
+    description: 'Langdurig houdbaar voedsel voor noodsituaties.',
+    type: 'guide' as const,
+    icon: 'UtensilsCrossed'
+  },
+  {
+    title: 'Wateruitval scenario',
+    href: '/nl/scenario/wateruitval/',
+    description: 'Voorbereiden op uitval van de waterleiding.',
+    type: 'scenario' as const,
+    icon: 'AlertTriangle'
+  },
+  {
+    title: 'Wateropslag producten',
+    href: '/nl/producten/wateropslag/',
+    description: 'Aanbevolen jerrycans en containers.',
+    type: 'product' as const,
+    icon: 'Droplet'
+  },
+  {
+    title: 'Water-calculator',
+    href: '/nl/tools/water-calculator/',
+    description: 'Bereken je persoonlijke waterbehoefte.',
+    type: 'tool' as const,
+    icon: 'Calculator'
+  }
+];
+---
+
+<BaseLayout
+  title="Water Opslaan — Kit-72"
+  description="Hoe je veilig drinkwater opslaat voor noodsituaties. Rijksoverheid-aanbevelingen voor 72 uur watervoorraad."
+  locale="nl"
+  dateModified="2025-12-15"
+  schemaType="Article"
+>
+  <section class="py-16">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6">
+      <Breadcrumb items={[{ label: 'Gidsen', href: '/nl/gidsen/' }, { label: 'Water Opslaan' }]} class="mb-4" locale="nl" />
+      <h1 class="text-4xl font-bold mb-6">Water Opslaan</h1>
+
+      <div class="prose prose-lg">
+        <p class="lead">
+          Water is het belangrijkste onderdeel van je noodpakket. De Rijksoverheid adviseert
+          <strong>3 liter per persoon per dag</strong> — voor drinken, koken en minimale hygiëne.
+        </p>
+
+        <!-- Quick Reference Card -->
+        <div class="card p-6 my-8 bg-[--color-bg-tertiary] not-prose">
+          <h3 class="text-lg font-semibold mb-4 flex items-center gap-2">
+            <Icon name="Droplet" size={20} class="text-[--color-accent-primary]" />
+            Snelle Rekensom: Waterbehoefte
+          </h3>
+          <div class="grid sm:grid-cols-2 gap-4">
+            <div class="p-4 bg-[--color-bg-secondary] rounded-lg">
+              <p class="text-2xl font-bold text-[--color-accent-primary]">9 liter</p>
+              <p class="text-sm text-[--color-text-secondary]">per persoon voor 72 uur (3 dagen)</p>
+            </div>
+            <div class="p-4 bg-[--color-bg-secondary] rounded-lg">
+              <p class="text-2xl font-bold text-[--color-accent-primary]">21 liter</p>
+              <p class="text-sm text-[--color-text-secondary]">per persoon voor 1 week</p>
+            </div>
+          </div>
+          <p class="text-sm text-[--color-text-muted] mt-4">
+            <strong>Huisdieren:</strong> 50-100ml per kg lichaamsgewicht per dag
+          </p>
+        </div>
+
+        <h2>Geschikte Opslagmiddelen</h2>
+        <ul>
+          <li><strong>Origineel verpakt flessenwater</strong> — veiligste optie, langste houdbaarheid</li>
+          <li><strong>Levensmiddelgeschikte jerrycans</strong> — HDPE (recyclagecode 2), BPA-vrij</li>
+          <li><strong>RVS containers</strong> — duurzaam, maar zwaarder</li>
+          <li><strong>Opvouwbare waterzakken</strong> — ruimtebesparend, minder robuust</li>
+        </ul>
+
+        <div class="card p-4 my-6 border-l-4 border-l-amber-500 bg-amber-50 dark:bg-amber-950/30 not-prose">
+          <p class="text-sm">
+            <strong>⚠️ Niet gebruiken:</strong> Melkflessen, voormalige chemicaliënhouders,
+            of doorzichtige plastic flessen voor langdurige opslag (licht bevordert alggroei).
+          </p>
+        </div>
+
+        <h2>Waar Bewaren?</h2>
+        <ul>
+          <li><strong>Koel</strong> — idealiter onder 20°C (kelder, bijkeuken)</li>
+          <li><strong>Donker</strong> — beschermd tegen direct zonlicht</li>
+          <li><strong>Schoon</strong> — niet naast chemicaliën, verf of schoonmaakmiddelen</li>
+          <li><strong>Vorstvrij</strong> — bevroren water kan containers beschadigen</li>
+        </ul>
+
+        <h2>Houdbaarheid</h2>
+        <p>
+          Ongeopend flessenwater is praktisch onbeperkt houdbaar, maar voor optimale kwaliteit:
+        </p>
+        <ul>
+          <li><strong>Mineraalwater (ongeopend):</strong> 1-2 jaar optimaal, daarna nog drinkbaar</li>
+          <li><strong>Zelf afgetapt kraanwater:</strong> elke 6 maanden verversen</li>
+          <li><strong>Na opening:</strong> binnen 3-5 dagen consumeren</li>
+        </ul>
+
+        <h2>Backup-oplossingen</h2>
+        <div class="card p-6 my-8 bg-[--color-accent-subtle] not-prose">
+          <p class="font-medium mb-2">💡 Noodopties</p>
+          <p class="text-sm text-[--color-text-secondary] mb-4">
+            Naast opgeslagen water moet je deze opties paraat hebben:
+          </p>
+          <ul class="space-y-2 text-sm">
+            <li class="flex items-start gap-2">
+              <span class="text-[--color-accent-primary]">•</span>
+              <span><strong>Waterzuiveringstabletten</strong> — bijv. Micropur, 1 tablet per liter</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-[--color-accent-primary]">•</span>
+              <span><strong>Waterfilter</strong> — Sawyer, LifeStraw voor noodgevallen onderweg</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-[--color-accent-primary]">•</span>
+              <span><strong>Afkoken</strong> — 3 minuten doorkoken doodt de meeste ziekteverwekkers</span>
+            </li>
+          </ul>
+        </div>
+
+        <h2>Checklist Wateropslag</h2>
+        <ul>
+          <li>☐ Minimaal 9 liter per persoon (72 uur)</li>
+          <li>☐ Levensmiddelgeschikte containers gebruikt</li>
+          <li>☐ Koel, donker en vorstvrij opgeslagen</li>
+          <li>☐ Datum van opslag genoteerd</li>
+          <li>☐ Waterbehoefte huisdieren ingepland</li>
+          <li>☐ Backup: zuiveringstabletten aanwezig</li>
+        </ul>
+      </div>
+
+      <!-- CTA -->
+      <div class="mt-12 card p-6 bg-[--color-bg-tertiary]">
+        <h3 class="font-semibold mb-2">Exact berekenen?</h3>
+        <p class="text-sm text-[--color-text-secondary] mb-4">
+          Gebruik onze water-calculator voor jouw specifieke behoefte.
+        </p>
+        <a
+          href="/nl/tools/water-calculator/"
+          class="inline-flex items-center gap-2 px-4 py-2 bg-[--color-accent-primary] text-[--color-bg-primary] font-medium rounded hover:bg-[--color-accent-hover] transition-colors"
+        >
+          <Icon name="Calculator" size={16} />
+          Naar Water-Calculator
+        </a>
+      </div>
+
+      <!-- Related Content -->
+      <RelatedContent items={relatedItems} locale="nl" />
+    </div>
+  </section>
+</BaseLayout>

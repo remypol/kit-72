@@ -1,0 +1,96 @@
+---
+/**
+ * Button Component
+ *
+ * A flexible button component with multiple variants, sizes, and states.
+ * Supports icons (left/right), loading state, and can render as a link.
+ *
+ * @example
+ * <Button variant="primary">Click me</Button>
+ * <Button variant="secondary" size="lg" href="/link">Go to page</Button>
+ * <Button variant="ghost" leftIcon="Search" loading>Loading...</Button>
+ */
+
+import Icon from './Icon.astro';
+
+interface Props {
+  /** Visual style variant */
+  variant?: 'primary' | 'secondary' | 'ghost';
+  /** Size of the button */
+  size?: 'sm' | 'md' | 'lg';
+  /** Icon to show on the left side */
+  leftIcon?: string;
+  /** Icon to show on the right side */
+  rightIcon?: string;
+  /** Whether the button is in loading state */
+  loading?: boolean;
+  /** Whether the button is disabled */
+  disabled?: boolean;
+  /** If provided, renders as an anchor tag */
+  href?: string;
+  /** Link target (only when href is provided) */
+  target?: '_self' | '_blank' | '_parent' | '_top';
+  /** Button type (only when href is not provided) */
+  type?: 'button' | 'submit' | 'reset';
+  /** Additional CSS classes */
+  class?: string;
+  /** Full width button */
+  fullWidth?: boolean;
+}
+
+const {
+  variant = 'primary',
+  size = 'md',
+  leftIcon,
+  rightIcon,
+  loading = false,
+  disabled = false,
+  href,
+  target,
+  type = 'button',
+  class: className = '',
+  fullWidth = false,
+} = Astro.props;
+
+// Build class string
+const classes = [
+  'btn',
+  `btn-${variant}`,
+  size !== 'md' && `btn-${size}`,
+  loading && 'btn-loading',
+  fullWidth && 'w-full',
+  className,
+].filter(Boolean).join(' ');
+
+// Determine icon size based on button size
+const iconSize = size === 'sm' ? 14 : size === 'lg' ? 20 : 16;
+
+// Show icons only when not loading
+const showLeftIcon = leftIcon && !loading;
+const showRightIcon = rightIcon && !loading;
+---
+
+{href ? (
+  <a
+    href={href}
+    target={target}
+    rel={target === '_blank' ? 'noopener noreferrer' : undefined}
+    class={classes}
+    aria-disabled={disabled || loading}
+  >
+    {showLeftIcon && <Icon name={leftIcon as any} size={iconSize} />}
+    <slot />
+    {showRightIcon && <Icon name={rightIcon as any} size={iconSize} />}
+  </a>
+) : (
+  <button
+    type={type}
+    class={classes}
+    disabled={disabled || loading}
+    aria-busy={loading}
+  >
+    {showLeftIcon && <Icon name={leftIcon as any} size={iconSize} />}
+    <slot />
+    {showRightIcon && <Icon name={rightIcon as any} size={iconSize} />}
+  </button>
+)}

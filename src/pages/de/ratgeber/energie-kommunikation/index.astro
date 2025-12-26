@@ -1,0 +1,195 @@
+---
+import BaseLayout from '../../../../layouts/BaseLayout.astro';
+import Breadcrumb from '../../../../components/layout/Breadcrumb.astro';
+import Icon from '../../../../components/ui/Icon.astro';
+---
+
+<BaseLayout
+  title="Energie & Kommunikation — Kit-72"
+  description="Bleib verbunden und informiert bei Stromausfall. Powerbanks, Notfallradios und Beleuchtung für Notfälle."
+  locale="de"
+  dateModified="2025-12-15"
+  schemaType="Article"
+>
+  <section class="py-16">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6">
+      <Breadcrumb items={[{ label: 'Ratgeber', href: '/de/ratgeber/' }, { label: 'Energie & Kommunikation' }]} class="mb-4" locale="de" />
+      <h1 class="text-4xl font-bold mb-6">Energie & Kommunikation</h1>
+
+      <div class="prose prose-lg">
+        <p class="lead">
+          Bei Stromausfall fallen nicht nur Lampen aus — auch Internet, Mobilfunknetze und
+          Festnetz können beeinträchtigt sein. Vorbereitung ist entscheidend, um
+          <strong>informiert und erreichbar</strong> zu bleiben.
+        </p>
+
+        <!-- Impact Overview -->
+        <div class="card p-6 my-8 bg-[--color-bg-tertiary] not-prose">
+          <h3 class="text-lg font-semibold mb-4 flex items-center gap-2">
+            <Icon name="AlertTriangle" size={20} class="text-amber-500" />
+            Was fällt bei Stromausfall aus?
+          </h3>
+          <div class="grid sm:grid-cols-2 gap-3 text-sm">
+            <div class="flex items-center gap-2 text-[--color-text-secondary]">
+              <span class="text-red-500">✗</span> Internet (Router braucht Strom)
+            </div>
+            <div class="flex items-center gap-2 text-[--color-text-secondary]">
+              <span class="text-red-500">✗</span> WLAN und Smart Home
+            </div>
+            <div class="flex items-center gap-2 text-[--color-text-secondary]">
+              <span class="text-amber-500">~</span> Mobilfunk (Akkureserven ~2-8h)
+            </div>
+            <div class="flex items-center gap-2 text-[--color-text-secondary]">
+              <span class="text-red-500">✗</span> Festnetztelefon (meist)
+            </div>
+            <div class="flex items-center gap-2 text-[--color-text-secondary]">
+              <span class="text-green-500">✓</span> UKW/AM-Radio (mit Batterien)
+            </div>
+            <div class="flex items-center gap-2 text-[--color-text-secondary]">
+              <span class="text-green-500">✓</span> Taschenlampen (mit Batterien)
+            </div>
+          </div>
+        </div>
+
+        <h2>Powerbank — Dein Smartphone am Leben halten</h2>
+        <p>
+          Das Smartphone ist in Notfällen essentiell: Notruf, NINA-Warn-App, Kontakt zu Familie.
+        </p>
+
+        <h3>Wie viel Kapazität brauchst du?</h3>
+        <ul>
+          <li><strong>10.000 mAh</strong> — lädt ein durchschnittliches Smartphone 2-3x</li>
+          <li><strong>20.000 mAh</strong> — empfohlen für 2 Personen oder 72 Stunden</li>
+          <li><strong>30.000+ mAh</strong> — für Familien oder längere Ausfälle</li>
+        </ul>
+
+        <div class="card p-6 my-8 bg-[--color-accent-subtle] not-prose">
+          <p class="font-medium mb-2">💡 Energie sparen im Notfall</p>
+          <ul class="text-sm text-[--color-text-secondary] space-y-1">
+            <li>• <strong>Flugmodus</strong> aktivieren, wenn kein Netz verfügbar</li>
+            <li>• <strong>Helligkeit</strong> auf Minimum reduzieren</li>
+            <li>• <strong>Stromsparmodus</strong> einschalten</li>
+            <li>• <strong>Apps schließen</strong> — besonders Social Media</li>
+            <li>• <strong>Nur Notwendiges</strong> — NINA-App, SMS, Notrufe</li>
+          </ul>
+        </div>
+
+        <h3>Tipps für Powerbanks</h3>
+        <ul>
+          <li><strong>Regelmäßig laden</strong> — alle 2-3 Monate auf 50-80% bringen</li>
+          <li><strong>Kühl lagern</strong> — Hitze schadet dem Akku</li>
+          <li><strong>Qualität kaufen</strong> — Marken wie Anker, RAVPower, Belkin</li>
+          <li><strong>Passende Kabel</strong> — USB-C, Lightning bereithalten</li>
+        </ul>
+
+        <h2>Notfallradio — Information ohne Strom</h2>
+        <p>
+          Wenn alles ausfällt, sendet das Radio weiter. Der Deutschlandfunk ist der offizielle
+          Kanal für <strong>Warnmeldungen des Bundes</strong>.
+        </p>
+
+        <h3>Worauf achten?</h3>
+        <ul>
+          <li><strong>UKW/FM + AM</strong> — UKW reicht meist, AM hat größere Reichweite</li>
+          <li><strong>Kurbel-Dynamo</strong> — Notbetrieb ohne Batterien</li>
+          <li><strong>Solarpanel</strong> — bei längeren Ausfällen hilfreich</li>
+          <li><strong>Taschenlampe integriert</strong> — praktischer Doppelnutzen</li>
+          <li><strong>USB-Ausgang</strong> — kann Handy notladen</li>
+        </ul>
+
+        <div class="card p-4 my-6 border-l-4 border-l-blue-500 bg-blue-50 dark:bg-blue-950/30 not-prose">
+          <p class="text-sm">
+            <strong>📻 Wichtige Frequenzen:</strong><br>
+            Deutschlandfunk: 91.3 MHz (UKW) oder über DAB+<br>
+            Lokale Sender: Notiere die Frequenzen deines Bundeslandes
+          </p>
+        </div>
+
+        <h2>Beleuchtung — Sehen ohne Strom</h2>
+
+        <h3>LED-Taschenlampen</h3>
+        <ul>
+          <li><strong>Mindestens 200 Lumen</strong> — hell genug für die meisten Situationen</li>
+          <li><strong>Wasserdicht (IPX4+)</strong> — auch bei Regen nutzbar</li>
+          <li><strong>Lange Laufzeit</strong> — LED verbraucht wenig, AAA/AA-Batterien</li>
+          <li><strong>Mehrere Stück</strong> — eine pro Raum, eine griffbereit</li>
+        </ul>
+
+        <h3>Stirnlampen</h3>
+        <p>
+          <strong>Unterschätzt, aber extrem praktisch:</strong> Beide Hände frei für Kochen,
+          Reparaturen, Erste Hilfe. Ideal für jedes Familienmitglied.
+        </p>
+
+        <h3>Kerzen als Backup</h3>
+        <ul>
+          <li>Nur mit stabilen Kerzenhaltern verwenden</li>
+          <li>Niemals unbeaufsichtigt brennen lassen</li>
+          <li>Nicht in der Nähe von Vorhängen oder Papier</li>
+          <li>Streichhölzer oder Feuerzeug bereithalten</li>
+        </ul>
+
+        <div class="card p-4 my-6 border-l-4 border-l-amber-500 bg-amber-50 dark:bg-amber-950/30 not-prose">
+          <p class="text-sm">
+            <strong>⚠️ Brandgefahr:</strong> In Notfällen gibt es überdurchschnittlich viele
+            Brände durch Kerzen. LED-Lichter sind sicherer!
+          </p>
+        </div>
+
+        <h2>Offline-Kontaktliste</h2>
+        <p>
+          Wenn dein Handy leer ist oder das Netz ausfällt, brauchst du die wichtigsten
+          Nummern <strong>auf Papier</strong>.
+        </p>
+        <ul>
+          <li>Familienmitglieder und enge Freunde</li>
+          <li>Nachbarn (gegenseitige Hilfe!)</li>
+          <li>Arbeitgeber</li>
+          <li>Hausarzt und Kinderarzt</li>
+          <li>Versicherungen</li>
+          <li>Notdienste: 112 (Notruf), 110 (Polizei)</li>
+        </ul>
+
+        <h2>Checkliste Energie & Kommunikation</h2>
+        <ul>
+          <li>☐ Powerbank 20.000+ mAh, geladen</li>
+          <li>☐ Ladekabel für alle Geräte</li>
+          <li>☐ Batterie- oder Kurbelradio</li>
+          <li>☐ LED-Taschenlampe pro Raum</li>
+          <li>☐ Ersatzbatterien (AA, AAA)</li>
+          <li>☐ Stirnlampe für jeden</li>
+          <li>☐ Offline-Kontaktliste ausgedruckt</li>
+          <li>☐ NINA-App installiert</li>
+        </ul>
+      </div>
+
+      <!-- Product CTAs -->
+      <div class="mt-12 grid sm:grid-cols-2 gap-4">
+        <div class="card p-6 bg-[--color-bg-tertiary]">
+          <h3 class="font-semibold mb-2">Powerbank kaufen</h3>
+          <p class="text-sm text-[--color-text-secondary] mb-4">
+            Unsere Empfehlungen für zuverlässige Powerbanks.
+          </p>
+          <a
+            href="/de/produkte/powerbanks/"
+            class="inline-flex items-center gap-2 text-[--color-accent-primary] hover:underline"
+          >
+            Zu den Powerbanks →
+          </a>
+        </div>
+        <div class="card p-6 bg-[--color-bg-tertiary]">
+          <h3 class="font-semibold mb-2">Notfallradio kaufen</h3>
+          <p class="text-sm text-[--color-text-secondary] mb-4">
+            Radios mit Kurbel, Solar und Taschenlampe.
+          </p>
+          <a
+            href="/de/produkte/notfallradio/"
+            class="inline-flex items-center gap-2 text-[--color-accent-primary] hover:underline"
+          >
+            Zu den Notfallradios →
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

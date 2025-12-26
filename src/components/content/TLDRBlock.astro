@@ -1,0 +1,163 @@
+---
+/**
+ * TLDRBlock Component
+ *
+ * "Answer-first" block for AI SEO and scannable content.
+ * Appears at the top of articles to provide quick summary for:
+ * - Users who want fast answers
+ * - LLMs that need to extract key information
+ * - Featured snippet optimization
+ */
+
+interface Props {
+  /** Short definition/answer (1-2 sentences) */
+  definition: string;
+  /** Key points as bullet list */
+  keyPoints?: string[];
+  /** Quick action/recommendation */
+  quickAction?: {
+    text: string;
+    url?: string;
+  };
+  /** Optional label override (default: "En resumen") */
+  label?: string;
+}
+
+const {
+  definition,
+  keyPoints = [],
+  quickAction,
+  label = 'En resumen',
+} = Astro.props;
+---
+
+<aside class="tldr-block" aria-label={label}>
+  <div class="tldr-header">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <circle cx="12" cy="12" r="10"/>
+      <path d="M12 16v-4"/>
+      <path d="M12 8h.01"/>
+    </svg>
+    <span class="tldr-label">{label}</span>
+  </div>
+
+  <p class="tldr-definition">{definition}</p>
+
+  {keyPoints.length > 0 && (
+    <ul class="tldr-points">
+      {keyPoints.map((point) => (
+        <li>{point}</li>
+      ))}
+    </ul>
+  )}
+
+  {quickAction && (
+    <div class="tldr-action">
+      {quickAction.url ? (
+        <a href={quickAction.url} class="tldr-action-link">
+          {quickAction.text}
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M5 12h14"/><path d="m12 5 7 7-7 7"/>
+          </svg>
+        </a>
+      ) : (
+        <span class="tldr-action-text">{quickAction.text}</span>
+      )}
+    </div>
+  )}
+</aside>
+
+<style>
+  .tldr-block {
+    background: linear-gradient(135deg, var(--color-accent-primary)/0.08 0%, var(--color-accent-primary)/0.03 100%);
+    border: 1px solid var(--color-accent-primary)/0.2;
+    border-left: 3px solid var(--color-accent-primary);
+    border-radius: 8px;
+    padding: 16px 20px;
+    margin-bottom: 24px;
+  }
+
+  .tldr-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 10px;
+  }
+
+  .tldr-header svg {
+    color: var(--color-accent-primary);
+  }
+
+  .tldr-label {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--color-accent-primary);
+  }
+
+  .tldr-definition {
+    font-size: 15px;
+    line-height: 1.6;
+    color: var(--color-text-primary);
+    margin: 0 0 12px 0;
+    font-weight: 500;
+  }
+
+  .tldr-points {
+    margin: 0 0 12px 0;
+    padding-left: 20px;
+  }
+
+  .tldr-points li {
+    font-size: 14px;
+    line-height: 1.5;
+    color: var(--color-text-secondary);
+    margin-bottom: 4px;
+  }
+
+  .tldr-points li::marker {
+    color: var(--color-accent-primary);
+  }
+
+  .tldr-action {
+    margin-top: 12px;
+    padding-top: 12px;
+    border-top: 1px solid var(--color-border-subtle);
+  }
+
+  .tldr-action-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--color-accent-primary);
+    text-decoration: none;
+    transition: gap 0.15s ease;
+  }
+
+  .tldr-action-link:hover {
+    gap: 10px;
+  }
+
+  .tldr-action-text {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--color-text-muted);
+  }
+
+  @media (max-width: 640px) {
+    .tldr-block {
+      padding: 14px 16px;
+    }
+
+    .tldr-definition {
+      font-size: 14px;
+    }
+
+    .tldr-points li {
+      font-size: 13px;
+    }
+  }
+</style>

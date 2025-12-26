@@ -1,0 +1,556 @@
+---
+import ArticleLayout from '../../../../layouts/ArticleLayout.astro';
+
+const tocItems = [
+  { id: 'principios', label: 'Principios básicos' },
+  { id: 'que-almacenar', label: 'Qué alimentos almacenar' },
+  { id: 'duracion', label: 'Duración de los alimentos' },
+  { id: 'organizacion', label: 'Organización y rotación' },
+  { id: 'sin-cocinar', label: 'Comida sin cocinar' },
+  { id: 'necesidades-especiales', label: 'Necesidades especiales' },
+  { id: 'errores', label: 'Errores comunes' },
+  { id: 'faq', label: 'Preguntas frecuentes' },
+];
+
+const breadcrumbs = [
+  { label: 'Inicio', href: '/es/' },
+  { label: 'Guías', href: '/es/guias/' },
+  { label: 'Almacenamiento de Comida' },
+];
+
+const foodCategories = [
+  {
+    category: 'Carbohidratos / Energía',
+    icon: '🍚',
+    items: [
+      { name: 'Arroz', duration: '2-5 años', notes: 'Blanco dura más que integral' },
+      { name: 'Pasta seca', duration: '2-3 años', notes: 'Guardar en recipiente hermético' },
+      { name: 'Avena', duration: '1-2 años', notes: 'Versátil, desayuno o espesante' },
+      { name: 'Galletas/crackers', duration: '6-12 meses', notes: 'Envasadas, no abiertas' },
+      { name: 'Harina', duration: '6-12 meses', notes: 'En recipiente hermético, lugar fresco' },
+    ],
+    priority: 'critical',
+  },
+  {
+    category: 'Proteínas',
+    icon: '🥫',
+    items: [
+      { name: 'Atún/sardinas en lata', duration: '3-5 años', notes: 'Alto valor nutricional' },
+      { name: 'Legumbres en conserva', duration: '2-5 años', notes: 'Garbanzos, lentejas, alubias' },
+      { name: 'Legumbres secas', duration: '1-2 años', notes: 'Requieren cocción (agua + energía)' },
+      { name: 'Carne en conserva', duration: '2-5 años', notes: 'Pollo, cerdo, ternera' },
+      { name: 'Mantequilla de cacahuete', duration: '1-2 años', notes: 'Alta en calorías y proteína' },
+    ],
+    priority: 'critical',
+  },
+  {
+    category: 'Frutas y verduras',
+    icon: '🥕',
+    items: [
+      { name: 'Frutas en conserva', duration: '1-2 años', notes: 'En su jugo, no en almíbar' },
+      { name: 'Verduras en conserva', duration: '2-5 años', notes: 'Guisantes, maíz, judías' },
+      { name: 'Tomate triturado', duration: '1-2 años', notes: 'Base para salsas' },
+      { name: 'Frutos secos', duration: '6-12 meses', notes: 'Vitaminas + calorías' },
+      { name: 'Frutas deshidratadas', duration: '6-12 meses', notes: 'Pasas, orejones, dátiles' },
+    ],
+    priority: 'recommended',
+  },
+  {
+    category: 'Grasas y aceites',
+    icon: '🫒',
+    items: [
+      { name: 'Aceite de oliva', duration: '1-2 años', notes: 'Sin abrir, lugar oscuro' },
+      { name: 'Aceite de coco', duration: '2+ años', notes: 'Muy estable' },
+      { name: 'Mantequilla clarificada (ghee)', duration: '1+ años', notes: 'No requiere refrigeración' },
+    ],
+    priority: 'recommended',
+  },
+  {
+    category: 'Básicos de cocina',
+    icon: '🧂',
+    items: [
+      { name: 'Sal', duration: 'Indefinida', notes: 'Esencial para sabor y conservación' },
+      { name: 'Azúcar', duration: 'Indefinida', notes: 'Guardar hermético contra humedad' },
+      { name: 'Miel', duration: 'Indefinida', notes: 'Puede cristalizar pero sigue buena' },
+      { name: 'Vinagre', duration: 'Indefinida', notes: 'Conservante natural' },
+      { name: 'Especias secas', duration: '1-3 años', notes: 'Pierden sabor, no se estropean' },
+    ],
+    priority: 'recommended',
+  },
+  {
+    category: 'Comida lista para comer',
+    icon: '🍫',
+    items: [
+      { name: 'Barritas energéticas', duration: '6-12 meses', notes: 'No requieren preparación' },
+      { name: 'Frutos secos mixtos', duration: '6-12 meses', notes: 'Snack nutritivo inmediato' },
+      { name: 'Chocolate negro', duration: '1-2 años', notes: 'Energía + moral' },
+      { name: 'Galletas saladas', duration: '6-12 meses', notes: 'Base para otros alimentos' },
+      { name: 'Cecina/jamón curado', duration: '3-6 meses', notes: 'Proteína sin refrigerar' },
+    ],
+    priority: 'critical',
+  },
+];
+
+const storageTips = [
+  {
+    tip: 'FIFO: First In, First Out',
+    description: 'Pon la comida nueva al fondo, consume primero la más antigua. Etiqueta con fecha de compra.',
+  },
+  {
+    tip: 'Recipientes herméticos',
+    description: 'Transfiere granos, pasta y harinas a recipientes herméticos para evitar humedad e insectos.',
+  },
+  {
+    tip: 'Lugar fresco y oscuro',
+    description: 'Ideal <20°C. Cada 10°C de más reduce la vida útil a la mitad. Evita luz directa.',
+  },
+  {
+    tip: 'Separar de químicos',
+    description: 'Los alimentos absorben olores. Mantén alejados de productos de limpieza, gasolina, pinturas.',
+  },
+  {
+    tip: 'Revisión trimestral',
+    description: 'Cada 3 meses revisa fechas, busca signos de deterioro, y planifica consumo.',
+  },
+  {
+    tip: 'Inventario actualizado',
+    description: 'Lista de lo que tienes, cuánto y fecha de caducidad. Simplifica la rotación.',
+  },
+];
+
+const noToCookMeals = [
+  {
+    meal: 'Desayuno',
+    options: ['Barritas de cereales + frutos secos', 'Avena instantánea + agua fría (remoja 10 min)', 'Galletas + mantequilla de cacahuete', 'Fruta en conserva'],
+  },
+  {
+    meal: 'Comida',
+    options: ['Atún/sardinas + galletas crackers', 'Legumbres en conserva (enjuagar si posible)', 'Ensalada de maíz + atún (todo de lata)', 'Jamón serrano/cecina + pan de molde'],
+  },
+  {
+    meal: 'Cena',
+    options: ['Sopa instantánea (solo agua caliente)', 'Verduras en conserva + proteína enlatada', 'Puré de patatas instantáneo + carne en lata', 'Hummus en conserva + pan pita'],
+  },
+  {
+    meal: 'Snacks',
+    options: ['Frutos secos', 'Chocolate', 'Frutas deshidratadas', 'Galletas', 'Barritas energéticas'],
+  },
+];
+
+const specialNeeds = [
+  {
+    group: 'Bebés',
+    icon: '👶',
+    needs: ['Leche de fórmula (polvo dura más)', 'Potitos variados', 'Cereales infantiles', 'Agua embotellada para preparación'],
+    tips: 'Rota frecuentemente. Los bebés cambian de necesidades rápido.',
+  },
+  {
+    group: 'Diabéticos',
+    icon: '💉',
+    needs: ['Alimentos bajo índice glucémico', 'Zumo/glucosa para hipoglucemia', 'Snacks equilibrados', 'Evitar exceso de azúcares simples'],
+    tips: 'Consulta con médico sobre alternativas en emergencia.',
+  },
+  {
+    group: 'Celíacos',
+    icon: '🌾',
+    needs: ['Arroz, maíz, quinoa', 'Conservas sin gluten', 'Frutos secos naturales', 'Verificar etiquetas de todo'],
+    tips: 'El arroz y las legumbres naturales son seguros.',
+  },
+  {
+    group: 'Vegetarianos/Veganos',
+    icon: '🥬',
+    needs: ['Legumbres (proteína principal)', 'Frutos secos y semillas', 'Tofu envasado al vacío', 'Leches vegetales UHT'],
+    tips: 'Asegurar suficiente proteína combinando legumbres y cereales.',
+  },
+  {
+    group: 'Alergias alimentarias',
+    icon: '⚠️',
+    needs: ['Alternativas seguras a alérgenos', 'Leer TODAS las etiquetas', 'Epipen/medicación de emergencia', 'Comunicar alergias en refugios'],
+    tips: 'Ten lista de ingredientes a evitar para verificar rápido.',
+  },
+  {
+    group: 'Personas mayores',
+    icon: '👴',
+    needs: ['Alimentos blandos o fáciles de masticar', 'Sopas y purés', 'Snacks nutritivos', 'Suficientes calorías (tendencia a comer menos)'],
+    tips: 'Priorizar facilidad de preparación y digestión.',
+  },
+];
+
+const commonMistakes = [
+  {
+    mistake: 'Almacenar solo lo que "debería" comer',
+    why: 'En emergencia, comerás poco si no te gusta',
+    solution: 'Incluye comida reconfortante que realmente comas. El chocolate cuenta.',
+  },
+  {
+    mistake: 'No rotar las reservas',
+    why: 'Comida caducada = comida inútil',
+    solution: 'Sistema FIFO + revisión trimestral + integrar en comidas normales.',
+  },
+  {
+    mistake: 'Olvidar abrelatas y utensilios',
+    why: 'Latas sin abrelatas son pisapapeles',
+    solution: 'Abrelatas manual, cubiertos, platos desechables junto a la comida.',
+  },
+  {
+    mistake: 'Todo requiere cocción',
+    why: 'Sin energía, no cocinas',
+    solution: 'Mínimo 50% de tu reserva debe ser comestible sin preparación.',
+  },
+  {
+    mistake: 'No considerar el agua para cocinar',
+    why: 'Arroz y pasta necesitan agua que quizás no tengas',
+    solution: 'Calcula agua extra para cocción o prioriza comida sin cocinar.',
+  },
+  {
+    mistake: 'Guardar en garaje caliente',
+    why: 'El calor acelera deterioro exponencialmente',
+    solution: 'Interior de la casa, despensa, sótano. Nunca exterior o garaje sin climatizar.',
+  },
+];
+
+const faqs = [
+  {
+    question: '¿Cuánta comida debo almacenar?',
+    answer: 'Mínimo para 72 horas (3 días), idealmente 1-2 semanas. Calcula 2.000 calorías/día por adulto. Para 3 días y familia de 4: aproximadamente 24.000 calorías, que equivale a unas 15-20 latas de comida + snacks + básicos.'
+  },
+  {
+    question: '¿Las latas realmente duran tanto?',
+    answer: 'Las latas de metal bien almacenadas pueden durar 2-5 años, a veces más. La fecha de "consumir preferentemente antes de" indica calidad óptima, no seguridad. Latas abombadas, oxidadas o con mal olor deben descartarse siempre.'
+  },
+  {
+    question: '¿Puedo comer comida caducada?',
+    answer: 'Depende. "Consumir preferentemente antes de" es indicativo de calidad. "Fecha de caducidad" en productos frescos es más estricta. Conservas pueden estar bien meses después de la fecha si están intactas. Usa el sentido común: olor, aspecto, sabor.'
+  },
+  {
+    question: '¿Qué pasa con la comida del congelador en un apagón?',
+    answer: 'Congelador lleno y cerrado: 48 horas. Medio lleno: 24 horas. No abras la puerta. Después, la comida que aún tenga cristales de hielo se puede volver a congelar. La que esté descongelada pero fría (<5°C): cocinar y consumir inmediatamente.'
+  },
+  {
+    question: '¿Necesito comida especial de supervivencia?',
+    answer: 'No necesariamente. Los alimentos del supermercado (conservas, pasta, arroz) son perfectamente válidos y más baratos. La comida liofilizada de "supervivencia" dura más (25+ años) pero es cara. Empieza con lo normal, expande si quieres.'
+  },
+  {
+    question: '¿Cómo evito los insectos en los granos?',
+    answer: 'Congela los granos 48h al comprar para matar huevos de insectos. Luego guárdalos en recipientes herméticos (cristal o plástico grueso). Las hojas de laurel en el recipiente ayudan a repeler. Inspecciona periódicamente.'
+  },
+];
+
+const caloriesGuide = [
+  { item: 'Arroz (100g seco)', calories: 350, notes: 'Necesita agua y cocción' },
+  { item: 'Pasta (100g seca)', calories: 350, notes: 'Necesita agua y cocción' },
+  { item: 'Lata de atún (80g escurrido)', calories: 100, notes: 'Lista para comer' },
+  { item: 'Lata de garbanzos (240g)', calories: 280, notes: 'Lista para comer' },
+  { item: 'Barrita energética', calories: 200, notes: 'Lista para comer' },
+  { item: 'Puñado frutos secos (30g)', calories: 180, notes: 'Lista para comer' },
+  { item: 'Galletas crackers (4 uds)', calories: 70, notes: 'Lista para comer' },
+  { item: 'Mantequilla cacahuete (2 cdas)', calories: 190, notes: 'Lista para comer' },
+  { item: 'Chocolate negro (30g)', calories: 170, notes: 'Lista para comer' },
+];
+
+// Generate FAQPage schema for rich results
+const faqSchema = {
+  mainEntity: faqs.map(faq => ({
+    '@type': 'Question',
+    name: faq.question,
+    acceptedAnswer: {
+      '@type': 'Answer',
+      text: faq.answer
+    }
+  }))
+};
+---
+
+<ArticleLayout
+  faqData={faqs}
+  title="Almacenamiento de Comida para Emergencias: Guía Completa"
+  description="Qué alimentos almacenar para emergencias, cuánto duran, cómo organizarlos y qué comer sin cocinar. Guía práctica con ejemplos."
+  updatedDate="2025-12-15"
+  author="Equipo Kit-72"
+  readTime="11 min"
+  breadcrumbs={breadcrumbs}
+  schemaType="FAQPage"
+  schemaData={faqSchema}
+>
+  <!-- TOC Slot -->
+  <nav slot="toc" class="p-4 bg-[--color-bg-tertiary] rounded-lg">
+    <h2 class="text-sm font-semibold mb-3 text-[--color-text-primary]">En esta página</h2>
+    <ul class="space-y-2 text-sm">
+      {tocItems.map((item) => (
+        <li>
+          <a href={`#${item.id}`} class="text-[--color-text-secondary] hover:text-[--color-accent-primary] transition-colors">
+            {item.label}
+          </a>
+        </li>
+      ))}
+    </ul>
+  </nav>
+
+  <!-- Main Content -->
+  <div class="card p-6 mb-8 not-prose border-l-4 border-l-[--color-status-info]">
+    <p class="text-[--color-text-secondary] m-0">
+      <strong class="text-[--color-text-primary]">Lo esencial:</strong> Almacena comida que realmente comas,
+      que no requiera refrigeración, y que al menos la mitad sea comestible sin cocinar.
+      Sistema FIFO (primero en entrar, primero en salir) para rotar. Mínimo 3 días, ideal 1-2 semanas.
+    </p>
+  </div>
+
+  <section id="principios" class="mb-12">
+    <h2>Principios básicos del almacenamiento</h2>
+
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4 my-6 not-prose">
+      {storageTips.map((tip) => (
+        <div class="card p-5">
+          <h3 class="font-semibold text-[--color-text-primary] mb-2 text-base">{tip.tip}</h3>
+          <p class="text-sm text-[--color-text-secondary] m-0">{tip.description}</p>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <section id="que-almacenar" class="mb-12">
+    <h2>Qué alimentos almacenar</h2>
+    <p>
+      Organiza tu despensa de emergencia por categorías. Necesitas un equilibrio de
+      carbohidratos, proteínas, grasas y vitaminas.
+    </p>
+
+    <div class="space-y-6 my-8">
+      {foodCategories.map((cat) => (
+        <div class="card overflow-hidden">
+          <div class={`px-6 py-4 border-b border-[--color-border] ${
+            cat.priority === 'critical' ? 'bg-[--color-status-critical]/10' : 'bg-[--color-bg-tertiary]'
+          }`}>
+            <h3 class="flex items-center gap-3 text-lg font-semibold m-0">
+              <span class="text-2xl">{cat.icon}</span>
+              {cat.category}
+              {cat.priority === 'critical' && (
+                <span class="px-2 py-0.5 text-xs bg-[--color-status-critical]/20 text-[--color-status-critical] rounded">
+                  Prioritario
+                </span>
+              )}
+            </h3>
+          </div>
+          <div class="divide-y divide-[--color-border]">
+            {cat.items.map((item) => (
+              <div class="px-6 py-3 flex items-center justify-between">
+                <div>
+                  <span class="font-medium text-[--color-text-primary]">{item.name}</span>
+                  <span class="text-sm text-[--color-text-muted] ml-2">— {item.notes}</span>
+                </div>
+                <span class="text-sm text-[--color-accent-primary] font-medium">{item.duration}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <section id="duracion" class="mb-12">
+    <h2>Guía de calorías para planificar</h2>
+    <p>
+      Un adulto necesita aproximadamente <strong>2.000 calorías/día</strong> (menos si sedentario,
+      más si activo). Usa esta tabla para planificar:
+    </p>
+
+    <div class="overflow-x-auto my-6">
+      <table>
+        <thead>
+          <tr>
+            <th>Alimento</th>
+            <th>Calorías</th>
+            <th>Notas</th>
+          </tr>
+        </thead>
+        <tbody>
+          {caloriesGuide.map((item) => (
+            <tr>
+              <td class="font-medium">{item.item}</td>
+              <td class="text-[--color-accent-primary] font-semibold">{item.calories} kcal</td>
+              <td class="text-sm text-[--color-text-secondary]">{item.notes}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+
+    <div class="card p-6 my-6 not-prose bg-[--color-accent-subtle] border-[--color-border-accent]">
+      <h3 class="font-semibold text-[--color-text-primary] mb-3 text-base">📊 Ejemplo: 3 días para 1 persona</h3>
+      <p class="text-sm text-[--color-text-secondary] mb-2">
+        Objetivo: ~6.000 calorías (2.000 × 3 días)
+      </p>
+      <ul class="text-sm text-[--color-text-secondary] space-y-1">
+        <li>• 6 barritas energéticas (1.200 kcal)</li>
+        <li>• 4 latas de atún/sardinas (400 kcal)</li>
+        <li>• 2 latas de legumbres (560 kcal)</li>
+        <li>• 200g frutos secos (1.200 kcal)</li>
+        <li>• 300g arroz/pasta (1.050 kcal)</li>
+        <li>• Galletas, chocolate, extras (1.500 kcal)</li>
+        <li>• <strong>Total: ~5.900 kcal</strong></li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="organizacion" class="mb-12">
+    <h2>Organización y rotación</h2>
+    <p>
+      El mejor sistema es integrar tu reserva de emergencia con tu despensa normal:
+    </p>
+
+    <div class="card p-6 my-6 not-prose">
+      <h3 class="font-semibold text-[--color-text-primary] mb-4 text-base">Sistema de despensa profunda</h3>
+      <ol class="space-y-3 text-sm text-[--color-text-secondary]">
+        <li class="flex gap-3">
+          <span class="flex-shrink-0 w-6 h-6 flex items-center justify-center bg-[--color-accent-primary] text-[--color-bg-primary] rounded-full text-xs font-bold">1</span>
+          <span>Mantén siempre 2-3 unidades extra de cada producto que uses normalmente</span>
+        </li>
+        <li class="flex gap-3">
+          <span class="flex-shrink-0 w-6 h-6 flex items-center justify-center bg-[--color-accent-primary] text-[--color-bg-primary] rounded-full text-xs font-bold">2</span>
+          <span>Cuando abras la última unidad de algo, añádelo a la lista de compra</span>
+        </li>
+        <li class="flex gap-3">
+          <span class="flex-shrink-0 w-6 h-6 flex items-center justify-center bg-[--color-accent-primary] text-[--color-bg-primary] rounded-full text-xs font-bold">3</span>
+          <span>Las compras nuevas van al fondo, consume del frente (FIFO)</span>
+        </li>
+        <li class="flex gap-3">
+          <span class="flex-shrink-0 w-6 h-6 flex items-center justify-center bg-[--color-accent-primary] text-[--color-bg-primary] rounded-full text-xs font-bold">4</span>
+          <span>Así siempre tienes reserva fresca sin desperdicio</span>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <section id="sin-cocinar" class="mb-12">
+    <h2>Comidas sin cocinar</h2>
+    <p>
+      Si no tienes energía para cocinar (apagón sin hornillo), necesitas opciones listas:
+    </p>
+
+    <div class="grid md:grid-cols-2 gap-4 my-6 not-prose">
+      {noToCookMeals.map((meal) => (
+        <div class="card p-5">
+          <h3 class="font-semibold text-[--color-text-primary] mb-3 text-base">{meal.meal}</h3>
+          <ul class="space-y-1">
+            {meal.options.map((option) => (
+              <li class="flex items-center gap-2 text-sm text-[--color-text-secondary]">
+                <span class="w-1.5 h-1.5 bg-[--color-accent-primary] rounded-full flex-shrink-0"></span>
+                {option}
+              </li>
+            ))}
+          </ul>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <section id="necesidades-especiales" class="mb-12">
+    <h2>Necesidades especiales</h2>
+
+    <div class="grid md:grid-cols-2 gap-6 my-8">
+      {specialNeeds.map((need) => (
+        <div class="card p-6">
+          <h3 class="flex items-center gap-3 text-lg font-semibold mb-4">
+            <span class="text-2xl">{need.icon}</span>
+            {need.group}
+          </h3>
+          <ul class="space-y-1 mb-4">
+            {need.needs.map((item) => (
+              <li class="flex items-center gap-2 text-sm text-[--color-text-secondary]">
+                <span class="w-1.5 h-1.5 bg-[--color-accent-primary] rounded-full flex-shrink-0"></span>
+                {item}
+              </li>
+            ))}
+          </ul>
+          <p class="text-xs text-[--color-text-muted] bg-[--color-bg-tertiary] p-2 rounded m-0">
+            💡 {need.tips}
+          </p>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <section id="errores" class="mb-12">
+    <h2>Errores comunes</h2>
+
+    <div class="space-y-4 my-8">
+      {commonMistakes.map((item) => (
+        <div class="card p-6">
+          <div class="flex items-start gap-4">
+            <span class="text-2xl flex-shrink-0">⚠️</span>
+            <div>
+              <h3 class="font-semibold text-[--color-text-primary] mb-1 text-base">{item.mistake}</h3>
+              <p class="text-sm text-[--color-text-secondary] mb-2">
+                <strong>Por qué es problema:</strong> {item.why}
+              </p>
+              <p class="text-sm text-[--color-accent-primary] m-0">
+                <strong>Solución:</strong> {item.solution}
+              </p>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <section id="faq" class="mb-12">
+    <h2>Preguntas frecuentes</h2>
+
+    <div class="space-y-4 my-8">
+      {faqs.map((faq) => (
+        <details class="card group">
+          <summary class="px-6 py-4 cursor-pointer list-none flex items-center justify-between hover:bg-[--color-bg-tertiary] transition-colors">
+            <span class="font-medium text-[--color-text-primary] pr-4">{faq.question}</span>
+            <svg class="w-5 h-5 text-[--color-text-muted] transform transition-transform group-open:rotate-180 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+            </svg>
+          </summary>
+          <div class="px-6 pb-4">
+            <p class="text-[--color-text-secondary] m-0">{faq.answer}</p>
+          </div>
+        </details>
+      ))}
+    </div>
+  </section>
+
+  <!-- Sources Slot -->
+  <div slot="sources">
+    <h2 id="fuentes">Fuentes y referencias</h2>
+    <ul class="text-sm space-y-2">
+      <li>
+        <a href="https://www.foodsafety.gov/" target="_blank" rel="noopener">
+          FoodSafety.gov — Food Storage Guidelines
+        </a>
+      </li>
+      <li>
+        <a href="https://www.ready.gov/food" target="_blank" rel="noopener">
+          Ready.gov — Emergency Food Supply
+        </a>
+      </li>
+      <li>
+        <a href="https://www.fda.gov/food" target="_blank" rel="noopener">
+          FDA — Food Storage and Safety
+        </a>
+      </li>
+    </ul>
+  </div>
+
+  <!-- CTA Slot -->
+  <div slot="cta" class="card p-8 text-center bg-[--color-bg-tertiary]">
+    <h3 class="text-xl font-semibold mb-4">Crea tu lista personalizada</h3>
+    <p class="text-[--color-text-secondary] mb-6">
+      Usa nuestro configurador para generar un checklist adaptado a tu familia.
+    </p>
+    <div class="flex flex-wrap gap-4 justify-center">
+      <a href="/es/herramientas/configurador-kit/" class="inline-flex items-center gap-2 px-6 py-3 bg-[--color-accent-primary] text-[--color-bg-primary] font-semibold rounded hover:bg-[--color-accent-hover] transition-colors">
+        Crear mi kit
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+        </svg>
+      </a>
+      <a href="/es/guias/almacenamiento-agua/" class="inline-flex items-center gap-2 px-6 py-3 border border-[--color-border] text-[--color-text-primary] font-medium rounded hover:border-[--color-accent-primary] hover:text-[--color-accent-primary] transition-colors">
+        Guía de almacenamiento de agua
+      </a>
+    </div>
+  </div>
+</ArticleLayout>

@@ -1,0 +1,176 @@
+---
+import BaseLayout from '../../../../layouts/BaseLayout.astro';
+import Breadcrumb from '../../../../components/layout/Breadcrumb.astro';
+import Icon from '../../../../components/ui/Icon.astro';
+import HeroImage from '../../../../components/content/HeroImage.astro';
+---
+
+<BaseLayout
+  title="Notfallradio: Kurbel oder Solar? Kaufratgeber & Vergleich"
+  description="Das richtige Notfallradio für Krisensituationen. Kurbel, Solar, Batterien — worauf du achten musst."
+  locale="de"
+  dateModified="2025-12-15"
+  schemaType="Article"
+>
+  <section class="py-16">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6">
+      <Breadcrumb items={[{ label: 'Produkte', href: '/de/produkte/' }, { label: 'Notfallradio' }]} class="mb-4" locale="de" />
+      <h1 class="text-4xl font-bold mb-6">Notfallradio</h1>
+
+      <div class="mb-8">
+        <HeroImage
+          src="/images/shared/emergency-radio.webp"
+          alt="Notfallradio mit Kurbel und Solar"
+          priority={true}
+        />
+      </div>
+
+      <div class="prose prose-lg">
+        <p class="lead">
+          Wenn Strom, Internet und Mobilfunk ausfallen, ist das Radio oft die
+          <strong>einzige Informationsquelle</strong>. Der Deutschlandfunk ist der offizielle
+          Kanal für Warnmeldungen des Bundes.
+        </p>
+
+        <!-- Key Info -->
+        <div class="card p-6 my-8 bg-[--color-bg-tertiary] not-prose">
+          <h3 class="text-lg font-semibold mb-4 flex items-center gap-2">
+            <Icon name="Radio" size={20} class="text-[--color-accent-primary]" />
+            Wichtige Frequenzen
+          </h3>
+          <div class="space-y-2 text-sm">
+            <div class="flex justify-between items-center p-3 bg-[--color-bg-secondary] rounded">
+              <span>Deutschlandfunk</span>
+              <span class="font-semibold">91.3 MHz (UKW) / DAB+</span>
+            </div>
+            <div class="flex justify-between items-center p-3 bg-[--color-bg-secondary] rounded">
+              <span>Deutschlandfunk Kultur</span>
+              <span class="font-semibold">97.7 MHz (UKW)</span>
+            </div>
+          </div>
+          <p class="text-xs text-[--color-text-muted] mt-3">
+            💡 Notiere die Frequenzen deiner lokalen Sender — sie informieren bei regionalen Ereignissen.
+          </p>
+        </div>
+
+        <h2>Warum ein spezielles Notfallradio?</h2>
+        <p>
+          Ein normales Radio braucht Strom oder muss regelmäßig geladen werden.
+          Ein <strong>Notfallradio</strong> bietet:
+        </p>
+        <ul>
+          <li><strong>Kurbel-Dynamo:</strong> Strom aus eigener Muskelkraft</li>
+          <li><strong>Solarpanel:</strong> Aufladung bei Tageslicht</li>
+          <li><strong>Batterien:</strong> Klassische Backup-Option</li>
+          <li><strong>USB-Ladung:</strong> Normale Aufladung, wenn Strom da ist</li>
+        </ul>
+
+        <h2>Empfangsarten</h2>
+
+        <h3>UKW/FM (87.5-108 MHz)</h3>
+        <p>
+          Der Standard in Deutschland. Gute Tonqualität, aber begrenzte Reichweite.
+          <strong>Unverzichtbar.</strong>
+        </p>
+
+        <h3>AM/MW (Mittelwelle)</h3>
+        <p>
+          Schlechtere Tonqualität, aber <strong>größere Reichweite</strong>.
+          Kann in Krisensituationen wichtig sein, wenn lokale UKW-Sender ausfallen.
+        </p>
+
+        <h3>DAB+</h3>
+        <p>
+          Digitaler Standard mit besserem Klang und mehr Sendern.
+          Allerdings höherer Stromverbrauch — weniger ideal für Notfälle.
+        </p>
+
+        <div class="card p-6 my-8 bg-[--color-accent-subtle] not-prose">
+          <p class="font-medium mb-2">💡 Empfehlung</p>
+          <p class="text-sm text-[--color-text-secondary]">
+            Priorität: <strong>UKW + AM</strong>. DAB+ ist ein Nice-to-have,
+            aber nicht essentiell für Notfälle.
+          </p>
+        </div>
+
+        <h2>Wichtige Zusatzfunktionen</h2>
+        <ul>
+          <li><strong>Integrierte Taschenlampe:</strong> Praktischer Doppelnutzen</li>
+          <li><strong>USB-Ausgang:</strong> Kann Smartphone notladen (langsam, aber hilfreich)</li>
+          <li><strong>SOS-Sirene:</strong> Für Notsignale, falls du Hilfe brauchst</li>
+          <li><strong>Kopfhöreranschluss:</strong> Für privates Hören</li>
+          <li><strong>Wasserdicht (IPX4):</strong> Schutz vor Spritzwasser</li>
+        </ul>
+
+        <h2>Betriebszeiten</h2>
+        <div class="overflow-x-auto not-prose my-6">
+          <table class="w-full text-sm">
+            <thead>
+              <tr class="border-b border-[--color-border-primary]">
+                <th class="text-left py-2">Stromquelle</th>
+                <th class="text-left py-2">Betriebszeit</th>
+                <th class="text-left py-2">Hinweis</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="border-b border-[--color-border-secondary]">
+                <td class="py-2">3x AAA Batterien</td>
+                <td class="py-2">8-12 Stunden</td>
+                <td class="py-2 text-[--color-text-muted]">Ersatz einplanen</td>
+              </tr>
+              <tr class="border-b border-[--color-border-secondary]">
+                <td class="py-2">1 Min. Kurbeln</td>
+                <td class="py-2">5-10 Min. Radio</td>
+                <td class="py-2 text-[--color-text-muted]">Anstrengend auf Dauer</td>
+              </tr>
+              <tr class="border-b border-[--color-border-secondary]">
+                <td class="py-2">Solarpanel (volle Sonne)</td>
+                <td class="py-2">Lädt internen Akku</td>
+                <td class="py-2 text-[--color-text-muted]">Langsam, aber nachhaltig</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2>Empfohlene Marken</h2>
+        <ul>
+          <li><strong>Sangean</strong> — professionelle Qualität, langlebig</li>
+          <li><strong>Midland</strong> — gutes Preis-Leistungs-Verhältnis</li>
+          <li><strong>Mesqool</strong> — Budget-Option, solide Basics</li>
+          <li><strong>RunningSnail</strong> — kompakt, viele Funktionen</li>
+        </ul>
+
+        <h2>Checkliste</h2>
+        <ul>
+          <li>☐ UKW-Empfang (AM optional aber empfohlen)</li>
+          <li>☐ Kurbel-Dynamo vorhanden</li>
+          <li>☐ Solarpanel oder Batterien als Backup</li>
+          <li>☐ Taschenlampe integriert</li>
+          <li>☐ USB-Ausgang für Smartphone</li>
+          <li>☐ Lokale Senderfrequenzen notiert</li>
+          <li>☐ Funktionstest alle 6 Monate</li>
+        </ul>
+      </div>
+
+      <!-- Amazon Link -->
+      <div class="mt-12 card p-6 bg-[--color-bg-tertiary]">
+        <h3 class="font-semibold mb-2">Notfallradios auf Amazon.de</h3>
+        <p class="text-sm text-[--color-text-secondary] mb-4">
+          Empfohlene Kurbelradios mit Solar und Taschenlampe.
+        </p>
+        <a
+          href="https://www.amazon.de/s?k=notfallradio+kurbel+solar&tag=kit72de-21"
+          target="_blank"
+          rel="noopener noreferrer sponsored"
+          class="inline-flex items-center gap-2 px-4 py-2 bg-[--color-accent-primary] text-[--color-bg-primary] font-medium rounded hover:bg-[--color-accent-hover] transition-colors"
+        >
+          Auf Amazon ansehen
+          <Icon name="ExternalLink" size={16} />
+        </a>
+        <p class="text-xs text-[--color-text-muted] mt-3">
+          * Affiliate-Link — du zahlst nicht mehr, wir erhalten eine kleine Provision.
+        </p>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

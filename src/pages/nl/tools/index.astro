@@ -1,0 +1,69 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import Breadcrumb from '../../../components/layout/Breadcrumb.astro';
+import Icon from '../../../components/ui/Icon.astro';
+
+const tools = [
+  {
+    title: 'Noodpakket Samenstellen',
+    description: 'Interactieve tool om een gepersonaliseerde checklist te maken voor jouw gezin.',
+    href: '/nl/tools/noodpakket-samenstellen/',
+    icon: 'ClipboardCheck',
+    badge: 'Populair'
+  },
+  {
+    title: 'Water Calculator',
+    description: 'Bereken hoeveel water je nodig hebt op basis van gezinsgrootte en situatie.',
+    href: '/nl/tools/water-calculator/',
+    icon: 'Droplet',
+  },
+  {
+    title: 'Energie Calculator',
+    description: 'Bereken je energiebehoefte en welke powerbank capaciteit je nodig hebt.',
+    href: '/nl/tools/energie-calculator/',
+    icon: 'Battery',
+  },
+];
+---
+
+<BaseLayout
+  title="Tools — Kit-72"
+  description="Interactieve tools om je noodpakket te plannen: configurator, water calculator en energie calculator."
+  locale="nl"
+>
+  <section class="py-16">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6">
+      <div class="mb-12">
+        <Breadcrumb items={[{ label: 'Tools' }]} class="mb-4" locale="nl" />
+        <h1 class="text-4xl font-bold mb-4">Handige Tools</h1>
+        <p class="text-xl text-[--color-text-secondary]">
+          Interactieve hulpmiddelen om je noodpakket perfect af te stemmen op jouw situatie.
+        </p>
+      </div>
+
+      <div class="space-y-6">
+        {tools.map((tool) => (
+          <a href={tool.href} class="card p-6 flex items-start gap-4 hover:border-[--color-accent-primary] transition-colors group block">
+            <div class="w-14 h-14 flex-shrink-0 flex items-center justify-center bg-[--color-bg-tertiary] rounded-xl text-[--color-accent-primary] group-hover:bg-[--color-accent-primary] group-hover:text-[--color-bg-primary] transition-colors">
+              <Icon name={tool.icon} size={28} />
+            </div>
+            <div class="flex-1">
+              <div class="flex items-center gap-2 mb-1">
+                <h2 class="text-xl font-semibold text-[--color-text-primary]">{tool.title}</h2>
+                {tool.badge && (
+                  <span class="px-2 py-0.5 text-xs font-medium bg-[--color-accent-primary] text-[--color-bg-primary] rounded">
+                    {tool.badge}
+                  </span>
+                )}
+              </div>
+              <p class="text-[--color-text-secondary]">{tool.description}</p>
+            </div>
+            <svg class="w-5 h-5 text-[--color-text-muted] group-hover:text-[--color-accent-primary] transition-colors flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+            </svg>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+</BaseLayout>

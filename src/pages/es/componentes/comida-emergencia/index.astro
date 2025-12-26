@@ -1,0 +1,534 @@
+---
+import BaseLayout from '../../../../layouts/BaseLayout.astro';
+import ProductGrid from '../../../../components/content/ProductGrid.astro';
+import Icon from '../../../../components/ui/Icon.astro';
+
+const amazonProducts = [
+  {
+    name: 'Pack Conservas Surtidas',
+    description: 'Lote de conservas variadas: legumbres, atún, verduras',
+    amazonUrl: 'https://www.amazon.es/s?k=pack+conservas+emergencia+legumbres',
+    price: '~25€',
+    rating: 4.4,
+    features: ['Variedad', 'Larga duración', 'Listas para comer'],
+    badge: 'recommended' as const
+  },
+  {
+    name: 'Barritas Energéticas Trek',
+    description: 'Pack de barritas de avena alta energía, sin gluten disponible',
+    amazonUrl: 'https://www.amazon.es/s?k=barritas+energeticas+trek+avena',
+    price: '~15€',
+    rating: 4.5,
+    features: ['Alta energía', 'Compactas', 'Sin preparación'],
+    badge: 'best-value' as const
+  },
+  {
+    name: 'Comida Liofilizada Travellunch',
+    description: 'Comidas completas liofilizadas, solo añadir agua caliente',
+    amazonUrl: 'https://www.amazon.es/s?k=comida+liofilizada+travellunch',
+    price: '~8€/ración',
+    rating: 4.3,
+    features: ['Ligera', '10+ años duración', 'Solo agua'],
+    badge: 'premium' as const
+  },
+  {
+    name: 'Frutos Secos Mixtos 1kg',
+    description: 'Mezcla de nueces, almendras y avellanas, alta energía',
+    amazonUrl: 'https://www.amazon.es/s?k=frutos+secos+mixtos+1kg',
+    price: '~18€',
+    rating: 4.6,
+    features: ['Alta energía', 'Larga duración', 'Nutritivos']
+  }
+];
+
+const foodCategories = [
+  {
+    name: 'Conservas enlatadas',
+    description: 'Alimentos cocidos y esterilizados en lata',
+    pros: ['Larga duración (2-5 años)', 'Listos para comer', 'Económicas', 'Nutritivas'],
+    cons: ['Pesadas', 'Requieren abrelatas', 'Espacio considerable'],
+    bestFor: 'Base de la reserva de emergencia',
+    shelf: '2-5 años',
+    icon: 'Package'
+  },
+  {
+    name: 'Alimentos deshidratados',
+    description: 'Frutas, verduras y comidas secas',
+    pros: ['Muy ligeros', 'Larga duración', 'Compactos', 'Nutritivos'],
+    cons: ['Necesitan agua', 'Algunos requieren cocción', 'Más caros'],
+    bestFor: 'Kit de evacuación, mochila',
+    shelf: '5-25 años',
+    icon: 'Apple'
+  },
+  {
+    name: 'Comidas liofilizadas',
+    description: 'Alimentos congelados y secados al vacío',
+    pros: ['Ultra ligeras', 'Sabor conservado', 'Muy larga duración', 'Solo añadir agua caliente'],
+    cons: ['Caras', 'Necesitan agua caliente', 'Menos disponibles'],
+    bestFor: 'Emergencias prolongadas, senderismo',
+    shelf: '10-30 años',
+    icon: 'UtensilsCrossed'
+  },
+  {
+    name: 'Barritas y snacks',
+    description: 'Barritas energéticas, frutos secos, chocolate',
+    pros: ['No requieren preparación', 'Alta energía', 'Portátiles', 'Rápido consumo'],
+    cons: ['Caducan antes', 'No son comidas completas', 'Pueden derretirse'],
+    bestFor: 'Energía rápida, primeras horas',
+    shelf: '6-18 meses',
+    icon: 'Candy'
+  },
+  {
+    name: 'Raciones militares (MRE)',
+    description: 'Comidas completas autocalentables',
+    pros: ['Todo incluido', 'Autocalentables', 'Muy duraderas', 'Equilibradas'],
+    cons: ['Caras', 'Pesadas', 'Sabor variable', 'Difícil conseguir'],
+    bestFor: 'Situaciones extremas sin cocina',
+    shelf: '3-5 años',
+    icon: 'Medal'
+  },
+  {
+    name: 'Alimentos básicos secos',
+    description: 'Arroz, pasta, legumbres, harina',
+    pros: ['Muy económicos', 'Alta duración', 'Versátiles', 'Llenan mucho'],
+    cons: ['Requieren cocción', 'Necesitan agua y fuego', 'Almacenamiento especial'],
+    bestFor: 'Reserva económica a largo plazo',
+    shelf: '2-30 años (según almacenamiento)',
+    icon: 'Wheat'
+  }
+];
+
+const essentialItems = [
+  { item: 'Conservas de legumbres', examples: 'Lentejas, garbanzos, alubias', kcal: '100-150/100g', priority: 'essential' },
+  { item: 'Conservas de pescado', examples: 'Atún, sardinas, caballa', kcal: '150-250/100g', priority: 'essential' },
+  { item: 'Conservas de carne', examples: 'Pollo, cerdo, albóndigas', kcal: '150-200/100g', priority: 'essential' },
+  { item: 'Conservas de verduras', examples: 'Maíz, guisantes, judías', kcal: '50-80/100g', priority: 'essential' },
+  { item: 'Conservas de fruta', examples: 'Melocotón, piña, macedonia', kcal: '60-80/100g', priority: 'recommended' },
+  { item: 'Pasta seca', examples: 'Espaguetis, macarrones', kcal: '350/100g', priority: 'essential' },
+  { item: 'Arroz', examples: 'Blanco, integral, precocido', kcal: '350/100g', priority: 'essential' },
+  { item: 'Galletas y crackers', examples: 'María, integrales, saladas', kcal: '400-450/100g', priority: 'essential' },
+  { item: 'Frutos secos', examples: 'Nueces, almendras, cacahuetes', kcal: '550-650/100g', priority: 'recommended' },
+  { item: 'Barritas energéticas', examples: 'Cereales, proteína, fruta', kcal: '400-500/100g', priority: 'recommended' },
+  { item: 'Leche evaporada/polvo', examples: 'UHT, condensada, en polvo', kcal: '300-500/100g', priority: 'recommended' },
+  { item: 'Miel/mermelada', examples: 'Miel, mermeladas variadas', kcal: '300/100g', priority: 'optional' },
+  { item: 'Café/té soluble', examples: 'Café instantáneo, bolsitas té', kcal: 'Variable', priority: 'optional' },
+  { item: 'Sal y especias', examples: 'Sal, pimienta, orégano', kcal: '-', priority: 'recommended' }
+];
+
+const calorieNeeds = [
+  { group: 'Adulto hombre (actividad baja)', kcal: '1800-2000', perDay: 3 },
+  { group: 'Adulto mujer (actividad baja)', kcal: '1500-1800', perDay: 3 },
+  { group: 'Niño 4-8 años', kcal: '1200-1400', perDay: 3 },
+  { group: 'Niño 9-13 años', kcal: '1600-2000', perDay: 3 },
+  { group: 'Adolescente', kcal: '1800-2400', perDay: 3 },
+  { group: 'Persona mayor', kcal: '1400-1800', perDay: 3 }
+];
+
+const storageRules = [
+  { rule: 'Lugar fresco', detail: '10-20°C ideal. Cada 10°C de más reduce vida útil a la mitad.' },
+  { rule: 'Oscuridad', detail: 'La luz degrada vitaminas y acelera oxidación.' },
+  { rule: 'Seco', detail: 'La humedad provoca moho y oxidación en latas.' },
+  { rule: 'Alejado del suelo', detail: 'Estanterías o palés. Evita humedad y plagas.' },
+  { rule: 'Rotación FIFO', detail: 'First In, First Out. Lo primero que entra, primero que sale.' },
+  { rule: 'Etiquetado', detail: 'Fecha de compra visible. Revisa caducidades regularmente.' }
+];
+
+const mealPlan3Days = [
+  {
+    day: 'Día 1',
+    meals: [
+      { meal: 'Desayuno', items: 'Galletas + leche evaporada + café', kcal: 400 },
+      { meal: 'Comida', items: 'Conserva de lentejas + atún + pan', kcal: 600 },
+      { meal: 'Merienda', items: 'Barrita energética + frutos secos', kcal: 300 },
+      { meal: 'Cena', items: 'Pasta con tomate y sardinas', kcal: 500 }
+    ]
+  },
+  {
+    day: 'Día 2',
+    meals: [
+      { meal: 'Desayuno', items: 'Cereales + leche + fruta en conserva', kcal: 400 },
+      { meal: 'Comida', items: 'Arroz + garbanzos + verduras', kcal: 600 },
+      { meal: 'Merienda', items: 'Galletas + miel + té', kcal: 250 },
+      { meal: 'Cena', items: 'Conserva de carne + pan + maíz', kcal: 550 }
+    ]
+  },
+  {
+    day: 'Día 3',
+    meals: [
+      { meal: 'Desayuno', items: 'Tostadas + mermelada + café', kcal: 350 },
+      { meal: 'Comida', items: 'Alubias + caballa + crackers', kcal: 600 },
+      { meal: 'Merienda', items: 'Frutos secos + chocolate', kcal: 400 },
+      { meal: 'Cena', items: 'Sopa de sobre + conserva pollo', kcal: 450 }
+    ]
+  }
+];
+
+const specialDiets = [
+  { diet: 'Sin gluten', items: 'Arroz, maíz, conservas de legumbres, frutos secos, carne/pescado en conserva' },
+  { diet: 'Vegetariano', items: 'Legumbres, pasta, arroz, verduras en conserva, frutos secos, leche' },
+  { diet: 'Vegano', items: 'Legumbres, cereales, verduras, frutos secos, leche vegetal UHT' },
+  { diet: 'Diabético', items: 'Legumbres, verduras, proteínas, evitar azúcares simples. Glucosa de emergencia.' },
+  { diet: 'Bebés', items: 'Leche de fórmula, potitos, cereales infantiles, agua embotellada' },
+  { diet: 'Alergias', items: 'Leer etiquetas cuidadosamente. Tener antihistamínico en botiquín.' }
+];
+
+const kitSuggestion = [
+  { item: 'Conservas variadas', qty: '15-20 latas', notes: 'Legumbres, pescado, carne, verdura' },
+  { item: 'Pasta/arroz', qty: '1-2 kg', notes: 'Base de carbohidratos' },
+  { item: 'Galletas/crackers', qty: '2-3 paquetes', notes: 'Desayunos y snacks' },
+  { item: 'Frutos secos', qty: '500g', notes: 'Alta energía, fácil consumo' },
+  { item: 'Barritas energéticas', qty: '10-15 uds', notes: 'Emergencias rápidas' },
+  { item: 'Leche UHT/polvo', qty: '2-3 L', notes: 'Calcio y proteínas' },
+  { item: 'Café/té', qty: '1 bote/caja', notes: 'Moral y energía' },
+  { item: 'Miel/azúcar', qty: '500g', notes: 'Energía rápida, conservante natural' },
+  { item: 'Sal y especias', qty: 'Varios', notes: 'Mejora el sabor' },
+  { item: 'Abrelatas manual', qty: '2 uds', notes: 'CRÍTICO. Ten 2 por si falla uno' }
+];
+
+const commonMistakes = [
+  'Almacenar solo lo que "no me gusta" (en emergencia querrás comida reconfortante)',
+  'Olvidar el abrelatas (¡crítico!)',
+  'No tener variedad (fatiga del paladar)',
+  'Ignorar necesidades especiales (alergias, dietas)',
+  'No rotar la comida (caducidades)',
+  'Guardar cerca de productos químicos',
+  'No considerar cómo cocinar sin electricidad',
+  'Almacenar en garaje caliente o húmedo'
+];
+
+// Generate ItemList + Product schema for rich results
+const productSchema = {
+  '@type': 'ItemList',
+  itemListElement: amazonProducts.map((product, index) => ({
+    '@type': 'ListItem',
+    position: index + 1,
+    item: {
+      '@type': 'Product',
+      name: product.name,
+      description: product.description,
+      aggregateRating: {
+        '@type': 'AggregateRating',
+        ratingValue: product.rating,
+        bestRating: 5,
+        worstRating: 1,
+        ratingCount: 100
+      }
+    }
+  }))
+};
+---
+
+<BaseLayout
+  title="Comida de emergencia: ¿Qué comprar? Calorías y duración"
+  description="Guía completa de alimentos para tu kit de emergencia: tipos, calorías, almacenamiento, y lista de compra para 72 horas."
+  locale="es"
+  dateModified="2025-12-15"
+  schemaType="Article"
+  schemaData={productSchema}
+>
+  <section class="py-16">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6">
+      <!-- Header -->
+      <div class="mb-12">
+        <nav class="text-sm mb-4">
+          <ol class="flex items-center gap-2 text-[--color-text-muted]">
+            <li><a href="/es/" class="hover:text-[--color-accent-primary]">Inicio</a></li>
+            <li>/</li>
+            <li><a href="/es/componentes/" class="hover:text-[--color-accent-primary]">Componentes</a></li>
+            <li>/</li>
+            <li class="text-[--color-text-primary]">Comida de Emergencia</li>
+          </ol>
+        </nav>
+        <h1 class="mb-4 flex items-center gap-3">
+          <Icon name="UtensilsCrossed" size={32} class="text-[--color-accent-primary]" />
+          Comida de Emergencia
+        </h1>
+        <p class="text-lg text-[--color-text-secondary]">
+          En 72 horas sin comida no te mueres, pero sí pierdes energía, concentración y moral.
+          Una reserva de alimentos bien planificada marca la diferencia en una emergencia.
+        </p>
+      </div>
+
+      <!-- Quick Recommendation -->
+      <div class="card p-6 mb-8 border-l-4 border-l-[--color-accent-primary]">
+        <h3 class="font-semibold mb-2 text-[--color-text-primary] flex items-center gap-2">
+          <Icon name="UtensilsCrossed" size={20} class="text-[--color-accent-primary]" />
+          Recomendación rápida
+        </h3>
+        <p class="text-[--color-text-secondary] m-0">
+          <strong>Mínimo:</strong> 2000 kcal/persona/día × 3 días = 6000 kcal por persona.
+          <strong>Ideal:</strong> Variedad de conservas + carbohidratos + snacks.
+          <strong>Presupuesto:</strong> 30-50€ por persona para 72h.
+        </p>
+      </div>
+
+      <!-- Calorie Calculator -->
+      <div class="card p-6 mb-8 bg-[--color-bg-tertiary]">
+        <h3 class="font-semibold mb-4 text-[--color-text-primary] flex items-center gap-2">
+          <Icon name="Calculator" size={20} class="text-[--color-accent-primary]" />
+          ¿Cuántas calorías necesito?
+        </h3>
+
+        <div class="overflow-x-auto mb-4">
+          <table class="w-full text-sm">
+            <thead>
+              <tr class="border-b border-[--color-border]">
+                <th class="text-left py-2">Grupo</th>
+                <th class="text-center py-2">kcal/día</th>
+                <th class="text-center py-2">72h (3 días)</th>
+              </tr>
+            </thead>
+            <tbody class="text-[--color-text-secondary]">
+              {calorieNeeds.map((need) => (
+                <tr class="border-b border-[--color-border]">
+                  <td class="py-2">{need.group}</td>
+                  <td class="py-2 text-center">{need.kcal}</td>
+                  <td class="py-2 text-center font-bold text-[--color-accent-primary]">
+                    {parseInt(need.kcal.split('-')[1] || need.kcal.split('-')[0]) * need.perDay} kcal
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+
+        <p class="text-xs text-[--color-text-muted]">
+          En emergencia con actividad reducida, 1500-1800 kcal/día es suficiente para adultos.
+          Prioriza proteínas y carbohidratos complejos.
+        </p>
+      </div>
+
+      <!-- Food Categories -->
+      <div class="mb-12">
+        <h2 class="text-2xl font-bold mb-6 text-[--color-text-primary]">Tipos de alimentos de emergencia</h2>
+
+        <div class="space-y-4">
+          {foodCategories.map((cat) => (
+            <div class="card p-6">
+              <div class="flex items-start gap-4">
+                <div class="w-12 h-12 flex items-center justify-center bg-[--color-bg-tertiary] rounded-lg flex-shrink-0">
+                  <Icon name={cat.icon as any} size={28} class="text-[--color-accent-primary]" />
+                </div>
+                <div class="flex-1">
+                  <div class="flex items-center gap-3 mb-2">
+                    <h3 class="font-semibold text-[--color-text-primary]">{cat.name}</h3>
+                    <span class="text-xs px-2 py-1 bg-[--color-bg-tertiary] text-[--color-text-muted] rounded">
+                      {cat.shelf}
+                    </span>
+                  </div>
+                  <p class="text-sm text-[--color-text-secondary] mb-3">{cat.description}</p>
+
+                  <div class="grid sm:grid-cols-3 gap-4 text-sm">
+                    <div>
+                      <span class="text-green-400 font-medium flex items-center gap-1">
+                        <Icon name="CircleCheck" size={14} />
+                        Pros
+                      </span>
+                      <ul class="mt-1 space-y-1 text-[--color-text-muted]">
+                        {cat.pros.map((pro) => <li>• {pro}</li>)}
+                      </ul>
+                    </div>
+                    <div>
+                      <span class="text-red-400 font-medium flex items-center gap-1">
+                        <Icon name="CircleX" size={14} />
+                        Contras
+                      </span>
+                      <ul class="mt-1 space-y-1 text-[--color-text-muted]">
+                        {cat.cons.map((con) => <li>• {con}</li>)}
+                      </ul>
+                    </div>
+                    <div>
+                      <span class="text-[--color-accent-primary] font-medium flex items-center gap-1">
+                        <Icon name="Star" size={14} />
+                        Ideal para
+                      </span>
+                      <p class="mt-1 text-[--color-text-muted]">{cat.bestFor}</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <!-- Essential Items -->
+      <div class="mb-12">
+        <h2 class="text-2xl font-bold mb-6 text-[--color-text-primary]">Alimentos esenciales</h2>
+
+        <div class="card overflow-hidden">
+          <div class="overflow-x-auto">
+            <table class="w-full text-sm">
+              <thead class="bg-[--color-bg-tertiary]">
+                <tr>
+                  <th class="text-left py-3 px-4">Alimento</th>
+                  <th class="text-left py-3 px-4">Ejemplos</th>
+                  <th class="text-center py-3 px-4">kcal/100g</th>
+                  <th class="text-center py-3 px-4">Prioridad</th>
+                </tr>
+              </thead>
+              <tbody class="text-[--color-text-secondary]">
+                {essentialItems.map((item, i) => (
+                  <tr class={i % 2 === 0 ? 'bg-[--color-bg-secondary]' : ''}>
+                    <td class="py-3 px-4 font-medium text-[--color-text-primary]">{item.item}</td>
+                    <td class="py-3 px-4 text-xs">{item.examples}</td>
+                    <td class="py-3 px-4 text-center">{item.kcal}</td>
+                    <td class="py-3 px-4 text-center">
+                      <span class={`text-xs px-2 py-1 rounded ${item.priority === 'essential' ? 'bg-red-500/20 text-red-400' : item.priority === 'recommended' ? 'bg-[--color-accent-primary]/20 text-[--color-accent-primary]' : 'bg-[--color-bg-tertiary] text-[--color-text-muted]'}`}>
+                        {item.priority === 'essential' ? 'Esencial' : item.priority === 'recommended' ? 'Recomendado' : 'Opcional'}
+                      </span>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- 3-Day Meal Plan -->
+      <div class="mb-12">
+        <h2 class="text-2xl font-bold mb-6 text-[--color-text-primary]">Plan de comidas ejemplo (3 días)</h2>
+
+        <div class="space-y-4">
+          {mealPlan3Days.map((day) => (
+            <div class="card p-6">
+              <h3 class="font-semibold text-[--color-accent-primary] mb-4">{day.day}</h3>
+              <div class="space-y-2">
+                {day.meals.map((meal) => (
+                  <div class="flex items-center justify-between text-sm border-b border-[--color-border] pb-2">
+                    <div>
+                      <span class="font-medium text-[--color-text-primary]">{meal.meal}:</span>
+                      <span class="text-[--color-text-secondary] ml-2">{meal.items}</span>
+                    </div>
+                    <span class="text-xs text-[--color-text-muted]">{meal.kcal} kcal</span>
+                  </div>
+                ))}
+                <div class="text-right text-sm font-bold text-[--color-accent-primary] pt-2">
+                  Total: {day.meals.reduce((sum, m) => sum + m.kcal, 0)} kcal
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <!-- Storage Rules -->
+      <div class="mb-12">
+        <h2 class="text-2xl font-bold mb-6 text-[--color-text-primary]">Reglas de almacenamiento</h2>
+
+        <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          {storageRules.map((rule) => (
+            <div class="card p-4">
+              <h3 class="font-semibold text-[--color-text-primary] mb-2">{rule.rule}</h3>
+              <p class="text-sm text-[--color-text-secondary]">{rule.detail}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <!-- Special Diets -->
+      <div class="mb-12">
+        <h2 class="text-2xl font-bold mb-6 text-[--color-text-primary]">Dietas especiales</h2>
+
+        <div class="card p-6">
+          <div class="space-y-4">
+            {specialDiets.map((diet) => (
+              <div class="border-b border-[--color-border] pb-3 last:border-0">
+                <h4 class="font-semibold text-[--color-text-primary] mb-1">{diet.diet}</h4>
+                <p class="text-sm text-[--color-text-secondary]">{diet.items}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      <!-- Suggested Kit -->
+      <div class="mb-12">
+        <h2 class="text-2xl font-bold mb-6 text-[--color-text-primary]">Kit de comida sugerido</h2>
+
+        <div class="card p-6">
+          <p class="text-sm text-[--color-text-secondary] mb-4">
+            Para 1 adulto durante 3 días (~6000 kcal):
+          </p>
+
+          <div class="overflow-x-auto">
+            <table class="w-full text-sm">
+              <thead>
+                <tr class="border-b border-[--color-border]">
+                  <th class="text-left py-2">Artículo</th>
+                  <th class="text-center py-2">Cantidad</th>
+                  <th class="text-left py-2">Notas</th>
+                </tr>
+              </thead>
+              <tbody class="text-[--color-text-secondary]">
+                {kitSuggestion.map((item) => (
+                  <tr class="border-b border-[--color-border]">
+                    <td class="py-2">{item.item}</td>
+                    <td class="py-2 text-center font-bold text-[--color-accent-primary]">{item.qty}</td>
+                    <td class="py-2 text-xs text-[--color-text-muted]">{item.notes}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+
+          <div class="mt-4 pt-4 border-t border-[--color-border] text-center">
+            <p class="text-sm text-[--color-text-muted]">
+              Inversión aproximada: <strong class="text-[--color-accent-primary]">30-50€</strong> por persona
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Product Recommendations -->
+      <div class="mb-12">
+        <h2 class="text-2xl font-bold mb-6 text-[--color-text-primary] flex items-center gap-2">
+          <Icon name="ShoppingCart" size={24} class="text-[--color-accent-primary]" />
+          Productos recomendados
+        </h2>
+        <ProductGrid products={amazonProducts} title="Alimentos para tu kit de emergencia" />
+      </div>
+
+      <!-- Common Mistakes -->
+      <div class="card p-6 mb-8 border-l-4 border-l-red-500">
+        <h3 class="font-semibold mb-4 text-[--color-text-primary] flex items-center gap-2">
+          <Icon name="CircleX" size={20} class="text-red-400" />
+          Errores comunes a evitar
+        </h3>
+        <ul class="grid sm:grid-cols-2 gap-2 text-sm text-[--color-text-secondary]">
+          {commonMistakes.map((mistake) => (
+            <li>• {mistake}</li>
+          ))}
+        </ul>
+      </div>
+
+      <!-- Critical Reminder -->
+      <div class="p-4 bg-[--color-status-warning]/10 border border-[--color-status-warning]/30 rounded-lg mb-8">
+        <p class="text-sm text-[--color-text-secondary] m-0 flex items-start gap-2">
+          <Icon name="AlertTriangle" size={18} class="text-[--color-status-warning] flex-shrink-0 mt-0.5" />
+          <span><strong class="text-[--color-status-warning]">No olvides:</strong> Ten siempre
+          <strong>2 abrelatas manuales</strong> (los eléctricos no sirven sin luz),
+          <strong>cubiertos</strong>, y considera cómo <strong>calentar</strong> la comida
+          (hornillo camping, velas, etc.).</span>
+        </p>
+      </div>
+
+      <!-- Related Links -->
+      <div class="flex flex-wrap gap-4 justify-center">
+        <a
+          href="/es/guias/almacenamiento-comida/"
+          class="inline-flex items-center gap-2 px-4 py-2 border border-[--color-border] text-sm font-medium rounded hover:border-[--color-accent-primary] hover:text-[--color-accent-primary] transition-colors"
+        >
+          Guía completa: Almacenamiento de Comida
+        </a>
+        <a
+          href="/es/herramientas/configurador-kit/"
+          class="inline-flex items-center gap-2 px-4 py-2 bg-[--color-accent-primary] text-[--color-bg-primary] text-sm font-medium rounded hover:bg-[--color-accent-secondary] transition-colors"
+        >
+          Configurador de Kit →
+        </a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

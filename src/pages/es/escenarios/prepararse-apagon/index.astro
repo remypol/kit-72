@@ -1,0 +1,997 @@
+---
+/**
+ * Apagón Scenario Page - Guided Flow Template
+ *
+ * New hub-style layout with:
+ * - TL;DR block at top
+ * - Phase tabs (Antes/Durante/Después)
+ * - Collapsible steps
+ * - Interactive checklist
+ * - StickyActionBar
+ */
+import BaseLayout from '../../../../layouts/BaseLayout.astro';
+import TLDRBlock from '../../../../components/hub/TLDRBlock.astro';
+import CollapsibleSection from '../../../../components/hub/CollapsibleSection.astro';
+import PhaseTabs from '../../../../components/hub/PhaseTabs.tsx';
+import InteractiveChecklist from '../../../../components/hub/InteractiveChecklist.tsx';
+import StickyActionBar from '../../../../components/hub/StickyActionBar.tsx';
+import Icon from '../../../../components/ui/Icon.astro';
+import HeroImage from '../../../../components/content/HeroImage.astro';
+
+const scenarioKey = 'apagon';
+
+// Phase content
+const phases = {
+  antes: [
+    {
+      title: 'Identifica aparatos críticos',
+      detail: 'Nevera, equipos médicos, móvil. Prioriza qué necesita energía.',
+      tip: 'Haz una lista y calcula consumos con nuestra calculadora'
+    },
+    {
+      title: 'Mantén el depósito del coche medio lleno',
+      detail: 'Las gasolineras necesitan electricidad para funcionar.',
+      tip: null
+    },
+    {
+      title: 'Conoce tu cuadro eléctrico',
+      detail: 'Localiza el diferencial y aprende a bajarlo para proteger aparatos.',
+      tip: 'Etiqueta los interruptores si aún no lo están'
+    },
+    {
+      title: 'Congela botellas de agua',
+      detail: 'Actuarán como acumuladores de frío si cae la luz. Mantienen el congelador frío más tiempo.',
+      tip: null
+    },
+    {
+      title: 'Guarda efectivo en casa',
+      detail: 'Los cajeros y datáfonos no funcionarán sin electricidad.',
+      tip: 'Guarda billetes pequeños (10€, 20€)'
+    },
+    {
+      title: 'Carga todos los dispositivos',
+      detail: 'Si hay aviso de tormenta o alerta, carga móviles, tablets y powerbanks antes.',
+      tip: null
+    },
+  ],
+  durante: [
+    {
+      title: 'Desconecta electrodomésticos',
+      detail: 'Evita daños por pico de tensión cuando vuelva la luz. Desenchufa TV, ordenadores, etc.',
+      tip: null
+    },
+    {
+      title: 'Deja UNA luz encendida',
+      detail: 'Así sabrás cuando vuelve la electricidad sin tener que comprobarlo.',
+      tip: null
+    },
+    {
+      title: 'No abras el frigorífico',
+      detail: 'Cerrado mantiene frío 4-6 horas. El congelador aguanta 24-48h si está lleno.',
+      tip: 'Mueve alimentos críticos a nevera portátil con hielo si el corte va para largo'
+    },
+    {
+      title: 'Usa linternas, no velas',
+      detail: 'Las velas son riesgo de incendio real, especialmente con niños o mascotas.',
+      tip: 'Una linterna frontal te deja las manos libres'
+    },
+    {
+      title: 'Conserva batería del móvil',
+      detail: 'Modo avión, brillo bajo, solo llamadas esenciales.',
+      tip: null
+    },
+    {
+      title: 'Avisa a familiares',
+      detail: 'Un mensaje corto: "Estamos bien, sin luz". No gastes batería en llamadas largas.',
+      tip: null
+    },
+  ],
+  despues: [
+    {
+      title: 'Reconecta aparatos gradualmente',
+      detail: 'No todo a la vez. Empieza por lo esencial para evitar sobrecargas.',
+      tip: null
+    },
+    {
+      title: 'Revisa el frigorífico',
+      detail: 'Si han pasado más de 4h sin frío, descarta perecederos (carne, lácteos, etc.).',
+      tip: 'En caso de duda, descártalo'
+    },
+    {
+      title: 'Comprueba el congelador',
+      detail: 'Si hay cristales de hielo en los alimentos, siguen en buen estado.',
+      tip: null
+    },
+    {
+      title: 'Recarga todos los dispositivos',
+      detail: 'Powerbanks, móviles, tablets. El próximo apagón puede ser pronto.',
+      tip: null
+    },
+    {
+      title: 'Repón suministros usados',
+      detail: 'Pilas, velas, comida consumida. No esperes al siguiente corte.',
+      tip: null
+    },
+    {
+      title: 'Documenta daños',
+      detail: 'Fotos de alimentos descartados o aparatos dañados para reclamaciones al seguro.',
+      tip: null
+    },
+  ],
+};
+
+// Checklist categories for InteractiveChecklist
+const checklistCategories = [
+  {
+    id: 'iluminacion',
+    name: 'Iluminación',
+    icon: 'flashlight',
+    items: [
+      { id: 'linterna-led', name: 'Linterna LED potente', quantity: '1-2 unidades', priority: 'critical' as const, notes: 'Evita linternas de bombilla, gastan más pilas' },
+      { id: 'linterna-frontal', name: 'Linterna de cabeza', quantity: '1 por persona', priority: 'recommended' as const, notes: 'Manos libres para cocinar o moverte' },
+      { id: 'pilas-repuesto', name: 'Pilas de repuesto', quantity: '2-3 sets', priority: 'critical' as const, notes: 'Mismo tipo que tus linternas' },
+      { id: 'velas', name: 'Velas', quantity: '10-20 unidades', priority: 'recommended' as const, notes: 'Gruesas, larga duración. Vigilar fuego' },
+      { id: 'mecheros', name: 'Mecheros/cerillas', quantity: '2-3 unidades', priority: 'critical' as const, notes: 'Guardar en lugar seco' },
+      { id: 'farolillo-led', name: 'Farolillo LED', quantity: '1 unidad', priority: 'optional' as const, notes: 'Ilumina habitaciones enteras' },
+    ]
+  },
+  {
+    id: 'energia',
+    name: 'Energía',
+    icon: 'battery',
+    items: [
+      { id: 'powerbank', name: 'Powerbank', quantity: '10.000+ mAh/persona', priority: 'critical' as const, notes: 'Mantenerlo siempre cargado' },
+      { id: 'estacion-portatil', name: 'Estación de energía portátil', quantity: '300-500Wh', priority: 'recommended' as const, notes: 'Para apagones largos (>24h)' },
+      { id: 'cargador-coche', name: 'Cargador de coche', quantity: '1 unidad', priority: 'recommended' as const, notes: 'El coche es una batería gigante' },
+      { id: 'panel-solar', name: 'Panel solar portátil', quantity: '20-50W', priority: 'optional' as const, notes: 'Solo útil en exterior con sol' },
+      { id: 'pilas-recargables', name: 'Pilas recargables + cargador', quantity: '8-12 pilas', priority: 'recommended' as const, notes: 'Cargar antes de temporada de tormentas' },
+    ]
+  },
+  {
+    id: 'comunicacion',
+    name: 'Comunicación',
+    icon: 'radio',
+    items: [
+      { id: 'radio-pilas', name: 'Radio con pilas o dinamo', quantity: '1 unidad', priority: 'critical' as const, notes: 'AM/FM para noticias locales' },
+      { id: 'lista-contactos', name: 'Lista de contactos impresa', quantity: '1 copia', priority: 'critical' as const, notes: 'Sin móvil no tendrás acceso a contactos' },
+      { id: 'cargador-solar', name: 'Cargador solar USB', quantity: '1 unidad', priority: 'optional' as const, notes: 'Backup para el móvil' },
+    ]
+  },
+  {
+    id: 'alimentacion',
+    name: 'Alimentación',
+    icon: 'utensils',
+    items: [
+      { id: 'hornillo-camping', name: 'Hornillo de camping (gas)', quantity: '1 + 2 bombonas', priority: 'recommended' as const, notes: 'SOLO usar en exterior o muy ventilado' },
+      { id: 'comida-sin-coccion', name: 'Comida sin cocción', quantity: '3 días/persona', priority: 'critical' as const, notes: 'Conservas, barritas, frutos secos' },
+      { id: 'agua-embotellada', name: 'Agua embotellada', quantity: '3L/persona/día', priority: 'critical' as const, notes: 'También para cocinar si es necesario' },
+      { id: 'nevera-portatil', name: 'Nevera portátil + acumuladores', quantity: '1 nevera', priority: 'recommended' as const, notes: 'Para salvar alimentos del frigo' },
+    ]
+  },
+  {
+    id: 'confort',
+    name: 'Confort térmico',
+    icon: 'thermometer',
+    items: [
+      { id: 'mantas', name: 'Mantas extra', quantity: '1-2/persona', priority: 'critical' as const, notes: 'Apagón en invierno = frío' },
+      { id: 'saco-dormir', name: 'Saco de dormir', quantity: '1/persona', priority: 'recommended' as const, notes: 'Si no tienes calefacción alternativa' },
+      { id: 'ropa-termica', name: 'Ropa térmica', quantity: '1 muda', priority: 'recommended' as const, notes: 'Capas: mejor que una prenda gruesa' },
+      { id: 'ventilador-pilas', name: 'Ventilador de pilas', quantity: '1 unidad', priority: 'optional' as const, notes: 'Para apagón en verano' },
+    ]
+  },
+];
+
+// FAQs
+const faqs = [
+  {
+    question: '¿Cuánto puede durar un apagón?',
+    answer: 'La mayoría duran minutos a pocas horas. Los cortes por tormentas pueden durar 6-24 horas. En casos extremos (huracanes, nevadas intensas) pueden extenderse días. Prepárate para 72 horas como mínimo.'
+  },
+  {
+    question: '¿Puedo usar el generador en interior?',
+    answer: 'NUNCA. Los generadores producen monóxido de carbono, un gas inodoro y mortal. Deben usarse en exterior, a mínimo 6 metros de puertas y ventanas.'
+  },
+  {
+    question: '¿El gas sigue funcionando sin luz?',
+    answer: 'El gas natural sí llega, pero las cocinas con encendido eléctrico necesitan un mechero. Las calderas con termostato electrónico NO funcionarán.'
+  },
+  {
+    question: '¿Cuánto aguanta la comida del frigorífico?',
+    answer: 'Frigorífico cerrado: 4-6 horas. Congelador lleno: 48 horas. Congelador medio vacío: 24 horas. No abras la puerta innecesariamente.'
+  },
+  {
+    question: '¿Debo reportar el apagón?',
+    answer: 'Sí, especialmente si solo te afecta a ti o a tu edificio. Usa la app o teléfono de averías de tu compañía (apúntalo antes).'
+  },
+];
+
+// Special situations
+const specialSituations = [
+  {
+    title: 'Equipos médicos',
+    icon: 'Heart',
+    content: 'Si dependes de CPAP, concentrador de oxígeno u otros equipos: contacta con tu proveedor médico para soluciones de backup.'
+  },
+  {
+    title: 'Teletrabajo',
+    icon: 'Laptop',
+    content: 'Ten un plan B: cafetería con wifi, biblioteca, coworking. Un SAI (UPS) te da tiempo para guardar y apagar.'
+  },
+  {
+    title: 'Bebés',
+    icon: 'Baby',
+    content: 'Leche de fórmula que no requiera refrigeración. Pañales extras. Entretenimiento sin pantallas.'
+  },
+  {
+    title: 'Edificio con ascensor',
+    icon: 'Building',
+    content: 'No uses el ascensor si hay aviso de corte. Ten un plan para subir/bajar a pie.'
+  },
+];
+---
+
+<BaseLayout
+  title="Apagón: ¿Qué hacer sin luz? Checklist y Consejos Urgentes"
+  description="Guía paso a paso para antes, durante y después de un corte de luz. Checklist interactivo y consejos prácticos."
+  schemaType="HowTo"
+  dateModified="2025-12-15"
+  datePublished="2024-11-01"
+  schemaData={{
+    step: [
+      { '@type': 'HowToStep', name: 'Identifica aparatos críticos', text: 'Nevera, equipos médicos, móvil. Prioriza qué necesita energía.' },
+      { '@type': 'HowToStep', name: 'Mantén el depósito del coche medio lleno', text: 'Las gasolineras necesitan electricidad para funcionar.' },
+      { '@type': 'HowToStep', name: 'Congela botellas de agua', text: 'Actuarán como acumuladores de frío si cae la luz.' },
+      { '@type': 'HowToStep', name: 'Guarda efectivo en casa', text: 'Los cajeros y datáfonos no funcionarán sin electricidad.' },
+      { '@type': 'HowToStep', name: 'Carga todos los dispositivos', text: 'Carga móviles, tablets y powerbanks antes del apagón.' },
+    ],
+    totalTime: 'PT30M',
+    estimatedCost: { '@type': 'MonetaryAmount', currency: 'EUR', value: '50-200' },
+  }}
+  faqData={faqs}
+>
+  <main class="scenario-page">
+    <!-- Header -->
+    <header class="scenario-header">
+      <nav class="scenario-breadcrumb">
+        <a href="/es/" class="breadcrumb-back">
+          <Icon name="ChevronLeft" size={20} />
+        </a>
+        <span class="breadcrumb-current">Apagón</span>
+      </nav>
+
+      <div class="scenario-title-row">
+        <div class="scenario-icon scenario-icon--amber">
+          <Icon name="Zap" size={28} />
+        </div>
+        <div class="scenario-title-content">
+          <h1 class="scenario-title">Prepararse para un Apagón</h1>
+          <div class="scenario-meta">
+            <span class="meta-item">8 min</span>
+            <span class="meta-divider">·</span>
+            <span class="meta-item">Actualizado dic 2025</span>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Hero Image -->
+    <section class="scenario-section">
+      <HeroImage
+        src="/images/shared/power-outage-candles.webp"
+        alt="Preparación para apagón con velas y linterna"
+        priority={true}
+      />
+    </section>
+
+    <!-- TL;DR -->
+    <section class="scenario-section">
+      <TLDRBlock
+        summary="Un apagón puede ocurrir sin aviso. La clave es tener iluminación (linternas), energía (powerbanks) y comida que no requiera electricidad preparados de antemano."
+        keyStat="72 horas"
+        keyStatLabel="Prepárate para"
+      />
+    </section>
+
+    <!-- Phase Tabs -->
+    <PhaseTabs client:idle scenarioKey={scenarioKey} />
+
+    <!-- Phase: Antes -->
+    <section id="antes" class="phase-section">
+      <div class="phase-header">
+        <span class="phase-number">1</span>
+        <div class="phase-title-group">
+          <h2 class="phase-title">Antes del apagón</h2>
+          <p class="phase-subtitle">Preparación preventiva</p>
+        </div>
+      </div>
+
+      <div class="phase-steps">
+        {phases.antes.map((step, index) => (
+          <CollapsibleSection
+            title={step.title}
+            summary={step.detail}
+            step={index + 1}
+            variant="card"
+          >
+            <p>{step.detail}</p>
+            {step.tip && (
+              <div class="step-tip">
+                <Icon name="Lightbulb" size={16} />
+                <span>{step.tip}</span>
+              </div>
+            )}
+          </CollapsibleSection>
+        ))}
+      </div>
+    </section>
+
+    <!-- Phase: Durante -->
+    <section id="durante" class="phase-section">
+      <div class="phase-header">
+        <span class="phase-number phase-number--warning">2</span>
+        <div class="phase-title-group">
+          <h2 class="phase-title">Durante el apagón</h2>
+          <p class="phase-subtitle">Qué hacer cuando ocurre</p>
+        </div>
+      </div>
+
+      <!-- Warning Box -->
+      <div class="warning-box">
+        <div class="warning-icon">
+          <Icon name="AlertTriangle" size={24} />
+        </div>
+        <div class="warning-content">
+          <strong>Peligros a evitar</strong>
+          <ul>
+            <li>Velas sin supervisión = riesgo de incendio</li>
+            <li>Generadores en interior = intoxicación por CO</li>
+            <li>Cables caídos = NO tocar, avisar a emergencias</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="phase-steps">
+        {phases.durante.map((step, index) => (
+          <CollapsibleSection
+            title={step.title}
+            summary={step.detail}
+            step={index + 1}
+            variant="card"
+          >
+            <p>{step.detail}</p>
+            {step.tip && (
+              <div class="step-tip">
+                <Icon name="Lightbulb" size={16} />
+                <span>{step.tip}</span>
+              </div>
+            )}
+          </CollapsibleSection>
+        ))}
+      </div>
+    </section>
+
+    <!-- Phase: Después -->
+    <section id="despues" class="phase-section">
+      <div class="phase-header">
+        <span class="phase-number phase-number--success">3</span>
+        <div class="phase-title-group">
+          <h2 class="phase-title">Después del apagón</h2>
+          <p class="phase-subtitle">Recuperación y reposición</p>
+        </div>
+      </div>
+
+      <div class="phase-steps">
+        {phases.despues.map((step, index) => (
+          <CollapsibleSection
+            title={step.title}
+            summary={step.detail}
+            step={index + 1}
+            variant="card"
+          >
+            <p>{step.detail}</p>
+            {step.tip && (
+              <div class="step-tip">
+                <Icon name="Lightbulb" size={16} />
+                <span>{step.tip}</span>
+              </div>
+            )}
+          </CollapsibleSection>
+        ))}
+      </div>
+    </section>
+
+    <!-- Interactive Checklist -->
+    <section class="scenario-section">
+      <h2 class="section-title">
+        <Icon name="CheckSquare" size={24} />
+        Tu checklist de apagón
+      </h2>
+      <p class="section-intro">
+        Marca los items que ya tienes. Tu progreso se guarda automáticamente.
+      </p>
+      <InteractiveChecklist
+        client:idle
+        storageKey={scenarioKey}
+        categories={checklistCategories}
+        title="Items para apagones"
+      />
+    </section>
+
+    <!-- Special Situations -->
+    <section class="scenario-section">
+      <h2 class="section-title">Situaciones especiales</h2>
+      <div class="situations-grid">
+        {specialSituations.map((situation) => (
+          <div class="situation-card">
+            <div class="situation-icon">
+              <Icon name={situation.icon as any} size={20} />
+            </div>
+            <div class="situation-content">
+              <h3 class="situation-title">{situation.title}</h3>
+              <p class="situation-text">{situation.content}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <!-- FAQs -->
+    <section class="scenario-section">
+      <h2 class="section-title">Preguntas frecuentes</h2>
+      <div class="faq-list">
+        {faqs.map((faq) => (
+          <details class="faq-item">
+            <summary class="faq-question">
+              <span>{faq.question}</span>
+              <Icon name="ChevronDown" size={20} />
+            </summary>
+            <div class="faq-answer">
+              <p>{faq.answer}</p>
+            </div>
+          </details>
+        ))}
+      </div>
+    </section>
+
+    <!-- Sources (collapsed) -->
+    <section class="scenario-section">
+      <details class="sources-block">
+        <summary class="sources-header">
+          <Icon name="BookOpen" size={18} />
+          <span>Ver fuentes y referencias</span>
+          <Icon name="ChevronDown" size={16} />
+        </summary>
+        <div class="sources-content">
+          <ul>
+            <li>
+              <a href="https://www.ree.es/" target="_blank" rel="noopener">
+                Red Eléctrica de España
+              </a>
+            </li>
+            <li>
+              <a href="https://www.proteccioncivil.es/" target="_blank" rel="noopener">
+                Protección Civil
+              </a>
+            </li>
+            <li>
+              <a href="https://www.ready.gov/power-outages" target="_blank" rel="noopener">
+                Ready.gov — Power Outages
+              </a>
+            </li>
+          </ul>
+        </div>
+      </details>
+    </section>
+
+    <!-- Productos recomendados -->
+    <section class="scenario-section">
+      <h2 class="section-title">
+        <Icon name="ShoppingBag" size={20} />
+        Productos recomendados
+      </h2>
+      <p class="section-intro">Nuestras guías de los productos más importantes para este escenario:</p>
+      <div class="related-grid">
+        <a href="/es/componentes/linternas/" class="related-card related-card--green">
+          <Icon name="Flashlight" size={24} />
+          <span>Linternas</span>
+        </a>
+        <a href="/es/componentes/powerbanks/" class="related-card related-card--green">
+          <Icon name="Battery" size={24} />
+          <span>Powerbanks</span>
+        </a>
+        <a href="/es/componentes/radios-emergencia/" class="related-card related-card--purple">
+          <Icon name="Radio" size={24} />
+          <span>Radio de emergencia</span>
+        </a>
+        <a href="/es/componentes/comida-emergencia/" class="related-card related-card--purple">
+          <Icon name="UtensilsCrossed" size={24} />
+          <span>Comida de emergencia</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- Escenarios relacionados -->
+    <section class="scenario-section">
+      <h2 class="section-title">Escenarios relacionados</h2>
+      <div class="related-grid">
+        <a href="/es/escenarios/prepararse-ola-calor/" class="related-card related-card--orange">
+          <Icon name="Sun" size={24} />
+          <span>Ola de Calor</span>
+        </a>
+        <a href="/es/escenarios/prepararse-corte-agua/" class="related-card related-card--blue">
+          <Icon name="Droplet" size={24} />
+          <span>Corte de Agua</span>
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <!-- Sticky Action Bar -->
+  <StickyActionBar
+    client:idle
+    actionText="Calcular energía"
+    actionUrl="/es/herramientas/calculadora-energia/"
+    dismissKey={`scenario_${scenarioKey}`}
+    label="Próximo paso:"
+  />
+</BaseLayout>
+
+<style>
+  .scenario-page {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 0 16px 120px;
+  }
+
+  /* Header */
+  .scenario-header {
+    padding: 16px 0 24px;
+  }
+
+  .scenario-breadcrumb {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 16px;
+  }
+
+  .breadcrumb-back {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    background: var(--color-bg-secondary);
+    border-radius: 10px;
+    color: var(--color-text-secondary);
+    transition: all 0.15s ease;
+  }
+
+  .breadcrumb-back:hover {
+    background: var(--color-bg-tertiary);
+    color: var(--color-text-primary);
+  }
+
+  .breadcrumb-current {
+    font-size: 14px;
+    color: var(--color-text-muted);
+  }
+
+  .scenario-title-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+  }
+
+  .scenario-icon {
+    flex-shrink: 0;
+    width: 56px;
+    height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 16px;
+  }
+
+  .scenario-icon--amber {
+    background: rgba(245, 158, 11, 0.15);
+    color: #f59e0b;
+  }
+
+  .scenario-title-content {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .scenario-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--color-text-primary);
+    margin: 0 0 6px;
+    line-height: 1.2;
+  }
+
+  .scenario-meta {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    color: var(--color-text-muted);
+  }
+
+  .meta-divider {
+    opacity: 0.5;
+  }
+
+  /* Sections */
+  .scenario-section {
+    margin-bottom: 32px;
+  }
+
+  .section-title {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: var(--color-text-primary);
+    margin: 0 0 12px;
+  }
+
+  .section-intro {
+    font-size: 14px;
+    color: var(--color-text-muted);
+    margin: 0 0 16px;
+  }
+
+  /* Phase Sections */
+  .phase-section {
+    padding: 24px 0;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .phase-section:last-of-type {
+    border-bottom: none;
+  }
+
+  .phase-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    margin-bottom: 20px;
+  }
+
+  .phase-number {
+    flex-shrink: 0;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--color-accent-subtle);
+    color: var(--color-accent-primary);
+    font-size: 18px;
+    font-weight: 700;
+    border-radius: 12px;
+  }
+
+  .phase-number--warning {
+    background: rgba(245, 158, 11, 0.15);
+    color: #f59e0b;
+  }
+
+  .phase-number--success {
+    background: rgba(34, 197, 94, 0.15);
+    color: #22c55e;
+  }
+
+  .phase-title-group {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .phase-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--color-text-primary);
+    margin: 0 0 4px;
+  }
+
+  .phase-subtitle {
+    font-size: 14px;
+    color: var(--color-text-muted);
+    margin: 0;
+  }
+
+  .phase-steps {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  /* Step Tips */
+  .step-tip {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    margin-top: 12px;
+    padding: 10px 12px;
+    background: var(--color-accent-subtle);
+    border-radius: 8px;
+    font-size: 13px;
+    color: var(--color-accent-primary);
+  }
+
+  .step-tip svg {
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  /* Warning Box */
+  .warning-box {
+    display: flex;
+    gap: 16px;
+    padding: 16px;
+    margin-bottom: 20px;
+    background: rgba(239, 68, 68, 0.1);
+    border: 1px solid rgba(239, 68, 68, 0.3);
+    border-radius: 12px;
+  }
+
+  .warning-icon {
+    flex-shrink: 0;
+    color: #ef4444;
+  }
+
+  .warning-content {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .warning-content strong {
+    display: block;
+    font-size: 14px;
+    color: #ef4444;
+    margin-bottom: 8px;
+  }
+
+  .warning-content ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .warning-content li {
+    position: relative;
+    padding-left: 16px;
+    font-size: 13px;
+    color: var(--color-text-secondary);
+    line-height: 1.6;
+  }
+
+  .warning-content li::before {
+    content: '•';
+    position: absolute;
+    left: 0;
+    color: #ef4444;
+  }
+
+  /* Situations Grid */
+  .situations-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+
+  .situation-card {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 16px;
+    background: var(--color-bg-secondary);
+    border: 1px solid var(--color-border);
+    border-radius: 12px;
+  }
+
+  .situation-icon {
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--color-bg-tertiary);
+    color: var(--color-text-muted);
+    border-radius: 10px;
+  }
+
+  .situation-title {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--color-text-primary);
+    margin: 0;
+  }
+
+  .situation-text {
+    font-size: 12px;
+    color: var(--color-text-secondary);
+    line-height: 1.5;
+    margin: 0;
+  }
+
+  /* FAQs */
+  .faq-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .faq-item {
+    background: var(--color-bg-secondary);
+    border: 1px solid var(--color-border);
+    border-radius: 12px;
+    overflow: hidden;
+  }
+
+  .faq-question {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 14px 16px;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--color-text-primary);
+    cursor: pointer;
+    list-style: none;
+  }
+
+  .faq-question::-webkit-details-marker {
+    display: none;
+  }
+
+  .faq-question svg {
+    flex-shrink: 0;
+    color: var(--color-text-muted);
+    transition: transform 0.2s ease;
+  }
+
+  .faq-item[open] .faq-question svg {
+    transform: rotate(180deg);
+  }
+
+  .faq-answer {
+    padding: 0 16px 14px;
+  }
+
+  .faq-answer p {
+    font-size: 14px;
+    color: var(--color-text-secondary);
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  /* Sources */
+  .sources-block {
+    background: var(--color-bg-secondary);
+    border-radius: 12px;
+    overflow: hidden;
+  }
+
+  .sources-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 16px;
+    font-size: 14px;
+    color: var(--color-text-muted);
+    cursor: pointer;
+    list-style: none;
+  }
+
+  .sources-header::-webkit-details-marker {
+    display: none;
+  }
+
+  .sources-header svg:last-child {
+    margin-left: auto;
+    transition: transform 0.2s ease;
+  }
+
+  .sources-block[open] .sources-header svg:last-child {
+    transform: rotate(180deg);
+  }
+
+  .sources-content {
+    padding: 0 16px 14px;
+  }
+
+  .sources-content ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .sources-content li {
+    margin-bottom: 8px;
+  }
+
+  .sources-content a {
+    font-size: 13px;
+    color: var(--color-accent-primary);
+    text-decoration: none;
+  }
+
+  .sources-content a:hover {
+    text-decoration: underline;
+  }
+
+  /* Related Scenarios */
+  .related-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+
+  .related-card {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 16px;
+    border-radius: 12px;
+    text-decoration: none;
+    transition: transform 0.15s ease;
+  }
+
+  .related-card:hover {
+    transform: translateY(-2px);
+  }
+
+  .related-card span {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--color-text-primary);
+  }
+
+  .related-card--orange {
+    background: rgba(249, 115, 22, 0.1);
+    border: 1px solid rgba(249, 115, 22, 0.2);
+    color: #f97316;
+  }
+
+  .related-card--blue {
+    background: rgba(59, 130, 246, 0.1);
+    border: 1px solid rgba(59, 130, 246, 0.2);
+    color: #3b82f6;
+  }
+
+  .related-card--green {
+    background: rgba(34, 197, 94, 0.1);
+    border: 1px solid rgba(34, 197, 94, 0.2);
+    color: #22c55e;
+  }
+
+  .related-card--purple {
+    background: rgba(139, 92, 246, 0.1);
+    border: 1px solid rgba(139, 92, 246, 0.2);
+    color: #8b5cf6;
+  }
+
+  /* Mobile adjustments */
+  @media (max-width: 480px) {
+    .scenario-page {
+      padding: 0 12px 120px;
+    }
+
+    .scenario-title {
+      font-size: 1.25rem;
+    }
+
+    .situations-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .related-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

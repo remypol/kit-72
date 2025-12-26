@@ -1,0 +1,931 @@
+---
+/**
+ * Hittegolf Scenario Page - Dutch Heat Wave Preparedness
+ *
+ * Adapted for NL context:
+ * - Dutch housing not designed for heat (poor insulation for cooling)
+ * - KNMI heat warnings system
+ * - RIVM health guidance
+ * - Koelcentra (cooling centers) concept
+ * - Higher humidity makes heat feel worse
+ */
+import BaseLayout from '../../../../layouts/BaseLayout.astro';
+import TLDRBlock from '../../../../components/hub/TLDRBlock.astro';
+import CollapsibleSection from '../../../../components/hub/CollapsibleSection.astro';
+import PhaseTabs from '../../../../components/hub/PhaseTabs.tsx';
+import InteractiveChecklist from '../../../../components/hub/InteractiveChecklist.tsx';
+import StickyActionBar from '../../../../components/hub/StickyActionBar.tsx';
+import Icon from '../../../../components/ui/Icon.astro';
+import HeroImage from '../../../../components/content/HeroImage.astro';
+
+const scenarioKey = 'hittegolf';
+
+// Phase content - Dutch specific
+const phases = {
+  voor: [
+    {
+      title: 'Volg KNMI waarschuwingen',
+      detail: 'Activeer meldingen van de KNMI app. Code oranje/rood = hittegolf.',
+      tip: 'Stel pushmeldingen in voor jouw regio'
+    },
+    {
+      title: 'Identificeer koele plekken',
+      detail: 'Bibliotheken, winkelcentra, gemeentehuizen. Check bij je gemeente voor koelcentra.',
+      tip: 'Noteer adressen en openingstijden offline'
+    },
+    {
+      title: 'Controleer ventilatie en zonwering',
+      detail: 'Nederlandse huizen zijn goed geïsoleerd tegen kou, maar houden ook warmte vast.',
+      tip: 'Overweeg reflecterende raamfolie voor ramen op het zuiden'
+    },
+    {
+      title: 'Sla extra water in',
+      detail: 'Minimaal 5-6 liter per persoon per dag, meer dan normaal.',
+      tip: 'Vries flessen water in: dienen ook als koelelementen'
+    },
+    {
+      title: 'Koop ORS (Oral Rehydration Salts)',
+      detail: 'Bij de apotheek of drogist. Onmisbaar voor het aanvullen van zouten bij veel zweten.',
+      tip: 'Ook sportdranken werken, maar bevatten meer suiker'
+    },
+    {
+      title: 'Neem contact op met kwetsbare mensen',
+      detail: 'Spreek af om dagelijks te bellen met oudere familieleden of buren die alleen wonen.',
+      tip: null
+    },
+  ],
+  tijdens: [
+    {
+      title: 'Vermijd buitenactiviteiten tussen 12:00-18:00',
+      detail: 'De heetste uren van de dag. Plan boodschappen en activiteiten vroeg of laat.',
+      tip: null
+    },
+    {
+      title: 'Drink regelmatig, ook zonder dorst',
+      detail: 'Als je dorst voelt, ben je al licht gedehydrateerd. Stel herinneringen in.',
+      tip: 'Drink elk halfuur een glas water'
+    },
+    {
+      title: 'Houd je huis koel',
+      detail: 'Sluit gordijnen en zonwering overdag. Open ramen alleen als het buiten koeler is dan binnen.',
+      tip: 'Hang natte handdoeken voor open ramen voor extra verkoeling'
+    },
+    {
+      title: 'Verminder fysieke inspanning',
+      detail: 'Stel sporten en zware klussen uit. Als het moet: alleen vroeg in de ochtend.',
+      tip: null
+    },
+    {
+      title: 'Eet licht en fris',
+      detail: 'Salades, fruit, koude maaltijden. Vermijd zware, warme maaltijden.',
+      tip: 'Watermeloen en komkommer bevatten veel vocht'
+    },
+    {
+      title: 'Herken alarmsignalen',
+      detail: 'Verwardheid, niet meer zweten, hoge temperatuur = bel 112.',
+      tip: null
+    },
+  ],
+  na: [
+    {
+      title: 'Blijf gehydrateerd',
+      detail: 'Je lichaam heeft tijd nodig om te herstellen. Drink de dagen erna extra.',
+      tip: null
+    },
+    {
+      title: 'Vul je voorraad aan',
+      detail: 'Water, ORS, en vers fruit dat je hebt gebruikt.',
+      tip: null
+    },
+    {
+      title: 'Check op kwetsbare mensen',
+      detail: 'Ouderen, kleine kinderen en chronisch zieken kunnen vertraagde effecten ervaren.',
+      tip: null
+    },
+    {
+      title: 'Evalueer wat werkte',
+      detail: 'Noteer welke maatregelen effectief waren voor een volgende hittegolf.',
+      tip: null
+    },
+  ],
+};
+
+// Heat risks - Dutch terminology
+const heatRisks = [
+  { condition: 'Hitteberoerte', symptoms: 'Temp >40°C, droge huid, verwardheid', action: 'NOODGEVAL 112', severity: 'critical' },
+  { condition: 'Hitte-uitputting', symptoms: 'Overmatig zweten, zwakte, misselijkheid', action: 'Koele plek, vocht', severity: 'warning' },
+];
+
+// Checklist categories - NL products
+const checklistCategories = [
+  {
+    id: 'hydratatie',
+    name: 'Hydratatie',
+    icon: 'droplet',
+    items: [
+      { id: 'water-extra', name: 'Extra flessenwater', quantity: '5-6L/persoon/dag', priority: 'critical' as const, notes: 'Meer dan normaal door de hitte' },
+      { id: 'ors-zakjes', name: 'ORS zakjes (apotheek)', quantity: '10+ zakjes', priority: 'critical' as const, notes: 'Vult verloren zouten aan', affiliateUrl: 'https://www.bol.com/nl/nl/s/?searchtext=ors+zakjes' },
+      { id: 'sportdrank', name: 'Sportdrank/isotonisch', quantity: '6-12 stuks', priority: 'recommended' as const, notes: 'Alternatief voor ORS' },
+      { id: 'drinkfles', name: 'Herbruikbare drinkfles', quantity: '1 per persoon', priority: 'recommended' as const, notes: 'Om altijd water bij je te hebben' },
+    ]
+  },
+  {
+    id: 'verkoeling',
+    name: 'Verkoeling',
+    icon: 'snowflake',
+    items: [
+      { id: 'ventilator-usb', name: 'USB/batterij ventilator', quantity: '1-2 stuks', priority: 'recommended' as const, notes: 'Werkt ook bij stroomuitval', affiliateUrl: 'https://www.bol.com/nl/nl/s/?searchtext=usb+ventilator+draagbaar' },
+      { id: 'microvezeldoeken', name: 'Microvezeldoeken', quantity: '2 per persoon', priority: 'critical' as const, notes: 'Nat maken om af te koelen' },
+      { id: 'plantenspuit', name: 'Plantenspuit', quantity: '1-2 stuks', priority: 'recommended' as const, notes: 'Water vernevelen + ventilator = effectief' },
+      { id: 'koelelementen', name: 'Koelelementen', quantity: '4-6 stuks', priority: 'critical' as const, notes: 'Van tevoren invriezen', affiliateUrl: 'https://www.bol.com/nl/nl/s/?searchtext=koelelementen' },
+      { id: 'koeltas', name: 'Koeltas', quantity: '1 stuk', priority: 'recommended' as const, notes: 'Voor koude dranken en kompressen', affiliateUrl: 'https://www.bol.com/nl/nl/s/?searchtext=koeltas' },
+    ]
+  },
+  {
+    id: 'zonbescherming',
+    name: 'Zonbescherming',
+    icon: 'sun',
+    items: [
+      { id: 'zonnebrand', name: 'Zonnebrand SPF50+', quantity: '1 grote fles', priority: 'critical' as const, notes: 'Elke 2 uur opnieuw aanbrengen', affiliateUrl: 'https://www.bol.com/nl/nl/s/?searchtext=zonnebrand+spf50' },
+      { id: 'zonnehoed', name: 'Zonnehoed met brede rand', quantity: '1 per persoon', priority: 'critical' as const, notes: 'Beschermt gezicht en nek' },
+      { id: 'zonnebril', name: 'Zonnebril UV-bescherming', quantity: '1 per persoon', priority: 'recommended' as const, notes: 'Beschermt de ogen' },
+      { id: 'lichte-kleding', name: 'Lichte, loszittende kleding', quantity: '2-3 sets', priority: 'recommended' as const, notes: 'Ademend, lichte kleuren' },
+    ]
+  },
+  {
+    id: 'monitoring',
+    name: 'Monitoren',
+    icon: 'thermometer',
+    items: [
+      { id: 'thermometer-lichaam', name: 'Lichaamsthermometer', quantity: '1 stuk', priority: 'critical' as const, notes: 'Om koorts/hitteberoerte te herkennen' },
+      { id: 'thermometer-kamer', name: 'Kamerthermometer', quantity: '1 stuk', priority: 'recommended' as const, notes: 'Weten wanneer te ventileren', affiliateUrl: 'https://www.bol.com/nl/nl/s/?searchtext=digitale+thermometer+binnen' },
+      { id: 'radio-batterij', name: 'Radio op batterijen', quantity: '1 stuk', priority: 'recommended' as const, notes: 'KNMI waarschuwingen volgen', affiliateUrl: 'https://www.bol.com/nl/nl/s/?searchtext=draagbare+radio+batterij' },
+    ]
+  },
+];
+
+// Risk groups - Dutch context
+const riskGroups = [
+  { group: 'Ouderen (65+)', icon: 'Users', tip: 'Dagelijks bellen/langsgaan, help met drinken' },
+  { group: "Baby's en peuters", icon: 'Baby', tip: 'NOOIT alleen in auto, extra vocht geven' },
+  { group: 'Chronisch zieken', icon: 'Heart', tip: 'Medicatie checken, actieplan bespreken met arts' },
+  { group: 'Buitenwerkers', icon: 'HardHat', tip: 'Pauzes in schaduw, vermijd 12-18u' },
+];
+
+// FAQs - Dutch context
+const faqs = [
+  {
+    question: 'Wanneer is er officieel sprake van een hittegolf?',
+    answer: 'In Nederland: minimaal 5 dagen achtereen >25°C, waarvan 3 dagen >30°C. Het KNMI geeft dan code oranje of rood af.'
+  },
+  {
+    question: 'Waarom zijn Nederlandse huizen zo warm?',
+    answer: 'Nederlandse woningen zijn ontworpen om warmte vast te houden tegen de kou. Goede isolatie werkt ook omgekeerd: warmte komt er moeilijk uit.'
+  },
+  {
+    question: 'Helpt een ventilator boven 35°C nog?',
+    answer: 'Een ventilator alleen verplaatst warme lucht. Maar combineer het met natte huid of natte doeken, dan versnelt het de verdamping en koelt het wel.'
+  },
+  {
+    question: 'Hoeveel moet ik drinken?',
+    answer: 'Bij extreme hitte: 3-4 liter per dag voor volwassenen die niet actief zijn. Meer als je beweegt. Drink regelmatig kleine hoeveelheden.'
+  },
+  {
+    question: 'Wat als ik geen airco heb?',
+    answer: 'Zoek koelcentra (bibliotheek, winkelcentrum, gemeentehuis). Thuis: zonwering dicht, natte handdoeken, ventilator + water vernevelen, koel douchen.'
+  },
+];
+---
+
+<BaseLayout
+  title="Hittegolf: Overleven bij extreme hitte — Checklist & Koeltips"
+  description="Complete gids voor hittegolf voorbereiding in Nederland. Hydratatie, verkoeling, risicogroepen en checklist. KNMI en RIVM richtlijnen."
+  locale="nl"
+  schemaType="HowTo"
+  dateModified="2025-12-15"
+  alternates={{
+    es: '/es/escenarios/prepararse-ola-calor/',
+    de: '/de/szenarien/hitzewelle/',
+  }}
+  schemaData={{
+    step: [
+      { '@type': 'HowToStep', name: 'Volg KNMI waarschuwingen', text: 'Activeer meldingen van de KNMI app. Code oranje/rood = hittegolf. Stel pushmeldingen in voor jouw regio.' },
+      { '@type': 'HowToStep', name: 'Identificeer koele plekken', text: 'Bibliotheken, winkelcentra, gemeentehuizen. Check bij je gemeente voor koelcentra.' },
+      { '@type': 'HowToStep', name: 'Sla extra water in', text: 'Minimaal 5-6 liter per persoon per dag. Vries flessen water in: dienen ook als koelelementen.' },
+      { '@type': 'HowToStep', name: 'Koop ORS bij de apotheek', text: 'Oral Rehydration Salts zijn onmisbaar voor het aanvullen van zouten bij veel zweten.' },
+      { '@type': 'HowToStep', name: 'Vermijd buitenactiviteiten 12:00-18:00', text: 'De heetste uren van de dag. Plan activiteiten vroeg of laat.' },
+      { '@type': 'HowToStep', name: 'Drink regelmatig, ook zonder dorst', text: 'Als je dorst voelt, ben je al licht gedehydrateerd. Drink elk halfuur een glas water.' },
+      { '@type': 'HowToStep', name: 'Herken alarmsignalen', text: 'Verwardheid, niet meer zweten, hoge temperatuur = bel 112.' },
+    ],
+    totalTime: 'P3D',
+    supply: [
+      { '@type': 'HowToSupply', name: 'Extra flessenwater (5-6L/persoon/dag)' },
+      { '@type': 'HowToSupply', name: 'ORS zakjes' },
+      { '@type': 'HowToSupply', name: 'USB/batterij ventilator' },
+      { '@type': 'HowToSupply', name: 'Microvezeldoeken' },
+      { '@type': 'HowToSupply', name: 'Zonnebrand SPF50+' },
+      { '@type': 'HowToSupply', name: 'Lichaamsthermometer' },
+    ],
+  }}
+  faqData={faqs}
+>
+  <main class="scenario-page">
+    <!-- Header -->
+    <header class="scenario-header">
+      <nav class="scenario-breadcrumb">
+        <a href="/nl/scenario/" class="breadcrumb-back">
+          <Icon name="ChevronLeft" size={20} />
+        </a>
+        <span class="breadcrumb-current">Hittegolf</span>
+      </nav>
+
+      <div class="scenario-title-row">
+        <div class="scenario-icon scenario-icon--orange">
+          <Icon name="Sun" size={28} />
+        </div>
+        <div class="scenario-title-content">
+          <h1 class="scenario-title">Voorbereiden op een Hittegolf</h1>
+          <div class="scenario-meta">
+            <span class="meta-item">8 min</span>
+            <span class="meta-divider">·</span>
+            <span class="meta-item">Bijgewerkt dec 2025</span>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Hero Image -->
+    <section class="scenario-section">
+      <HeroImage
+        src="/images/shared/heat-wave-sun.webp"
+        alt="Extreme hitte en zon tijdens een hittegolf"
+        priority={true}
+      />
+    </section>
+
+    <!-- TL;DR -->
+    <section class="scenario-section">
+      <TLDRBlock
+        summary="Hittegolven worden in Nederland steeds vaker en intenser. De sleutel: drink continu (3-4 liter/dag), vermijd de middagzon, en herken de symptomen van hitteberoerte. Nederlandse huizen houden warmte vast - zoek koelcentra op."
+        keyStat="3-4 liter/dag"
+        keyStatLabel="Drink minimaal"
+        locale="nl"
+      />
+    </section>
+
+    <!-- Phase Tabs -->
+    <PhaseTabs
+      client:idle
+      scenarioKey={scenarioKey}
+      locale="nl"
+    />
+
+    <!-- Phase: Voor -->
+    <section id="voor" class="phase-section">
+      <div class="phase-header">
+        <span class="phase-number">1</span>
+        <div class="phase-title-group">
+          <h2 class="phase-title">Voor de hittegolf</h2>
+          <p class="phase-subtitle">Preventieve voorbereiding</p>
+        </div>
+      </div>
+
+      <div class="phase-steps">
+        {phases.voor.map((step, index) => (
+          <CollapsibleSection
+            title={step.title}
+            summary={step.detail}
+            step={index + 1}
+            variant="card"
+          >
+            <p>{step.detail}</p>
+            {step.tip && (
+              <div class="step-tip">
+                <Icon name="Lightbulb" size={16} />
+                <span>{step.tip}</span>
+              </div>
+            )}
+          </CollapsibleSection>
+        ))}
+      </div>
+    </section>
+
+    <!-- Phase: Tijdens -->
+    <section id="tijdens" class="phase-section">
+      <div class="phase-header">
+        <span class="phase-number phase-number--warning">2</span>
+        <div class="phase-title-group">
+          <h2 class="phase-title">Tijdens de hittegolf</h2>
+          <p class="phase-subtitle">Overleven bij extreme hitte</p>
+        </div>
+      </div>
+
+      <!-- Warning Box -->
+      <div class="warning-box">
+        <div class="warning-icon">
+          <Icon name="AlertTriangle" size={24} />
+        </div>
+        <div class="warning-content">
+          <strong>Noodsignalen</strong>
+          <ul>
+            {heatRisks.map((risk) => (
+              <li>
+                <strong class={risk.severity === 'critical' ? 'text-red' : ''}>{risk.condition}:</strong> {risk.symptoms} → {risk.action}
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+
+      <div class="phase-steps">
+        {phases.tijdens.map((step, index) => (
+          <CollapsibleSection
+            title={step.title}
+            summary={step.detail}
+            step={index + 1}
+            variant="card"
+          >
+            <p>{step.detail}</p>
+            {step.tip && (
+              <div class="step-tip">
+                <Icon name="Lightbulb" size={16} />
+                <span>{step.tip}</span>
+              </div>
+            )}
+          </CollapsibleSection>
+        ))}
+      </div>
+    </section>
+
+    <!-- Phase: Na -->
+    <section id="na" class="phase-section">
+      <div class="phase-header">
+        <span class="phase-number phase-number--success">3</span>
+        <div class="phase-title-group">
+          <h2 class="phase-title">Na de hittegolf</h2>
+          <p class="phase-subtitle">Herstel</p>
+        </div>
+      </div>
+
+      <div class="phase-steps">
+        {phases.na.map((step, index) => (
+          <CollapsibleSection
+            title={step.title}
+            summary={step.detail}
+            step={index + 1}
+            variant="card"
+          >
+            <p>{step.detail}</p>
+            {step.tip && (
+              <div class="step-tip">
+                <Icon name="Lightbulb" size={16} />
+                <span>{step.tip}</span>
+              </div>
+            )}
+          </CollapsibleSection>
+        ))}
+      </div>
+    </section>
+
+    <!-- Risk Groups -->
+    <section class="scenario-section">
+      <h2 class="section-title">Risicogroepen</h2>
+      <div class="risk-groups-grid">
+        {riskGroups.map((group) => (
+          <div class="risk-group-card">
+            <div class="risk-group-icon">
+              <Icon name={group.icon as any} size={20} />
+            </div>
+            <div class="risk-group-content">
+              <h3 class="risk-group-title">{group.group}</h3>
+              <p class="risk-group-tip">{group.tip}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <!-- Interactive Checklist -->
+    <section class="scenario-section">
+      <h2 class="section-title">
+        <Icon name="CheckSquare" size={24} />
+        Je hittegolf checklist
+      </h2>
+      <p class="section-intro">
+        Vink af wat je al hebt. Je voortgang wordt automatisch opgeslagen.
+      </p>
+      <InteractiveChecklist
+        client:idle
+        storageKey={`${scenarioKey}_nl`}
+        categories={checklistCategories}
+        title="Hittegolf benodigdheden"
+      />
+    </section>
+
+    <!-- FAQs -->
+    <section class="scenario-section">
+      <h2 class="section-title">Veelgestelde vragen</h2>
+      <div class="faq-list">
+        {faqs.map((faq) => (
+          <details class="faq-item">
+            <summary class="faq-question">
+              <span>{faq.question}</span>
+              <Icon name="ChevronDown" size={20} />
+            </summary>
+            <div class="faq-answer">
+              <p>{faq.answer}</p>
+            </div>
+          </details>
+        ))}
+      </div>
+    </section>
+
+    <!-- Sources -->
+    <section class="scenario-section">
+      <details class="sources-block">
+        <summary class="sources-header">
+          <Icon name="BookOpen" size={18} />
+          <span>Bronnen en referenties</span>
+          <Icon name="ChevronDown" size={16} />
+        </summary>
+        <div class="sources-content">
+          <ul>
+            <li><a href="https://www.knmi.nl/" target="_blank" rel="noopener">KNMI - Koninklijk Nederlands Meteorologisch Instituut</a></li>
+            <li><a href="https://www.rivm.nl/hitte" target="_blank" rel="noopener">RIVM - Hitte en gezondheid</a></li>
+            <li><a href="https://www.rijksoverheid.nl/onderwerpen/weer/vraag-en-antwoord/wat-moet-ik-doen-bij-een-hittegolf" target="_blank" rel="noopener">Rijksoverheid - Hittegolf</a></li>
+            <li><a href="https://www.rodekruis.nl/ehbo/hitteberoerte/" target="_blank" rel="noopener">Rode Kruis - Hitteberoerte</a></li>
+          </ul>
+        </div>
+      </details>
+    </section>
+
+    <!-- Related Scenarios -->
+    <section class="scenario-section">
+      <h2 class="section-title">Gerelateerde scenario's</h2>
+      <div class="related-grid">
+        <a href="/nl/scenario/stroomstoring/" class="related-card related-card--amber">
+          <Icon name="Zap" size={24} />
+          <span>Stroomstoring</span>
+        </a>
+        <a href="/nl/scenario/wateruitval/" class="related-card related-card--blue">
+          <Icon name="Droplet" size={24} />
+          <span>Wateruitval</span>
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <!-- Sticky Action Bar -->
+  <StickyActionBar
+    client:idle
+    actionText="Water berekenen"
+    actionUrl="/nl/tools/water-calculator/"
+    dismissKey={`scenario_${scenarioKey}_nl`}
+    label="Volgende stap:"
+    locale="nl"
+  />
+</BaseLayout>
+
+<style>
+  .scenario-page {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 0 16px 120px;
+  }
+
+  .scenario-header {
+    padding: 16px 0 24px;
+  }
+
+  .scenario-breadcrumb {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 16px;
+  }
+
+  .breadcrumb-back {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    background: var(--color-bg-secondary);
+    border-radius: 10px;
+    color: var(--color-text-secondary);
+    transition: all 0.15s ease;
+  }
+
+  .breadcrumb-back:hover {
+    background: var(--color-bg-tertiary);
+    color: var(--color-text-primary);
+  }
+
+  .breadcrumb-current {
+    font-size: 14px;
+    color: var(--color-text-muted);
+  }
+
+  .scenario-title-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+  }
+
+  .scenario-icon {
+    flex-shrink: 0;
+    width: 56px;
+    height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 16px;
+  }
+
+  .scenario-icon--orange {
+    background: rgba(249, 115, 22, 0.15);
+    color: #f97316;
+  }
+
+  .scenario-title-content {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .scenario-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--color-text-primary);
+    margin: 0 0 6px;
+    line-height: 1.2;
+  }
+
+  .scenario-meta {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    color: var(--color-text-muted);
+  }
+
+  .meta-divider {
+    opacity: 0.5;
+  }
+
+  .scenario-section {
+    margin-bottom: 32px;
+  }
+
+  .section-title {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: var(--color-text-primary);
+    margin: 0 0 12px;
+  }
+
+  .section-intro {
+    font-size: 14px;
+    color: var(--color-text-muted);
+    margin: 0 0 16px;
+  }
+
+  .phase-section {
+    padding: 24px 0;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .phase-section:last-of-type {
+    border-bottom: none;
+  }
+
+  .phase-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    margin-bottom: 20px;
+  }
+
+  .phase-number {
+    flex-shrink: 0;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--color-accent-subtle);
+    color: var(--color-accent-primary);
+    font-size: 18px;
+    font-weight: 700;
+    border-radius: 12px;
+  }
+
+  .phase-number--warning {
+    background: rgba(249, 115, 22, 0.15);
+    color: #f97316;
+  }
+
+  .phase-number--success {
+    background: rgba(34, 197, 94, 0.15);
+    color: #22c55e;
+  }
+
+  .phase-title-group {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .phase-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--color-text-primary);
+    margin: 0 0 4px;
+  }
+
+  .phase-subtitle {
+    font-size: 14px;
+    color: var(--color-text-muted);
+    margin: 0;
+  }
+
+  .phase-steps {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .step-tip {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    margin-top: 12px;
+    padding: 10px 12px;
+    background: var(--color-accent-subtle);
+    border-radius: 8px;
+    font-size: 13px;
+    color: var(--color-accent-primary);
+  }
+
+  .step-tip svg {
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  .warning-box {
+    display: flex;
+    gap: 16px;
+    padding: 16px;
+    margin-bottom: 20px;
+    background: rgba(239, 68, 68, 0.1);
+    border: 1px solid rgba(239, 68, 68, 0.3);
+    border-radius: 12px;
+  }
+
+  .warning-icon {
+    flex-shrink: 0;
+    color: #ef4444;
+  }
+
+  .warning-content {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .warning-content strong {
+    display: block;
+    font-size: 14px;
+    color: #ef4444;
+    margin-bottom: 8px;
+  }
+
+  .warning-content ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .warning-content li {
+    font-size: 13px;
+    color: var(--color-text-secondary);
+    line-height: 1.6;
+    margin-bottom: 4px;
+  }
+
+  .warning-content .text-red {
+    color: #ef4444;
+  }
+
+  /* Risk Groups */
+  .risk-groups-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+
+  .risk-group-card {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 14px;
+    background: var(--color-bg-secondary);
+    border: 1px solid var(--color-border);
+    border-radius: 12px;
+  }
+
+  .risk-group-icon {
+    flex-shrink: 0;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(249, 115, 22, 0.1);
+    color: #f97316;
+    border-radius: 10px;
+  }
+
+  .risk-group-content {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .risk-group-title {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--color-text-primary);
+    margin: 0 0 4px;
+  }
+
+  .risk-group-tip {
+    font-size: 12px;
+    color: var(--color-text-muted);
+    line-height: 1.4;
+    margin: 0;
+  }
+
+  /* FAQs */
+  .faq-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .faq-item {
+    background: var(--color-bg-secondary);
+    border: 1px solid var(--color-border);
+    border-radius: 12px;
+    overflow: hidden;
+  }
+
+  .faq-question {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 14px 16px;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--color-text-primary);
+    cursor: pointer;
+    list-style: none;
+  }
+
+  .faq-question::-webkit-details-marker {
+    display: none;
+  }
+
+  .faq-question svg {
+    flex-shrink: 0;
+    color: var(--color-text-muted);
+    transition: transform 0.2s ease;
+  }
+
+  .faq-item[open] .faq-question svg {
+    transform: rotate(180deg);
+  }
+
+  .faq-answer {
+    padding: 0 16px 14px;
+  }
+
+  .faq-answer p {
+    font-size: 14px;
+    color: var(--color-text-secondary);
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  /* Sources */
+  .sources-block {
+    background: var(--color-bg-secondary);
+    border-radius: 12px;
+    overflow: hidden;
+  }
+
+  .sources-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 16px;
+    font-size: 14px;
+    color: var(--color-text-muted);
+    cursor: pointer;
+    list-style: none;
+  }
+
+  .sources-header::-webkit-details-marker {
+    display: none;
+  }
+
+  .sources-header svg:last-child {
+    margin-left: auto;
+    transition: transform 0.2s ease;
+  }
+
+  .sources-block[open] .sources-header svg:last-child {
+    transform: rotate(180deg);
+  }
+
+  .sources-content {
+    padding: 0 16px 14px;
+  }
+
+  .sources-content ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .sources-content li {
+    margin-bottom: 8px;
+  }
+
+  .sources-content a {
+    font-size: 13px;
+    color: var(--color-accent-primary);
+    text-decoration: none;
+  }
+
+  .sources-content a:hover {
+    text-decoration: underline;
+  }
+
+  /* Related Scenarios */
+  .related-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+
+  .related-card {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 16px;
+    border-radius: 12px;
+    text-decoration: none;
+    transition: transform 0.15s ease;
+  }
+
+  .related-card:hover {
+    transform: translateY(-2px);
+  }
+
+  .related-card span {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--color-text-primary);
+  }
+
+  .related-card--amber {
+    background: rgba(245, 158, 11, 0.1);
+    border: 1px solid rgba(245, 158, 11, 0.2);
+    color: #f59e0b;
+  }
+
+  .related-card--blue {
+    background: rgba(59, 130, 246, 0.1);
+    border: 1px solid rgba(59, 130, 246, 0.2);
+    color: #3b82f6;
+  }
+
+  @media (max-width: 480px) {
+    .scenario-page {
+      padding: 0 12px 120px;
+    }
+
+    .scenario-title {
+      font-size: 1.25rem;
+    }
+
+    .risk-groups-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .related-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

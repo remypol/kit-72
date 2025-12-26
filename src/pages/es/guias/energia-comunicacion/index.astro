@@ -1,0 +1,581 @@
+---
+import ArticleLayout from '../../../../layouts/ArticleLayout.astro';
+
+const tocItems = [
+  { id: 'prioridades', label: 'Prioridades de energía' },
+  { id: 'opciones-energia', label: 'Opciones de energía portátil' },
+  { id: 'dimensionar', label: 'Cómo dimensionar tu sistema' },
+  { id: 'comunicacion', label: 'Comunicación en emergencias' },
+  { id: 'cargar-movil', label: 'Maximizar batería del móvil' },
+  { id: 'iluminacion', label: 'Iluminación de emergencia' },
+  { id: 'faq', label: 'Preguntas frecuentes' },
+];
+
+const breadcrumbs = [
+  { label: 'Inicio', href: '/es/' },
+  { label: 'Guías', href: '/es/guias/' },
+  { label: 'Energía y Comunicación' },
+];
+
+const energyPriorities = [
+  {
+    priority: 1,
+    device: 'Teléfono móvil',
+    why: 'Comunicación, noticias, linterna, GPS, contactos de emergencia',
+    consumption: '10-15 Wh por carga completa',
+    icon: '📱',
+  },
+  {
+    priority: 2,
+    device: 'Radio de emergencia',
+    why: 'Información oficial cuando no hay internet/cobertura',
+    consumption: '0.5-2W (muy bajo)',
+    icon: '📻',
+  },
+  {
+    priority: 3,
+    device: 'Linterna / iluminación',
+    why: 'Movilidad segura, tareas básicas en oscuridad',
+    consumption: 'Variable (pilas recomendadas)',
+    icon: '🔦',
+  },
+  {
+    priority: 4,
+    device: 'Equipos médicos',
+    why: 'CPAP, nebulizadores, medidores de glucosa',
+    consumption: 'Variable, consultar dispositivo',
+    icon: '⚕️',
+  },
+  {
+    priority: 5,
+    device: 'Nevera (preservar alimentos)',
+    why: 'Evitar pérdida de comida perecedera',
+    consumption: '100-400 Wh/día',
+    icon: '❄️',
+  },
+];
+
+const powerOptions = [
+  {
+    type: 'Powerbank',
+    capacity: '10.000-30.000 mAh',
+    pros: ['Económico', 'Portátil', 'Fácil de usar', 'Se carga por USB'],
+    cons: ['Solo para dispositivos pequeños', 'Capacidad limitada'],
+    bestFor: 'Móviles, tablets, pequeños dispositivos USB',
+    priceRange: '15-60€',
+    charges: '2-6 cargas de móvil',
+  },
+  {
+    type: 'Estación de energía portátil',
+    capacity: '200-1000 Wh',
+    pros: ['Múltiples salidas (USB, 220V)', 'Puede alimentar nevera pequeña', 'Recargable con solar'],
+    cons: ['Más caro', 'Más pesado', 'Inversión inicial alta'],
+    bestFor: 'Apagones largos, equipos médicos, nevera',
+    priceRange: '150-800€',
+    charges: '15-80 cargas de móvil',
+  },
+  {
+    type: 'Panel solar portátil',
+    capacity: '20-100W',
+    pros: ['Energía renovable', 'Funciona mientras haya sol', 'Sin combustible'],
+    cons: ['Depende del clima', 'Carga lenta', 'Solo de día'],
+    bestFor: 'Complemento para powerbank/estación, emergencias largas',
+    priceRange: '50-200€',
+    charges: 'Depende de sol disponible',
+  },
+  {
+    type: 'Generador de gasolina',
+    capacity: '1000-5000W',
+    pros: ['Alta potencia', 'Puede alimentar toda la casa', 'Funciona de noche'],
+    cons: ['Ruidoso', 'Necesita combustible', 'Emisiones CO (NUNCA en interior)', 'Mantenimiento'],
+    bestFor: 'Casas grandes, necesidades altas, rural',
+    priceRange: '300-1500€',
+    charges: 'Ilimitado mientras tenga gasolina',
+  },
+  {
+    type: 'Batería del coche',
+    capacity: '500-800 Wh aprox.',
+    pros: ['Ya la tienes', 'Gratis', 'Capacidad decente'],
+    cons: ['No diseñada para esto', 'Puede dejar el coche sin arranque', 'Necesita inversor'],
+    bestFor: 'Emergencia puntual, cargar dispositivos',
+    priceRange: 'Gratis (+ inversor ~30€)',
+    charges: '50+ cargas de móvil (con cuidado)',
+  },
+];
+
+const deviceConsumption = [
+  { device: 'Smartphone', watts: '5-10W', whPerCharge: '10-15 Wh', notes: 'Carga completa' },
+  { device: 'Tablet', watts: '10-15W', whPerCharge: '25-40 Wh', notes: 'Carga completa' },
+  { device: 'Portátil', watts: '30-65W', whPerCharge: '50-100 Wh', notes: 'Carga completa' },
+  { device: 'Router WiFi', watts: '5-10W', whPerCharge: '120-240 Wh/día', notes: 'Funcionando 24h' },
+  { device: 'Lámpara LED', watts: '5-15W', whPerCharge: '25-75 Wh', notes: '5 horas de uso' },
+  { device: 'Nevera pequeña', watts: '50-100W', whPerCharge: '150-400 Wh/día', notes: 'Ciclo normal' },
+  { device: 'CPAP', watts: '30-60W', whPerCharge: '150-300 Wh', notes: '8 horas de sueño' },
+  { device: 'TV 32"', watts: '30-50W', whPerCharge: '60-100 Wh', notes: '2 horas de uso' },
+];
+
+const communicationMethods = [
+  {
+    method: 'Teléfono móvil',
+    pros: 'Multifuncional, portable, lo tienes',
+    cons: 'Depende de cobertura y batería',
+    when: 'Primera opción siempre',
+    tips: 'Modo avión cuando no uses, brillo bajo, apps en background cerradas',
+  },
+  {
+    method: 'Radio AM/FM',
+    pros: 'No depende de internet, funciona con pilas, larga duración',
+    cons: 'Solo recepción (no puedes comunicar)',
+    when: 'Cuando no hay cobertura móvil o quieres ahorrar batería',
+    tips: 'AM tiene más alcance que FM. Busca emisoras de emergencias locales.',
+  },
+  {
+    method: 'SMS',
+    pros: 'Funciona con señal débil donde las llamadas fallan',
+    cons: 'Puede tener retrasos',
+    when: 'Cuando las llamadas no conectan pero hay algo de señal',
+    tips: 'Los SMS consumen menos batería que llamadas. Más fiables que datos.',
+  },
+  {
+    method: 'Teléfono fijo',
+    pros: 'No depende de batería ni cobertura móvil',
+    cons: 'Requiere línea activa, no es portátil',
+    when: 'Si tienes línea fija y los móviles fallan',
+    tips: 'Ten un teléfono simple con cable (sin baterías ni bases inalámbricas).',
+  },
+  {
+    method: 'Walkie-talkies (PMR446)',
+    pros: 'Comunicación directa sin cobertura, sin cuotas',
+    cons: 'Alcance limitado (1-5km), necesita receptor',
+    when: 'Comunicación local con familia/vecinos cercanos',
+    tips: 'PMR446 es legal en España sin licencia. Acordar canal previamente.',
+  },
+];
+
+const phoneBatteryTips = [
+  {
+    tip: 'Modo avión',
+    saving: 'Alto',
+    detail: 'Desactiva todas las radios. Úsalo cuando no necesites comunicar. La batería puede durar días.',
+  },
+  {
+    tip: 'Brillo al mínimo',
+    saving: 'Alto',
+    detail: 'La pantalla es el mayor consumidor. Reduce al mínimo legible.',
+  },
+  {
+    tip: 'Cerrar apps en background',
+    saving: 'Medio',
+    detail: 'Apps como redes sociales consumen aunque no las uses.',
+  },
+  {
+    tip: 'Desactivar localización',
+    saving: 'Medio',
+    detail: 'El GPS consume mucha batería. Actívalo solo cuando necesites.',
+  },
+  {
+    tip: 'Modo ahorro de energía',
+    saving: 'Alto',
+    detail: 'Todos los móviles lo tienen. Actívalo desde el principio del apagón.',
+  },
+  {
+    tip: 'Desactivar WiFi/Bluetooth',
+    saving: 'Bajo-Medio',
+    detail: 'Si no los usas, desactívalos. Buscan conexiones constantemente.',
+  },
+  {
+    tip: 'No usar como linterna prolongada',
+    saving: 'Alto',
+    detail: 'El flash LED consume mucho. Usa linterna dedicada.',
+  },
+  {
+    tip: 'Notificaciones solo esenciales',
+    saving: 'Bajo',
+    detail: 'Cada notificación enciende la pantalla. Silencia las no críticas.',
+  },
+];
+
+const lightingOptions = [
+  {
+    type: 'Linterna LED de mano',
+    runtime: '10-50 horas',
+    pros: 'Dirigida, potente, portátil',
+    cons: 'Ilumina solo donde apuntes',
+    recommended: 'LED, 200+ lúmenes, pilas AA o recargable',
+  },
+  {
+    type: 'Linterna frontal',
+    runtime: '10-40 horas',
+    pros: 'Manos libres, ideal para tareas',
+    cons: 'Menos potente generalmente',
+    recommended: 'LED, ajustable, pilas AAA o recargable',
+  },
+  {
+    type: 'Farol LED',
+    runtime: '20-100 horas',
+    pros: 'Ilumina 360°, ideal para habitaciones',
+    cons: 'Menos portátil, más voluminoso',
+    recommended: 'LED, plegable, pilas D o recargable',
+  },
+  {
+    type: 'Velas',
+    runtime: '4-8 horas por vela',
+    pros: 'Baratas, crean ambiente',
+    cons: 'Riesgo de incendio, poca luz, humo',
+    recommended: 'Gruesas, en portavelas estable, nunca sin supervisión',
+  },
+  {
+    type: 'Luces solares de jardín',
+    runtime: '6-10 horas',
+    pros: 'Se recargan solas, bajo mantenimiento',
+    cons: 'Poca potencia, dependen de carga previa',
+    recommended: 'Tener varias, dejar al sol de día, meter de noche',
+  },
+];
+
+const faqs = [
+  {
+    question: '¿Qué tamaño de powerbank necesito?',
+    answer: 'Mínimo 10.000 mAh para 2-3 cargas de móvil. Recomendado 20.000 mAh para más autonomía. Para una familia de 4 personas durante 3 días, considera 2-3 powerbanks de 20.000 mAh o una estación de energía portátil.'
+  },
+  {
+    question: '¿Puedo usar un generador de gasolina en interior?',
+    answer: 'NUNCA. Los generadores de combustión emiten monóxido de carbono (CO), un gas inodoro y mortal. Deben usarse SIEMPRE en exterior, a mínimo 6 metros de puertas y ventanas. Cada año hay muertes por este error. No hay excepciones.'
+  },
+  {
+    question: '¿Merece la pena un panel solar?',
+    answer: 'Como complemento, sí. Un panel de 20-50W puede cargar un powerbank en 4-8 horas de sol. No es solución única (nubes, noche), pero extiende tu autonomía indefinidamente si hay sol. Mejor con powerbank o estación para almacenar.'
+  },
+  {
+    question: '¿Cómo cargo dispositivos con el coche?',
+    answer: 'Puedes usar el encendedor de cigarrillos (12V) con adaptador USB mientras el motor está encendido. Alternativamente, un inversor 12V→220V te da enchufe normal. IMPORTANTE: no dejes el motor parado con accesorios encendidos mucho tiempo o la batería no arrancará.'
+  },
+  {
+    question: '¿El móvil funciona sin cobertura?',
+    answer: 'Parcialmente. Sin cobertura no puedes llamar/enviar mensajes normales, pero SÍ puedes: usar linterna, ver fotos/documentos offline, usar GPS (mapas descargados), escuchar música descargada, y en muchos casos llamar al 112 (usa cualquier red disponible).'
+  },
+  {
+    question: '¿Pilas alcalinas o recargables?',
+    answer: 'Ambas tienen su lugar. Alcalinas: larga vida en almacenamiento (5-10 años), ideales para kit de emergencia que no tocas. Recargables: más económicas a largo plazo, pero se descargan solas (revisar cada 3-6 meses). Solución: alcalinas de reserva + recargables de uso diario.'
+  },
+];
+
+// Generate FAQPage schema for rich results
+const faqSchema = {
+  mainEntity: faqs.map(faq => ({
+    '@type': 'Question',
+    name: faq.question,
+    acceptedAnswer: {
+      '@type': 'Answer',
+      text: faq.answer
+    }
+  }))
+};
+---
+
+<ArticleLayout
+  faqData={faqs}
+  title="Energía y Comunicación en Emergencias: Guía Completa"
+  description="Cómo mantener tus dispositivos cargados y comunicarte durante un apagón o emergencia. Powerbanks, generadores, radios y más."
+  updatedDate="2025-12-15"
+  author="Equipo Kit-72"
+  readTime="13 min"
+  breadcrumbs={breadcrumbs}
+  schemaType="FAQPage"
+  schemaData={faqSchema}
+>
+  <!-- TOC Slot -->
+  <nav slot="toc" class="p-4 bg-[--color-bg-tertiary] rounded-lg">
+    <h2 class="text-sm font-semibold mb-3 text-[--color-text-primary]">En esta página</h2>
+    <ul class="space-y-2 text-sm">
+      {tocItems.map((item) => (
+        <li>
+          <a href={`#${item.id}`} class="text-[--color-text-secondary] hover:text-[--color-accent-primary] transition-colors">
+            {item.label}
+          </a>
+        </li>
+      ))}
+    </ul>
+  </nav>
+
+  <!-- Main Content -->
+  <div class="card p-6 mb-8 not-prose border-l-4 border-l-[--color-status-info]">
+    <p class="text-[--color-text-secondary] m-0">
+      <strong class="text-[--color-text-primary]">Lo esencial:</strong> Prioriza mantener el móvil cargado
+      (comunicación + múltiples funciones). Un powerbank de 20.000 mAh te da 4-5 cargas.
+      Ten una radio con pilas para información cuando no haya internet. Y siempre: linternas LED con pilas de repuesto.
+    </p>
+  </div>
+
+  <section id="prioridades" class="mb-12">
+    <h2>Prioridades de energía</h2>
+    <p>
+      En una emergencia, no puedes alimentar todo. Prioriza según utilidad real:
+    </p>
+
+    <div class="space-y-4 my-6 not-prose">
+      {energyPriorities.map((item) => (
+        <div class="card p-5 flex items-start gap-4">
+          <div class="flex-shrink-0 w-12 h-12 flex items-center justify-center bg-[--color-bg-tertiary] rounded-full">
+            <span class="text-2xl">{item.icon}</span>
+          </div>
+          <div class="flex-1">
+            <div class="flex items-center gap-3 mb-1">
+              <span class="px-2 py-0.5 text-xs font-bold bg-[--color-accent-primary] text-[--color-bg-primary] rounded">
+                #{item.priority}
+              </span>
+              <h3 class="font-semibold text-[--color-text-primary] m-0 text-base">{item.device}</h3>
+            </div>
+            <p class="text-sm text-[--color-text-secondary] mb-1">{item.why}</p>
+            <p class="text-xs text-[--color-text-muted] m-0">Consumo: {item.consumption}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <section id="opciones-energia" class="mb-12">
+    <h2>Opciones de energía portátil</h2>
+
+    <div class="space-y-6 my-8">
+      {powerOptions.map((option) => (
+        <div class="card p-6">
+          <div class="flex items-start justify-between mb-4">
+            <div>
+              <h3 class="text-lg font-semibold m-0">{option.type}</h3>
+              <p class="text-sm text-[--color-text-muted]">{option.capacity}</p>
+            </div>
+            <span class="px-3 py-1 text-sm bg-[--color-bg-tertiary] rounded">{option.priceRange}</span>
+          </div>
+          <div class="grid md:grid-cols-3 gap-4 mb-4">
+            <div>
+              <h4 class="text-sm font-semibold text-[--color-status-success] mb-2">Ventajas</h4>
+              <ul class="space-y-1">
+                {option.pros.map((pro) => (
+                  <li class="flex items-center gap-2 text-sm text-[--color-text-secondary]">
+                    <span class="text-[--color-status-success]">+</span> {pro}
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div>
+              <h4 class="text-sm font-semibold text-[--color-status-critical] mb-2">Inconvenientes</h4>
+              <ul class="space-y-1">
+                {option.cons.map((con) => (
+                  <li class="flex items-center gap-2 text-sm text-[--color-text-secondary]">
+                    <span class="text-[--color-status-critical]">-</span> {con}
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div>
+              <h4 class="text-sm font-semibold text-[--color-accent-primary] mb-2">Mejor para</h4>
+              <p class="text-sm text-[--color-text-secondary]">{option.bestFor}</p>
+              <p class="text-xs text-[--color-text-muted] mt-2">≈ {option.charges}</p>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <section id="dimensionar" class="mb-12">
+    <h2>Cómo dimensionar tu sistema</h2>
+    <p>
+      Para saber cuánta capacidad necesitas, suma el consumo de tus dispositivos:
+    </p>
+
+    <div class="overflow-x-auto my-6">
+      <table>
+        <thead>
+          <tr>
+            <th>Dispositivo</th>
+            <th>Potencia</th>
+            <th>Consumo típico</th>
+            <th>Notas</th>
+          </tr>
+        </thead>
+        <tbody>
+          {deviceConsumption.map((item) => (
+            <tr>
+              <td class="font-medium">{item.device}</td>
+              <td>{item.watts}</td>
+              <td class="text-[--color-accent-primary] font-medium">{item.whPerCharge}</td>
+              <td class="text-sm text-[--color-text-secondary]">{item.notes}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+
+    <div class="card p-6 my-6 not-prose bg-[--color-accent-subtle] border-[--color-border-accent]">
+      <h3 class="font-semibold text-[--color-text-primary] mb-3 text-base">📊 Ejemplo de cálculo</h3>
+      <p class="text-sm text-[--color-text-secondary] mb-2">
+        Familia de 4, apagón de 3 días, uso moderado:
+      </p>
+      <ul class="text-sm text-[--color-text-secondary] space-y-1 mb-3">
+        <li>• 4 móviles × 3 cargas × 15 Wh = <strong>180 Wh</strong></li>
+        <li>• Iluminación LED 5h/día × 10W × 3 días = <strong>150 Wh</strong></li>
+        <li>• Radio 4h/día × 1W × 3 días = <strong>12 Wh</strong></li>
+        <li>• <strong>Total: ~350 Wh</strong></li>
+      </ul>
+      <p class="text-sm text-[--color-text-primary]">
+        Solución: 2 powerbanks de 20.000 mAh (≈150 Wh cada uno) + pilas para linternas
+        <br/>O una estación portátil de 500 Wh
+      </p>
+    </div>
+  </section>
+
+  <section id="comunicacion" class="mb-12">
+    <h2>Comunicación en emergencias</h2>
+    <p>
+      Cuando falla un método, ten alternativas:
+    </p>
+
+    <div class="space-y-4 my-8">
+      {communicationMethods.map((method) => (
+        <div class="card p-6">
+          <h3 class="text-lg font-semibold mb-3">{method.method}</h3>
+          <div class="grid md:grid-cols-2 gap-4 mb-3">
+            <div>
+              <span class="text-[--color-status-success] text-sm">+</span>
+              <span class="text-sm text-[--color-text-secondary] ml-2">{method.pros}</span>
+            </div>
+            <div>
+              <span class="text-[--color-status-critical] text-sm">-</span>
+              <span class="text-sm text-[--color-text-secondary] ml-2">{method.cons}</span>
+            </div>
+          </div>
+          <p class="text-sm text-[--color-text-secondary] mb-2">
+            <strong>Cuándo usar:</strong> {method.when}
+          </p>
+          <p class="text-xs text-[--color-accent-primary] bg-[--color-bg-tertiary] p-2 rounded m-0">
+            💡 {method.tips}
+          </p>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <section id="cargar-movil" class="mb-12">
+    <h2>Maximizar la batería del móvil</h2>
+    <p>
+      Tu móvil es tu herramienta más versátil. Haz que la batería dure:
+    </p>
+
+    <div class="grid md:grid-cols-2 gap-4 my-6 not-prose">
+      {phoneBatteryTips.map((tip) => (
+        <div class="card p-4">
+          <div class="flex items-center justify-between mb-2">
+            <h3 class="font-semibold text-[--color-text-primary] m-0 text-base">{tip.tip}</h3>
+            <span class={`px-2 py-0.5 text-xs rounded ${
+              tip.saving === 'Alto' ? 'bg-[--color-status-success]/20 text-[--color-status-success]' :
+              tip.saving === 'Medio' ? 'bg-[--color-status-warning]/20 text-[--color-status-warning]' :
+              'bg-[--color-status-info]/20 text-[--color-status-info]'
+            }`}>
+              Ahorro {tip.saving}
+            </span>
+          </div>
+          <p class="text-sm text-[--color-text-secondary] m-0">{tip.detail}</p>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <section id="iluminacion" class="mb-12">
+    <h2>Iluminación de emergencia</h2>
+    <p>
+      La oscuridad complica todo. Ten varias opciones:
+    </p>
+
+    <div class="overflow-x-auto my-6">
+      <table>
+        <thead>
+          <tr>
+            <th>Tipo</th>
+            <th>Duración</th>
+            <th>Ventajas</th>
+            <th>Recomendación</th>
+          </tr>
+        </thead>
+        <tbody>
+          {lightingOptions.map((option) => (
+            <tr>
+              <td class="font-medium">{option.type}</td>
+              <td>{option.runtime}</td>
+              <td class="text-sm text-[--color-text-secondary]">{option.pros}</td>
+              <td class="text-sm text-[--color-text-secondary]">{option.recommended}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+
+    <div class="card p-6 my-6 not-prose bg-[--color-status-critical]/10 border border-[--color-status-critical]/30">
+      <h3 class="font-semibold text-[--color-status-critical] mb-2 text-base">⚠️ Seguridad con velas</h3>
+      <ul class="space-y-1 text-sm text-[--color-text-secondary]">
+        <li>• NUNCA dejar sin supervisión</li>
+        <li>• Mantener alejadas de cortinas, papel, niños y mascotas</li>
+        <li>• Usar portavelas estables y no inflamables</li>
+        <li>• Apagar antes de dormir</li>
+        <li>• Tener extintor o manta ignífuga accesible</li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="faq" class="mb-12">
+    <h2>Preguntas frecuentes</h2>
+
+    <div class="space-y-4 my-8">
+      {faqs.map((faq) => (
+        <details class="card group">
+          <summary class="px-6 py-4 cursor-pointer list-none flex items-center justify-between hover:bg-[--color-bg-tertiary] transition-colors">
+            <span class="font-medium text-[--color-text-primary] pr-4">{faq.question}</span>
+            <svg class="w-5 h-5 text-[--color-text-muted] transform transition-transform group-open:rotate-180 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+            </svg>
+          </summary>
+          <div class="px-6 pb-4">
+            <p class="text-[--color-text-secondary] m-0">{faq.answer}</p>
+          </div>
+        </details>
+      ))}
+    </div>
+  </section>
+
+  <!-- Sources Slot -->
+  <div slot="sources">
+    <h2 id="fuentes">Fuentes y referencias</h2>
+    <ul class="text-sm space-y-2">
+      <li>
+        <a href="https://www.ready.gov/power-outages" target="_blank" rel="noopener">
+          Ready.gov — Power Outages
+        </a>
+      </li>
+      <li>
+        <a href="https://www.redcross.org/get-help/how-to-prepare-for-emergencies/types-of-emergencies/power-outage.html" target="_blank" rel="noopener">
+          Cruz Roja Americana — Power Outage Safety
+        </a>
+      </li>
+    </ul>
+  </div>
+
+  <!-- CTA Slot -->
+  <div slot="cta" class="card p-8 text-center bg-[--color-bg-tertiary]">
+    <h3 class="text-xl font-semibold mb-4">Calcula tu energía necesaria</h3>
+    <p class="text-[--color-text-secondary] mb-6">
+      Usa nuestra calculadora para saber qué capacidad de batería necesitas.
+    </p>
+    <div class="flex flex-wrap gap-4 justify-center">
+      <a href="/es/herramientas/calculadora-energia/" class="inline-flex items-center gap-2 px-6 py-3 bg-[--color-accent-primary] text-[--color-bg-primary] font-semibold rounded hover:bg-[--color-accent-hover] transition-colors">
+        Calcular mi energía
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+        </svg>
+      </a>
+      <a href="/es/escenarios/prepararse-apagon/" class="inline-flex items-center gap-2 px-6 py-3 border border-[--color-border] text-[--color-text-primary] font-medium rounded hover:border-[--color-accent-primary] hover:text-[--color-accent-primary] transition-colors">
+        Guía: Prepararse para apagón
+      </a>
+    </div>
+  </div>
+</ArticleLayout>

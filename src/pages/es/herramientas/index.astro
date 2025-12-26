@@ -1,0 +1,114 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import Breadcrumb from '../../../components/layout/Breadcrumb.astro';
+import ToolCard from '../../../components/content/ToolCard.astro';
+import Icon from '../../../components/ui/Icon.astro';
+
+const tools = [
+  {
+    title: 'Configurador de Kit',
+    description: 'Crea tu checklist personalizado según escenario, familia y mascotas. Imprimible y descargable.',
+    href: '/es/herramientas/configurador-kit/',
+    icon: 'Settings',
+    cta: 'Crear mi kit',
+    features: [
+      'Personalizado para tu familia',
+      'Múltiples escenarios',
+      'Lista imprimible',
+    ],
+  },
+  {
+    title: 'Calculadora de Agua',
+    description: 'Calcula exactamente cuántos litros necesitas almacenar para tu familia y duración.',
+    href: '/es/herramientas/calculadora-agua/',
+    icon: 'Droplet',
+    cta: 'Calcular agua',
+    features: [
+      'Por persona y mascota',
+      'Múltiples usos',
+      'Recomendaciones de envases',
+    ],
+  },
+  {
+    title: 'Calculadora de Energía',
+    description: 'Estima qué capacidad de batería/powerbank necesitas para tus dispositivos esenciales.',
+    href: '/es/herramientas/calculadora-energia/',
+    icon: 'Battery',
+    cta: 'Calcular energía',
+    features: [
+      'Por dispositivo',
+      'Horas de uso',
+      'Tamaño de powerbank',
+    ],
+  },
+];
+
+const benefits = [
+  {
+    icon: 'Gauge',
+    title: 'Personalizado',
+    description: 'Resultados adaptados a tu situación familiar específica.',
+  },
+  {
+    icon: 'Printer',
+    title: 'Imprimible',
+    description: 'Genera checklists que puedes imprimir y colgar en la nevera.',
+  },
+  {
+    icon: 'Shield',
+    title: 'Sin registro',
+    description: 'No guardamos datos. Todo se calcula en tu navegador.',
+  },
+];
+---
+
+<BaseLayout
+  title="Herramientas Gratuitas — Kit-72"
+  description="Herramientas interactivas para preparar tu kit de emergencia: configurador de kit, calculadora de agua y calculadora de energía."
+>
+  <section class="py-16">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6">
+      <!-- Header -->
+      <div class="mb-12">
+        <Breadcrumb items={[{ label: 'Herramientas' }]} class="mb-4" />
+        <h1 class="mb-4">Herramientas Gratuitas</h1>
+        <p class="text-lg text-[--color-text-secondary] max-w-2xl">
+          Calculadoras y configuradores para que sepas exactamente qué necesitas.
+          Sin registro, sin complicaciones.
+        </p>
+      </div>
+
+      <!-- Tools Grid -->
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {tools.map((tool) => (
+          <ToolCard {...tool} />
+        ))}
+      </div>
+
+      <!-- Benefits Section -->
+      <div class="mt-16 card p-8 bg-[--color-bg-tertiary]">
+        <div class="max-w-2xl mx-auto text-center">
+          <h2 class="text-xl font-semibold mb-4">¿Por qué usar estas herramientas?</h2>
+          <p class="text-[--color-text-secondary] mb-6">
+            Las recomendaciones genéricas ("10 litros de agua") no tienen en cuenta tu situación
+            específica. Estas herramientas calculan cantidades exactas basadas en tu familia,
+            mascotas y escenario, para que no compres de más ni de menos.
+          </p>
+          <div class="grid sm:grid-cols-3 gap-6 text-left">
+            {benefits.map((benefit) => (
+              <div>
+                <div class="w-10 h-10 flex items-center justify-center bg-[--color-bg-secondary] rounded mb-3">
+                  <Icon name={benefit.icon as any} size={20} class="text-[--color-accent-primary]" />
+                </div>
+                <h4 class="font-semibold mb-1">{benefit.title}</h4>
+                <p class="text-sm text-[--color-text-secondary]">
+                  {benefit.description}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

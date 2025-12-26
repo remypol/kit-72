@@ -1,0 +1,176 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import Breadcrumb from '../../../components/layout/Breadcrumb.astro';
+import GuideCard from '../../../components/content/GuideCard.astro';
+import Icon from '../../../components/ui/Icon.astro';
+
+const guides = [
+  {
+    title: 'Almacenamiento de Agua',
+    description: 'Todo sobre cómo almacenar agua de forma segura: tipos de recipientes, ubicación, rotación y tratamiento.',
+    href: '/es/guias/almacenamiento-agua/',
+    icon: 'Droplet',
+    readTime: '8 min',
+    topics: ['Recipientes', 'Conservación', 'Potabilización']
+  },
+  {
+    title: 'Almacenamiento de Comida',
+    description: 'Guía completa para crear tu reserva de alimentos de emergencia con el sistema FIFO y categorías por calorías.',
+    href: '/es/guias/almacenamiento-comida/',
+    icon: 'UtensilsCrossed',
+    readTime: '10 min',
+    topics: ['FIFO', 'Calorías', 'Conservación']
+  },
+  {
+    title: 'Energía y Comunicación',
+    description: 'Mantén tus dispositivos cargados y la comunicación activa durante emergencias con powerbanks, radios y más.',
+    href: '/es/guias/energia-comunicacion/',
+    icon: 'Battery',
+    readTime: '9 min',
+    topics: ['Powerbanks', 'Radios', 'Generadores']
+  },
+  {
+    title: 'Botiquín de Primeros Auxilios',
+    description: 'Arma un botiquín completo y aprende a mantenerlo actualizado para cualquier emergencia.',
+    href: '/es/guias/botiquin-primeros-auxilios/',
+    icon: 'Heart',
+    readTime: '8 min',
+    topics: ['Contenido', 'Medicamentos', 'Mantenimiento']
+  }
+];
+
+const quickStats = [
+  { icon: 'Droplet', title: 'Agua', value: '9L', label: 'por persona / 72h' },
+  { icon: 'UtensilsCrossed', title: 'Comida', value: '6000', label: 'kcal / persona / 72h' },
+  { icon: 'Battery', title: 'Energía', value: '20000', label: 'mAh mínimo' },
+  { icon: 'Heart', title: 'Botiquín', value: '25+', label: 'artículos esenciales' },
+];
+---
+
+<BaseLayout
+  title="Guías de Preparación — Kit-72"
+  description="Guías detalladas para prepararte ante emergencias: agua, comida, energía y primeros auxilios. Información práctica y paso a paso."
+>
+  <section class="py-16">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6">
+      <!-- Header -->
+      <div class="mb-12">
+        <Breadcrumb items={[{ label: 'Guías' }]} class="mb-4" />
+        <h1 class="mb-4">Guías de Preparación</h1>
+        <p class="text-lg text-[--color-text-secondary] max-w-3xl">
+          Conocimiento práctico y detallado para cada aspecto de la preparación ante emergencias.
+          Cada guía te lleva paso a paso desde lo básico hasta lo avanzado.
+        </p>
+      </div>
+
+      <!-- Intro Box -->
+      <div class="card p-6 mb-12 border-l-4 border-l-[--color-accent-primary]">
+        <h2 class="text-lg font-semibold mb-2 text-[--color-text-primary]">¿Por dónde empezar?</h2>
+        <p class="text-[--color-text-secondary] m-0">
+          Si estás comenzando tu preparación, te recomendamos seguir este orden: primero
+          <strong>Agua</strong> (lo más crítico), luego <strong>Comida</strong>, después
+          <strong>Energía y Comunicación</strong>, y finalmente <strong>Botiquín</strong>.
+          Cada guía incluye listas de compras y consejos de almacenamiento.
+        </p>
+      </div>
+
+      <!-- Guides Grid -->
+      <div class="grid md:grid-cols-2 gap-6 mb-12">
+        {guides.map((guide) => (
+          <GuideCard {...guide} />
+        ))}
+      </div>
+
+      <!-- Quick Reference -->
+      <div class="card p-8 mb-12">
+        <h2 class="text-xl font-bold mb-6 text-center text-[--color-text-primary]">Resumen Rápido: Las 4 Categorías Esenciales</h2>
+
+        <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          {quickStats.map((stat) => (
+            <div class="text-center">
+              <div class="w-12 h-12 mx-auto mb-3 flex items-center justify-center bg-[--color-bg-tertiary] rounded-lg">
+                <Icon name={stat.icon as any} size={24} class="text-[--color-accent-primary]" />
+              </div>
+              <h3 class="font-semibold text-[--color-text-primary] mb-1">{stat.title}</h3>
+              <p class="text-2xl font-bold text-[--color-accent-primary] mb-1">{stat.value}</p>
+              <p class="text-xs text-[--color-text-muted]">{stat.label}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <!-- Learning Path -->
+      <div class="card p-8 mb-12">
+        <h2 class="text-xl font-bold mb-6 text-[--color-text-primary]">Ruta de Aprendizaje Recomendada</h2>
+
+        <div class="space-y-4">
+          <div class="flex items-start gap-4">
+            <div class="flex-shrink-0 w-8 h-8 bg-[--color-accent-primary] text-[--color-bg-primary] rounded-full flex items-center justify-center font-bold">1</div>
+            <div>
+              <h3 class="font-semibold text-[--color-text-primary] flex items-center gap-2">
+                <Icon name="Droplet" size={18} class="text-[--color-accent-primary]" />
+                Agua — Lo más urgente
+              </h3>
+              <p class="text-sm text-[--color-text-secondary]">Sin agua solo sobrevives 3 días. Empieza por aquí.</p>
+            </div>
+          </div>
+
+          <div class="flex items-start gap-4">
+            <div class="flex-shrink-0 w-8 h-8 bg-[--color-accent-primary] text-[--color-bg-primary] rounded-full flex items-center justify-center font-bold">2</div>
+            <div>
+              <h3 class="font-semibold text-[--color-text-primary] flex items-center gap-2">
+                <Icon name="UtensilsCrossed" size={18} class="text-[--color-accent-primary]" />
+                Comida — Energía para actuar
+              </h3>
+              <p class="text-sm text-[--color-text-secondary]">Alimentos que no requieren cocción ni refrigeración.</p>
+            </div>
+          </div>
+
+          <div class="flex items-start gap-4">
+            <div class="flex-shrink-0 w-8 h-8 bg-[--color-accent-primary] text-[--color-bg-primary] rounded-full flex items-center justify-center font-bold">3</div>
+            <div>
+              <h3 class="font-semibold text-[--color-text-primary] flex items-center gap-2">
+                <Icon name="Battery" size={18} class="text-[--color-accent-primary]" />
+                Energía y Comunicación — Mantente conectado
+              </h3>
+              <p class="text-sm text-[--color-text-secondary]">Carga dispositivos y recibe información de emergencias.</p>
+            </div>
+          </div>
+
+          <div class="flex items-start gap-4">
+            <div class="flex-shrink-0 w-8 h-8 bg-[--color-accent-primary] text-[--color-bg-primary] rounded-full flex items-center justify-center font-bold">4</div>
+            <div>
+              <h3 class="font-semibold text-[--color-text-primary] flex items-center gap-2">
+                <Icon name="Heart" size={18} class="text-[--color-accent-primary]" />
+                Botiquín — Preparado para lesiones
+              </h3>
+              <p class="text-sm text-[--color-text-secondary]">Trata heridas menores y gestiona condiciones crónicas.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CTA -->
+      <div class="text-center">
+        <p class="text-[--color-text-secondary] mb-6">
+          ¿Prefieres una lista rápida de todo lo que necesitas?
+        </p>
+        <div class="flex flex-wrap gap-4 justify-center">
+          <a
+            href="/es/herramientas/configurador-kit/"
+            class="btn btn-primary"
+          >
+            <Icon name="Settings" size={18} />
+            Configurador de Kit
+          </a>
+          <a
+            href="/es/kit-72-horas/"
+            class="btn btn-secondary"
+          >
+            Ver Kit 72 Horas Completo
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

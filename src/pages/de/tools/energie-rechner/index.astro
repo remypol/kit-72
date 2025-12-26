@@ -1,0 +1,58 @@
+---
+import BaseLayout from '../../../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../../../components/ui/Breadcrumbs.astro';
+import PowerCalculator from '../../../../components/tools/PowerCalculator';
+---
+
+<BaseLayout
+  title="Energie-Rechner — Kit-72"
+  description="Berechne, welche Powerbank-Kapazität du für dein Notfallpaket brauchst. Interaktive Tool mit persönlicher Berechnung."
+  locale="de"
+  dateModified="2025-12-15"
+  schemaType="HowTo"
+  schemaData={{
+    name: 'Wie viel Powerbank-Kapazität brauchst du',
+    description: 'Berechne die mAh Powerbank-Kapazität, die du benötigst, um deine Geräte 72 Stunden betriebsbereit zu halten. Inklusive Sicherheitsmarge.',
+    totalTime: 'PT3M',
+    step: [
+      {
+        '@type': 'HowToStep',
+        position: 1,
+        name: 'Wähle die Dauer',
+        text: 'Wähle, für wie viele Tage du vorbereitet sein möchtest: 24 Stunden, 72 Stunden (empfohlen), 1 Woche oder 2 Wochen.',
+      },
+      {
+        '@type': 'HowToStep',
+        position: 2,
+        name: 'Füge deine Geräte hinzu',
+        text: 'Wähle die Geräte, die du aufladen musst: Smartphones, Tablets, Smartwatches, Taschenlampen, Notfallradios oder medizinische Geräte wie CPAP.',
+      },
+      {
+        '@type': 'HowToStep',
+        position: 3,
+        name: 'Stelle die Ladehäufigkeit ein',
+        text: 'Gib an, wie oft du jedes Gerät auflädst. Zum Beispiel: Smartphone 1x pro Tag, Taschenlampe alle 3 Tage.',
+      },
+      {
+        '@type': 'HowToStep',
+        position: 4,
+        name: 'Wähle die Sicherheitsmarge',
+        text: 'Wähle die Sicherheitsmarge (20-50%). Batterien verlieren bei Kälte und Nutzung an Effizienz. Eine Marge von 30% wird empfohlen.',
+      },
+    ],
+  }}
+>
+  <section class="py-12 md:py-16">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6">
+      <div class="mb-8">
+        <Breadcrumbs locale="de" />
+        <h1 class="text-4xl font-bold mb-4">Energie-Rechner</h1>
+        <p class="text-xl text-[--color-text-secondary]">
+          Berechne genau, welche Powerbank-Kapazität du für dein Notfallpaket brauchst. Füge deine Geräte hinzu und sieh sofort, wie viel mAh du benötigst.
+        </p>
+      </div>
+
+      <PowerCalculator locale="de" client:load />
+    </div>
+  </section>
+</BaseLayout>

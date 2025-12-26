@@ -1,0 +1,275 @@
+---
+/**
+ * Header Component
+ *
+ * Desktop: Full navigation with dropdowns for Guías and Escenarios
+ * Mobile: Simplified header (logo only) - navigation moves to BottomNav
+ * Supports i18n via locale prop
+ */
+
+import Icon from '../ui/Icon.astro';
+import LanguageSwitcher from '../ui/LanguageSwitcher.astro';
+
+type Locale = 'es' | 'nl' | 'de';
+
+interface Props {
+  locale?: Locale;
+}
+
+interface NavDropdownItem {
+  href: string;
+  label: string;
+  description?: string;
+  divider?: boolean;
+}
+
+interface NavItem {
+  href?: string;
+  label: string;
+  highlight?: boolean;
+  dropdown?: NavDropdownItem[];
+}
+
+const { locale = 'es' } = Astro.props;
+
+// Navigation structure per locale
+const navItemsPerLocale: Record<Locale, NavItem[]> = {
+  es: [
+    { href: '/es/', label: 'Inicio' },
+    {
+      label: 'Guías',
+      dropdown: [
+        { href: '/es/kit-de-emergencia/', label: 'Kit de Emergencia', description: 'Guía completa' },
+        { href: '/es/kit-72-horas/', label: 'Kit 72 Horas', description: 'Mochila BOB' },
+        { divider: true, href: '', label: '' },
+        { href: '/es/guias/almacenamiento-agua/', label: 'Almacenamiento de Agua' },
+        { href: '/es/guias/almacenamiento-comida/', label: 'Almacenamiento de Comida' },
+        { href: '/es/guias/energia-comunicacion/', label: 'Energía y Comunicación' },
+        { href: '/es/guias/botiquin-primeros-auxilios/', label: 'Botiquín de Primeros Auxilios' },
+      ],
+    },
+    {
+      label: 'Escenarios',
+      dropdown: [
+        { href: '/es/escenarios/prepararse-apagon/', label: 'Apagón', description: 'Corte eléctrico' },
+        { href: '/es/escenarios/prepararse-ola-calor/', label: 'Ola de Calor' },
+        { href: '/es/escenarios/prepararse-corte-agua/', label: 'Corte de Agua' },
+        { href: '/es/escenarios/kit-evacuacion/', label: 'Kit de Evacuación' },
+      ],
+    },
+    { href: '/es/componentes/', label: 'Componentes' },
+    { href: '/es/herramientas/', label: 'Herramientas' },
+  ],
+  nl: [
+    { href: '/nl/', label: 'Home' },
+    {
+      label: 'Gidsen',
+      dropdown: [
+        { href: '/nl/noodpakket-samenstellen/', label: 'Noodpakket Samenstellen', description: 'Complete gids' },
+        { href: '/nl/noodpakket-72-uur/', label: 'Noodpakket 72 Uur', description: 'Bug-out bag' },
+        { divider: true, href: '', label: '' },
+        { href: '/nl/gidsen/water-opslaan/', label: 'Water Opslaan' },
+        { href: '/nl/gidsen/voedsel-opslaan/', label: 'Voedsel Opslaan' },
+        { href: '/nl/gidsen/energie-communicatie/', label: 'Energie & Communicatie' },
+        { href: '/nl/gidsen/ehbo-kit/', label: 'EHBO Kit' },
+      ],
+    },
+    {
+      label: "Scenario's",
+      dropdown: [
+        { href: '/nl/scenario/stroomstoring/', label: 'Stroomstoring', description: 'Stroomuitval' },
+        { href: '/nl/scenario/hittegolf/', label: 'Hittegolf' },
+        { href: '/nl/scenario/wateruitval/', label: 'Wateruitval' },
+        { href: '/nl/scenario/evacuatie/', label: 'Evacuatie' },
+        { href: '/nl/scenario/overstroming/', label: 'Overstroming' },
+        { href: '/nl/scenario/cyberaanval/', label: 'Cyberaanval' },
+      ],
+    },
+    { href: '/nl/producten/', label: 'Producten' },
+    { href: '/nl/tools/', label: 'Tools' },
+  ],
+  de: [
+    { href: '/de/', label: 'Startseite' },
+    {
+      label: 'Ratgeber',
+      dropdown: [
+        { href: '/de/notfallausruestung/', label: 'Notfallausrüstung', description: 'Vollständige Anleitung' },
+        { href: '/de/notfallpaket-72-stunden/', label: 'Notfallpaket 72 Stunden', description: 'Bug-out bag' },
+        { divider: true, href: '', label: '' },
+        { href: '/de/ratgeber/wasser-lagerung/', label: 'Wasser Lagerung' },
+        { href: '/de/ratgeber/lebensmittel-lagerung/', label: 'Lebensmittel Lagerung' },
+        { href: '/de/ratgeber/energie-kommunikation/', label: 'Energie & Kommunikation' },
+        { href: '/de/ratgeber/erste-hilfe-set/', label: 'Erste-Hilfe-Set' },
+      ],
+    },
+    {
+      label: 'Szenarien',
+      dropdown: [
+        { href: '/de/szenarien/stromausfall/', label: 'Stromausfall', description: 'Stromausfall' },
+        { href: '/de/szenarien/hitzewelle/', label: 'Hitzewelle' },
+        { href: '/de/szenarien/wasserausfall/', label: 'Wasserausfall' },
+        { href: '/de/szenarien/evakuierung/', label: 'Evakuierung' },
+        { href: '/de/szenarien/hochwasser/', label: 'Hochwasser' },
+        { href: '/de/szenarien/cyberangriff/', label: 'Cyberangriff' },
+      ],
+    },
+    { href: '/de/produkte/', label: 'Produkte' },
+    { href: '/de/tools/', label: 'Tools' },
+  ],
+};
+
+// UI strings per locale
+const uiStrings: Record<Locale, { search: string; configurator: string; openMenu: string }> = {
+  es: { search: 'Buscar', configurator: 'Configurador', openMenu: 'abrir menú' },
+  nl: { search: 'Zoeken', configurator: 'Samenstellen', openMenu: 'menu openen' },
+  de: { search: 'Suchen', configurator: 'Konfigurator', openMenu: 'Menü öffnen' },
+};
+
+// CTA links per locale
+const ctaLinks: Record<Locale, string> = {
+  es: '/es/herramientas/configurador-kit/',
+  nl: '/nl/tools/noodpakket-samenstellen/',
+  de: '/de/tools/notfallpaket-zusammenstellen/',
+};
+
+const navItems = navItemsPerLocale[locale];
+const strings = uiStrings[locale];
+const ctaLink = ctaLinks[locale];
+const currentPath = Astro.url.pathname;
+
+// Helper to check if a nav item is active
+function isActive(item: NavItem): boolean {
+  if (item.href) {
+    return currentPath === item.href || currentPath.startsWith(item.href);
+  }
+  if (item.dropdown) {
+    return item.dropdown.some(d => d.href && currentPath.startsWith(d.href));
+  }
+  return false;
+}
+---
+
+<header class="sticky top-0 z-[100] border-b border-[--color-border] bg-[--color-bg-primary] backdrop-blur-md">
+  <div class="max-w-6xl mx-auto px-4 sm:px-6">
+    <div class="flex items-center justify-between h-16">
+      <!-- Logo -->
+      <a href={`/${locale}/`} class="flex items-center gap-2 group">
+        <span class="text-2xl font-bold tracking-tight">
+          Kit<span class="text-[--color-accent-primary]">-72</span>
+        </span>
+      </a>
+
+      <!-- Desktop Navigation -->
+      <nav class="hidden md:flex items-center gap-1 relative z-[110]" aria-label="Navegación principal">
+        {navItems.map((item) => (
+          item.dropdown ? (
+            // Dropdown menu
+            <div class="relative group">
+              <button
+                type="button"
+                class:list={[
+                  'nav-dropdown-trigger flex items-center gap-1 px-4 py-2 text-sm font-medium rounded transition-all duration-150',
+                  isActive(item)
+                    ? 'text-[--color-accent-primary] bg-[--color-accent-subtle]'
+                    : 'text-[--color-text-secondary] hover:text-[--color-text-primary] hover:bg-[--color-bg-secondary]'
+                ]}
+                aria-haspopup="true"
+                aria-expanded="false"
+                aria-label={`${item.label} - ${strings.openMenu}`}
+              >
+                {item.label}
+                <Icon name="ChevronDown" size={16} class="transition-transform duration-150 group-hover:rotate-180" />
+              </button>
+              <div class="nav-dropdown absolute top-full left-0 mt-1 w-64 py-2 bg-[#1a1d23] border border-[--color-border] rounded-xl shadow-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-150 z-[120]" style="isolation: isolate;">
+                {item.dropdown.map((dropItem) => (
+                  dropItem.divider ? (
+                    <div class="my-2 border-t border-[--color-border-subtle]" />
+                  ) : (
+                    <a
+                      href={dropItem.href}
+                      class:list={[
+                        'block px-4 py-2 text-sm transition-colors',
+                        currentPath === dropItem.href
+                          ? 'text-[--color-accent-primary] bg-[--color-accent-subtle]'
+                          : 'text-[--color-text-secondary] hover:text-[--color-text-primary] hover:bg-[--color-bg-elevated]'
+                      ]}
+                    >
+                      <span class="font-medium">{dropItem.label}</span>
+                      {dropItem.description && (
+                        <span class="block text-xs text-[--color-text-tertiary] mt-0.5">{dropItem.description}</span>
+                      )}
+                    </a>
+                  )
+                ))}
+              </div>
+            </div>
+          ) : (
+            // Regular link
+            <a
+              href={item.href}
+              class:list={[
+                'px-4 py-2 text-sm font-medium rounded transition-all duration-150',
+                item.highlight
+                  ? 'bg-[--color-accent-primary] text-[--color-bg-primary] hover:bg-[--color-accent-hover]'
+                  : isActive(item)
+                    ? 'text-[--color-accent-primary] bg-[--color-accent-subtle]'
+                    : 'text-[--color-text-secondary] hover:text-[--color-text-primary] hover:bg-[--color-bg-secondary]'
+              ]}
+            >
+              {item.label}
+            </a>
+          )
+        ))}
+
+        <!-- Search Button -->
+        <button
+          type="button"
+          id="desktop-search-button"
+          class="ml-2 p-2 text-[--color-text-secondary] hover:text-[--color-text-primary] hover:bg-[--color-bg-secondary] rounded transition-colors"
+          aria-label={strings.search}
+        >
+          <Icon name="Search" size={20} />
+        </button>
+
+        <!-- Language Switcher -->
+        <LanguageSwitcher locale={locale} variant="dropdown" />
+
+        <!-- CTA Button -->
+        <a
+          href={ctaLink}
+          class="ml-2 px-4 py-2 text-sm font-semibold bg-[--color-accent-primary] text-[--color-bg-primary] hover:bg-[--color-accent-hover] rounded transition-colors"
+        >
+          {strings.configurator}
+        </a>
+      </nav>
+
+      <!-- Mobile: Language switcher only (nav is in BottomNav) -->
+      <div class="md:hidden flex items-center">
+        <LanguageSwitcher locale={locale} variant="flags" />
+      </div>
+    </div>
+  </div>
+</header>
+
+<style>
+  /* Keep dropdown open when hovering from trigger to dropdown */
+  .nav-dropdown-trigger:hover + .nav-dropdown,
+  .nav-dropdown:hover {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .group:hover .nav-dropdown {
+    opacity: 1;
+    visibility: visible;
+  }
+</style>
+
+<script>
+  // Desktop search button - could trigger search modal
+  const searchButton = document.getElementById('desktop-search-button');
+  searchButton?.addEventListener('click', () => {
+    // Dispatch custom event that can be caught by React
+    window.dispatchEvent(new CustomEvent('open-search'));
+  });
+</script>

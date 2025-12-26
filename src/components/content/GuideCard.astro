@@ -1,0 +1,86 @@
+---
+/**
+ * GuideCard Component
+ *
+ * Card for linking to guide pages (water storage, food storage, etc.)
+ *
+ * @example
+ * <GuideCard
+ *   title="Almacenamiento de Agua"
+ *   description="Cómo almacenar agua potable de forma segura."
+ *   href="/es/guias/almacenamiento-agua/"
+ *   icon="Droplet"
+ *   readTime="15 min"
+ *   topics={['Contenedores', 'Tratamiento', 'Rotación']}
+ * />
+ */
+
+import Icon from '../ui/Icon.astro';
+
+interface Props {
+  title: string;
+  description: string;
+  href: string;
+  icon: string;
+  readTime?: string;
+  topics?: string[];
+  class?: string;
+}
+
+const {
+  title,
+  description,
+  href,
+  icon,
+  readTime,
+  topics = [],
+  class: className = '',
+} = Astro.props;
+---
+
+<a
+  href={href}
+  class={`card card-interactive group p-6 flex flex-col ${className}`}
+>
+  <div class="flex items-start justify-between mb-4">
+    <span class="text-[--color-accent-primary]">
+      <Icon name={icon as any} size={32} />
+    </span>
+    {readTime && (
+      <span class="flex items-center gap-1 px-2 py-0.5 text-xs bg-[--color-bg-tertiary] text-[--color-text-muted] rounded">
+        <Icon name="Clock" size={12} />
+        {readTime}
+      </span>
+    )}
+  </div>
+
+  <h2 class="text-xl font-semibold mb-2 group-hover:text-[--color-accent-primary] transition-colors">
+    {title}
+  </h2>
+
+  <p class="text-[--color-text-secondary] mb-4 flex-1">
+    {description}
+  </p>
+
+  {topics.length > 0 && (
+    <div class="mb-4">
+      <p class="text-xs text-[--color-text-muted] mb-2">Temas cubiertos:</p>
+      <ul class="flex flex-wrap gap-2">
+        {topics.map((topic) => (
+          <li class="px-2 py-0.5 text-xs bg-[--color-bg-tertiary] text-[--color-text-secondary] rounded">
+            {topic}
+          </li>
+        ))}
+      </ul>
+    </div>
+  )}
+
+  <div class="flex items-center justify-between mt-auto">
+    <span class="text-sm text-[--color-accent-primary] font-medium">
+      Leer guía
+    </span>
+    <span class="text-[--color-accent-primary] group-hover:translate-x-1 transition-transform">
+      <Icon name="ArrowRight" size={20} />
+    </span>
+  </div>
+</a>

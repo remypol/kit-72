@@ -1,0 +1,179 @@
+---
+import BaseLayout from '../../../../layouts/BaseLayout.astro';
+import Breadcrumb from '../../../../components/layout/Breadcrumb.astro';
+import Icon from '../../../../components/ui/Icon.astro';
+import RelatedContent from '../../../../components/content/RelatedContent.astro';
+
+const relatedItems = [
+  {
+    title: 'Water opslaan',
+    href: '/nl/gidsen/water-opslaan/',
+    description: 'Veilig drinkwater bewaren voor noodsituaties.',
+    type: 'guide' as const,
+    icon: 'Droplet'
+  },
+  {
+    title: 'Stroomstoring scenario',
+    href: '/nl/scenario/stroomstoring/',
+    description: 'Voorbereiden op langdurige stroomuitval.',
+    type: 'scenario' as const,
+    icon: 'Zap'
+  },
+  {
+    title: 'Noodvoedsel',
+    href: '/nl/producten/noodvoedsel/',
+    description: 'Aanbevolen producten voor je noodvoorraad.',
+    type: 'product' as const,
+    icon: 'Package'
+  },
+  {
+    title: 'Noodpakket samenstellen',
+    href: '/nl/tools/noodpakket-samenstellen/',
+    description: 'Maak een gepersonaliseerde checklist.',
+    type: 'tool' as const,
+    icon: 'Settings'
+  }
+];
+---
+
+<BaseLayout
+  title="Voedsel Opslaan — Kit-72"
+  description="Langdurig houdbaar voedsel voor noodsituaties. Wat je nodig hebt, hoeveel en hoe je het goed bewaart."
+  locale="nl"
+  dateModified="2025-12-15"
+  schemaType="Article"
+>
+  <section class="py-16">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6">
+      <Breadcrumb items={[{ label: 'Gidsen', href: '/nl/gidsen/' }, { label: 'Voedsel Opslaan' }]} class="mb-4" locale="nl" />
+      <h1 class="text-4xl font-bold mb-6">Voedsel Opslaan</h1>
+
+      <div class="prose prose-lg">
+        <p class="lead">
+          Kies voedsel dat lang houdbaar is en <strong>geen koeling of ingewikkelde
+          bereiding</strong> nodig heeft. De Rijksoverheid adviseert een voorraad voor minimaal 3 dagen.
+        </p>
+
+        <!-- Calorie Reference -->
+        <div class="card p-6 my-8 bg-[--color-bg-tertiary] not-prose">
+          <h3 class="text-lg font-semibold mb-4 flex items-center gap-2">
+            <Icon name="UtensilsCrossed" size={20} class="text-[--color-accent-primary]" />
+            Caloriebehoefte in Noodsituaties
+          </h3>
+          <div class="grid sm:grid-cols-2 gap-4">
+            <div class="p-4 bg-[--color-bg-secondary] rounded-lg">
+              <p class="text-2xl font-bold text-[--color-accent-primary]">1.500-2.000</p>
+              <p class="text-sm text-[--color-text-secondary]">kcal per volwassene per dag (minimum)</p>
+            </div>
+            <div class="p-4 bg-[--color-bg-secondary] rounded-lg">
+              <p class="text-2xl font-bold text-[--color-accent-primary]">4.500-6.000</p>
+              <p class="text-sm text-[--color-text-secondary]">kcal per persoon voor 72 uur</p>
+            </div>
+          </div>
+        </div>
+
+        <h2>Aanbevolen Producten</h2>
+
+        <h3>Koolhydraten (Energie)</h3>
+        <ul>
+          <li><strong>Knäckebröd, beschuit</strong> — lang houdbaar, geen schimmelrisico</li>
+          <li><strong>Havermout</strong> — veelzijdig, eetbaar met koud water</li>
+          <li><strong>Pasta, rijst</strong> — vereist water en warmte om te koken</li>
+          <li><strong>Mueslirepen, energierepen</strong> — direct eetbaar, compact</li>
+        </ul>
+
+        <h3>Eiwitten</h3>
+        <ul>
+          <li><strong>Conserven</strong> — tonijn, bonen, linzen, erwten</li>
+          <li><strong>Noten en zaden</strong> — calorierijk, lang houdbaar</li>
+          <li><strong>Pindakaas</strong> — hoge energiedichtheid, lekker</li>
+          <li><strong>Harde kaas (vacuüm verpakt)</strong> — maandenlang houdbaar zonder koeling</li>
+        </ul>
+
+        <h3>Vitaminen & Mineralen</h3>
+        <ul>
+          <li><strong>Fruitconserven</strong> — perziken, ananas, mandarijnen</li>
+          <li><strong>Gedroogd fruit</strong> — rozijnen, abrikozen, dadels</li>
+          <li><strong>Groenteconserven</strong> — mais, erwten, wortels</li>
+        </ul>
+
+        <h3>Zoet & Comfort</h3>
+        <ul>
+          <li><strong>Honing</strong> — onbeperkt houdbaar, antibacterieel</li>
+          <li><strong>Jam</strong> — suiker conserveert van nature</li>
+          <li><strong>Chocolade</strong> — energie en moraalbooster</li>
+        </ul>
+
+        <div class="card p-4 my-6 border-l-4 border-l-amber-500 bg-amber-50 dark:bg-amber-950/30 not-prose">
+          <p class="text-sm">
+            <strong>⚠️ Belangrijk:</strong> Vergeet geen <strong>handmatige blikopener</strong>!
+            Zonder stroom werkt je elektrische niet.
+          </p>
+        </div>
+
+        <h2>Juist Bewaren</h2>
+        <ul>
+          <li><strong>Koel:</strong> Onder 20°C, idealiter 10-15°C</li>
+          <li><strong>Donker:</strong> Licht versnelt afbraak van vitaminen</li>
+          <li><strong>Droog:</strong> Vocht leidt tot schimmel</li>
+          <li><strong>Luchtdicht:</strong> Open verpakkingen overschenken in containers</li>
+        </ul>
+
+        <h2>Het Rotatieprincipe</h2>
+        <p>
+          De slimme methode: integreer je noodvoorraad in het dagelijks leven.
+        </p>
+        <ol>
+          <li><strong>FIFO-principe:</strong> First In, First Out — oudste producten eerst gebruiken</li>
+          <li><strong>Nieuwe aankopen naar achteren:</strong> Oude producten naar voren plaatsen</li>
+          <li><strong>Regelmatig koken:</strong> Conserven in normale maaltijden verwerken</li>
+          <li><strong>Vervangen:</strong> Gebruikte producten direct aanvullen</li>
+        </ol>
+
+        <div class="card p-6 my-8 bg-[--color-accent-subtle] not-prose">
+          <p class="font-medium mb-2">💡 Tip: Noodkooktoestel</p>
+          <p class="text-sm text-[--color-text-secondary]">
+            Een kleine campingbrander met gaspatronen maakt warme maaltijden mogelijk zonder stroom.
+            <strong>Alleen buiten of bij goede ventilatie gebruiken!</strong>
+          </p>
+        </div>
+
+        <h2>Speciale Behoeften</h2>
+        <ul>
+          <li><strong>Baby's:</strong> Kant-en-klare zuigelingenvoeding, geen poeder zonder veilig water</li>
+          <li><strong>Allergieën:</strong> Let op ingrediënten, heb alternatieven op voorraad</li>
+          <li><strong>Diabetici:</strong> Koolhydraten en snacks voor hypoglykemie inplannen</li>
+          <li><strong>Huisdieren:</strong> Aparte voedselvoorraad aanleggen</li>
+        </ul>
+
+        <h2>Checklist 72-uurs Voorraad</h2>
+        <ul>
+          <li>☐ Minimaal 4.500 kcal per persoon</li>
+          <li>☐ Geen bederfelijke producten zonder koeling</li>
+          <li>☐ Handmatige blikopener aanwezig</li>
+          <li>☐ Eetgerei en bestek (bruikbaar zonder afwassen)</li>
+          <li>☐ Datum van opslag genoteerd</li>
+          <li>☐ Rotatieplan gemaakt</li>
+        </ul>
+      </div>
+
+      <!-- CTA -->
+      <div class="mt-12 card p-6 bg-[--color-bg-tertiary]">
+        <h3 class="font-semibold mb-2">Compleet noodpakket samenstellen?</h3>
+        <p class="text-sm text-[--color-text-secondary] mb-4">
+          Maak een gepersonaliseerde checklist met onze samensteller.
+        </p>
+        <a
+          href="/nl/tools/noodpakket-samenstellen/"
+          class="inline-flex items-center gap-2 px-4 py-2 bg-[--color-accent-primary] text-[--color-bg-primary] font-medium rounded hover:bg-[--color-accent-hover] transition-colors"
+        >
+          <Icon name="Settings" size={16} />
+          Pakket samenstellen
+        </a>
+      </div>
+
+      <!-- Related Content -->
+      <RelatedContent items={relatedItems} locale="nl" />
+    </div>
+  </section>
+</BaseLayout>

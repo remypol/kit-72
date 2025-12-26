@@ -1,0 +1,96 @@
+---
+/**
+ * Breadcrumb Component
+ *
+ * Displays navigation hierarchy for the current page.
+ * Automatically adds home as the first item based on locale.
+ *
+ * @example
+ * <Breadcrumb items={[
+ *   { label: 'Escenarios', href: '/es/escenarios/' },
+ *   { label: 'Prepararse para un Apagón' }
+ * ]} locale="es" />
+ */
+
+import Icon from '../ui/Icon.astro';
+
+interface BreadcrumbItem {
+  label: string;
+  href?: string;
+}
+
+type Locale = 'es' | 'nl' | 'de';
+
+interface Props {
+  items: BreadcrumbItem[];
+  class?: string;
+  locale?: Locale;
+}
+
+const homePerLocale: Record<Locale, { label: string; href: string }> = {
+  es: { label: 'Inicio', href: '/es/' },
+  nl: { label: 'Home', href: '/nl/' },
+  de: { label: 'Startseite', href: '/de/' },
+};
+
+const { items, class: className = '', locale = 'es' } = Astro.props;
+const home = homePerLocale[locale] || homePerLocale.es;
+
+// Always start with home
+const allItems: BreadcrumbItem[] = [
+  { label: home.label, href: home.href },
+  ...items.filter(item => item.label !== home.label), // Remove any duplicate home
+];
+
+// Note: Breadcrumb schema is handled by BaseLayout.astro globally
+// This component only renders the visual breadcrumb navigation
+---
+
+<nav class={`breadcrumb ${className}`} aria-label="Breadcrumb">
+  <ol class="flex flex-wrap items-center gap-2 text-sm text-[--color-text-muted]">
+    {allItems.map((item, index) => (
+      <>
+        {index > 0 && (
+          <li class="text-[--color-border]" aria-hidden="true">
+            <Icon name="ChevronRight" size={14} />
+          </li>
+        )}
+        <li>
+          {item.href && index < allItems.length - 1 ? (
+            <a
+              href={item.href}
+              class="hover:text-[--color-accent-primary] transition-colors"
+            >
+              {item.label}
+            </a>
+          ) : (
+            <span class="text-[--color-text-secondary]" aria-current={index === allItems.length - 1 ? 'page' : undefined}>
+              {item.label}
+            </span>
+          )}
+        </li>
+      </>
+    ))}
+  </ol>
+</nav>
+
+<style>
+  .breadcrumb ol {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  /* On mobile, truncate long breadcrumbs */
+  @media (max-width: 640px) {
+    .breadcrumb li:not(:first-child):not(:last-child) a,
+    .breadcrumb li:not(:first-child):not(:last-child) span {
+      max-width: 100px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      display: inline-block;
+      vertical-align: bottom;
+    }
+  }
+</style>

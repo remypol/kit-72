@@ -1,0 +1,203 @@
+---
+/**
+ * Breadcrumbs Component
+ *
+ * Visual breadcrumb navigation that complements Schema.org BreadcrumbList.
+ * Mobile-friendly with horizontal scroll and compact display.
+ * Supports ES, NL, DE locales.
+ */
+
+interface BreadcrumbItem {
+  name: string;
+  url: string;
+}
+
+type Locale = 'es' | 'nl' | 'de';
+
+interface Props {
+  items?: BreadcrumbItem[];
+  class?: string;
+  locale?: Locale;
+}
+
+const { items, class: className = '' } = Astro.props;
+const currentPath = Astro.url.pathname;
+
+// Detect locale from path if not provided
+const detectedLocale = currentPath.startsWith('/nl/') ? 'nl' : currentPath.startsWith('/de/') ? 'de' : 'es';
+const locale: Locale = Astro.props.locale || detectedLocale;
+
+// Home labels per locale
+const homePerLocale: Record<Locale, { name: string; url: string }> = {
+  es: { name: 'Inicio', url: '/es/' },
+  nl: { name: 'Home', url: '/nl/' },
+  de: { name: 'Startseite', url: '/de/' },
+};
+
+// Section names per locale
+const sectionNamesPerLocale: Record<Locale, Record<string, string>> = {
+  es: {
+    'escenarios': 'Escenarios',
+    'guias': 'Guías',
+    'componentes': 'Componentes',
+    'herramientas': 'Herramientas',
+    'kit-de-emergencia': 'Kit de Emergencia',
+    'kit-72-horas': 'Kit 72 Horas',
+    'prepararse-apagon': 'Apagón',
+    'prepararse-ola-calor': 'Ola de Calor',
+    'prepararse-corte-agua': 'Corte de Agua',
+    'kit-evacuacion': 'Evacuación',
+    'almacenamiento-agua': 'Almacenamiento de Agua',
+    'almacenamiento-comida': 'Almacenamiento de Comida',
+    'botiquin-primeros-auxilios': 'Botiquín',
+    'energia-comunicacion': 'Energía y Comunicación',
+    'linternas': 'Linternas',
+    'powerbanks': 'Powerbanks',
+    'radios-emergencia': 'Radios',
+    'bidones-agua': 'Bidones de Agua',
+    'comida-emergencia': 'Comida',
+    'botiquin-basico': 'Botiquín',
+    'mochilas': 'Mochilas',
+    'calculadora-agua': 'Calculadora de Agua',
+    'calculadora-energia': 'Calculadora de Energía',
+    'configurador-kit': 'Configurador',
+  },
+  nl: {
+    'scenario': "Scenario's",
+    'gidsen': 'Gidsen',
+    'producten': 'Producten',
+    'tools': 'Tools',
+    'noodpakket-samenstellen': 'Noodpakket Samenstellen',
+    'noodpakket-72-uur': 'Noodpakket 72 Uur',
+    'stroomstoring': 'Stroomstoring',
+    'hittegolf': 'Hittegolf',
+    'wateruitval': 'Wateruitval',
+    'evacuatie': 'Evacuatie',
+    'overstroming': 'Overstroming',
+    'cyberaanval': 'Cyberaanval',
+    'water-opslaan': 'Water Opslaan',
+    'voedsel-opslaan': 'Voedsel Opslaan',
+    'ehbo-kit': 'EHBO Kit',
+    'energie-communicatie': 'Energie & Communicatie',
+    'water-calculator': 'Water Calculator',
+    'energie-calculator': 'Energie Calculator',
+    'affiliate-disclaimer': 'Affiliate Disclaimer',
+    'redactioneel-beleid': 'Redactioneel Beleid',
+    'privacy': 'Privacy',
+    'cookies': 'Cookies',
+  },
+  de: {
+    'szenarien': 'Szenarien',
+    'ratgeber': 'Ratgeber',
+    'produkte': 'Produkte',
+    'tools': 'Tools',
+    'notfallausruestung': 'Notfallausrüstung',
+    'notfallpaket-72-stunden': 'Notfallpaket 72 Stunden',
+    'stromausfall': 'Stromausfall',
+    'hitzewelle': 'Hitzewelle',
+    'wasserausfall': 'Wasserausfall',
+    'evakuierung': 'Evakuierung',
+    'datenschutz': 'Datenschutz',
+    'cookies': 'Cookies',
+  },
+};
+
+const home = homePerLocale[locale];
+const sectionNames = sectionNamesPerLocale[locale];
+
+const autoBreadcrumbs: BreadcrumbItem[] = items || (() => {
+  const segments = currentPath.split('/').filter(Boolean);
+  const crumbs: BreadcrumbItem[] = [{ name: home.name, url: home.url }];
+
+  let pathSoFar = '';
+  for (let i = 0; i < segments.length; i++) {
+    const segment = segments[i];
+    // Skip locale segment
+    if (segment === 'es' || segment === 'nl' || segment === 'de') continue;
+
+    pathSoFar += `/${segment}`;
+    const name = sectionNames[segment] || segment.charAt(0).toUpperCase() + segment.slice(1).replace(/-/g, ' ');
+    crumbs.push({ name, url: `/${locale}${pathSoFar}/` });
+  }
+
+  return crumbs;
+})();
+
+// Don't render if only homepage
+if (autoBreadcrumbs.length <= 1) return null;
+---
+
+<nav class={`breadcrumbs ${className}`} aria-label="Breadcrumb">
+  <ol class="breadcrumb-list">
+    {autoBreadcrumbs.map((crumb, index) => (
+      <li class="breadcrumb-item">
+        {index > 0 && (
+          <svg class="breadcrumb-separator" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="m9 18 6-6-6-6"/>
+          </svg>
+        )}
+        {index === autoBreadcrumbs.length - 1 ? (
+          <span class="breadcrumb-current" aria-current="page">{crumb.name}</span>
+        ) : (
+          <a href={crumb.url} class="breadcrumb-link">{crumb.name}</a>
+        )}
+      </li>
+    ))}
+  </ol>
+</nav>
+
+<style>
+  .breadcrumbs {
+    padding: 12px 0;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+
+  .breadcrumbs::-webkit-scrollbar {
+    display: none;
+  }
+
+  .breadcrumb-list {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    font-size: 13px;
+    white-space: nowrap;
+  }
+
+  .breadcrumb-item {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+
+  .breadcrumb-separator {
+    color: var(--color-text-tertiary);
+    flex-shrink: 0;
+  }
+
+  .breadcrumb-link {
+    color: var(--color-text-secondary);
+    text-decoration: none;
+    transition: color 0.15s ease;
+  }
+
+  .breadcrumb-link:hover {
+    color: var(--color-accent-primary);
+  }
+
+  .breadcrumb-current {
+    color: var(--color-text-muted);
+    font-weight: 500;
+  }
+
+  @media (max-width: 640px) {
+    .breadcrumb-list {
+      font-size: 12px;
+    }
+  }
+</style>

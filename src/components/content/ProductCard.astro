@@ -1,0 +1,112 @@
+---
+interface Props {
+  name: string;
+  description: string;
+  image?: string;
+  amazonUrl: string;
+  price?: string;
+  rating?: number;
+  features?: string[];
+  badge?: 'recommended' | 'best-value' | 'premium';
+}
+
+import Icon from '../ui/Icon.astro';
+
+const { name, description, image, amazonUrl, price, rating, features, badge } = Astro.props;
+
+const badgeConfig = {
+  'recommended': { label: 'Recomendado', bg: 'bg-[--color-accent-primary]/10', text: 'text-[--color-accent-primary]', border: 'border-[--color-accent-primary]/30', icon: 'ThumbsUp' },
+  'best-value': { label: 'Mejor relación calidad-precio', bg: 'bg-emerald-500/10', text: 'text-emerald-400', border: 'border-emerald-500/30', icon: 'TrendingUp' },
+  'premium': { label: 'Premium', bg: 'bg-purple-500/10', text: 'text-purple-400', border: 'border-purple-500/30', icon: 'Crown' }
+};
+---
+
+<a
+  href={amazonUrl}
+  target="_blank"
+  rel="nofollow sponsored noopener"
+  class:list={[
+    'product-card block rounded-xl border transition-all duration-200 hover:shadow-lg hover:scale-[1.01] overflow-hidden',
+    badge ? `${badgeConfig[badge].bg} ${badgeConfig[badge].border}` : 'bg-[--color-bg-secondary] border-[--color-border] hover:border-[--color-accent-primary]/50'
+  ]}
+>
+  {/* Badge */}
+  {badge && (
+    <div class={`px-4 py-2 ${badgeConfig[badge].bg} border-b ${badgeConfig[badge].border}`}>
+      <span class={`text-xs font-semibold ${badgeConfig[badge].text} flex items-center gap-1.5`}>
+        <Icon name={badgeConfig[badge].icon as any} size={12} />
+        {badgeConfig[badge].label}
+      </span>
+    </div>
+  )}
+
+  <div class="p-5">
+    {/* Header with icon and name */}
+    <div class="flex items-start gap-4 mb-4">
+      {/* Product Icon - Clean modern design instead of emoji */}
+      <div class="flex-shrink-0 w-14 h-14 rounded-xl bg-gradient-to-br from-[--color-bg-tertiary] to-[--color-bg-primary] border border-[--color-border] flex items-center justify-center">
+        <Icon name="Package" size={24} class="text-[--color-text-muted]" />
+      </div>
+
+      <div class="flex-1 min-w-0">
+        <h4 class="font-semibold text-[--color-text-primary] mb-1 leading-tight">{name}</h4>
+        {rating && (
+          <div class="flex items-center gap-1.5">
+            <div class="flex items-center">
+              {[1, 2, 3, 4, 5].map((star) => (
+                <span class={star <= Math.floor(rating) ? 'text-amber-400' : 'text-[--color-border]'}>
+                  <Icon name="Star" size={14} class={star <= Math.floor(rating) ? 'fill-current' : ''} />
+                </span>
+              ))}
+            </div>
+            <span class="text-xs text-[--color-text-muted] font-medium">{rating.toFixed(1)}</span>
+          </div>
+        )}
+      </div>
+    </div>
+
+    {/* Description */}
+    <p class="text-sm text-[--color-text-secondary] mb-4 line-clamp-2">{description}</p>
+
+    {/* Features */}
+    {features && features.length > 0 && (
+      <div class="flex flex-wrap gap-2 mb-4">
+        {features.slice(0, 3).map(feature => (
+          <span class="inline-flex items-center gap-1 text-xs px-2.5 py-1 rounded-full bg-[--color-bg-tertiary] text-[--color-text-muted]">
+            <Icon name="Check" size={10} class="text-emerald-400" />
+            {feature}
+          </span>
+        ))}
+      </div>
+    )}
+
+    {/* Price and CTA */}
+    <div class="flex items-center justify-between pt-4 border-t border-[--color-border]">
+      {price ? (
+        <span class="text-lg font-bold text-[--color-text-primary]">{price}</span>
+      ) : (
+        <span class="text-sm text-[--color-text-muted]">Ver precio</span>
+      )}
+
+      <span class="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-[#FF9900] to-[#FFB84D] text-black text-sm font-semibold rounded-lg shadow-sm">
+        <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M12.004 20.282c-4.608 0-8.747-1.461-11.867-3.893-.224-.166-.281-.478-.126-.706.155-.228.468-.283.696-.127 2.97 2.31 6.788 3.597 10.88 3.597 2.586 0 5.461-.503 7.815-1.5.131-.055.241-.081.351-.081.299 0 .546.199.614.485.082.346-.111.661-.458.793-2.525 1.074-5.581 1.614-8.301 1.614l-.004-.182zm8.597-3.583c-.199 0-.398-.059-.584-.176-2.034-1.272-4.307-1.918-6.75-1.918-1.65 0-3.283.282-4.856.84-.199.07-.41.105-.611.105-.591 0-1.034-.423-1.034-1.018 0-.495.329-.896.811-1.016 1.771-.63 3.633-.951 5.537-.951 2.765 0 5.346.717 7.676 2.136.393.239.611.614.611 1.054 0 .548-.355.944-.8.944z"/>
+        </svg>
+        Ver en Amazon
+      </span>
+    </div>
+  </div>
+</a>
+
+<style>
+  .line-clamp-2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .fill-current {
+    fill: currentColor;
+  }
+</style>

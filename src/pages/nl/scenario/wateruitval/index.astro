@@ -1,0 +1,957 @@
+---
+/**
+ * Wateruitval Scenario Page - Dutch Water Disruption
+ *
+ * NL-specific context:
+ * - Dutch tap water is excellent quality (no chlorine taste)
+ * - Vitens, Evides, PWN, etc. are regional water companies
+ * - storingskaart.drinkwater.nl for outage info
+ * - Drinkwaterbesluit regulations
+ */
+import BaseLayout from '../../../../layouts/BaseLayout.astro';
+import TLDRBlock from '../../../../components/hub/TLDRBlock.astro';
+import CollapsibleSection from '../../../../components/hub/CollapsibleSection.astro';
+import PhaseTabs from '../../../../components/hub/PhaseTabs.tsx';
+import InteractiveChecklist from '../../../../components/hub/InteractiveChecklist.tsx';
+import StickyActionBar from '../../../../components/hub/StickyActionBar.tsx';
+import Icon from '../../../../components/ui/Icon.astro';
+import HeroImage from '../../../../components/content/HeroImage.astro';
+
+const scenarioKey = 'wateruitval';
+
+// Phase content - Dutch specific
+const phases = {
+  voor: [
+    {
+      title: 'Sla drinkwater op',
+      detail: 'Minimaal 3 liter per persoon per dag. Voor 3 dagen: 9 liter per persoon.',
+      tip: 'Een gezin van 4 heeft minimaal 36 liter nodig voor 3 dagen'
+    },
+    {
+      title: 'Koop jerrycans voor water',
+      detail: 'Voedselveilige jerrycans van 10-20 liter. Roteer water elke 6 maanden.',
+      tip: 'Bewaar op een koele, donkere plek'
+    },
+    {
+      title: 'Heb waterzuiveringstabletten',
+      detail: 'Voor noodgevallen als je water van onbekende bronnen moet gebruiken.',
+      tip: null
+    },
+    {
+      title: 'Bereid hygiene zonder water voor',
+      detail: 'Vochtige doekjes, handgel, droogshampoo. 2-3 pakken doekjes per persoon.',
+      tip: null
+    },
+    {
+      title: 'Zorg voor emmers voor het toilet',
+      detail: 'Emmers van 8-10 liter voor handmatig doorspoelen van de wc.',
+      tip: null
+    },
+    {
+      title: 'Ken je waterleverancier',
+      detail: 'Check storingskaart.drinkwater.nl. Ken het nummer van je waterbedrijf.',
+      tip: 'Bij gepland onderhoud krijg je meestal vooraf bericht'
+    },
+  ],
+  tijdens: [
+    {
+      title: 'Prioriteer drinkwater',
+      detail: 'Gebruik nooit je drinkwatervoorraad voor andere doeleinden. Dit is prioriteit #1.',
+      tip: null
+    },
+    {
+      title: 'Open geen kranen onnodig',
+      detail: 'Als het water terugkomt kan het eerst troebel of met lucht zijn.',
+      tip: null
+    },
+    {
+      title: 'Gebruik handmatige wc-spoeling',
+      detail: 'Giet 6-8 liter water direct in de toiletpot om door te spoelen.',
+      tip: 'Hergebruik waswater voor de wc'
+    },
+    {
+      title: 'Persoonlijke hygiene met doekjes',
+      detail: 'Lichaam met vochtige doekjes. Handen met handgel.',
+      tip: null
+    },
+    {
+      title: 'Was af met twee teiltjes',
+      detail: 'Eén met zeepwater, één met schoon spoelwater.',
+      tip: 'Hergebruik het water daarna voor planten of wc'
+    },
+    {
+      title: 'Rantsoeneer per prioriteit',
+      detail: 'Drinken (40%) > Koken (15%) > Hygiene (25%) > WC (15%) > Overig (5%).',
+      tip: null
+    },
+  ],
+  na: [
+    {
+      title: 'Laat water eerst lopen',
+      detail: 'Laat de kraan 2-3 minuten lopen voordat je het water gebruikt. Het kan troebel zijn.',
+      tip: null
+    },
+    {
+      title: 'Controleer geur en smaak',
+      detail: 'Nederlands kraanwater heeft normaal geen chloorsmaak. Ruikt of smaakt het raar? Gebruik flessenwater.',
+      tip: 'Bij twijfel nog een dag flessenwater drinken'
+    },
+    {
+      title: 'Vul je voorraad aan',
+      detail: 'Jerrycans opnieuw vullen, flessenwater bijkopen, doekjes aanvullen.',
+      tip: null
+    },
+    {
+      title: 'Reinig kraanfilters',
+      detail: 'Er kunnen sedimenten zijn achtergebleven. Reinig de straaltjes/beluchters.',
+      tip: null
+    },
+  ],
+};
+
+// Checklist categories - NL products with Bol.com links
+const checklistCategories = [
+  {
+    id: 'opslag',
+    name: 'Wateropslag',
+    icon: 'droplet',
+    items: [
+      { id: 'flessenwater', name: 'Flessenwater', quantity: '3L/persoon/dag × 3 dagen', priority: 'critical' as const, notes: 'Drinkwater', affiliateUrl: 'https://www.bol.com/nl/nl/s/?searchtext=water+flessen' },
+      { id: 'grote-flessen', name: 'Grote flessen (5-6L)', quantity: '2-4 stuks', priority: 'critical' as const, notes: 'Makkelijker te hanteren' },
+      { id: 'jerrycan', name: 'Voedselveilige jerrycan 10-20L', quantity: '1 per gezin', priority: 'recommended' as const, notes: 'Voor langere opslag', affiliateUrl: 'https://www.bol.com/nl/nl/s/?searchtext=jerrycan+water+voedsel' },
+      { id: 'lege-flessen', name: 'Lege schone flessen', quantity: '10+ stuks', priority: 'recommended' as const, notes: 'Om te vullen bij waarschuwing' },
+    ]
+  },
+  {
+    id: 'zuivering',
+    name: 'Waterzuivering',
+    icon: 'beaker',
+    items: [
+      { id: 'zuiveringstabletten', name: 'Waterzuiveringstabletten', quantity: '2 verpakkingen', priority: 'critical' as const, notes: 'Voor noodgevallen', affiliateUrl: 'https://www.bol.com/nl/nl/s/?searchtext=waterzuiveringstabletten' },
+      { id: 'waterfilter', name: 'Draagbaar waterfilter', quantity: '1 stuk', priority: 'recommended' as const, notes: 'Verwijdert bacterien', affiliateUrl: 'https://www.bol.com/nl/nl/s/?searchtext=waterfilter+outdoor' },
+    ]
+  },
+  {
+    id: 'hygiene',
+    name: 'Hygiene zonder water',
+    icon: 'sparkles',
+    items: [
+      { id: 'vochtige-doekjes', name: 'Vochtige doekjes', quantity: '3-4 grote pakken', priority: 'critical' as const, notes: 'Voor lichaamsverzorging', affiliateUrl: 'https://www.bol.com/nl/nl/s/?searchtext=vochtige+doekjes+lichaam' },
+      { id: 'handgel', name: 'Desinfecterende handgel', quantity: '2-3 flessen', priority: 'critical' as const, notes: 'Voor handen', affiliateUrl: 'https://www.bol.com/nl/nl/s/?searchtext=desinfecterende+handgel' },
+      { id: 'droogshampoo', name: 'Droogshampoo', quantity: '1 bus', priority: 'recommended' as const, notes: 'Voor het haar', affiliateUrl: 'https://www.bol.com/nl/nl/s/?searchtext=droogshampoo' },
+      { id: 'deodorant', name: 'Extra deodorant', quantity: '1 stuk', priority: 'recommended' as const, notes: 'Handig zonder douche' },
+    ]
+  },
+  {
+    id: 'sanitair',
+    name: 'Sanitair',
+    icon: 'home',
+    items: [
+      { id: 'emmers', name: 'Emmers voor water', quantity: '2-3 (8-10L)', priority: 'critical' as const, notes: 'Voor handmatige wc-spoeling' },
+      { id: 'vuilniszakken', name: 'Stevige vuilniszakken', quantity: '1 rol', priority: 'critical' as const, notes: 'Voor noodsanitair' },
+      { id: 'kattenbakvulling', name: 'Kattenbakvulling of zaagsel', quantity: '1 zak', priority: 'optional' as const, notes: 'Als wc helemaal niet werkt' },
+    ]
+  },
+  {
+    id: 'keuken',
+    name: 'Keuken',
+    icon: 'utensils',
+    items: [
+      { id: 'wegwerpservies', name: 'Wegwerpborden en -bekers', quantity: 'Voorraad voor 3 dagen', priority: 'recommended' as const, notes: 'Voorkomt afwassen' },
+      { id: 'conserven', name: 'Eten dat geen water nodig heeft', quantity: 'Conserven, snacks', priority: 'critical' as const, notes: 'Vermijd koken' },
+      { id: 'teiltjes', name: 'Kleine teiltjes', quantity: '2 stuks', priority: 'recommended' as const, notes: 'Voor afwassen met weinig water' },
+    ]
+  },
+];
+
+// Water needs table - Dutch
+const waterNeeds = [
+  { use: 'Drinken', amount: '2L', notes: 'Minimaal vitaal' },
+  { use: 'Koken', amount: '0.5-1L', notes: 'Als je kookt' },
+  { use: 'Hygiene', amount: '2-4L', notes: 'Gezicht, handen' },
+  { use: 'WC', amount: '3-6L', notes: 'Per spoeling' },
+];
+
+// FAQs - Dutch context
+const faqs = [
+  {
+    question: 'Hoeveel water moet ik opslaan?',
+    answer: 'Minimaal 3 liter per persoon per dag. Een gezin van 4 heeft 36 liter nodig voor 3 dagen. Ideaal is 5-6 liter voor meer comfort.'
+  },
+  {
+    question: 'Hoe lang blijft opgeslagen water goed?',
+    answer: 'Flessenwater: 1-2 jaar ongeopend. Kraanwater in jerrycans: roteer elke 6 maanden. Ruikt of smaakt het raar? Zuiver het eerst.'
+  },
+  {
+    question: 'Kan ik badwater drinken?',
+    answer: 'Niet direct. Gebruik het voor schoonmaken, wc en wassen. Voor drinken alleen flessenwater of gezuiverd water.'
+  },
+  {
+    question: 'Hoe weet ik of water veilig is?',
+    answer: 'Bij twijfel: kook het minimaal 3 minuten of gebruik zuiveringstabletten. Troebel water, verkleuring of vreemde geur = niet drinken zonder behandeling.'
+  },
+  {
+    question: 'Wat als de storing langer dan 3 dagen duurt?',
+    answer: 'Verminder verbruik tot minimum. Gemeenten stellen vaak distributiepunten in. Schroom niet om hulp te vragen.'
+  },
+];
+---
+
+<BaseLayout
+  title="Wateruitval: Wat te doen zonder drinkwater? Noodplan & Checklist"
+  description="Complete gids voor wateruitval in Nederland. Hoeveel water opslaan, leven zonder kraanwater en praktische checklist."
+  locale="nl"
+  schemaType="HowTo"
+  dateModified="2025-12-15"
+  alternates={{
+    es: '/es/escenarios/prepararse-corte-agua/',
+    de: '/de/szenarien/wasserausfall/',
+  }}
+  schemaData={{
+    step: [
+      { '@type': 'HowToStep', name: 'Sla drinkwater op', text: 'Minimaal 3 liter per persoon per dag. Een gezin van 4 heeft minimaal 36 liter nodig voor 3 dagen.' },
+      { '@type': 'HowToStep', name: 'Koop jerrycans voor water', text: 'Voedselveilige jerrycans van 10-20 liter. Roteer water elke 6 maanden. Bewaar op koele, donkere plek.' },
+      { '@type': 'HowToStep', name: 'Heb waterzuiveringstabletten', text: 'Voor noodgevallen als je water van onbekende bronnen moet gebruiken.' },
+      { '@type': 'HowToStep', name: 'Bereid hygiene zonder water voor', text: 'Vochtige doekjes, handgel, droogshampoo. 2-3 pakken doekjes per persoon.' },
+      { '@type': 'HowToStep', name: 'Prioriteer drinkwater', text: 'Gebruik nooit je drinkwatervoorraad voor andere doeleinden. Dit is prioriteit #1.' },
+      { '@type': 'HowToStep', name: 'Gebruik handmatige wc-spoeling', text: 'Giet 6-8 liter water direct in de toiletpot. Hergebruik waswater voor de wc.' },
+    ],
+    totalTime: 'P3D',
+    supply: [
+      { '@type': 'HowToSupply', name: 'Flessenwater (3L/persoon/dag × 3 dagen)' },
+      { '@type': 'HowToSupply', name: 'Voedselveilige jerrycan 10-20L' },
+      { '@type': 'HowToSupply', name: 'Waterzuiveringstabletten' },
+      { '@type': 'HowToSupply', name: 'Vochtige doekjes (3-4 pakken)' },
+      { '@type': 'HowToSupply', name: 'Desinfecterende handgel' },
+      { '@type': 'HowToSupply', name: 'Emmers voor water (8-10L)' },
+    ],
+  }}
+  faqData={faqs}
+>
+  <main class="scenario-page">
+    <!-- Header -->
+    <header class="scenario-header">
+      <nav class="scenario-breadcrumb">
+        <a href="/nl/scenario/" class="breadcrumb-back">
+          <Icon name="ChevronLeft" size={20} />
+        </a>
+        <span class="breadcrumb-current">Wateruitval</span>
+      </nav>
+
+      <div class="scenario-title-row">
+        <div class="scenario-icon scenario-icon--blue">
+          <Icon name="Droplet" size={28} />
+        </div>
+        <div class="scenario-title-content">
+          <h1 class="scenario-title">Voorbereiden op Wateruitval</h1>
+          <div class="scenario-meta">
+            <span class="meta-item">6 min</span>
+            <span class="meta-divider">·</span>
+            <span class="meta-item">Bijgewerkt dec 2025</span>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Hero Image -->
+    <section class="scenario-section">
+      <HeroImage
+        src="/images/shared/water-storage-containers.webp"
+        alt="Wateropslag in jerrycans voor noodsituaties"
+        priority={true}
+      />
+    </section>
+
+    <!-- TL;DR -->
+    <section class="scenario-section">
+      <TLDRBlock
+        summary="Een volwassene heeft minimaal 3 liter per dag nodig voor drinken en basishygiene. Bij vooraankondiging: vul bad en alle containers. Zonder waarschuwing ben je afhankelijk van je voorraad. Prioriteer altijd drinkwater boven alle andere gebruik."
+        keyStat="3L/dag/persoon"
+        keyStatLabel="Minimaal"
+        locale="nl"
+      />
+    </section>
+
+    <!-- Water Needs Quick Reference -->
+    <section class="scenario-section">
+      <div class="water-needs-card">
+        <h3 class="water-needs-title">Hoeveel water heb je nodig?</h3>
+        <div class="water-needs-grid">
+          {waterNeeds.map((need) => (
+            <div class="water-need-item">
+              <span class="water-need-amount">{need.amount}</span>
+              <span class="water-need-use">{need.use}</span>
+              <span class="water-need-notes">{need.notes}</span>
+            </div>
+          ))}
+        </div>
+        <p class="water-needs-total">
+          <strong>Totaal minimaal:</strong> 8-15L/persoon/dag (te reduceren tot 3-5L in noodgeval)
+        </p>
+      </div>
+    </section>
+
+    <!-- Phase Tabs -->
+    <PhaseTabs
+      client:idle
+      scenarioKey={scenarioKey}
+      locale="nl"
+    />
+
+    <!-- Phase: Voor -->
+    <section id="voor" class="phase-section">
+      <div class="phase-header">
+        <span class="phase-number">1</span>
+        <div class="phase-title-group">
+          <h2 class="phase-title">Voor de wateruitval</h2>
+          <p class="phase-subtitle">Voorbereiding en opslag</p>
+        </div>
+      </div>
+
+      <div class="phase-steps">
+        {phases.voor.map((step, index) => (
+          <CollapsibleSection
+            title={step.title}
+            summary={step.detail}
+            step={index + 1}
+            variant="card"
+          >
+            <p>{step.detail}</p>
+            {step.tip && (
+              <div class="step-tip">
+                <Icon name="Lightbulb" size={16} />
+                <span>{step.tip}</span>
+              </div>
+            )}
+          </CollapsibleSection>
+        ))}
+      </div>
+    </section>
+
+    <!-- Phase: Tijdens -->
+    <section id="tijdens" class="phase-section">
+      <div class="phase-header">
+        <span class="phase-number phase-number--warning">2</span>
+        <div class="phase-title-group">
+          <h2 class="phase-title">Tijdens de wateruitval</h2>
+          <p class="phase-subtitle">Beheer en rantsoenering</p>
+        </div>
+      </div>
+
+      <!-- Priority Warning -->
+      <div class="priority-box">
+        <div class="priority-icon">
+          <Icon name="AlertCircle" size={24} />
+        </div>
+        <div class="priority-content">
+          <strong>Prioriteitsvolgorde</strong>
+          <div class="priority-list">
+            <span class="priority-item priority-1">1. Drinken</span>
+            <span class="priority-item priority-2">2. Koken</span>
+            <span class="priority-item priority-3">3. Hygiene</span>
+            <span class="priority-item priority-4">4. WC</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="phase-steps">
+        {phases.tijdens.map((step, index) => (
+          <CollapsibleSection
+            title={step.title}
+            summary={step.detail}
+            step={index + 1}
+            variant="card"
+          >
+            <p>{step.detail}</p>
+            {step.tip && (
+              <div class="step-tip">
+                <Icon name="Lightbulb" size={16} />
+                <span>{step.tip}</span>
+              </div>
+            )}
+          </CollapsibleSection>
+        ))}
+      </div>
+    </section>
+
+    <!-- Phase: Na -->
+    <section id="na" class="phase-section">
+      <div class="phase-header">
+        <span class="phase-number phase-number--success">3</span>
+        <div class="phase-title-group">
+          <h2 class="phase-title">Na de wateruitval</h2>
+          <p class="phase-subtitle">Herstel en aanvullen</p>
+        </div>
+      </div>
+
+      <div class="phase-steps">
+        {phases.na.map((step, index) => (
+          <CollapsibleSection
+            title={step.title}
+            summary={step.detail}
+            step={index + 1}
+            variant="card"
+          >
+            <p>{step.detail}</p>
+            {step.tip && (
+              <div class="step-tip">
+                <Icon name="Lightbulb" size={16} />
+                <span>{step.tip}</span>
+              </div>
+            )}
+          </CollapsibleSection>
+        ))}
+      </div>
+    </section>
+
+    <!-- Interactive Checklist -->
+    <section class="scenario-section">
+      <h2 class="section-title">
+        <Icon name="CheckSquare" size={24} />
+        Je wateruitval checklist
+      </h2>
+      <p class="section-intro">
+        Vink af wat je al hebt. Je voortgang wordt automatisch opgeslagen.
+      </p>
+      <InteractiveChecklist
+        client:idle
+        storageKey={`${scenarioKey}_nl`}
+        categories={checklistCategories}
+        title="Benodigdheden voor wateruitval"
+      />
+    </section>
+
+    <!-- FAQs -->
+    <section class="scenario-section">
+      <h2 class="section-title">Veelgestelde vragen</h2>
+      <div class="faq-list">
+        {faqs.map((faq) => (
+          <details class="faq-item">
+            <summary class="faq-question">
+              <span>{faq.question}</span>
+              <Icon name="ChevronDown" size={20} />
+            </summary>
+            <div class="faq-answer">
+              <p>{faq.answer}</p>
+            </div>
+          </details>
+        ))}
+      </div>
+    </section>
+
+    <!-- Sources -->
+    <section class="scenario-section">
+      <details class="sources-block">
+        <summary class="sources-header">
+          <Icon name="BookOpen" size={18} />
+          <span>Bronnen en referenties</span>
+          <Icon name="ChevronDown" size={16} />
+        </summary>
+        <div class="sources-content">
+          <ul>
+            <li><a href="https://storingskaart.drinkwater.nl/" target="_blank" rel="noopener">Storingskaart Drinkwater Nederland</a></li>
+            <li><a href="https://www.rivm.nl/drinkwater" target="_blank" rel="noopener">RIVM - Drinkwater</a></li>
+            <li><a href="https://www.rijksoverheid.nl/onderwerpen/drinkwater" target="_blank" rel="noopener">Rijksoverheid - Drinkwater</a></li>
+            <li><a href="https://www.who.int/water_sanitation_health/dwq/en/" target="_blank" rel="noopener">WHO - Waterkwaliteit</a></li>
+          </ul>
+        </div>
+      </details>
+    </section>
+
+    <!-- Related Scenarios -->
+    <section class="scenario-section">
+      <h2 class="section-title">Gerelateerde scenario's</h2>
+      <div class="related-grid">
+        <a href="/nl/scenario/stroomstoring/" class="related-card related-card--amber">
+          <Icon name="Zap" size={24} />
+          <span>Stroomstoring</span>
+        </a>
+        <a href="/nl/scenario/hittegolf/" class="related-card related-card--orange">
+          <Icon name="Sun" size={24} />
+          <span>Hittegolf</span>
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <!-- Sticky Action Bar -->
+  <StickyActionBar
+    client:idle
+    actionText="Water berekenen"
+    actionUrl="/nl/tools/water-calculator/"
+    dismissKey={`scenario_${scenarioKey}_nl`}
+    label="Volgende stap:"
+    locale="nl"
+  />
+</BaseLayout>
+
+<style>
+  .scenario-page {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 0 16px 120px;
+  }
+
+  .scenario-header {
+    padding: 16px 0 24px;
+  }
+
+  .scenario-breadcrumb {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 16px;
+  }
+
+  .breadcrumb-back {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    background: var(--color-bg-secondary);
+    border-radius: 10px;
+    color: var(--color-text-secondary);
+    transition: all 0.15s ease;
+  }
+
+  .breadcrumb-back:hover {
+    background: var(--color-bg-tertiary);
+    color: var(--color-text-primary);
+  }
+
+  .breadcrumb-current {
+    font-size: 14px;
+    color: var(--color-text-muted);
+  }
+
+  .scenario-title-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+  }
+
+  .scenario-icon {
+    flex-shrink: 0;
+    width: 56px;
+    height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 16px;
+  }
+
+  .scenario-icon--blue {
+    background: rgba(59, 130, 246, 0.15);
+    color: #3b82f6;
+  }
+
+  .scenario-title-content {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .scenario-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--color-text-primary);
+    margin: 0 0 6px;
+    line-height: 1.2;
+  }
+
+  .scenario-meta {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    color: var(--color-text-muted);
+  }
+
+  .meta-divider {
+    opacity: 0.5;
+  }
+
+  .scenario-section {
+    margin-bottom: 32px;
+  }
+
+  .section-title {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: var(--color-text-primary);
+    margin: 0 0 12px;
+  }
+
+  .section-intro {
+    font-size: 14px;
+    color: var(--color-text-muted);
+    margin: 0 0 16px;
+  }
+
+  /* Water Needs Card */
+  .water-needs-card {
+    background: var(--color-bg-secondary);
+    border: 1px solid var(--color-border);
+    border-radius: 16px;
+    padding: 20px;
+  }
+
+  .water-needs-title {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--color-text-primary);
+    margin: 0 0 16px;
+  }
+
+  .water-needs-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    margin-bottom: 16px;
+  }
+
+  .water-need-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 12px 8px;
+    background: var(--color-bg-tertiary);
+    border-radius: 12px;
+  }
+
+  .water-need-amount {
+    font-size: 18px;
+    font-weight: 700;
+    color: #3b82f6;
+    margin-bottom: 4px;
+  }
+
+  .water-need-use {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--color-text-primary);
+    margin-bottom: 2px;
+  }
+
+  .water-need-notes {
+    font-size: 11px;
+    color: var(--color-text-muted);
+  }
+
+  .water-needs-total {
+    font-size: 13px;
+    color: var(--color-text-secondary);
+    margin: 0;
+    padding-top: 12px;
+    border-top: 1px solid var(--color-border);
+  }
+
+  .phase-section {
+    padding: 24px 0;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .phase-section:last-of-type {
+    border-bottom: none;
+  }
+
+  .phase-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    margin-bottom: 20px;
+  }
+
+  .phase-number {
+    flex-shrink: 0;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--color-accent-subtle);
+    color: var(--color-accent-primary);
+    font-size: 18px;
+    font-weight: 700;
+    border-radius: 12px;
+  }
+
+  .phase-number--warning {
+    background: rgba(59, 130, 246, 0.15);
+    color: #3b82f6;
+  }
+
+  .phase-number--success {
+    background: rgba(34, 197, 94, 0.15);
+    color: #22c55e;
+  }
+
+  .phase-title-group {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .phase-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--color-text-primary);
+    margin: 0 0 4px;
+  }
+
+  .phase-subtitle {
+    font-size: 14px;
+    color: var(--color-text-muted);
+    margin: 0;
+  }
+
+  .phase-steps {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .step-tip {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    margin-top: 12px;
+    padding: 10px 12px;
+    background: var(--color-accent-subtle);
+    border-radius: 8px;
+    font-size: 13px;
+    color: var(--color-accent-primary);
+  }
+
+  .step-tip svg {
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  /* Priority Box */
+  .priority-box {
+    display: flex;
+    gap: 16px;
+    padding: 16px;
+    margin-bottom: 20px;
+    background: rgba(59, 130, 246, 0.1);
+    border: 1px solid rgba(59, 130, 246, 0.3);
+    border-radius: 12px;
+  }
+
+  .priority-icon {
+    flex-shrink: 0;
+    color: #3b82f6;
+  }
+
+  .priority-content {
+    flex: 1;
+  }
+
+  .priority-content strong {
+    display: block;
+    font-size: 14px;
+    color: #3b82f6;
+    margin-bottom: 10px;
+  }
+
+  .priority-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .priority-item {
+    padding: 4px 10px;
+    font-size: 12px;
+    font-weight: 600;
+    border-radius: 6px;
+  }
+
+  .priority-1 {
+    background: rgba(239, 68, 68, 0.2);
+    color: #ef4444;
+  }
+
+  .priority-2 {
+    background: rgba(249, 115, 22, 0.2);
+    color: #f97316;
+  }
+
+  .priority-3 {
+    background: rgba(234, 179, 8, 0.2);
+    color: #eab308;
+  }
+
+  .priority-4 {
+    background: rgba(59, 130, 246, 0.2);
+    color: #3b82f6;
+  }
+
+  /* FAQs */
+  .faq-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .faq-item {
+    background: var(--color-bg-secondary);
+    border: 1px solid var(--color-border);
+    border-radius: 12px;
+    overflow: hidden;
+  }
+
+  .faq-question {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 14px 16px;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--color-text-primary);
+    cursor: pointer;
+    list-style: none;
+  }
+
+  .faq-question::-webkit-details-marker {
+    display: none;
+  }
+
+  .faq-question svg {
+    flex-shrink: 0;
+    color: var(--color-text-muted);
+    transition: transform 0.2s ease;
+  }
+
+  .faq-item[open] .faq-question svg {
+    transform: rotate(180deg);
+  }
+
+  .faq-answer {
+    padding: 0 16px 14px;
+  }
+
+  .faq-answer p {
+    font-size: 14px;
+    color: var(--color-text-secondary);
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  /* Sources */
+  .sources-block {
+    background: var(--color-bg-secondary);
+    border-radius: 12px;
+    overflow: hidden;
+  }
+
+  .sources-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 16px;
+    font-size: 14px;
+    color: var(--color-text-muted);
+    cursor: pointer;
+    list-style: none;
+  }
+
+  .sources-header::-webkit-details-marker {
+    display: none;
+  }
+
+  .sources-header svg:last-child {
+    margin-left: auto;
+    transition: transform 0.2s ease;
+  }
+
+  .sources-block[open] .sources-header svg:last-child {
+    transform: rotate(180deg);
+  }
+
+  .sources-content {
+    padding: 0 16px 14px;
+  }
+
+  .sources-content ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .sources-content li {
+    margin-bottom: 8px;
+  }
+
+  .sources-content a {
+    font-size: 13px;
+    color: var(--color-accent-primary);
+    text-decoration: none;
+  }
+
+  .sources-content a:hover {
+    text-decoration: underline;
+  }
+
+  /* Related Scenarios */
+  .related-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+
+  .related-card {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 16px;
+    border-radius: 12px;
+    text-decoration: none;
+    transition: transform 0.15s ease;
+  }
+
+  .related-card:hover {
+    transform: translateY(-2px);
+  }
+
+  .related-card span {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--color-text-primary);
+  }
+
+  .related-card--amber {
+    background: rgba(245, 158, 11, 0.1);
+    border: 1px solid rgba(245, 158, 11, 0.2);
+    color: #f59e0b;
+  }
+
+  .related-card--orange {
+    background: rgba(249, 115, 22, 0.1);
+    border: 1px solid rgba(249, 115, 22, 0.2);
+    color: #f97316;
+  }
+
+  @media (max-width: 480px) {
+    .scenario-page {
+      padding: 0 12px 120px;
+    }
+
+    .scenario-title {
+      font-size: 1.25rem;
+    }
+
+    .water-needs-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .related-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

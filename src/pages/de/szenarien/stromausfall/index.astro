@@ -1,0 +1,1085 @@
+---
+/**
+ * Stromausfall Scenario Page (DE)
+ *
+ * German power outage preparation guide with:
+ * - TL;DR block at top
+ * - Phase tabs (Vor/Während/Nach)
+ * - Collapsible steps
+ * - Interactive checklist
+ * - StickyActionBar
+ *
+ * DE-specific adaptations:
+ * - References to BBK, Netzbetreiber
+ * - German context (weather events, grid info)
+ * - Amazon.de product links
+ * - Cash recommendation per BBK
+ */
+import BaseLayout from '../../../../layouts/BaseLayout.astro';
+import TLDRBlock from '../../../../components/hub/TLDRBlock.astro';
+import CollapsibleSection from '../../../../components/hub/CollapsibleSection.astro';
+import PhaseTabs from '../../../../components/hub/PhaseTabs.tsx';
+import InteractiveChecklist from '../../../../components/hub/InteractiveChecklist.tsx';
+import StickyActionBar from '../../../../components/hub/StickyActionBar.tsx';
+import Icon from '../../../../components/ui/Icon.astro';
+import HeroImage from '../../../../components/content/HeroImage.astro';
+
+const scenarioKey = 'stromausfall';
+
+// Phase content - German
+const phases = {
+  vor: [
+    {
+      title: 'Identifiziere kritische Geräte',
+      detail: 'Kühlschrank, medizinische Geräte, Telefon. Bestimme, was Strom benötigt.',
+      tip: 'Erstelle eine Liste und berechne den Verbrauch mit unserem Rechner'
+    },
+    {
+      title: 'Halte den Autotank mindestens halb voll',
+      detail: 'Tankstellen funktionieren ohne Strom nicht.',
+      tip: null
+    },
+    {
+      title: 'Kenne deinen Sicherungskasten',
+      detail: 'Finde den Hauptschalter und lerne, ihn auszuschalten, um Geräte zu schützen.',
+      tip: 'Beschrifte die Sicherungen, falls noch nicht geschehen'
+    },
+    {
+      title: 'Friere Wasserflaschen ein',
+      detail: 'Sie dienen als Kühlelemente bei Stromausfall. Halten die Tiefkühltruhe länger kalt.',
+      tip: null
+    },
+    {
+      title: 'Bewahre Bargeld zu Hause auf',
+      detail: 'Geldautomaten und Kartenzahlung funktionieren ohne Strom nicht.',
+      tip: 'BBK empfiehlt: ausreichend Bargeld in kleinen Scheinen'
+    },
+    {
+      title: 'Lade alle Geräte auf',
+      detail: 'Bei Unwetterwarnung: Lade Telefone, Tablets und Powerbanks vorher auf.',
+      tip: null
+    },
+    {
+      title: 'Halte ein Notfallradio bereit',
+      detail: 'Bei großen Störungen kann auch Mobilfunk ausfallen. UKW/MW bleibt funktionsfähig.',
+      tip: 'Wähle ein Radio mit Kurbel oder Solarpanel'
+    },
+  ],
+  waehrend: [
+    {
+      title: 'Schalte Geräte aus',
+      detail: 'Verhindere Schäden durch Spannungsspitzen wenn der Strom zurückkommt. Ziehe Stecker.',
+      tip: null
+    },
+    {
+      title: 'Lass EINE Lampe an',
+      detail: 'So weißt du, wann der Strom wieder da ist, ohne ständig zu prüfen.',
+      tip: null
+    },
+    {
+      title: 'Öffne den Kühlschrank nicht',
+      detail: 'Geschlossen bleibt er 4-6 Stunden kalt. Die Tiefkühltruhe hält 24-48 Stunden wenn voll.',
+      tip: 'Verlagere kritische Lebensmittel bei längerem Ausfall in eine Kühlbox mit Eis'
+    },
+    {
+      title: 'Benutze Taschenlampen, keine Kerzen',
+      detail: 'Kerzen sind brandgefährlich, besonders mit Kindern oder Haustieren.',
+      tip: 'Eine Stirnlampe hält die Hände frei'
+    },
+    {
+      title: 'Spare den Handyakku',
+      detail: 'Flugmodus, niedrige Helligkeit, nur notwendige Anrufe.',
+      tip: null
+    },
+    {
+      title: 'Informiere Familie',
+      detail: 'Kurze Nachricht: "Alles ok, kein Strom". Verschwende keinen Akku für lange Gespräche.',
+      tip: null
+    },
+    {
+      title: 'Prüfe Störungsinformationen',
+      detail: 'Per Radio oder mobiles Internet: Website deines Netzbetreibers für Updates.',
+      tip: 'Notiere die Nummer deines Netzbetreibers vorab'
+    },
+  ],
+  nach: [
+    {
+      title: 'Schließe Geräte schrittweise an',
+      detail: 'Nicht alles gleichzeitig. Beginne mit dem Wichtigsten um Überlastung zu vermeiden.',
+      tip: null
+    },
+    {
+      title: 'Kontrolliere den Kühlschrank',
+      detail: 'War er länger als 4 Stunden ohne Kühlung, wirf verderbliche Waren weg.',
+      tip: 'Im Zweifel: wegwerfen'
+    },
+    {
+      title: 'Prüfe die Tiefkühltruhe',
+      detail: 'Wenn noch Eiskristalle auf den Lebensmitteln sind, ist es noch gut.',
+      tip: null
+    },
+    {
+      title: 'Lade alles wieder auf',
+      detail: 'Powerbanks, Telefone, Tablets. Der nächste Ausfall kann jederzeit kommen.',
+      tip: null
+    },
+    {
+      title: 'Fülle Vorräte auf',
+      detail: 'Batterien, Kerzen, verbrauchte Lebensmittel. Warte nicht auf den nächsten Ausfall.',
+      tip: null
+    },
+    {
+      title: 'Dokumentiere Schäden',
+      detail: 'Fotos von weggeworfenen Lebensmitteln oder defekten Geräten für Versicherungsansprüche.',
+      tip: null
+    },
+  ],
+};
+
+// Checklist categories for InteractiveChecklist - German
+const checklistCategories = [
+  {
+    id: 'beleuchtung',
+    name: 'Beleuchtung',
+    icon: 'flashlight',
+    items: [
+      { id: 'taschenlampe-led', name: 'LED Taschenlampe', quantity: '1-2 Stück', priority: 'critical' as const, notes: 'Vermeide Glühlampen - verbrauchen mehr Batterien', affiliateUrl: 'https://www.amazon.de/s?k=led+taschenlampe+aufladbar' },
+      { id: 'stirnlampe', name: 'Stirnlampe', quantity: '1 pro Person', priority: 'recommended' as const, notes: 'Hände frei zum Kochen oder Bewegen', affiliateUrl: 'https://www.amazon.de/s?k=stirnlampe+led' },
+      { id: 'batterien', name: 'Ersatzbatterien', quantity: '2-3 Sets', priority: 'critical' as const, notes: 'Gleicher Typ wie deine Taschenlampen', affiliateUrl: 'https://www.amazon.de/s?k=batterien+aa+aaa+vorteilspack' },
+      { id: 'kerzen', name: 'Kerzen', quantity: '10-20 Stück', priority: 'recommended' as const, notes: 'Dicke, langbrennende. Vorsicht: Brandgefahr', affiliateUrl: 'https://www.amazon.de/s?k=notfallkerzen' },
+      { id: 'feuerzeuge', name: 'Feuerzeuge/Streichhölzer', quantity: '2-3 Stück', priority: 'critical' as const, notes: 'Trocken aufbewahren' },
+      { id: 'laterne', name: 'LED Laterne', quantity: '1 Stück', priority: 'optional' as const, notes: 'Beleuchtet ganze Räume', affiliateUrl: 'https://www.amazon.de/s?k=led+camping+laterne' },
+    ]
+  },
+  {
+    id: 'energie',
+    name: 'Energie',
+    icon: 'battery',
+    items: [
+      { id: 'powerbank', name: 'Powerbank', quantity: '10.000+ mAh/Person', priority: 'critical' as const, notes: 'Immer aufgeladen halten', affiliateUrl: 'https://www.amazon.de/s?k=powerbank+20000mah' },
+      { id: 'powerstation', name: 'Tragbare Powerstation', quantity: '300-500Wh', priority: 'recommended' as const, notes: 'Für längere Ausfälle (>24h)', affiliateUrl: 'https://www.amazon.de/s?k=powerstation+tragbar' },
+      { id: 'autolader', name: 'USB-Autoladegerät', quantity: '1 Stück', priority: 'recommended' as const, notes: 'Dein Auto ist eine große Batterie', affiliateUrl: 'https://www.amazon.de/s?k=usb+autoladegeraet+schnell' },
+      { id: 'solarpanel', name: 'Tragbares Solarpanel', quantity: '20-50W', priority: 'optional' as const, notes: 'Nur draußen bei Sonne nützlich', affiliateUrl: 'https://www.amazon.de/s?k=tragbares+solarpanel+usb' },
+      { id: 'aufladbare-batterien', name: 'Aufladbare Batterien + Ladegerät', quantity: '8-12 Batterien', priority: 'recommended' as const, notes: 'Vor Sturmsaison aufladen', affiliateUrl: 'https://www.amazon.de/s?k=aufladbare+batterien+aa' },
+    ]
+  },
+  {
+    id: 'kommunikation',
+    name: 'Kommunikation',
+    icon: 'radio',
+    items: [
+      { id: 'notfallradio', name: 'Notfallradio mit Kurbel', quantity: '1 Stück', priority: 'critical' as const, notes: 'UKW/MW für lokale Nachrichten', affiliateUrl: 'https://www.amazon.de/s?k=kurbelradio+solar' },
+      { id: 'kontaktliste', name: 'Ausgedruckte Kontaktliste', quantity: '1 Kopie', priority: 'critical' as const, notes: 'Ohne Telefon kein Zugang zu Nummern' },
+      { id: 'solar-ladegeraet', name: 'Solar USB Ladegerät', quantity: '1 Stück', priority: 'optional' as const, notes: 'Backup für dein Telefon', affiliateUrl: 'https://www.amazon.de/s?k=solar+ladegeraet+handy' },
+    ]
+  },
+  {
+    id: 'ernaehrung',
+    name: 'Ernährung',
+    icon: 'utensils',
+    items: [
+      { id: 'campingkocher', name: 'Campingkocher (Gas)', quantity: '1 + 2 Gaskartuschen', priority: 'recommended' as const, notes: 'NUR draußen oder sehr gut belüftet verwenden', affiliateUrl: 'https://www.amazon.de/s?k=camping+gaskocher' },
+      { id: 'fertignahrung', name: 'Essen ohne Kochen', quantity: '3 Tage/Person', priority: 'critical' as const, notes: 'Konserven, Energieriegel, Nüsse', affiliateUrl: 'https://www.amazon.de/s?k=notration+lebensmittel' },
+      { id: 'wasser', name: 'Trinkwasser', quantity: '2-3L/Person/Tag', priority: 'critical' as const, notes: 'Auch zum Kochen bei Bedarf', affiliateUrl: 'https://www.amazon.de/s?k=wasser+kanister+trinkwasser' },
+      { id: 'kuehlbox', name: 'Kühlbox + Kühlelemente', quantity: '1 Box', priority: 'recommended' as const, notes: 'Um Lebensmittel aus dem Kühlschrank zu retten', affiliateUrl: 'https://www.amazon.de/s?k=kuehlbox+gross' },
+    ]
+  },
+  {
+    id: 'waerme',
+    name: 'Wärme',
+    icon: 'thermometer',
+    items: [
+      { id: 'decken', name: 'Zusätzliche Decken', quantity: '1-2/Person', priority: 'critical' as const, notes: 'Stromausfall im Winter = Kälte' },
+      { id: 'schlafsack', name: 'Schlafsack', quantity: '1/Person', priority: 'recommended' as const, notes: 'Wenn du keine alternative Heizung hast', affiliateUrl: 'https://www.amazon.de/s?k=schlafsack+winter' },
+      { id: 'thermounterwaesche', name: 'Thermounterwäsche', quantity: '1 Set', priority: 'recommended' as const, notes: 'Schichten: besser als eine dicke Schicht', affiliateUrl: 'https://www.amazon.de/s?k=thermounterwaesche' },
+      { id: 'ventilator-batterie', name: 'Ventilator mit Batterien', quantity: '1 Stück', priority: 'optional' as const, notes: 'Für Stromausfall im Sommer', affiliateUrl: 'https://www.amazon.de/s?k=ventilator+aufladbar' },
+    ]
+  },
+  {
+    id: 'dokumente',
+    name: 'Dokumente & Geld',
+    icon: 'file',
+    items: [
+      { id: 'bargeld', name: 'Bargeld', quantity: 'Ausreichend in kleinen Scheinen', priority: 'critical' as const, notes: 'Kleine Scheine (10€, 20€) - BBK Empfehlung' },
+      { id: 'id-kopie', name: 'Kopie Personalausweis/Pass', quantity: 'Alle Haushaltsmitglieder', priority: 'critical' as const },
+      { id: 'versicherungspapiere', name: 'Versicherungsunterlagen', quantity: 'Kopie', priority: 'recommended' as const, notes: 'Für eventuelle Schadensmeldungen' },
+      { id: 'netzbetreiber', name: 'Nummer Netzbetreiber', quantity: 'Notiert', priority: 'critical' as const, notes: 'Störungshotline deines lokalen Netzbetreibers' },
+    ]
+  },
+];
+
+// FAQs - German
+const faqs = [
+  {
+    question: 'Wie lange kann ein Stromausfall dauern?',
+    answer: 'Die meisten Ausfälle dauern Minuten bis einige Stunden. Sturmbedingte Ausfälle können 6-24 Stunden dauern. In Extremfällen (Orkan, starker Schnee) können sie Tage dauern. Bereite dich auf mindestens 72 Stunden vor.'
+  },
+  {
+    question: 'Darf ich einen Generator drinnen benutzen?',
+    answer: 'NIEMALS. Generatoren produzieren Kohlenmonoxid, ein geruchloses und tödliches Gas. Benutze sie draußen, mindestens 6 Meter von Türen und Fenstern entfernt.'
+  },
+  {
+    question: 'Funktioniert Gas noch ohne Strom?',
+    answer: 'Erdgas kommt noch, aber Kochfelder mit elektrischer Zündung brauchen ein Feuerzeug. Gasheizungen mit elektronischem Thermostat funktionieren NICHT.'
+  },
+  {
+    question: 'Wie lange bleiben Lebensmittel im Kühlschrank gut?',
+    answer: 'Geschlossener Kühlschrank: 4-6 Stunden. Volle Tiefkühltruhe: 48 Stunden. Halbvolle Tiefkühltruhe: 24 Stunden. Öffne die Tür nicht unnötig.'
+  },
+  {
+    question: 'Muss ich den Ausfall melden?',
+    answer: 'Ja, besonders wenn nur du oder dein Gebäude betroffen ist. Nutze die App oder Störungsnummer deines Netzbetreibers (notiere diese vorab).'
+  },
+  {
+    question: 'Was wenn ich medizinische Geräte nutze?',
+    answer: 'Kontaktiere deinen Arzt für Backup-Lösungen. Melde dich bei deinem Netzbetreiber an, wenn du von Strom für medizinische Geräte abhängig bist.'
+  },
+];
+
+// Special situations - German
+const specialSituations = [
+  {
+    title: 'Medizinische Geräte',
+    icon: 'Heart',
+    content: 'Abhängig von CPAP, Sauerstoffkonzentrator oder anderen Geräten? Kontaktiere deinen Lieferanten für Notlösungen. Melde dich beim Netzbetreiber an.'
+  },
+  {
+    title: 'Homeoffice',
+    icon: 'Laptop',
+    content: 'Habe einen Plan B: Café mit WLAN, Bibliothek, Coworking Space. Eine USV gibt Zeit, Arbeit zu speichern und sicher herunterzufahren.'
+  },
+  {
+    title: 'Babys',
+    icon: 'Baby',
+    content: 'Fertignahrung die keine Kühlung braucht. Extra Windeln. Unterhaltung ohne Bildschirme.'
+  },
+  {
+    title: 'Hochhaus mit Aufzug',
+    icon: 'Building',
+    content: 'Benutze den Aufzug nicht bei Störungswarnungen. Habe einen Plan, zu Fuß hoch/runter zu gehen.'
+  },
+];
+---
+
+<BaseLayout
+  title="Stromausfall: Was tun bei Blackout? Checkliste & Sofort-Tipps"
+  description="Schritt-für-Schritt Anleitung für vor, während und nach einem Stromausfall. Interaktive Checkliste und praktische Tipps."
+  locale="de"
+  schemaType="HowTo"
+  dateModified="2025-12-15"
+  datePublished="2025-12-15"
+  alternates={{
+    es: '/es/escenarios/prepararse-apagon/',
+    nl: '/nl/scenario/stroomstoring/',
+  }}
+  schemaData={{
+    step: [
+      { '@type': 'HowToStep', name: 'Identifiziere kritische Geräte', text: 'Kühlschrank, medizinische Geräte, Telefon. Bestimme, was Strom benötigt.' },
+      { '@type': 'HowToStep', name: 'Halte den Autotank mindestens halb voll', text: 'Tankstellen funktionieren ohne Strom nicht.' },
+      { '@type': 'HowToStep', name: 'Friere Wasserflaschen ein', text: 'Sie dienen als Kühlelemente bei Stromausfall.' },
+      { '@type': 'HowToStep', name: 'Bewahre Bargeld zu Hause auf', text: 'Geldautomaten und Kartenzahlung funktionieren ohne Strom nicht.' },
+      { '@type': 'HowToStep', name: 'Lade alle Geräte auf', text: 'Lade Telefone, Tablets und Powerbanks vorher auf.' },
+    ],
+    totalTime: 'PT30M',
+    estimatedCost: { '@type': 'MonetaryAmount', currency: 'EUR', value: '50-200' },
+  }}
+  faqData={faqs}
+>
+  <main class="scenario-page">
+    <!-- Header -->
+    <header class="scenario-header">
+      <nav class="scenario-breadcrumb">
+        <a href="/de/szenarien/" class="breadcrumb-back">
+          <Icon name="ChevronLeft" size={20} />
+        </a>
+        <span class="breadcrumb-current">Stromausfall</span>
+      </nav>
+
+      <div class="scenario-title-row">
+        <div class="scenario-icon scenario-icon--amber">
+          <Icon name="Zap" size={28} />
+        </div>
+        <div class="scenario-title-content">
+          <h1 class="scenario-title">Vorbereitung auf Stromausfall</h1>
+          <div class="scenario-meta">
+            <span class="meta-item">10 min</span>
+            <span class="meta-divider">·</span>
+            <span class="meta-item">Aktualisiert Dez 2025</span>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Hero Image -->
+    <section class="scenario-section">
+      <HeroImage
+        src="/images/shared/power-outage-candles.webp"
+        alt="Stromausfall Vorbereitung mit Kerzen und Taschenlampe"
+        priority={true}
+      />
+    </section>
+
+    <!-- TL;DR -->
+    <section class="scenario-section">
+      <TLDRBlock
+        summary="Ein Stromausfall kann ohne Vorwarnung passieren. Der Schlüssel ist, Beleuchtung (Taschenlampen), Energie (Powerbanks) und Lebensmittel die keinen Strom brauchen vorab bereit zu haben."
+        keyStat="72 Stunden"
+        keyStatLabel="Bereite dich vor auf"
+        locale="de"
+      />
+    </section>
+
+    <!-- Government Notice -->
+    <section class="scenario-section">
+      <div class="gov-notice">
+        <div class="gov-notice-icon">
+          <Icon name="Shield" size={20} />
+        </div>
+        <div class="gov-notice-content">
+          <strong>BBK-Empfehlung:</strong> Sorge dafür, dass dein Haushalt 72 Stunden bis 10 Tage selbstversorgt sein kann.
+          Mehr Infos auf <a href="https://www.bbk.bund.de/DE/Warnung-Vorsorge/Tipps-Notsituationen/Stromausfall/stromausfall_node.html" target="_blank" rel="noopener">bbk.bund.de</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Phase Tabs -->
+    <PhaseTabs client:idle scenarioKey={scenarioKey} locale="de" />
+
+    <!-- Phase: Vor -->
+    <section id="vor" class="phase-section">
+      <div class="phase-header">
+        <span class="phase-number">1</span>
+        <div class="phase-title-group">
+          <h2 class="phase-title">Vor dem Stromausfall</h2>
+          <p class="phase-subtitle">Präventive Vorbereitung</p>
+        </div>
+      </div>
+
+      <div class="phase-steps">
+        {phases.vor.map((step, index) => (
+          <CollapsibleSection
+            title={step.title}
+            summary={step.detail}
+            step={index + 1}
+            variant="card"
+          >
+            <p>{step.detail}</p>
+            {step.tip && (
+              <div class="step-tip">
+                <Icon name="Lightbulb" size={16} />
+                <span>{step.tip}</span>
+              </div>
+            )}
+          </CollapsibleSection>
+        ))}
+      </div>
+    </section>
+
+    <!-- Phase: Während -->
+    <section id="waehrend" class="phase-section">
+      <div class="phase-header">
+        <span class="phase-number phase-number--warning">2</span>
+        <div class="phase-title-group">
+          <h2 class="phase-title">Während des Stromausfalls</h2>
+          <p class="phase-subtitle">Was zu tun ist wenn es passiert</p>
+        </div>
+      </div>
+
+      <!-- Warning Box -->
+      <div class="warning-box">
+        <div class="warning-icon">
+          <Icon name="AlertTriangle" size={24} />
+        </div>
+        <div class="warning-content">
+          <strong>Gefahren vermeiden</strong>
+          <ul>
+            <li>Kerzen ohne Aufsicht = Brandgefahr</li>
+            <li>Generator drinnen = CO-Vergiftung</li>
+            <li>Heruntergefallene Kabel = NICHT berühren, 112 anrufen</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="phase-steps">
+        {phases.waehrend.map((step, index) => (
+          <CollapsibleSection
+            title={step.title}
+            summary={step.detail}
+            step={index + 1}
+            variant="card"
+          >
+            <p>{step.detail}</p>
+            {step.tip && (
+              <div class="step-tip">
+                <Icon name="Lightbulb" size={16} />
+                <span>{step.tip}</span>
+              </div>
+            )}
+          </CollapsibleSection>
+        ))}
+      </div>
+    </section>
+
+    <!-- Phase: Nach -->
+    <section id="nach" class="phase-section">
+      <div class="phase-header">
+        <span class="phase-number phase-number--success">3</span>
+        <div class="phase-title-group">
+          <h2 class="phase-title">Nach dem Stromausfall</h2>
+          <p class="phase-subtitle">Wiederherstellung und Auffüllen</p>
+        </div>
+      </div>
+
+      <div class="phase-steps">
+        {phases.nach.map((step, index) => (
+          <CollapsibleSection
+            title={step.title}
+            summary={step.detail}
+            step={index + 1}
+            variant="card"
+          >
+            <p>{step.detail}</p>
+            {step.tip && (
+              <div class="step-tip">
+                <Icon name="Lightbulb" size={16} />
+                <span>{step.tip}</span>
+              </div>
+            )}
+          </CollapsibleSection>
+        ))}
+      </div>
+    </section>
+
+    <!-- Interactive Checklist -->
+    <section class="scenario-section">
+      <h2 class="section-title">
+        <Icon name="CheckSquare" size={24} />
+        Deine Stromausfall-Checkliste
+      </h2>
+      <p class="section-intro">
+        Hake ab was du schon hast. Dein Fortschritt wird automatisch gespeichert.
+      </p>
+      <InteractiveChecklist
+        client:idle
+        storageKey={`${scenarioKey}_de`}
+        categories={checklistCategories}
+        title="Artikel für Stromausfall"
+        locale="de"
+      />
+    </section>
+
+    <!-- Special Situations -->
+    <section class="scenario-section">
+      <h2 class="section-title">Besondere Situationen</h2>
+      <div class="situations-grid">
+        {specialSituations.map((situation) => (
+          <div class="situation-card">
+            <div class="situation-icon">
+              <Icon name={situation.icon as any} size={20} />
+            </div>
+            <div class="situation-content">
+              <h3 class="situation-title">{situation.title}</h3>
+              <p class="situation-text">{situation.content}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <!-- FAQs -->
+    <section class="scenario-section">
+      <h2 class="section-title">Häufig gestellte Fragen</h2>
+      <div class="faq-list">
+        {faqs.map((faq) => (
+          <details class="faq-item">
+            <summary class="faq-question">
+              <span>{faq.question}</span>
+              <Icon name="ChevronDown" size={20} />
+            </summary>
+            <div class="faq-answer">
+              <p>{faq.answer}</p>
+            </div>
+          </details>
+        ))}
+      </div>
+    </section>
+
+    <!-- Sources (collapsed) -->
+    <section class="scenario-section">
+      <details class="sources-block">
+        <summary class="sources-header">
+          <Icon name="BookOpen" size={18} />
+          <span>Quellen und Referenzen</span>
+          <Icon name="ChevronDown" size={16} />
+        </summary>
+        <div class="sources-content">
+          <ul>
+            <li>
+              <a href="https://www.bbk.bund.de/DE/Warnung-Vorsorge/Tipps-Notsituationen/Stromausfall/stromausfall_node.html" target="_blank" rel="noopener">
+                BBK — Stromausfall
+              </a>
+            </li>
+            <li>
+              <a href="https://www.bbk.bund.de/DE/Warnung-Vorsorge/Vorsorge/Ratgeber-Checkliste/ratgeber-checkliste_node.html" target="_blank" rel="noopener">
+                BBK — Ratgeber Notfallvorsorge
+              </a>
+            </li>
+            <li>
+              <a href="https://www.drk.de/" target="_blank" rel="noopener">
+                Deutsches Rotes Kreuz
+              </a>
+            </li>
+          </ul>
+        </div>
+      </details>
+    </section>
+
+    <!-- Recommended Products -->
+    <section class="scenario-section">
+      <h2 class="section-title">
+        <Icon name="ShoppingBag" size={20} />
+        Empfohlene Produkte
+      </h2>
+      <p class="section-intro">Unsere Ratgeber zu den wichtigsten Produkten für dieses Szenario:</p>
+      <div class="related-grid">
+        <a href="/de/produkte/taschenlampen/" class="related-card related-card--green">
+          <Icon name="Flashlight" size={24} />
+          <span>Taschenlampen</span>
+        </a>
+        <a href="/de/produkte/powerbanks/" class="related-card related-card--green">
+          <Icon name="Battery" size={24} />
+          <span>Powerbanks</span>
+        </a>
+        <a href="/de/produkte/notfallradio/" class="related-card related-card--purple">
+          <Icon name="Radio" size={24} />
+          <span>Notfallradio</span>
+        </a>
+        <a href="/de/produkte/notnahrung/" class="related-card related-card--purple">
+          <Icon name="UtensilsCrossed" size={24} />
+          <span>Notnahrung</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- Related Scenarios -->
+    <section class="scenario-section">
+      <h2 class="section-title">Verwandte Szenarien</h2>
+      <div class="related-grid">
+        <a href="/de/szenarien/hitzewelle/" class="related-card related-card--orange">
+          <Icon name="Sun" size={24} />
+          <span>Hitzewelle</span>
+        </a>
+        <a href="/de/szenarien/wasserausfall/" class="related-card related-card--blue">
+          <Icon name="Droplet" size={24} />
+          <span>Wasserausfall</span>
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <!-- Sticky Action Bar -->
+  <StickyActionBar
+    client:idle
+    actionText="Energie berechnen"
+    actionUrl="/de/tools/energie-rechner/"
+    dismissKey={`scenario_${scenarioKey}_de`}
+    label="Nächster Schritt:"
+    locale="de"
+  />
+</BaseLayout>
+
+<style>
+  .scenario-page {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 0 16px 120px;
+  }
+
+  /* Header */
+  .scenario-header {
+    padding: 16px 0 24px;
+  }
+
+  .scenario-breadcrumb {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 16px;
+  }
+
+  .breadcrumb-back {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    background: var(--color-bg-secondary);
+    border-radius: 10px;
+    color: var(--color-text-secondary);
+    transition: all 0.15s ease;
+  }
+
+  .breadcrumb-back:hover {
+    background: var(--color-bg-tertiary);
+    color: var(--color-text-primary);
+  }
+
+  .breadcrumb-current {
+    font-size: 14px;
+    color: var(--color-text-muted);
+  }
+
+  .scenario-title-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+  }
+
+  .scenario-icon {
+    flex-shrink: 0;
+    width: 56px;
+    height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 16px;
+  }
+
+  .scenario-icon--amber {
+    background: rgba(245, 158, 11, 0.15);
+    color: #f59e0b;
+  }
+
+  .scenario-title-content {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .scenario-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--color-text-primary);
+    margin: 0 0 6px;
+    line-height: 1.2;
+  }
+
+  .scenario-meta {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    color: var(--color-text-muted);
+  }
+
+  .meta-divider {
+    opacity: 0.5;
+  }
+
+  /* Government Notice */
+  .gov-notice {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 14px 16px;
+    background: rgba(59, 130, 246, 0.1);
+    border: 1px solid rgba(59, 130, 246, 0.2);
+    border-radius: 12px;
+    margin-bottom: 8px;
+  }
+
+  .gov-notice-icon {
+    flex-shrink: 0;
+    color: #3b82f6;
+  }
+
+  .gov-notice-content {
+    font-size: 14px;
+    color: var(--color-text-secondary);
+    line-height: 1.5;
+  }
+
+  .gov-notice-content strong {
+    color: var(--color-text-primary);
+  }
+
+  .gov-notice-content a {
+    color: #3b82f6;
+    text-decoration: none;
+  }
+
+  .gov-notice-content a:hover {
+    text-decoration: underline;
+  }
+
+  /* Sections */
+  .scenario-section {
+    margin-bottom: 32px;
+  }
+
+  .section-title {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: var(--color-text-primary);
+    margin: 0 0 12px;
+  }
+
+  .section-intro {
+    font-size: 14px;
+    color: var(--color-text-muted);
+    margin: 0 0 16px;
+  }
+
+  /* Phase Sections */
+  .phase-section {
+    padding: 24px 0;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .phase-section:last-of-type {
+    border-bottom: none;
+  }
+
+  .phase-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    margin-bottom: 20px;
+  }
+
+  .phase-number {
+    flex-shrink: 0;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--color-accent-subtle);
+    color: var(--color-accent-primary);
+    font-size: 18px;
+    font-weight: 700;
+    border-radius: 12px;
+  }
+
+  .phase-number--warning {
+    background: rgba(245, 158, 11, 0.15);
+    color: #f59e0b;
+  }
+
+  .phase-number--success {
+    background: rgba(34, 197, 94, 0.15);
+    color: #22c55e;
+  }
+
+  .phase-title-group {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .phase-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--color-text-primary);
+    margin: 0 0 4px;
+  }
+
+  .phase-subtitle {
+    font-size: 14px;
+    color: var(--color-text-muted);
+    margin: 0;
+  }
+
+  .phase-steps {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  /* Step Tips */
+  .step-tip {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    margin-top: 12px;
+    padding: 10px 12px;
+    background: var(--color-accent-subtle);
+    border-radius: 8px;
+    font-size: 13px;
+    color: var(--color-accent-primary);
+  }
+
+  .step-tip svg {
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  /* Warning Box */
+  .warning-box {
+    display: flex;
+    gap: 16px;
+    padding: 16px;
+    margin-bottom: 20px;
+    background: rgba(239, 68, 68, 0.1);
+    border: 1px solid rgba(239, 68, 68, 0.3);
+    border-radius: 12px;
+  }
+
+  .warning-icon {
+    flex-shrink: 0;
+    color: #ef4444;
+  }
+
+  .warning-content {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .warning-content strong {
+    display: block;
+    font-size: 14px;
+    color: #ef4444;
+    margin-bottom: 8px;
+  }
+
+  .warning-content ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .warning-content li {
+    position: relative;
+    padding-left: 16px;
+    font-size: 13px;
+    color: var(--color-text-secondary);
+    line-height: 1.6;
+  }
+
+  .warning-content li::before {
+    content: '•';
+    position: absolute;
+    left: 0;
+    color: #ef4444;
+  }
+
+  /* Situations Grid */
+  .situations-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+
+  .situation-card {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 16px;
+    background: var(--color-bg-secondary);
+    border: 1px solid var(--color-border);
+    border-radius: 12px;
+  }
+
+  .situation-icon {
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--color-bg-tertiary);
+    color: var(--color-text-muted);
+    border-radius: 10px;
+  }
+
+  .situation-title {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--color-text-primary);
+    margin: 0;
+  }
+
+  .situation-text {
+    font-size: 12px;
+    color: var(--color-text-secondary);
+    line-height: 1.5;
+    margin: 0;
+  }
+
+  /* FAQs */
+  .faq-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .faq-item {
+    background: var(--color-bg-secondary);
+    border: 1px solid var(--color-border);
+    border-radius: 12px;
+    overflow: hidden;
+  }
+
+  .faq-question {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 14px 16px;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--color-text-primary);
+    cursor: pointer;
+    list-style: none;
+  }
+
+  .faq-question::-webkit-details-marker {
+    display: none;
+  }
+
+  .faq-question svg {
+    flex-shrink: 0;
+    color: var(--color-text-muted);
+    transition: transform 0.2s ease;
+  }
+
+  .faq-item[open] .faq-question svg {
+    transform: rotate(180deg);
+  }
+
+  .faq-answer {
+    padding: 0 16px 14px;
+  }
+
+  .faq-answer p {
+    font-size: 14px;
+    color: var(--color-text-secondary);
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  /* Sources */
+  .sources-block {
+    background: var(--color-bg-secondary);
+    border-radius: 12px;
+    overflow: hidden;
+  }
+
+  .sources-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 16px;
+    font-size: 14px;
+    color: var(--color-text-muted);
+    cursor: pointer;
+    list-style: none;
+  }
+
+  .sources-header::-webkit-details-marker {
+    display: none;
+  }
+
+  .sources-header svg:last-child {
+    margin-left: auto;
+    transition: transform 0.2s ease;
+  }
+
+  .sources-block[open] .sources-header svg:last-child {
+    transform: rotate(180deg);
+  }
+
+  .sources-content {
+    padding: 0 16px 14px;
+  }
+
+  .sources-content ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .sources-content li {
+    margin-bottom: 8px;
+  }
+
+  .sources-content a {
+    font-size: 13px;
+    color: var(--color-accent-primary);
+    text-decoration: none;
+  }
+
+  .sources-content a:hover {
+    text-decoration: underline;
+  }
+
+  /* Related Scenarios */
+  .related-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+
+  .related-card {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 16px;
+    border-radius: 12px;
+    text-decoration: none;
+    transition: transform 0.15s ease;
+  }
+
+  .related-card:hover {
+    transform: translateY(-2px);
+  }
+
+  .related-card span {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--color-text-primary);
+  }
+
+  .related-card--orange {
+    background: rgba(249, 115, 22, 0.1);
+    border: 1px solid rgba(249, 115, 22, 0.2);
+    color: #f97316;
+  }
+
+  .related-card--blue {
+    background: rgba(59, 130, 246, 0.1);
+    border: 1px solid rgba(59, 130, 246, 0.2);
+    color: #3b82f6;
+  }
+
+  .related-card--green {
+    background: rgba(34, 197, 94, 0.1);
+    border: 1px solid rgba(34, 197, 94, 0.2);
+    color: #22c55e;
+  }
+
+  .related-card--purple {
+    background: rgba(139, 92, 246, 0.1);
+    border: 1px solid rgba(139, 92, 246, 0.2);
+    color: #8b5cf6;
+  }
+
+  /* Mobile adjustments */
+  @media (max-width: 480px) {
+    .scenario-page {
+      padding: 0 12px 120px;
+    }
+
+    .scenario-title {
+      font-size: 1.25rem;
+    }
+
+    .situations-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .related-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

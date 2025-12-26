@@ -1,0 +1,1006 @@
+---
+/**
+ * Hitzewelle Scenario Page (DE)
+ *
+ * German heat wave preparation guide with:
+ * - DWD warning system references
+ * - German context (housing, climate)
+ * - Amazon.de product links
+ * - BBK/DRK health guidance
+ */
+import BaseLayout from '../../../../layouts/BaseLayout.astro';
+import TLDRBlock from '../../../../components/hub/TLDRBlock.astro';
+import CollapsibleSection from '../../../../components/hub/CollapsibleSection.astro';
+import PhaseTabs from '../../../../components/hub/PhaseTabs.tsx';
+import InteractiveChecklist from '../../../../components/hub/InteractiveChecklist.tsx';
+import StickyActionBar from '../../../../components/hub/StickyActionBar.tsx';
+import Icon from '../../../../components/ui/Icon.astro';
+import HeroImage from '../../../../components/content/HeroImage.astro';
+
+const scenarioKey = 'hitzewelle';
+
+// Phase content - German specific
+const phases = {
+  vor: [
+    {
+      title: 'Verfolge DWD-Warnungen',
+      detail: 'Aktiviere Benachrichtigungen der DWD WarnWetter App. Hitzewarnung ab 32°C.',
+      tip: 'Stelle Pushmeldungen für deine Region ein'
+    },
+    {
+      title: 'Identifiziere kühle Orte',
+      detail: 'Bibliotheken, Einkaufszentren, Rathäuser. Viele Städte richten Kühlräume ein.',
+      tip: 'Notiere Adressen und Öffnungszeiten offline'
+    },
+    {
+      title: 'Prüfe Belüftung und Sonnenschutz',
+      detail: 'Deutsche Häuser sind gut isoliert gegen Kälte, halten aber auch Wärme fest.',
+      tip: 'Überlege reflektierende Fensterfolie für Südfenster'
+    },
+    {
+      title: 'Lege extra Wasser an',
+      detail: 'Mindestens 5-6 Liter pro Person pro Tag, mehr als normal.',
+      tip: 'Friere Wasserflaschen ein: dienen auch als Kühlelemente'
+    },
+    {
+      title: 'Kaufe Elektrolytlösung',
+      detail: 'In der Apotheke erhältlich. Unverzichtbar zum Ausgleich von Salzen bei starkem Schwitzen.',
+      tip: 'Auch isotonische Getränke funktionieren, enthalten aber mehr Zucker'
+    },
+    {
+      title: 'Kontaktiere gefährdete Menschen',
+      detail: 'Vereinbare, ältere Familienmitglieder oder alleinstehende Nachbarn täglich anzurufen.',
+      tip: null
+    },
+  ],
+  waehrend: [
+    {
+      title: 'Vermeide Aktivitäten im Freien 11:00-18:00',
+      detail: 'Die heißesten Stunden des Tages. Plane Einkäufe und Aktivitäten früh oder spät.',
+      tip: null
+    },
+    {
+      title: 'Trinke regelmäßig, auch ohne Durst',
+      detail: 'Wenn du Durst spürst, bist du bereits leicht dehydriert. Stelle Erinnerungen ein.',
+      tip: 'Trinke alle halbe Stunde ein Glas Wasser'
+    },
+    {
+      title: 'Halte dein Zuhause kühl',
+      detail: 'Schließe Vorhänge und Rollläden tagsüber. Öffne Fenster nur wenn es draußen kühler ist.',
+      tip: 'Hänge nasse Handtücher vor offene Fenster für zusätzliche Kühlung'
+    },
+    {
+      title: 'Reduziere körperliche Anstrengung',
+      detail: 'Verschiebe Sport und schwere Arbeiten. Falls nötig: nur am frühen Morgen.',
+      tip: null
+    },
+    {
+      title: 'Iss leicht und frisch',
+      detail: 'Salate, Obst, kalte Mahlzeiten. Vermeide schwere, warme Mahlzeiten.',
+      tip: 'Wassermelone und Gurke enthalten viel Flüssigkeit'
+    },
+    {
+      title: 'Erkenne Warnsignale',
+      detail: 'Verwirrung, kein Schwitzen mehr, hohe Temperatur = rufe 112 an.',
+      tip: null
+    },
+  ],
+  nach: [
+    {
+      title: 'Bleibe hydriert',
+      detail: 'Dein Körper braucht Zeit zur Erholung. Trinke die folgenden Tage extra.',
+      tip: null
+    },
+    {
+      title: 'Fülle deine Vorräte auf',
+      detail: 'Wasser, Elektrolyte und frisches Obst das du verbraucht hast.',
+      tip: null
+    },
+    {
+      title: 'Prüfe gefährdete Menschen',
+      detail: 'Ältere, kleine Kinder und chronisch Kranke können verzögerte Auswirkungen erleben.',
+      tip: null
+    },
+    {
+      title: 'Bewerte was funktioniert hat',
+      detail: 'Notiere welche Maßnahmen wirksam waren für die nächste Hitzewelle.',
+      tip: null
+    },
+  ],
+};
+
+// Heat risks - German terminology
+const heatRisks = [
+  { condition: 'Hitzschlag', symptoms: 'Temp >40°C, trockene Haut, Verwirrtheit', action: 'NOTFALL 112', severity: 'critical' },
+  { condition: 'Hitzeerschöpfung', symptoms: 'Starkes Schwitzen, Schwäche, Übelkeit', action: 'Kühler Ort, Flüssigkeit', severity: 'warning' },
+];
+
+// Checklist categories - DE products with Amazon.de links
+const checklistCategories = [
+  {
+    id: 'hydratation',
+    name: 'Hydratation',
+    icon: 'droplet',
+    items: [
+      { id: 'wasser-extra', name: 'Extra Flaschenwasser', quantity: '5-6L/Person/Tag', priority: 'critical' as const, notes: 'Mehr als normal wegen Hitze' },
+      { id: 'elektrolyte', name: 'Elektrolytlösung', quantity: '10+ Beutel', priority: 'critical' as const, notes: 'Gleicht verlorene Salze aus', affiliateUrl: 'https://www.amazon.de/s?k=elektrolyte+pulver' },
+      { id: 'isotonisch', name: 'Isotonische Getränke', quantity: '6-12 Stück', priority: 'recommended' as const, notes: 'Alternative zu Elektrolyten' },
+      { id: 'trinkflasche', name: 'Wiederverwendbare Trinkflasche', quantity: '1 pro Person', priority: 'recommended' as const, notes: 'Um immer Wasser dabei zu haben' },
+    ]
+  },
+  {
+    id: 'kuehlung',
+    name: 'Kühlung',
+    icon: 'snowflake',
+    items: [
+      { id: 'ventilator-usb', name: 'USB/Batterie Ventilator', quantity: '1-2 Stück', priority: 'recommended' as const, notes: 'Funktioniert auch bei Stromausfall', affiliateUrl: 'https://www.amazon.de/s?k=usb+ventilator+tragbar' },
+      { id: 'mikrofasertuecher', name: 'Mikrofasertücher', quantity: '2 pro Person', priority: 'critical' as const, notes: 'Nass machen zum Abkühlen' },
+      { id: 'spruehflasche', name: 'Sprühflasche', quantity: '1-2 Stück', priority: 'recommended' as const, notes: 'Wasser vernebeln + Ventilator = effektiv' },
+      { id: 'kuehlakkus', name: 'Kühlakkus', quantity: '4-6 Stück', priority: 'critical' as const, notes: 'Vorher einfrieren', affiliateUrl: 'https://www.amazon.de/s?k=kuehlakkus' },
+      { id: 'kuehltasche', name: 'Kühltasche', quantity: '1 Stück', priority: 'recommended' as const, notes: 'Für kalte Getränke und Kompressen', affiliateUrl: 'https://www.amazon.de/s?k=kuehltasche' },
+    ]
+  },
+  {
+    id: 'sonnenschutz',
+    name: 'Sonnenschutz',
+    icon: 'sun',
+    items: [
+      { id: 'sonnencreme', name: 'Sonnencreme LSF50+', quantity: '1 große Flasche', priority: 'critical' as const, notes: 'Alle 2 Stunden erneut auftragen', affiliateUrl: 'https://www.amazon.de/s?k=sonnencreme+lsf50' },
+      { id: 'sonnenhut', name: 'Sonnenhut mit breiter Krempe', quantity: '1 pro Person', priority: 'critical' as const, notes: 'Schützt Gesicht und Nacken' },
+      { id: 'sonnenbrille', name: 'Sonnenbrille mit UV-Schutz', quantity: '1 pro Person', priority: 'recommended' as const, notes: 'Schützt die Augen' },
+      { id: 'leichte-kleidung', name: 'Leichte, lockere Kleidung', quantity: '2-3 Sets', priority: 'recommended' as const, notes: 'Atmungsaktiv, helle Farben' },
+    ]
+  },
+  {
+    id: 'ueberwachung',
+    name: 'Überwachen',
+    icon: 'thermometer',
+    items: [
+      { id: 'fieberthermometer', name: 'Fieberthermometer', quantity: '1 Stück', priority: 'critical' as const, notes: 'Um Fieber/Hitzschlag zu erkennen' },
+      { id: 'raumthermometer', name: 'Raumthermometer', quantity: '1 Stück', priority: 'recommended' as const, notes: 'Wissen wann zu lüften', affiliateUrl: 'https://www.amazon.de/s?k=digitales+thermometer+innen' },
+      { id: 'radio-batterie', name: 'Radio mit Batterien', quantity: '1 Stück', priority: 'recommended' as const, notes: 'DWD Warnungen verfolgen', affiliateUrl: 'https://www.amazon.de/s?k=tragbares+radio+batterie' },
+    ]
+  },
+];
+
+// Risk groups - German context
+const riskGroups = [
+  { group: 'Ältere (65+)', icon: 'Users', tip: 'Täglich anrufen/besuchen, beim Trinken helfen' },
+  { group: 'Babys und Kleinkinder', icon: 'Baby', tip: 'NIEMALS allein im Auto, extra Flüssigkeit geben' },
+  { group: 'Chronisch Kranke', icon: 'Heart', tip: 'Medikation prüfen, Aktionsplan mit Arzt besprechen' },
+  { group: 'Arbeiter im Freien', icon: 'HardHat', tip: 'Pausen im Schatten, 11-18 Uhr vermeiden' },
+];
+
+// FAQs - German context
+const faqs = [
+  {
+    question: 'Wann ist offiziell von einer Hitzewelle die Rede?',
+    answer: 'In Deutschland: Mehrere aufeinanderfolgende Tage mit Höchsttemperaturen über 30°C. Der DWD gibt dann Hitzewarnungen heraus.'
+  },
+  {
+    question: 'Warum sind deutsche Häuser bei Hitze so warm?',
+    answer: 'Deutsche Wohnungen sind darauf ausgelegt, Wärme gegen die Kälte zu speichern. Gute Isolierung wirkt auch umgekehrt: Wärme entweicht nur schwer.'
+  },
+  {
+    question: 'Hilft ein Ventilator über 35°C noch?',
+    answer: 'Ein Ventilator allein bewegt nur warme Luft. Aber kombiniere ihn mit feuchter Haut oder nassen Tüchern, dann beschleunigt er die Verdunstung und kühlt.'
+  },
+  {
+    question: 'Wie viel muss ich trinken?',
+    answer: 'Bei extremer Hitze: 3-4 Liter pro Tag für nicht aktive Erwachsene. Mehr bei Bewegung. Trinke regelmäßig kleine Mengen.'
+  },
+  {
+    question: 'Was wenn ich keine Klimaanlage habe?',
+    answer: 'Suche kühle öffentliche Orte (Bibliothek, Einkaufszentrum). Zuhause: Rollläden zu, nasse Handtücher, Ventilator + Wasser vernebeln, kühl duschen.'
+  },
+];
+---
+
+<BaseLayout
+  title="Hitzewelle: Richtig vorbereiten & überleben — Checkliste 2025"
+  description="Vollständiger Ratgeber zur Vorbereitung auf Hitzewellen in Deutschland. Hydratation, Kühlung, Risikogruppen und Checkliste. DWD und BBK Richtlinien."
+  locale="de"
+  schemaType="HowTo"
+  dateModified="2025-12-15"
+  datePublished="2025-12-15"
+  alternates={{
+    es: '/es/escenarios/prepararse-ola-calor/',
+    nl: '/nl/scenario/hittegolf/',
+  }}
+  schemaData={{
+    step: [
+      { '@type': 'HowToStep', name: 'Verfolge DWD-Warnungen', text: 'Aktiviere Benachrichtigungen der DWD WarnWetter App. Hitzewarnung ab 32°C.' },
+      { '@type': 'HowToStep', name: 'Identifiziere kühle Orte', text: 'Bibliotheken, Einkaufszentren, Rathäuser. Viele Städte richten Kühlräume ein.' },
+      { '@type': 'HowToStep', name: 'Lege extra Wasser an', text: 'Mindestens 5-6 Liter pro Person pro Tag. Friere Wasserflaschen ein.' },
+      { '@type': 'HowToStep', name: 'Kaufe Elektrolytlösung', text: 'In der Apotheke erhältlich. Unverzichtbar zum Ausgleich von Salzen bei starkem Schwitzen.' },
+      { '@type': 'HowToStep', name: 'Vermeide Aktivitäten 11:00-18:00', text: 'Die heißesten Stunden des Tages. Plane Aktivitäten früh oder spät.' },
+      { '@type': 'HowToStep', name: 'Trinke regelmäßig', text: 'Wenn du Durst spürst, bist du bereits leicht dehydriert. Trinke alle halbe Stunde.' },
+      { '@type': 'HowToStep', name: 'Erkenne Warnsignale', text: 'Verwirrung, kein Schwitzen mehr, hohe Temperatur = rufe 112 an.' },
+    ],
+    totalTime: 'P3D',
+    supply: [
+      { '@type': 'HowToSupply', name: 'Extra Flaschenwasser (5-6L/Person/Tag)' },
+      { '@type': 'HowToSupply', name: 'Elektrolytlösung' },
+      { '@type': 'HowToSupply', name: 'USB/Batterie Ventilator' },
+      { '@type': 'HowToSupply', name: 'Mikrofasertücher' },
+      { '@type': 'HowToSupply', name: 'Sonnencreme LSF50+' },
+      { '@type': 'HowToSupply', name: 'Fieberthermometer' },
+    ],
+  }}
+  faqData={faqs}
+>
+  <main class="scenario-page">
+    <!-- Header -->
+    <header class="scenario-header">
+      <nav class="scenario-breadcrumb">
+        <a href="/de/szenarien/" class="breadcrumb-back">
+          <Icon name="ChevronLeft" size={20} />
+        </a>
+        <span class="breadcrumb-current">Hitzewelle</span>
+      </nav>
+
+      <div class="scenario-title-row">
+        <div class="scenario-icon scenario-icon--orange">
+          <Icon name="Sun" size={28} />
+        </div>
+        <div class="scenario-title-content">
+          <h1 class="scenario-title">Vorbereitung auf eine Hitzewelle</h1>
+          <div class="scenario-meta">
+            <span class="meta-item">8 min</span>
+            <span class="meta-divider">·</span>
+            <span class="meta-item">Aktualisiert Dez 2025</span>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Hero Image -->
+    <section class="scenario-section">
+      <HeroImage
+        src="/images/shared/heat-wave-sun.webp"
+        alt="Extreme Hitze und Sonnenschein während einer Hitzewelle"
+        priority={true}
+      />
+    </section>
+
+    <!-- TL;DR -->
+    <section class="scenario-section">
+      <TLDRBlock
+        summary="Hitzewellen werden in Deutschland immer häufiger und intensiver. Der Schlüssel: Trinke kontinuierlich (3-4 Liter/Tag), meide die Mittagssonne und erkenne die Symptome eines Hitzschlags. Deutsche Häuser speichern Wärme - suche kühle öffentliche Orte auf."
+        keyStat="3-4 Liter/Tag"
+        keyStatLabel="Trinke mindestens"
+        locale="de"
+      />
+    </section>
+
+    <!-- Government Notice -->
+    <section class="scenario-section">
+      <div class="gov-notice">
+        <div class="gov-notice-icon">
+          <Icon name="Shield" size={20} />
+        </div>
+        <div class="gov-notice-content">
+          <strong>DWD-Empfehlung:</strong> Bei Hitzewarnungen körperliche Anstrengung vermeiden und viel trinken.
+          Mehr Infos auf <a href="https://www.dwd.de/DE/leistungen/warnwetterapp/warnwetterapp.html" target="_blank" rel="noopener">dwd.de</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Phase Tabs -->
+    <PhaseTabs
+      client:idle
+      scenarioKey={scenarioKey}
+      locale="de"
+    />
+
+    <!-- Phase: Vor -->
+    <section id="vor" class="phase-section">
+      <div class="phase-header">
+        <span class="phase-number">1</span>
+        <div class="phase-title-group">
+          <h2 class="phase-title">Vor der Hitzewelle</h2>
+          <p class="phase-subtitle">Präventive Vorbereitung</p>
+        </div>
+      </div>
+
+      <div class="phase-steps">
+        {phases.vor.map((step, index) => (
+          <CollapsibleSection
+            title={step.title}
+            summary={step.detail}
+            step={index + 1}
+            variant="card"
+          >
+            <p>{step.detail}</p>
+            {step.tip && (
+              <div class="step-tip">
+                <Icon name="Lightbulb" size={16} />
+                <span>{step.tip}</span>
+              </div>
+            )}
+          </CollapsibleSection>
+        ))}
+      </div>
+    </section>
+
+    <!-- Phase: Während -->
+    <section id="waehrend" class="phase-section">
+      <div class="phase-header">
+        <span class="phase-number phase-number--warning">2</span>
+        <div class="phase-title-group">
+          <h2 class="phase-title">Während der Hitzewelle</h2>
+          <p class="phase-subtitle">Überleben bei extremer Hitze</p>
+        </div>
+      </div>
+
+      <!-- Warning Box -->
+      <div class="warning-box">
+        <div class="warning-icon">
+          <Icon name="AlertTriangle" size={24} />
+        </div>
+        <div class="warning-content">
+          <strong>Notsignale</strong>
+          <ul>
+            {heatRisks.map((risk) => (
+              <li>
+                <strong class={risk.severity === 'critical' ? 'text-red' : ''}>{risk.condition}:</strong> {risk.symptoms} → {risk.action}
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+
+      <div class="phase-steps">
+        {phases.waehrend.map((step, index) => (
+          <CollapsibleSection
+            title={step.title}
+            summary={step.detail}
+            step={index + 1}
+            variant="card"
+          >
+            <p>{step.detail}</p>
+            {step.tip && (
+              <div class="step-tip">
+                <Icon name="Lightbulb" size={16} />
+                <span>{step.tip}</span>
+              </div>
+            )}
+          </CollapsibleSection>
+        ))}
+      </div>
+    </section>
+
+    <!-- Phase: Nach -->
+    <section id="nach" class="phase-section">
+      <div class="phase-header">
+        <span class="phase-number phase-number--success">3</span>
+        <div class="phase-title-group">
+          <h2 class="phase-title">Nach der Hitzewelle</h2>
+          <p class="phase-subtitle">Erholung</p>
+        </div>
+      </div>
+
+      <div class="phase-steps">
+        {phases.nach.map((step, index) => (
+          <CollapsibleSection
+            title={step.title}
+            summary={step.detail}
+            step={index + 1}
+            variant="card"
+          >
+            <p>{step.detail}</p>
+            {step.tip && (
+              <div class="step-tip">
+                <Icon name="Lightbulb" size={16} />
+                <span>{step.tip}</span>
+              </div>
+            )}
+          </CollapsibleSection>
+        ))}
+      </div>
+    </section>
+
+    <!-- Risk Groups -->
+    <section class="scenario-section">
+      <h2 class="section-title">Risikogruppen</h2>
+      <div class="risk-groups-grid">
+        {riskGroups.map((group) => (
+          <div class="risk-group-card">
+            <div class="risk-group-icon">
+              <Icon name={group.icon as any} size={20} />
+            </div>
+            <div class="risk-group-content">
+              <h3 class="risk-group-title">{group.group}</h3>
+              <p class="risk-group-tip">{group.tip}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <!-- Interactive Checklist -->
+    <section class="scenario-section">
+      <h2 class="section-title">
+        <Icon name="CheckSquare" size={24} />
+        Deine Hitzewelle-Checkliste
+      </h2>
+      <p class="section-intro">
+        Hake ab was du schon hast. Dein Fortschritt wird automatisch gespeichert.
+      </p>
+      <InteractiveChecklist
+        client:idle
+        storageKey={`${scenarioKey}_de`}
+        categories={checklistCategories}
+        title="Artikel für Hitzewelle"
+        locale="de"
+      />
+    </section>
+
+    <!-- FAQs -->
+    <section class="scenario-section">
+      <h2 class="section-title">Häufig gestellte Fragen</h2>
+      <div class="faq-list">
+        {faqs.map((faq) => (
+          <details class="faq-item">
+            <summary class="faq-question">
+              <span>{faq.question}</span>
+              <Icon name="ChevronDown" size={20} />
+            </summary>
+            <div class="faq-answer">
+              <p>{faq.answer}</p>
+            </div>
+          </details>
+        ))}
+      </div>
+    </section>
+
+    <!-- Sources -->
+    <section class="scenario-section">
+      <details class="sources-block">
+        <summary class="sources-header">
+          <Icon name="BookOpen" size={18} />
+          <span>Quellen und Referenzen</span>
+          <Icon name="ChevronDown" size={16} />
+        </summary>
+        <div class="sources-content">
+          <ul>
+            <li><a href="https://www.dwd.de/" target="_blank" rel="noopener">DWD - Deutscher Wetterdienst</a></li>
+            <li><a href="https://www.bbk.bund.de/DE/Warnung-Vorsorge/Tipps-Notsituationen/Hitze/hitze_node.html" target="_blank" rel="noopener">BBK - Hitze</a></li>
+            <li><a href="https://www.rki.de/" target="_blank" rel="noopener">RKI - Robert Koch-Institut</a></li>
+            <li><a href="https://www.drk.de/" target="_blank" rel="noopener">Deutsches Rotes Kreuz - Hitzschlag</a></li>
+          </ul>
+        </div>
+      </details>
+    </section>
+
+    <!-- Recommended Products -->
+    <section class="scenario-section">
+      <h2 class="section-title">
+        <Icon name="ShoppingBag" size={20} />
+        Empfohlene Produkte
+      </h2>
+      <p class="section-intro">Unsere Ratgeber zu den wichtigsten Produkten für dieses Szenario:</p>
+      <div class="related-grid">
+        <a href="/de/produkte/wasserspeicher/" class="related-card related-card--green">
+          <Icon name="Droplet" size={24} />
+          <span>Wasserspeicher</span>
+        </a>
+        <a href="/de/produkte/erste-hilfe-kasten/" class="related-card related-card--green">
+          <Icon name="Heart" size={24} />
+          <span>Erste-Hilfe-Kasten</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- Related Scenarios -->
+    <section class="scenario-section">
+      <h2 class="section-title">Verwandte Szenarien</h2>
+      <div class="related-grid">
+        <a href="/de/szenarien/stromausfall/" class="related-card related-card--amber">
+          <Icon name="Zap" size={24} />
+          <span>Stromausfall</span>
+        </a>
+        <a href="/de/szenarien/wasserausfall/" class="related-card related-card--blue">
+          <Icon name="Droplet" size={24} />
+          <span>Wasserausfall</span>
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <!-- Sticky Action Bar -->
+  <StickyActionBar
+    client:idle
+    actionText="Wasser berechnen"
+    actionUrl="/de/tools/wasser-rechner/"
+    dismissKey={`scenario_${scenarioKey}_de`}
+    label="Nächster Schritt:"
+    locale="de"
+  />
+</BaseLayout>
+
+<style>
+  .scenario-page {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 0 16px 120px;
+  }
+
+  .scenario-header {
+    padding: 16px 0 24px;
+  }
+
+  .scenario-breadcrumb {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 16px;
+  }
+
+  .breadcrumb-back {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    background: var(--color-bg-secondary);
+    border-radius: 10px;
+    color: var(--color-text-secondary);
+    transition: all 0.15s ease;
+  }
+
+  .breadcrumb-back:hover {
+    background: var(--color-bg-tertiary);
+    color: var(--color-text-primary);
+  }
+
+  .breadcrumb-current {
+    font-size: 14px;
+    color: var(--color-text-muted);
+  }
+
+  .scenario-title-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+  }
+
+  .scenario-icon {
+    flex-shrink: 0;
+    width: 56px;
+    height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 16px;
+  }
+
+  .scenario-icon--orange {
+    background: rgba(249, 115, 22, 0.15);
+    color: #f97316;
+  }
+
+  .scenario-title-content {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .scenario-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--color-text-primary);
+    margin: 0 0 6px;
+    line-height: 1.2;
+  }
+
+  .scenario-meta {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    color: var(--color-text-muted);
+  }
+
+  .meta-divider {
+    opacity: 0.5;
+  }
+
+  /* Government Notice */
+  .gov-notice {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 14px 16px;
+    background: rgba(249, 115, 22, 0.1);
+    border: 1px solid rgba(249, 115, 22, 0.2);
+    border-radius: 12px;
+    margin-bottom: 8px;
+  }
+
+  .gov-notice-icon {
+    flex-shrink: 0;
+    color: #f97316;
+  }
+
+  .gov-notice-content {
+    font-size: 14px;
+    color: var(--color-text-secondary);
+    line-height: 1.5;
+  }
+
+  .gov-notice-content strong {
+    color: var(--color-text-primary);
+  }
+
+  .gov-notice-content a {
+    color: #f97316;
+    text-decoration: none;
+  }
+
+  .gov-notice-content a:hover {
+    text-decoration: underline;
+  }
+
+  .scenario-section {
+    margin-bottom: 32px;
+  }
+
+  .section-title {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: var(--color-text-primary);
+    margin: 0 0 12px;
+  }
+
+  .section-intro {
+    font-size: 14px;
+    color: var(--color-text-muted);
+    margin: 0 0 16px;
+  }
+
+  .phase-section {
+    padding: 24px 0;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .phase-section:last-of-type {
+    border-bottom: none;
+  }
+
+  .phase-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    margin-bottom: 20px;
+  }
+
+  .phase-number {
+    flex-shrink: 0;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--color-accent-subtle);
+    color: var(--color-accent-primary);
+    font-size: 18px;
+    font-weight: 700;
+    border-radius: 12px;
+  }
+
+  .phase-number--warning {
+    background: rgba(249, 115, 22, 0.15);
+    color: #f97316;
+  }
+
+  .phase-number--success {
+    background: rgba(34, 197, 94, 0.15);
+    color: #22c55e;
+  }
+
+  .phase-title-group {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .phase-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--color-text-primary);
+    margin: 0 0 4px;
+  }
+
+  .phase-subtitle {
+    font-size: 14px;
+    color: var(--color-text-muted);
+    margin: 0;
+  }
+
+  .phase-steps {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .step-tip {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    margin-top: 12px;
+    padding: 10px 12px;
+    background: var(--color-accent-subtle);
+    border-radius: 8px;
+    font-size: 13px;
+    color: var(--color-accent-primary);
+  }
+
+  .step-tip svg {
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  .warning-box {
+    display: flex;
+    gap: 16px;
+    padding: 16px;
+    margin-bottom: 20px;
+    background: rgba(239, 68, 68, 0.1);
+    border: 1px solid rgba(239, 68, 68, 0.3);
+    border-radius: 12px;
+  }
+
+  .warning-icon {
+    flex-shrink: 0;
+    color: #ef4444;
+  }
+
+  .warning-content {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .warning-content strong {
+    display: block;
+    font-size: 14px;
+    color: #ef4444;
+    margin-bottom: 8px;
+  }
+
+  .warning-content ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .warning-content li {
+    font-size: 13px;
+    color: var(--color-text-secondary);
+    line-height: 1.6;
+    margin-bottom: 4px;
+  }
+
+  .warning-content .text-red {
+    color: #ef4444;
+  }
+
+  /* Risk Groups */
+  .risk-groups-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+
+  .risk-group-card {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 14px;
+    background: var(--color-bg-secondary);
+    border: 1px solid var(--color-border);
+    border-radius: 12px;
+  }
+
+  .risk-group-icon {
+    flex-shrink: 0;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(249, 115, 22, 0.1);
+    color: #f97316;
+    border-radius: 10px;
+  }
+
+  .risk-group-content {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .risk-group-title {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--color-text-primary);
+    margin: 0 0 4px;
+  }
+
+  .risk-group-tip {
+    font-size: 12px;
+    color: var(--color-text-muted);
+    line-height: 1.4;
+    margin: 0;
+  }
+
+  /* FAQs */
+  .faq-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .faq-item {
+    background: var(--color-bg-secondary);
+    border: 1px solid var(--color-border);
+    border-radius: 12px;
+    overflow: hidden;
+  }
+
+  .faq-question {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 14px 16px;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--color-text-primary);
+    cursor: pointer;
+    list-style: none;
+  }
+
+  .faq-question::-webkit-details-marker {
+    display: none;
+  }
+
+  .faq-question svg {
+    flex-shrink: 0;
+    color: var(--color-text-muted);
+    transition: transform 0.2s ease;
+  }
+
+  .faq-item[open] .faq-question svg {
+    transform: rotate(180deg);
+  }
+
+  .faq-answer {
+    padding: 0 16px 14px;
+  }
+
+  .faq-answer p {
+    font-size: 14px;
+    color: var(--color-text-secondary);
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  /* Sources */
+  .sources-block {
+    background: var(--color-bg-secondary);
+    border-radius: 12px;
+    overflow: hidden;
+  }
+
+  .sources-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 16px;
+    font-size: 14px;
+    color: var(--color-text-muted);
+    cursor: pointer;
+    list-style: none;
+  }
+
+  .sources-header::-webkit-details-marker {
+    display: none;
+  }
+
+  .sources-header svg:last-child {
+    margin-left: auto;
+    transition: transform 0.2s ease;
+  }
+
+  .sources-block[open] .sources-header svg:last-child {
+    transform: rotate(180deg);
+  }
+
+  .sources-content {
+    padding: 0 16px 14px;
+  }
+
+  .sources-content ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .sources-content li {
+    margin-bottom: 8px;
+  }
+
+  .sources-content a {
+    font-size: 13px;
+    color: var(--color-accent-primary);
+    text-decoration: none;
+  }
+
+  .sources-content a:hover {
+    text-decoration: underline;
+  }
+
+  /* Related Scenarios */
+  .related-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+
+  .related-card {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 16px;
+    border-radius: 12px;
+    text-decoration: none;
+    transition: transform 0.15s ease;
+  }
+
+  .related-card:hover {
+    transform: translateY(-2px);
+  }
+
+  .related-card span {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--color-text-primary);
+  }
+
+  .related-card--amber {
+    background: rgba(245, 158, 11, 0.1);
+    border: 1px solid rgba(245, 158, 11, 0.2);
+    color: #f59e0b;
+  }
+
+  .related-card--blue {
+    background: rgba(59, 130, 246, 0.1);
+    border: 1px solid rgba(59, 130, 246, 0.2);
+    color: #3b82f6;
+  }
+
+  .related-card--green {
+    background: rgba(34, 197, 94, 0.1);
+    border: 1px solid rgba(34, 197, 94, 0.2);
+    color: #22c55e;
+  }
+
+  @media (max-width: 480px) {
+    .scenario-page {
+      padding: 0 12px 120px;
+    }
+
+    .scenario-title {
+      font-size: 1.25rem;
+    }
+
+    .risk-groups-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .related-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

@@ -1,0 +1,58 @@
+---
+import BaseLayout from '../../../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../../../components/ui/Breadcrumbs.astro';
+import WaterCalculator from '../../../../components/tools/WaterCalculator';
+---
+
+<BaseLayout
+  title="Water Calculator — Kit-72"
+  description="Bereken hoeveel water je nodig hebt voor je noodpakket. Interactieve tool met persoonlijke berekening voor jouw gezin."
+  locale="nl"
+  dateModified="2025-12-15"
+  schemaType="HowTo"
+  schemaData={{
+    name: 'Hoeveel water heb je nodig voor een noodsituatie',
+    description: 'Bereken het aantal liters water dat je gezin nodig heeft voor 72 uur zelfvoorzienendheid. Inclusief huisdieren en verschillende gebruiksdoelen.',
+    totalTime: 'PT2M',
+    step: [
+      {
+        '@type': 'HowToStep',
+        position: 1,
+        name: 'Vul het aantal personen in',
+        text: 'Selecteer hoeveel volwassenen, kinderen (4-12 jaar) en baby\'s (0-3 jaar) er in je huishouden zijn. Volwassenen hebben meer water nodig dan kinderen.',
+      },
+      {
+        '@type': 'HowToStep',
+        position: 2,
+        name: 'Voeg huisdieren toe',
+        text: 'Geef aan of je honden of katten hebt. Huisdieren hebben ongeveer 50-100ml water per kg lichaamsgewicht per dag nodig.',
+      },
+      {
+        '@type': 'HowToStep',
+        position: 3,
+        name: 'Kies de duur',
+        text: 'Selecteer voor hoeveel dagen je voorbereid wilt zijn. Het minimum advies van de Rijksoverheid is 72 uur (3 dagen).',
+      },
+      {
+        '@type': 'HowToStep',
+        position: 4,
+        name: 'Pas de omstandigheden aan',
+        text: 'Selecteer of je warm weer verwacht (verhoogt de behoefte) en je gewenste comfortniveau (minimaal, standaard of comfortabel).',
+      },
+    ],
+  }}
+>
+  <section class="py-12 md:py-16">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6">
+      <div class="mb-8">
+        <Breadcrumbs locale="nl" />
+        <h1 class="text-4xl font-bold mb-4">Water Calculator</h1>
+        <p class="text-xl text-[--color-text-secondary]">
+          Bereken precies hoeveel water je nodig hebt voor je gezin. De Rijksoverheid adviseert 3 liter per persoon per dag.
+        </p>
+      </div>
+
+      <WaterCalculator locale="nl" client:load />
+    </div>
+  </section>
+</BaseLayout>

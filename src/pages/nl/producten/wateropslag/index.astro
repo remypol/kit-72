@@ -1,0 +1,172 @@
+---
+import BaseLayout from '../../../../layouts/BaseLayout.astro';
+import Breadcrumb from '../../../../components/layout/Breadcrumb.astro';
+import Icon from '../../../../components/ui/Icon.astro';
+import HeroImage from '../../../../components/content/HeroImage.astro';
+---
+
+<BaseLayout
+  title="Watercontainers voor noodvoorraad: Materiaal & Formaat — Koopgids"
+  description="De juiste containers voor je drinkwatervoorraad. Materialen, formaten, opslag."
+  locale="nl"
+  dateModified="2025-12-16"
+  schemaType="Article"
+  alternates={{
+    de: '/de/produkte/wasserspeicher/',
+  }}
+>
+  <section class="py-16">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6">
+      <Breadcrumb items={[{ label: 'Producten', href: '/nl/producten/' }, { label: 'Wateropslag' }]} class="mb-4" locale="nl" />
+      <h1 class="text-4xl font-bold mb-6">Wateropslag</h1>
+
+      <div class="mb-8">
+        <HeroImage
+          src="/images/shared/water-storage-containers.webp"
+          alt="Wateropslagcontainers en jerrycans voor noodvoorraad"
+          priority={true}
+        />
+      </div>
+
+      <div class="prose prose-lg">
+        <p class="lead">
+          <strong>Water is het belangrijkste.</strong> Je overleeft slechts 3 dagen zonder water.
+          De juiste containers houden je water maandenlang vers en veilig.
+        </p>
+
+        <!-- Quick Reference -->
+        <div class="card p-6 my-8 bg-[--color-bg-tertiary] not-prose">
+          <h3 class="text-lg font-semibold mb-4 flex items-center gap-2">
+            <Icon name="Droplet" size={20} class="text-[--color-accent-primary]" />
+            Waterbehoefte Overzicht
+          </h3>
+          <div class="grid sm:grid-cols-2 gap-4">
+            <div class="p-4 bg-[--color-bg-secondary] rounded-lg">
+              <p class="text-2xl font-bold text-[--color-accent-primary]">9 liter</p>
+              <p class="text-sm text-[--color-text-secondary]">per persoon voor 72 uur</p>
+            </div>
+            <div class="p-4 bg-[--color-bg-secondary] rounded-lg">
+              <p class="text-2xl font-bold text-[--color-accent-primary]">36 liter</p>
+              <p class="text-sm text-[--color-text-secondary]">4-persoons huishouden, 72 uur</p>
+            </div>
+          </div>
+        </div>
+
+        <h2>Container-types</h2>
+
+        <h3>Origineel verpakt mineraalwater</h3>
+        <p>De <strong>eenvoudigste en veiligste</strong> optie:</p>
+        <ul>
+          <li>✓ Hygiënisch afgevuld, lang houdbaar</li>
+          <li>✓ Geportioneerd, makkelijk te vervoeren</li>
+          <li>✓ Geen overvullen of schoonmaken nodig</li>
+          <li>✗ Neemt meer ruimte in dan jerrycans</li>
+          <li>✗ Plastic flessen niet ideaal voor lange termijn</li>
+        </ul>
+
+        <h3>Jerrycans (5-30 liter)</h3>
+        <p>Voor grotere hoeveelheden en langetermijnopslag:</p>
+        <ul>
+          <li>✓ Ruimtebesparender dan flessen</li>
+          <li>✓ Vaak stapelbaar</li>
+          <li>✓ Met aftapkraan verkrijgbaar</li>
+          <li>✗ Moeten regelmatig worden gereinigd</li>
+          <li>✗ Zwaar als ze vol zijn (10L = 10kg)</li>
+        </ul>
+
+        <h3>Opvouwbare waterzakken</h3>
+        <p>Voor noodgevallen of onderweg:</p>
+        <ul>
+          <li>✓ Extreem ruimtebesparend wanneer leeg</li>
+          <li>✓ Makkelijk te vervoeren</li>
+          <li>✗ Minder robuust dan jerrycans</li>
+          <li>✗ Niet voor langetermijnopslag</li>
+        </ul>
+
+        <h2>Materiaalkeuze</h2>
+
+        <div class="card p-4 my-6 border-l-4 border-l-green-500 bg-green-50 dark:bg-green-950/30 not-prose">
+          <p class="text-sm">
+            <strong>✓ Aanbevolen: HDPE (Recyclingcode 2)</strong><br>
+            Voedselveilig, BPA-vrij, UV-bestendig. Standaard voor waterjerrycans.
+          </p>
+        </div>
+
+        <ul>
+          <li><strong>HDPE (Polyethyleen):</strong> Beste keuze — voedselveilig, robuust, goedkoop</li>
+          <li><strong>PET (Recyclingcode 1):</strong> Voor wegwerpflessen, niet voor hervulling</li>
+          <li><strong>Roestvrij staal:</strong> Duurzaam, zwaar, duur — goed voor kleine hoeveelheden</li>
+          <li><strong>Glas:</strong> Hygiënisch, maar breekbaar</li>
+        </ul>
+
+        <div class="card p-4 my-6 border-l-4 border-l-red-500 bg-red-50 dark:bg-red-950/30 not-prose">
+          <p class="text-sm">
+            <strong>✗ Niet gebruiken:</strong><br>
+            • Melkflessen (vetresten, bacteriën)<br>
+            • Voormalige chemicaliëncontainers<br>
+            • Doorzichtig plastic zonder UV-bescherming
+          </p>
+        </div>
+
+        <h2>Opslag</h2>
+        <ul>
+          <li><strong>Koel:</strong> Onder 20°C, idealiter 10-15°C</li>
+          <li><strong>Donker:</strong> Licht bevordert algengroei</li>
+          <li><strong>Schoon:</strong> Weg van chemicaliën en schoonmaakmiddelen</li>
+          <li><strong>Vorstvrij:</strong> Bevroren water kan containers doen barsten</li>
+          <li><strong>Niet op beton:</strong> Kan de smaak beïnvloeden</li>
+        </ul>
+
+        <h2>Onderhoud en verversing</h2>
+        <ol>
+          <li><strong>Origineel water:</strong> Elke 1-2 jaar roteren</li>
+          <li><strong>Zelf afgevuld kraanwater:</strong> Elke 6 maanden verversen</li>
+          <li><strong>Jerrycans reinigen:</strong> Vóór het vullen spoelen met azijnwater</li>
+          <li><strong>Datum markeren:</strong> Vuldatum op container schrijven</li>
+        </ol>
+
+        <div class="card p-6 my-8 bg-[--color-accent-subtle] not-prose">
+          <p class="font-medium mb-2">💡 Backup: Waterzuivering</p>
+          <p class="text-sm text-[--color-text-secondary]">
+            Houd <strong>waterzuiveringstabletten</strong> (bijv. Micropur) bij de hand.
+            In noodgevallen kunnen ze ook twijfelachtig water drinkbaar maken.
+          </p>
+        </div>
+
+        <h2>Aanbevolen producten</h2>
+        <ul>
+          <li><strong>Hünersdorff jerrycans:</strong> Duitse kwaliteit, stapelbaar, met kraan</li>
+          <li><strong>Reliance Aqua-Tainer:</strong> Robuust, 7-20 liter, met uitgietmond</li>
+          <li><strong>Opvouwbare waterzakken:</strong> Compact, voor onderweg</li>
+        </ul>
+
+        <h2>Checklist</h2>
+        <ul>
+          <li>☐ Minimaal 9 liter per persoon (72 uur)</li>
+          <li>☐ Voedselveilige containers (HDPE)</li>
+          <li>☐ Koel en donker opgeslagen</li>
+          <li>☐ Datum gemarkeerd</li>
+          <li>☐ Reserve waterzuiveringstabletten</li>
+          <li>☐ Rotatieplan: elke 6-12 maanden verversen</li>
+        </ul>
+      </div>
+
+      <!-- Shop Link -->
+      <div class="mt-12 card p-6 bg-[--color-bg-tertiary]">
+        <h3 class="font-semibold mb-2">Jerrycans op Bol.com</h3>
+        <p class="text-sm text-[--color-text-secondary] mb-4">
+          Aanbevolen voedselveilige jerrycans met kraan.
+        </p>
+        <a
+          href="https://www.bol.com/nl/nl/s/?searchtext=waterjerrycan+voedselveilig"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex items-center gap-2 px-4 py-2 bg-[--color-accent-primary] text-[--color-bg-primary] font-medium rounded hover:bg-[--color-accent-hover] transition-colors"
+        >
+          Bekijk op Bol.com
+          <Icon name="ExternalLink" size={16} />
+        </a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

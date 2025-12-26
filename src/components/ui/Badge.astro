@@ -1,0 +1,40 @@
+---
+/**
+ * Badge Component
+ *
+ * A small label component for status indicators, categories, and priority levels.
+ *
+ * @example
+ * <Badge variant="critical">Crítico</Badge>
+ * <Badge variant="success">Completado</Badge>
+ * <Badge variant="premium" icon="Star">Premium</Badge>
+ */
+
+import Icon from './Icon.astro';
+
+interface Props {
+  /** Visual style variant */
+  variant?: 'critical' | 'important' | 'optional' | 'success' | 'neutral' | 'essential' | 'recommended' | 'premium';
+  /** Optional icon to show before text */
+  icon?: string;
+  /** Additional CSS classes */
+  class?: string;
+}
+
+const {
+  variant = 'neutral',
+  icon,
+  class: className = '',
+} = Astro.props;
+
+const classes = [
+  'badge',
+  `badge-${variant}`,
+  className,
+].filter(Boolean).join(' ');
+---
+
+<span class={classes}>
+  {icon && <Icon name={icon as any} size={12} />}
+  <slot />
+</span>

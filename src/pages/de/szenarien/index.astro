@@ -1,0 +1,270 @@
+---
+/**
+ * DE Scenarios Hub
+ *
+ * Central hub for all German emergency scenarios.
+ * Based on BBK (Bundesamt für Bevölkerungsschutz) guidance.
+ */
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import Breadcrumb from '../../../components/layout/Breadcrumb.astro';
+import Icon from '../../../components/ui/Icon.astro';
+
+const scenarios = [
+  {
+    title: 'Stromausfall',
+    description: 'Vorbereitung auf längere Stromausfälle und deren Kaskadeneffekte.',
+    href: '/de/szenarien/stromausfall/',
+    icon: 'Zap',
+    color: 'amber',
+    readTime: '10 min',
+    priority: 'hoch'
+  },
+  {
+    title: 'Hitzewelle',
+    description: 'Schutzmaßnahmen bei extremer Hitze für dich und deine Familie.',
+    href: '/de/szenarien/hitzewelle/',
+    icon: 'Sun',
+    color: 'orange',
+    readTime: '8 min',
+    priority: 'mittel'
+  },
+  {
+    title: 'Wasserausfall',
+    description: 'Was tun wenn die Wasserversorgung ausfällt oder verunreinigt ist.',
+    href: '/de/szenarien/wasserausfall/',
+    icon: 'Droplet',
+    color: 'blue',
+    readTime: '7 min',
+    priority: 'mittel'
+  },
+  {
+    title: 'Evakuierung',
+    description: 'Vorbereitung und Durchführung einer geordneten Evakuierung.',
+    href: '/de/szenarien/evakuierung/',
+    icon: 'Car',
+    color: 'emerald',
+    readTime: '12 min',
+    priority: 'hoch'
+  },
+];
+
+const colorMap = {
+  amber: { bg: 'rgba(245, 158, 11, 0.1)', border: 'rgba(245, 158, 11, 0.3)', text: '#f59e0b' },
+  orange: { bg: 'rgba(249, 115, 22, 0.1)', border: 'rgba(249, 115, 22, 0.3)', text: '#f97316' },
+  blue: { bg: 'rgba(59, 130, 246, 0.1)', border: 'rgba(59, 130, 246, 0.3)', text: '#3b82f6' },
+  emerald: { bg: 'rgba(16, 185, 129, 0.1)', border: 'rgba(16, 185, 129, 0.3)', text: '#10b981' },
+};
+---
+
+<BaseLayout
+  title="Notfall-Szenarien: Stromausfall, Hochwasser, Evakuierung & mehr"
+  description="Vorbereitung auf verschiedene Notfallszenarien: Stromausfall, Hitzewelle, Wasserausfall und Evakuierung. Schritt-für-Schritt Anleitungen."
+  locale="de"
+  dateModified="2025-12-15"
+  schemaType="WebPage"
+  schemaData={{
+    "@type": "CollectionPage",
+    "name": "Notfallszenarien",
+    "description": "Vorbereitung auf verschiedene Notfallszenarien: Stromausfall, Hitzewelle, Wasserausfall und Evakuierung.",
+    "mainEntity": {
+      "@type": "ItemList",
+      "numberOfItems": scenarios.length,
+      "itemListElement": scenarios.map((s, i) => ({
+        "@type": "ListItem",
+        "position": i + 1,
+        "name": s.title,
+        "description": s.description,
+        "url": `https://kit-72.com${s.href}`
+      }))
+    }
+  }}
+>
+  <section class="py-12 md:py-16">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6">
+      <Breadcrumb items={[{ label: 'Szenarien' }]} class="mb-6" locale="de" />
+
+      <div class="mb-10">
+        <h1 class="text-3xl md:text-4xl font-bold mb-4">Notfallszenarien</h1>
+        <p class="text-lg text-[--color-text-secondary]">
+          Spezifische Vorbereitungen für verschiedene Notfallsituationen. Wähle ein Szenario
+          für eine Schritt-für-Schritt Anleitung und personalisierte Checkliste.
+        </p>
+      </div>
+
+      <!-- BBK Reference -->
+      <div class="flex items-start gap-3 p-4 mb-8 bg-blue-500/10 border border-blue-500/20 rounded-xl">
+        <Icon name="Shield" size={20} class="text-blue-500 flex-shrink-0 mt-0.5" />
+        <p class="text-sm text-[--color-text-secondary] m-0">
+          <strong class="text-[--color-text-primary]">BBK-Empfehlung:</strong> Das Bundesamt für Bevölkerungsschutz
+          empfiehlt, für mindestens 72 Stunden bis 10 Tage selbstversorgt sein zu können.
+        </p>
+      </div>
+
+      <!-- Scenarios Grid -->
+      <div class="grid gap-4">
+        {scenarios.map((scenario) => {
+          const colors = colorMap[scenario.color as keyof typeof colorMap];
+          return (
+            <a
+              href={scenario.href}
+              class="scenario-card group"
+              style={`--card-bg: ${colors.bg}; --card-border: ${colors.border}; --card-accent: ${colors.text};`}
+            >
+              <div class="scenario-icon">
+                <Icon name={scenario.icon as any} size={28} />
+              </div>
+              <div class="scenario-content">
+                <div class="scenario-header">
+                  <h2 class="scenario-title">{scenario.title}</h2>
+                  <span class="scenario-priority" data-priority={scenario.priority}>
+                    {scenario.priority === 'hoch' ? 'Hohe Priorität' : 'Mittlere Priorität'}
+                  </span>
+                </div>
+                <p class="scenario-description">{scenario.description}</p>
+                <div class="scenario-meta">
+                  <span class="scenario-time">
+                    <Icon name="Clock" size={14} />
+                    {scenario.readTime}
+                  </span>
+                </div>
+              </div>
+              <div class="scenario-arrow">
+                <Icon name="ChevronRight" size={20} />
+              </div>
+            </a>
+          );
+        })}
+      </div>
+
+      <!-- Coming Soon -->
+      <div class="mt-8 p-6 bg-[--color-bg-secondary] border border-[--color-border] rounded-xl">
+        <h3 class="font-semibold mb-2">Weitere Szenarien in Planung</h3>
+        <p class="text-sm text-[--color-text-secondary] mb-3">
+          Wir arbeiten an zusätzlichen Szenarien basierend auf aktuellen Risikoanalysen:
+        </p>
+        <ul class="text-sm text-[--color-text-muted] space-y-1">
+          <li>• Überschwemmung (Hochwasser)</li>
+          <li>• Cyberangriff (kritische Infrastruktur)</li>
+          <li>• Wintersturm</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .scenario-card {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 20px;
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 16px;
+    text-decoration: none;
+    transition: all 0.2s ease;
+  }
+
+  .scenario-card:hover {
+    transform: translateY(-2px);
+    border-color: var(--card-accent);
+  }
+
+  .scenario-icon {
+    flex-shrink: 0;
+    width: 56px;
+    height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--card-bg);
+    border-radius: 14px;
+    color: var(--card-accent);
+  }
+
+  .scenario-content {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .scenario-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 6px;
+    flex-wrap: wrap;
+  }
+
+  .scenario-title {
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: var(--color-text-primary);
+    margin: 0;
+  }
+
+  .scenario-priority {
+    font-size: 11px;
+    font-weight: 500;
+    padding: 3px 8px;
+    border-radius: 6px;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+  }
+
+  .scenario-priority[data-priority="hoch"] {
+    background: rgba(239, 68, 68, 0.15);
+    color: #ef4444;
+  }
+
+  .scenario-priority[data-priority="mittel"] {
+    background: rgba(245, 158, 11, 0.15);
+    color: #f59e0b;
+  }
+
+  .scenario-description {
+    font-size: 14px;
+    color: var(--color-text-secondary);
+    margin: 0 0 8px;
+    line-height: 1.5;
+  }
+
+  .scenario-meta {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .scenario-time {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 12px;
+    color: var(--color-text-muted);
+  }
+
+  .scenario-arrow {
+    flex-shrink: 0;
+    color: var(--color-text-muted);
+    transition: transform 0.2s ease;
+  }
+
+  .scenario-card:hover .scenario-arrow {
+    transform: translateX(4px);
+    color: var(--card-accent);
+  }
+
+  @media (max-width: 480px) {
+    .scenario-card {
+      flex-wrap: wrap;
+    }
+
+    .scenario-icon {
+      width: 48px;
+      height: 48px;
+    }
+
+    .scenario-arrow {
+      display: none;
+    }
+  }
+</style>

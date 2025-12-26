@@ -1,0 +1,869 @@
+---
+/**
+ * NL Homepage - Kit-72 Hub
+ *
+ * Dutch market homepage for emergency preparedness.
+ * Adapted for "Denk Vooruit" campaign context.
+ *
+ * Key NL adaptations:
+ * - References Rijksoverheid guidelines
+ * - "Overstroming" as priority scenario (NL-specific)
+ * - Dutch-appropriate messaging tone
+ * - Bol.com as primary affiliate
+ */
+
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ScenarioQuickPicker from '../../components/hub/ScenarioQuickPicker.astro';
+import Icon from '../../components/ui/Icon.astro';
+
+const stats = [
+  { value: '72u', label: 'zelfvoorzienend' },
+  { value: '3L', label: 'water/dag' },
+  { value: '15', label: 'basisitems' },
+];
+---
+
+<BaseLayout
+  title="Kit-72 — Noodpakket Samenstellen"
+  description="Stel je persoonlijke 72-uurs noodpakket samen. Gepersonaliseerde checklists gebaseerd op Rijksoverheid richtlijnen. Praktisch, zonder paniek."
+  locale="nl"
+  dateModified="2025-12-15"
+  schemaType="WebPage"
+  schemaData={{
+    // FAQPage schema for AI SEO - NL-specific questions aligned with "Denk Vooruit" campaign
+    mainEntity: [
+      {
+        '@type': 'Question',
+        name: 'Wat zit er in een noodpakket?',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: 'Een noodpakket bevat: drinkwater (3 liter per persoon per dag), houdbaar voedsel, zaklamp met batterijen, noodradio, EHBO-doos, medicijnen, belangrijke documenten, contant geld (€70 per volwassene, €30 per kind volgens Rijksoverheid), powerbank, en warme kleding. De Rijksoverheid adviseert om minimaal 72 uur (3 dagen) zelfvoorzienend te kunnen zijn.',
+        },
+      },
+      {
+        '@type': 'Question',
+        name: 'Hoeveel water moet ik opslaan voor een noodsituatie?',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: 'De Rijksoverheid adviseert minimaal 3 liter water per persoon per dag. Voor 72 uur heb je dus 9 liter per persoon nodig. Een gezin van 4 personen heeft ongeveer 36 liter nodig. Sla zowel drinkwater als water voor hygiëne en koken op. Huisdieren hebben ook water nodig: ongeveer 50-100ml per kg lichaamsgewicht per dag.',
+        },
+      },
+      {
+        '@type': 'Question',
+        name: 'Hoe bereid ik me voor op een stroomstoring?',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: 'Voorbereiding op stroomstoring: 1) Heb zaklampen en kaarsen klaar, 2) Laad je telefoon en powerbank volledig op, 3) Houd contant geld achter de hand (pinautomaten werken niet), 4) Heb een radio op batterijen voor nieuwsupdates, 5) Vul jerrycans met water (waterdruk kan wegvallen), 6) Houd de koelkast en vriezer dicht, 7) Ontkoppel gevoelige apparaten.',
+        },
+      },
+      {
+        '@type': 'Question',
+        name: 'Waarom is een noodpakket belangrijk in Nederland?',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: 'Nederland is kwetsbaar voor diverse noodsituaties: overstromingen (groot deel ligt onder zeeniveau), stroomstoringen (cascading effecten op betaalsystemen en communicatie), hittegolven, en cyberaanvallen. De campagne "Denk Vooruit" van de Rijksoverheid benadrukt dat je de eerste 72 uur op jezelf aangewezen kunt zijn. Een noodpakket geeft rust en zekerheid.',
+        },
+      },
+      {
+        '@type': 'Question',
+        name: 'Wat moet ik doen bij een overstroming in Nederland?',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: 'Bij (dreigende) overstroming: 1) Volg Rijkswaterstaat en 112 voor actuele informatie, 2) Als evacuatie wordt geadviseerd: vertrek direct naar hoger gelegen gebied, 3) Neem je noodpakket en waardevolle documenten mee, 4) Zet gas en elektriciteit uit, 5) Ga niet het water in - stroming is gevaarlijker dan het lijkt, 6) Help anderen indien veilig mogelijk.',
+        },
+      },
+    ],
+  }}
+>
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero__container">
+      <!-- Main content -->
+      <div class="hero__content">
+        <h1 class="hero__title">
+          Bereid je voor op noodsituaties
+          <span class="hero__accent">in 10 minuten</span>
+        </h1>
+
+        <p class="hero__subtitle">
+          Kies je situatie en krijg een persoonlijke checklist.
+          Praktisch en nuchter, zonder paniek.
+        </p>
+
+        <!-- Stats inline -->
+        <div class="hero__stats">
+          {stats.map((stat) => (
+            <div class="hero__stat">
+              <span class="hero__stat-value">{stat.value}</span>
+              <span class="hero__stat-label">{stat.label}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <!-- Scenario Quick Picker - Above the fold -->
+      <div class="hero__scenarios">
+        <p class="hero__scenarios-label">Kies je scenario:</p>
+        <ScenarioQuickPicker locale="nl" />
+      </div>
+
+      <!-- Alternative CTA -->
+      <div class="hero__alt-cta">
+        <span class="hero__alt-text">of maak je complete pakket</span>
+        <a href="/nl/tools/noodpakket-samenstellen/" class="hero__alt-link">
+          Open Samenstellen
+          <Icon name="ArrowRight" size={16} />
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Returning User Block -->
+  <section id="returning-user-block" class="returning-user hidden">
+    <div class="returning-user__container">
+      <div class="returning-user__content">
+        <div class="returning-user__icon">
+          <Icon name="RotateCw" size={20} />
+        </div>
+        <div class="returning-user__text">
+          <span class="returning-user__label">Ga verder waar je gebleven was</span>
+          <span class="returning-user__progress" id="returning-progress">Laden...</span>
+        </div>
+      </div>
+      <a href="/nl/tools/noodpakket-samenstellen/" class="returning-user__button" id="returning-cta">
+        Doorgaan
+        <Icon name="ArrowRight" size={16} />
+      </a>
+    </div>
+  </section>
+
+  <!-- Featured Tool Spotlight -->
+  <section class="tool-spotlight">
+    <div class="tool-spotlight__container">
+      <div class="tool-spotlight__content">
+        <div class="tool-spotlight__badge">
+          <Icon name="Zap" size={14} />
+          Uitgelichte tool
+        </div>
+        <h2 class="tool-spotlight__title">Noodpakket Samenstellen</h2>
+        <p class="tool-spotlight__description">
+          Beantwoord 4 vragen en krijg je persoonlijke checklist
+          op basis van je gezin, huisdieren en scenario. Printbaar en bewaarbaar.
+        </p>
+        <ul class="tool-spotlight__features">
+          <li>
+            <Icon name="Check" size={16} class="text-emerald-400" />
+            Gebaseerd op Rijksoverheid advies
+          </li>
+          <li>
+            <Icon name="Check" size={16} class="text-emerald-400" />
+            Gepersonaliseerd voor jouw situatie
+          </li>
+          <li>
+            <Icon name="Check" size={16} class="text-emerald-400" />
+            Exporteer naar PDF of bewaar online
+          </li>
+        </ul>
+        <a href="/nl/tools/noodpakket-samenstellen/" class="tool-spotlight__cta">
+          Mijn pakket samenstellen
+          <Icon name="ArrowRight" size={18} />
+        </a>
+      </div>
+      <div class="tool-spotlight__visual">
+        <div class="tool-spotlight__preview">
+          <div class="preview-header">
+            <span class="preview-dot"></span>
+            <span class="preview-dot"></span>
+            <span class="preview-dot"></span>
+          </div>
+          <div class="preview-content">
+            <div class="preview-progress">
+              <div class="preview-progress-ring">
+                <span>67%</span>
+              </div>
+              <div class="preview-progress-text">
+                <span>10 van 15 items</span>
+                <span class="preview-progress-label">afgevinkt</span>
+              </div>
+            </div>
+            <div class="preview-items">
+              <div class="preview-item preview-item--done">
+                <Icon name="Check" size={14} />
+                LED Zaklamp
+              </div>
+              <div class="preview-item preview-item--done">
+                <Icon name="Check" size={14} />
+                Powerbank 20000mAh
+              </div>
+              <div class="preview-item">
+                <span class="preview-checkbox"></span>
+                Noodradio
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Other Tools (Compact) -->
+  <section class="other-tools">
+    <div class="other-tools__container">
+      <h3 class="other-tools__title">Calculators</h3>
+      <div class="other-tools__grid">
+        <a href="/nl/tools/water-calculator/" class="other-tool">
+          <div class="other-tool__icon other-tool__icon--blue">
+            <Icon name="Droplet" size={20} />
+          </div>
+          <div class="other-tool__content">
+            <span class="other-tool__title">Water</span>
+            <span class="other-tool__desc">Hoeveel liter nodig</span>
+          </div>
+          <Icon name="ChevronRight" size={18} class="other-tool__arrow" />
+        </a>
+        <a href="/nl/tools/energie-calculator/" class="other-tool">
+          <div class="other-tool__icon other-tool__icon--amber">
+            <Icon name="Battery" size={20} />
+          </div>
+          <div class="other-tool__content">
+            <span class="other-tool__title">Energie</span>
+            <span class="other-tool__desc">Batterijtip capaciteit</span>
+          </div>
+          <Icon name="ChevronRight" size={18} class="other-tool__arrow" />
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Trust Section (NL-specific: Rijksoverheid, Rode Kruis) -->
+  <section class="trust-section">
+    <div class="trust-section__container">
+      <details class="trust-details">
+        <summary class="trust-summary">
+          <div class="trust-summary__content">
+            <Icon name="Shield" size={20} class="trust-summary__icon" />
+            <span class="trust-summary__text">
+              Gebaseerd op Rijksoverheid en Rode Kruis richtlijnen
+            </span>
+          </div>
+          <Icon name="ChevronDown" size={18} class="trust-summary__chevron" />
+        </summary>
+        <div class="trust-content">
+          <p>
+            Kit-72 biedt praktische informatie gebaseerd op officiële aanbevelingen
+            van de Rijksoverheid en het Nederlandse Rode Kruis. Onze aanpak is
+            nuchter: wat je nodig hebt, hoeveel, en waarom. Zonder overdrijving
+            of onnodige paniek.
+          </p>
+          <div class="trust-features">
+            <div class="trust-feature">
+              <Icon name="CheckCircle" size={18} class="text-emerald-400" />
+              <span>Rijksoverheid advies</span>
+            </div>
+            <div class="trust-feature">
+              <Icon name="SlidersHorizontal" size={18} class="text-amber-400" />
+              <span>Persoonlijk aanpasbaar</span>
+            </div>
+            <div class="trust-feature">
+              <Icon name="Printer" size={18} class="text-blue-400" />
+              <span>Afdrukbaar</span>
+            </div>
+          </div>
+        </div>
+      </details>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  /* Hero Section */
+  .hero {
+    padding: 2rem 0 1.5rem;
+    background: linear-gradient(to bottom, var(--color-bg-secondary), var(--color-bg-primary));
+  }
+
+  .hero__container {
+    max-width: 72rem;
+    margin: 0 auto;
+    padding: 0 1rem;
+  }
+
+  .hero__content {
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+
+  .hero__title {
+    font-size: 1.75rem;
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 0.75rem;
+    color: var(--color-text-primary);
+  }
+
+  .hero__accent {
+    display: block;
+    color: var(--color-accent-primary);
+  }
+
+  .hero__subtitle {
+    font-size: 1rem;
+    color: var(--color-text-secondary);
+    margin-bottom: 1.5rem;
+    line-height: 1.5;
+  }
+
+  .hero__stats {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+  }
+
+  .hero__stat {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .hero__stat-value {
+    font-family: var(--font-mono);
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--color-accent-primary);
+  }
+
+  .hero__stat-label {
+    font-size: 0.7rem;
+    color: var(--color-text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .hero__scenarios {
+    margin-bottom: 1.5rem;
+  }
+
+  .hero__scenarios-label {
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--color-text-secondary);
+    margin-bottom: 0.75rem;
+    text-align: center;
+  }
+
+  .hero__alt-cta {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--color-border);
+  }
+
+  .hero__alt-text {
+    font-size: 0.875rem;
+    color: var(--color-text-muted);
+  }
+
+  .hero__alt-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--color-accent-primary);
+    text-decoration: none;
+  }
+
+  .hero__alt-link:hover {
+    text-decoration: underline;
+  }
+
+  /* Returning User Block */
+  .returning-user {
+    padding: 0 1rem 1rem;
+  }
+
+  .returning-user.hidden {
+    display: none;
+  }
+
+  .returning-user__container {
+    max-width: 72rem;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 1rem;
+    background: linear-gradient(135deg, var(--color-accent-primary)/10, var(--color-accent-primary)/5);
+    border: 1px solid var(--color-accent-primary)/30;
+    border-radius: 1rem;
+  }
+
+  .returning-user__content {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .returning-user__icon {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--color-accent-primary)/20;
+    border-radius: 10px;
+    color: var(--color-accent-primary);
+  }
+
+  .returning-user__text {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .returning-user__label {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--color-text-primary);
+  }
+
+  .returning-user__progress {
+    font-size: 0.75rem;
+    color: var(--color-text-muted);
+  }
+
+  .returning-user__button {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    background: var(--color-accent-primary);
+    color: var(--color-bg-primary);
+    font-size: 0.875rem;
+    font-weight: 600;
+    border-radius: 0.5rem;
+    text-decoration: none;
+    white-space: nowrap;
+  }
+
+  /* Tool Spotlight */
+  .tool-spotlight {
+    padding: 3rem 1rem;
+    background: var(--color-bg-secondary);
+    border-top: 1px solid var(--color-border);
+  }
+
+  .tool-spotlight__container {
+    max-width: 72rem;
+    margin: 0 auto;
+    display: grid;
+    gap: 2rem;
+  }
+
+  .tool-spotlight__badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.25rem 0.75rem;
+    background: var(--color-accent-primary)/10;
+    color: var(--color-accent-primary);
+    font-size: 0.75rem;
+    font-weight: 600;
+    border-radius: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .tool-spotlight__title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 0.75rem;
+    color: var(--color-text-primary);
+  }
+
+  .tool-spotlight__description {
+    font-size: 1rem;
+    color: var(--color-text-secondary);
+    margin-bottom: 1.5rem;
+    line-height: 1.6;
+  }
+
+  .tool-spotlight__features {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .tool-spotlight__features li {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.875rem;
+    color: var(--color-text-secondary);
+  }
+
+  .tool-spotlight__cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.875rem 1.5rem;
+    background: var(--color-accent-primary);
+    color: var(--color-bg-primary);
+    font-size: 1rem;
+    font-weight: 600;
+    border-radius: 0.75rem;
+    text-decoration: none;
+    transition: background 0.2s;
+  }
+
+  .tool-spotlight__cta:hover {
+    background: var(--color-accent-hover);
+  }
+
+  /* Tool Preview Visual */
+  .tool-spotlight__visual {
+    display: none;
+  }
+
+  .tool-spotlight__preview {
+    background: var(--color-bg-primary);
+    border: 1px solid var(--color-border);
+    border-radius: 1rem;
+    overflow: hidden;
+  }
+
+  .preview-header {
+    display: flex;
+    gap: 0.5rem;
+    padding: 0.75rem 1rem;
+    background: var(--color-bg-tertiary);
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .preview-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--color-border);
+  }
+
+  .preview-content {
+    padding: 1.5rem;
+  }
+
+  .preview-progress {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .preview-progress-ring {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: conic-gradient(var(--color-accent-primary) 67%, var(--color-bg-tertiary) 0);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+
+  .preview-progress-ring::before {
+    content: '';
+    position: absolute;
+    width: 48px;
+    height: 48px;
+    background: var(--color-bg-primary);
+    border-radius: 50%;
+  }
+
+  .preview-progress-ring span {
+    position: relative;
+    font-size: 0.875rem;
+    font-weight: 700;
+    color: var(--color-accent-primary);
+  }
+
+  .preview-progress-text {
+    display: flex;
+    flex-direction: column;
+    font-size: 0.875rem;
+    color: var(--color-text-primary);
+  }
+
+  .preview-progress-label {
+    font-size: 0.75rem;
+    color: var(--color-text-muted);
+  }
+
+  .preview-items {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .preview-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 0.75rem;
+    background: var(--color-bg-secondary);
+    border-radius: 0.5rem;
+    font-size: 0.875rem;
+    color: var(--color-text-secondary);
+  }
+
+  .preview-item--done {
+    color: var(--color-text-muted);
+    text-decoration: line-through;
+  }
+
+  .preview-item--done svg {
+    color: var(--color-status-success);
+  }
+
+  .preview-checkbox {
+    width: 16px;
+    height: 16px;
+    border: 2px solid var(--color-border);
+    border-radius: 4px;
+  }
+
+  /* Other Tools */
+  .other-tools {
+    padding: 2rem 1rem;
+    border-top: 1px solid var(--color-border);
+  }
+
+  .other-tools__container {
+    max-width: 72rem;
+    margin: 0 auto;
+  }
+
+  .other-tools__title {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--color-text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 1rem;
+  }
+
+  .other-tools__grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.75rem;
+  }
+
+  .other-tool {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 1rem;
+    background: var(--color-bg-secondary);
+    border: 1px solid var(--color-border);
+    border-radius: 0.75rem;
+    text-decoration: none;
+    transition: border-color 0.2s;
+  }
+
+  .other-tool:hover {
+    border-color: var(--color-accent-primary)/50;
+  }
+
+  .other-tool__icon {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 0.5rem;
+    flex-shrink: 0;
+  }
+
+  .other-tool__icon--blue {
+    background: #3b82f6/10;
+    color: #3b82f6;
+  }
+
+  .other-tool__icon--amber {
+    background: #f59e0b/10;
+    color: #f59e0b;
+  }
+
+  .other-tool__content {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .other-tool__title {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--color-text-primary);
+  }
+
+  .other-tool__desc {
+    font-size: 0.75rem;
+    color: var(--color-text-muted);
+  }
+
+  .other-tool__arrow {
+    color: var(--color-text-muted);
+    flex-shrink: 0;
+  }
+
+  /* Trust Section */
+  .trust-section {
+    padding: 1.5rem 1rem 2rem;
+    border-top: 1px solid var(--color-border);
+  }
+
+  .trust-section__container {
+    max-width: 72rem;
+    margin: 0 auto;
+  }
+
+  .trust-details {
+    background: var(--color-bg-secondary);
+    border: 1px solid var(--color-border);
+    border-radius: 0.75rem;
+    overflow: hidden;
+  }
+
+  .trust-summary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem;
+    cursor: pointer;
+    list-style: none;
+  }
+
+  .trust-summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .trust-summary__content {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .trust-summary__icon {
+    color: var(--color-accent-primary);
+  }
+
+  .trust-summary__text {
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--color-text-secondary);
+  }
+
+  .trust-summary__chevron {
+    color: var(--color-text-muted);
+    transition: transform 0.2s;
+  }
+
+  .trust-details[open] .trust-summary__chevron {
+    transform: rotate(180deg);
+  }
+
+  .trust-content {
+    padding: 0 1rem 1rem;
+  }
+
+  .trust-content p {
+    font-size: 0.875rem;
+    color: var(--color-text-secondary);
+    line-height: 1.6;
+    margin-bottom: 1rem;
+  }
+
+  .trust-features {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  .trust-feature {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.8125rem;
+    color: var(--color-text-secondary);
+  }
+
+  /* Desktop styles */
+  @media (min-width: 768px) {
+    .hero {
+      padding: 4rem 0 2rem;
+    }
+
+    .hero__container {
+      padding: 0 1.5rem;
+    }
+
+    .hero__title {
+      font-size: 2.5rem;
+    }
+
+    .hero__accent {
+      display: inline;
+    }
+
+    .hero__subtitle {
+      font-size: 1.125rem;
+      max-width: 32rem;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .tool-spotlight__container {
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+    }
+
+    .tool-spotlight__visual {
+      display: block;
+    }
+
+    .other-tools__grid {
+      grid-template-columns: repeat(2, minmax(200px, 300px));
+      justify-content: center;
+    }
+  }
+</style>
+
+<script>
+  // Check for returning user progress (NL uses different storage key)
+  document.addEventListener('DOMContentLoaded', () => {
+    const storedProgress = localStorage.getItem('kit72_builder_nl');
+    if (storedProgress) {
+      try {
+        const progress = JSON.parse(storedProgress);
+        const block = document.getElementById('returning-user-block');
+        const progressText = document.getElementById('returning-progress');
+
+        if (block && progress.checkedItems) {
+          const completed = progress.checkedItems.length;
+
+          if (completed > 0) {
+            block.classList.remove('hidden');
+            if (progressText) {
+              progressText.textContent = `${completed} items afgevinkt`;
+            }
+          }
+        }
+      } catch {
+        // Invalid data, ignore
+      }
+    }
+  });
+</script>

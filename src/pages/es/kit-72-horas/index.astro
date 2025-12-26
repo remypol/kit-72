@@ -1,0 +1,605 @@
+---
+import ArticleLayout from '../../../layouts/ArticleLayout.astro';
+
+const tocItems = [
+  { id: 'que-es', label: '¿Qué es un Kit 72 Horas?' },
+  { id: 'por-que-72-horas', label: '¿Por qué 72 horas?' },
+  { id: 'contenido-esencial', label: 'Contenido esencial' },
+  { id: 'organizacion', label: 'Cómo organizarlo' },
+  { id: 'donde-guardarlo', label: 'Dónde guardarlo' },
+  { id: 'adaptaciones', label: 'Adaptaciones especiales' },
+  { id: 'mantenimiento', label: 'Mantenimiento' },
+  { id: 'errores-comunes', label: 'Errores comunes' },
+  { id: 'faq', label: 'Preguntas frecuentes' },
+];
+
+const breadcrumbs = [
+  { label: 'Inicio', href: '/es/' },
+  { label: 'Kit 72 Horas' },
+];
+
+const essentialCategories = [
+  {
+    name: 'Agua',
+    icon: '💧',
+    items: [
+      { name: 'Agua embotellada', quantity: '3L por persona/día = 9L total', priority: 'critical' },
+      { name: 'Pastillas potabilizadoras', quantity: '1 paquete', priority: 'recommended' },
+      { name: 'Botella con filtro', quantity: '1 por persona', priority: 'optional' },
+    ]
+  },
+  {
+    name: 'Alimentación',
+    icon: '🍫',
+    items: [
+      { name: 'Barritas energéticas', quantity: '6-9 por persona', priority: 'critical' },
+      { name: 'Frutos secos', quantity: '200g por persona', priority: 'critical' },
+      { name: 'Comida enlatada', quantity: '3-6 latas por persona', priority: 'recommended' },
+      { name: 'Abrelatas manual', quantity: '1 unidad', priority: 'critical' },
+      { name: 'Cubiertos reutilizables', quantity: '1 set por persona', priority: 'recommended' },
+    ]
+  },
+  {
+    name: 'Iluminación y energía',
+    icon: '🔦',
+    items: [
+      { name: 'Linterna LED', quantity: '1-2 unidades', priority: 'critical' },
+      { name: 'Pilas de repuesto', quantity: '2 sets', priority: 'critical' },
+      { name: 'Powerbank cargado', quantity: '10.000+ mAh', priority: 'critical' },
+      { name: 'Radio con pilas/dinamo', quantity: '1 unidad', priority: 'recommended' },
+      { name: 'Velas y mechero', quantity: '4-6 velas', priority: 'recommended' },
+    ]
+  },
+  {
+    name: 'Documentación',
+    icon: '📄',
+    items: [
+      { name: 'Copias de DNI/pasaporte', quantity: 'Todos los miembros', priority: 'critical' },
+      { name: 'Tarjeta sanitaria', quantity: 'Copias', priority: 'critical' },
+      { name: 'Números de emergencia', quantity: 'Lista impresa', priority: 'critical' },
+      { name: 'Efectivo', quantity: '100-200€ en billetes pequeños', priority: 'critical' },
+      { name: 'Contactos familiares', quantity: 'Lista impresa', priority: 'recommended' },
+    ]
+  },
+  {
+    name: 'Botiquín básico',
+    icon: '🩹',
+    items: [
+      { name: 'Tiritas variadas', quantity: '20+ unidades', priority: 'critical' },
+      { name: 'Gasas estériles', quantity: '1 paquete', priority: 'critical' },
+      { name: 'Vendas elásticas', quantity: '2 rollos', priority: 'recommended' },
+      { name: 'Antiséptico', quantity: '1 bote pequeño', priority: 'critical' },
+      { name: 'Medicación personal', quantity: 'Para 3+ días', priority: 'critical' },
+      { name: 'Analgésicos', quantity: '1 caja', priority: 'recommended' },
+      { name: 'Antihistamínicos', quantity: '1 caja', priority: 'optional' },
+    ]
+  },
+  {
+    name: 'Higiene',
+    icon: '🧴',
+    items: [
+      { name: 'Papel higiénico compacto', quantity: '1-2 rollos', priority: 'critical' },
+      { name: 'Toallitas húmedas', quantity: '2 paquetes', priority: 'critical' },
+      { name: 'Gel desinfectante', quantity: '1-2 botes', priority: 'critical' },
+      { name: 'Bolsas de basura', quantity: '5-10 unidades', priority: 'recommended' },
+      { name: 'Productos menstruales', quantity: 'Según necesidad', priority: 'critical' },
+    ]
+  },
+  {
+    name: 'Herramientas',
+    icon: '🔧',
+    items: [
+      { name: 'Navaja multiusos', quantity: '1 unidad', priority: 'critical' },
+      { name: 'Cinta americana', quantity: '1 rollo pequeño', priority: 'recommended' },
+      { name: 'Silbato', quantity: '1 por persona', priority: 'critical' },
+      { name: 'Guantes de trabajo', quantity: '1 par', priority: 'recommended' },
+      { name: 'Cuerda', quantity: '5-10 metros', priority: 'optional' },
+    ]
+  },
+  {
+    name: 'Protección',
+    icon: '🧥',
+    items: [
+      { name: 'Manta térmica', quantity: '1 por persona', priority: 'critical' },
+      { name: 'Chubasquero', quantity: '1 por persona', priority: 'recommended' },
+      { name: 'Ropa de cambio', quantity: '1 muda', priority: 'recommended' },
+      { name: 'Mascarillas', quantity: '5-10 unidades', priority: 'recommended' },
+    ]
+  },
+];
+
+const adaptations = [
+  {
+    group: 'Bebés y niños pequeños',
+    icon: '👶',
+    items: ['Pañales para 3+ días', 'Leche de fórmula / potitos', 'Biberones', 'Chupete de repuesto', 'Manta especial', 'Juguete pequeño reconfortante']
+  },
+  {
+    group: 'Personas mayores',
+    icon: '👴',
+    items: ['Medicación extra (mínimo 7 días)', 'Gafas de repuesto', 'Audífonos y pilas', 'Lista de medicamentos actualizada', 'Contacto del médico']
+  },
+  {
+    group: 'Mascotas',
+    icon: '🐕',
+    items: ['Comida para 3+ días', 'Agua extra', 'Correa y transportín', 'Documentación veterinaria', 'Medicación si aplica', 'Bolsas para excrementos']
+  },
+  {
+    group: 'Condiciones médicas',
+    icon: '💊',
+    items: ['Insulina y kit de frío', 'Inhaladores', 'EpiPens', 'Medidor de glucosa', 'Tensiómetro portátil', 'Oxígeno portátil si necesario']
+  },
+];
+
+const maintenanceSchedule = [
+  { task: 'Verificar fechas de caducidad', frequency: 'Cada 3 meses' },
+  { task: 'Rotar agua embotellada', frequency: 'Cada 6 meses' },
+  { task: 'Comprobar pilas y powerbanks', frequency: 'Cada 3 meses' },
+  { task: 'Actualizar documentación', frequency: 'Cuando cambie' },
+  { task: 'Revisar ropa (tallas niños)', frequency: 'Cada 6 meses' },
+  { task: 'Renovar medicamentos', frequency: 'Antes de caducidad' },
+  { task: 'Probar linternas y radio', frequency: 'Cada 3 meses' },
+  { task: 'Revisión completa del kit', frequency: '2 veces al año' },
+];
+
+const commonMistakes = [
+  {
+    mistake: 'Kit demasiado pesado',
+    why: 'Si no puedes cargarlo, no te servirá en una evacuación',
+    solution: 'Limita el peso a 10-15kg. Prioriza lo esencial.',
+  },
+  {
+    mistake: 'Olvidar el agua',
+    why: 'Es lo primero que necesitarás y lo que más espacio ocupa',
+    solution: 'Calcula 3L/persona/día. El agua es innegociable.',
+  },
+  {
+    mistake: 'No revisar las fechas',
+    why: 'Alimentos y medicamentos caducados no sirven',
+    solution: 'Marca en el calendario una revisión trimestral.',
+  },
+  {
+    mistake: 'Guardarlo en lugar inaccesible',
+    why: 'En una emergencia cada segundo cuenta',
+    solution: 'Ubicación conocida por todos y acceso rápido.',
+  },
+  {
+    mistake: 'No incluir efectivo',
+    why: 'Los cajeros y tarjetas pueden no funcionar',
+    solution: 'Incluye 100-200€ en billetes pequeños.',
+  },
+  {
+    mistake: 'Olvidar la documentación',
+    why: 'Necesitarás identificarte y contactar familiares',
+    solution: 'Copias de DNI, tarjeta sanitaria, lista de contactos.',
+  },
+];
+
+const faqs = [
+  {
+    question: '¿Por qué exactamente 72 horas?',
+    answer: 'Es el tiempo estimado que pueden tardar los servicios de emergencia en restablecer servicios básicos o llegar a zonas afectadas. Este estándar lo utilizan Protección Civil, Cruz Roja y organizaciones de emergencias en todo el mundo. No significa que todas las emergencias duren 72 horas, sino que es un período de autonomía razonable para la mayoría de situaciones.'
+  },
+  {
+    question: '¿Qué diferencia hay entre el Kit 72 Horas y el Kit de Emergencia general?',
+    answer: 'El Kit 72 Horas está diseñado específicamente para ser portátil y autónomo durante 3 días, ideal para evacuaciones o refugio temporal. El Kit de Emergencia general puede incluir más suministros para quedarse en casa durante períodos más largos. El Kit 72 Horas es la base mínima; el kit general puede ser más extenso.'
+  },
+  {
+    question: '¿Cuánto debería pesar mi kit?',
+    answer: 'Idealmente entre 10-15 kg para un adulto. Si pesa más, probablemente no podrás cargarlo durante mucho tiempo en una evacuación. Prioriza agua, comida, documentación y botiquín. El resto es secundario si el peso es un problema.'
+  },
+  {
+    question: '¿Necesito un kit por persona?',
+    answer: 'Depende de tu situación. Un kit familiar compartido funciona si siempre vais a estar juntos. Pero considera kits individuales reducidos si: hay niños mayores que pueden cargar, los miembros de la familia pueden separarse, o vives en una zona con alto riesgo de evacuación rápida.'
+  },
+  {
+    question: '¿Qué tipo de mochila necesito?',
+    answer: 'Una mochila resistente con múltiples compartimentos. No necesita ser táctica o de marca. Lo importante es: costuras reforzadas, correas acolchadas, material impermeable o con funda impermeable, y tamaño adecuado (40-60L para kit familiar, 25-35L individual).'
+  },
+  {
+    question: '¿Debo incluir armas o herramientas de defensa?',
+    answer: 'No recomendamos incluir armas. En una emergencia real, las autoridades están presentes y los conflictos son raros. Las herramientas multiusos (navaja suiza) son útiles por razones prácticas, no defensivas. Céntrate en supervivencia básica, no en escenarios de películas.'
+  },
+];
+---
+
+<ArticleLayout
+  faqData={faqs}
+  title="Kit 72 Horas: La Guía Definitiva para Preparar tu Mochila de Emergencia"
+  description="Todo lo que necesitas saber para preparar un kit de supervivencia de 72 horas. Checklist completo, cantidades exactas y consejos prácticos para España y Latinoamérica."
+  updatedDate="2025-12-13"
+  author="Equipo Kit-72"
+  readTime="14 min"
+  breadcrumbs={breadcrumbs}
+>
+  <!-- TOC Slot -->
+  <nav slot="toc" class="p-4 bg-[--color-bg-tertiary] rounded-lg">
+    <h2 class="text-sm font-semibold mb-3 text-[--color-text-primary]">En esta página</h2>
+    <ul class="space-y-2 text-sm">
+      {tocItems.map((item) => (
+        <li>
+          <a
+            href={`#${item.id}`}
+            class="text-[--color-text-secondary] hover:text-[--color-accent-primary] transition-colors"
+          >
+            {item.label}
+          </a>
+        </li>
+      ))}
+    </ul>
+  </nav>
+
+  <!-- Main Content -->
+  <section id="que-es" class="mb-12">
+    <h2>¿Qué es un Kit 72 Horas?</h2>
+    <p>
+      Un <strong>kit 72 horas</strong> (también llamado <em>bug out bag</em>, mochila de emergencia o BOB)
+      es un conjunto de suministros esenciales que te permiten sobrevivir de forma autónoma durante
+      3 días sin acceso a servicios básicos como agua corriente, electricidad o tiendas.
+    </p>
+    <p>
+      La idea es simple: si ocurre una emergencia que te obliga a evacuar tu casa o que interrumpe
+      los servicios durante varios días, ya tienes todo lo necesario preparado y listo para usar.
+    </p>
+
+    <div class="card p-6 my-6 not-prose">
+      <div class="flex items-start gap-4">
+        <span class="text-3xl">🎒</span>
+        <div>
+          <h3 class="font-semibold mb-2 text-[--color-text-primary] text-base">El concepto en una frase</h3>
+          <p class="text-[--color-text-secondary] m-0">
+            Una mochila que puedes coger y salir en 5 minutos, sabiendo que tienes todo lo necesario
+            para ti y tu familia durante los próximos 3 días.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="por-que-72-horas" class="mb-12">
+    <h2>¿Por qué 72 horas?</h2>
+    <p>
+      El período de 72 horas (3 días) no es arbitrario. Es el estándar internacional recomendado por:
+    </p>
+    <ul>
+      <li><strong>Protección Civil</strong> (España y Latinoamérica)</li>
+      <li><strong>Cruz Roja</strong> internacional</li>
+      <li><strong>FEMA</strong> (Estados Unidos)</li>
+      <li><strong>Organismos de gestión de emergencias</strong> de todo el mundo</li>
+    </ul>
+
+    <p>¿Por qué este tiempo específico?</p>
+
+    <div class="grid md:grid-cols-3 gap-4 my-6 not-prose">
+      <div class="card p-4">
+        <div class="text-2xl mb-2">⏱️</div>
+        <h3 class="font-semibold mb-1 text-[--color-text-primary] text-base">Tiempo de respuesta</h3>
+        <p class="text-sm text-[--color-text-secondary] m-0">
+          72 horas es el tiempo máximo típico para que los servicios de emergencia restablezcan
+          suministros básicos en la mayoría de situaciones.
+        </p>
+      </div>
+      <div class="card p-4">
+        <div class="text-2xl mb-2">⚖️</div>
+        <h3 class="font-semibold mb-1 text-[--color-text-primary] text-base">Equilibrio práctico</h3>
+        <p class="text-sm text-[--color-text-secondary] m-0">
+          Es suficiente para cubrir la mayoría de emergencias, pero el kit sigue siendo
+          manejable en peso y tamaño.
+        </p>
+      </div>
+      <div class="card p-4">
+        <div class="text-2xl mb-2">📊</div>
+        <h3 class="font-semibold mb-1 text-[--color-text-primary] text-base">Dato estadístico</h3>
+        <p class="text-sm text-[--color-text-secondary] m-0">
+          El 95% de las emergencias que afectan a civiles se resuelven o estabilizan
+          en menos de 72 horas.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section id="contenido-esencial" class="mb-12">
+    <h2>Contenido esencial del Kit 72 Horas</h2>
+    <p>
+      Aquí tienes el checklist completo organizado por categorías. Cada item está marcado con
+      su nivel de prioridad:
+    </p>
+
+    <div class="flex flex-wrap gap-3 my-4 not-prose">
+      <span class="inline-flex items-center gap-2 px-3 py-1 badge-critical text-xs font-medium rounded">
+        <span class="w-2 h-2 bg-[--color-status-critical] rounded-full"></span>
+        Crítico — Imprescindible
+      </span>
+      <span class="inline-flex items-center gap-2 px-3 py-1 badge-warning text-xs font-medium rounded">
+        <span class="w-2 h-2 bg-[--color-status-warning] rounded-full"></span>
+        Recomendado — Muy útil
+      </span>
+      <span class="inline-flex items-center gap-2 px-3 py-1 badge-info text-xs font-medium rounded">
+        <span class="w-2 h-2 bg-[--color-status-info] rounded-full"></span>
+        Opcional — Si hay espacio
+      </span>
+    </div>
+
+    <div class="space-y-8 my-8">
+      {essentialCategories.map((category) => (
+        <div class="card overflow-hidden">
+          <div class="px-6 py-4 bg-[--color-bg-tertiary] border-b border-[--color-border]">
+            <h3 class="flex items-center gap-3 text-lg font-semibold m-0">
+              <span class="text-2xl">{category.icon}</span>
+              {category.name}
+            </h3>
+          </div>
+          <div class="divide-y divide-[--color-border]">
+            {category.items.map((item) => (
+              <div class="px-6 py-3 flex items-center justify-between">
+                <div class="flex items-center gap-3">
+                  <span class={`w-2 h-2 rounded-full ${
+                    item.priority === 'critical' ? 'bg-[--color-status-critical]' :
+                    item.priority === 'recommended' ? 'bg-[--color-status-warning]' :
+                    'bg-[--color-status-info]'
+                  }`}></span>
+                  <span class="font-medium text-[--color-text-primary]">{item.name}</span>
+                </div>
+                <span class="text-sm text-[--color-text-secondary]">{item.quantity}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <section id="organizacion" class="mb-12">
+    <h2>Cómo organizar tu Kit 72 Horas</h2>
+    <p>
+      La organización es casi tan importante como el contenido. Un kit mal organizado te hará perder
+      tiempo valioso buscando cosas cuando más las necesitas.
+    </p>
+
+    <h3>Sistema de capas</h3>
+    <p>Organiza tu mochila en "capas" según la frecuencia de uso:</p>
+
+    <div class="card p-6 my-6 not-prose">
+      <div class="space-y-4">
+        <div class="flex items-start gap-4">
+          <span class="flex-shrink-0 w-8 h-8 flex items-center justify-center bg-[--color-status-critical] text-white rounded-full font-bold text-sm">1</span>
+          <div>
+            <h3 class="font-semibold text-[--color-text-primary] text-base">Bolsillos exteriores y laterales</h3>
+            <p class="text-sm text-[--color-text-secondary] m-0">
+              Linterna, silbato, snacks, botella de agua, documentos. Lo que necesitas acceder sin abrir la mochila.
+            </p>
+          </div>
+        </div>
+        <div class="flex items-start gap-4">
+          <span class="flex-shrink-0 w-8 h-8 flex items-center justify-center bg-[--color-status-warning] text-white rounded-full font-bold text-sm">2</span>
+          <div>
+            <h3 class="font-semibold text-[--color-text-primary] text-base">Parte superior del compartimento principal</h3>
+            <p class="text-sm text-[--color-text-secondary] m-0">
+              Botiquín, powerbank, comida para el primer día, chubasquero. Acceso rápido pero protegido.
+            </p>
+          </div>
+        </div>
+        <div class="flex items-start gap-4">
+          <span class="flex-shrink-0 w-8 h-8 flex items-center justify-center bg-[--color-status-info] text-white rounded-full font-bold text-sm">3</span>
+          <div>
+            <h3 class="font-semibold text-[--color-text-primary] text-base">Fondo de la mochila</h3>
+            <p class="text-sm text-[--color-text-secondary] m-0">
+              Ropa de cambio, manta térmica, herramientas, comida para días 2-3. Lo que usarás menos frecuentemente.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h3>Bolsas organizadoras</h3>
+    <p>
+      Usa bolsas de colores o con etiquetas para agrupar items por categoría. Así cualquier miembro
+      de la familia puede encontrar lo que necesita rápidamente, incluso bajo estrés.
+    </p>
+    <ul>
+      <li><strong>Rojo:</strong> Botiquín y medicamentos</li>
+      <li><strong>Azul:</strong> Higiene personal</li>
+      <li><strong>Verde:</strong> Comida y snacks</li>
+      <li><strong>Amarillo:</strong> Herramientas</li>
+      <li><strong>Transparente:</strong> Documentos</li>
+    </ul>
+  </section>
+
+  <section id="donde-guardarlo" class="mb-12">
+    <h2>Dónde guardar tu Kit 72 Horas</h2>
+    <p>
+      El mejor kit del mundo no sirve si no puedes acceder a él. Elige la ubicación con cuidado.
+    </p>
+
+    <div class="grid md:grid-cols-2 gap-6 my-6 not-prose">
+      <div class="card p-6 border-l-4 border-l-[--color-status-success]">
+        <h3 class="font-semibold mb-3 text-[--color-status-success] text-base">✓ Buenas ubicaciones</h3>
+        <ul class="space-y-2 text-sm text-[--color-text-secondary]">
+          <li>Armario de la entrada (acceso rápido)</li>
+          <li>Junto a la puerta del garaje</li>
+          <li>En el maletero del coche (kit secundario)</li>
+          <li>Debajo de las escaleras si es accesible</li>
+          <li>En la zona de paso hacia la salida</li>
+        </ul>
+      </div>
+      <div class="card p-6 border-l-4 border-l-[--color-status-critical]">
+        <h3 class="font-semibold mb-3 text-[--color-status-critical] text-base">✗ Malas ubicaciones</h3>
+        <ul class="space-y-2 text-sm text-[--color-text-secondary]">
+          <li>Sótano sin salida alternativa</li>
+          <li>Trastero alejado de la vivienda</li>
+          <li>Armarios altos de difícil acceso</li>
+          <li>Lugares húmedos o con calor extremo</li>
+          <li>Detrás de muebles pesados</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="card p-6 my-6 not-prose bg-[--color-accent-subtle] border-[--color-border-accent]">
+      <p class="text-sm text-[--color-text-primary] m-0">
+        <strong>💡 Consejo:</strong> Todos los miembros de la familia deben saber dónde está el kit.
+        Haz un simulacro: ¿pueden los niños encontrarlo y sacarlo solos si fuera necesario?
+      </p>
+    </div>
+  </section>
+
+  <section id="adaptaciones" class="mb-12">
+    <h2>Adaptaciones especiales</h2>
+    <p>
+      El kit básico es un punto de partida. Según tu situación familiar, necesitarás añadir
+      items específicos.
+    </p>
+
+    <div class="grid md:grid-cols-2 gap-6 my-8">
+      {adaptations.map((group) => (
+        <div class="card p-6">
+          <h3 class="flex items-center gap-3 text-lg font-semibold mb-4">
+            <span class="text-2xl">{group.icon}</span>
+            {group.group}
+          </h3>
+          <ul class="space-y-2 text-sm">
+            {group.items.map((item) => (
+              <li class="flex items-center gap-2 text-[--color-text-secondary]">
+                <span class="w-1.5 h-1.5 bg-[--color-accent-primary] rounded-full flex-shrink-0"></span>
+                {item}
+              </li>
+            ))}
+          </ul>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <section id="mantenimiento" class="mb-12">
+    <h2>Mantenimiento del kit</h2>
+    <p>
+      Un kit olvidado es un kit inútil. Establece un calendario de revisión y cúmplelo.
+    </p>
+
+    <div class="overflow-x-auto my-6">
+      <table>
+        <thead>
+          <tr>
+            <th>Tarea</th>
+            <th>Frecuencia</th>
+          </tr>
+        </thead>
+        <tbody>
+          {maintenanceSchedule.map((item) => (
+            <tr>
+              <td>{item.task}</td>
+              <td><code>{item.frequency}</code></td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+
+    <div class="card p-6 my-6 not-prose bg-[--color-accent-subtle] border-[--color-border-accent]">
+      <p class="text-sm text-[--color-text-primary] m-0">
+        <strong>💡 Truco:</strong> Pon una alarma recurrente en el móvil (ej: primer domingo de cada trimestre)
+        para revisar el kit. Hazlo coincidir con el cambio de hora para recordarlo mejor.
+      </p>
+    </div>
+  </section>
+
+  <section id="errores-comunes" class="mb-12">
+    <h2>Errores comunes (y cómo evitarlos)</h2>
+
+    <div class="space-y-4 my-8">
+      {commonMistakes.map((item) => (
+        <div class="card p-6">
+          <div class="flex items-start gap-4">
+            <span class="text-2xl flex-shrink-0">⚠️</span>
+            <div>
+              <h3 class="font-semibold text-[--color-text-primary] mb-1 text-base">{item.mistake}</h3>
+              <p class="text-sm text-[--color-text-secondary] mb-2">
+                <strong>Por qué es problema:</strong> {item.why}
+              </p>
+              <p class="text-sm text-[--color-accent-primary] m-0">
+                <strong>Solución:</strong> {item.solution}
+              </p>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <section id="faq" class="mb-12">
+    <h2>Preguntas frecuentes</h2>
+
+    <div class="space-y-4 my-8">
+      {faqs.map((faq, index) => (
+        <details class="card group">
+          <summary class="px-6 py-4 cursor-pointer list-none flex items-center justify-between hover:bg-[--color-bg-tertiary] transition-colors">
+            <span class="font-medium text-[--color-text-primary] pr-4">{faq.question}</span>
+            <svg
+              class="w-5 h-5 text-[--color-text-muted] transform transition-transform group-open:rotate-180 flex-shrink-0"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+            </svg>
+          </summary>
+          <div class="px-6 pb-4">
+            <p class="text-[--color-text-secondary] m-0">{faq.answer}</p>
+          </div>
+        </details>
+      ))}
+    </div>
+  </section>
+
+  <!-- Sources Slot -->
+  <div slot="sources">
+    <h2 id="fuentes">Fuentes y referencias</h2>
+    <ul class="text-sm space-y-2">
+      <li>
+        <a href="https://www.proteccioncivil.es/" target="_blank" rel="noopener">
+          Dirección General de Protección Civil y Emergencias — España
+        </a>
+      </li>
+      <li>
+        <a href="https://www.cruzroja.es/" target="_blank" rel="noopener">
+          Cruz Roja Española — Guías de preparación ante emergencias
+        </a>
+      </li>
+      <li>
+        <a href="https://www.ready.gov/" target="_blank" rel="noopener">
+          Ready.gov (FEMA) — Build a Kit
+        </a>
+      </li>
+      <li>
+        <a href="https://www.ifrc.org/" target="_blank" rel="noopener">
+          Federación Internacional de la Cruz Roja
+        </a>
+      </li>
+    </ul>
+  </div>
+
+  <!-- CTA Slot -->
+  <div slot="cta" class="card p-8 text-center bg-[--color-bg-tertiary]">
+    <h3 class="text-xl font-semibold mb-4">¿Quieres personalizar tu kit?</h3>
+    <p class="text-[--color-text-secondary] mb-6">
+      Usa nuestro configurador interactivo para crear un checklist adaptado a tu familia,
+      mascotas y situación específica.
+    </p>
+    <div class="flex flex-wrap gap-4 justify-center">
+      <a
+        href="/es/herramientas/configurador-kit/"
+        class="inline-flex items-center gap-2 px-6 py-3 bg-[--color-accent-primary] text-[--color-bg-primary] font-semibold rounded hover:bg-[--color-accent-hover] transition-colors"
+      >
+        Crear mi kit personalizado
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+        </svg>
+      </a>
+      <a
+        href="/es/kit-de-emergencia/"
+        class="inline-flex items-center gap-2 px-6 py-3 border border-[--color-border] text-[--color-text-primary] font-medium rounded hover:border-[--color-accent-primary] hover:text-[--color-accent-primary] transition-colors"
+      >
+        Ver kit de emergencia completo
+      </a>
+    </div>
+  </div>
+</ArticleLayout>

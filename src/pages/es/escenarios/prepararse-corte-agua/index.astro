@@ -1,0 +1,940 @@
+---
+/**
+ * Corte de Agua Scenario Page - Guided Flow Template
+ */
+import BaseLayout from '../../../../layouts/BaseLayout.astro';
+import TLDRBlock from '../../../../components/hub/TLDRBlock.astro';
+import CollapsibleSection from '../../../../components/hub/CollapsibleSection.astro';
+import PhaseTabs from '../../../../components/hub/PhaseTabs.tsx';
+import InteractiveChecklist from '../../../../components/hub/InteractiveChecklist.tsx';
+import StickyActionBar from '../../../../components/hub/StickyActionBar.tsx';
+import Icon from '../../../../components/ui/Icon.astro';
+import HeroImage from '../../../../components/content/HeroImage.astro';
+
+const scenarioKey = 'corte-agua';
+
+// Phase content
+const phases = {
+  antes: [
+    {
+      title: 'Almacena agua potable',
+      detail: 'Mínimo 3L por persona y día para beber. Ideal 5-6L para mayor confort.',
+      tip: 'Una familia de 4 necesita ~36L mínimo para 3 días'
+    },
+    {
+      title: 'Ten bidones alimentarios',
+      detail: 'Bidones de 20-30L para almacenar agua del grifo. Rota cada 6 meses.',
+      tip: 'Guarda en lugar fresco y oscuro'
+    },
+    {
+      title: 'Compra pastillas potabilizadoras',
+      detail: 'Para tratar agua de fuentes no verificadas si te quedas sin reserva.',
+      tip: null
+    },
+    {
+      title: 'Prepara higiene sin agua',
+      detail: 'Toallitas húmedas, gel desinfectante, champú seco.',
+      tip: '2-3 paquetes de toallitas por persona'
+    },
+    {
+      title: 'Ten cubos para el WC',
+      detail: 'Cubos de 8-10L para descarga manual del inodoro.',
+      tip: null
+    },
+    {
+      title: 'Conoce las causas',
+      detail: 'Mantenimiento programado (con aviso), rotura tubería, sequía o desastre.',
+      tip: 'Si hay aviso, llena bañera y todos los recipientes'
+    },
+  ],
+  durante: [
+    {
+      title: 'Prioriza el agua de bebida',
+      detail: 'Nunca comprometas el agua de bebida por otros usos. Es la prioridad #1.',
+      tip: null
+    },
+    {
+      title: 'No abras grifos innecesariamente',
+      detail: 'Cuando vuelva el agua puede salir con aire o sucia.',
+      tip: null
+    },
+    {
+      title: 'Usa descarga manual del WC',
+      detail: 'Vierte 6-8L directamente en la taza para provocar descarga.',
+      tip: 'Reutiliza agua de lavado para descargas'
+    },
+    {
+      title: 'Higiene con toallitas',
+      detail: 'Cuerpo con toallitas húmedas. Manos con gel desinfectante.',
+      tip: null
+    },
+    {
+      title: 'Lava platos con método de 2 barreños',
+      detail: 'Uno con agua jabonosa, otro con agua limpia para aclarar.',
+      tip: 'Reutiliza el agua después para plantas o WC'
+    },
+    {
+      title: 'Ración el agua por prioridades',
+      detail: 'Beber (40%) > Cocinar (15%) > Higiene (25%) > WC (15%) > Otros (5%).',
+      tip: null
+    },
+  ],
+  despues: [
+    {
+      title: 'Deja correr el agua',
+      detail: 'Cuando vuelva, deja correr 2-3 minutos antes de usar. Puede salir turbia.',
+      tip: null
+    },
+    {
+      title: 'Comprueba el sabor y olor',
+      detail: 'Si huele a cloro fuerte es normal. Si huele raro o sabe mal, no bebas.',
+      tip: 'En caso de duda, usa agua embotellada un día más'
+    },
+    {
+      title: 'Repón suministros',
+      detail: 'Rellenar bidones, comprar más agua embotellada, toallitas usadas.',
+      tip: null
+    },
+    {
+      title: 'Limpia grifos y filtros',
+      detail: 'Pueden haberse acumulado sedimentos. Limpia los aireadores.',
+      tip: null
+    },
+  ],
+};
+
+// Checklist categories
+const checklistCategories = [
+  {
+    id: 'almacenamiento',
+    name: 'Almacenamiento de agua',
+    icon: 'droplet',
+    items: [
+      { id: 'agua-embotellada', name: 'Agua embotellada', quantity: '3L/persona/día × 3 días', priority: 'critical' as const, notes: 'Agua potable para beber' },
+      { id: 'garrafas', name: 'Garrafas grandes (5-8L)', quantity: '2-4 unidades', priority: 'critical' as const, notes: 'Más fácil de manejar' },
+      { id: 'bidon', name: 'Bidón alimentario 20-30L', quantity: '1 por familia', priority: 'recommended' as const, notes: 'Para almacenamiento a medio plazo' },
+      { id: 'botellas-vacias', name: 'Botellas vacías limpias', quantity: '10+ unidades', priority: 'recommended' as const, notes: 'Para llenar si hay aviso' },
+    ]
+  },
+  {
+    id: 'tratamiento',
+    name: 'Tratamiento de agua',
+    icon: 'beaker',
+    items: [
+      { id: 'pastillas', name: 'Pastillas potabilizadoras', quantity: '2 paquetes', priority: 'critical' as const, notes: 'Para emergencias' },
+      { id: 'filtro', name: 'Filtro de agua portátil', quantity: '1 unidad', priority: 'recommended' as const, notes: 'Elimina bacterias y parásitos' },
+      { id: 'lejia', name: 'Lejía sin aditivos', quantity: '1 botella pequeña', priority: 'optional' as const, notes: 'Solo como último recurso' },
+    ]
+  },
+  {
+    id: 'higiene',
+    name: 'Higiene sin agua',
+    icon: 'sparkles',
+    items: [
+      { id: 'toallitas', name: 'Toallitas húmedas', quantity: '3-4 paquetes grandes', priority: 'critical' as const, notes: 'Para limpieza corporal' },
+      { id: 'gel', name: 'Gel desinfectante', quantity: '2-3 botes', priority: 'critical' as const, notes: 'Para manos' },
+      { id: 'champu-seco', name: 'Champú seco', quantity: '1 bote', priority: 'recommended' as const, notes: 'Para el pelo' },
+      { id: 'desodorante', name: 'Desodorante extra', quantity: '1 unidad', priority: 'recommended' as const, notes: 'Muy útil sin ducha' },
+    ]
+  },
+  {
+    id: 'saneamiento',
+    name: 'Saneamiento',
+    icon: 'home',
+    items: [
+      { id: 'cubos', name: 'Cubos para agua', quantity: '2-3 (8-10L)', priority: 'critical' as const, notes: 'Para descarga manual WC' },
+      { id: 'bolsas-basura', name: 'Bolsas de basura resistentes', quantity: '1 rollo', priority: 'critical' as const, notes: 'Para emergencias sanitarias' },
+      { id: 'arena-gatos', name: 'Arena para gatos o serrín', quantity: '1 bolsa', priority: 'optional' as const, notes: 'Si falla totalmente el WC' },
+    ]
+  },
+  {
+    id: 'cocina',
+    name: 'Cocina',
+    icon: 'utensils',
+    items: [
+      { id: 'platos-desechables', name: 'Platos y vasos desechables', quantity: 'Pack para 3 días', priority: 'recommended' as const, notes: 'Evita lavar platos' },
+      { id: 'comida-sin-agua', name: 'Comidas que no requieren agua', quantity: 'Conservas, snacks', priority: 'critical' as const, notes: 'Evita cocinar' },
+      { id: 'barrenos', name: 'Barreños pequeños', quantity: '2 unidades', priority: 'recommended' as const, notes: 'Para lavar con poco agua' },
+    ]
+  },
+];
+
+// Water needs table
+const waterNeeds = [
+  { use: 'Beber', amount: '2L', notes: 'Mínimo vital' },
+  { use: 'Cocinar', amount: '0.5-1L', notes: 'Si cocinas' },
+  { use: 'Higiene', amount: '2-4L', notes: 'Cara, manos' },
+  { use: 'WC', amount: '3-6L', notes: 'Por descarga' },
+];
+
+// FAQs
+const faqs = [
+  {
+    question: '¿Cuánta agua debo almacenar?',
+    answer: 'Mínimo 3 litros por persona y día. Una familia de 4 necesita 36L mínimo para 3 días. Idealmente 5-6L para mayor confort.'
+  },
+  {
+    question: '¿Cuánto dura el agua almacenada?',
+    answer: 'Agua embotellada: 1-2 años sellada. Agua del grifo en bidones: rotar cada 6 meses. Si huele o sabe mal, trátala.'
+  },
+  {
+    question: '¿Puedo beber agua de la bañera?',
+    answer: 'No directamente. Úsala para limpieza, WC y lavado. Para beber, usa solo agua embotellada o tratada con pastillas.'
+  },
+  {
+    question: '¿Cómo sé si el agua es potable?',
+    answer: 'En caso de duda, hiérvela 3+ minutos o usa pastillas potabilizadoras. Agua turbia, con color u olor = no bebas sin tratar.'
+  },
+  {
+    question: '¿Y si el corte dura más de 3 días?',
+    answer: 'Reduce consumo al mínimo. Busca puntos de distribución municipal (suelen habilitarse). No dudes en pedir ayuda.'
+  },
+];
+---
+
+<BaseLayout
+  title="Corte de Agua: ¿Qué hacer sin agua? Guía de Emergencia"
+  description="Guía paso a paso para cortes de agua. Cuánta almacenar, cómo vivir sin agua corriente y checklist interactivo."
+  schemaType="HowTo"
+  dateModified="2025-12-15"
+  schemaData={{
+    step: [
+      { '@type': 'HowToStep', name: 'Almacena agua potable', text: 'Mínimo 3L por persona y día para beber. Ideal 5-6L para mayor confort. Una familia de 4 necesita ~36L mínimo para 3 días.' },
+      { '@type': 'HowToStep', name: 'Ten bidones alimentarios', text: 'Bidones de 20-30L para almacenar agua del grifo. Rota cada 6 meses. Guarda en lugar fresco y oscuro.' },
+      { '@type': 'HowToStep', name: 'Compra pastillas potabilizadoras', text: 'Para tratar agua de fuentes no verificadas si te quedas sin reserva.' },
+      { '@type': 'HowToStep', name: 'Prepara higiene sin agua', text: 'Toallitas húmedas, gel desinfectante, champú seco. 2-3 paquetes de toallitas por persona.' },
+      { '@type': 'HowToStep', name: 'Prioriza el agua de bebida', text: 'Nunca comprometas el agua de bebida por otros usos. Es la prioridad #1.' },
+      { '@type': 'HowToStep', name: 'Usa descarga manual del WC', text: 'Vierte 6-8L directamente en la taza para provocar descarga. Reutiliza agua de lavado para descargas.' },
+    ],
+    totalTime: 'P3D',
+    supply: [
+      { '@type': 'HowToSupply', name: 'Agua embotellada (3L/persona/día × 3 días)' },
+      { '@type': 'HowToSupply', name: 'Bidón alimentario 20-30L' },
+      { '@type': 'HowToSupply', name: 'Pastillas potabilizadoras' },
+      { '@type': 'HowToSupply', name: 'Toallitas húmedas (3-4 paquetes)' },
+      { '@type': 'HowToSupply', name: 'Gel desinfectante' },
+      { '@type': 'HowToSupply', name: 'Cubos para agua (8-10L)' },
+    ],
+  }}
+  faqData={faqs}
+>
+  <main class="scenario-page">
+    <!-- Header -->
+    <header class="scenario-header">
+      <nav class="scenario-breadcrumb">
+        <a href="/es/" class="breadcrumb-back">
+          <Icon name="ChevronLeft" size={20} />
+        </a>
+        <span class="breadcrumb-current">Corte de Agua</span>
+      </nav>
+
+      <div class="scenario-title-row">
+        <div class="scenario-icon scenario-icon--blue">
+          <Icon name="Droplet" size={28} />
+        </div>
+        <div class="scenario-title-content">
+          <h1 class="scenario-title">Prepararse para un Corte de Agua</h1>
+          <div class="scenario-meta">
+            <span class="meta-item">6 min</span>
+            <span class="meta-divider">·</span>
+            <span class="meta-item">Actualizado dic 2025</span>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Hero Image -->
+    <section class="scenario-section">
+      <HeroImage
+        src="/images/shared/water-storage-containers.webp"
+        alt="Almacenamiento de agua en bidones para emergencias"
+        priority={true}
+      />
+    </section>
+
+    <!-- TL;DR -->
+    <section class="scenario-section">
+      <TLDRBlock
+        summary="Un adulto necesita mínimo 3 litros diarios para beber e higiene básica. Con aviso previo, llena bañeras y recipientes. Sin aviso, dependerás de tu reserva. Prioriza siempre el agua de bebida sobre cualquier otro uso."
+        keyStat="3L/día/persona"
+        keyStatLabel="Mínimo para"
+      />
+    </section>
+
+    <!-- Water Needs Quick Reference -->
+    <section class="scenario-section">
+      <div class="water-needs-card">
+        <h3 class="water-needs-title">¿Cuánta agua necesitas?</h3>
+        <div class="water-needs-grid">
+          {waterNeeds.map((need) => (
+            <div class="water-need-item">
+              <span class="water-need-amount">{need.amount}</span>
+              <span class="water-need-use">{need.use}</span>
+              <span class="water-need-notes">{need.notes}</span>
+            </div>
+          ))}
+        </div>
+        <p class="water-needs-total">
+          <strong>Total mínimo:</strong> 8-15L/persona/día (reducible a 3-5L en emergencia)
+        </p>
+      </div>
+    </section>
+
+    <!-- Phase Tabs -->
+    <PhaseTabs client:idle scenarioKey={scenarioKey} />
+
+    <!-- Phase: Antes -->
+    <section id="antes" class="phase-section">
+      <div class="phase-header">
+        <span class="phase-number">1</span>
+        <div class="phase-title-group">
+          <h2 class="phase-title">Antes del corte</h2>
+          <p class="phase-subtitle">Preparación y almacenamiento</p>
+        </div>
+      </div>
+
+      <div class="phase-steps">
+        {phases.antes.map((step, index) => (
+          <CollapsibleSection
+            title={step.title}
+            summary={step.detail}
+            step={index + 1}
+            variant="card"
+          >
+            <p>{step.detail}</p>
+            {step.tip && (
+              <div class="step-tip">
+                <Icon name="Lightbulb" size={16} />
+                <span>{step.tip}</span>
+              </div>
+            )}
+          </CollapsibleSection>
+        ))}
+      </div>
+    </section>
+
+    <!-- Phase: Durante -->
+    <section id="durante" class="phase-section">
+      <div class="phase-header">
+        <span class="phase-number phase-number--warning">2</span>
+        <div class="phase-title-group">
+          <h2 class="phase-title">Durante el corte</h2>
+          <p class="phase-subtitle">Gestión y racionamiento</p>
+        </div>
+      </div>
+
+      <!-- Priority Warning -->
+      <div class="priority-box">
+        <div class="priority-icon">
+          <Icon name="AlertCircle" size={24} />
+        </div>
+        <div class="priority-content">
+          <strong>Orden de prioridad</strong>
+          <div class="priority-list">
+            <span class="priority-item priority-1">1. Beber</span>
+            <span class="priority-item priority-2">2. Cocinar</span>
+            <span class="priority-item priority-3">3. Higiene</span>
+            <span class="priority-item priority-4">4. WC</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="phase-steps">
+        {phases.durante.map((step, index) => (
+          <CollapsibleSection
+            title={step.title}
+            summary={step.detail}
+            step={index + 1}
+            variant="card"
+          >
+            <p>{step.detail}</p>
+            {step.tip && (
+              <div class="step-tip">
+                <Icon name="Lightbulb" size={16} />
+                <span>{step.tip}</span>
+              </div>
+            )}
+          </CollapsibleSection>
+        ))}
+      </div>
+    </section>
+
+    <!-- Phase: Después -->
+    <section id="despues" class="phase-section">
+      <div class="phase-header">
+        <span class="phase-number phase-number--success">3</span>
+        <div class="phase-title-group">
+          <h2 class="phase-title">Después del corte</h2>
+          <p class="phase-subtitle">Recuperación y reposición</p>
+        </div>
+      </div>
+
+      <div class="phase-steps">
+        {phases.despues.map((step, index) => (
+          <CollapsibleSection
+            title={step.title}
+            summary={step.detail}
+            step={index + 1}
+            variant="card"
+          >
+            <p>{step.detail}</p>
+            {step.tip && (
+              <div class="step-tip">
+                <Icon name="Lightbulb" size={16} />
+                <span>{step.tip}</span>
+              </div>
+            )}
+          </CollapsibleSection>
+        ))}
+      </div>
+    </section>
+
+    <!-- Interactive Checklist -->
+    <section class="scenario-section">
+      <h2 class="section-title">
+        <Icon name="CheckSquare" size={24} />
+        Tu checklist de corte de agua
+      </h2>
+      <p class="section-intro">
+        Marca los items que ya tienes. Tu progreso se guarda automáticamente.
+      </p>
+      <InteractiveChecklist
+        client:idle
+        storageKey={scenarioKey}
+        categories={checklistCategories}
+        title="Items para cortes de agua"
+      />
+    </section>
+
+    <!-- FAQs -->
+    <section class="scenario-section">
+      <h2 class="section-title">Preguntas frecuentes</h2>
+      <div class="faq-list">
+        {faqs.map((faq) => (
+          <details class="faq-item">
+            <summary class="faq-question">
+              <span>{faq.question}</span>
+              <Icon name="ChevronDown" size={20} />
+            </summary>
+            <div class="faq-answer">
+              <p>{faq.answer}</p>
+            </div>
+          </details>
+        ))}
+      </div>
+    </section>
+
+    <!-- Sources -->
+    <section class="scenario-section">
+      <details class="sources-block">
+        <summary class="sources-header">
+          <Icon name="BookOpen" size={18} />
+          <span>Ver fuentes y referencias</span>
+          <Icon name="ChevronDown" size={16} />
+        </summary>
+        <div class="sources-content">
+          <ul>
+            <li><a href="https://www.who.int/water_sanitation_health/dwq/en/" target="_blank" rel="noopener">OMS - Calidad del agua</a></li>
+            <li><a href="https://www.mscbs.gob.es/" target="_blank" rel="noopener">Ministerio de Sanidad</a></li>
+            <li><a href="https://www.ready.gov/water" target="_blank" rel="noopener">Ready.gov - Water</a></li>
+          </ul>
+        </div>
+      </details>
+    </section>
+
+    <!-- Related Scenarios -->
+    <section class="scenario-section">
+      <h2 class="section-title">Escenarios relacionados</h2>
+      <div class="related-grid">
+        <a href="/es/escenarios/prepararse-apagon/" class="related-card related-card--amber">
+          <Icon name="Zap" size={24} />
+          <span>Apagón</span>
+        </a>
+        <a href="/es/escenarios/prepararse-ola-calor/" class="related-card related-card--orange">
+          <Icon name="Sun" size={24} />
+          <span>Ola de Calor</span>
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <!-- Sticky Action Bar -->
+  <StickyActionBar
+    client:idle
+    actionText="Calcular agua"
+    actionUrl="/es/herramientas/calculadora-agua/"
+    dismissKey={`scenario_${scenarioKey}`}
+    label="Próximo paso:"
+  />
+</BaseLayout>
+
+<style>
+  .scenario-page {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 0 16px 120px;
+  }
+
+  .scenario-header {
+    padding: 16px 0 24px;
+  }
+
+  .scenario-breadcrumb {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 16px;
+  }
+
+  .breadcrumb-back {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    background: var(--color-bg-secondary);
+    border-radius: 10px;
+    color: var(--color-text-secondary);
+    transition: all 0.15s ease;
+  }
+
+  .breadcrumb-back:hover {
+    background: var(--color-bg-tertiary);
+    color: var(--color-text-primary);
+  }
+
+  .breadcrumb-current {
+    font-size: 14px;
+    color: var(--color-text-muted);
+  }
+
+  .scenario-title-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+  }
+
+  .scenario-icon {
+    flex-shrink: 0;
+    width: 56px;
+    height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 16px;
+  }
+
+  .scenario-icon--blue {
+    background: rgba(59, 130, 246, 0.15);
+    color: #3b82f6;
+  }
+
+  .scenario-title-content {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .scenario-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--color-text-primary);
+    margin: 0 0 6px;
+    line-height: 1.2;
+  }
+
+  .scenario-meta {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    color: var(--color-text-muted);
+  }
+
+  .meta-divider {
+    opacity: 0.5;
+  }
+
+  .scenario-section {
+    margin-bottom: 32px;
+  }
+
+  .section-title {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: var(--color-text-primary);
+    margin: 0 0 12px;
+  }
+
+  .section-intro {
+    font-size: 14px;
+    color: var(--color-text-muted);
+    margin: 0 0 16px;
+  }
+
+  /* Water Needs Card */
+  .water-needs-card {
+    background: var(--color-bg-secondary);
+    border: 1px solid var(--color-border);
+    border-radius: 16px;
+    padding: 20px;
+  }
+
+  .water-needs-title {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--color-text-primary);
+    margin: 0 0 16px;
+  }
+
+  .water-needs-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    margin-bottom: 16px;
+  }
+
+  .water-need-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 12px 8px;
+    background: var(--color-bg-tertiary);
+    border-radius: 12px;
+  }
+
+  .water-need-amount {
+    font-size: 18px;
+    font-weight: 700;
+    color: #3b82f6;
+    margin-bottom: 4px;
+  }
+
+  .water-need-use {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--color-text-primary);
+    margin-bottom: 2px;
+  }
+
+  .water-need-notes {
+    font-size: 11px;
+    color: var(--color-text-muted);
+  }
+
+  .water-needs-total {
+    font-size: 13px;
+    color: var(--color-text-secondary);
+    margin: 0;
+    padding-top: 12px;
+    border-top: 1px solid var(--color-border);
+  }
+
+  .phase-section {
+    padding: 24px 0;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .phase-section:last-of-type {
+    border-bottom: none;
+  }
+
+  .phase-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    margin-bottom: 20px;
+  }
+
+  .phase-number {
+    flex-shrink: 0;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--color-accent-subtle);
+    color: var(--color-accent-primary);
+    font-size: 18px;
+    font-weight: 700;
+    border-radius: 12px;
+  }
+
+  .phase-number--warning {
+    background: rgba(59, 130, 246, 0.15);
+    color: #3b82f6;
+  }
+
+  .phase-number--success {
+    background: rgba(34, 197, 94, 0.15);
+    color: #22c55e;
+  }
+
+  .phase-title-group {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .phase-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--color-text-primary);
+    margin: 0 0 4px;
+  }
+
+  .phase-subtitle {
+    font-size: 14px;
+    color: var(--color-text-muted);
+    margin: 0;
+  }
+
+  .phase-steps {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .step-tip {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    margin-top: 12px;
+    padding: 10px 12px;
+    background: var(--color-accent-subtle);
+    border-radius: 8px;
+    font-size: 13px;
+    color: var(--color-accent-primary);
+  }
+
+  .step-tip svg {
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  /* Priority Box */
+  .priority-box {
+    display: flex;
+    gap: 16px;
+    padding: 16px;
+    margin-bottom: 20px;
+    background: rgba(59, 130, 246, 0.1);
+    border: 1px solid rgba(59, 130, 246, 0.3);
+    border-radius: 12px;
+  }
+
+  .priority-icon {
+    flex-shrink: 0;
+    color: #3b82f6;
+  }
+
+  .priority-content {
+    flex: 1;
+  }
+
+  .priority-content strong {
+    display: block;
+    font-size: 14px;
+    color: #3b82f6;
+    margin-bottom: 10px;
+  }
+
+  .priority-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .priority-item {
+    padding: 4px 10px;
+    font-size: 12px;
+    font-weight: 600;
+    border-radius: 6px;
+  }
+
+  .priority-1 {
+    background: rgba(239, 68, 68, 0.2);
+    color: #ef4444;
+  }
+
+  .priority-2 {
+    background: rgba(249, 115, 22, 0.2);
+    color: #f97316;
+  }
+
+  .priority-3 {
+    background: rgba(234, 179, 8, 0.2);
+    color: #eab308;
+  }
+
+  .priority-4 {
+    background: rgba(59, 130, 246, 0.2);
+    color: #3b82f6;
+  }
+
+  /* FAQs */
+  .faq-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .faq-item {
+    background: var(--color-bg-secondary);
+    border: 1px solid var(--color-border);
+    border-radius: 12px;
+    overflow: hidden;
+  }
+
+  .faq-question {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 14px 16px;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--color-text-primary);
+    cursor: pointer;
+    list-style: none;
+  }
+
+  .faq-question::-webkit-details-marker {
+    display: none;
+  }
+
+  .faq-question svg {
+    flex-shrink: 0;
+    color: var(--color-text-muted);
+    transition: transform 0.2s ease;
+  }
+
+  .faq-item[open] .faq-question svg {
+    transform: rotate(180deg);
+  }
+
+  .faq-answer {
+    padding: 0 16px 14px;
+  }
+
+  .faq-answer p {
+    font-size: 14px;
+    color: var(--color-text-secondary);
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  /* Sources */
+  .sources-block {
+    background: var(--color-bg-secondary);
+    border-radius: 12px;
+    overflow: hidden;
+  }
+
+  .sources-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 16px;
+    font-size: 14px;
+    color: var(--color-text-muted);
+    cursor: pointer;
+    list-style: none;
+  }
+
+  .sources-header::-webkit-details-marker {
+    display: none;
+  }
+
+  .sources-header svg:last-child {
+    margin-left: auto;
+    transition: transform 0.2s ease;
+  }
+
+  .sources-block[open] .sources-header svg:last-child {
+    transform: rotate(180deg);
+  }
+
+  .sources-content {
+    padding: 0 16px 14px;
+  }
+
+  .sources-content ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .sources-content li {
+    margin-bottom: 8px;
+  }
+
+  .sources-content a {
+    font-size: 13px;
+    color: var(--color-accent-primary);
+    text-decoration: none;
+  }
+
+  .sources-content a:hover {
+    text-decoration: underline;
+  }
+
+  /* Related Scenarios */
+  .related-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+
+  .related-card {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 16px;
+    border-radius: 12px;
+    text-decoration: none;
+    transition: transform 0.15s ease;
+  }
+
+  .related-card:hover {
+    transform: translateY(-2px);
+  }
+
+  .related-card span {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--color-text-primary);
+  }
+
+  .related-card--amber {
+    background: rgba(245, 158, 11, 0.1);
+    border: 1px solid rgba(245, 158, 11, 0.2);
+    color: #f59e0b;
+  }
+
+  .related-card--orange {
+    background: rgba(249, 115, 22, 0.1);
+    border: 1px solid rgba(249, 115, 22, 0.2);
+    color: #f97316;
+  }
+
+  @media (max-width: 480px) {
+    .scenario-page {
+      padding: 0 12px 120px;
+    }
+
+    .scenario-title {
+      font-size: 1.25rem;
+    }
+
+    .water-needs-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .related-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

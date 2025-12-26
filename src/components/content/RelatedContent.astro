@@ -1,0 +1,82 @@
+---
+import Icon from '../ui/Icon.astro';
+
+interface RelatedItem {
+  title: string;
+  href: string;
+  description?: string;
+  icon?: string;
+  type?: 'guide' | 'scenario' | 'product' | 'tool';
+}
+
+interface Props {
+  title?: string;
+  items: RelatedItem[];
+  locale: 'es' | 'nl' | 'de';
+}
+
+const { title, items, locale } = Astro.props;
+
+// Default titles per locale
+const defaultTitles: Record<string, string> = {
+  es: 'Contenido Relacionado',
+  nl: 'Gerelateerde Inhoud',
+  de: 'Verwandte Inhalte',
+};
+
+// Type labels per locale
+const typeLabels: Record<string, Record<string, string>> = {
+  es: { guide: 'Guía', scenario: 'Escenario', product: 'Producto', tool: 'Herramienta' },
+  nl: { guide: 'Gids', scenario: 'Scenario', product: 'Product', tool: 'Tool' },
+  de: { guide: 'Ratgeber', scenario: 'Szenario', product: 'Produkt', tool: 'Tool' },
+};
+
+// Default icons by type
+const typeIcons: Record<string, string> = {
+  guide: 'BookOpen',
+  scenario: 'AlertTriangle',
+  product: 'Package',
+  tool: 'Settings',
+};
+
+const finalTitle = title || defaultTitles[locale];
+---
+
+<aside class="mt-12 pt-8 border-t border-[--color-border]">
+  <h3 class="text-lg font-semibold mb-4 flex items-center gap-2">
+    <Icon name="Link" size={20} class="text-[--color-accent-primary]" />
+    {finalTitle}
+  </h3>
+  <div class="grid sm:grid-cols-2 gap-3">
+    {items.map((item) => (
+      <a
+        href={item.href}
+        class="card card-lift p-4 flex items-start gap-3 no-underline group"
+      >
+        <div class="flex-shrink-0 w-10 h-10 rounded-lg bg-[--color-accent-subtle] flex items-center justify-center group-hover:bg-[--color-accent-muted] transition-colors">
+          <Icon
+            name={item.icon || typeIcons[item.type || 'guide'] || 'ArrowRight'}
+            size={20}
+            class="text-[--color-accent-primary]"
+          />
+        </div>
+        <div class="flex-1 min-w-0">
+          {item.type && (
+            <span class="text-xs font-medium text-[--color-text-muted] uppercase tracking-wider">
+              {typeLabels[locale][item.type]}
+            </span>
+          )}
+          <p class="font-medium text-[--color-text-primary] group-hover:text-[--color-accent-primary] transition-colors">
+            {item.title}
+          </p>
+          {item.description && (
+            <p class="text-sm text-[--color-text-secondary] mt-1 line-clamp-2">
+              {item.description}
+            </p>
+          )}
+        </div>
+        <Icon name="ChevronRight" size={16} class="text-[--color-text-muted] group-hover:text-[--color-accent-primary] transition-colors flex-shrink-0 mt-1" />
+      </a>
+    ))}
+  </div>
+</aside>

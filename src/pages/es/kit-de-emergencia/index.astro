@@ -1,0 +1,392 @@
+---
+import ArticleLayout from '../../../layouts/ArticleLayout.astro';
+
+const title = 'Kit de Emergencia: Guía Completa 2025';
+const description = 'Todo lo que necesitas saber para preparar un kit de emergencia completo. Checklist detallado, cantidades recomendadas y consejos prácticos para proteger a tu familia.';
+
+const essentialItems = [
+  { category: 'Agua', items: ['3 litros por persona/día', 'Bidones o garrafas', 'Pastillas potabilizadoras'], priority: 'critical' },
+  { category: 'Alimentación', items: ['Comida no perecedera (3 días)', 'Abridor de latas manual', 'Cubiertos y platos desechables'], priority: 'critical' },
+  { category: 'Iluminación', items: ['Linterna (preferible dinamo)', 'Velas de emergencia', 'Mechero o cerillas'], priority: 'critical' },
+  { category: 'Comunicación', items: ['Radio AM/FM (preferible dinamo)', 'Pilas de repuesto', 'Silbato de emergencia'], priority: 'critical' },
+  { category: 'Energía', items: ['Powerbank cargado', 'Cargador solar (opcional)', 'Pilas para todos los dispositivos'], priority: 'warning' },
+  { category: 'Primeros auxilios', items: ['Botiquín básico', 'Medicamentos personales', 'Manta térmica'], priority: 'warning' },
+  { category: 'Documentos', items: ['Copias de DNI/pasaporte', 'Pólizas de seguros', 'Contactos de emergencia'], priority: 'warning' },
+  { category: 'Higiene', items: ['Papel higiénico', 'Toallitas húmedas', 'Gel desinfectante'], priority: 'info' },
+];
+
+const faqs = [
+  {
+    question: '¿Cuánto tiempo debe cubrir un kit de emergencia?',
+    answer: 'El estándar internacional es 72 horas (3 días). Este período cubre la mayoría de emergencias urbanas como apagones, cortes de agua o evacuaciones temporales. Para zonas rurales o con mayor riesgo, se recomienda ampliar a 7 días.'
+  },
+  {
+    question: '¿Cuánta agua necesito almacenar por persona?',
+    answer: 'El mínimo recomendado es 3 litros por persona al día para beber e higiene básica. En climas cálidos o para personas con necesidades especiales, aumenta a 4-5 litros. Para 72 horas, necesitas al menos 9 litros por persona.'
+  },
+  {
+    question: '¿Dónde debo guardar el kit de emergencia?',
+    answer: 'En un lugar accesible, fresco y seco. Evita sótanos que puedan inundarse o áticos con temperaturas extremas. Idealmente cerca de una salida. Si tienes coche, considera un kit secundario en el maletero.'
+  },
+  {
+    question: '¿Cada cuánto debo revisar el kit?',
+    answer: 'Revisa tu kit cada 6 meses. Comprueba las fechas de caducidad del agua y la comida, el estado de las pilas, y que los medicamentos no hayan expirado. Un buen momento es al cambiar la hora (marzo y octubre).'
+  },
+  {
+    question: '¿Necesito un kit diferente para cada escenario?',
+    answer: 'Un kit base bien preparado cubre la mayoría de situaciones. Puedes añadir elementos específicos según tu zona: más agua para olas de calor, ropa de abrigo para inviernos fríos, o documentación extra si vives en zona de evacuaciones.'
+  },
+  {
+    question: '¿Cuánto cuesta preparar un kit básico?',
+    answer: 'Un kit básico para una persona puede prepararse por 50-80€. Incluye agua, comida no perecedera, linterna, radio, botiquín y powerbank. No es necesario comprarlo todo de golpe: puedes ir añadiendo elementos cada mes.'
+  },
+];
+
+const scenarios = [
+  { name: 'Apagón', href: '/es/escenarios/prepararse-apagon/', description: 'Cortes de luz de horas a días' },
+  { name: 'Ola de calor', href: '/es/escenarios/prepararse-ola-calor/', description: 'Temperaturas extremas sin aire acondicionado' },
+  { name: 'Corte de agua', href: '/es/escenarios/prepararse-corte-agua/', description: 'Sin suministro de agua corriente' },
+  { name: 'Evacuación', href: '/es/escenarios/kit-evacuacion/', description: 'Salir de casa con lo esencial' },
+];
+---
+
+<ArticleLayout
+  title={title}
+  description={description}
+  updatedDate="2025-12-13"
+  breadcrumbs={[{ label: 'Kit de Emergencia', href: '/es/kit-de-emergencia/' }]}
+  faqData={faqs}
+>
+  <!-- Table of Contents -->
+  <nav slot="toc" class="card p-6 mb-12">
+    <h2 class="text-lg font-semibold mb-4">En esta guía</h2>
+    <ul class="space-y-2 text-sm">
+      <li><a href="#que-es" class="text-[--color-text-secondary] hover:text-[--color-accent-primary]">¿Qué es un kit de emergencia?</a></li>
+      <li><a href="#items-esenciales" class="text-[--color-text-secondary] hover:text-[--color-accent-primary]">Items esenciales</a></li>
+      <li><a href="#como-preparar" class="text-[--color-text-secondary] hover:text-[--color-accent-primary]">Cómo preparar tu kit paso a paso</a></li>
+      <li><a href="#escenarios" class="text-[--color-text-secondary] hover:text-[--color-accent-primary]">Escenarios específicos</a></li>
+      <li><a href="#mantenimiento" class="text-[--color-text-secondary] hover:text-[--color-accent-primary]">Mantenimiento y rotación</a></li>
+      <li><a href="#faq" class="text-[--color-text-secondary] hover:text-[--color-accent-primary]">Preguntas frecuentes</a></li>
+    </ul>
+  </nav>
+
+  <!-- Introduction -->
+  <section id="que-es" class="mb-16">
+    <h2>¿Qué es un kit de emergencia?</h2>
+
+    <p>
+      Un kit de emergencia es un conjunto de suministros básicos que te permite
+      mantener a tu familia segura y con lo esencial durante una situación de emergencia.
+      Ya sea un apagón prolongado, una ola de calor, un corte de agua o una evacuación,
+      tener un kit preparado marca la diferencia entre el caos y la tranquilidad.
+    </p>
+
+    <p>
+      La regla general es prepararse para <strong>72 horas de autonomía</strong>. Este período
+      cubre la mayoría de emergencias urbanas y da tiempo suficiente para que los servicios
+      de emergencia actúen o para que puedas desplazarte a un lugar seguro.
+    </p>
+
+    <div class="card p-6 my-8">
+      <div class="flex items-start gap-4">
+        <div class="w-12 h-12 flex-shrink-0 flex items-center justify-center bg-[--color-accent-subtle] rounded">
+          <svg class="w-6 h-6 text-[--color-accent-primary]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
+        </div>
+        <div>
+          <h3 class="font-semibold mb-2 text-base">¿Por qué 72 horas?</h3>
+          <p class="text-sm text-[--color-text-secondary] m-0">
+            Es el estándar recomendado por Protección Civil y organismos internacionales como FEMA.
+            Cubre la mayoría de cortes de suministro urbanos y permite a los servicios de emergencia
+            estabilizar la situación.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Essential Items -->
+  <section id="items-esenciales" class="mb-16">
+    <h2>Items esenciales</h2>
+
+    <p>
+      Estos son los elementos fundamentales que debe contener tu kit. Los hemos
+      organizado por categoría y nivel de prioridad para que puedas empezar por
+      lo más importante.
+    </p>
+
+    <div class="grid md:grid-cols-2 gap-4 my-8 not-prose">
+      {essentialItems.map((category) => (
+        <div class="card p-5">
+          <div class="flex items-center gap-3 mb-3">
+            <span class:list={[
+              'px-2 py-0.5 text-xs font-medium rounded',
+              category.priority === 'critical' && 'badge-critical',
+              category.priority === 'warning' && 'badge-warning',
+              category.priority === 'info' && 'badge-info',
+            ]}>
+              {category.priority === 'critical' ? 'Crítico' : category.priority === 'warning' ? 'Importante' : 'Recomendado'}
+            </span>
+            <h3 class="font-semibold text-[--color-text-primary] text-base">{category.category}</h3>
+          </div>
+          <ul class="space-y-1.5">
+            {category.items.map((item) => (
+              <li class="flex items-center gap-2 text-sm text-[--color-text-secondary]">
+                <svg class="w-4 h-4 text-[--color-accent-primary] flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                </svg>
+                {item}
+              </li>
+            ))}
+          </ul>
+        </div>
+      ))}
+    </div>
+
+    <div class="card p-6 border-[--color-accent-primary]/30 my-8">
+      <p class="text-sm text-[--color-text-secondary] m-0">
+        <strong class="text-[--color-accent-primary]">Personaliza tu kit:</strong> Usa nuestro
+        <a href="/es/herramientas/configurador-kit/" class="text-[--color-accent-primary] hover:underline">configurador de kit</a>
+        para obtener una lista adaptada a tu familia, mascotas y situación específica.
+      </p>
+    </div>
+  </section>
+
+  <!-- How to Prepare -->
+  <section id="como-preparar" class="mb-16">
+    <h2>Cómo preparar tu kit paso a paso</h2>
+
+    <p>
+      No necesitas comprar todo de golpe. Sigue estos pasos para construir tu kit
+      de forma gradual y sin agobios.
+    </p>
+
+    <div class="space-y-6 my-8 not-prose">
+      <div class="flex gap-4">
+        <div class="w-10 h-10 flex-shrink-0 flex items-center justify-center bg-[--color-accent-primary] text-[--color-bg-primary] font-bold rounded">
+          1
+        </div>
+        <div>
+          <h3 class="font-semibold text-[--color-text-primary] mb-2 text-base">Evalúa tu situación</h3>
+          <p class="text-[--color-text-secondary] text-sm">
+            ¿Cuántas personas hay en tu hogar? ¿Tienes mascotas? ¿Alguien tiene necesidades
+            médicas especiales? ¿Vives en piso o casa? Estas respuestas determinarán el tamaño
+            y contenido de tu kit.
+          </p>
+        </div>
+      </div>
+
+      <div class="flex gap-4">
+        <div class="w-10 h-10 flex-shrink-0 flex items-center justify-center bg-[--color-accent-primary] text-[--color-bg-primary] font-bold rounded">
+          2
+        </div>
+        <div>
+          <h3 class="font-semibold text-[--color-text-primary] mb-2 text-base">Empieza por lo crítico</h3>
+          <p class="text-[--color-text-secondary] text-sm">
+            Agua, comida no perecedera, linterna y botiquín. Con estos cuatro elementos
+            cubres las necesidades más básicas. Coste aproximado: 30-40€.
+          </p>
+        </div>
+      </div>
+
+      <div class="flex gap-4">
+        <div class="w-10 h-10 flex-shrink-0 flex items-center justify-center bg-[--color-accent-primary] text-[--color-bg-primary] font-bold rounded">
+          3
+        </div>
+        <div>
+          <h3 class="font-semibold text-[--color-text-primary] mb-2 text-base">Añade comunicación y energía</h3>
+          <p class="text-[--color-text-secondary] text-sm">
+            Radio de emergencia, powerbank y pilas. Mantenerte informado y con el móvil
+            operativo es fundamental en cualquier emergencia.
+          </p>
+        </div>
+      </div>
+
+      <div class="flex gap-4">
+        <div class="w-10 h-10 flex-shrink-0 flex items-center justify-center bg-[--color-accent-primary] text-[--color-bg-primary] font-bold rounded">
+          4
+        </div>
+        <div>
+          <h3 class="font-semibold text-[--color-text-primary] mb-2 text-base">Completa con documentos e higiene</h3>
+          <p class="text-[--color-text-secondary] text-sm">
+            Copias de documentos importantes en bolsa impermeable, artículos de higiene
+            básica y efectivo en metálico (los cajeros pueden no funcionar).
+          </p>
+        </div>
+      </div>
+
+      <div class="flex gap-4">
+        <div class="w-10 h-10 flex-shrink-0 flex items-center justify-center bg-[--color-accent-primary] text-[--color-bg-primary] font-bold rounded">
+          5
+        </div>
+        <div>
+          <h3 class="font-semibold text-[--color-text-primary] mb-2 text-base">Personaliza según necesidades</h3>
+          <p class="text-[--color-text-secondary] text-sm">
+            Añade elementos para bebés, mascotas, personas mayores o con condiciones médicas.
+            Considera el clima de tu zona y los escenarios más probables.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Scenarios -->
+  <section id="escenarios" class="mb-16">
+    <h2>Escenarios específicos</h2>
+
+    <p>
+      Aunque un kit base bien preparado cubre la mayoría de situaciones, cada escenario
+      tiene sus particularidades. Consulta nuestras guías específicas para adaptar tu preparación.
+    </p>
+
+    <div class="grid sm:grid-cols-2 gap-4 my-8 not-prose">
+      {scenarios.map((scenario) => (
+        <a href={scenario.href} class="card p-5 group hover:-translate-y-1 transition-all duration-200">
+          <h3 class="font-semibold text-[--color-text-primary] group-hover:text-[--color-accent-primary] transition-colors mb-1 text-base">
+            {scenario.name}
+          </h3>
+          <p class="text-sm text-[--color-text-secondary] m-0">{scenario.description}</p>
+        </a>
+      ))}
+    </div>
+  </section>
+
+  <!-- Maintenance -->
+  <section id="mantenimiento" class="mb-16">
+    <h2>Mantenimiento y rotación</h2>
+
+    <p>
+      Un kit de emergencia no es algo que preparas una vez y olvidas. Requiere
+      revisiones periódicas para asegurar que todo esté en condiciones cuando lo necesites.
+    </p>
+
+    <div class="overflow-x-auto my-8">
+      <table>
+        <thead>
+          <tr>
+            <th>Elemento</th>
+            <th>Frecuencia de revisión</th>
+            <th>Qué comprobar</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Agua embotellada</td>
+            <td>Cada 6 meses</td>
+            <td>Fecha de caducidad, estado del envase</td>
+          </tr>
+          <tr>
+            <td>Comida no perecedera</td>
+            <td>Cada 6 meses</td>
+            <td>Fechas de caducidad, estado de las latas</td>
+          </tr>
+          <tr>
+            <td>Pilas</td>
+            <td>Cada 6 meses</td>
+            <td>Carga, posibles fugas</td>
+          </tr>
+          <tr>
+            <td>Medicamentos</td>
+            <td>Cada 3 meses</td>
+            <td>Fechas de caducidad</td>
+          </tr>
+          <tr>
+            <td>Powerbank</td>
+            <td>Cada 3 meses</td>
+            <td>Nivel de carga (mantener >50%)</td>
+          </tr>
+          <tr>
+            <td>Documentos</td>
+            <td>Anualmente</td>
+            <td>Actualizar si hay cambios</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="card p-6 my-8">
+      <div class="flex items-start gap-4">
+        <div class="w-12 h-12 flex-shrink-0 flex items-center justify-center bg-[--color-status-success-bg] rounded">
+          <svg class="w-6 h-6 text-[--color-status-success]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
+        </div>
+        <div>
+          <h3 class="font-semibold mb-2 text-base">Consejo: Usa el cambio de hora</h3>
+          <p class="text-sm text-[--color-text-secondary] m-0">
+            Revisa tu kit cada vez que cambie la hora (marzo y octubre). Es fácil de recordar
+            y coincide con la frecuencia recomendada de 6 meses.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq" class="mb-16">
+    <h2>Preguntas frecuentes</h2>
+
+    <div class="space-y-4 my-8 not-prose">
+      {faqs.map((faq, index) => (
+        <details class="card group" id={`faq-${index}`}>
+          <summary class="p-5 cursor-pointer list-none flex items-center justify-between gap-4">
+            <h3 class="font-semibold text-[--color-text-primary] text-base m-0">{faq.question}</h3>
+            <svg class="w-5 h-5 text-[--color-text-muted] group-open:rotate-180 transition-transform flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+            </svg>
+          </summary>
+          <div class="px-5 pb-5 pt-0 text-[--color-text-secondary] border-t border-[--color-border]">
+            <p class="mt-4 mb-0">{faq.answer}</p>
+          </div>
+        </details>
+      ))}
+    </div>
+  </section>
+
+  <!-- Sources -->
+  <aside slot="sources" class="mt-16 pt-8 border-t border-[--color-border]">
+    <h3 class="text-lg font-semibold mb-4">Fuentes y metodología</h3>
+    <p class="text-sm text-[--color-text-secondary] mb-4">
+      Esta guía se basa en recomendaciones oficiales de:
+    </p>
+    <ul class="text-sm text-[--color-text-secondary] space-y-2">
+      <li>
+        <a href="https://www.proteccioncivil.es" target="_blank" rel="noopener" class="text-[--color-accent-primary] hover:underline">
+          Protección Civil España
+        </a> — Guías de autoprotección ciudadana
+      </li>
+      <li>
+        <a href="https://www.cruzroja.es" target="_blank" rel="noopener" class="text-[--color-accent-primary] hover:underline">
+          Cruz Roja Española
+        </a> — Recomendaciones de primeros auxilios
+      </li>
+      <li>
+        <a href="https://www.ready.gov" target="_blank" rel="noopener" class="text-[--color-accent-primary] hover:underline">
+          Ready.gov (FEMA)
+        </a> — Estándares internacionales de preparación
+      </li>
+    </ul>
+    <p class="text-xs text-[--color-text-muted] mt-4">
+      Última actualización: Diciembre 2025 · Próxima revisión: Marzo 2026
+    </p>
+  </aside>
+
+  <!-- CTA -->
+  <div slot="cta" class="mt-12 p-8 card border-[--color-accent-primary]/30 text-center">
+    <h3 class="text-xl font-semibold mb-3">¿Listo para preparar tu kit?</h3>
+    <p class="text-[--color-text-secondary] mb-6 max-w-lg mx-auto">
+      Usa nuestro configurador para crear un checklist personalizado
+      según tu familia, mascotas y situación.
+    </p>
+    <a
+      href="/es/herramientas/configurador-kit/"
+      class="inline-flex items-center gap-2 px-6 py-3 bg-[--color-accent-primary] text-[--color-bg-primary] font-semibold rounded hover:bg-[--color-accent-hover] transition-colors"
+    >
+      Crear mi kit personalizado
+      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+      </svg>
+    </a>
+  </div>
+</ArticleLayout>

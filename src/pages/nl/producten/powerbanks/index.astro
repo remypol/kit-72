@@ -1,0 +1,162 @@
+---
+import BaseLayout from '../../../../layouts/BaseLayout.astro';
+import Breadcrumb from '../../../../components/layout/Breadcrumb.astro';
+import Icon from '../../../../components/ui/Icon.astro';
+import HeroImage from '../../../../components/content/HeroImage.astro';
+---
+
+<BaseLayout
+  title="Powerbank voor noodpakket: Welke capaciteit? Koopgids 2025"
+  description="De juiste powerbank voor je noodpakket. Capaciteit, snelladen, kwaliteitskenmerken."
+  locale="nl"
+  dateModified="2025-12-16"
+  schemaType="Article"
+  alternates={{
+    de: '/de/produkte/powerbanks/',
+  }}
+>
+  <section class="py-16">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6">
+      <Breadcrumb items={[{ label: 'Producten', href: '/nl/producten/' }, { label: 'Powerbanks' }]} class="mb-4" locale="nl" />
+      <h1 class="text-4xl font-bold mb-6">Powerbanks</h1>
+
+      <div class="mb-8">
+        <HeroImage
+          src="/images/shared/powerbank-collection.webp"
+          alt="Powerbank collectie voor noodvoorbereiding"
+          priority={true}
+        />
+      </div>
+
+      <div class="prose prose-lg">
+        <p class="lead">
+          Je smartphone is in noodsituaties essentieel: 112 bellen, NL-Alert ontvangen, contact
+          met familie. Een goede powerbank houdt het <strong>72 uur in leven</strong>.
+        </p>
+
+        <!-- Capacity Guide -->
+        <div class="card p-6 my-8 bg-[--color-bg-tertiary] not-prose">
+          <h3 class="text-lg font-semibold mb-4 flex items-center gap-2">
+            <Icon name="Battery" size={20} class="text-[--color-accent-primary]" />
+            Capaciteitsberekening
+          </h3>
+          <div class="space-y-3 text-sm">
+            <div class="flex justify-between items-center p-3 bg-[--color-bg-secondary] rounded">
+              <span>Gemiddelde smartphone</span>
+              <span class="font-semibold">~4.000 mAh</span>
+            </div>
+            <div class="flex justify-between items-center p-3 bg-[--color-bg-secondary] rounded">
+              <span>10.000 mAh powerbank</span>
+              <span class="font-semibold">~2 volledige ladingen</span>
+            </div>
+            <div class="flex justify-between items-center p-3 bg-[--color-bg-secondary] rounded">
+              <span>20.000 mAh powerbank</span>
+              <span class="font-semibold">~4-5 volledige ladingen</span>
+            </div>
+          </div>
+          <p class="text-xs text-[--color-text-muted] mt-3">
+            * Reken op ~30% verlies door warmte en conversie
+          </p>
+        </div>
+
+        <h2>Aanbevolen capaciteit</h2>
+        <ul>
+          <li><strong>1 persoon:</strong> 10.000-20.000 mAh</li>
+          <li><strong>2 personen:</strong> 20.000-30.000 mAh</li>
+          <li><strong>Gezin (4+):</strong> 30.000+ mAh of meerdere kleinere</li>
+        </ul>
+
+        <h2>Belangrijke aankoopcriteria</h2>
+
+        <h3>1. Capaciteit (mAh)</h3>
+        <p>
+          Meer is beter, maar let op: boven 27.000 mAh is verboden in vliegtuigen.
+          <strong>20.000 mAh</strong> is de sweet spot.
+        </p>
+
+        <h3>2. Uitgangsvermogen (Watt)</h3>
+        <ul>
+          <li><strong>10-18W:</strong> Standaard laden (langzaam maar zuinig)</li>
+          <li><strong>20-30W:</strong> Snelladen voor moderne smartphones</li>
+          <li><strong>45-65W:</strong> Kan ook laptops opladen</li>
+        </ul>
+
+        <h3>3. Aansluitingen</h3>
+        <ul>
+          <li><strong>USB-A:</strong> Universeel, voor oudere apparaten</li>
+          <li><strong>USB-C:</strong> Moderne standaard, bidirectioneel (in+uitgang)</li>
+          <li><strong>Minimaal 2 uitgangen:</strong> Meerdere apparaten tegelijk</li>
+        </ul>
+
+        <div class="card p-6 my-8 bg-[--color-accent-subtle] not-prose">
+          <p class="font-medium mb-2">💡 Onderhoudstip</p>
+          <p class="text-sm text-[--color-text-secondary]">
+            Bewaar powerbanks op <strong>50-80% lading</strong>.
+            Laad ze elke 2-3 maanden bij om de accuconditie te behouden.
+            Vermijd extreme hitte of koude.
+          </p>
+        </div>
+
+        <h3>4. Extra functies</h3>
+        <ul>
+          <li><strong>Pass-through laden:</strong> Apparaat en powerbank tegelijk opladen</li>
+          <li><strong>LED-display:</strong> Exacte capaciteitsweergave in %</li>
+          <li><strong>Zaklamp:</strong> Praktisch dubbel gebruik</li>
+          <li><strong>Zonnepaneel:</strong> Voor langere uitval (langzaam maar handig)</li>
+        </ul>
+
+        <h2>Kwaliteitskenmerken</h2>
+        <p>Let op deze veiligheidsstandaarden:</p>
+        <ul>
+          <li>✓ Overlaadbeveiliging</li>
+          <li>✓ Kortsluitbeveiliging</li>
+          <li>✓ Temperatuurbeveiliging</li>
+          <li>✓ CE-markering</li>
+        </ul>
+
+        <div class="card p-4 my-6 border-l-4 border-l-amber-500 bg-amber-50 dark:bg-amber-950/30 not-prose">
+          <p class="text-sm">
+            <strong>⚠️ Waarschuwing:</strong> Koop geen merkloze producten met onrealistische capaciteitsaanduidingen.
+            "50.000 mAh voor €15" is oplichterij — echte cellen kosten meer.
+          </p>
+        </div>
+
+        <h2>Aanbevolen merken</h2>
+        <ul>
+          <li><strong>Anker</strong> — marktleider, betrouwbaar</li>
+          <li><strong>RAVPower</strong> — goede prijs-kwaliteit</li>
+          <li><strong>Belkin</strong> — premium kwaliteit</li>
+          <li><strong>INIU</strong> — budget optie met solide kwaliteit</li>
+          <li><strong>Zendure</strong> — robuust, voor outdoor</li>
+        </ul>
+
+        <h2>Checklist</h2>
+        <ul>
+          <li>☐ Minimaal 20.000 mAh capaciteit</li>
+          <li>☐ USB-C + USB-A uitgang</li>
+          <li>☐ Van bekend merk</li>
+          <li>☐ Passende laadkabels erbij</li>
+          <li>☐ Op 50-80% opgeladen bewaren</li>
+          <li>☐ Elke 2-3 maanden bijladen</li>
+        </ul>
+      </div>
+
+      <!-- Shop Link -->
+      <div class="mt-12 card p-6 bg-[--color-bg-tertiary]">
+        <h3 class="font-semibold mb-2">Powerbanks op Bol.com</h3>
+        <p class="text-sm text-[--color-text-secondary] mb-4">
+          Aanbevolen powerbanks met 20.000+ mAh.
+        </p>
+        <a
+          href="https://www.bol.com/nl/nl/s/?searchtext=powerbank+20000mah"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex items-center gap-2 px-4 py-2 bg-[--color-accent-primary] text-[--color-bg-primary] font-medium rounded hover:bg-[--color-accent-hover] transition-colors"
+        >
+          Bekijk op Bol.com
+          <Icon name="ExternalLink" size={16} />
+        </a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

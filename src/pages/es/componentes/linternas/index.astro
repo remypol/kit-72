@@ -1,0 +1,476 @@
+---
+import BaseLayout from '../../../../layouts/BaseLayout.astro';
+import ProductGrid from '../../../../components/content/ProductGrid.astro';
+import Icon from '../../../../components/ui/Icon.astro';
+import AddToKitButton from '../../../../components/tools/AddToKitButton';
+
+// Kit item IDs that relate to linternas (must match KitBuilder's kitItems)
+const relatedKitItems = [
+  { id: 'luz-1', name: 'Linterna LED', category: 'Iluminación' },
+  { id: 'luz-2', name: 'Pilas de repuesto', category: 'Iluminación' },
+  { id: 'luz-4', name: 'Linterna frontal', category: 'Iluminación' },
+];
+
+const amazonProducts = [
+  {
+    name: 'Ledlenser P7R Core',
+    description: 'Linterna recargable profesional, 1400 lúmenes, resistente al agua IP68',
+    amazonUrl: 'https://www.amazon.es/s?k=ledlenser+p7r+core',
+    price: '~90€',
+    rating: 4.7,
+    features: ['1400 lúmenes', 'USB recargable', 'IP68'],
+    badge: 'premium' as const
+  },
+  {
+    name: 'Petzl Actik Core',
+    description: 'Frontal recargable 600 lúmenes, ideal para manos libres',
+    amazonUrl: 'https://www.amazon.es/s?k=petzl+actik+core',
+    price: '~55€',
+    rating: 4.6,
+    features: ['600 lúmenes', 'Frontal', 'Recargable'],
+    badge: 'recommended' as const
+  },
+  {
+    name: 'Varta LED Camping Lantern',
+    description: 'Lámpara de camping 360°, perfecta para iluminar habitaciones',
+    amazonUrl: 'https://www.amazon.es/s?k=varta+camping+lantern',
+    price: '~15€',
+    rating: 4.4,
+    features: ['360° luz', 'Pilas D', 'Colgable'],
+    badge: 'best-value' as const
+  },
+  {
+    name: 'Linterna Dinamo con Radio',
+    description: 'Linterna de emergencia con manivela, radio AM/FM y carga USB',
+    amazonUrl: 'https://www.amazon.es/s?k=linterna+dinamo+radio+emergencia',
+    price: '~25€',
+    rating: 4.2,
+    features: ['Sin pilas', 'Radio AM/FM', 'Carga USB']
+  }
+];
+
+const flashlightTypes = [
+  {
+    name: 'Linterna de mano',
+    description: 'Clásica y versátil, ideal para uso general',
+    pros: ['Fácil de usar', 'Gran alcance', 'Múltiples tamaños'],
+    cons: ['Ocupa una mano', 'Fácil de perder'],
+    bestFor: 'Uso general, búsqueda',
+    lumens: '100-1000',
+    icon: 'Flashlight'
+  },
+  {
+    name: 'Linterna frontal',
+    description: 'Se lleva en la cabeza, manos libres',
+    pros: ['Manos libres', 'Ligera', 'Ilumina donde miras'],
+    cons: ['Menor alcance', 'Puede ser incómoda'],
+    bestFor: 'Tareas manuales, evacuación',
+    lumens: '50-500',
+    icon: 'HardHat'
+  },
+  {
+    name: 'Linterna de camping',
+    description: 'Iluminación 360° para espacios',
+    pros: ['Ilumina toda la habitación', 'Se puede colgar', 'Larga duración'],
+    cons: ['No sirve para buscar a distancia', 'Más grande'],
+    bestFor: 'Iluminación de estancias, campamentos',
+    lumens: '100-400',
+    icon: 'Tent'
+  },
+  {
+    name: 'Linterna dinamo',
+    description: 'Se recarga manualmente con manivela',
+    pros: ['No necesita pilas', 'Siempre funciona', 'Ecológica'],
+    cons: ['Menos potente', 'Requiere esfuerzo físico'],
+    bestFor: 'Backup de emergencia',
+    lumens: '10-50',
+    icon: 'RotateCw'
+  }
+];
+
+const features = [
+  { name: 'Lúmenes', description: 'Cantidad de luz. 100-300 para uso general, 500+ para búsqueda', icon: 'Lightbulb' },
+  { name: 'Autonomía', description: 'Horas de funcionamiento. Busca mínimo 4h en modo alto', icon: 'Timer' },
+  { name: 'Resistencia agua', description: 'IPX4 mínimo (salpicaduras), IPX7 ideal (inmersión)', icon: 'Droplets' },
+  { name: 'Modos de luz', description: 'Alto, bajo, SOS. Más modos = más versatilidad', icon: 'SlidersHorizontal' },
+  { name: 'Tipo de pilas', description: 'AA/AAA son fáciles de conseguir. Recargables son económicas', icon: 'Battery' },
+  { name: 'Material', description: 'Aluminio resiste golpes. Plástico es más ligero', icon: 'Shield' }
+];
+
+const recommendations = [
+  {
+    type: 'Básica económica',
+    name: 'Linterna LED AA/AAA',
+    price: '10-20€',
+    features: ['100-200 lúmenes', 'Pilas AA', 'Aluminio', 'IPX4'],
+    verdict: 'Perfecta para empezar. Compra 2-3 unidades.',
+    priority: 'essential'
+  },
+  {
+    type: 'Frontal versátil',
+    name: 'Frontal LED recargable',
+    price: '20-40€',
+    features: ['200-300 lúmenes', 'USB recargable', 'Ligera', 'Modos rojo/blanco'],
+    verdict: 'Imprescindible si necesitas manos libres.',
+    priority: 'recommended'
+  },
+  {
+    type: 'Camping/hogar',
+    name: 'Lámpara LED camping',
+    price: '15-30€',
+    features: ['360° luz', 'Colgable', '8+ horas', 'Pilas D o recargable'],
+    verdict: 'Ilumina habitaciones enteras. Muy útil con niños.',
+    priority: 'recommended'
+  },
+  {
+    type: 'Backup infalible',
+    name: 'Linterna dinamo + radio',
+    price: '25-50€',
+    features: ['No necesita pilas', 'Radio AM/FM', 'Carga USB', 'Alarma SOS'],
+    verdict: 'Tu última línea de defensa. Siempre funciona.',
+    priority: 'recommended'
+  },
+  {
+    type: 'Táctica potente',
+    name: 'Linterna táctica 18650',
+    price: '30-60€',
+    features: ['500-1000+ lúmenes', 'Batería 18650', 'Zoom', 'Modo estrobo'],
+    verdict: 'Máxima potencia para profesionales o entusiastas.',
+    priority: 'optional'
+  }
+];
+
+const batteryGuide = [
+  { type: 'AA alcalinas', shelf: '5-7 años', notes: 'Universales, fáciles de encontrar' },
+  { type: 'AAA alcalinas', shelf: '5-7 años', notes: 'Para linternas compactas' },
+  { type: 'D alcalinas', shelf: '5-7 años', notes: 'Lámparas camping, mayor duración' },
+  { type: 'AA recargables NiMH', shelf: 'Indefinida (cargar cada 6 meses)', notes: 'Económicas a largo plazo' },
+  { type: '18650 Li-ion', shelf: '2-3 años', notes: 'Alta capacidad, linternas tácticas' },
+  { type: 'CR123A litio', shelf: '10 años', notes: 'Profesionales, mejor en frío/calor' }
+];
+
+const kitSuggestion = [
+  { item: 'Linterna de mano LED', qty: 2, notes: 'Una por piso o zona' },
+  { item: 'Linterna frontal', qty: 1, notes: 'Por adulto activo' },
+  { item: 'Lámpara camping', qty: 1, notes: 'Para zona común' },
+  { item: 'Pilas de repuesto AA', qty: 8, notes: 'Mínimo 2 juegos por linterna' },
+  { item: 'Pilas de repuesto AAA', qty: 4, notes: 'Si usas frontales AAA' }
+];
+
+// Generate ItemList + Product schema for rich results
+const productSchema = {
+  '@type': 'ItemList',
+  itemListElement: amazonProducts.map((product, index) => ({
+    '@type': 'ListItem',
+    position: index + 1,
+    item: {
+      '@type': 'Product',
+      name: product.name,
+      description: product.description,
+      aggregateRating: {
+        '@type': 'AggregateRating',
+        ratingValue: product.rating,
+        bestRating: 5,
+        worstRating: 1,
+        ratingCount: 100
+      }
+    }
+  }))
+};
+---
+
+<BaseLayout
+  title="Mejor linterna de emergencia: ¿Cuál comprar? Guía de compra"
+  description="Guía completa de linternas para emergencias: tipos, características, recomendaciones y cuántas necesitas para tu kit 72 horas."
+  locale="es"
+  dateModified="2025-12-15"
+  schemaType="Article"
+  schemaData={productSchema}
+>
+  <section class="py-16">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6">
+      <!-- Header -->
+      <div class="mb-12">
+        <nav class="text-sm mb-4">
+          <ol class="flex items-center gap-2 text-[--color-text-muted]">
+            <li><a href="/es/" class="hover:text-[--color-accent-primary]">Inicio</a></li>
+            <li>/</li>
+            <li><a href="/es/componentes/" class="hover:text-[--color-accent-primary]">Componentes</a></li>
+            <li>/</li>
+            <li class="text-[--color-text-primary]">Linternas</li>
+          </ol>
+        </nav>
+        <h1 class="mb-4 flex items-center gap-3">
+          <Icon name="Flashlight" size={32} class="text-[--color-accent-primary]" />
+          Linternas de Emergencia
+        </h1>
+        <p class="text-lg text-[--color-text-secondary]">
+          La iluminación es crítica en emergencias. Sin luz, todo se complica: encontrar cosas,
+          moverse con seguridad, pedir ayuda. Esta guía te ayuda a elegir las linternas correctas.
+        </p>
+      </div>
+
+      <!-- Quick Recommendation -->
+      <div class="card p-6 mb-8 border-l-4 border-l-[--color-accent-primary]">
+        <h3 class="font-semibold mb-2 text-[--color-text-primary] flex items-center gap-2">
+          <Icon name="Lightbulb" size={20} class="text-[--color-accent-primary]" />
+          Recomendación rápida
+        </h3>
+        <p class="text-[--color-text-secondary] m-0">
+          <strong>Mínimo:</strong> 2 linternas de mano LED + 1 frontal + pilas de repuesto.
+          <strong>Presupuesto:</strong> 40-60€ total. No escatimes en luz.
+        </p>
+      </div>
+
+      <!-- Types of Flashlights -->
+      <div class="mb-12">
+        <h2 class="text-2xl font-bold mb-6 text-[--color-text-primary]">Tipos de linternas</h2>
+
+        <div class="space-y-4">
+          {flashlightTypes.map((type) => (
+            <div class="card p-6">
+              <div class="flex items-start gap-4">
+                <div class="w-12 h-12 flex items-center justify-center bg-[--color-bg-tertiary] rounded-lg flex-shrink-0">
+                  <Icon name={type.icon as any} size={28} class="text-[--color-accent-primary]" />
+                </div>
+                <div class="flex-1">
+                  <div class="flex items-center gap-3 mb-2">
+                    <h3 class="font-semibold text-[--color-text-primary]">{type.name}</h3>
+                    <span class="text-xs px-2 py-1 bg-[--color-bg-tertiary] text-[--color-text-muted] rounded">
+                      {type.lumens} lm
+                    </span>
+                  </div>
+                  <p class="text-sm text-[--color-text-secondary] mb-3">{type.description}</p>
+
+                  <div class="grid sm:grid-cols-3 gap-4 text-sm">
+                    <div>
+                      <span class="text-green-400 font-medium flex items-center gap-1">
+                        <Icon name="CircleCheck" size={14} />
+                        Pros
+                      </span>
+                      <ul class="mt-1 space-y-1 text-[--color-text-muted]">
+                        {type.pros.map((pro) => <li>• {pro}</li>)}
+                      </ul>
+                    </div>
+                    <div>
+                      <span class="text-red-400 font-medium flex items-center gap-1">
+                        <Icon name="CircleX" size={14} />
+                        Contras
+                      </span>
+                      <ul class="mt-1 space-y-1 text-[--color-text-muted]">
+                        {type.cons.map((con) => <li>• {con}</li>)}
+                      </ul>
+                    </div>
+                    <div>
+                      <span class="text-[--color-accent-primary] font-medium flex items-center gap-1">
+                        <Icon name="Star" size={14} />
+                        Ideal para
+                      </span>
+                      <p class="mt-1 text-[--color-text-muted]">{type.bestFor}</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <!-- Key Features -->
+      <div class="mb-12">
+        <h2 class="text-2xl font-bold mb-6 text-[--color-text-primary]">Características clave</h2>
+
+        <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          {features.map((feature) => (
+            <div class="card p-4">
+              <div class="flex items-start gap-3">
+                <div class="w-10 h-10 flex items-center justify-center bg-[--color-bg-tertiary] rounded-lg flex-shrink-0">
+                  <Icon name={feature.icon as any} size={22} class="text-[--color-accent-primary]" />
+                </div>
+                <div>
+                  <h3 class="font-semibold text-[--color-text-primary]">{feature.name}</h3>
+                  <p class="text-sm text-[--color-text-secondary]">{feature.description}</p>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <!-- Recommendations -->
+      <div class="mb-12">
+        <h2 class="text-2xl font-bold mb-6 text-[--color-text-primary]">Recomendaciones por tipo</h2>
+
+        <div class="space-y-4">
+          {recommendations.map((rec) => (
+            <div class={`card p-6 ${rec.priority === 'essential' ? 'border-l-4 border-l-red-500' : rec.priority === 'recommended' ? 'border-l-4 border-l-[--color-accent-primary]' : ''}`}>
+              <div class="flex items-start justify-between gap-4 mb-3">
+                <div>
+                  <span class={`text-xs px-2 py-1 rounded ${rec.priority === 'essential' ? 'bg-red-500/20 text-red-400' : rec.priority === 'recommended' ? 'bg-[--color-accent-primary]/20 text-[--color-accent-primary]' : 'bg-[--color-bg-tertiary] text-[--color-text-muted]'}`}>
+                    {rec.priority === 'essential' ? 'Esencial' : rec.priority === 'recommended' ? 'Recomendada' : 'Opcional'}
+                  </span>
+                  <span class="text-xs text-[--color-text-muted] ml-2">{rec.type}</span>
+                </div>
+                <span class="font-bold text-[--color-accent-primary]">{rec.price}</span>
+              </div>
+
+              <h3 class="font-semibold text-[--color-text-primary] mb-2">{rec.name}</h3>
+
+              <div class="flex flex-wrap gap-2 mb-3">
+                {rec.features.map((feature) => (
+                  <span class="text-xs px-2 py-1 bg-[--color-bg-tertiary] text-[--color-text-muted] rounded">
+                    {feature}
+                  </span>
+                ))}
+              </div>
+
+              <p class="text-sm text-[--color-text-secondary] m-0">
+                <strong>Veredicto:</strong> {rec.verdict}
+              </p>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <!-- Battery Guide -->
+      <div class="mb-12">
+        <h2 class="text-2xl font-bold mb-6 text-[--color-text-primary]">Guía de pilas</h2>
+
+        <div class="card overflow-hidden">
+          <div class="overflow-x-auto">
+            <table class="w-full text-sm">
+              <thead class="bg-[--color-bg-tertiary]">
+                <tr>
+                  <th class="text-left py-3 px-4">Tipo</th>
+                  <th class="text-left py-3 px-4">Vida útil</th>
+                  <th class="text-left py-3 px-4">Notas</th>
+                </tr>
+              </thead>
+              <tbody class="text-[--color-text-secondary]">
+                {batteryGuide.map((battery, i) => (
+                  <tr class={i % 2 === 0 ? 'bg-[--color-bg-secondary]' : ''}>
+                    <td class="py-3 px-4 font-medium text-[--color-text-primary]">{battery.type}</td>
+                    <td class="py-3 px-4">{battery.shelf}</td>
+                    <td class="py-3 px-4">{battery.notes}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="mt-4 p-4 bg-[--color-status-warning]/10 border border-[--color-status-warning]/30 rounded-lg">
+          <p class="text-sm text-[--color-text-secondary] m-0 flex items-start gap-2">
+            <Icon name="AlertTriangle" size={18} class="text-[--color-status-warning] flex-shrink-0 mt-0.5" />
+            <span><strong class="text-[--color-status-warning]">Consejo:</strong> Guarda las pilas
+            FUERA de las linternas para evitar corrosión. Etiqueta con fecha de compra.</span>
+          </p>
+        </div>
+      </div>
+
+      <!-- Suggested Kit -->
+      <div class="mb-12">
+        <h2 class="text-2xl font-bold mb-6 text-[--color-text-primary]">Kit de iluminación sugerido</h2>
+
+        <div class="card p-6">
+          <p class="text-sm text-[--color-text-secondary] mb-4">
+            Para una familia de 2-4 personas en un piso:
+          </p>
+
+          <div class="overflow-x-auto">
+            <table class="w-full text-sm">
+              <thead>
+                <tr class="border-b border-[--color-border]">
+                  <th class="text-left py-2">Artículo</th>
+                  <th class="text-center py-2">Cantidad</th>
+                  <th class="text-left py-2">Notas</th>
+                </tr>
+              </thead>
+              <tbody class="text-[--color-text-secondary]">
+                {kitSuggestion.map((item) => (
+                  <tr class="border-b border-[--color-border]">
+                    <td class="py-2">{item.item}</td>
+                    <td class="py-2 text-center font-bold text-[--color-accent-primary]">{item.qty}</td>
+                    <td class="py-2 text-xs text-[--color-text-muted]">{item.notes}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+
+          <div class="mt-4 pt-4 border-t border-[--color-border] text-center">
+            <p class="text-sm text-[--color-text-muted]">
+              Inversión aproximada: <strong class="text-[--color-accent-primary]">50-80€</strong>
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Product Recommendations -->
+      <div class="mb-12">
+        <h2 class="text-2xl font-bold mb-6 text-[--color-text-primary] flex items-center gap-2">
+          <Icon name="ShoppingCart" size={24} class="text-[--color-accent-primary]" />
+          Productos recomendados
+        </h2>
+        <ProductGrid products={amazonProducts} title="Linternas para tu kit de emergencia" />
+      </div>
+
+      <!-- Tips -->
+      <div class="card p-6 mb-8">
+        <h3 class="font-semibold mb-4 text-[--color-text-primary] flex items-center gap-2">
+          <Icon name="Lightbulb" size={20} class="text-[--color-accent-primary]" />
+          Consejos prácticos
+        </h3>
+        <ul class="space-y-2 text-sm text-[--color-text-secondary]">
+          <li>• <strong>Ubicación fija:</strong> Cada linterna debe tener un lugar asignado que todos conozcan</li>
+          <li>• <strong>Prueba mensual:</strong> Verifica que funcionan el primer día de cada mes</li>
+          <li>• <strong>Velas como backup:</strong> Nunca como fuente principal (riesgo de incendio)</li>
+          <li>• <strong>Luz roja:</strong> Preserva la visión nocturna, ideal para no despertar a otros</li>
+          <li>• <strong>Modo SOS:</strong> Útil para señalizar tu posición si necesitas rescate</li>
+          <li>• <strong>No mires directamente:</strong> Las LED potentes pueden dañar la vista temporalmente</li>
+        </ul>
+      </div>
+
+      <!-- Add to Kit Section -->
+      <div class="card p-6 mb-8 bg-gradient-to-r from-[--color-accent-primary]/10 to-[--color-accent-secondary]/5 border border-[--color-accent-primary]/20">
+        <h3 class="font-semibold mb-4 text-[--color-text-primary] flex items-center gap-2">
+          <Icon name="CheckSquare" size={20} class="text-[--color-accent-primary]" />
+          Añadir a tu checklist
+        </h3>
+        <p class="text-sm text-[--color-text-secondary] mb-4">
+          Marca estos items en tu Kit Builder para llevar un seguimiento de tu preparación.
+        </p>
+        <div class="flex flex-wrap gap-3">
+          {relatedKitItems.map((item) => (
+            <div class="flex items-center gap-2 bg-[--color-bg-secondary] rounded-lg px-3 py-2">
+              <span class="text-sm text-[--color-text-primary]">{item.name}</span>
+              <AddToKitButton client:idle itemId={item.id} size="sm" />
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <!-- Related Links -->
+      <div class="flex flex-wrap gap-4 justify-center">
+        <a
+          href="/es/componentes/powerbanks/"
+          class="inline-flex items-center gap-2 px-4 py-2 border border-[--color-border] text-sm font-medium rounded hover:border-[--color-accent-primary] hover:text-[--color-accent-primary] transition-colors"
+        >
+          Ver Powerbanks →
+        </a>
+        <a
+          href="/es/guias/energia-comunicacion/"
+          class="inline-flex items-center gap-2 px-4 py-2 border border-[--color-border] text-sm font-medium rounded hover:border-[--color-accent-primary] hover:text-[--color-accent-primary] transition-colors"
+        >
+          Guía: Energía y Comunicación
+        </a>
+        <a
+          href="/es/herramientas/configurador-kit/"
+          class="inline-flex items-center gap-2 px-4 py-2 bg-[--color-accent-primary] text-[--color-bg-primary] text-sm font-medium rounded hover:bg-[--color-accent-secondary] transition-colors"
+        >
+          Configurar Mi Kit
+        </a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

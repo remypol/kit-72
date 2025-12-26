@@ -1,0 +1,546 @@
+---
+import BaseLayout from '../../../../layouts/BaseLayout.astro';
+import ProductGrid from '../../../../components/content/ProductGrid.astro';
+import Icon from '../../../../components/ui/Icon.astro';
+
+const amazonProducts = [
+  {
+    name: 'Radio Emergencia Solar con Dinamo',
+    description: 'Radio AM/FM con manivela, panel solar, linterna LED y carga USB',
+    amazonUrl: 'https://www.amazon.es/s?k=radio+emergencia+solar+dinamo',
+    price: '~30€',
+    rating: 4.3,
+    features: ['AM/FM', 'Solar + Dinamo', 'Linterna', 'USB'],
+    badge: 'recommended' as const
+  },
+  {
+    name: 'Sony ICF-P26 Radio Portátil',
+    description: 'Radio AM/FM compacta de calidad, pilas AA, marca fiable',
+    amazonUrl: 'https://www.amazon.es/s?k=sony+icf+radio+portatil',
+    price: '~20€',
+    rating: 4.5,
+    features: ['AM/FM', 'Pilas AA', 'Compacta'],
+    badge: 'best-value' as const
+  },
+  {
+    name: 'Motorola Talkabout T82 Extreme',
+    description: 'Par de walkies PMR446 resistentes, 10km alcance, IPX4',
+    amazonUrl: 'https://www.amazon.es/s?k=motorola+talkabout+t82',
+    price: '~70€',
+    rating: 4.4,
+    features: ['PMR446', '10km alcance', 'IPX4', 'Par incluido'],
+    badge: 'premium' as const
+  },
+  {
+    name: 'Baofeng UV-5R Plus',
+    description: 'Walkie bibanda para radioaficionados (requiere licencia)',
+    amazonUrl: 'https://www.amazon.es/s?k=baofeng+uv-5r',
+    price: '~25€',
+    rating: 4.2,
+    features: ['Bibanda', 'Programable', 'Potente']
+  }
+];
+
+const radioTypes = [
+  {
+    name: 'Radio AM/FM portátil',
+    description: 'La clásica radio de bolsillo para recibir emisoras locales',
+    pros: ['Económica', 'Simple de usar', 'Pilas AA/AAA', 'Muy ligera'],
+    cons: ['Solo recepción', 'Sin funciones extra', 'Depende de emisoras'],
+    bestFor: 'Uso básico, seguir noticias locales',
+    frequency: 'AM/FM',
+    icon: 'Radio'
+  },
+  {
+    name: 'Radio dinamo/solar',
+    description: 'Se recarga con manivela o panel solar, autosuficiente',
+    pros: ['No necesita pilas', 'Linterna incluida', 'Carga USB a veces', 'Siempre funciona'],
+    cons: ['Carga lenta', 'Calidad de audio media', 'Manivela requiere esfuerzo'],
+    bestFor: 'Kit de emergencia, independencia energética',
+    frequency: 'AM/FM/WB',
+    icon: 'RotateCw'
+  },
+  {
+    name: 'Radio Weather Band (NOAA)',
+    description: 'Recibe alertas meteorológicas automáticas (principalmente USA)',
+    pros: ['Alertas automáticas', 'Información oficial', 'SAME selectivo por zona'],
+    cons: ['WB no disponible en España', 'Más cara', 'Funciones innecesarias para Europa'],
+    bestFor: 'Residentes en USA, zonas de huracanes',
+    frequency: 'AM/FM/WB',
+    icon: 'CloudLightning'
+  },
+  {
+    name: 'Walkie-talkie PMR446',
+    description: 'Comunicación bidireccional sin licencia en Europa',
+    pros: ['Comunicación entre personas', 'Sin licencia', 'Hasta 5km alcance', '8 canales'],
+    cons: ['Solo entre usuarios PMR', 'Requiere otro walkie', 'Interferencias posibles'],
+    bestFor: 'Familias separadas, grupos, excursiones',
+    frequency: 'PMR446',
+    icon: 'Radio'
+  },
+  {
+    name: 'Radio CB 27 MHz',
+    description: 'Banda ciudadana, mayor alcance que PMR',
+    pros: ['Mayor alcance (10-30km)', 'Comunidad activa', 'Vehículos'],
+    cons: ['Requiere antena', 'Más voluminosa', 'Puede requerir licencia según país'],
+    bestFor: 'Vehículos, zonas rurales, comunidades',
+    frequency: 'CB 27MHz',
+    icon: 'Car'
+  },
+  {
+    name: 'Receptor multibanda/SDR',
+    description: 'Recibe múltiples frecuencias: aviación, marítima, emergencias',
+    pros: ['Escucha todo', 'Comunicaciones de emergencias', 'Muy informativo'],
+    cons: ['Complejo', 'Caro', 'Curva de aprendizaje'],
+    bestFor: 'Entusiastas, monitoreo avanzado',
+    frequency: 'Multibanda',
+    icon: 'SlidersHorizontal'
+  }
+];
+
+const features = [
+  { name: 'Bandas', description: 'AM/FM mínimo. WB útil en USA. DAB+ en Europa urbana', icon: 'BarChart3' },
+  { name: 'Alimentación', description: 'Pilas + dinamo + solar = máxima flexibilidad', icon: 'Battery' },
+  { name: 'Linterna', description: 'Bonus muy útil en radios de emergencia', icon: 'Flashlight' },
+  { name: 'Carga USB', description: 'Algunas radios pueden cargar tu móvil (lento)', icon: 'Smartphone' },
+  { name: 'Alarma/sirena', description: 'Para pedir ayuda o alertar a otros', icon: 'Siren' },
+  { name: 'Resistencia agua', description: 'IPX4 mínimo para uso exterior', icon: 'Droplets' }
+];
+
+const recommendations = [
+  {
+    type: 'Básica esencial',
+    name: 'Radio AM/FM pilas',
+    price: '10-20€',
+    features: ['AM/FM', 'Pilas AA', 'Compacta', 'Altavoz + auricular'],
+    verdict: 'Lo mínimo. Compra una buena marca (Sony, Sangean).',
+    priority: 'essential'
+  },
+  {
+    type: 'Emergencia completa',
+    name: 'Radio dinamo/solar con linterna',
+    price: '25-50€',
+    features: ['AM/FM', 'Manivela + solar', 'Linterna LED', 'Puerto USB'],
+    verdict: 'La mejor opción para kit 72h. Autosuficiente.',
+    priority: 'essential'
+  },
+  {
+    type: 'Comunicación familiar',
+    name: 'Par de walkies PMR446',
+    price: '30-60€',
+    features: ['8 canales', 'Hasta 5km', 'Recargables', 'VOX manos libres'],
+    verdict: 'Imprescindible si la familia puede separarse.',
+    priority: 'recommended'
+  },
+  {
+    type: 'Premium multifunción',
+    name: 'Radio emergencia premium',
+    price: '50-100€',
+    features: ['AM/FM/WB', 'Dinamo+solar+USB', 'Linterna potente', 'Alarma SOS'],
+    verdict: 'Lo mejor si quieres un único dispositivo completo.',
+    priority: 'recommended'
+  },
+  {
+    type: 'Vehículo/rural',
+    name: 'Radio CB móvil',
+    price: '60-150€',
+    features: ['40 canales', 'Mayor alcance', 'Comunidad activa', 'Para coche'],
+    verdict: 'Para viajes largos o zonas rurales aisladas.',
+    priority: 'optional'
+  }
+];
+
+const frequencyGuide = [
+  { band: 'AM (MW)', range: '530-1700 kHz', use: 'Noticias, alcance largo (noche)', spain: 'RNE, COPE, SER' },
+  { band: 'FM', range: '87.5-108 MHz', use: 'Música, noticias locales, mejor audio', spain: 'Todas las emisoras' },
+  { band: 'DAB+', range: 'Banda III', use: 'Radio digital, sin interferencias', spain: 'Cobertura limitada' },
+  { band: 'PMR446', range: '446 MHz', use: 'Walkies sin licencia', spain: 'Legal, 8 canales' },
+  { band: 'CB 27 MHz', range: '26.965-27.405 MHz', use: 'Banda ciudadana', spain: 'Legal sin licencia' },
+  { band: 'WB (NOAA)', range: '162 MHz', use: 'Alertas meteorológicas', spain: 'No disponible (solo USA)' }
+];
+
+const emergencyFrequencies = [
+  { name: 'Canal 9 PMR446', freq: '446.10625 MHz', use: 'Canal de emergencia PMR en Europa' },
+  { name: 'Canal 9 CB', freq: '27.065 MHz', use: 'Emergencias en banda ciudadana' },
+  { name: 'Canal 16 VHF Marítimo', freq: '156.8 MHz', use: 'Emergencias marítimas' },
+  { name: '112', freq: 'GSM/móvil', use: 'Emergencias Europa (funciona sin SIM)' }
+];
+
+const kitSuggestion = [
+  { item: 'Radio dinamo/solar con linterna', qty: 1, notes: 'Principal del kit' },
+  { item: 'Radio FM compacta de bolsillo', qty: 1, notes: 'Backup, muy ligera' },
+  { item: 'Par de walkies PMR446', qty: 1, notes: 'Si hay posibilidad de separarse' },
+  { item: 'Pilas AA de repuesto', qty: 8, notes: 'Para radios y walkies' },
+  { item: 'Auriculares con cable', qty: 1, notes: 'Para escuchar sin molestar' }
+];
+
+const usageTips = [
+  'Programa las emisoras locales de noticias ANTES de la emergencia',
+  'Conoce las frecuencias de Protección Civil de tu zona',
+  'Practica usando los walkies con tu familia (alcance, canales)',
+  'Guarda la radio con pilas fuera para evitar corrosión',
+  'Ten auriculares para poder escuchar sin gastar pilas en altavoz',
+  'En emergencias, AM tiene mejor alcance que FM',
+  'El Canal 9 de PMR446 es el de emergencias en Europa',
+  'Mantén el volumen bajo y usa auricular para ahorrar batería'
+];
+
+// Generate ItemList + Product schema for rich results
+const productSchema = {
+  '@type': 'ItemList',
+  itemListElement: amazonProducts.map((product, index) => ({
+    '@type': 'ListItem',
+    position: index + 1,
+    item: {
+      '@type': 'Product',
+      name: product.name,
+      description: product.description,
+      aggregateRating: {
+        '@type': 'AggregateRating',
+        ratingValue: product.rating,
+        bestRating: 5,
+        worstRating: 1,
+        ratingCount: 100
+      }
+    }
+  }))
+};
+---
+
+<BaseLayout
+  title="Radio de emergencia: ¿Solar o dinamo? Guía y comparativa"
+  description="Guía completa de radios para emergencias: tipos, frecuencias, walkies PMR446, y qué radio elegir para tu kit 72 horas en España."
+  locale="es"
+  dateModified="2025-12-15"
+  schemaType="Article"
+  schemaData={productSchema}
+>
+  <section class="py-16">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6">
+      <!-- Header -->
+      <div class="mb-12">
+        <nav class="text-sm mb-4">
+          <ol class="flex items-center gap-2 text-[--color-text-muted]">
+            <li><a href="/es/" class="hover:text-[--color-accent-primary]">Inicio</a></li>
+            <li>/</li>
+            <li><a href="/es/componentes/" class="hover:text-[--color-accent-primary]">Componentes</a></li>
+            <li>/</li>
+            <li class="text-[--color-text-primary]">Radios de Emergencia</li>
+          </ol>
+        </nav>
+        <h1 class="mb-4 flex items-center gap-3">
+          <Icon name="Radio" size={32} class="text-[--color-accent-primary]" />
+          Radios de Emergencia
+        </h1>
+        <p class="text-lg text-[--color-text-secondary]">
+          Cuando caen las redes móviles y se va la luz, la radio es tu conexión con el mundo exterior.
+          Información oficial, alertas y coordinación familiar: todo depende de tener una buena radio.
+        </p>
+      </div>
+
+      <!-- Quick Recommendation -->
+      <div class="card p-6 mb-8 border-l-4 border-l-[--color-accent-primary]">
+        <h3 class="font-semibold mb-2 text-[--color-text-primary] flex items-center gap-2">
+          <Icon name="Radio" size={20} class="text-[--color-accent-primary]" />
+          Recomendación rápida
+        </h3>
+        <p class="text-[--color-text-secondary] m-0">
+          <strong>Mínimo:</strong> Radio AM/FM con dinamo o pilas.
+          <strong>Ideal:</strong> Radio dinamo/solar + par de walkies PMR446.
+          <strong>Presupuesto:</strong> 40-80€ total.
+        </p>
+      </div>
+
+      <!-- Why Radio Matters -->
+      <div class="card p-6 mb-8 bg-[--color-bg-tertiary]">
+        <h3 class="font-semibold mb-4 text-[--color-text-primary]">¿Por qué necesito una radio?</h3>
+        <div class="grid sm:grid-cols-2 gap-4 text-sm text-[--color-text-secondary]">
+          <div>
+            <h4 class="font-medium text-[--color-text-primary] mb-2 flex items-center gap-2">
+              <Icon name="WifiOff" size={16} class="text-[--color-accent-primary]" />
+              Sin internet ni móvil
+            </h4>
+            <p>En emergencias graves, las redes móviles se saturan o caen. La radio funciona siempre.</p>
+          </div>
+          <div>
+            <h4 class="font-medium text-[--color-text-primary] mb-2 flex items-center gap-2">
+              <Icon name="Megaphone" size={16} class="text-[--color-accent-primary]" />
+              Información oficial
+            </h4>
+            <p>Protección Civil y autoridades usan la radio para dar instrucciones a la población.</p>
+          </div>
+          <div>
+            <h4 class="font-medium text-[--color-text-primary] mb-2 flex items-center gap-2">
+              <Icon name="Users" size={16} class="text-[--color-accent-primary]" />
+              Coordinación familiar
+            </h4>
+            <p>Los walkies permiten comunicarte con tu familia si os separáis.</p>
+          </div>
+          <div>
+            <h4 class="font-medium text-[--color-text-primary] mb-2 flex items-center gap-2">
+              <Icon name="Battery" size={16} class="text-[--color-accent-primary]" />
+              Bajo consumo
+            </h4>
+            <p>Una radio con pilas dura días. Tu móvil, horas.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Types -->
+      <div class="mb-12">
+        <h2 class="text-2xl font-bold mb-6 text-[--color-text-primary]">Tipos de radios</h2>
+
+        <div class="space-y-4">
+          {radioTypes.map((type) => (
+            <div class="card p-6">
+              <div class="flex items-start gap-4">
+                <div class="w-12 h-12 flex items-center justify-center bg-[--color-bg-tertiary] rounded-lg flex-shrink-0">
+                  <Icon name={type.icon as any} size={28} class="text-[--color-accent-primary]" />
+                </div>
+                <div class="flex-1">
+                  <div class="flex items-center gap-3 mb-2">
+                    <h3 class="font-semibold text-[--color-text-primary]">{type.name}</h3>
+                    <span class="text-xs px-2 py-1 bg-[--color-bg-tertiary] text-[--color-text-muted] rounded">
+                      {type.frequency}
+                    </span>
+                  </div>
+                  <p class="text-sm text-[--color-text-secondary] mb-3">{type.description}</p>
+
+                  <div class="grid sm:grid-cols-3 gap-4 text-sm">
+                    <div>
+                      <span class="text-green-400 font-medium flex items-center gap-1">
+                        <Icon name="CircleCheck" size={14} />
+                        Pros
+                      </span>
+                      <ul class="mt-1 space-y-1 text-[--color-text-muted]">
+                        {type.pros.map((pro) => <li>• {pro}</li>)}
+                      </ul>
+                    </div>
+                    <div>
+                      <span class="text-red-400 font-medium flex items-center gap-1">
+                        <Icon name="CircleX" size={14} />
+                        Contras
+                      </span>
+                      <ul class="mt-1 space-y-1 text-[--color-text-muted]">
+                        {type.cons.map((con) => <li>• {con}</li>)}
+                      </ul>
+                    </div>
+                    <div>
+                      <span class="text-[--color-accent-primary] font-medium flex items-center gap-1">
+                        <Icon name="Star" size={14} />
+                        Ideal para
+                      </span>
+                      <p class="mt-1 text-[--color-text-muted]">{type.bestFor}</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <!-- Key Features -->
+      <div class="mb-12">
+        <h2 class="text-2xl font-bold mb-6 text-[--color-text-primary]">Características a buscar</h2>
+
+        <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          {features.map((feature) => (
+            <div class="card p-4">
+              <div class="flex items-start gap-3">
+                <div class="w-10 h-10 flex items-center justify-center bg-[--color-bg-tertiary] rounded-lg flex-shrink-0">
+                  <Icon name={feature.icon as any} size={22} class="text-[--color-accent-primary]" />
+                </div>
+                <div>
+                  <h3 class="font-semibold text-[--color-text-primary]">{feature.name}</h3>
+                  <p class="text-sm text-[--color-text-secondary]">{feature.description}</p>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <!-- Frequency Guide -->
+      <div class="mb-12">
+        <h2 class="text-2xl font-bold mb-6 text-[--color-text-primary]">Guía de frecuencias</h2>
+
+        <div class="card overflow-hidden">
+          <div class="overflow-x-auto">
+            <table class="w-full text-sm">
+              <thead class="bg-[--color-bg-tertiary]">
+                <tr>
+                  <th class="text-left py-3 px-4">Banda</th>
+                  <th class="text-left py-3 px-4">Rango</th>
+                  <th class="text-left py-3 px-4">Uso</th>
+                  <th class="text-left py-3 px-4">En España</th>
+                </tr>
+              </thead>
+              <tbody class="text-[--color-text-secondary]">
+                {frequencyGuide.map((band, i) => (
+                  <tr class={i % 2 === 0 ? 'bg-[--color-bg-secondary]' : ''}>
+                    <td class="py-3 px-4 font-medium text-[--color-text-primary]">{band.band}</td>
+                    <td class="py-3 px-4 font-mono text-xs">{band.range}</td>
+                    <td class="py-3 px-4">{band.use}</td>
+                    <td class="py-3 px-4 text-xs">{band.spain}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- Emergency Frequencies -->
+      <div class="mb-12">
+        <h2 class="text-2xl font-bold mb-6 text-[--color-text-primary]">Frecuencias de emergencia</h2>
+
+        <div class="card p-6 border-l-4 border-l-red-500">
+          <div class="grid sm:grid-cols-2 gap-4">
+            {emergencyFrequencies.map((freq) => (
+              <div class="flex items-start gap-3">
+                <Icon name="Siren" size={20} class="text-red-400 flex-shrink-0 mt-0.5" />
+                <div>
+                  <h4 class="font-semibold text-[--color-text-primary]">{freq.name}</h4>
+                  <p class="text-xs font-mono text-[--color-text-muted]">{freq.freq}</p>
+                  <p class="text-sm text-[--color-text-secondary]">{freq.use}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      <!-- Recommendations -->
+      <div class="mb-12">
+        <h2 class="text-2xl font-bold mb-6 text-[--color-text-primary]">Recomendaciones por uso</h2>
+
+        <div class="space-y-4">
+          {recommendations.map((rec) => (
+            <div class={`card p-6 ${rec.priority === 'essential' ? 'border-l-4 border-l-red-500' : rec.priority === 'recommended' ? 'border-l-4 border-l-[--color-accent-primary]' : ''}`}>
+              <div class="flex items-start justify-between gap-4 mb-3">
+                <div>
+                  <span class={`text-xs px-2 py-1 rounded ${rec.priority === 'essential' ? 'bg-red-500/20 text-red-400' : rec.priority === 'recommended' ? 'bg-[--color-accent-primary]/20 text-[--color-accent-primary]' : 'bg-[--color-bg-tertiary] text-[--color-text-muted]'}`}>
+                    {rec.priority === 'essential' ? 'Esencial' : rec.priority === 'recommended' ? 'Recomendado' : 'Opcional'}
+                  </span>
+                  <span class="text-xs text-[--color-text-muted] ml-2">{rec.type}</span>
+                </div>
+                <span class="font-bold text-[--color-accent-primary]">{rec.price}</span>
+              </div>
+
+              <h3 class="font-semibold text-[--color-text-primary] mb-2">{rec.name}</h3>
+
+              <div class="flex flex-wrap gap-2 mb-3">
+                {rec.features.map((feature) => (
+                  <span class="text-xs px-2 py-1 bg-[--color-bg-tertiary] text-[--color-text-muted] rounded">
+                    {feature}
+                  </span>
+                ))}
+              </div>
+
+              <p class="text-sm text-[--color-text-secondary] m-0">
+                <strong>Veredicto:</strong> {rec.verdict}
+              </p>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <!-- Suggested Kit -->
+      <div class="mb-12">
+        <h2 class="text-2xl font-bold mb-6 text-[--color-text-primary]">Kit de comunicación sugerido</h2>
+
+        <div class="card p-6">
+          <p class="text-sm text-[--color-text-secondary] mb-4">
+            Para una familia con posibilidad de separación:
+          </p>
+
+          <div class="overflow-x-auto">
+            <table class="w-full text-sm">
+              <thead>
+                <tr class="border-b border-[--color-border]">
+                  <th class="text-left py-2">Artículo</th>
+                  <th class="text-center py-2">Cantidad</th>
+                  <th class="text-left py-2">Notas</th>
+                </tr>
+              </thead>
+              <tbody class="text-[--color-text-secondary]">
+                {kitSuggestion.map((item) => (
+                  <tr class="border-b border-[--color-border]">
+                    <td class="py-2">{item.item}</td>
+                    <td class="py-2 text-center font-bold text-[--color-accent-primary]">{item.qty}</td>
+                    <td class="py-2 text-xs text-[--color-text-muted]">{item.notes}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+
+          <div class="mt-4 pt-4 border-t border-[--color-border] text-center">
+            <p class="text-sm text-[--color-text-muted]">
+              Inversión aproximada: <strong class="text-[--color-accent-primary]">50-100€</strong>
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Product Recommendations -->
+      <div class="mb-12">
+        <h2 class="text-2xl font-bold mb-6 text-[--color-text-primary] flex items-center gap-2">
+          <Icon name="ShoppingCart" size={24} class="text-[--color-accent-primary]" />
+          Productos recomendados
+        </h2>
+        <ProductGrid products={amazonProducts} title="Radios y walkies para emergencias" />
+      </div>
+
+      <!-- Tips -->
+      <div class="card p-6 mb-8">
+        <h3 class="font-semibold mb-4 text-[--color-text-primary] flex items-center gap-2">
+          <Icon name="Lightbulb" size={20} class="text-[--color-accent-primary]" />
+          Consejos de uso
+        </h3>
+        <ul class="grid sm:grid-cols-2 gap-2 text-sm text-[--color-text-secondary]">
+          {usageTips.map((tip) => (
+            <li>• {tip}</li>
+          ))}
+        </ul>
+      </div>
+
+      <!-- PMR446 Info Box -->
+      <div class="card p-6 mb-8 bg-[--color-bg-tertiary]">
+        <h3 class="font-semibold mb-3 text-[--color-text-primary] flex items-center gap-2">
+          <Icon name="Radio" size={20} class="text-[--color-accent-primary]" />
+          Sobre PMR446 (Walkies en Europa)
+        </h3>
+        <div class="text-sm text-[--color-text-secondary] space-y-2">
+          <p><strong>PMR446</strong> es el estándar europeo de radio de uso libre sin licencia.</p>
+          <p><strong>Alcance real:</strong> 500m-2km en ciudad, 3-5km en campo abierto, hasta 10km en montaña.</p>
+          <p><strong>Canales:</strong> 8 principales (1-8) + 8 adicionales (9-16). El <strong>canal 9</strong> es el de emergencias.</p>
+          <p><strong>Consejo:</strong> Acordad un canal y hora de contacto con tu familia antes de separarse.</p>
+        </div>
+      </div>
+
+      <!-- Related Links -->
+      <div class="flex flex-wrap gap-4 justify-center">
+        <a
+          href="/es/componentes/powerbanks/"
+          class="inline-flex items-center gap-2 px-4 py-2 border border-[--color-border] text-sm font-medium rounded hover:border-[--color-accent-primary] hover:text-[--color-accent-primary] transition-colors"
+        >
+          ← Ver Powerbanks
+        </a>
+        <a
+          href="/es/guias/energia-comunicacion/"
+          class="inline-flex items-center gap-2 px-4 py-2 border border-[--color-border] text-sm font-medium rounded hover:border-[--color-accent-primary] hover:text-[--color-accent-primary] transition-colors"
+        >
+          Guía: Energía y Comunicación
+        </a>
+        <a
+          href="/es/herramientas/configurador-kit/"
+          class="inline-flex items-center gap-2 px-4 py-2 bg-[--color-accent-primary] text-[--color-bg-primary] text-sm font-medium rounded hover:bg-[--color-accent-secondary] transition-colors"
+        >
+          Configurar Mi Kit
+        </a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

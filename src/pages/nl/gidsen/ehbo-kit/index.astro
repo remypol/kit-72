@@ -1,0 +1,169 @@
+---
+import BaseLayout from '../../../../layouts/BaseLayout.astro';
+import Breadcrumb from '../../../../components/layout/Breadcrumb.astro';
+import Icon from '../../../../components/ui/Icon.astro';
+---
+
+<BaseLayout
+  title="EHBO-kit — Kit-72"
+  description="Samenstellen en onderhouden van je EHBO-kit voor noodsituaties. Wat erin hoort en hoe je hem onderhoudt."
+  locale="nl"
+  dateModified="2025-12-15"
+  schemaType="Article"
+>
+  <section class="py-16">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6">
+      <Breadcrumb items={[{ label: 'Gidsen', href: '/nl/gidsen/' }, { label: 'EHBO-kit' }]} class="mb-4" locale="nl" />
+      <h1 class="text-4xl font-bold mb-6">EHBO-kit</h1>
+
+      <div class="prose prose-lg">
+        <p class="lead">
+          Een goede EHBO-kit kan bij kleine verwondingen het verschil maken —
+          en in een noodsituatie, wanneer de hulpdiensten niet bereikbaar zijn,
+          <strong>levensreddend</strong> zijn.
+        </p>
+
+        <!-- Key Message -->
+        <div class="card p-6 my-8 bg-[--color-bg-tertiary] not-prose">
+          <h3 class="text-lg font-semibold mb-3 flex items-center gap-2">
+            <Icon name="Heart" size={20} class="text-red-500" />
+            Het Belangrijkste Eerst
+          </h3>
+          <p class="text-sm text-[--color-text-secondary]">
+            Een EHBO-kit is alleen zo goed als je kennis.
+            <strong>Volg een EHBO-cursus</strong> — het Rode Kruis en andere aanbieders geven
+            regelmatig cursussen. De investering van een paar uur kan levens redden.
+          </p>
+        </div>
+
+        <h2>Basisuitrusting</h2>
+        <p>Deze spullen horen in elke EHBO-kit:</p>
+
+        <h3>Verbandmiddelen</h3>
+        <ul>
+          <li><strong>Pleisters</strong> — verschillende maten, waterbestendig</li>
+          <li><strong>Steriele kompressen</strong> — 10x10 cm, minimaal 10 stuks</li>
+          <li><strong>Gaasrollen</strong> — 6 cm en 8 cm breed</li>
+          <li><strong>Elastische zwachtels</strong> — voor verbanden en steunverbanden</li>
+          <li><strong>Driekante doek</strong> — als armslinger of hoofdverband</li>
+          <li><strong>Snelverband</strong> — voor grotere wonden</li>
+          <li><strong>Hechtpleister/Leukoplast</strong> — om te bevestigen</li>
+        </ul>
+
+        <h3>Hulpmiddelen</h3>
+        <ul>
+          <li><strong>Verbandschaar</strong> — met afgeronde punten</li>
+          <li><strong>Pincet</strong> — voor splinters en teken</li>
+          <li><strong>Wegwerphandschoenen</strong> — minimaal 4 paar (latexvrij!)</li>
+          <li><strong>Reddingsdeken</strong> — tegen onderkoeling</li>
+          <li><strong>Coldpack</strong> — instant koelkompres</li>
+        </ul>
+
+        <h3>Medicijnen & Desinfectie</h3>
+        <ul>
+          <li><strong>Wondontsmettingsmiddel</strong> — Betadine, chloorhexidine o.i.d.</li>
+          <li><strong>Pijnstillers</strong> — paracetamol, ibuprofen</li>
+          <li><strong>Koortsthermometer</strong> — digitaal, op batterijen</li>
+          <li><strong>Antihistaminicum</strong> — bij allergische reacties</li>
+          <li><strong>Diarreemiddel</strong> — loperamide, norit</li>
+          <li><strong>ORS-poeder</strong> — bij diarree en braken</li>
+        </ul>
+
+        <div class="card p-4 my-6 border-l-4 border-l-red-500 bg-red-50 dark:bg-red-950/30 not-prose">
+          <p class="text-sm">
+            <strong>⚠️ Medicijnen:</strong> Let op intoleranties en interacties.
+            Lees de bijsluiter en vraag bij twijfel je arts of apotheker.
+          </p>
+        </div>
+
+        <h2>Persoonlijke Medicijnen</h2>
+        <p>
+          <strong>Uiterst belangrijk:</strong> Als jij of gezinsleden regelmatig medicijnen
+          gebruiken, houd altijd een voorraad voor minimaal <strong>7-14 dagen</strong> achter de hand.
+        </p>
+        <ul>
+          <li>Bloeddrukmedicatie</li>
+          <li>Insuline en diabetesbenodigdheden</li>
+          <li>Hartmedicatie</li>
+          <li>Astma-inhalator</li>
+          <li>Schildkliermedicatie</li>
+          <li>Psychofarmaca (nooit abrupt stoppen!)</li>
+        </ul>
+
+        <div class="card p-6 my-8 bg-[--color-accent-subtle] not-prose">
+          <p class="font-medium mb-2">💡 Medicatielijst</p>
+          <p class="text-sm text-[--color-text-secondary]">
+            Maak een actuele lijst van alle medicijnen met dosering en innamemomenten.
+            Bewaar deze in de EHBO-kit — ook belangrijk voor hulpverleners.
+          </p>
+        </div>
+
+        <h2>Onderhoud Elke 3 Maanden</h2>
+        <ol>
+          <li><strong>Houdbaarheidsdatums controleren</strong> — verlopen producten direct vervangen</li>
+          <li><strong>Volledigheid checken</strong> — gebruikte artikelen bijkopen</li>
+          <li><strong>Medicijnen inspecteren</strong> — op verkleuring, geur letten</li>
+          <li><strong>Verpakkingen controleren</strong> — beschadigde steriele verpakkingen vervangen</li>
+        </ol>
+
+        <h2>Opberging</h2>
+        <ul>
+          <li><strong>Goed bereikbaar</strong> — alle gezinsleden weten waar het is</li>
+          <li><strong>Droog en koel</strong> — niet in de badkamer (te vochtig)</li>
+          <li><strong>Kindveilig</strong> — buiten bereik van kleine kinderen</li>
+          <li><strong>Draagbaar</strong> — bij evacuatie snel mee te nemen</li>
+        </ul>
+
+        <h2>Uitgebreide Uitrusting</h2>
+        <p>Voor gezinnen of bij extra voorbereiding:</p>
+        <ul>
+          <li><strong>SAM-spalk</strong> — vormbare spalk voor botbreuken</li>
+          <li><strong>Tourniquet</strong> — bij ernstige bloedingen (alleen met training!)</li>
+          <li><strong>Hechtmateriaal/Steri-Strips</strong> — voor diepe snijwonden</li>
+          <li><strong>Beademingsmasker</strong> — voor mond-op-mondbeademing</li>
+          <li><strong>Oogspoelvloeistof</strong> — bij vuil of chemicaliën in ogen</li>
+        </ul>
+
+        <h2>Checklist EHBO-kit</h2>
+        <ul>
+          <li>☐ Basisuitrusting compleet</li>
+          <li>☐ Persoonlijke medicijnen voor 7+ dagen</li>
+          <li>☐ Actuele medicatielijst bijgevoegd</li>
+          <li>☐ Alle houdbaarheidsdatums gecontroleerd</li>
+          <li>☐ Opbergplek bij iedereen bekend</li>
+          <li>☐ Volgende controle ingepland</li>
+        </ul>
+      </div>
+
+      <!-- CTA -->
+      <div class="mt-12 grid sm:grid-cols-2 gap-4">
+        <div class="card p-6 bg-[--color-bg-tertiary]">
+          <h3 class="font-semibold mb-2">EHBO-doos kopen</h3>
+          <p class="text-sm text-[--color-text-secondary] mb-4">
+            Aanbevelingen voor complete sets met goede basisuitrusting.
+          </p>
+          <a
+            href="/nl/producten/ehbo-doos/"
+            class="inline-flex items-center gap-2 text-[--color-accent-primary] hover:underline"
+          >
+            Naar de producten →
+          </a>
+        </div>
+        <div class="card p-6 bg-[--color-bg-tertiary]">
+          <h3 class="font-semibold mb-2">EHBO-cursus vinden</h3>
+          <p class="text-sm text-[--color-text-secondary] mb-4">
+            Het Rode Kruis biedt landelijk cursussen aan.
+          </p>
+          <a
+            href="https://www.rodekruis.nl/cursussen/ehbo/"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex items-center gap-2 text-[--color-accent-primary] hover:underline"
+          >
+            Rode Kruis cursussen →
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

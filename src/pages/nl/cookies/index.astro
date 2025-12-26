@@ -1,0 +1,30 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import Breadcrumb from '../../../components/layout/Breadcrumb.astro';
+---
+
+<BaseLayout title="Cookiebeleid — Kit-72" description="Informatie over cookies op Kit-72." locale="nl">
+  <section class="py-16">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6">
+      <Breadcrumb items={[{ label: 'Cookies' }]} class="mb-4" locale="nl" />
+      <h1 class="text-4xl font-bold mb-6">Cookiebeleid</h1>
+      
+      <div class="prose prose-lg">
+        <p><em>Laatst bijgewerkt: december 2025</em></p>
+        
+        <h2>Wat zijn cookies?</h2>
+        <p>Cookies zijn kleine tekstbestanden die op je apparaat worden opgeslagen wanneer je een website bezoekt.</p>
+
+        <h2>Welke cookies gebruiken we?</h2>
+        <h3>Noodzakelijke cookies</h3>
+        <p>Deze zijn essentieel voor de werking van de website, zoals het onthouden van je taalvoorkeur.</p>
+
+        <h3>Analytics cookies</h3>
+        <p>We gebruiken privacy-vriendelijke analytics om te begrijpen hoe de site wordt gebruikt, zonder persoonlijke gegevens te verzamelen.</p>
+
+        <h2>Cookies beheren</h2>
+        <p>Je kunt cookies beheren via je browserinstellingen. Let op: het uitschakelen van cookies kan de functionaliteit beperken.</p>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

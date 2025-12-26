@@ -1,0 +1,204 @@
+---
+/**
+ * 404 Error Page
+ *
+ * Locale-aware 404 page that detects the user's preferred language
+ * and displays an appropriate message with helpful navigation links.
+ */
+
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Icon from '../components/ui/Icon.astro';
+
+// Detect locale from referrer URL or default to ES
+const referrer = Astro.request.headers.get('referer') || '';
+let locale: 'es' | 'nl' | 'de' = 'es';
+
+if (referrer.includes('/nl/') || referrer.includes('kit-72.com/nl')) {
+  locale = 'nl';
+} else if (referrer.includes('/de/') || referrer.includes('kit-72.com/de')) {
+  locale = 'de';
+}
+
+// Content per locale
+const content = {
+  es: {
+    title: 'Página no encontrada',
+    heading: '404',
+    subheading: 'Página no encontrada',
+    message: 'Lo sentimos, la página que buscas no existe o ha sido movida.',
+    homeLink: 'Volver al inicio',
+    homeUrl: '/es/',
+    scenariosTitle: 'Escenarios populares',
+    scenarios: [
+      { name: 'Apagón', url: '/es/escenarios/prepararse-apagon/', icon: 'Zap' },
+      { name: 'Ola de calor', url: '/es/escenarios/prepararse-ola-calor/', icon: 'Sun' },
+      { name: 'Inundación', url: '/es/escenarios/inundacion/', icon: 'CloudRain' },
+    ],
+  },
+  nl: {
+    title: 'Pagina niet gevonden',
+    heading: '404',
+    subheading: 'Pagina niet gevonden',
+    message: 'Sorry, de pagina die je zoekt bestaat niet of is verplaatst.',
+    homeLink: 'Terug naar home',
+    homeUrl: '/nl/',
+    scenariosTitle: 'Populaire scenario\'s',
+    scenarios: [
+      { name: 'Stroomstoring', url: '/nl/scenario/stroomstoring/', icon: 'Zap' },
+      { name: 'Hittegolf', url: '/nl/scenario/hittegolf/', icon: 'Sun' },
+      { name: 'Overstroming', url: '/nl/scenario/overstroming/', icon: 'CloudRain' },
+    ],
+  },
+  de: {
+    title: 'Seite nicht gefunden',
+    heading: '404',
+    subheading: 'Seite nicht gefunden',
+    message: 'Entschuldigung, die gesuchte Seite existiert nicht oder wurde verschoben.',
+    homeLink: 'Zurück zur Startseite',
+    homeUrl: '/de/',
+    scenariosTitle: 'Beliebte Szenarien',
+    scenarios: [
+      { name: 'Stromausfall', url: '/de/szenarien/stromausfall/', icon: 'Zap' },
+      { name: 'Hitzewelle', url: '/de/szenarien/hitzewelle/', icon: 'Sun' },
+      { name: 'Hochwasser', url: '/de/szenarien/hochwasser/', icon: 'CloudRain' },
+    ],
+  },
+};
+
+const c = content[locale];
+---
+
+<BaseLayout
+  title={c.title}
+  description={c.message}
+  locale={locale}
+  noIndex={true}
+  hideBottomNav={true}
+>
+  <main class="error-page">
+    <div class="error-content">
+      <h1 class="error-code">{c.heading}</h1>
+      <h2 class="error-title">{c.subheading}</h2>
+      <p class="error-message">{c.message}</p>
+
+      <a href={c.homeUrl} class="home-button">
+        <Icon name="Home" size={20} />
+        {c.homeLink}
+      </a>
+
+      <div class="scenarios-section">
+        <h3 class="scenarios-title">{c.scenariosTitle}</h3>
+        <div class="scenarios-grid">
+          {c.scenarios.map((scenario) => (
+            <a href={scenario.url} class="scenario-link">
+              <Icon name={scenario.icon} size={24} />
+              <span>{scenario.name}</span>
+            </a>
+          ))}
+        </div>
+      </div>
+    </div>
+  </main>
+</BaseLayout>
+
+<style>
+  .error-page {
+    min-height: 80vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+  }
+
+  .error-content {
+    text-align: center;
+    max-width: 500px;
+  }
+
+  .error-code {
+    font-family: var(--font-display);
+    font-size: 8rem;
+    font-weight: 400;
+    color: var(--color-accent-primary);
+    line-height: 1;
+    margin: 0;
+  }
+
+  .error-title {
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    color: var(--color-text-primary);
+    margin: 0.5rem 0 1rem;
+  }
+
+  .error-message {
+    color: var(--color-text-secondary);
+    margin-bottom: 2rem;
+  }
+
+  .home-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    background: var(--color-accent-primary);
+    color: var(--color-bg-primary);
+    border-radius: 0.5rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: background 0.2s;
+  }
+
+  .home-button:hover {
+    background: var(--color-accent-secondary);
+  }
+
+  .scenarios-section {
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--color-border);
+  }
+
+  .scenarios-title {
+    font-size: 0.875rem;
+    color: var(--color-text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 1rem;
+  }
+
+  .scenarios-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.75rem;
+  }
+
+  .scenario-link {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    background: var(--color-bg-secondary);
+    border: 1px solid var(--color-border);
+    border-radius: 0.5rem;
+    color: var(--color-text-secondary);
+    text-decoration: none;
+    transition: all 0.2s;
+  }
+
+  .scenario-link:hover {
+    border-color: var(--color-accent-primary);
+    color: var(--color-accent-primary);
+  }
+
+  @media (max-width: 480px) {
+    .error-code {
+      font-size: 5rem;
+    }
+
+    .scenarios-grid {
+      flex-direction: column;
+    }
+  }
+</style>

@@ -1,0 +1,57 @@
+---
+/**
+ * CalloutBox Component
+ *
+ * Highlighted boxes for tips, warnings, info, and critical notices.
+ *
+ * @example
+ * <CalloutBox variant="tip" title="Consejo">
+ *   Almacena agua en un lugar fresco y oscuro.
+ * </CalloutBox>
+ *
+ * <CalloutBox variant="warning">
+ *   Revisa las fechas de caducidad mensualmente.
+ * </CalloutBox>
+ */
+
+import Icon from './Icon.astro';
+
+interface Props {
+  /** Visual style variant */
+  variant?: 'tip' | 'warning' | 'info' | 'critical';
+  /** Optional title for the callout */
+  title?: string;
+  /** Additional CSS classes */
+  class?: string;
+}
+
+const {
+  variant = 'info',
+  title,
+  class: className = '',
+} = Astro.props;
+
+// Map variant to icon
+const iconMap: Record<string, string> = {
+  tip: 'Lightbulb',
+  warning: 'AlertTriangle',
+  info: 'Info',
+  critical: 'AlertCircle',
+};
+
+const classes = [
+  'callout',
+  `callout-${variant}`,
+  className,
+].filter(Boolean).join(' ');
+---
+
+<div class={classes} role="note">
+  <div class="callout-icon">
+    <Icon name={iconMap[variant] as any} size={24} />
+  </div>
+  <div class="callout-content">
+    {title && <div class="callout-title">{title}</div>}
+    <slot />
+  </div>
+</div>

@@ -1,0 +1,260 @@
+---
+/**
+ * Language Hub - Root Page
+ *
+ * Serves as x-default hreflang target and allows users to choose their language.
+ * Minimal, fast-loading page with no React hydration.
+ */
+
+const languages = [
+  { code: 'es', name: 'Español', flag: '🇪🇸', href: '/es/', native: 'Español' },
+  { code: 'nl', name: 'Nederlands', flag: '🇳🇱', href: '/nl/', native: 'Nederlands' },
+  { code: 'de', name: 'Deutsch', flag: '🇩🇪', href: '/de/', native: 'Deutsch' },
+];
+
+const title = 'Kit-72 — 72-Hour Emergency Preparedness Guides & Tools';
+const description = 'Free guides and tools to build your 72-hour emergency kit. Learn what supplies you need for power outages, floods, and other emergencies. Available in Spanish, Dutch, and German.';
+
+// Schema.org structured data
+const schemaData = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "Kit-72",
+  "alternateName": "Kit 72",
+  "url": "https://kit-72.com/",
+  "description": description,
+  "inLanguage": ["es", "nl", "de"],
+  "publisher": {
+    "@type": "Organization",
+    "name": "Kit-72",
+    "url": "https://kit-72.com/"
+  }
+};
+---
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>{title}</title>
+  <meta name="description" content={description}>
+  <meta name="robots" content="index, follow">
+
+  <link rel="canonical" href="https://kit-72.com/">
+
+  <!-- hreflang tags -->
+  <link rel="alternate" hreflang="x-default" href="https://kit-72.com/">
+  <link rel="alternate" hreflang="es-ES" href="https://kit-72.com/es/">
+  <link rel="alternate" hreflang="nl-NL" href="https://kit-72.com/nl/">
+  <link rel="alternate" hreflang="de-DE" href="https://kit-72.com/de/">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://kit-72.com/">
+  <meta property="og:title" content={title}>
+  <meta property="og:description" content={description}>
+  <meta property="og:site_name" content="Kit-72">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+
+  <meta name="theme-color" content="#0a0f1a">
+
+  <!-- Schema.org structured data -->
+  <script type="application/ld+json" set:html={JSON.stringify(schemaData)} />
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --color-bg: #0a0f1a;
+      --color-bg-card: #111827;
+      --color-border: #1f2937;
+      --color-text: #f9fafb;
+      --color-text-muted: #9ca3af;
+      --color-accent: #3b82f6;
+      --color-accent-hover: #60a5fa;
+    }
+
+    body {
+      font-family: 'Source Sans 3', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: var(--color-bg);
+      color: var(--color-text);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+
+    .container {
+      max-width: 400px;
+      width: 100%;
+      text-align: center;
+    }
+
+    .logo {
+      font-size: 2.5rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      margin-bottom: 8px;
+      background: linear-gradient(135deg, var(--color-accent), #8b5cf6);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .tagline {
+      font-size: 1rem;
+      color: var(--color-text-muted);
+      margin-bottom: 12px;
+    }
+
+    .intro {
+      font-size: 0.9rem;
+      color: var(--color-text-muted);
+      margin-bottom: 32px;
+      line-height: 1.5;
+    }
+
+    .language-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .language-link {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 16px 20px;
+      background: var(--color-bg-card);
+      border: 1px solid var(--color-border);
+      border-radius: 12px;
+      text-decoration: none;
+      color: var(--color-text);
+      transition: all 0.15s ease;
+    }
+
+    .language-link:hover {
+      border-color: var(--color-accent);
+      transform: translateY(-2px);
+    }
+
+    .language-link:focus {
+      outline: 2px solid var(--color-accent);
+      outline-offset: 2px;
+    }
+
+    .flag {
+      font-size: 2rem;
+      line-height: 1;
+    }
+
+    .language-info {
+      flex: 1;
+      text-align: left;
+    }
+
+    .language-name {
+      font-size: 1.125rem;
+      font-weight: 600;
+    }
+
+    .language-native {
+      font-size: 0.875rem;
+      color: var(--color-text-muted);
+    }
+
+    .arrow {
+      color: var(--color-text-muted);
+      transition: transform 0.15s ease;
+    }
+
+    .language-link:hover .arrow {
+      transform: translateX(4px);
+      color: var(--color-accent);
+    }
+
+    .coming-soon {
+      opacity: 0.5;
+      pointer-events: none;
+    }
+
+    .coming-soon .language-name::after {
+      content: ' (coming soon)';
+      font-size: 0.75rem;
+      font-weight: 400;
+      color: var(--color-text-muted);
+    }
+
+    .footer {
+      margin-top: 48px;
+      font-size: 0.75rem;
+      color: var(--color-text-muted);
+    }
+
+    .footer a {
+      color: var(--color-text-muted);
+      text-decoration: none;
+    }
+
+    .footer a:hover {
+      color: var(--color-accent);
+    }
+
+    @media (max-width: 480px) {
+      .logo {
+        font-size: 2rem;
+      }
+
+      .language-link {
+        padding: 14px 16px;
+      }
+
+      .flag {
+        font-size: 1.75rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="container">
+    <h1 class="logo">Kit-72</h1>
+    <p class="tagline">72-Hour Emergency Preparedness</p>
+    <p class="intro">Free guides and tools to help you prepare for emergencies. Select your language:</p>
+
+    <nav class="language-list" aria-label="Choose your language">
+      {languages.map((lang) => (
+        <a
+          href={lang.href}
+          class="language-link"
+          hreflang={lang.code}
+          aria-label={`Continue in ${lang.name}`}
+        >
+          <span class="flag" aria-hidden="true">{lang.flag}</span>
+          <div class="language-info">
+            <span class="language-name">{lang.name}</span>
+            <span class="language-native">{lang.native}</span>
+          </div>
+          <svg class="arrow" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M5 12h14M12 5l7 7-7 7"/>
+          </svg>
+        </a>
+      ))}
+    </nav>
+
+    <footer class="footer">
+      <p>© 2025 Kit-72 · <a href="/es/politica-editorial/">Editorial Policy</a></p>
+    </footer>
+  </main>
+</body>
+</html>

@@ -1,0 +1,172 @@
+---
+import BaseLayout from '../../../../layouts/BaseLayout.astro';
+import Breadcrumb from '../../../../components/layout/Breadcrumb.astro';
+import Icon from '../../../../components/ui/Icon.astro';
+import HeroImage from '../../../../components/content/HeroImage.astro';
+---
+
+<BaseLayout
+  title="Wasserbehälter für Notvorrat: Material & Größe — Kaufratgeber"
+  description="Die richtigen Behälter für deinen Trinkwasservorrat. Materialien, Größen, Lagerung."
+  locale="de"
+  dateModified="2025-12-15"
+  schemaType="Article"
+>
+  <section class="py-16">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6">
+      <Breadcrumb items={[{ label: 'Produkte', href: '/de/produkte/' }, { label: 'Wasserspeicher' }]} class="mb-4" locale="de" />
+      <h1 class="text-4xl font-bold mb-6">Wasserspeicher</h1>
+
+      <div class="mb-8">
+        <HeroImage
+          src="/images/shared/water-storage-containers.webp"
+          alt="Wasserspeicher und Kanister für Notvorrat"
+          priority={true}
+        />
+      </div>
+
+      <div class="prose prose-lg">
+        <p class="lead">
+          <strong>Wasser ist das Wichtigste.</strong> Du überlebst nur 3 Tage ohne Wasser.
+          Die richtigen Behälter halten dein Wasser über Monate frisch und sicher.
+        </p>
+
+        <!-- Quick Reference -->
+        <div class="card p-6 my-8 bg-[--color-bg-tertiary] not-prose">
+          <h3 class="text-lg font-semibold mb-4 flex items-center gap-2">
+            <Icon name="Droplet" size={20} class="text-[--color-accent-primary]" />
+            Wasserbedarf Übersicht
+          </h3>
+          <div class="grid sm:grid-cols-2 gap-4">
+            <div class="p-4 bg-[--color-bg-secondary] rounded-lg">
+              <p class="text-2xl font-bold text-[--color-accent-primary]">9 Liter</p>
+              <p class="text-sm text-[--color-text-secondary]">pro Person für 72 Stunden</p>
+            </div>
+            <div class="p-4 bg-[--color-bg-secondary] rounded-lg">
+              <p class="text-2xl font-bold text-[--color-accent-primary]">36 Liter</p>
+              <p class="text-sm text-[--color-text-secondary]">4-Personen-Haushalt, 72 Std.</p>
+            </div>
+          </div>
+        </div>
+
+        <h2>Behälter-Typen</h2>
+
+        <h3>Originalverpacktes Mineralwasser</h3>
+        <p>Die <strong>einfachste und sicherste</strong> Option:</p>
+        <ul>
+          <li>✓ Hygienisch abgefüllt, lange haltbar</li>
+          <li>✓ Portioniert, leicht zu transportieren</li>
+          <li>✓ Kein Umfüllen oder Reinigen nötig</li>
+          <li>✗ Braucht mehr Platz als Kanister</li>
+          <li>✗ Plastikflaschen nicht ideal für Langzeit</li>
+        </ul>
+
+        <h3>Wasserkanister (5-30 Liter)</h3>
+        <p>Für größere Mengen und Langzeitlagerung:</p>
+        <ul>
+          <li>✓ Platzsparender als Flaschen</li>
+          <li>✓ Oft stapelbar</li>
+          <li>✓ Mit Ablasshahn erhältlich</li>
+          <li>✗ Müssen regelmäßig gereinigt werden</li>
+          <li>✗ Schwer, wenn voll (10L = 10kg)</li>
+        </ul>
+
+        <h3>Faltbare Wasserbeutel</h3>
+        <p>Für den Notfall oder unterwegs:</p>
+        <ul>
+          <li>✓ Extrem platzsparend wenn leer</li>
+          <li>✓ Leicht zu transportieren</li>
+          <li>✗ Weniger robust als Kanister</li>
+          <li>✗ Nicht für Langzeitlagerung</li>
+        </ul>
+
+        <h2>Material-Wahl</h2>
+
+        <div class="card p-4 my-6 border-l-4 border-l-green-500 bg-green-50 dark:bg-green-950/30 not-prose">
+          <p class="text-sm">
+            <strong>✓ Empfohlen: HDPE (Recyclingcode 2)</strong><br>
+            Lebensmittelecht, BPA-frei, UV-beständig. Standard für Wasserkanister.
+          </p>
+        </div>
+
+        <ul>
+          <li><strong>HDPE (Polyethylen):</strong> Beste Wahl — lebensmittelecht, robust, günstig</li>
+          <li><strong>PET (Recyclingcode 1):</strong> Für Einwegflaschen, nicht für Wiederbefüllung</li>
+          <li><strong>Edelstahl:</strong> Langlebig, schwer, teuer — gut für kleine Mengen</li>
+          <li><strong>Glas:</strong> Hygienisch, aber bruchgefährdet</li>
+        </ul>
+
+        <div class="card p-4 my-6 border-l-4 border-l-red-500 bg-red-50 dark:bg-red-950/30 not-prose">
+          <p class="text-sm">
+            <strong>✗ Nicht verwenden:</strong><br>
+            • Milchflaschen (Fett-Rückstände, Bakterien)<br>
+            • Ehemalige Chemikalienbehälter<br>
+            • Durchsichtiges Plastik ohne UV-Schutz
+          </p>
+        </div>
+
+        <h2>Lagerung</h2>
+        <ul>
+          <li><strong>Kühl:</strong> Unter 20°C, idealerweise 10-15°C</li>
+          <li><strong>Dunkel:</strong> Licht fördert Algenbildung</li>
+          <li><strong>Sauber:</strong> Weg von Chemikalien und Reinigungsmitteln</li>
+          <li><strong>Frostfrei:</strong> Gefrorenes Wasser kann Behälter sprengen</li>
+          <li><strong>Nicht auf Beton:</strong> Kann Geschmack beeinflussen</li>
+        </ul>
+
+        <h2>Wartung und Erneuerung</h2>
+        <ol>
+          <li><strong>Originalwasser:</strong> Alle 1-2 Jahre rotieren</li>
+          <li><strong>Selbst abgefülltes Leitungswasser:</strong> Alle 6 Monate erneuern</li>
+          <li><strong>Kanister reinigen:</strong> Vor dem Befüllen mit Essigwasser spülen</li>
+          <li><strong>Datum markieren:</strong> Einfülldatum auf Behälter schreiben</li>
+        </ol>
+
+        <div class="card p-6 my-8 bg-[--color-accent-subtle] not-prose">
+          <p class="font-medium mb-2">💡 Backup: Wasserentkeimung</p>
+          <p class="text-sm text-[--color-text-secondary]">
+            Halte <strong>Wasserentkeimungstabletten</strong> (z.B. Micropur) bereit.
+            Im Notfall können sie auch fragwürdiges Wasser trinkbar machen.
+          </p>
+        </div>
+
+        <h2>Empfohlene Produkte</h2>
+        <ul>
+          <li><strong>Hünersdorff Kanister:</strong> Deutsche Qualität, stapelbar, mit Hahn</li>
+          <li><strong>Reliance Aqua-Tainer:</strong> Robust, 7-20 Liter, mit Ausgießer</li>
+          <li><strong>Waterdrop-Beutel:</strong> Faltbar, für unterwegs</li>
+        </ul>
+
+        <h2>Checkliste</h2>
+        <ul>
+          <li>☐ Mindestens 9 Liter pro Person (72 Std.)</li>
+          <li>☐ Lebensmittelechte Behälter (HDPE)</li>
+          <li>☐ Kühl und dunkel gelagert</li>
+          <li>☐ Datum markiert</li>
+          <li>☐ Ersatz-Entkeimungstabletten</li>
+          <li>☐ Rotationsplan: alle 6-12 Monate erneuern</li>
+        </ul>
+      </div>
+
+      <!-- Amazon Link -->
+      <div class="mt-12 card p-6 bg-[--color-bg-tertiary]">
+        <h3 class="font-semibold mb-2">Wasserkanister auf Amazon.de</h3>
+        <p class="text-sm text-[--color-text-secondary] mb-4">
+          Empfohlene lebensmittelechte Kanister mit Hahn.
+        </p>
+        <a
+          href="https://www.amazon.de/s?k=wasserkanister+lebensmittelecht&tag=kit72de-21"
+          target="_blank"
+          rel="noopener noreferrer sponsored"
+          class="inline-flex items-center gap-2 px-4 py-2 bg-[--color-accent-primary] text-[--color-bg-primary] font-medium rounded hover:bg-[--color-accent-hover] transition-colors"
+        >
+          Auf Amazon ansehen
+          <Icon name="ExternalLink" size={16} />
+        </a>
+        <p class="text-xs text-[--color-text-muted] mt-3">
+          * Affiliate-Link — du zahlst nicht mehr, wir erhalten eine kleine Provision.
+        </p>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

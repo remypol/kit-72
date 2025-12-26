@@ -1,0 +1,38 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import Breadcrumb from '../../../components/layout/Breadcrumb.astro';
+---
+
+<BaseLayout title="Redaktionelle Richtlinien — Kit-72" description="Unsere redaktionellen Grundsätze und Quellen." locale="de">
+  <section class="py-16">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6">
+      <Breadcrumb items={[{ label: 'Redaktionelle Richtlinien' }]} class="mb-4" locale="de" />
+      <h1 class="text-4xl font-bold mb-6">Redaktionelle Richtlinien</h1>
+
+      <div class="prose prose-lg">
+        <p><em>Zuletzt aktualisiert: Dezember 2025</em></p>
+
+        <h2>Unsere Mission</h2>
+        <p>Kit-72 bietet praktische, zuverlässige Informationen zur Notfallvorsorge für deutsche Haushalte.</p>
+
+        <h2>Quellen</h2>
+        <p>Unsere Informationen basieren auf:</p>
+        <ul>
+          <li>Bundesamt für Bevölkerungsschutz und Katastrophenhilfe (BBK)</li>
+          <li>Deutsches Rotes Kreuz (DRK)</li>
+          <li>Technisches Hilfswerk (THW)</li>
+          <li>Internationale Notfallorganisationen (IFRC, FEMA)</li>
+        </ul>
+
+        <h2>Unabhängigkeit</h2>
+        <p>Kit-72 ist keine offizielle Regierungswebsite. Wir bieten Informationen, keinen offiziellen Regierungsrat. Konsultiere immer bbk.bund.de für die aktuellsten offiziellen Informationen.</p>
+
+        <h2>Produktempfehlungen</h2>
+        <p>Unsere Produktempfehlungen basieren auf Funktionalität und Preis-Leistungs-Verhältnis. Wir erhalten möglicherweise Affiliate-Provisionen, aber dies beeinflusst unsere Empfehlungen nicht.</p>
+
+        <h2>Aktualität</h2>
+        <p>Wir aktualisieren unsere Inhalte regelmäßig, um sicherzustellen, dass sie den aktuellen Empfehlungen entsprechen. Das Datum der letzten Aktualisierung findest du auf jeder Seite.</p>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

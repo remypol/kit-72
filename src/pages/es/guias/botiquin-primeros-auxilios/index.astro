@@ -1,0 +1,563 @@
+---
+import ArticleLayout from '../../../../layouts/ArticleLayout.astro';
+
+const tocItems = [
+  { id: 'contenido-basico', label: 'Contenido básico' },
+  { id: 'organizacion', label: 'Organización del botiquín' },
+  { id: 'medicamentos', label: 'Medicamentos' },
+  { id: 'situaciones-especiales', label: 'Situaciones especiales' },
+  { id: 'mantenimiento', label: 'Mantenimiento' },
+  { id: 'donde-guardar', label: 'Dónde guardarlo' },
+  { id: 'faq', label: 'Preguntas frecuentes' },
+];
+
+const breadcrumbs = [
+  { label: 'Inicio', href: '/es/' },
+  { label: 'Guías', href: '/es/guias/' },
+  { label: 'Botiquín de Primeros Auxilios' },
+];
+
+const basicContents = [
+  {
+    category: 'Vendajes y apósitos',
+    icon: '🩹',
+    items: [
+      { name: 'Tiritas surtidas', quantity: '20-30 unidades', notes: 'Varios tamaños' },
+      { name: 'Gasas estériles', quantity: '10-20 unidades', notes: 'Diferentes tamaños' },
+      { name: 'Vendas elásticas', quantity: '2-3 rollos', notes: '5-10 cm de ancho' },
+      { name: 'Vendas de gasa', quantity: '2 rollos', notes: 'Para sujetar apósitos' },
+      { name: 'Esparadrapo', quantity: '1-2 rollos', notes: 'Hipoalergénico si posible' },
+      { name: 'Apósitos para ampollas', quantity: '5-10 unidades', notes: 'Tipo segunda piel' },
+    ],
+    priority: 'critical',
+  },
+  {
+    category: 'Antisépticos y limpieza',
+    icon: '🧴',
+    items: [
+      { name: 'Suero fisiológico', quantity: '2-3 monodosis', notes: 'Para lavar heridas/ojos' },
+      { name: 'Antiséptico (clorhexidina/povidona)', quantity: '1 bote pequeño', notes: 'Desinfectar heridas' },
+      { name: 'Toallitas antisépticas', quantity: '10-20 unidades', notes: 'Prácticas, selladas individualmente' },
+      { name: 'Agua oxigenada', quantity: '1 bote pequeño', notes: 'Limpieza, no desinfecta' },
+      { name: 'Gel desinfectante manos', quantity: '1 bote', notes: 'Antes de curar' },
+    ],
+    priority: 'critical',
+  },
+  {
+    category: 'Instrumentos',
+    icon: '✂️',
+    items: [
+      { name: 'Tijeras punta roma', quantity: '1 par', notes: 'Para cortar vendas, ropa' },
+      { name: 'Pinzas', quantity: '1 par', notes: 'Para astillas, garrapatas' },
+      { name: 'Guantes de nitrilo', quantity: '4-6 pares', notes: 'Protección al curar' },
+      { name: 'Termómetro', quantity: '1 unidad', notes: 'Digital preferible' },
+      { name: 'Manta térmica', quantity: '1-2 unidades', notes: 'Prevenir hipotermia' },
+      { name: 'Imperdibles', quantity: '5-10 unidades', notes: 'Sujetar vendas, cabestrillos' },
+    ],
+    priority: 'critical',
+  },
+  {
+    category: 'Otros básicos',
+    icon: '📦',
+    items: [
+      { name: 'Bolsas de frío instantáneo', quantity: '2-3 unidades', notes: 'Golpes, torceduras' },
+      { name: 'Triángulo cabestrillo', quantity: '1-2 unidades', notes: 'Inmovilizar brazo' },
+      { name: 'Manual de primeros auxilios', quantity: '1 libro/tarjetas', notes: 'Consulta rápida' },
+      { name: 'Lista de teléfonos de emergencia', quantity: 'Plastificada', notes: '112, médico, farmacia' },
+    ],
+    priority: 'recommended',
+  },
+];
+
+const medications = [
+  {
+    type: 'Analgésicos',
+    examples: 'Paracetamol, Ibuprofeno',
+    uses: 'Dolor leve-moderado, fiebre',
+    notes: 'Respetar dosis. Ibuprofeno no con estómago vacío.',
+    prescription: false,
+  },
+  {
+    type: 'Antihistamínicos',
+    examples: 'Cetirizina, Loratadina',
+    uses: 'Reacciones alérgicas leves, picaduras',
+    notes: 'Pueden causar somnolencia. No conducir.',
+    prescription: false,
+  },
+  {
+    type: 'Antiácidos',
+    examples: 'Omeprazol, Almax',
+    uses: 'Acidez, reflujo',
+    notes: 'Útil por cambios de dieta en emergencia.',
+    prescription: false,
+  },
+  {
+    type: 'Antidiarreicos',
+    examples: 'Loperamida (Fortasec)',
+    uses: 'Diarrea aguda',
+    notes: 'No usar si hay fiebre o sangre en heces.',
+    prescription: false,
+  },
+  {
+    type: 'Sales de rehidratación',
+    examples: 'Sueroral, similares',
+    uses: 'Deshidratación por diarrea, vómitos, calor',
+    notes: 'Crítico en ola de calor o gastroenteritis.',
+    prescription: false,
+  },
+  {
+    type: 'Pomada para quemaduras',
+    examples: 'Biafine, Silvederma',
+    uses: 'Quemaduras leves (1er grado)',
+    notes: 'No usar en quemaduras abiertas o graves.',
+    prescription: false,
+  },
+  {
+    type: 'Crema corticoide suave',
+    examples: 'Hidrocortisona 0.5-1%',
+    uses: 'Picaduras, irritaciones, dermatitis',
+    notes: 'No usar más de 1 semana sin consultar.',
+    prescription: false,
+  },
+  {
+    type: 'Colirio lubricante',
+    examples: 'Lágrimas artificiales',
+    uses: 'Irritación ocular, cuerpos extraños',
+    notes: 'No usar si hay lesión penetrante.',
+    prescription: false,
+  },
+];
+
+const specialSituations = [
+  {
+    situation: 'Bebés y niños pequeños',
+    icon: '👶',
+    additions: [
+      'Termómetro pediátrico',
+      'Paracetamol/Ibuprofeno infantil (dosis según peso)',
+      'Suero fisiológico para nariz',
+      'Crema para rozaduras (óxido de zinc)',
+      'Tiritas infantiles (motivadoras)',
+    ],
+  },
+  {
+    situation: 'Personas mayores',
+    icon: '👴',
+    additions: [
+      'Medicación crónica para 7+ días',
+      'Lista actualizada de medicamentos',
+      'Tensiómetro portátil',
+      'Pastillero organizado por días',
+      'Lupa para leer prospectos',
+    ],
+  },
+  {
+    situation: 'Alergias graves',
+    icon: '⚠️',
+    additions: [
+      'Adrenalina autoinyectable (EpiPen) - CON RECETA',
+      'Antihistamínicos de acción rápida',
+      'Tarjeta de alerta médica',
+      'Plan de acción escrito',
+    ],
+  },
+  {
+    situation: 'Diabetes',
+    icon: '💉',
+    additions: [
+      'Glucómetro + tiras',
+      'Insulina (si aplica) + kit de frío',
+      'Glucosa de acción rápida (gel, pastillas)',
+      'Snacks equilibrados',
+      'Identificación médica',
+    ],
+  },
+  {
+    situation: 'Actividades al aire libre',
+    icon: '🏕️',
+    additions: [
+      'Repelente de insectos',
+      'Pomada para picaduras',
+      'Vendas adhesivas extra',
+      'Steri-strips (cierre de heridas)',
+      'Protector solar',
+    ],
+  },
+  {
+    situation: 'Botiquín del coche',
+    icon: '🚗',
+    additions: [
+      'Triángulos de emergencia',
+      'Chaleco reflectante',
+      'Botiquín compacto homologado',
+      'Manta térmica',
+      'Linterna pequeña',
+    ],
+  },
+];
+
+const maintenanceSchedule = [
+  { task: 'Revisar fechas de caducidad', frequency: 'Cada 3 meses' },
+  { task: 'Reponer items usados', frequency: 'Inmediatamente tras uso' },
+  { task: 'Verificar estado de productos', frequency: 'Cada 6 meses' },
+  { task: 'Actualizar lista de medicamentos personales', frequency: 'Cuando cambie la medicación' },
+  { task: 'Revisión completa del contenido', frequency: '1 vez al año' },
+  { task: 'Comprobar funcionamiento termómetro', frequency: 'Cada 6 meses' },
+];
+
+const storageLocations = [
+  {
+    location: 'Casa principal',
+    where: 'Baño o cocina, lugar accesible para adultos pero no niños',
+    notes: 'Evitar humedad excesiva. El botiquín principal.',
+  },
+  {
+    location: 'Kit de emergencia',
+    where: 'Mochila de emergencia / zona de salida',
+    notes: 'Versión compacta de lo esencial. Para evacuación.',
+  },
+  {
+    location: 'Coche',
+    where: 'Maletero, en lugar accesible',
+    notes: 'Vigilar temperaturas extremas que degradan medicamentos.',
+  },
+  {
+    location: 'Trabajo/oficina',
+    where: 'Cajón o armario personal',
+    notes: 'Kit básico personal + medicación habitual.',
+  },
+];
+
+const faqs = [
+  {
+    question: '¿Puedo usar medicamentos caducados?',
+    answer: 'Depende. Muchos medicamentos (pastillas, cápsulas) mantienen eficacia meses después de caducar, pero con potencia reducida. Colirios, insulina y medicamentos líquidos NO deben usarse caducados. En emergencia real donde no hay alternativa, un paracetamol caducado hace meses probablemente funcione. Pero renueva tu botiquín regularmente para no estar en esa situación.'
+  },
+  {
+    question: '¿Necesito formación en primeros auxilios?',
+    answer: 'Es muy recomendable. Un curso básico de 4-8 horas te enseña RCP, posición lateral de seguridad, control de hemorragias y atención básica. Cruz Roja y Protección Civil ofrecen cursos. Sin formación, puedes hacer más daño que bien en algunas situaciones. El manual del botiquín ayuda, pero no sustituye la práctica.'
+  },
+  {
+    question: '¿Qué hago si alguien tiene una reacción alérgica grave?',
+    answer: 'Llama al 112 INMEDIATAMENTE. Si tiene adrenalina autoinyectable (EpiPen) y sabe usarla, adminístrala según instrucciones. Acuéstale con piernas elevadas (salvo si tiene dificultad respiratoria). No des nada por boca si está inconsciente. Esto es una emergencia médica que requiere atención profesional urgente.'
+  },
+  {
+    question: '¿Debo tener un desfibrilador?',
+    answer: 'Para el hogar normal, no es necesario. Los DEA son más útiles en espacios públicos donde hay mucha gente. Si tienes antecedentes cardíacos en familia, consulta con tu médico. Lo más importante para parada cardíaca es: llamar al 112, iniciar RCP (masaje cardíaco) y usar DEA si hay uno cerca (cada vez más comunes en espacios públicos).'
+  },
+  {
+    question: '¿Puedo incluir antibióticos?',
+    answer: 'Los antibióticos requieren receta médica y NO deben usarse sin diagnóstico profesional. Usarlos mal favorece resistencias bacterianas. No los incluyas en el botiquín general. Si tienes una condición que requiere antibióticos de emergencia, tu médico te lo prescribirá específicamente.'
+  },
+  {
+    question: '¿Qué diferencia hay entre povidona yodada y clorhexidina?',
+    answer: 'Ambos son antisépticos efectivos. Povidona yodada (Betadine): amplio espectro, colorea la piel, puede causar alergia en sensibles al yodo. Clorhexidina (Cristalmina): incolora, menor riesgo alérgico, no usar en oídos. Para uso general, la clorhexidina es buena opción. Si hay alergia a alguno, usa el otro.'
+  },
+];
+
+const limitaciones = [
+  'El botiquín es para primeros auxilios menores, NO para tratamientos médicos',
+  'No dar medicamentos sin conocer alergias y contraindicaciones de la persona',
+  'Ante duda o lesiones graves, llamar siempre al 112',
+  'El botiquín no sustituye la atención médica profesional',
+  'No incluir medicamentos de prescripción ajenos',
+  'No dar medicamentos a niños sin confirmar dosis pediátricas',
+];
+
+// Generate FAQPage schema for rich results
+const faqSchema = {
+  mainEntity: faqs.map(faq => ({
+    '@type': 'Question',
+    name: faq.question,
+    acceptedAnswer: {
+      '@type': 'Answer',
+      text: faq.answer
+    }
+  }))
+};
+---
+
+<ArticleLayout
+  faqData={faqs}
+  title="Botiquín de Primeros Auxilios: Guía Completa"
+  description="Qué incluir en tu botiquín de emergencia, cómo organizarlo, mantenerlo actualizado y adaptarlo a necesidades especiales."
+  updatedDate="2025-12-15"
+  author="Equipo Kit-72"
+  readTime="11 min"
+  breadcrumbs={breadcrumbs}
+  schemaType="FAQPage"
+  schemaData={faqSchema}
+>
+  <!-- TOC Slot -->
+  <nav slot="toc" class="p-4 bg-[--color-bg-tertiary] rounded-lg">
+    <h2 class="text-sm font-semibold mb-3 text-[--color-text-primary]">En esta página</h2>
+    <ul class="space-y-2 text-sm">
+      {tocItems.map((item) => (
+        <li>
+          <a href={`#${item.id}`} class="text-[--color-text-secondary] hover:text-[--color-accent-primary] transition-colors">
+            {item.label}
+          </a>
+        </li>
+      ))}
+    </ul>
+  </nav>
+
+  <!-- Main Content -->
+  <div class="card p-6 mb-8 not-prose border-l-4 border-l-[--color-status-warning]">
+    <p class="text-[--color-text-secondary] m-0">
+      <strong class="text-[--color-text-primary]">Importante:</strong> Esta guía es informativa.
+      El botiquín sirve para primeros auxilios menores. Ante cualquier lesión grave o duda,
+      llama al <strong>112</strong>. No sustituye la atención médica profesional ni la formación en primeros auxilios.
+    </p>
+  </div>
+
+  <section id="contenido-basico" class="mb-12">
+    <h2>Contenido básico del botiquín</h2>
+    <p>
+      Un buen botiquín cubre las situaciones más comunes: cortes, quemaduras leves,
+      golpes y molestias menores.
+    </p>
+
+    <div class="space-y-6 my-8">
+      {basicContents.map((cat) => (
+        <div class="card overflow-hidden">
+          <div class={`px-6 py-4 border-b border-[--color-border] ${
+            cat.priority === 'critical' ? 'bg-[--color-status-critical]/10' : 'bg-[--color-bg-tertiary]'
+          }`}>
+            <h3 class="flex items-center gap-3 text-lg font-semibold m-0">
+              <span class="text-2xl">{cat.icon}</span>
+              {cat.category}
+              {cat.priority === 'critical' && (
+                <span class="px-2 py-0.5 text-xs bg-[--color-status-critical]/20 text-[--color-status-critical] rounded">
+                  Esencial
+                </span>
+              )}
+            </h3>
+          </div>
+          <div class="divide-y divide-[--color-border]">
+            {cat.items.map((item) => (
+              <div class="px-6 py-3 flex items-center justify-between">
+                <div>
+                  <span class="font-medium text-[--color-text-primary]">{item.name}</span>
+                  <span class="text-sm text-[--color-text-muted] ml-2">— {item.notes}</span>
+                </div>
+                <span class="text-sm text-[--color-accent-primary] font-medium">{item.quantity}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <section id="organizacion" class="mb-12">
+    <h2>Organización del botiquín</h2>
+    <p>
+      Un botiquín desorganizado es inútil en una emergencia. Organízalo para encontrar
+      todo rápidamente:
+    </p>
+
+    <div class="grid md:grid-cols-2 gap-4 my-6 not-prose">
+      <div class="card p-5">
+        <h3 class="font-semibold text-[--color-text-primary] mb-3 text-base">✓ Buenas prácticas</h3>
+        <ul class="space-y-2 text-sm text-[--color-text-secondary]">
+          <li>• Usar bolsitas transparentes con etiquetas</li>
+          <li>• Agrupar por función (vendajes, antisépticos, medicamentos)</li>
+          <li>• Mantener todo en un contenedor rígido o bolsa dedicada</li>
+          <li>• Incluir lista de contenido y fecha última revisión</li>
+          <li>• Prospectos de medicamentos junto al producto</li>
+        </ul>
+      </div>
+      <div class="card p-5">
+        <h3 class="font-semibold text-[--color-text-primary] mb-3 text-base">✗ Errores comunes</h3>
+        <ul class="space-y-2 text-sm text-[--color-text-secondary]">
+          <li>• Mezclar todo en una caja sin orden</li>
+          <li>• No marcar fechas de caducidad</li>
+          <li>• Guardar medicamentos fuera de su envase original</li>
+          <li>• Olvidar reponer lo que se usa</li>
+          <li>• No revisar periódicamente</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="medicamentos" class="mb-12">
+    <h2>Medicamentos recomendados</h2>
+    <p>
+      Estos medicamentos de venta libre cubren las molestias más comunes.
+      Siempre respeta las dosis y contraindicaciones del prospecto.
+    </p>
+
+    <div class="overflow-x-auto my-6">
+      <table>
+        <thead>
+          <tr>
+            <th>Tipo</th>
+            <th>Ejemplos</th>
+            <th>Uso</th>
+            <th>Notas</th>
+          </tr>
+        </thead>
+        <tbody>
+          {medications.map((med) => (
+            <tr>
+              <td class="font-medium">{med.type}</td>
+              <td class="text-sm">{med.examples}</td>
+              <td class="text-sm text-[--color-text-secondary]">{med.uses}</td>
+              <td class="text-sm text-[--color-text-muted]">{med.notes}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+
+    <div class="card p-6 my-6 not-prose bg-[--color-status-critical]/10 border border-[--color-status-critical]/30">
+      <h3 class="font-semibold text-[--color-status-critical] mb-2 text-base">⚠️ Limitaciones importantes</h3>
+      <ul class="space-y-1 text-sm text-[--color-text-secondary]">
+        {limitaciones.map((limit) => (
+          <li>• {limit}</li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <section id="situaciones-especiales" class="mb-12">
+    <h2>Adaptaciones para situaciones especiales</h2>
+    <p>
+      Según tu situación familiar, necesitarás añadir elementos específicos:
+    </p>
+
+    <div class="grid md:grid-cols-2 gap-6 my-8">
+      {specialSituations.map((sit) => (
+        <div class="card p-6">
+          <h3 class="flex items-center gap-3 text-lg font-semibold mb-4">
+            <span class="text-2xl">{sit.icon}</span>
+            {sit.situation}
+          </h3>
+          <ul class="space-y-1">
+            {sit.additions.map((item) => (
+              <li class="flex items-center gap-2 text-sm text-[--color-text-secondary]">
+                <span class="w-1.5 h-1.5 bg-[--color-accent-primary] rounded-full flex-shrink-0"></span>
+                {item}
+              </li>
+            ))}
+          </ul>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <section id="mantenimiento" class="mb-12">
+    <h2>Mantenimiento del botiquín</h2>
+    <p>
+      Un botiquín con productos caducados no sirve. Establece un calendario:
+    </p>
+
+    <div class="overflow-x-auto my-6">
+      <table>
+        <thead>
+          <tr>
+            <th>Tarea</th>
+            <th>Frecuencia</th>
+          </tr>
+        </thead>
+        <tbody>
+          {maintenanceSchedule.map((item) => (
+            <tr>
+              <td class="font-medium">{item.task}</td>
+              <td><code>{item.frequency}</code></td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+
+    <div class="card p-6 my-6 not-prose bg-[--color-accent-subtle] border-[--color-border-accent]">
+      <h3 class="font-semibold text-[--color-text-primary] mb-3 text-base">💡 Truco: Pon una alarma</h3>
+      <p class="text-sm text-[--color-text-secondary]">
+        Crea una alarma recurrente en el móvil (ej: primer día de cada estación) para revisar
+        el botiquín. Hazlo coincidir con otra rutina para no olvidarlo.
+      </p>
+    </div>
+  </section>
+
+  <section id="donde-guardar" class="mb-12">
+    <h2>Dónde guardar el botiquín</h2>
+
+    <div class="space-y-4 my-6 not-prose">
+      {storageLocations.map((loc) => (
+        <div class="card p-5">
+          <h3 class="font-semibold text-[--color-text-primary] mb-2 text-base">{loc.location}</h3>
+          <p class="text-sm text-[--color-text-secondary] mb-1">
+            <strong>Ubicación:</strong> {loc.where}
+          </p>
+          <p class="text-xs text-[--color-text-muted] m-0">
+            💡 {loc.notes}
+          </p>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <section id="faq" class="mb-12">
+    <h2>Preguntas frecuentes</h2>
+
+    <div class="space-y-4 my-8">
+      {faqs.map((faq) => (
+        <details class="card group">
+          <summary class="px-6 py-4 cursor-pointer list-none flex items-center justify-between hover:bg-[--color-bg-tertiary] transition-colors">
+            <span class="font-medium text-[--color-text-primary] pr-4">{faq.question}</span>
+            <svg class="w-5 h-5 text-[--color-text-muted] transform transition-transform group-open:rotate-180 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+            </svg>
+          </summary>
+          <div class="px-6 pb-4">
+            <p class="text-[--color-text-secondary] m-0">{faq.answer}</p>
+          </div>
+        </details>
+      ))}
+    </div>
+  </section>
+
+  <!-- Sources Slot -->
+  <div slot="sources">
+    <h2 id="fuentes">Fuentes y referencias</h2>
+    <ul class="text-sm space-y-2">
+      <li>
+        <a href="https://www.cruzroja.es/" target="_blank" rel="noopener">
+          Cruz Roja Española — Primeros Auxilios
+        </a>
+      </li>
+      <li>
+        <a href="https://www.redcross.org/get-help/how-to-prepare-for-emergencies/anatomy-of-a-first-aid-kit.html" target="_blank" rel="noopener">
+          Cruz Roja Americana — First Aid Kit
+        </a>
+      </li>
+      <li>
+        <a href="https://www.nhs.uk/conditions/first-aid/" target="_blank" rel="noopener">
+          NHS — First Aid Guide
+        </a>
+      </li>
+    </ul>
+  </div>
+
+  <!-- CTA Slot -->
+  <div slot="cta" class="card p-8 text-center bg-[--color-bg-tertiary]">
+    <h3 class="text-xl font-semibold mb-4">Crea tu kit completo</h3>
+    <p class="text-[--color-text-secondary] mb-6">
+      El botiquín es parte de tu kit de emergencia. Usa nuestro configurador
+      para crear una lista completa personalizada.
+    </p>
+    <div class="flex flex-wrap gap-4 justify-center">
+      <a href="/es/herramientas/configurador-kit/" class="inline-flex items-center gap-2 px-6 py-3 bg-[--color-accent-primary] text-[--color-bg-primary] font-semibold rounded hover:bg-[--color-accent-hover] transition-colors">
+        Crear mi kit
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+        </svg>
+      </a>
+      <a href="/es/kit-72-horas/" class="inline-flex items-center gap-2 px-6 py-3 border border-[--color-border] text-[--color-text-primary] font-medium rounded hover:border-[--color-accent-primary] hover:text-[--color-accent-primary] transition-colors">
+        Ver Kit 72 Horas completo
+      </a>
+    </div>
+  </div>
+</ArticleLayout>

@@ -1,0 +1,210 @@
+---
+import BaseLayout from '../../../../layouts/BaseLayout.astro';
+import Breadcrumb from '../../../../components/layout/Breadcrumb.astro';
+import Icon from '../../../../components/ui/Icon.astro';
+import HeroImage from '../../../../components/content/HeroImage.astro';
+---
+
+<BaseLayout
+  title="Noodtas: Welk formaat? Paklijst & Koopgids"
+  description="De juiste rugzak voor je noodpakket. Formaat, draagsysteem, waterdichtheid."
+  locale="nl"
+  dateModified="2025-12-16"
+  schemaType="Article"
+  alternates={{
+    de: '/de/produkte/notfallrucksack/',
+  }}
+>
+  <section class="py-16">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6">
+      <Breadcrumb items={[{ label: 'Producten', href: '/nl/producten/' }, { label: 'Noodtassen' }]} class="mb-4" locale="nl" />
+      <h1 class="text-4xl font-bold mb-6">Noodtassen</h1>
+
+      <div class="mb-8">
+        <HeroImage
+          src="/images/shared/family-evacuation.webp"
+          alt="Noodtas voor evacuatie"
+          priority={true}
+        />
+      </div>
+
+      <div class="prose prose-lg">
+        <p class="lead">
+          Bij een evacuatie heb je misschien maar <strong>minuten om in te pakken</strong>.
+          Een voorbereide noodtas (ook wel "Bug-Out-Bag" genoemd) bevat alles
+          voor 72 uur onderweg.
+        </p>
+
+        <!-- Size Guide -->
+        <div class="card p-6 my-8 bg-[--color-bg-tertiary] not-prose">
+          <h3 class="text-lg font-semibold mb-4 flex items-center gap-2">
+            <Icon name="Backpack" size={20} class="text-[--color-accent-primary]" />
+            Formaat Aanbeveling
+          </h3>
+          <div class="space-y-3 text-sm">
+            <div class="flex justify-between items-center p-3 bg-[--color-bg-secondary] rounded">
+              <span>1 persoon, 72 uur</span>
+              <span class="font-semibold">30-40 liter</span>
+            </div>
+            <div class="flex justify-between items-center p-3 bg-[--color-bg-secondary] rounded">
+              <span>1 persoon + kind</span>
+              <span class="font-semibold">40-50 liter</span>
+            </div>
+            <div class="flex justify-between items-center p-3 bg-[--color-bg-secondary] rounded">
+              <span>Gezin (gezamenlijk)</span>
+              <span class="font-semibold">50-65 liter</span>
+            </div>
+          </div>
+        </div>
+
+        <h2>Belangrijke eigenschappen</h2>
+
+        <h3>1. Draagsysteem</h3>
+        <p>
+          Een slecht draagsysteem wordt na een paar kilometer een kwelling.
+        </p>
+        <ul>
+          <li><strong>Gevoerde schouderbanden:</strong> Verdeelt het gewicht</li>
+          <li><strong>Heupgordel:</strong> Essentieel bij zware lading — brengt gewicht over naar de heupen</li>
+          <li><strong>Borstband:</strong> Voorkomt afglijden van schouderbanden</li>
+          <li><strong>Geventileerd rugpaneel:</strong> Vermindert zweten</li>
+        </ul>
+
+        <h3>2. Waterdichtheid</h3>
+        <ul>
+          <li><strong>Waterafstotend:</strong> Houdt lichte regen tegen</li>
+          <li><strong>Waterdicht:</strong> Afgedichte naden, gecoat materiaal</li>
+          <li><strong>Regenhoes:</strong> Extra bescherming, vaak bijgeleverd</li>
+        </ul>
+
+        <div class="card p-6 my-8 bg-[--color-accent-subtle] not-prose">
+          <p class="font-medium mb-2">💡 Tip: Dubbele bescherming</p>
+          <p class="text-sm text-[--color-text-secondary]">
+            Verpak belangrijke documenten, elektronica en kleding in <strong>waterdichte
+            zakken</strong> in de rugzak — ook als de rugzak zelf waterdicht is.
+          </p>
+        </div>
+
+        <h3>3. Organisatie</h3>
+        <ul>
+          <li><strong>Meerdere vakken:</strong> Snelle toegang tot belangrijke spullen</li>
+          <li><strong>Buitenzakken:</strong> Voor waterfles, zaklamp</li>
+          <li><strong>Compressieriemen:</strong> Houdt inhoud compact</li>
+          <li><strong>MOLLE-systeem:</strong> Extra tassen te bevestigen (optioneel)</li>
+        </ul>
+
+        <h3>4. Materiaal en robuustheid</h3>
+        <ul>
+          <li><strong>1000D Cordura/Nylon:</strong> Extreem slijtvast</li>
+          <li><strong>Ripstop:</strong> Voorkomt doorscheuren</li>
+          <li><strong>YKK-ritsen:</strong> Kwaliteitsstandaard</li>
+          <li><strong>Versterkte naden:</strong> Op belastingspunten</li>
+        </ul>
+
+        <h2>Wat hoort erin?</h2>
+        <p>
+          Een 72-uurs noodtas moet bevatten:
+        </p>
+
+        <div class="overflow-x-auto not-prose my-6">
+          <table class="w-full text-sm">
+            <thead>
+              <tr class="border-b border-[--color-border-primary]">
+                <th class="text-left py-2">Categorie</th>
+                <th class="text-left py-2">Inhoud</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="border-b border-[--color-border-secondary]">
+                <td class="py-2 font-semibold">Water</td>
+                <td class="py-2">3L water + zuiveringstabletten</td>
+              </tr>
+              <tr class="border-b border-[--color-border-secondary]">
+                <td class="py-2 font-semibold">Voedsel</td>
+                <td class="py-2">Energierepen, noten, gedroogd fruit</td>
+              </tr>
+              <tr class="border-b border-[--color-border-secondary]">
+                <td class="py-2 font-semibold">Licht</td>
+                <td class="py-2">Zaklamp + hoofdlamp + batterijen</td>
+              </tr>
+              <tr class="border-b border-[--color-border-secondary]">
+                <td class="py-2 font-semibold">Communicatie</td>
+                <td class="py-2">Powerbank, laadkabel, noodradio</td>
+              </tr>
+              <tr class="border-b border-[--color-border-secondary]">
+                <td class="py-2 font-semibold">Eerste hulp</td>
+                <td class="py-2">Compacte EHBO-set + persoonl. medicijnen</td>
+              </tr>
+              <tr class="border-b border-[--color-border-secondary]">
+                <td class="py-2 font-semibold">Documenten</td>
+                <td class="py-2">Kopieën: ID, verzekering, contacten</td>
+              </tr>
+              <tr class="border-b border-[--color-border-secondary]">
+                <td class="py-2 font-semibold">Kleding</td>
+                <td class="py-2">Wisselkleding, regenjack</td>
+              </tr>
+              <tr class="border-b border-[--color-border-secondary]">
+                <td class="py-2 font-semibold">Contant geld</td>
+                <td class="py-2">€50-100 in kleine biljetten + munten</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2>Juist inpakken</h2>
+        <ol>
+          <li><strong>Zware spullen in het midden:</strong> Dicht bij je rug, op heupniveau</li>
+          <li><strong>Lichte spullen onderin:</strong> Slaapzak, kleding</li>
+          <li><strong>Veelgebruikt aan de buitenkant:</strong> Water, snacks, zaklamp</li>
+          <li><strong>Gewicht balanceren:</strong> Links en rechts gelijkmatig</li>
+          <li><strong>Comprimeren:</strong> Lucht eruit persen, riemen aantrekken</li>
+        </ol>
+
+        <div class="card p-4 my-6 border-l-4 border-l-amber-500 bg-amber-50 dark:bg-amber-950/30 not-prose">
+          <p class="text-sm">
+            <strong>⚠️ Gewichtslimiet:</strong> Een ingepakte rugzak mag niet meer dan
+            <strong>15-20% van je lichaamsgewicht</strong> wegen. Meer is op den duur niet draagbaar.
+          </p>
+        </div>
+
+        <h2>Aanbevolen merken</h2>
+        <ul>
+          <li><strong>Deuter:</strong> Duitse kwaliteitsfabrikant, uitstekende draagsystemen</li>
+          <li><strong>Tasmanian Tiger:</strong> Tactische kwaliteit, extreem robuust</li>
+          <li><strong>Osprey:</strong> Licht en comfortabel</li>
+          <li><strong>5.11 Tactical:</strong> Goede prijs-kwaliteit</li>
+          <li><strong>Mil-Tec:</strong> Budget optie, solide basis</li>
+        </ul>
+
+        <h2>Checklist</h2>
+        <ul>
+          <li>☐ 30-50 liter capaciteit</li>
+          <li>☐ Gevoerd draagsysteem met heupgordel</li>
+          <li>☐ Waterafstotend of met regenhoes</li>
+          <li>☐ Meerdere vakken voor organisatie</li>
+          <li>☐ Robuust materiaal (Cordura/Ripstop)</li>
+          <li>☐ Inhoud ingepakt en compleet</li>
+          <li>☐ Gewicht onder 10-15 kg</li>
+          <li>☐ Binnen handbereik opgeslagen (niet in de kelder!)</li>
+        </ul>
+      </div>
+
+      <!-- Shop Link -->
+      <div class="mt-12 card p-6 bg-[--color-bg-tertiary]">
+        <h3 class="font-semibold mb-2">Noodtassen op Bol.com</h3>
+        <p class="text-sm text-[--color-text-secondary] mb-4">
+          Aanbevolen rugzakken 40-50 liter met goed draagsysteem.
+        </p>
+        <a
+          href="https://www.bol.com/nl/nl/s/?searchtext=wandelrugzak+40+liter"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex items-center gap-2 px-4 py-2 bg-[--color-accent-primary] text-[--color-bg-primary] font-medium rounded hover:bg-[--color-accent-hover] transition-colors"
+        >
+          Bekijk op Bol.com
+          <Icon name="ExternalLink" size={16} />
+        </a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

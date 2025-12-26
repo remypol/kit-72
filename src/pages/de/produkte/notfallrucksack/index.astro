@@ -1,0 +1,210 @@
+---
+import BaseLayout from '../../../../layouts/BaseLayout.astro';
+import Breadcrumb from '../../../../components/layout/Breadcrumb.astro';
+import Icon from '../../../../components/ui/Icon.astro';
+import HeroImage from '../../../../components/content/HeroImage.astro';
+---
+
+<BaseLayout
+  title="Notfallrucksack: Welche Größe? Packliste & Kaufratgeber"
+  description="Der richtige Rucksack für dein Notfallpaket. Größe, Tragesystem, Wasserdichtigkeit."
+  locale="de"
+  dateModified="2025-12-15"
+  schemaType="Article"
+>
+  <section class="py-16">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6">
+      <Breadcrumb items={[{ label: 'Produkte', href: '/de/produkte/' }, { label: 'Notfallrucksack' }]} class="mb-4" locale="de" />
+      <h1 class="text-4xl font-bold mb-6">Notfallrucksack</h1>
+
+      <div class="mb-8">
+        <HeroImage
+          src="/images/shared/family-evacuation.webp"
+          alt="Notfallrucksack für Evakuierung"
+          priority={true}
+        />
+      </div>
+
+      <div class="prose prose-lg">
+        <p class="lead">
+          Bei einer Evakuierung hast du vielleicht nur <strong>Minuten, um zu packen</strong>.
+          Ein vorbereiteter Notfallrucksack (auch "Bug-Out-Bag" genannt) enthält alles
+          für 72 Stunden unterwegs.
+        </p>
+
+        <!-- Size Guide -->
+        <div class="card p-6 my-8 bg-[--color-bg-tertiary] not-prose">
+          <h3 class="text-lg font-semibold mb-4 flex items-center gap-2">
+            <Icon name="Backpack" size={20} class="text-[--color-accent-primary]" />
+            Größenempfehlung
+          </h3>
+          <div class="space-y-3 text-sm">
+            <div class="flex justify-between items-center p-3 bg-[--color-bg-secondary] rounded">
+              <span>1 Person, 72 Stunden</span>
+              <span class="font-semibold">30-40 Liter</span>
+            </div>
+            <div class="flex justify-between items-center p-3 bg-[--color-bg-secondary] rounded">
+              <span>1 Person + Kind</span>
+              <span class="font-semibold">40-50 Liter</span>
+            </div>
+            <div class="flex justify-between items-center p-3 bg-[--color-bg-secondary] rounded">
+              <span>Familie (gemeinsamer)</span>
+              <span class="font-semibold">50-65 Liter</span>
+            </div>
+          </div>
+        </div>
+
+        <h2>Wichtige Eigenschaften</h2>
+
+        <h3>1. Tragesystem</h3>
+        <p>
+          Ein schlechtes Tragesystem wird nach wenigen Kilometern zur Qual.
+        </p>
+        <ul>
+          <li><strong>Gepolsterte Schultergurte:</strong> Verteilt das Gewicht</li>
+          <li><strong>Hüftgurt:</strong> Essentiell bei schwerer Ladung — überträgt Gewicht auf die Hüfte</li>
+          <li><strong>Brustgurt:</strong> Verhindert Rutschen der Schultergurte</li>
+          <li><strong>Belüftetes Rückenpanel:</strong> Reduziert Schwitzen</li>
+        </ul>
+
+        <h3>2. Wasserdichtigkeit</h3>
+        <ul>
+          <li><strong>Wasserabweisend:</strong> Hält leichten Regen ab</li>
+          <li><strong>Wasserdicht:</strong> Versiegelte Nähte, beschichtetes Material</li>
+          <li><strong>Regenhülle:</strong> Zusätzlicher Schutz, oft im Lieferumfang</li>
+        </ul>
+
+        <div class="card p-6 my-8 bg-[--color-accent-subtle] not-prose">
+          <p class="font-medium mb-2">💡 Tipp: Doppelter Schutz</p>
+          <p class="text-sm text-[--color-text-secondary]">
+            Verpacke wichtige Dokumente, Elektronik und Kleidung in <strong>wasserdichten
+            Beuteln</strong> im Rucksack — auch wenn der Rucksack selbst wasserdicht ist.
+          </p>
+        </div>
+
+        <h3>3. Organisation</h3>
+        <ul>
+          <li><strong>Mehrere Fächer:</strong> Schneller Zugriff auf wichtige Dinge</li>
+          <li><strong>Außentaschen:</strong> Für Wasserflasche, Taschenlampe</li>
+          <li><strong>Kompressionsriemen:</strong> Hält Inhalt kompakt</li>
+          <li><strong>MOLLE-System:</strong> Zusätzliche Taschen anbringbar (optional)</li>
+        </ul>
+
+        <h3>4. Material und Robustheit</h3>
+        <ul>
+          <li><strong>1000D Cordura/Nylon:</strong> Extrem strapazierfähig</li>
+          <li><strong>Ripstop:</strong> Verhindert Weiterreißen</li>
+          <li><strong>YKK-Reißverschlüsse:</strong> Qualitätsstandard</li>
+          <li><strong>Verstärkte Nähte:</strong> An Belastungspunkten</li>
+        </ul>
+
+        <h2>Was gehört hinein?</h2>
+        <p>
+          Ein 72-Stunden-Notfallrucksack sollte enthalten:
+        </p>
+
+        <div class="overflow-x-auto not-prose my-6">
+          <table class="w-full text-sm">
+            <thead>
+              <tr class="border-b border-[--color-border-primary]">
+                <th class="text-left py-2">Kategorie</th>
+                <th class="text-left py-2">Inhalt</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="border-b border-[--color-border-secondary]">
+                <td class="py-2 font-semibold">Wasser</td>
+                <td class="py-2">3L Wasser + Entkeimungstabletten</td>
+              </tr>
+              <tr class="border-b border-[--color-border-secondary]">
+                <td class="py-2 font-semibold">Nahrung</td>
+                <td class="py-2">Energieriegel, Nüsse, Trockenfrüchte</td>
+              </tr>
+              <tr class="border-b border-[--color-border-secondary]">
+                <td class="py-2 font-semibold">Licht</td>
+                <td class="py-2">Taschenlampe + Stirnlampe + Batterien</td>
+              </tr>
+              <tr class="border-b border-[--color-border-secondary]">
+                <td class="py-2 font-semibold">Kommunikation</td>
+                <td class="py-2">Powerbank, Ladekabel, Kurbelradio</td>
+              </tr>
+              <tr class="border-b border-[--color-border-secondary]">
+                <td class="py-2 font-semibold">Erste Hilfe</td>
+                <td class="py-2">Kompaktes EHBO-Set + persönl. Medikamente</td>
+              </tr>
+              <tr class="border-b border-[--color-border-secondary]">
+                <td class="py-2 font-semibold">Dokumente</td>
+                <td class="py-2">Kopien: Ausweis, Versicherung, Kontakte</td>
+              </tr>
+              <tr class="border-b border-[--color-border-secondary]">
+                <td class="py-2 font-semibold">Kleidung</td>
+                <td class="py-2">Wechselwäsche, Regenjacke</td>
+              </tr>
+              <tr class="border-b border-[--color-border-secondary]">
+                <td class="py-2 font-semibold">Bargeld</td>
+                <td class="py-2">50-100€ in kleinen Scheinen + Münzen</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2>Richtig packen</h2>
+        <ol>
+          <li><strong>Schwere Sachen mittig:</strong> Nah am Rücken, auf Hüfthöhe</li>
+          <li><strong>Leichte Sachen unten:</strong> Schlafsack, Kleidung</li>
+          <li><strong>Häufig Gebrauchtes außen:</strong> Wasser, Snacks, Taschenlampe</li>
+          <li><strong>Gewicht balancieren:</strong> Links und rechts gleichmäßig</li>
+          <li><strong>Komprimieren:</strong> Luft rausdrücken, Riemen anziehen</li>
+        </ol>
+
+        <div class="card p-4 my-6 border-l-4 border-l-amber-500 bg-amber-50 dark:bg-amber-950/30 not-prose">
+          <p class="text-sm">
+            <strong>⚠️ Gewichtsgrenze:</strong> Ein gepackter Rucksack sollte nicht mehr als
+            <strong>15-20% deines Körpergewichts</strong> wiegen. Mehr ist auf Dauer nicht tragbar.
+          </p>
+        </div>
+
+        <h2>Empfohlene Marken</h2>
+        <ul>
+          <li><strong>Deuter:</strong> Deutscher Qualitätshersteller, exzellente Tragesysteme</li>
+          <li><strong>Tasmanian Tiger:</strong> Taktische Qualität, extrem robust</li>
+          <li><strong>Osprey:</strong> Leicht und komfortabel</li>
+          <li><strong>5.11 Tactical:</strong> Gutes Preis-Leistungs-Verhältnis</li>
+          <li><strong>Mil-Tec:</strong> Budget-Option, solide Basics</li>
+        </ul>
+
+        <h2>Checkliste</h2>
+        <ul>
+          <li>☐ 30-50 Liter Kapazität</li>
+          <li>☐ Gepolstertes Tragesystem mit Hüftgurt</li>
+          <li>☐ Wasserabweisend oder mit Regenhülle</li>
+          <li>☐ Mehrere Fächer für Organisation</li>
+          <li>☐ Robustes Material (Cordura/Ripstop)</li>
+          <li>☐ Inhalt gepackt und vollständig</li>
+          <li>☐ Gewicht unter 10-15 kg</li>
+          <li>☐ Griffbereit gelagert (nicht im Keller!)</li>
+        </ul>
+      </div>
+
+      <!-- Amazon Link -->
+      <div class="mt-12 card p-6 bg-[--color-bg-tertiary]">
+        <h3 class="font-semibold mb-2">Notfallrucksäcke auf Amazon.de</h3>
+        <p class="text-sm text-[--color-text-secondary] mb-4">
+          Empfohlene Rucksäcke 40-50 Liter mit gutem Tragesystem.
+        </p>
+        <a
+          href="https://www.amazon.de/s?k=wanderrucksack+40+liter&tag=kit72de-21"
+          target="_blank"
+          rel="noopener noreferrer sponsored"
+          class="inline-flex items-center gap-2 px-4 py-2 bg-[--color-accent-primary] text-[--color-bg-primary] font-medium rounded hover:bg-[--color-accent-hover] transition-colors"
+        >
+          Auf Amazon ansehen
+          <Icon name="ExternalLink" size={16} />
+        </a>
+        <p class="text-xs text-[--color-text-muted] mt-3">
+          * Affiliate-Link — du zahlst nicht mehr, wir erhalten eine kleine Provision.
+        </p>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

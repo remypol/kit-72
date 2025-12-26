@@ -1,0 +1,72 @@
+---
+/**
+ * ToolCard Component
+ *
+ * Card for linking to tool pages (configurador, calculadoras)
+ *
+ * @example
+ * <ToolCard
+ *   title="Configurador de Kit"
+ *   description="Crea tu checklist personalizado."
+ *   href="/es/herramientas/configurador-kit/"
+ *   icon="Settings"
+ *   cta="Empezar"
+ * />
+ */
+
+import Icon from '../ui/Icon.astro';
+import Button from '../ui/Button.astro';
+
+interface Props {
+  title: string;
+  description: string;
+  href: string;
+  icon: string;
+  cta?: string;
+  features?: string[];
+  class?: string;
+}
+
+const {
+  title,
+  description,
+  href,
+  icon,
+  cta = 'Abrir herramienta',
+  features = [],
+  class: className = '',
+} = Astro.props;
+---
+
+<div class={`card p-6 flex flex-col ${className}`}>
+  <div class="flex items-center gap-4 mb-4">
+    <div class="w-12 h-12 flex items-center justify-center bg-[--color-accent-subtle] rounded-lg">
+      <Icon name={icon as any} size={24} class="text-[--color-accent-primary]" />
+    </div>
+    <h2 class="text-xl font-semibold">{title}</h2>
+  </div>
+
+  <p class="text-[--color-text-secondary] mb-4 flex-1">
+    {description}
+  </p>
+
+  {features.length > 0 && (
+    <ul class="mb-6 space-y-2">
+      {features.map((feature) => (
+        <li class="flex items-center gap-2 text-sm text-[--color-text-secondary]">
+          <Icon name="Check" size={16} class="text-[--color-success]" />
+          {feature}
+        </li>
+      ))}
+    </ul>
+  )}
+
+  <Button
+    variant="primary"
+    href={href}
+    rightIcon="ArrowRight"
+    fullWidth
+  >
+    {cta}
+  </Button>
+</div>

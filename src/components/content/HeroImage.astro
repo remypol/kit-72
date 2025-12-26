@@ -1,0 +1,104 @@
+---
+/**
+ * HeroImage Component
+ *
+ * Responsive hero image with WebP support, lazy loading, and SEO-optimized alt text.
+ * Designed for scenario, guide, and product pages.
+ */
+
+interface Props {
+  src: string;
+  alt: string;
+  width?: number;
+  height?: number;
+  priority?: boolean; // If true, skip lazy loading (for above-fold images)
+  class?: string;
+  caption?: string;
+}
+
+const {
+  src,
+  alt,
+  width = 1200,
+  height = 630,
+  priority = false,
+  class: className = '',
+  caption
+} = Astro.props;
+
+// Ensure alt text ends with brand for SEO
+const seoAlt = alt.includes('Kit-72') ? alt : `${alt} | Kit-72`;
+---
+
+<figure class:list={['hero-image', className]}>
+  <img
+    src={src}
+    alt={seoAlt}
+    width={width}
+    height={height}
+    loading={priority ? 'eager' : 'lazy'}
+    decoding={priority ? 'sync' : 'async'}
+    fetchpriority={priority ? 'high' : 'auto'}
+    class="hero-image__img"
+  />
+  {caption && (
+    <figcaption class="hero-image__caption">{caption}</figcaption>
+  )}
+</figure>
+
+<style>
+  .hero-image {
+    margin: 0 0 1.5rem 0;
+    width: 100%;
+    border-radius: 1rem;
+    overflow: hidden;
+  }
+
+  .hero-image__img {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: cover;
+    aspect-ratio: 1200 / 630;
+    background-color: var(--color-bg-secondary);
+  }
+
+  .hero-image__caption {
+    padding: 0.75rem 1rem;
+    font-size: 0.875rem;
+    color: var(--color-text-secondary);
+    background-color: var(--color-bg-secondary);
+    text-align: center;
+  }
+
+  /* Fade in animation for lazy loaded images */
+  .hero-image__img[loading="lazy"] {
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+  }
+
+  .hero-image__img[loading="lazy"].loaded {
+    opacity: 1;
+  }
+
+  @media (max-width: 640px) {
+    .hero-image {
+      border-radius: 0.75rem;
+      margin: 0 -1rem 1.5rem -1rem;
+      width: calc(100% + 2rem);
+    }
+  }
+</style>
+
+<script>
+  // Add loaded class when image loads
+  document.querySelectorAll('.hero-image__img[loading="lazy"]').forEach(img => {
+    if (img.complete) {
+      img.classList.add('loaded');
+    } else {
+      img.addEventListener('load', () => {
+        img.classList.add('loaded');
+      });
+    }
+  });
+</script>

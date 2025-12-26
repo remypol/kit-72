@@ -1,0 +1,183 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import Breadcrumb from '../../../components/layout/Breadcrumb.astro';
+import Icon from '../../../components/ui/Icon.astro';
+import HeroImage from '../../../components/content/HeroImage.astro';
+
+const products = [
+  {
+    title: 'Zaklampen',
+    description: 'Soorten zaklampen, lumen, batterijen en hoeveel je nodig hebt voor je noodpakket.',
+    href: '/nl/producten/zaklampen/',
+    icon: 'Flashlight',
+    priceRange: '€40-80',
+    features: ['Krachtige LED', 'Batterij of oplaadbaar', 'Waterbestendig']
+  },
+  {
+    title: 'Powerbanks',
+    description: 'Externe batterijen: capaciteiten, types en hoeveel energie je nodig hebt voor 72 uur.',
+    href: '/nl/producten/powerbanks/',
+    icon: 'Battery',
+    priceRange: '€50-150',
+    features: ['20.000+ mAh', 'Snelladen', 'Meerdere poorten']
+  },
+  {
+    title: 'Noodradio',
+    description: "Radio's AM/FM en hoe je geïnformeerd blijft zonder internet.",
+    href: '/nl/producten/noodradio/',
+    icon: 'Radio',
+    priceRange: '€40-100',
+    features: ['AM/FM', 'Zonne-/dynamo-opladen', 'Ingebouwde zaklamp']
+  },
+  {
+    title: 'Wateropslag',
+    description: 'Veilige containers, materialen, capaciteiten en hoe je water correct opslaat.',
+    href: '/nl/producten/wateropslag/',
+    icon: 'Droplet',
+    priceRange: '€30-60',
+    features: ['Voedselkwaliteit', 'Stapelbaar', 'Met kraan']
+  },
+  {
+    title: 'Noodvoedsel',
+    description: 'Conserven, gedroogd voedsel, calorieën en hoe je je voorraad plant.',
+    href: '/nl/producten/noodvoedsel/',
+    icon: 'UtensilsCrossed',
+    priceRange: '€30-50/persoon',
+    features: ['Lange houdbaarheid', 'Geen koken nodig', 'Calorierijk']
+  },
+  {
+    title: 'EHBO-doos',
+    description: 'Essentiële inhoud, medicijnen, speciale aanpassingen en onderhoud.',
+    href: '/nl/producten/ehbo-doos/',
+    icon: 'Heart',
+    priceRange: '€40-60',
+    features: ['25+ artikelen', 'Basismedicijnen', 'Georganiseerd']
+  },
+  {
+    title: 'Noodtassen',
+    description: 'Capaciteiten, hoe correct te laden en waar je op moet letten bij een noodtas.',
+    href: '/nl/producten/noodtassen/',
+    icon: 'Backpack',
+    priceRange: '€50-100',
+    features: ['40-60L capaciteit', 'Waterafstotend', 'Draagsysteem']
+  }
+];
+
+const priorityOrder = [
+  { step: 1, icon: 'Droplet', title: 'Water + Opslag', description: 'Zonder water overleef je slechts 3 dagen. Het meest kritiek.', priority: 'critical' },
+  { step: 2, icon: 'Flashlight', title: 'Verlichting (Zaklampen)', description: "Zonder licht kun je 's nachts niets doen. Goedkoop en essentieel.", priority: 'critical' },
+  { step: 3, icon: 'Heart', title: 'EHBO-kit', description: 'Kleine verwondingen behandelen voorkomt grotere problemen.', priority: 'high' },
+  { step: 4, icon: 'UtensilsCrossed', title: 'Noodvoedsel', description: 'Je kunt weken zonder eten, maar energie is belangrijk.', priority: 'high' },
+  { step: 5, icon: 'Battery', title: 'Energie (Powerbanks)', description: 'Houd je telefoon opgeladen om te communiceren.', priority: 'medium' },
+  { step: 6, icon: 'Radio', title: 'Noodradio', description: 'Officiële informatie als er geen internet is.', priority: 'medium' },
+  { step: 7, icon: 'Backpack', title: 'Evacuatietas', description: 'Om alles mee te nemen als je moet evacueren.', priority: 'low' },
+];
+
+function getPriorityColor(priority: string) {
+  switch (priority) {
+    case 'critical': return 'bg-red-500 text-white';
+    case 'high': return 'bg-[--color-accent-primary] text-[--color-bg-primary]';
+    case 'medium': return 'bg-[--color-accent-secondary] text-[--color-bg-primary]';
+    default: return 'bg-[--color-bg-tertiary] text-[--color-text-primary]';
+  }
+}
+---
+
+<BaseLayout
+  title="Noodpakket samenstellen: Wat kopen? Productgids op prioriteit"
+  description="Gids voor alle onderdelen van een noodpakket: zaklampen, powerbanks, radio's, water, voedsel, EHBO en tassen."
+  locale="nl"
+>
+  <section class="py-16">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6">
+      <!-- Header -->
+      <div class="mb-12">
+        <Breadcrumb items={[{ label: 'Producten' }]} class="mb-4" locale="nl" />
+        <h1 class="text-4xl font-bold mb-4">Producten voor je Noodpakket</h1>
+        <p class="text-xl text-[--color-text-secondary] max-w-3xl">
+          Alles wat je nodig hebt om 72 uur zelfstandig te overleven. We behandelen elk onderdeel:
+          wat het is, waarom je het nodig hebt, en welke opties we aanbevelen.
+        </p>
+      </div>
+
+      <!-- Hero Image -->
+      <div class="mb-12">
+        <HeroImage
+          src="/images/shared/emergency-kit-flatlay.webp"
+          alt="Noodpakket overzicht - Kit-72 producten"
+          priority={true}
+        />
+      </div>
+
+      <!-- Priority Order Section -->
+      <div class="card p-8 mb-12">
+        <h2 class="text-2xl font-semibold mb-6">In welke volgorde kopen?</h2>
+        <p class="text-[--color-text-secondary] mb-6">
+          Als je budget beperkt is, volg dan deze prioriteitsvolgorde. Begin met het meest kritieke
+          en bouw van daaruit verder.
+        </p>
+
+        <div class="space-y-4">
+          {priorityOrder.map((item) => (
+            <div class="flex items-center gap-4 p-4 bg-[--color-bg-tertiary] rounded-lg">
+              <span class={`flex-shrink-0 w-8 h-8 flex items-center justify-center rounded-full font-bold text-sm ${getPriorityColor(item.priority)}`}>
+                {item.step}
+              </span>
+              <div class="flex-shrink-0 w-10 h-10 flex items-center justify-center text-[--color-accent-primary]">
+                <Icon name={item.icon} size={24} />
+              </div>
+              <div class="flex-1 min-w-0">
+                <h3 class="font-semibold text-[--color-text-primary]">{item.title}</h3>
+                <p class="text-sm text-[--color-text-secondary] truncate">{item.description}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <!-- Products Grid -->
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+        {products.map((product) => (
+          <a href={product.href} class="card p-6 hover:border-[--color-accent-primary] transition-colors group">
+            <div class="flex items-center gap-3 mb-4">
+              <div class="w-12 h-12 flex items-center justify-center bg-[--color-bg-tertiary] rounded-lg text-[--color-accent-primary] group-hover:bg-[--color-accent-primary] group-hover:text-[--color-bg-primary] transition-colors">
+                <Icon name={product.icon} size={24} />
+              </div>
+              <div>
+                <h3 class="font-semibold text-[--color-text-primary]">{product.title}</h3>
+                <span class="text-sm text-[--color-accent-primary]">{product.priceRange}</span>
+              </div>
+            </div>
+            <p class="text-sm text-[--color-text-secondary] mb-4">{product.description}</p>
+            <ul class="space-y-1">
+              {product.features.map((feature) => (
+                <li class="flex items-center gap-2 text-xs text-[--color-text-muted]">
+                  <span class="w-1 h-1 bg-[--color-accent-primary] rounded-full"></span>
+                  {feature}
+                </li>
+              ))}
+            </ul>
+          </a>
+        ))}
+      </div>
+
+      <!-- CTA -->
+      <div class="card p-8 text-center bg-[--color-bg-tertiary]">
+        <h2 class="text-2xl font-semibold mb-4">Klaar om te beginnen?</h2>
+        <p class="text-[--color-text-secondary] mb-6 max-w-2xl mx-auto">
+          Gebruik onze interactieve tool om een gepersonaliseerde checklist te maken
+          op basis van je gezinsgrootte en specifieke behoeften.
+        </p>
+        <a
+          href="/nl/tools/noodpakket-samenstellen/"
+          class="inline-flex items-center gap-2 px-6 py-3 bg-[--color-accent-primary] text-[--color-bg-primary] font-semibold rounded hover:bg-[--color-accent-hover] transition-colors"
+        >
+          Mijn noodpakket samenstellen
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+          </svg>
+        </a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

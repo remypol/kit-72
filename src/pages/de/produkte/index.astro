@@ -1,0 +1,218 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import Breadcrumb from '../../../components/layout/Breadcrumb.astro';
+import Icon from '../../../components/ui/Icon.astro';
+import HeroImage from '../../../components/content/HeroImage.astro';
+
+const products = [
+  {
+    title: 'Taschenlampen',
+    description: 'Arten von Taschenlampen, Lumen, Batterien und wie viele du für dein Notfallpaket brauchst.',
+    href: '/de/produkte/taschenlampen/',
+    icon: 'Flashlight',
+    priceRange: '40-80€',
+    features: ['Leistungsstarke LED', 'Batterie oder aufladbar', 'Wasserdicht']
+  },
+  {
+    title: 'Powerbanks',
+    description: 'Externe Batterien: Kapazitäten, Typen und wie viel Energie du für 72 Stunden brauchst.',
+    href: '/de/produkte/powerbanks/',
+    icon: 'Battery',
+    priceRange: '50-150€',
+    features: ['20.000+ mAh', 'Schnellladen', 'Mehrere Anschlüsse']
+  },
+  {
+    title: 'Notfallradio',
+    description: 'AM/FM-Radios und wie du ohne Internet informiert bleibst.',
+    href: '/de/produkte/notfallradio/',
+    icon: 'Radio',
+    priceRange: '40-100€',
+    features: ['AM/FM', 'Solar-/Kurbelaufladung', 'Eingebaute Taschenlampe']
+  },
+  {
+    title: 'Wasserspeicher',
+    description: 'Sichere Behälter, Materialien, Kapazitäten und wie du Wasser richtig lagerst.',
+    href: '/de/produkte/wasserspeicher/',
+    icon: 'Droplet',
+    priceRange: '30-60€',
+    features: ['Lebensmittelecht', 'Stapelbar', 'Mit Hahn']
+  },
+  {
+    title: 'Notnahrung',
+    description: 'Konserven, Trockennahrung, Kalorien und wie du deinen Vorrat planst.',
+    href: '/de/produkte/notnahrung/',
+    icon: 'UtensilsCrossed',
+    priceRange: '30-50€/Person',
+    features: ['Lange Haltbarkeit', 'Kein Kochen nötig', 'Kalorienreich']
+  },
+  {
+    title: 'Erste-Hilfe-Kasten',
+    description: 'Wesentlicher Inhalt, Medikamente, spezielle Anpassungen und Wartung.',
+    href: '/de/produkte/erste-hilfe-kasten/',
+    icon: 'Heart',
+    priceRange: '40-60€',
+    features: ['25+ Artikel', 'Basismedikamente', 'Organisiert']
+  },
+  {
+    title: 'Notfallrucksack',
+    description: 'Kapazitäten, richtiges Packen und worauf du bei einem Notfallrucksack achten solltest.',
+    href: '/de/produkte/notfallrucksack/',
+    icon: 'Backpack',
+    priceRange: '50-100€',
+    features: ['40-60L Kapazität', 'Wasserabweisend', 'Tragesystem']
+  }
+];
+
+const totalBudget = {
+  min: 280,
+  max: 600,
+  note: 'Für 1 Person mit vollständigem Paket'
+};
+
+const priorityOrder = [
+  { step: 1, icon: 'Droplet', title: 'Wasser + Behälter', description: 'Ohne Wasser überlebst du nur 3 Tage. Das Kritischste.', priority: 'critical' },
+  { step: 2, icon: 'Flashlight', title: 'Beleuchtung (Taschenlampen)', description: 'Ohne Licht kannst du nachts nichts tun. Günstig und essentiell.', priority: 'critical' },
+  { step: 3, icon: 'Heart', title: 'Erste-Hilfe-Kasten', description: 'Kleine Verletzungen behandeln verhindert größere Probleme.', priority: 'high' },
+  { step: 4, icon: 'UtensilsCrossed', title: 'Notnahrung', description: 'Du kannst Wochen ohne Essen überleben, aber Energie ist wichtig.', priority: 'high' },
+  { step: 5, icon: 'Battery', title: 'Energie (Powerbanks)', description: 'Halte dein Handy geladen für Kommunikation.', priority: 'medium' },
+  { step: 6, icon: 'Radio', title: 'Notfallradio', description: 'Offizielle Informationen, wenn es kein Internet gibt.', priority: 'medium' },
+  { step: 7, icon: 'Backpack', title: 'Evakuierungsrucksack', description: 'Um alles mitzunehmen, wenn du evakuieren musst.', priority: 'low' },
+];
+
+function getPriorityColor(priority: string) {
+  switch (priority) {
+    case 'critical': return 'bg-red-500 text-white';
+    case 'high': return 'bg-[--color-accent-primary] text-[--color-bg-primary]';
+    case 'medium': return 'bg-[--color-accent-secondary] text-[--color-bg-primary]';
+    default: return 'bg-[--color-bg-tertiary] text-[--color-text-primary]';
+  }
+}
+---
+
+<BaseLayout
+  title="Notfallausrüstung: Was kaufen? Produktratgeber nach Priorität"
+  description="Ratgeber für alle Bestandteile eines Notfallpakets: Taschenlampen, Powerbanks, Radios, Wasser, Nahrung, Erste Hilfe und Rucksäcke."
+  locale="de"
+>
+  <section class="py-16">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6">
+      <!-- Header -->
+      <div class="mb-12">
+        <Breadcrumb items={[{ label: 'Produkte' }]} class="mb-4" locale="de" />
+        <h1 class="text-4xl font-bold mb-4">Produkte für dein Notfallpaket</h1>
+        <p class="text-xl text-[--color-text-secondary] max-w-3xl">
+          Alles, was du brauchst, um 72 Stunden selbstständig zu überleben. Wir behandeln jeden
+          Bestandteil: was er ist, warum du ihn brauchst und welche Optionen wir empfehlen.
+        </p>
+      </div>
+
+      <!-- Hero Image -->
+      <div class="mb-12">
+        <HeroImage
+          src="/images/shared/emergency-kit-flatlay.webp"
+          alt="Notfallausrüstung Übersicht - Kit-72 Produkte"
+          priority={true}
+        />
+      </div>
+
+      <!-- Budget Overview -->
+      <div class="card p-6 mb-12 border-l-4 border-l-[--color-accent-primary]">
+        <h2 class="text-lg font-semibold mb-2 text-[--color-text-primary] flex items-center gap-2">
+          <Icon name="Wallet" size={20} class="text-[--color-accent-primary]" />
+          Geschätztes Gesamtbudget
+        </h2>
+        <p class="text-[--color-text-secondary] mb-4">
+          Ein komplettes 72-Stunden-Paket für <strong>1 Person</strong> kostet ungefähr:
+        </p>
+        <div class="flex items-baseline gap-2">
+          <span class="text-3xl font-bold text-[--color-accent-primary]">{totalBudget.min}-{totalBudget.max}€</span>
+          <span class="text-sm text-[--color-text-muted]">{totalBudget.note}</span>
+        </div>
+        <p class="text-sm text-[--color-text-muted] mt-2">
+          Du kannst mit dem Wesentlichen (~200€) beginnen und nach und nach ergänzen.
+        </p>
+      </div>
+
+      <!-- Priority Order Section -->
+      <div class="card p-8 mb-12">
+        <h2 class="text-2xl font-semibold mb-6">In welcher Reihenfolge kaufen?</h2>
+        <p class="text-[--color-text-secondary] mb-6">
+          Wenn dein Budget begrenzt ist, folge dieser Prioritätsreihenfolge.
+          Beginne mit dem Kritischsten und baue von dort aus weiter.
+        </p>
+
+        <div class="space-y-4">
+          {priorityOrder.map((item) => (
+            <div class="flex items-center gap-4 p-4 bg-[--color-bg-tertiary] rounded-lg">
+              <span class={`flex-shrink-0 w-8 h-8 flex items-center justify-center rounded-full font-bold text-sm ${getPriorityColor(item.priority)}`}>
+                {item.step}
+              </span>
+              <div class="flex-shrink-0 w-10 h-10 flex items-center justify-center text-[--color-accent-primary]">
+                <Icon name={item.icon} size={24} />
+              </div>
+              <div class="flex-1 min-w-0">
+                <h3 class="font-semibold text-[--color-text-primary]">{item.title}</h3>
+                <p class="text-sm text-[--color-text-secondary] truncate">{item.description}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <!-- Products Grid -->
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+        {products.map((product) => (
+          <a href={product.href} class="card p-6 hover:border-[--color-accent-primary] transition-colors group">
+            <div class="flex items-center gap-3 mb-4">
+              <div class="w-12 h-12 flex items-center justify-center bg-[--color-bg-tertiary] rounded-lg text-[--color-accent-primary] group-hover:bg-[--color-accent-primary] group-hover:text-[--color-bg-primary] transition-colors">
+                <Icon name={product.icon} size={24} />
+              </div>
+              <div>
+                <h3 class="font-semibold text-[--color-text-primary]">{product.title}</h3>
+                <span class="text-sm text-[--color-accent-primary]">{product.priceRange}</span>
+              </div>
+            </div>
+            <p class="text-sm text-[--color-text-secondary] mb-4">{product.description}</p>
+            <ul class="space-y-1">
+              {product.features.map((feature) => (
+                <li class="flex items-center gap-2 text-xs text-[--color-text-muted]">
+                  <span class="w-1 h-1 bg-[--color-accent-primary] rounded-full"></span>
+                  {feature}
+                </li>
+              ))}
+            </ul>
+          </a>
+        ))}
+      </div>
+
+      <!-- CTA -->
+      <div class="card p-8 text-center bg-[--color-bg-tertiary]">
+        <h2 class="text-2xl font-semibold mb-4">Bereit anzufangen?</h2>
+        <p class="text-[--color-text-secondary] mb-6 max-w-2xl mx-auto">
+          Nutze unser interaktives Tool, um eine personalisierte Checkliste zu erstellen,
+          basierend auf deiner Haushaltsgröße und speziellen Bedürfnissen.
+        </p>
+        <a
+          href="/de/tools/notfallpaket-zusammenstellen/"
+          class="inline-flex items-center gap-2 px-6 py-3 bg-[--color-accent-primary] text-[--color-bg-primary] font-semibold rounded hover:bg-[--color-accent-hover] transition-colors"
+        >
+          Mein Notfallpaket zusammenstellen
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+          </svg>
+        </a>
+      </div>
+
+      <!-- Back to Kit -->
+      <div class="text-center mt-8">
+        <a
+          href="/de/notfallpaket-72-stunden/"
+          class="inline-flex items-center gap-2 text-[--color-accent-primary] hover:underline"
+        >
+          <Icon name="ArrowLeft" size={16} />
+          Zurück zum vollständigen 72-Stunden-Paket
+        </a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

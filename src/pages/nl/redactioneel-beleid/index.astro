@@ -1,0 +1,35 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import Breadcrumb from '../../../components/layout/Breadcrumb.astro';
+---
+
+<BaseLayout title="Redactioneel Beleid — Kit-72" description="Onze redactionele richtlijnen en bronnen." locale="nl">
+  <section class="py-16">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6">
+      <Breadcrumb items={[{ label: 'Redactioneel Beleid' }]} class="mb-4" locale="nl" />
+      <h1 class="text-4xl font-bold mb-6">Redactioneel Beleid</h1>
+      
+      <div class="prose prose-lg">
+        <p><em>Laatst bijgewerkt: december 2025</em></p>
+        
+        <h2>Onze missie</h2>
+        <p>Kit-72 biedt praktische, betrouwbare informatie over noodvoorbereiding voor Nederlandse huishoudens.</p>
+
+        <h2>Bronnen</h2>
+        <p>Onze informatie is gebaseerd op:</p>
+        <ul>
+          <li>Rijksoverheid.nl - Officiële Nederlandse overheidsrichtlijnen</li>
+          <li>Rode Kruis Nederland</li>
+          <li>KNMI en RIVM</li>
+          <li>Internationale noodorganisaties (FEMA, IFRC)</li>
+        </ul>
+
+        <h2>Onafhankelijkheid</h2>
+        <p>Kit-72 is geen officiële overheidswebsite. Wij bieden voorlichting, geen officieel overheidsadvies. Raadpleeg altijd rijksoverheid.nl voor de meest actuele officiële informatie.</p>
+
+        <h2>Productaanbevelingen</h2>
+        <p>Onze productaanbevelingen zijn gebaseerd op functionaliteit en prijs-kwaliteitsverhouding. We ontvangen mogelijk affiliate-commissie, maar dit beïnvloedt onze aanbevelingen niet.</p>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

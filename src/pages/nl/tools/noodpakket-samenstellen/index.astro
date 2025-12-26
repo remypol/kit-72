@@ -1,0 +1,67 @@
+---
+import BaseLayout from '../../../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../../../components/ui/Breadcrumbs.astro';
+import KitBuilder from '../../../../components/tools/KitBuilder';
+---
+
+<BaseLayout
+  title="Noodpakket Samenstellen — Kit-72"
+  description="Interactieve tool om een gepersonaliseerd noodpakket samen te stellen voor jouw gezin. Kies je scenario, vink items af en exporteer je checklist."
+  locale="nl"
+  dateModified="2025-12-15"
+  schemaType="HowTo"
+  schemaData={{
+    name: 'Hoe stel je een noodpakket samen',
+    description: 'Stapsgewijze handleiding voor het samenstellen van een 72-uurs noodpakket, aangepast aan jouw gezin, huisdieren en specifieke scenario\'s.',
+    totalTime: 'PT10M',
+    estimatedCost: {
+      '@type': 'MonetaryAmount',
+      currency: 'EUR',
+      value: '100-250',
+    },
+    tool: [
+      { '@type': 'HowToTool', name: 'Deze online tool' },
+      { '@type': 'HowToTool', name: 'Printer (optioneel)' },
+    ],
+    step: [
+      {
+        '@type': 'HowToStep',
+        position: 1,
+        name: 'Kies je scenario',
+        text: 'Selecteer het scenario waar je je op wilt voorbereiden: stroomstoring, hittegolf, wateruitval, evacuatie, overstroming of cyberaanval. Elk scenario voegt specifieke items toe aan je checklist.',
+      },
+      {
+        '@type': 'HowToStep',
+        position: 2,
+        name: 'Geef je gezinssamenstelling aan',
+        text: 'Geef aan of je baby\'s of kleine kinderen hebt (luiers, flesjes worden toegevoegd) en of je huisdieren hebt (voer, bench worden toegevoegd).',
+      },
+      {
+        '@type': 'HowToStep',
+        position: 3,
+        name: 'Vink items af die je al hebt',
+        text: 'Loop de lijst door en vink de items af die je al in huis hebt. Je ziet je voortgang in percentage en kunt identificeren wat je nog mist.',
+      },
+      {
+        '@type': 'HowToStep',
+        position: 4,
+        name: 'Bewaar of print je checklist',
+        text: 'Exporteer je gepersonaliseerde checklist naar PDF om te printen, of bewaar online voor toegang vanaf elk apparaat. Je voortgang wordt automatisch opgeslagen.',
+      },
+    ],
+  }}
+>
+  <section class="py-12 md:py-16">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6">
+      <div class="mb-8">
+        <Breadcrumbs locale="nl" />
+        <h1 class="text-4xl font-bold mb-4">Noodpakket Samenstellen</h1>
+        <p class="text-xl text-[--color-text-secondary]">
+          Maak een gepersonaliseerde checklist voor jouw gezin en situatie. Kies je scenario, vink items af en deel of print je pakket.
+        </p>
+      </div>
+
+      <KitBuilder locale="nl" client:load />
+    </div>
+  </section>
+</BaseLayout>

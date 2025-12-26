@@ -1,0 +1,90 @@
+---
+/**
+ * TLDRBlock Component
+ *
+ * Summary card that appears at the top of scenario/guide pages.
+ * Provides quick overview so users can decide if they need to read more.
+ *
+ * Features:
+ * - 2-3 line summary maximum
+ * - Optional key stat highlight
+ * - Accent border for visibility
+ */
+
+interface Props {
+  /** The summary text (2-3 sentences max) */
+  summary: string;
+  /** Optional highlighted stat (e.g., "72 horas") */
+  keyStat?: string;
+  /** Label for the key stat (e.g., "Prepárate para") */
+  keyStatLabel?: string;
+  /** Current locale for i18n */
+  locale?: 'es' | 'nl' | 'de';
+}
+
+const labelPerLocale: Record<string, string> = {
+  es: 'En resumen',
+  nl: 'Samenvatting',
+  de: 'Zusammenfassung',
+};
+
+const { summary, keyStat, keyStatLabel, locale = 'es' } = Astro.props;
+const tldrLabel = labelPerLocale[locale] || labelPerLocale.es;
+---
+
+<div class="tldr-block">
+  <div class="tldr-label">{tldrLabel}</div>
+  <p class="tldr-summary">{summary}</p>
+  {keyStat && (
+    <div class="tldr-stat">
+      {keyStatLabel && <span class="tldr-stat-label">{keyStatLabel}</span>}
+      <span class="tldr-stat-value">{keyStat}</span>
+    </div>
+  )}
+</div>
+
+<style>
+  .tldr-block {
+    background: var(--color-bg-secondary);
+    border-left: 4px solid var(--color-accent-primary);
+    border-radius: 0 12px 12px 0;
+    padding: 16px 20px;
+    margin-bottom: 24px;
+  }
+
+  .tldr-label {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--color-accent-primary);
+    margin-bottom: 8px;
+  }
+
+  .tldr-summary {
+    font-size: 15px;
+    line-height: 1.6;
+    color: var(--color-text-secondary);
+    margin: 0;
+  }
+
+  .tldr-stat {
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+    margin-top: 12px;
+    padding-top: 12px;
+    border-top: 1px solid var(--color-border);
+  }
+
+  .tldr-stat-label {
+    font-size: 12px;
+    color: var(--color-text-muted);
+  }
+
+  .tldr-stat-value {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--color-accent-primary);
+  }
+</style>

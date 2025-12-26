@@ -1,0 +1,164 @@
+---
+import BaseLayout from '../../../../layouts/BaseLayout.astro';
+import Breadcrumb from '../../../../components/layout/Breadcrumb.astro';
+import Icon from '../../../../components/ui/Icon.astro';
+import RelatedContent from '../../../../components/content/RelatedContent.astro';
+
+const relatedItems = [
+  {
+    title: 'Lebensmittel lagern',
+    href: '/de/ratgeber/lebensmittel-lagerung/',
+    description: 'Langlebige Nahrung für Notfälle richtig aufbewahren.',
+    type: 'guide' as const,
+    icon: 'UtensilsCrossed'
+  },
+  {
+    title: 'Wasserausfall-Szenario',
+    href: '/de/szenarien/wasserausfall/',
+    description: 'So bereitest du dich auf Unterbrechungen der Wasserversorgung vor.',
+    type: 'scenario' as const,
+    icon: 'AlertTriangle'
+  },
+  {
+    title: 'Wasserspeicher',
+    href: '/de/produkte/wasserspeicher/',
+    description: 'Empfohlene Kanister und Behälter für Trinkwasser.',
+    type: 'product' as const,
+    icon: 'Droplet'
+  },
+  {
+    title: 'Wasser-Rechner',
+    href: '/de/tools/wasser-rechner/',
+    description: 'Berechne deinen individuellen Wasserbedarf.',
+    type: 'tool' as const,
+    icon: 'Calculator'
+  }
+];
+---
+
+<BaseLayout
+  title="Wasser Lagern — Kit-72"
+  description="Wie du sicher Trinkwasser für Notfälle aufbewahrst. BBK-Empfehlungen für 72 Stunden Wasservorrat."
+  locale="de"
+  dateModified="2025-12-15"
+  schemaType="Article"
+>
+  <section class="py-16">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6">
+      <Breadcrumb items={[{ label: 'Ratgeber', href: '/de/ratgeber/' }, { label: 'Wasser Lagern' }]} class="mb-4" locale="de" />
+      <h1 class="text-4xl font-bold mb-6">Wasser Lagern</h1>
+
+      <div class="prose prose-lg">
+        <p class="lead">
+          Wasser ist der wichtigste Bestandteil deines Notfallpakets. Das BBK empfiehlt
+          <strong>2 Liter Trinkwasser pro Person pro Tag</strong> — das absolute Minimum.
+          Für Kochen und Hygiene rechne mit insgesamt 3 Litern.
+        </p>
+
+        <!-- Quick Reference Card -->
+        <div class="card p-6 my-8 bg-[--color-bg-tertiary] not-prose">
+          <h3 class="text-lg font-semibold mb-4 flex items-center gap-2">
+            <Icon name="Droplet" size={20} class="text-[--color-accent-primary]" />
+            Schnellübersicht: Wasserbedarf
+          </h3>
+          <div class="grid sm:grid-cols-2 gap-4">
+            <div class="p-4 bg-[--color-bg-secondary] rounded-lg">
+              <p class="text-2xl font-bold text-[--color-accent-primary]">9 Liter</p>
+              <p class="text-sm text-[--color-text-secondary]">pro Person für 72 Stunden (3 Tage)</p>
+            </div>
+            <div class="p-4 bg-[--color-bg-secondary] rounded-lg">
+              <p class="text-2xl font-bold text-[--color-accent-primary]">21 Liter</p>
+              <p class="text-sm text-[--color-text-secondary]">pro Person für 1 Woche</p>
+            </div>
+          </div>
+          <p class="text-sm text-[--color-text-muted] mt-4">
+            <strong>Haustiere:</strong> 50-100ml pro kg Körpergewicht pro Tag
+          </p>
+        </div>
+
+        <h2>Geeignete Behälter</h2>
+        <ul>
+          <li><strong>Originalverpacktes Mineralwasser</strong> — am sichersten und längsten haltbar</li>
+          <li><strong>Lebensmittelechte Kanister</strong> — aus HDPE (Recyclingcode 2), BPA-frei</li>
+          <li><strong>Edelstahlbehälter</strong> — langlebig, aber schwerer</li>
+          <li><strong>Faltbare Wasserbeutel</strong> — platzsparend, aber weniger robust</li>
+        </ul>
+
+        <div class="card p-4 my-6 border-l-4 border-l-amber-500 bg-amber-50 dark:bg-amber-950/30 not-prose">
+          <p class="text-sm">
+            <strong>⚠️ Nicht verwenden:</strong> Milchflaschen, ehemalige Chemikalienbehälter,
+            oder durchsichtige Plastikflaschen für Langzeitlagerung (Licht fördert Algenbildung).
+          </p>
+        </div>
+
+        <h2>Wo lagern?</h2>
+        <ul>
+          <li><strong>Kühl</strong> — idealerweise unter 20°C (Keller, Abstellraum)</li>
+          <li><strong>Dunkel</strong> — vor direktem Sonnenlicht geschützt</li>
+          <li><strong>Sauber</strong> — nicht neben Chemikalien, Farben oder Reinigungsmitteln</li>
+          <li><strong>Frostfrei</strong> — gefrorenes Wasser kann Behälter beschädigen</li>
+        </ul>
+
+        <h2>Haltbarkeit</h2>
+        <p>
+          Ungeöffnetes Flaschenwasser ist praktisch unbegrenzt haltbar, aber für optimale Qualität:
+        </p>
+        <ul>
+          <li><strong>Mineralwasser (ungeöffnet):</strong> 1-2 Jahre optimal, danach noch trinkbar</li>
+          <li><strong>Selbst abgefülltes Leitungswasser:</strong> alle 6 Monate erneuern</li>
+          <li><strong>Nach Öffnung:</strong> innerhalb von 3-5 Tagen verbrauchen</li>
+        </ul>
+
+        <h2>Zusätzliche Sicherheit</h2>
+        <div class="card p-6 my-8 bg-[--color-accent-subtle] not-prose">
+          <p class="font-medium mb-2">💡 Backup-Lösungen</p>
+          <p class="text-sm text-[--color-text-secondary] mb-4">
+            Neben gelagertem Wasser solltest du diese Optionen haben:
+          </p>
+          <ul class="space-y-2 text-sm">
+            <li class="flex items-start gap-2">
+              <span class="text-[--color-accent-primary]">•</span>
+              <span><strong>Wasserentkeimungstabletten</strong> — z.B. Micropur, 1 Tablette pro Liter</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-[--color-accent-primary]">•</span>
+              <span><strong>Wasserfilter</strong> — Sawyer, LifeStraw für Notfälle unterwegs</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-[--color-accent-primary]">•</span>
+              <span><strong>Abkochen</strong> — 3 Minuten sprudelndes Kochen tötet die meisten Keime</span>
+            </li>
+          </ul>
+        </div>
+
+        <h2>Checkliste Wasserlagerung</h2>
+        <ul>
+          <li>☐ Mindestens 9 Liter pro Person (72 Stunden)</li>
+          <li>☐ Lebensmittelechte Behälter verwendet</li>
+          <li>☐ Kühl, dunkel und frostfrei gelagert</li>
+          <li>☐ Datum der Einlagerung notiert</li>
+          <li>☐ Wasserbedarf für Haustiere eingeplant</li>
+          <li>☐ Backup: Entkeimungstabletten vorhanden</li>
+        </ul>
+      </div>
+
+      <!-- CTA -->
+      <div class="mt-12 card p-6 bg-[--color-bg-tertiary]">
+        <h3 class="font-semibold mb-2">Exakt berechnen?</h3>
+        <p class="text-sm text-[--color-text-secondary] mb-4">
+          Nutze unseren Wasser-Rechner für deinen individuellen Bedarf.
+        </p>
+        <a
+          href="/de/tools/wasser-rechner/"
+          class="inline-flex items-center gap-2 px-4 py-2 bg-[--color-accent-primary] text-[--color-bg-primary] font-medium rounded hover:bg-[--color-accent-hover] transition-colors"
+        >
+          <Icon name="Calculator" size={16} />
+          Zum Wasser-Rechner
+        </a>
+      </div>
+
+      <!-- Related Content -->
+      <RelatedContent items={relatedItems} locale="de" />
+    </div>
+  </section>
+</BaseLayout>

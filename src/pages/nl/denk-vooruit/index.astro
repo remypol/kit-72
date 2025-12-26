@@ -1,0 +1,269 @@
+---
+/**
+ * Denk Vooruit - Dutch Government Campaign Tie-in Page
+ *
+ * "Denk Vooruit" (Think Ahead) is the official Dutch government campaign
+ * for emergency preparedness. This page explains the campaign and how
+ * Kit-72 helps you follow the official recommendations.
+ */
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import Breadcrumb from '../../../components/layout/Breadcrumb.astro';
+import Icon from '../../../components/ui/Icon.astro';
+import HeroImage from '../../../components/content/HeroImage.astro';
+
+const governmentChecklist = [
+  {
+    category: 'Water',
+    items: ['3 liter drinkwater per persoon per dag', 'Voor minimaal 3 dagen'],
+    icon: 'Droplet',
+    kitLink: '/nl/producten/wateropslag/'
+  },
+  {
+    category: 'Voedsel',
+    items: ['Houdbaar voedsel voor 3 dagen', 'Blikopener (niet elektrisch)', 'Voedsel dat je koud kunt eten'],
+    icon: 'UtensilsCrossed',
+    kitLink: '/nl/producten/noodvoedsel/'
+  },
+  {
+    category: 'Licht',
+    items: ['Zaklamp met batterijen', 'Kaarsen en aansteker'],
+    icon: 'Flashlight',
+    kitLink: '/nl/producten/zaklampen/'
+  },
+  {
+    category: 'Communicatie',
+    items: ['Radio op batterijen', 'Opgeladen powerbank', 'Belangrijke telefoonnummers op papier'],
+    icon: 'Radio',
+    kitLink: '/nl/producten/noodradio/'
+  },
+  {
+    category: 'Eerste hulp',
+    items: ['EHBO-doos', 'Persoonlijke medicijnen voor 1 week', 'Medische hulpmiddelen'],
+    icon: 'Heart',
+    kitLink: '/nl/producten/ehbo-doos/'
+  },
+  {
+    category: 'Contant geld',
+    items: ['€50-100 in kleine coupures', 'OV-chipkaart met saldo'],
+    icon: 'Wallet',
+    kitLink: null
+  },
+];
+
+const scenarios = [
+  { name: 'Stroomstoring', description: 'Langdurige uitval van elektriciteit', link: '/nl/scenario/stroomstoring/', icon: 'Zap' },
+  { name: 'Wateruitval', description: 'Geen of onveilig drinkwater', link: '/nl/scenario/wateruitval/', icon: 'Droplet' },
+  { name: 'Overstroming', description: 'Hoog water en evacuatie', link: '/nl/scenario/overstroming/', icon: 'Waves' },
+  { name: 'Cyberaanval', description: 'Digitale storing van systemen', link: '/nl/scenario/cyberaanval/', icon: 'Shield' },
+  { name: 'Hittegolf', description: 'Extreme warmte', link: '/nl/scenario/hittegolf/', icon: 'Sun' },
+  { name: 'Evacuatie', description: 'Huis verlaten in noodgeval', link: '/nl/scenario/evacuatie/', icon: 'Car' },
+];
+
+const officialLinks = [
+  { title: 'Denk Vooruit - Rijksoverheid', url: 'https://www.rijksoverheid.nl/onderwerpen/veiligheid/zelf-voorbereiden-op-noodsituaties' },
+  { title: 'NL-Alert - Waarschuwingssysteem', url: 'https://www.nl-alert.nl/' },
+  { title: 'Crisis.nl', url: 'https://www.crisis.nl/' },
+  { title: 'KNMI Waarschuwingen', url: 'https://www.knmi.nl/nederland-nu/weer/waarschuwingen' },
+];
+---
+
+<BaseLayout
+  title="Denk Vooruit: Officiële Noodvoorbereiding Nederland — Kit-72"
+  description="Denk Vooruit is de officiële campagne van de Rijksoverheid voor noodvoorbereiding. Ontdek wat de overheid adviseert en hoe je je kunt voorbereiden."
+  locale="nl"
+  dateModified="2025-12-16"
+  schemaType="Article"
+>
+  <section class="py-16">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6">
+      <Breadcrumb
+        items={[{ label: 'Denk Vooruit' }]}
+        class="mb-4"
+        locale="nl"
+      />
+
+      <header class="mb-8">
+        <div class="inline-flex items-center gap-2 px-3 py-1 bg-orange-100 dark:bg-orange-950/30 text-orange-700 dark:text-orange-400 rounded-full text-sm font-medium mb-4">
+          <Icon name="Flag" size={16} />
+          Officiële Rijksoverheid Campagne
+        </div>
+        <h1 class="text-4xl font-bold mb-4">
+          Denk Vooruit: Ben Jij Voorbereid?
+        </h1>
+        <p class="text-xl text-[--color-text-secondary]">
+          "Denk Vooruit" is de officiële campagne van de Nederlandse overheid om burgers
+          voor te bereiden op noodsituaties. Van stroomuitval tot overstromingen —
+          weet jij wat je moet doen?
+        </p>
+      </header>
+
+      <HeroImage
+        src="/images/shared/emergency-kit-flatlay.webp"
+        alt="Noodpakket volgens Denk Vooruit richtlijnen"
+        priority={true}
+      />
+
+      <div class="prose prose-lg mt-8">
+
+        <!-- Intro -->
+        <div class="not-prose card p-6 my-8 bg-orange-50 dark:bg-orange-950/20 border-l-4 border-l-orange-500">
+          <h2 class="text-lg font-semibold mb-2 flex items-center gap-2">
+            <Icon name="Info" size={20} class="text-orange-500" />
+            Wat is Denk Vooruit?
+          </h2>
+          <p class="text-[--color-text-secondary]">
+            Denk Vooruit is een initiatief van de Rijksoverheid om Nederlanders bewust te maken
+            van mogelijke rampen en hoe je jezelf kunt voorbereiden. Het advies: wees in staat
+            om <strong>minimaal 3 dagen zelfstandig te overleven</strong> als hulpdiensten
+            niet direct beschikbaar zijn.
+          </p>
+        </div>
+
+        <h2>Waarom is voorbereiding nodig?</h2>
+        <p>
+          Nederland is een van de veiligste landen ter wereld. Maar dat betekent niet dat
+          er nooit iets kan gebeuren:
+        </p>
+        <ul>
+          <li><strong>Klimaatverandering:</strong> Extremer weer, meer overstromingsrisico</li>
+          <li><strong>Digitale afhankelijkheid:</strong> Cyberaanvallen kunnen systemen platleggen</li>
+          <li><strong>Infrastructuur:</strong> Stroomnetten kunnen overbelast raken</li>
+          <li><strong>Pandemieën:</strong> COVID-19 toonde hoe snel alles kan veranderen</li>
+        </ul>
+        <p>
+          De overheid adviseert: <strong>"Reken niet alleen op hulpdiensten.
+          Bereid je voor om 3 dagen zelfstandig te kunnen overleven."</strong>
+        </p>
+
+        <h2>Officiële Checklist: Wat Adviseert de Overheid?</h2>
+        <p>
+          Dit is de officiële checklist van de Rijksoverheid, aangevuld met links naar
+          onze gedetailleerde productgidsen:
+        </p>
+
+        <div class="not-prose grid gap-4 my-8">
+          {governmentChecklist.map((category) => (
+            <div class="card p-4">
+              <div class="flex items-start gap-4">
+                <div class="flex-shrink-0 w-12 h-12 rounded-lg bg-[--color-accent-subtle] flex items-center justify-center">
+                  <Icon name={category.icon} size={24} class="text-[--color-accent-primary]" />
+                </div>
+                <div class="flex-1">
+                  <h3 class="font-semibold text-lg mb-2">{category.category}</h3>
+                  <ul class="space-y-1">
+                    {category.items.map((item) => (
+                      <li class="flex items-center gap-2 text-sm text-[--color-text-secondary]">
+                        <Icon name="Check" size={16} class="text-green-500 flex-shrink-0" />
+                        {item}
+                      </li>
+                    ))}
+                  </ul>
+                  {category.kitLink && (
+                    <a href={category.kitLink} class="inline-flex items-center gap-1 mt-3 text-sm text-[--color-accent-primary] hover:underline">
+                      Bekijk onze gids
+                      <Icon name="ArrowRight" size={14} />
+                    </a>
+                  )}
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <h2>Scenario's: Waar Bereid Je Je Op Voor?</h2>
+        <p>
+          De overheid identificeert verschillende scenario's waarvoor Nederlanders
+          zich moeten voorbereiden. Klik op een scenario voor gedetailleerde instructies:
+        </p>
+
+        <div class="not-prose grid sm:grid-cols-2 lg:grid-cols-3 gap-4 my-8">
+          {scenarios.map((scenario) => (
+            <a href={scenario.link} class="card p-4 hover:border-[--color-accent-primary] transition-colors group">
+              <div class="flex items-center gap-3 mb-2">
+                <div class="w-10 h-10 rounded-full bg-[--color-bg-tertiary] flex items-center justify-center group-hover:bg-[--color-accent-primary] group-hover:text-[--color-bg-primary] transition-colors">
+                  <Icon name={scenario.icon} size={20} />
+                </div>
+                <h3 class="font-semibold">{scenario.name}</h3>
+              </div>
+              <p class="text-sm text-[--color-text-secondary]">{scenario.description}</p>
+            </a>
+          ))}
+        </div>
+
+        <h2>NL-Alert: Het Waarschuwingssysteem</h2>
+        <p>
+          Bij een noodsituatie stuurt de overheid een <strong>NL-Alert</strong> naar alle
+          mobiele telefoons in het getroffen gebied. Dit bericht bevat:
+        </p>
+        <ul>
+          <li>Wat er aan de hand is</li>
+          <li>Wat je moet doen</li>
+          <li>Waar je meer informatie vindt</li>
+        </ul>
+        <p>
+          <strong>Belangrijk:</strong> NL-Alert werkt alleen als je telefoon aanstaat en
+          bereik heeft. Bij een stroomstoring kan de telecominfrastructuur uitvallen.
+          Daarom is een radio met batterijen essentieel.
+        </p>
+
+        <!-- CTA Box -->
+        <div class="not-prose card p-6 my-8 bg-[--color-accent-subtle] border-2 border-[--color-accent-primary]">
+          <h3 class="font-semibold text-xl mb-3">Begin vandaag met voorbereiden</h3>
+          <p class="text-[--color-text-secondary] mb-4">
+            Gebruik onze tools om je noodpakket samen te stellen volgens de officiële richtlijnen.
+          </p>
+          <div class="flex flex-wrap gap-3">
+            <a
+              href="/nl/tools/noodpakket-samenstellen/"
+              class="inline-flex items-center gap-2 px-4 py-2 bg-[--color-accent-primary] text-[--color-bg-primary] font-medium rounded hover:bg-[--color-accent-hover] transition-colors"
+            >
+              <Icon name="Package" size={18} />
+              Noodpakket samenstellen
+            </a>
+            <a
+              href="/nl/noodpakket-72-uur/"
+              class="inline-flex items-center gap-2 px-4 py-2 border border-[--color-accent-primary] text-[--color-accent-primary] font-medium rounded hover:bg-[--color-accent-subtle] transition-colors"
+            >
+              Complete gids
+            </a>
+          </div>
+        </div>
+
+        <h2>Officiële Bronnen</h2>
+        <p>
+          Raadpleeg altijd de officiële overheidsbronnen voor de meest actuele informatie:
+        </p>
+
+        <div class="not-prose grid sm:grid-cols-2 gap-4 my-8">
+          {officialLinks.map((link) => (
+            <a
+              href={link.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="card p-4 hover:border-[--color-accent-primary] transition-colors group flex items-center justify-between"
+            >
+              <span class="font-medium group-hover:text-[--color-accent-primary]">{link.title}</span>
+              <Icon name="ExternalLink" size={16} class="text-[--color-text-muted]" />
+            </a>
+          ))}
+        </div>
+
+        <h2>Hoe Kit-72 Helpt</h2>
+        <p>
+          Kit-72 is geen vervanging voor officiële overheidsadviezen. Wij helpen je
+          om die adviezen <strong>praktisch uit te voeren</strong>:
+        </p>
+        <ul>
+          <li><strong>Productgidsen:</strong> Welke zaklamp, powerbank of radio koop je?</li>
+          <li><strong>Scenario-specifieke tips:</strong> Wat doe je tijdens een stroomstoring?</li>
+          <li><strong>Calculators:</strong> Hoeveel water heb je nodig voor je huishouden?</li>
+          <li><strong>Checklists:</strong> Interactief bijhouden wat je al hebt</li>
+        </ul>
+        <p>
+          Denk Vooruit zegt <em>wat</em> je nodig hebt. Kit-72 helpt je <em>hoe</em> je het regelt.
+        </p>
+
+      </div>
+    </div>
+  </section>
+</BaseLayout>

@@ -1,0 +1,179 @@
+---
+import BaseLayout from '../../../../layouts/BaseLayout.astro';
+import Breadcrumb from '../../../../components/layout/Breadcrumb.astro';
+import Icon from '../../../../components/ui/Icon.astro';
+import HeroImage from '../../../../components/content/HeroImage.astro';
+---
+
+<BaseLayout
+  title="Beste Taschenlampe für Notfälle: Worauf achten? Kaufratgeber"
+  description="Die beste Taschenlampe für dein Notfallpaket. Lumen, Batterien, wasserdicht — worauf du achten musst."
+  locale="de"
+  dateModified="2025-12-15"
+  schemaType="Article"
+>
+  <section class="py-16">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6">
+      <Breadcrumb items={[{ label: 'Produkte', href: '/de/produkte/' }, { label: 'Taschenlampen' }]} class="mb-4" locale="de" />
+      <h1 class="text-4xl font-bold mb-6">Taschenlampen</h1>
+
+      <div class="mb-8">
+        <HeroImage
+          src="/images/shared/flashlights-comparison.webp"
+          alt="Taschenlampen Vergleich für Notfallvorsorge"
+          priority={true}
+        />
+      </div>
+
+      <div class="prose prose-lg">
+        <p class="lead">
+          Eine zuverlässige Taschenlampe ist nach Wasser das <strong>zweitwichtigste Element</strong>
+          deines Notfallpakets. Ohne Licht bist du nachts völlig hilflos.
+        </p>
+
+        <!-- Quick Specs -->
+        <div class="card p-6 my-8 bg-[--color-bg-tertiary] not-prose">
+          <h3 class="text-lg font-semibold mb-4 flex items-center gap-2">
+            <Icon name="Flashlight" size={20} class="text-[--color-accent-primary]" />
+            Empfohlene Spezifikationen
+          </h3>
+          <div class="grid sm:grid-cols-3 gap-4 text-center">
+            <div class="p-3 bg-[--color-bg-secondary] rounded-lg">
+              <p class="text-2xl font-bold text-[--color-accent-primary]">200-500</p>
+              <p class="text-xs text-[--color-text-secondary]">Lumen (Helligkeit)</p>
+            </div>
+            <div class="p-3 bg-[--color-bg-secondary] rounded-lg">
+              <p class="text-2xl font-bold text-[--color-accent-primary]">IPX4+</p>
+              <p class="text-xs text-[--color-text-secondary]">Wasserschutz</p>
+            </div>
+            <div class="p-3 bg-[--color-bg-secondary] rounded-lg">
+              <p class="text-2xl font-bold text-[--color-accent-primary]">10+ Std</p>
+              <p class="text-xs text-[--color-text-secondary]">Laufzeit</p>
+            </div>
+          </div>
+        </div>
+
+        <h2>Wie viele brauchst du?</h2>
+        <ul>
+          <li><strong>Minimum:</strong> 2 Taschenlampen (Haupt + Backup)</li>
+          <li><strong>Empfohlen:</strong> 1 pro Raum + 1 Stirnlampe pro Person</li>
+          <li><strong>Familie:</strong> 3-4 Taschenlampen + Stirnlampen</li>
+        </ul>
+
+        <h2>LED vs. andere Technologien</h2>
+        <p>
+          <strong>LED ist der Standard.</strong> Glühbirnen sind veraltet. LED-Vorteile:
+        </p>
+        <ul>
+          <li>90% weniger Energieverbrauch</li>
+          <li>Bis zu 50.000 Stunden Lebensdauer</li>
+          <li>Robust gegen Stöße</li>
+          <li>Sofort volle Helligkeit</li>
+        </ul>
+
+        <h2>Batterie-Optionen</h2>
+
+        <h3>AA/AAA-Batterien</h3>
+        <ul>
+          <li>✓ Überall erhältlich</li>
+          <li>✓ Lange Lagerfähigkeit (5-10 Jahre)</li>
+          <li>✗ Müssen regelmäßig ersetzt werden</li>
+        </ul>
+
+        <h3>Wiederaufladbar (18650, USB-C)</h3>
+        <ul>
+          <li>✓ Kostengünstig auf Dauer</li>
+          <li>✓ Kann über Powerbank geladen werden</li>
+          <li>✗ Braucht Zugang zu Strom zum Laden</li>
+        </ul>
+
+        <div class="card p-6 my-8 bg-[--color-accent-subtle] not-prose">
+          <p class="font-medium mb-2">💡 Tipp: Beides haben</p>
+          <p class="text-sm text-[--color-text-secondary]">
+            Ideal: Eine aufladbare Haupttaschenlampe + eine Batterie-Backup-Lampe.
+            Lagere mindestens <strong>2 Sätze Ersatzbatterien</strong>.
+          </p>
+        </div>
+
+        <h2>Wichtige Funktionen</h2>
+        <ul>
+          <li><strong>Mehrere Modi:</strong> Hoch, niedrig, SOS-Blinken</li>
+          <li><strong>Wasserdicht (IPX4+):</strong> Spritzwasserschutz minimum</li>
+          <li><strong>Fokussierbar:</strong> Breiter Lichtkegel für Raumbeleuchtung, Spot für Distanz</li>
+          <li><strong>Robustes Gehäuse:</strong> Aluminium oder verstärkter Kunststoff</li>
+          <li><strong>Lanyard-Öse:</strong> Zum Aufhängen oder Tragen</li>
+        </ul>
+
+        <h2>Stirnlampen — unterschätzt aber essentiell</h2>
+        <p>
+          Mit einer Stirnlampe hast du <strong>beide Hände frei</strong> für:
+        </p>
+        <ul>
+          <li>Kochen ohne Strom</li>
+          <li>Erste Hilfe leisten</li>
+          <li>Reparaturen durchführen</li>
+          <li>Kinder betreuen</li>
+        </ul>
+
+        <h2>Empfohlene Marken</h2>
+        <p>Qualitätsmarken für Notfall-Taschenlampen:</p>
+        <ul>
+          <li><strong>Fenix</strong> — professionelle Qualität</li>
+          <li><strong>Ledlenser</strong> — deutsche Qualität</li>
+          <li><strong>Olight</strong> — gutes Preis-Leistungs-Verhältnis</li>
+          <li><strong>Nitecore</strong> — für Enthusiasten</li>
+          <li><strong>Petzl</strong> — beste Stirnlampen</li>
+        </ul>
+
+        <h2>Checkliste</h2>
+        <ul>
+          <li>☐ Mindestens 2 Taschenlampen</li>
+          <li>☐ LED-Technologie</li>
+          <li>☐ 200+ Lumen</li>
+          <li>☐ Wasserdicht (IPX4+)</li>
+          <li>☐ Ersatzbatterien (2 Sätze)</li>
+          <li>☐ 1 Stirnlampe pro Person</li>
+          <li>☐ Funktionstest alle 6 Monate</li>
+        </ul>
+      </div>
+
+      <!-- Used in Scenarios -->
+      <div class="mt-12">
+        <h3 class="font-semibold mb-4 flex items-center gap-2">
+          <Icon name="AlertTriangle" size={20} class="text-amber-500" />
+          Wichtig bei diesen Szenarien
+        </h3>
+        <div class="grid sm:grid-cols-2 gap-3">
+          <a href="/de/szenarien/stromausfall/" class="card p-4 flex items-center gap-3 hover:border-amber-500 transition-colors">
+            <Icon name="Zap" size={24} class="text-amber-500" />
+            <span class="font-medium">Stromausfall</span>
+          </a>
+          <a href="/de/szenarien/evakuierung/" class="card p-4 flex items-center gap-3 hover:border-emerald-500 transition-colors">
+            <Icon name="Car" size={24} class="text-emerald-500" />
+            <span class="font-medium">Evakuierung</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Amazon Link -->
+      <div class="mt-12 card p-6 bg-[--color-bg-tertiary]">
+        <h3 class="font-semibold mb-2">Taschenlampen auf Amazon.de</h3>
+        <p class="text-sm text-[--color-text-secondary] mb-4">
+          Empfohlene LED-Taschenlampen für Notfälle.
+        </p>
+        <a
+          href="https://www.amazon.de/s?k=led+taschenlampe+notfall&tag=kit72de-21"
+          target="_blank"
+          rel="noopener noreferrer sponsored"
+          class="inline-flex items-center gap-2 px-4 py-2 bg-[--color-accent-primary] text-[--color-bg-primary] font-medium rounded hover:bg-[--color-accent-hover] transition-colors"
+        >
+          Auf Amazon ansehen
+          <Icon name="ExternalLink" size={16} />
+        </a>
+        <p class="text-xs text-[--color-text-muted] mt-3">
+          * Affiliate-Link — du zahlst nicht mehr, wir erhalten eine kleine Provision.
+        </p>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

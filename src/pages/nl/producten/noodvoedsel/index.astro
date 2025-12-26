@@ -1,0 +1,164 @@
+---
+import BaseLayout from '../../../../layouts/BaseLayout.astro';
+import Breadcrumb from '../../../../components/layout/Breadcrumb.astro';
+import Icon from '../../../../components/ui/Icon.astro';
+import HeroImage from '../../../../components/content/HeroImage.astro';
+---
+
+<BaseLayout
+  title="Noodvoedsel: Wat kopen? Houdbaarheid & Calorieën — Gids"
+  description="Het juiste noodvoedsel voor je noodpakket. Conserven, droogvoedsel, calorieën en opslag."
+  locale="nl"
+  dateModified="2025-12-16"
+  schemaType="Article"
+  alternates={{
+    de: '/de/produkte/notnahrung/',
+  }}
+>
+  <section class="py-16">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6">
+      <Breadcrumb items={[{ label: 'Producten', href: '/nl/producten/' }, { label: 'Noodvoedsel' }]} class="mb-4" locale="nl" />
+      <h1 class="text-4xl font-bold mb-6">Noodvoedsel</h1>
+
+      <div class="mb-8">
+        <HeroImage
+          src="/images/shared/emergency-kit-flatlay.webp"
+          alt="Noodvoedsel en levensmiddelenvoorraad voor noodgevallen"
+          priority={true}
+        />
+      </div>
+
+      <div class="prose prose-lg">
+        <p class="lead">
+          Je overleeft weken zonder eten — maar voor 72 uur heb je energie nodig
+          om handelingsbekwaam te blijven. Kies voedsel dat <strong>geen koeling
+          en weinig bereiding</strong> nodig heeft.
+        </p>
+
+        <!-- Calorie Guide -->
+        <div class="card p-6 my-8 bg-[--color-bg-tertiary] not-prose">
+          <h3 class="text-lg font-semibold mb-4 flex items-center gap-2">
+            <Icon name="UtensilsCrossed" size={20} class="text-[--color-accent-primary]" />
+            Caloriebehoefte
+          </h3>
+          <div class="grid sm:grid-cols-2 gap-4">
+            <div class="p-4 bg-[--color-bg-secondary] rounded-lg">
+              <p class="text-2xl font-bold text-[--color-accent-primary]">1.500-2.000</p>
+              <p class="text-sm text-[--color-text-secondary]">kcal per dag (minimum)</p>
+            </div>
+            <div class="p-4 bg-[--color-bg-secondary] rounded-lg">
+              <p class="text-2xl font-bold text-[--color-accent-primary]">4.500-6.000</p>
+              <p class="text-sm text-[--color-text-secondary]">kcal per persoon voor 72 uur</p>
+            </div>
+          </div>
+        </div>
+
+        <h2>Soorten noodvoedsel</h2>
+
+        <h3>Direct eetbaar (geen koken)</h3>
+        <ul>
+          <li><strong>Energierepen, mueslirepen:</strong> Compact, calorierijk</li>
+          <li><strong>Noten en gedroogd fruit:</strong> Lang houdbaar, voedzaam</li>
+          <li><strong>Knäckebröd, beschuit:</strong> Geen schimmelrisico</li>
+          <li><strong>Pindakaas:</strong> Hoge energiedichtheid</li>
+          <li><strong>Honing:</strong> Onbeperkt houdbaar</li>
+        </ul>
+
+        <h3>Conserven</h3>
+        <ul>
+          <li><strong>Tonijn, sardines:</strong> Eiwitrijk, lang houdbaar</li>
+          <li><strong>Bonen, linzen:</strong> Eiwit en vezels</li>
+          <li><strong>Fruit op siroop:</strong> Vitamines en suikers</li>
+          <li><strong>Groenten:</strong> Mais, erwten, wortelen</li>
+          <li><strong>Kant-en-klaarmaaltijden:</strong> Ravioli, goulash (zonder koken eetbaar)</li>
+        </ul>
+
+        <div class="card p-4 my-6 border-l-4 border-l-amber-500 bg-amber-50 dark:bg-amber-950/30 not-prose">
+          <p class="text-sm">
+            <strong>⚠️ Belangrijk:</strong> Een <strong>handblikopener</strong> is
+            onmisbaar! Zonder stroom werkt je elektrische niet.
+          </p>
+        </div>
+
+        <h3>Droogvoedsel (met water)</h3>
+        <ul>
+          <li><strong>Havermout:</strong> Met koud water eetbaar (overnight oats)</li>
+          <li><strong>Instantnoedels:</strong> Snel klaar</li>
+          <li><strong>Couscous:</strong> Zwelt in warm water</li>
+          <li><strong>Melkpoeder:</strong> Voor dranken en muesli</li>
+        </ul>
+
+        <h3>Speciale noodvoeding</h3>
+        <ul>
+          <li><strong>NRG-5, BP-WR:</strong> Compacte noodrepen, 15-20 jaar houdbaar</li>
+          <li><strong>Gevriesdroogde maaltijden:</strong> Licht, lang houdbaar</li>
+          <li><strong>Astronautenvoeding:</strong> Compact, calorierijk</li>
+        </ul>
+
+        <h2>Het rotatieprincipe</h2>
+        <p>
+          Slim: Integreer je noodvoorraad in het dagelijks leven, in plaats van het te laten vergeten.
+        </p>
+        <ol>
+          <li><strong>FIFO:</strong> First In, First Out — Oudste eerst verbruiken</li>
+          <li><strong>Regelmatig koken:</strong> Conserven in normale maaltijden verwerken</li>
+          <li><strong>Direct aanvullen:</strong> Verbruikte producten meteen vervangen</li>
+          <li><strong>Houdbaarheidsdatums controleren:</strong> Elke 3 maanden checken</li>
+        </ol>
+
+        <h2>Opslag</h2>
+        <ul>
+          <li><strong>Koel:</strong> Onder 20°C — Hitte verkort houdbaarheid</li>
+          <li><strong>Donker:</strong> Licht versnelt vitamineafbraak</li>
+          <li><strong>Droog:</strong> Vocht leidt tot schimmel</li>
+          <li><strong>Ongediertebestendig:</strong> Containers tegen motten en muizen</li>
+        </ul>
+
+        <div class="card p-6 my-8 bg-[--color-accent-subtle] not-prose">
+          <p class="font-medium mb-2">💡 Camping brander als optie</p>
+          <p class="text-sm text-[--color-text-secondary]">
+            Een klein gasstelletje maakt warme maaltijden mogelijk.
+            <strong>Alleen buiten of bij zeer goede ventilatie gebruiken!</strong>
+            Gasgeur = direct ventileren en niet gebruiken.
+          </p>
+        </div>
+
+        <h2>Speciale behoeften</h2>
+        <ul>
+          <li><strong>Baby's:</strong> Kant-en-klare babyvoeding (geen poedermelk zonder veilig water)</li>
+          <li><strong>Allergieën:</strong> Alternatieven voor noten-, gluten-, lactose-intolerantie</li>
+          <li><strong>Diabetici:</strong> Druivensuiker voor hypoglycemie, koolhydraatgecontroleerde snacks</li>
+          <li><strong>Huisdieren:</strong> Apart voedselvoorraad aanleggen</li>
+        </ul>
+
+        <h2>Checklist</h2>
+        <ul>
+          <li>☐ Minimaal 4.500 kcal per persoon (72 uur)</li>
+          <li>☐ Mix van direct eetbaar en conserven</li>
+          <li>☐ Handblikopener</li>
+          <li>☐ Wegwerpservies/-bestek</li>
+          <li>☐ Speciaalvoeding voor gezinsleden</li>
+          <li>☐ Houdbaarheidsdatums gecontroleerd</li>
+          <li>☐ Rotatieplan opgesteld</li>
+        </ul>
+      </div>
+
+      <!-- Shop Link -->
+      <div class="mt-12 card p-6 bg-[--color-bg-tertiary]">
+        <h3 class="font-semibold mb-2">Noodvoedsel op Bol.com</h3>
+        <p class="text-sm text-[--color-text-secondary] mb-4">
+          Aanbevolen noodvoeding met lange houdbaarheid.
+        </p>
+        <a
+          href="https://www.bol.com/nl/nl/s/?searchtext=noodvoedsel+lang+houdbaar"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex items-center gap-2 px-4 py-2 bg-[--color-accent-primary] text-[--color-bg-primary] font-medium rounded hover:bg-[--color-accent-hover] transition-colors"
+        >
+          Bekijk op Bol.com
+          <Icon name="ExternalLink" size={16} />
+        </a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

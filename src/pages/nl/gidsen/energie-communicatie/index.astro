@@ -1,0 +1,195 @@
+---
+import BaseLayout from '../../../../layouts/BaseLayout.astro';
+import Breadcrumb from '../../../../components/layout/Breadcrumb.astro';
+import Icon from '../../../../components/ui/Icon.astro';
+---
+
+<BaseLayout
+  title="Energie & Communicatie — Kit-72"
+  description="Blijf verbonden en geïnformeerd bij stroomuitval. Powerbanks, noodradio's en verlichting voor noodsituaties."
+  locale="nl"
+  dateModified="2025-12-15"
+  schemaType="Article"
+>
+  <section class="py-16">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6">
+      <Breadcrumb items={[{ label: 'Gidsen', href: '/nl/gidsen/' }, { label: 'Energie & Communicatie' }]} class="mb-4" locale="nl" />
+      <h1 class="text-4xl font-bold mb-6">Energie & Communicatie</h1>
+
+      <div class="prose prose-lg">
+        <p class="lead">
+          Bij stroomuitval vallen niet alleen lampen uit — ook internet, mobiele netwerken en
+          vaste telefonie kunnen verstoord raken. Voorbereiding is essentieel om
+          <strong>geïnformeerd en bereikbaar</strong> te blijven.
+        </p>
+
+        <!-- Impact Overview -->
+        <div class="card p-6 my-8 bg-[--color-bg-tertiary] not-prose">
+          <h3 class="text-lg font-semibold mb-4 flex items-center gap-2">
+            <Icon name="AlertTriangle" size={20} class="text-amber-500" />
+            Wat valt uit bij stroomstoring?
+          </h3>
+          <div class="grid sm:grid-cols-2 gap-3 text-sm">
+            <div class="flex items-center gap-2 text-[--color-text-secondary]">
+              <span class="text-red-500">✗</span> Internet (router heeft stroom nodig)
+            </div>
+            <div class="flex items-center gap-2 text-[--color-text-secondary]">
+              <span class="text-red-500">✗</span> WiFi en smart home
+            </div>
+            <div class="flex items-center gap-2 text-[--color-text-secondary]">
+              <span class="text-amber-500">~</span> Mobiel netwerk (noodstroom ~2-8u)
+            </div>
+            <div class="flex items-center gap-2 text-[--color-text-secondary]">
+              <span class="text-red-500">✗</span> Vaste telefoon (meestal)
+            </div>
+            <div class="flex items-center gap-2 text-[--color-text-secondary]">
+              <span class="text-green-500">✓</span> FM/AM-radio (met batterijen)
+            </div>
+            <div class="flex items-center gap-2 text-[--color-text-secondary]">
+              <span class="text-green-500">✓</span> Zaklampen (met batterijen)
+            </div>
+          </div>
+        </div>
+
+        <h2>Powerbank — Houd je Smartphone Werkend</h2>
+        <p>
+          Je smartphone is essentieel in noodsituaties: 112 bellen, NL-Alert, contact met familie.
+        </p>
+
+        <h3>Hoeveel capaciteit heb je nodig?</h3>
+        <ul>
+          <li><strong>10.000 mAh</strong> — laadt een gemiddelde smartphone 2-3x op</li>
+          <li><strong>20.000 mAh</strong> — aanbevolen voor 2 personen of 72 uur</li>
+          <li><strong>30.000+ mAh</strong> — voor gezinnen of langere uitval</li>
+        </ul>
+
+        <div class="card p-6 my-8 bg-[--color-accent-subtle] not-prose">
+          <p class="font-medium mb-2">💡 Energie besparen in noodgevallen</p>
+          <ul class="text-sm text-[--color-text-secondary] space-y-1">
+            <li>• <strong>Vliegtuigmodus</strong> aanzetten als er geen bereik is</li>
+            <li>• <strong>Helderheid</strong> op minimum zetten</li>
+            <li>• <strong>Spaarstand</strong> inschakelen</li>
+            <li>• <strong>Apps sluiten</strong> — vooral social media</li>
+            <li>• <strong>Alleen noodzakelijk</strong> — NL-Alert, SMS, 112</li>
+          </ul>
+        </div>
+
+        <h3>Tips voor Powerbanks</h3>
+        <ul>
+          <li><strong>Regelmatig opladen</strong> — elke 2-3 maanden naar 50-80%</li>
+          <li><strong>Koel bewaren</strong> — hitte beschadigt de accu</li>
+          <li><strong>Kwaliteit kopen</strong> — merken als Anker, RAVPower, Belkin</li>
+          <li><strong>Juiste kabels</strong> — USB-C, Lightning klaarleggen</li>
+        </ul>
+
+        <h2>Noodradio — Informatie Zonder Stroom</h2>
+        <p>
+          Als alles uitvalt, zendt de radio nog steeds uit. NPO Radio 1 is het officiële
+          kanaal voor <strong>overheidswaarschuwingen</strong>.
+        </p>
+
+        <h3>Waar op letten?</h3>
+        <ul>
+          <li><strong>FM + AM</strong> — FM is meestal genoeg, AM heeft groter bereik</li>
+          <li><strong>Zwengeldynamo</strong> — noodwerking zonder batterijen</li>
+          <li><strong>Zonnepaneel</strong> — handig bij langere uitval</li>
+          <li><strong>Ingebouwde zaklamp</strong> — praktische dubbelfunctie</li>
+          <li><strong>USB-uitgang</strong> — kan telefoon noodladen</li>
+        </ul>
+
+        <div class="card p-4 my-6 border-l-4 border-l-blue-500 bg-blue-50 dark:bg-blue-950/30 not-prose">
+          <p class="text-sm">
+            <strong>📻 Belangrijke Frequenties:</strong><br>
+            NPO Radio 1: 91.8 MHz (landelijk) of 98.9 MHz (Randstad)<br>
+            Noteer de frequenties van je lokale omroep
+          </p>
+        </div>
+
+        <h2>Verlichting — Zien Zonder Stroom</h2>
+
+        <h3>LED-zaklampen</h3>
+        <ul>
+          <li><strong>Minimaal 200 lumen</strong> — helder genoeg voor de meeste situaties</li>
+          <li><strong>Waterdicht (IPX4+)</strong> — ook bij regen bruikbaar</li>
+          <li><strong>Lange looptijd</strong> — LED verbruikt weinig, AA/AAA-batterijen</li>
+          <li><strong>Meerdere stuks</strong> — één per kamer, één binnen handbereik</li>
+        </ul>
+
+        <h3>Hoofdlampen</h3>
+        <p>
+          <strong>Onderschat maar super handig:</strong> Beide handen vrij voor koken,
+          reparaties, EHBO. Ideaal voor elk gezinslid.
+        </p>
+
+        <h3>Kaarsen als Backup</h3>
+        <ul>
+          <li>Alleen met stabiele kaarsenhouders gebruiken</li>
+          <li>Nooit onbewaakt laten branden</li>
+          <li>Niet in de buurt van gordijnen of papier</li>
+          <li>Lucifers of aansteker klaarleggen</li>
+        </ul>
+
+        <div class="card p-4 my-6 border-l-4 border-l-amber-500 bg-amber-50 dark:bg-amber-950/30 not-prose">
+          <p class="text-sm">
+            <strong>⚠️ Brandgevaar:</strong> Bij noodsituaties zijn er bovengemiddeld veel
+            branden door kaarsen. LED-verlichting is veiliger!
+          </p>
+        </div>
+
+        <h2>Offline Contactenlijst</h2>
+        <p>
+          Als je telefoon leeg is of het netwerk uitvalt, heb je de belangrijkste
+          nummers <strong>op papier</strong> nodig.
+        </p>
+        <ul>
+          <li>Familieleden en goede vrienden</li>
+          <li>Buren (wederzijdse hulp!)</li>
+          <li>Werkgever</li>
+          <li>Huisarts en kinderarts</li>
+          <li>Verzekeringen</li>
+          <li>Hulpdiensten: 112 (spoed), 0900-8844 (politie niet-spoed)</li>
+        </ul>
+
+        <h2>Checklist Energie & Communicatie</h2>
+        <ul>
+          <li>☐ Powerbank 20.000+ mAh, opgeladen</li>
+          <li>☐ Oplaadkabels voor alle apparaten</li>
+          <li>☐ Batterij- of zwengelradio</li>
+          <li>☐ LED-zaklamp per kamer</li>
+          <li>☐ Reservebatterijen (AA, AAA)</li>
+          <li>☐ Hoofdlamp voor iedereen</li>
+          <li>☐ Offline contactenlijst uitgeprint</li>
+          <li>☐ NL-Alert staat aan op telefoon</li>
+        </ul>
+      </div>
+
+      <!-- Product CTAs -->
+      <div class="mt-12 grid sm:grid-cols-2 gap-4">
+        <div class="card p-6 bg-[--color-bg-tertiary]">
+          <h3 class="font-semibold mb-2">Powerbank kopen</h3>
+          <p class="text-sm text-[--color-text-secondary] mb-4">
+            Onze aanbevelingen voor betrouwbare powerbanks.
+          </p>
+          <a
+            href="/nl/producten/powerbanks/"
+            class="inline-flex items-center gap-2 text-[--color-accent-primary] hover:underline"
+          >
+            Naar de powerbanks →
+          </a>
+        </div>
+        <div class="card p-6 bg-[--color-bg-tertiary]">
+          <h3 class="font-semibold mb-2">Noodradio kopen</h3>
+          <p class="text-sm text-[--color-text-secondary] mb-4">
+            Radio's met zwengel, zonnepaneel en zaklamp.
+          </p>
+          <a
+            href="/nl/producten/noodradio/"
+            class="inline-flex items-center gap-2 text-[--color-accent-primary] hover:underline"
+          >
+            Naar de noodradio's →
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

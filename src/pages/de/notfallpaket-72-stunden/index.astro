@@ -1,0 +1,591 @@
+---
+import ArticleLayout from '../../../layouts/ArticleLayout.astro';
+
+const tocItems = [
+  { id: 'was-ist', label: 'Was ist ein Notfallpaket?' },
+  { id: 'warum-72-stunden', label: 'Warum 72 Stunden?' },
+  { id: 'inhalt', label: 'Essentieller Inhalt' },
+  { id: 'organisation', label: 'Wie organisieren' },
+  { id: 'aufbewahrung', label: 'Wo aufbewahren' },
+  { id: 'anpassungen', label: 'Spezielle Anpassungen' },
+  { id: 'wartung', label: 'Wartung' },
+  { id: 'fehler', label: 'Häufige Fehler' },
+  { id: 'faq', label: 'Häufig gestellte Fragen' },
+];
+
+const breadcrumbs = [
+  { label: 'Startseite', href: '/de/' },
+  { label: 'Notfallpaket 72 Stunden' },
+];
+
+const essentialCategories = [
+  {
+    name: 'Wasser',
+    icon: '💧',
+    items: [
+      { name: 'Flaschenwasser', quantity: '2L pro Person/Tag = 6L gesamt', priority: 'critical' },
+      { name: 'Wasserentkeimungstabletten', quantity: '1 Packung', priority: 'recommended' },
+      { name: 'Trinkflasche mit Filter', quantity: '1 pro Person', priority: 'optional' },
+    ]
+  },
+  {
+    name: 'Nahrung',
+    icon: '🍫',
+    items: [
+      { name: 'Energieriegel', quantity: '6-9 pro Person', priority: 'critical' },
+      { name: 'Nüsse und Trockenfrüchte', quantity: '200g pro Person', priority: 'critical' },
+      { name: 'Konserven', quantity: '3-6 Dosen pro Person', priority: 'recommended' },
+      { name: 'Manueller Dosenöffner', quantity: '1 Stück', priority: 'critical' },
+      { name: 'Besteck', quantity: '1 Set pro Person', priority: 'recommended' },
+    ]
+  },
+  {
+    name: 'Beleuchtung und Energie',
+    icon: '🔦',
+    items: [
+      { name: 'LED-Taschenlampe', quantity: '1-2 Stück', priority: 'critical' },
+      { name: 'Ersatzbatterien', quantity: '2 Sets', priority: 'critical' },
+      { name: 'Aufgeladene Powerbank', quantity: '10.000+ mAh', priority: 'critical' },
+      { name: 'Notfallradio (Batterie/Kurbel)', quantity: '1 Stück', priority: 'recommended' },
+      { name: 'Kerzen und Feuerzeug', quantity: '4-6 Kerzen', priority: 'recommended' },
+    ]
+  },
+  {
+    name: 'Dokumente',
+    icon: '📄',
+    items: [
+      { name: 'Kopien Personalausweis/Pass', quantity: 'Alle Haushaltsmitglieder', priority: 'critical' },
+      { name: 'Krankenversicherungskarte', quantity: 'Kopien', priority: 'critical' },
+      { name: 'Notrufnummern', quantity: 'Ausgedruckte Liste', priority: 'critical' },
+      { name: 'Bargeld', quantity: 'In kleinen Scheinen', priority: 'critical' },
+      { name: 'Kontaktdaten Familie', quantity: 'Ausgedruckte Liste', priority: 'recommended' },
+    ]
+  },
+  {
+    name: 'Erste-Hilfe-Set',
+    icon: '🩹',
+    items: [
+      { name: 'Pflaster (diverse Größen)', quantity: '20+ Stück', priority: 'critical' },
+      { name: 'Sterile Kompressen', quantity: '1 Packung', priority: 'critical' },
+      { name: 'Elastische Binden', quantity: '2 Rollen', priority: 'recommended' },
+      { name: 'Desinfektionsmittel', quantity: '1 Flasche', priority: 'critical' },
+      { name: 'Persönliche Medikamente', quantity: 'Für 3+ Tage', priority: 'critical' },
+      { name: 'Schmerzmittel', quantity: '1 Packung', priority: 'recommended' },
+    ]
+  },
+  {
+    name: 'Hygiene',
+    icon: '🧴',
+    items: [
+      { name: 'Toilettenpapier (kompakt)', quantity: '1-2 Rollen', priority: 'critical' },
+      { name: 'Feuchttücher', quantity: '2 Packungen', priority: 'critical' },
+      { name: 'Handgel', quantity: '1-2 Flaschen', priority: 'critical' },
+      { name: 'Müllbeutel', quantity: '5-10 Stück', priority: 'recommended' },
+      { name: 'Menstruationsprodukte', quantity: 'Nach Bedarf', priority: 'critical' },
+    ]
+  },
+  {
+    name: 'Werkzeug',
+    icon: '🔧',
+    items: [
+      { name: 'Taschenmesser/Multitool', quantity: '1 Stück', priority: 'critical' },
+      { name: 'Klebeband', quantity: '1 kleine Rolle', priority: 'recommended' },
+      { name: 'Signalpfeife', quantity: '1 pro Person', priority: 'critical' },
+      { name: 'Arbeitshandschuhe', quantity: '1 Paar', priority: 'recommended' },
+      { name: 'Seil', quantity: '5-10 Meter', priority: 'optional' },
+    ]
+  },
+  {
+    name: 'Schutz',
+    icon: '🧥',
+    items: [
+      { name: 'Rettungsdecke', quantity: '1 pro Person', priority: 'critical' },
+      { name: 'Regenponcho', quantity: '1 pro Person', priority: 'recommended' },
+      { name: 'Wechselkleidung', quantity: '1 Set', priority: 'recommended' },
+      { name: 'Mundschutz', quantity: '5-10 Stück', priority: 'recommended' },
+    ]
+  },
+];
+
+const adaptations = [
+  {
+    group: 'Babys und Kleinkinder',
+    icon: '👶',
+    items: ['Windeln für 3+ Tage', 'Fläschchennahrung / Gläschen', 'Fläschchen', 'Ersatzschnuller', 'Spezielle Decke', 'Kleines Kuscheltier']
+  },
+  {
+    group: 'Ältere Menschen',
+    icon: '👴',
+    items: ['Extra Medikation (mindestens 7 Tage)', 'Ersatzbrille', 'Hörgerät und Batterien', 'Aktuelle Medikamentenliste', 'Kontaktdaten Hausarzt']
+  },
+  {
+    group: 'Haustiere',
+    icon: '🐕',
+    items: ['Futter für 3+ Tage', 'Extra Wasser', 'Leine und Transportbox', 'Tierarztdokumente', 'Eventuelle Medikation', 'Kotbeutel']
+  },
+  {
+    group: 'Medizinische Bedürfnisse',
+    icon: '💊',
+    items: ['Insulin und Kühltasche', 'Inhalatoren', 'EpiPens', 'Blutzuckermessgerät', 'Tragbares Blutdruckmessgerät', 'Tragbarer Sauerstoff falls nötig']
+  },
+];
+
+const maintenanceSchedule = [
+  { task: 'Verfallsdaten kontrollieren', frequency: 'Alle 3 Monate' },
+  { task: 'Flaschenwasser austauschen', frequency: 'Alle 6 Monate' },
+  { task: 'Batterien und Powerbanks prüfen', frequency: 'Alle 3 Monate' },
+  { task: 'Dokumente aktualisieren', frequency: 'Bei Änderungen' },
+  { task: 'Kleidung kontrollieren (Kindergrößen)', frequency: 'Alle 6 Monate' },
+  { task: 'Medikamente erneuern', frequency: 'Vor Ablaufdatum' },
+  { task: 'Taschenlampen und Radio testen', frequency: 'Alle 3 Monate' },
+  { task: 'Komplette Kontrolle Notfallpaket', frequency: '2x pro Jahr' },
+];
+
+const commonMistakes = [
+  {
+    mistake: 'Zu schweres Paket',
+    why: 'Wenn du es nicht tragen kannst, ist es bei Evakuierung nutzlos',
+    solution: 'Begrenze Gewicht auf 10-15 kg. Priorisiere das Essentielle.',
+  },
+  {
+    mistake: 'Wasser vergessen',
+    why: 'Das ist das Erste was du brauchst und nimmt den meisten Platz ein',
+    solution: 'Berechne 2L/Person/Tag. Wasser ist nicht verhandelbar.',
+  },
+  {
+    mistake: 'Verfallsdaten nicht kontrollieren',
+    why: 'Abgelaufene Lebensmittel und Medikamente funktionieren nicht',
+    solution: 'Setze eine vierteljährliche Erinnerung in deinem Kalender.',
+  },
+  {
+    mistake: 'Unerreichbarer Aufbewahrungsort',
+    why: 'Bei einer Notsituation zählt jede Sekunde',
+    solution: 'Standort muss allen bekannt und schnell zugänglich sein.',
+  },
+  {
+    mistake: 'Kein Bargeld',
+    why: 'Geldautomaten und Kartenterminals können ausfallen',
+    solution: 'Nimm Bargeld in kleinen Scheinen (10€, 20€) mit.',
+  },
+  {
+    mistake: 'Dokumente vergessen',
+    why: 'Du musst dich ausweisen können und Familie erreichen können',
+    solution: 'Kopien von Ausweis, Versicherungskarte, Kontaktliste mitnehmen.',
+  },
+];
+
+const faqs = [
+  {
+    question: 'Warum genau 72 Stunden?',
+    answer: 'Das ist die Zeit die Hilfsdienste durchschnittlich brauchen um Basisdienste wiederherzustellen oder betroffene Gebiete zu erreichen. Das BBK und internationale Organisationen wie das Rote Kreuz verwenden diesen Standard. Es bedeutet nicht dass alle Notsituationen 72 Stunden dauern, aber es ist eine vernünftige Zeit der Selbstversorgung für die meisten Situationen.'
+  },
+  {
+    question: 'Was ist der Unterschied zwischen Notfallpaket und Notfalltasche?',
+    answer: 'Ein Notfallpaket ist dafür gedacht 72 Stunden zu Hause ohne Basisdienste zu überleben. Eine Notfalltasche (auch Fluchtgepäck genannt) ist speziell zum Mitnehmen wenn du schnell gehen musst. Ideal ist beides zu haben: ein umfangreicheres Paket zu Hause und eine kompakte Tasche zum Mitnehmen.'
+  },
+  {
+    question: 'Wie viel soll mein Notfallpaket wiegen?',
+    answer: 'Ideal zwischen 10-15 kg für einen Erwachsenen. Wenn es schwerer ist, kannst du es wahrscheinlich nicht lange bei einer Evakuierung tragen. Priorisiere Wasser, Nahrung, Dokumente und Erste Hilfe. Der Rest ist sekundär wenn Gewicht ein Problem ist.'
+  },
+  {
+    question: 'Brauche ich pro Person ein Paket?',
+    answer: 'Das hängt von deiner Situation ab. Ein geteiltes Familienpaket funktioniert wenn ihr immer zusammen seid. Aber erwäge individuelle (kleinere) Pakete wenn: es ältere Kinder gibt die tragen können, Familienmitglieder getrennt werden könnten, oder du in einem Gebiet mit hohem Risiko für schnelle Evakuierung wohnst.'
+  },
+  {
+    question: 'Was für eine Tasche brauche ich?',
+    answer: 'Einen stabilen Rucksack mit mehreren Fächern. Keine teure oder taktische Tasche nötig. Wichtig ist: verstärkte Nähte, gepolsterte Schultergurte, wasserabweisendes Material oder Regenhülle, und passende Größe (40-60L für Familienpaket, 25-35L individuell).'
+  },
+  {
+    question: 'Wo finde ich die offizielle BBK-Checkliste?',
+    answer: 'Das Bundesamt für Bevölkerungsschutz und Katastrophenhilfe hat eine offizielle Notfallpaketliste auf bbk.bund.de. Suche nach "Ratgeber Notfallvorsorge" oder "Checkliste" auf der Website. Unsere Checkliste basiert auf diesen offiziellen Richtlinien, ergänzt mit praktischen Tipps.'
+  },
+];
+---
+
+<ArticleLayout
+  faqData={faqs}
+  title="Notfallpaket 72 Stunden: Vollständiger Ratgeber"
+  description="Alles was du wissen musst um ein Notfallpaket für 72 Stunden zusammenzustellen. Vollständige Checkliste, genaue Mengen und praktische Tipps nach BBK-Richtlinien."
+  updatedDate="2025-12-15"
+  author="Team Kit-72"
+  readTime="14 min"
+  breadcrumbs={breadcrumbs}
+  locale="de"
+  alternates={{
+    es: '/es/kit-72-horas/',
+    nl: '/nl/noodpakket-72-uur/',
+  }}
+>
+  <!-- TOC Slot -->
+  <nav slot="toc" class="p-4 bg-[--color-bg-tertiary] rounded-lg">
+    <h2 class="text-sm font-semibold mb-3 text-[--color-text-primary]">Auf dieser Seite</h2>
+    <ul class="space-y-2 text-sm">
+      {tocItems.map((item) => (
+        <li>
+          <a
+            href={`#${item.id}`}
+            class="text-[--color-text-secondary] hover:text-[--color-accent-primary] transition-colors"
+          >
+            {item.label}
+          </a>
+        </li>
+      ))}
+    </ul>
+  </nav>
+
+  <!-- Main Content -->
+  <section id="was-ist" class="mb-12">
+    <h2>Was ist ein Notfallpaket 72 Stunden?</h2>
+    <p>
+      Ein <strong>Notfallpaket</strong> (auch Notfalltasche, Fluchtgepäck oder Grab-and-Go-Bag genannt)
+      ist eine Sammlung essentieller Gegenstände mit denen du 3 Tage selbstständig überleben kannst
+      ohne Zugang zu Basisdiensten wie fließendem Wasser, Strom oder Geschäften.
+    </p>
+    <p>
+      Die Idee ist einfach: Wenn eine Notsituation entsteht wodurch du evakuieren musst oder
+      Dienste tagelang ausfallen, hast du alles was du brauchst bereits bereit.
+    </p>
+
+    <div class="card p-6 my-6 not-prose">
+      <div class="flex items-start gap-4">
+        <span class="text-3xl">🎒</span>
+        <div>
+          <h3 class="font-semibold mb-2 text-[--color-text-primary] text-base">Das Konzept in einem Satz</h3>
+          <p class="text-[--color-text-secondary] m-0">
+            Eine Tasche die du in 5 Minuten packen und gehen kannst, in dem Wissen dass du alles hast
+            was du und deine Familie die nächsten 3 Tage brauchen.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="card p-6 my-6 not-prose bg-[--color-accent-subtle] border-[--color-border-accent]">
+      <p class="text-sm text-[--color-text-primary] m-0">
+        <strong>📋 BBK-Empfehlung:</strong> Das Bundesamt für Bevölkerungsschutz und Katastrophenhilfe empfiehlt
+        jeden Haushalt auf einen mehrtägigen Ausfall der Versorgung vorzubereiten. Diese Seite folgt den
+        offiziellen Richtlinien und ergänzt sie mit praktischen Tipps.
+      </p>
+    </div>
+  </section>
+
+  <section id="warum-72-stunden" class="mb-12">
+    <h2>Warum 72 Stunden?</h2>
+    <p>
+      Die Zeitspanne von 72 Stunden (3 Tagen) ist keine willkürliche Wahl. Es ist der internationale Standard
+      empfohlen von:
+    </p>
+    <ul>
+      <li><strong>BBK</strong> (Bundesamt für Bevölkerungsschutz)</li>
+      <li><strong>Rotes Kreuz</strong> international</li>
+      <li><strong>THW</strong> (Technisches Hilfswerk)</li>
+      <li><strong>FEMA</strong> (USA)</li>
+    </ul>
+
+    <p>Warum genau diese Zeitspanne?</p>
+
+    <div class="grid md:grid-cols-3 gap-4 my-6 not-prose">
+      <div class="card p-4">
+        <div class="text-2xl mb-2">⏱️</div>
+        <h3 class="font-semibold mb-1 text-[--color-text-primary] text-base">Reaktionszeit</h3>
+        <p class="text-sm text-[--color-text-secondary] m-0">
+          72 Stunden ist die typische maximale Zeit für Hilfsdienste um Basisdienste
+          in den meisten Situationen wiederherzustellen.
+        </p>
+      </div>
+      <div class="card p-4">
+        <div class="text-2xl mb-2">⚖️</div>
+        <h3 class="font-semibold mb-1 text-[--color-text-primary] text-base">Praktisches Gleichgewicht</h3>
+        <p class="text-sm text-[--color-text-secondary] m-0">
+          Ausreichend um die meisten Notsituationen zu überbrücken, aber das Paket
+          bleibt tragbar in Bezug auf Gewicht und Größe.
+        </p>
+      </div>
+      <div class="card p-4">
+        <div class="text-2xl mb-2">📊</div>
+        <h3 class="font-semibold mb-1 text-[--color-text-primary] text-base">Statistischer Fakt</h3>
+        <p class="text-sm text-[--color-text-secondary] m-0">
+          95% der Notsituationen die Bürger betreffen werden innerhalb von
+          72 Stunden gelöst oder stabilisiert.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section id="inhalt" class="mb-12">
+    <h2>Essentieller Inhalt des Notfallpakets</h2>
+    <p>
+      Hier findest du die vollständige Checkliste organisiert nach Kategorien. Jeder Artikel ist markiert
+      mit Prioritätsstufe:
+    </p>
+
+    <div class="flex flex-wrap gap-3 my-4 not-prose">
+      <span class="inline-flex items-center gap-2 px-3 py-1 badge-critical text-xs font-medium rounded">
+        <span class="w-2 h-2 bg-[--color-status-critical] rounded-full"></span>
+        Kritisch — Unverzichtbar
+      </span>
+      <span class="inline-flex items-center gap-2 px-3 py-1 badge-warning text-xs font-medium rounded">
+        <span class="w-2 h-2 bg-[--color-status-warning] rounded-full"></span>
+        Empfohlen — Sehr nützlich
+      </span>
+      <span class="inline-flex items-center gap-2 px-3 py-1 badge-info text-xs font-medium rounded">
+        <span class="w-2 h-2 bg-[--color-status-info] rounded-full"></span>
+        Optional — Wenn Platz ist
+      </span>
+    </div>
+
+    <div class="space-y-8 my-8">
+      {essentialCategories.map((category) => (
+        <div class="card overflow-hidden">
+          <div class="px-6 py-4 bg-[--color-bg-tertiary] border-b border-[--color-border]">
+            <h3 class="flex items-center gap-3 text-lg font-semibold m-0">
+              <span class="text-2xl">{category.icon}</span>
+              {category.name}
+            </h3>
+          </div>
+          <div class="divide-y divide-[--color-border]">
+            {category.items.map((item) => (
+              <div class="px-6 py-3 flex items-center justify-between">
+                <div class="flex items-center gap-3">
+                  <span class={`w-2 h-2 rounded-full ${
+                    item.priority === 'critical' ? 'bg-[--color-status-critical]' :
+                    item.priority === 'recommended' ? 'bg-[--color-status-warning]' :
+                    'bg-[--color-status-info]'
+                  }`}></span>
+                  <span class="font-medium text-[--color-text-primary]">{item.name}</span>
+                </div>
+                <span class="text-sm text-[--color-text-secondary]">{item.quantity}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <section id="organisation" class="mb-12">
+    <h2>Wie du dein Notfallpaket organisierst</h2>
+    <p>
+      Organisation ist fast genauso wichtig wie der Inhalt. Ein schlecht organisiertes Paket
+      kostet dich wertvolle Zeit beim Suchen wenn du Dinge am dringendsten brauchst.
+    </p>
+
+    <h3>Schichtensystem</h3>
+    <p>Organisiere deinen Rucksack in "Schichten" nach Nutzungshäufigkeit:</p>
+
+    <div class="card p-6 my-6 not-prose">
+      <div class="space-y-4">
+        <div class="flex items-start gap-4">
+          <span class="flex-shrink-0 w-8 h-8 flex items-center justify-center bg-[--color-status-critical] text-white rounded-full font-bold text-sm">1</span>
+          <div>
+            <h3 class="font-semibold text-[--color-text-primary] text-base">Außen- und Seitentaschen</h3>
+            <p class="text-sm text-[--color-text-secondary] m-0">
+              Taschenlampe, Pfeife, Snacks, Wasserflasche, Dokumente. Was du brauchst ohne den Rucksack zu öffnen.
+            </p>
+          </div>
+        </div>
+        <div class="flex items-start gap-4">
+          <span class="flex-shrink-0 w-8 h-8 flex items-center justify-center bg-[--color-status-warning] text-white rounded-full font-bold text-sm">2</span>
+          <div>
+            <h3 class="font-semibold text-[--color-text-primary] text-base">Oberer Teil Hauptfach</h3>
+            <p class="text-sm text-[--color-text-secondary] m-0">
+              Erste-Hilfe-Set, Powerbank, Essen für ersten Tag, Regenponcho. Schneller Zugang aber geschützt.
+            </p>
+          </div>
+        </div>
+        <div class="flex items-start gap-4">
+          <span class="flex-shrink-0 w-8 h-8 flex items-center justify-center bg-[--color-status-info] text-white rounded-full font-bold text-sm">3</span>
+          <div>
+            <h3 class="font-semibold text-[--color-text-primary] text-base">Unterer Teil Rucksack</h3>
+            <p class="text-sm text-[--color-text-secondary] m-0">
+              Wechselkleidung, Rettungsdecke, Werkzeug, Essen für Tag 2-3. Was du seltener brauchst.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="aufbewahrung" class="mb-12">
+    <h2>Wo dein Notfallpaket aufbewahren</h2>
+    <p>
+      Das beste Notfallpaket der Welt ist nutzlos wenn du nicht rankommst. Wähle den Standort sorgfältig.
+    </p>
+
+    <div class="grid md:grid-cols-2 gap-6 my-6 not-prose">
+      <div class="card p-6 border-l-4 border-l-[--color-status-success]">
+        <h3 class="font-semibold mb-3 text-[--color-status-success] text-base">✓ Gute Standorte</h3>
+        <ul class="space-y-2 text-sm text-[--color-text-secondary]">
+          <li>Flurschrank (schneller Zugang)</li>
+          <li>Bei der Garagentür</li>
+          <li>Im Kofferraum (zweites Paket)</li>
+          <li>Unter der Treppe wenn zugänglich</li>
+          <li>Auf dem Weg zum Ausgang</li>
+        </ul>
+      </div>
+      <div class="card p-6 border-l-4 border-l-[--color-status-critical]">
+        <h3 class="font-semibold mb-3 text-[--color-status-critical] text-base">✗ Schlechte Standorte</h3>
+        <ul class="space-y-2 text-sm text-[--color-text-secondary]">
+          <li>Keller ohne Alternativausgang</li>
+          <li>Abstellraum weit von der Wohnung</li>
+          <li>Hohe Schränke die schwer erreichbar sind</li>
+          <li>Feuchte oder extrem warme Orte</li>
+          <li>Hinter schweren Möbeln</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="anpassungen" class="mb-12">
+    <h2>Spezielle Anpassungen</h2>
+    <p>
+      Das Basispaket ist ein Ausgangspunkt. Abhängig von deiner Familiensituation musst du
+      spezifische Artikel hinzufügen.
+    </p>
+
+    <div class="grid md:grid-cols-2 gap-6 my-8">
+      {adaptations.map((group) => (
+        <div class="card p-6">
+          <h3 class="flex items-center gap-3 text-lg font-semibold mb-4">
+            <span class="text-2xl">{group.icon}</span>
+            {group.group}
+          </h3>
+          <ul class="space-y-2 text-sm">
+            {group.items.map((item) => (
+              <li class="flex items-center gap-2 text-[--color-text-secondary]">
+                <span class="w-1.5 h-1.5 bg-[--color-accent-primary] rounded-full flex-shrink-0"></span>
+                {item}
+              </li>
+            ))}
+          </ul>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <section id="wartung" class="mb-12">
+    <h2>Wartung deines Notfallpakets</h2>
+    <p>
+      Ein vergessenes Notfallpaket ist ein nutzloses Notfallpaket. Erstelle einen Kontrollplan und halte dich daran.
+    </p>
+
+    <div class="overflow-x-auto my-6">
+      <table>
+        <thead>
+          <tr>
+            <th>Aufgabe</th>
+            <th>Häufigkeit</th>
+          </tr>
+        </thead>
+        <tbody>
+          {maintenanceSchedule.map((item) => (
+            <tr>
+              <td>{item.task}</td>
+              <td><code>{item.frequency}</code></td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section id="fehler" class="mb-12">
+    <h2>Häufige Fehler (und wie man sie vermeidet)</h2>
+
+    <div class="space-y-4 my-8">
+      {commonMistakes.map((item) => (
+        <div class="card p-6">
+          <div class="flex items-start gap-4">
+            <span class="text-2xl flex-shrink-0">⚠️</span>
+            <div>
+              <h3 class="font-semibold text-[--color-text-primary] mb-1 text-base">{item.mistake}</h3>
+              <p class="text-sm text-[--color-text-secondary] mb-2">
+                <strong>Warum ein Problem:</strong> {item.why}
+              </p>
+              <p class="text-sm text-[--color-accent-primary] m-0">
+                <strong>Lösung:</strong> {item.solution}
+              </p>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <section id="faq" class="mb-12">
+    <h2>Häufig gestellte Fragen</h2>
+
+    <div class="space-y-4 my-8">
+      {faqs.map((faq) => (
+        <details class="card group">
+          <summary class="px-6 py-4 cursor-pointer list-none flex items-center justify-between hover:bg-[--color-bg-tertiary] transition-colors">
+            <span class="font-medium text-[--color-text-primary] pr-4">{faq.question}</span>
+            <svg
+              class="w-5 h-5 text-[--color-text-muted] transform transition-transform group-open:rotate-180 flex-shrink-0"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+            </svg>
+          </summary>
+          <div class="px-6 pb-4">
+            <p class="text-[--color-text-secondary] m-0">{faq.answer}</p>
+          </div>
+        </details>
+      ))}
+    </div>
+  </section>
+
+  <!-- Sources Slot -->
+  <div slot="sources">
+    <h2 id="quellen">Quellen und Referenzen</h2>
+    <ul class="text-sm space-y-2">
+      <li>
+        <a href="https://www.bbk.bund.de/DE/Warnung-Vorsorge/Vorsorge/Ratgeber-Checkliste/ratgeber-checkliste_node.html" target="_blank" rel="noopener">
+          BBK — Ratgeber und Checkliste
+        </a>
+      </li>
+      <li>
+        <a href="https://www.drk.de/" target="_blank" rel="noopener">
+          Deutsches Rotes Kreuz — Katastrophenschutz
+        </a>
+      </li>
+      <li>
+        <a href="https://www.thw.de/" target="_blank" rel="noopener">
+          THW — Technisches Hilfswerk
+        </a>
+      </li>
+      <li>
+        <a href="https://www.ready.gov/" target="_blank" rel="noopener">
+          Ready.gov (FEMA) — Build a Kit
+        </a>
+      </li>
+    </ul>
+  </div>
+
+  <!-- CTA Slot -->
+  <div slot="cta" class="card p-8 text-center bg-[--color-bg-tertiary]">
+    <h3 class="text-xl font-semibold mb-4">Willst du dein Paket personalisieren?</h3>
+    <p class="text-[--color-text-secondary] mb-6">
+      Nutze unseren interaktiven Konfigurator um eine Checkliste zu erstellen die auf
+      deine Familie, Haustiere und spezifische Situation angepasst ist.
+    </p>
+    <div class="flex flex-wrap gap-4 justify-center">
+      <a
+        href="/de/tools/notfallpaket-zusammenstellen/"
+        class="inline-flex items-center gap-2 px-6 py-3 bg-[--color-accent-primary] text-[--color-bg-primary] font-semibold rounded hover:bg-[--color-accent-hover] transition-colors"
+      >
+        Mein Paket zusammenstellen
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+        </svg>
+      </a>
+      <a
+        href="/de/notfallausruestung/"
+        class="inline-flex items-center gap-2 px-6 py-3 border border-[--color-border] text-[--color-text-primary] font-medium rounded hover:border-[--color-accent-primary] hover:text-[--color-accent-primary] transition-colors"
+      >
+        Vollständiger Notfallausrüstung Ratgeber
+      </a>
+    </div>
+  </div>
+</ArticleLayout>

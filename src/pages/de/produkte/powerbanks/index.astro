@@ -1,0 +1,188 @@
+---
+import BaseLayout from '../../../../layouts/BaseLayout.astro';
+import Breadcrumb from '../../../../components/layout/Breadcrumb.astro';
+import Icon from '../../../../components/ui/Icon.astro';
+import HeroImage from '../../../../components/content/HeroImage.astro';
+---
+
+<BaseLayout
+  title="Powerbank für Notfall: Welche Kapazität? Kaufratgeber 2025"
+  description="Die richtige Powerbank für dein Notfallpaket. Kapazität, Schnellladen, Qualitätsmerkmale."
+  locale="de"
+  dateModified="2025-12-15"
+  schemaType="Article"
+>
+  <section class="py-16">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6">
+      <Breadcrumb items={[{ label: 'Produkte', href: '/de/produkte/' }, { label: 'Powerbanks' }]} class="mb-4" locale="de" />
+      <h1 class="text-4xl font-bold mb-6">Powerbanks</h1>
+
+      <div class="mb-8">
+        <HeroImage
+          src="/images/shared/powerbank-collection.webp"
+          alt="Powerbank Sammlung für Notfallvorsorge"
+          priority={true}
+        />
+      </div>
+
+      <div class="prose prose-lg">
+        <p class="lead">
+          Dein Smartphone ist im Notfall essentiell: Notruf 112, NINA-Warn-App, Kontakt
+          zur Familie. Eine gute Powerbank hält es <strong>72 Stunden am Leben</strong>.
+        </p>
+
+        <!-- Capacity Guide -->
+        <div class="card p-6 my-8 bg-[--color-bg-tertiary] not-prose">
+          <h3 class="text-lg font-semibold mb-4 flex items-center gap-2">
+            <Icon name="Battery" size={20} class="text-[--color-accent-primary]" />
+            Kapazitätsrechnung
+          </h3>
+          <div class="space-y-3 text-sm">
+            <div class="flex justify-between items-center p-3 bg-[--color-bg-secondary] rounded">
+              <span>Durchschnittliches Smartphone</span>
+              <span class="font-semibold">~4.000 mAh</span>
+            </div>
+            <div class="flex justify-between items-center p-3 bg-[--color-bg-secondary] rounded">
+              <span>10.000 mAh Powerbank</span>
+              <span class="font-semibold">~2 volle Ladungen</span>
+            </div>
+            <div class="flex justify-between items-center p-3 bg-[--color-bg-secondary] rounded">
+              <span>20.000 mAh Powerbank</span>
+              <span class="font-semibold">~4-5 volle Ladungen</span>
+            </div>
+          </div>
+          <p class="text-xs text-[--color-text-muted] mt-3">
+            * Ca. 30% Verlust durch Wärme und Umwandlung einrechnen
+          </p>
+        </div>
+
+        <h2>Empfohlene Kapazität</h2>
+        <ul>
+          <li><strong>1 Person:</strong> 10.000-20.000 mAh</li>
+          <li><strong>2 Personen:</strong> 20.000-30.000 mAh</li>
+          <li><strong>Familie (4+):</strong> 30.000+ mAh oder mehrere kleinere</li>
+        </ul>
+
+        <h2>Wichtige Kaufkriterien</h2>
+
+        <h3>1. Kapazität (mAh)</h3>
+        <p>
+          Mehr ist besser, aber beachte: Über 27.000 mAh sind im Flugzeug verboten.
+          <strong>20.000 mAh</strong> ist der Sweet Spot.
+        </p>
+
+        <h3>2. Ausgangsleistung (Watt)</h3>
+        <ul>
+          <li><strong>10-18W:</strong> Standard-Ladung (langsam aber schonend)</li>
+          <li><strong>20-30W:</strong> Schnellladen für moderne Smartphones</li>
+          <li><strong>45-65W:</strong> Kann auch Laptops laden</li>
+        </ul>
+
+        <h3>3. Anschlüsse</h3>
+        <ul>
+          <li><strong>USB-A:</strong> Universal, für ältere Geräte</li>
+          <li><strong>USB-C:</strong> Moderner Standard, bidirektional (Ein+Ausgang)</li>
+          <li><strong>Mindestens 2 Ausgänge:</strong> Mehrere Geräte gleichzeitig</li>
+        </ul>
+
+        <div class="card p-6 my-8 bg-[--color-accent-subtle] not-prose">
+          <p class="font-medium mb-2">💡 Wartungstipp</p>
+          <p class="text-sm text-[--color-text-secondary]">
+            Lagere Powerbanks bei <strong>50-80% Ladung</strong>.
+            Lade sie alle 2-3 Monate nach, um die Akkugesundheit zu erhalten.
+            Extreme Hitze oder Kälte vermeiden.
+          </p>
+        </div>
+
+        <h3>4. Zusatzfunktionen</h3>
+        <ul>
+          <li><strong>Pass-Through-Ladung:</strong> Gerät und Powerbank gleichzeitig laden</li>
+          <li><strong>LED-Anzeige:</strong> Exakte Kapazitätsanzeige in %</li>
+          <li><strong>Taschenlampe:</strong> Praktischer Doppelnutzen</li>
+          <li><strong>Solarpanel:</strong> Für längere Ausfälle (langsam aber hilfreich)</li>
+        </ul>
+
+        <h2>Qualitätsmerkmale</h2>
+        <p>Achte auf diese Sicherheitsstandards:</p>
+        <ul>
+          <li>✓ Überladeschutz</li>
+          <li>✓ Kurzschlussschutz</li>
+          <li>✓ Temperaturschutz</li>
+          <li>✓ CE-Kennzeichnung</li>
+        </ul>
+
+        <div class="card p-4 my-6 border-l-4 border-l-amber-500 bg-amber-50 dark:bg-amber-950/30 not-prose">
+          <p class="text-sm">
+            <strong>⚠️ Warnung:</strong> Kaufe keine No-Name-Produkte mit unrealistischen Kapazitätsangaben.
+            "50.000 mAh für 15€" sind Betrug — echte Zellen kosten mehr.
+          </p>
+        </div>
+
+        <h2>Empfohlene Marken</h2>
+        <ul>
+          <li><strong>Anker</strong> — Marktführer, zuverlässig</li>
+          <li><strong>RAVPower</strong> — gutes Preis-Leistungs-Verhältnis</li>
+          <li><strong>Belkin</strong> — Premium-Qualität</li>
+          <li><strong>INIU</strong> — Budget-Option mit solider Qualität</li>
+          <li><strong>Zendure</strong> — robust, für Outdoor</li>
+        </ul>
+
+        <h2>Checkliste</h2>
+        <ul>
+          <li>☐ Mindestens 20.000 mAh Kapazität</li>
+          <li>☐ USB-C + USB-A Ausgang</li>
+          <li>☐ Von bekannter Marke</li>
+          <li>☐ Passende Ladekabel dabei</li>
+          <li>☐ Auf 50-80% geladen gelagert</li>
+          <li>☐ Alle 2-3 Monate nachgeladen</li>
+        </ul>
+      </div>
+
+      <!-- Used in Scenarios -->
+      <div class="mt-12">
+        <h3 class="font-semibold mb-4 flex items-center gap-2">
+          <Icon name="AlertTriangle" size={20} class="text-amber-500" />
+          Wichtig bei diesen Szenarien
+        </h3>
+        <div class="grid sm:grid-cols-2 gap-3">
+          <a href="/de/szenarien/stromausfall/" class="card p-4 flex items-center gap-3 hover:border-amber-500 transition-colors">
+            <Icon name="Zap" size={24} class="text-amber-500" />
+            <span class="font-medium">Stromausfall</span>
+          </a>
+          <a href="/de/szenarien/cyberangriff/" class="card p-4 flex items-center gap-3 hover:border-purple-500 transition-colors">
+            <Icon name="Shield" size={24} class="text-purple-500" />
+            <span class="font-medium">Cyberangriff</span>
+          </a>
+          <a href="/de/szenarien/evakuierung/" class="card p-4 flex items-center gap-3 hover:border-emerald-500 transition-colors">
+            <Icon name="Car" size={24} class="text-emerald-500" />
+            <span class="font-medium">Evakuierung</span>
+          </a>
+          <a href="/de/szenarien/hochwasser/" class="card p-4 flex items-center gap-3 hover:border-blue-500 transition-colors">
+            <Icon name="Waves" size={24} class="text-blue-500" />
+            <span class="font-medium">Hochwasser</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Amazon Link -->
+      <div class="mt-12 card p-6 bg-[--color-bg-tertiary]">
+        <h3 class="font-semibold mb-2">Powerbanks auf Amazon.de</h3>
+        <p class="text-sm text-[--color-text-secondary] mb-4">
+          Empfohlene Powerbanks mit 20.000+ mAh.
+        </p>
+        <a
+          href="https://www.amazon.de/s?k=powerbank+20000mah&tag=kit72de-21"
+          target="_blank"
+          rel="noopener noreferrer sponsored"
+          class="inline-flex items-center gap-2 px-4 py-2 bg-[--color-accent-primary] text-[--color-bg-primary] font-medium rounded hover:bg-[--color-accent-hover] transition-colors"
+        >
+          Auf Amazon ansehen
+          <Icon name="ExternalLink" size={16} />
+        </a>
+        <p class="text-xs text-[--color-text-muted] mt-3">
+          * Affiliate-Link — du zahlst nicht mehr, wir erhalten eine kleine Provision.
+        </p>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

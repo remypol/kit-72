@@ -1,0 +1,636 @@
+{
+  "meta": {
+    "locale": "nl",
+    "version": "1.0.0",
+    "lastUpdated": "2025-12-15",
+    "source": "Rijksoverheid.nl noodpakket richtlijnen + NCTV 2024"
+  },
+  "scenarios": {
+    "general": {
+      "id": "general",
+      "label": "Algemeen Noodpakket",
+      "description": "Compleet 72-uurs noodpakket voor alle situaties",
+      "icon": "Package",
+      "time": "10 min",
+      "color": "from-blue-500 to-blue-600"
+    },
+    "stroomstoring": {
+      "id": "stroomstoring",
+      "label": "Stroomstoring",
+      "description": "Voorbereid op langdurige stroomuitval",
+      "icon": "Zap",
+      "time": "8 min",
+      "color": "from-amber-500 to-orange-500"
+    },
+    "hittegolf": {
+      "id": "hittegolf",
+      "label": "Hittegolf",
+      "description": "Bescherming bij extreme warmte",
+      "icon": "Sun",
+      "time": "6 min",
+      "color": "from-red-500 to-orange-500"
+    },
+    "wateruitval": {
+      "id": "wateruitval",
+      "label": "Wateruitval",
+      "description": "Wanneer de kraan droog staat",
+      "icon": "Droplet",
+      "time": "5 min",
+      "color": "from-cyan-500 to-blue-500"
+    },
+    "evacuatie": {
+      "id": "evacuatie",
+      "label": "Evacuatie",
+      "description": "Snel het huis verlaten",
+      "icon": "ArrowRight",
+      "time": "12 min",
+      "color": "from-purple-500 to-pink-500"
+    },
+    "overstroming": {
+      "id": "overstroming",
+      "label": "Overstroming",
+      "description": "Voorbereid op hoogwater en dijkdoorbraak",
+      "icon": "Waves",
+      "time": "10 min",
+      "color": "from-blue-600 to-indigo-600"
+    },
+    "cyberaanval": {
+      "id": "cyberaanval",
+      "label": "Cyberaanval",
+      "description": "Digitale storing en uitval betaalsystemen",
+      "icon": "Shield",
+      "time": "8 min",
+      "color": "from-slate-600 to-gray-700"
+    }
+  },
+  "quickPresets": [
+    {
+      "id": "alleen",
+      "label": "Ik woon alleen",
+      "description": "Compact pakket voor 1 persoon",
+      "config": { "adults": 1, "babies": false, "pets": false, "scenario": "general" }
+    },
+    {
+      "id": "gezin",
+      "label": "Gezin met kinderen",
+      "description": "Compleet pakket voor het hele gezin",
+      "config": { "adults": 2, "babies": true, "pets": false, "scenario": "general" }
+    },
+    {
+      "id": "huisdieren",
+      "label": "Met huisdieren",
+      "description": "Inclusief benodigdheden voor je huisdier",
+      "config": { "adults": 2, "babies": false, "pets": true, "scenario": "general" }
+    },
+    {
+      "id": "noodtas",
+      "label": "Noodtas / Bug-out bag",
+      "description": "Lichte tas om snel te vertrekken",
+      "config": { "adults": 1, "babies": false, "pets": false, "scenario": "evacuatie" }
+    }
+  ],
+  "categories": [
+    { "id": "water", "name": "Water", "icon": "Droplet" },
+    { "id": "voedsel", "name": "Voedsel", "icon": "Apple" },
+    { "id": "verlichting", "name": "Verlichting", "icon": "Flashlight" },
+    { "id": "energie", "name": "Energie", "icon": "Battery" },
+    { "id": "ehbo", "name": "EHBO", "icon": "FirstAid" },
+    { "id": "hygiene", "name": "Hygiëne", "icon": "Soap" },
+    { "id": "documenten", "name": "Documenten", "icon": "FileText" },
+    { "id": "gereedschap", "name": "Gereedschap", "icon": "Wrench" },
+    { "id": "bescherming", "name": "Bescherming", "icon": "Shield" },
+    { "id": "koeling", "name": "Koeling", "icon": "Thermometer" },
+    { "id": "communicatie", "name": "Communicatie", "icon": "Radio" },
+    { "id": "baby", "name": "Baby's", "icon": "Baby", "conditional": "hasBabies" },
+    { "id": "huisdieren", "name": "Huisdieren", "icon": "Paw", "conditional": "hasPets" }
+  ],
+  "items": [
+    {
+      "id": "water-1",
+      "name": "Drinkwater",
+      "category": "water",
+      "quantity": "3L per persoon per dag (9L totaal per persoon)",
+      "priority": "critical",
+      "scenarios": ["general", "stroomstoring", "hittegolf", "wateruitval", "evacuatie", "overstroming", "cyberaanval"],
+      "notes": "Rijksoverheid adviseert minimaal 3 liter per persoon per dag",
+      "affiliateUrl": "https://www.bol.com/nl/nl/s/?searchtext=drinkwater+flessen+voorraad",
+      "affiliateSource": "bol"
+    },
+    {
+      "id": "water-2",
+      "name": "Waterjerrycans",
+      "category": "water",
+      "quantity": "2× 10L jerrycans per huishouden",
+      "priority": "recommended",
+      "scenarios": ["general", "wateruitval", "overstroming"],
+      "notes": "BPA-vrij, geschikt voor drinkwater",
+      "affiliateUrl": "https://www.bol.com/nl/nl/s/?searchtext=jerrycan+drinkwater+10+liter",
+      "affiliateSource": "bol"
+    },
+    {
+      "id": "water-3",
+      "name": "Waterzuiveringstabletten",
+      "category": "water",
+      "quantity": "1 pakje (50 tabletten)",
+      "priority": "optional",
+      "scenarios": ["evacuatie", "overstroming"],
+      "notes": "Voor noodgevallen als drinkwater opraakt",
+      "affiliateUrl": "https://www.bol.com/nl/nl/s/?searchtext=waterzuiveringstabletten",
+      "affiliateSource": "bol"
+    },
+    {
+      "id": "voedsel-1",
+      "name": "Houdbaar voedsel",
+      "category": "voedsel",
+      "quantity": "3 dagen voorraad per persoon",
+      "priority": "critical",
+      "scenarios": ["general", "stroomstoring", "hittegolf", "wateruitval", "evacuatie", "overstroming", "cyberaanval"],
+      "notes": "Blikvoedsel, crackers, noten, gedroogd fruit - geen koeling nodig",
+      "affiliateUrl": "https://www.bol.com/nl/nl/s/?searchtext=noodvoedsel+voorraad",
+      "affiliateSource": "bol"
+    },
+    {
+      "id": "voedsel-2",
+      "name": "Energierepen",
+      "category": "voedsel",
+      "quantity": "10-15 repen per persoon",
+      "priority": "recommended",
+      "scenarios": ["general", "stroomstoring", "evacuatie"],
+      "notes": "Lange houdbaarheid, compact, energierijk",
+      "affiliateUrl": "https://www.bol.com/nl/nl/s/?searchtext=energierepen+noodrantsoen",
+      "affiliateSource": "bol"
+    },
+    {
+      "id": "voedsel-3",
+      "name": "Kant-en-klare maaltijden",
+      "category": "voedsel",
+      "quantity": "3-6 maaltijden per persoon",
+      "priority": "recommended",
+      "scenarios": ["general", "stroomstoring", "cyberaanval"],
+      "notes": "Zelfverwarmende maaltijden of blikvoedsel",
+      "affiliateUrl": "https://www.bol.com/nl/nl/s/?searchtext=noodrantsoen+maaltijd",
+      "affiliateSource": "bol"
+    },
+    {
+      "id": "voedsel-4",
+      "name": "Blikopener",
+      "category": "voedsel",
+      "quantity": "1 stuks",
+      "priority": "critical",
+      "scenarios": ["general", "stroomstoring", "wateruitval", "overstroming", "cyberaanval"],
+      "notes": "Handmatige blikopener (geen elektrische)",
+      "affiliateUrl": "https://www.bol.com/nl/nl/s/?searchtext=blikopener+handmatig",
+      "affiliateSource": "bol"
+    },
+    {
+      "id": "verlichting-1",
+      "name": "Zaklamp LED",
+      "category": "verlichting",
+      "quantity": "1-2 per huishouden",
+      "priority": "critical",
+      "scenarios": ["general", "stroomstoring", "evacuatie", "overstroming", "cyberaanval"],
+      "notes": "LED zaklamp met lange batterijduur",
+      "affiliateUrl": "https://www.bol.com/nl/nl/s/?searchtext=zaklamp+led+krachtig",
+      "affiliateSource": "bol"
+    },
+    {
+      "id": "verlichting-2",
+      "name": "Hoofdlamp",
+      "category": "verlichting",
+      "quantity": "1 per persoon",
+      "priority": "recommended",
+      "scenarios": ["general", "stroomstoring", "evacuatie", "overstroming"],
+      "notes": "Handen vrij, ideaal bij noodgevallen",
+      "affiliateUrl": "https://www.bol.com/nl/nl/s/?searchtext=hoofdlamp+led",
+      "affiliateSource": "bol"
+    },
+    {
+      "id": "verlichting-3",
+      "name": "Kaarsen en lucifers",
+      "category": "verlichting",
+      "quantity": "10+ kaarsen, 2 doosjes lucifers",
+      "priority": "recommended",
+      "scenarios": ["general", "stroomstoring"],
+      "notes": "Noodverlichting zonder batterijen. Let op brandveiligheid!",
+      "affiliateUrl": "https://www.bol.com/nl/nl/s/?searchtext=noodkaarsen+lange+brandtijd",
+      "affiliateSource": "bol"
+    },
+    {
+      "id": "energie-1",
+      "name": "Reservebatterijen",
+      "category": "energie",
+      "quantity": "Pakket AA en AAA batterijen",
+      "priority": "critical",
+      "scenarios": ["general", "stroomstoring", "evacuatie", "overstroming", "cyberaanval"],
+      "notes": "Voor zaklamp, radio en andere apparaten",
+      "affiliateUrl": "https://www.bol.com/nl/nl/s/?searchtext=batterijen+aa+aaa+voorraad",
+      "affiliateSource": "bol"
+    },
+    {
+      "id": "energie-2",
+      "name": "Powerbank",
+      "category": "energie",
+      "quantity": "1 per persoon (minimaal 10.000 mAh)",
+      "priority": "critical",
+      "scenarios": ["general", "stroomstoring", "evacuatie", "cyberaanval"],
+      "notes": "Houd altijd opgeladen! Voor telefoon en kleine apparaten",
+      "affiliateUrl": "https://www.bol.com/nl/nl/s/?searchtext=powerbank+20000mah",
+      "affiliateSource": "bol"
+    },
+    {
+      "id": "energie-3",
+      "name": "Solar oplader",
+      "category": "energie",
+      "quantity": "1 per huishouden",
+      "priority": "optional",
+      "scenarios": ["stroomstoring", "evacuatie", "overstroming"],
+      "notes": "Onafhankelijk van het stroomnet",
+      "affiliateUrl": "https://www.bol.com/nl/nl/s/?searchtext=solar+oplader+powerbank",
+      "affiliateSource": "bol"
+    },
+    {
+      "id": "energie-4",
+      "name": "Campingbrander",
+      "category": "energie",
+      "quantity": "1 per huishouden + gaspatronen",
+      "priority": "optional",
+      "scenarios": ["stroomstoring", "wateruitval"],
+      "notes": "Om water te koken en eten te bereiden",
+      "affiliateUrl": "https://www.bol.com/nl/nl/s/?searchtext=campingbrander+gas",
+      "affiliateSource": "bol"
+    },
+    {
+      "id": "ehbo-1",
+      "name": "EHBO-kit compleet",
+      "category": "ehbo",
+      "quantity": "1 per huishouden",
+      "priority": "critical",
+      "scenarios": ["general", "stroomstoring", "hittegolf", "wateruitval", "evacuatie", "overstroming", "cyberaanval"],
+      "notes": "Pleisters, verband, ontsmettingsmiddel, pincet, schaar",
+      "affiliateUrl": "https://www.bol.com/nl/nl/s/?searchtext=ehbo+kit+compleet",
+      "affiliateSource": "bol"
+    },
+    {
+      "id": "ehbo-2",
+      "name": "Medicijnen",
+      "category": "ehbo",
+      "quantity": "Voorraad voor 1 week",
+      "priority": "critical",
+      "scenarios": ["general", "stroomstoring", "hittegolf", "wateruitval", "evacuatie", "overstroming", "cyberaanval"],
+      "notes": "Persoonlijke medicatie + pijnstillers, anti-diarree"
+    },
+    {
+      "id": "ehbo-3",
+      "name": "Mondkapjes",
+      "category": "ehbo",
+      "quantity": "10 per persoon",
+      "priority": "recommended",
+      "scenarios": ["general", "evacuatie", "overstroming"],
+      "notes": "FFP2 mondkapjes voor stof en rook",
+      "affiliateUrl": "https://www.bol.com/nl/nl/s/?searchtext=ffp2+mondkapjes",
+      "affiliateSource": "bol"
+    },
+    {
+      "id": "hygiene-1",
+      "name": "Toiletpapier",
+      "category": "hygiene",
+      "quantity": "1 rol per persoon per dag",
+      "priority": "recommended",
+      "scenarios": ["general", "wateruitval", "overstroming"],
+      "notes": "Compacte rollen voor de noodvoorraad"
+    },
+    {
+      "id": "hygiene-2",
+      "name": "Vochtige doekjes",
+      "category": "hygiene",
+      "quantity": "2-3 pakken",
+      "priority": "recommended",
+      "scenarios": ["general", "wateruitval", "evacuatie", "overstroming"],
+      "notes": "Voor persoonlijke hygiëne zonder water",
+      "affiliateUrl": "https://www.bol.com/nl/nl/s/?searchtext=vochtige+doekjes+grote+verpakking",
+      "affiliateSource": "bol"
+    },
+    {
+      "id": "hygiene-3",
+      "name": "Handgel (alcohol)",
+      "category": "hygiene",
+      "quantity": "2 flesjes",
+      "priority": "recommended",
+      "scenarios": ["general", "wateruitval", "evacuatie"],
+      "notes": "Minimaal 70% alcohol",
+      "affiliateUrl": "https://www.bol.com/nl/nl/s/?searchtext=handgel+desinfecterend",
+      "affiliateSource": "bol"
+    },
+    {
+      "id": "hygiene-4",
+      "name": "Vuilniszakken",
+      "category": "hygiene",
+      "quantity": "1 rol (20+ zakken)",
+      "priority": "recommended",
+      "scenarios": ["general", "wateruitval", "overstroming"],
+      "notes": "Groot formaat, ook voor noodtoilet"
+    },
+    {
+      "id": "documenten-1",
+      "name": "Identiteitsbewijs kopieën",
+      "category": "documenten",
+      "quantity": "Kopieën van alle gezinsleden",
+      "priority": "critical",
+      "scenarios": ["general", "evacuatie", "overstroming", "cyberaanval"],
+      "notes": "Paspoort/ID-kaart, rijbewijs. Bewaar in waterdichte map"
+    },
+    {
+      "id": "documenten-2",
+      "name": "Contant geld",
+      "category": "documenten",
+      "quantity": "€70 per volwassene, €30 per kind",
+      "priority": "critical",
+      "scenarios": ["general", "stroomstoring", "evacuatie", "cyberaanval"],
+      "notes": "Rijksoverheid advies: pinautomaten kunnen uitvallen bij stroomstoring"
+    },
+    {
+      "id": "documenten-3",
+      "name": "Verzekeringspapieren",
+      "category": "documenten",
+      "quantity": "Kopieën",
+      "priority": "recommended",
+      "scenarios": ["general", "evacuatie", "overstroming"],
+      "notes": "Zorgverzekering, inboedelverzekering, autoverzekering"
+    },
+    {
+      "id": "documenten-4",
+      "name": "Contactenlijst (offline)",
+      "category": "documenten",
+      "quantity": "1 lijst per gezin",
+      "priority": "critical",
+      "scenarios": ["general", "stroomstoring", "cyberaanval"],
+      "notes": "Familie, huisarts, verzekering, gemeente - op papier!"
+    },
+    {
+      "id": "gereedschap-1",
+      "name": "Multitool/zakmes",
+      "category": "gereedschap",
+      "quantity": "1 per huishouden",
+      "priority": "recommended",
+      "scenarios": ["general", "stroomstoring", "evacuatie", "overstroming"],
+      "notes": "Mes, schroevendraaier, tang in één",
+      "affiliateUrl": "https://www.bol.com/nl/nl/s/?searchtext=leatherman+multitool",
+      "affiliateSource": "bol"
+    },
+    {
+      "id": "gereedschap-2",
+      "name": "Duct tape",
+      "category": "gereedschap",
+      "quantity": "1 rol",
+      "priority": "recommended",
+      "scenarios": ["general", "stroomstoring", "overstroming"],
+      "notes": "Universeel inzetbaar voor noodreparaties",
+      "affiliateUrl": "https://www.bol.com/nl/nl/s/?searchtext=duct+tape+sterk",
+      "affiliateSource": "bol"
+    },
+    {
+      "id": "gereedschap-3",
+      "name": "Touw",
+      "category": "gereedschap",
+      "quantity": "10-20 meter",
+      "priority": "optional",
+      "scenarios": ["evacuatie", "overstroming"],
+      "notes": "Stevig touw voor diverse doeleinden",
+      "affiliateUrl": "https://www.bol.com/nl/nl/s/?searchtext=paracord+touw",
+      "affiliateSource": "bol"
+    },
+    {
+      "id": "bescherming-1",
+      "name": "Werkhandschoenen",
+      "category": "bescherming",
+      "quantity": "1 paar per volwassene",
+      "priority": "recommended",
+      "scenarios": ["general", "stroomstoring", "evacuatie", "overstroming"],
+      "notes": "Bescherming bij opruimwerk",
+      "affiliateUrl": "https://www.bol.com/nl/nl/s/?searchtext=werkhandschoenen+stevig",
+      "affiliateSource": "bol"
+    },
+    {
+      "id": "bescherming-2",
+      "name": "Noodfluitje",
+      "category": "bescherming",
+      "quantity": "1 per persoon",
+      "priority": "recommended",
+      "scenarios": ["evacuatie", "overstroming"],
+      "notes": "Om aandacht te trekken bij nood",
+      "affiliateUrl": "https://www.bol.com/nl/nl/s/?searchtext=noodfluit+survival",
+      "affiliateSource": "bol"
+    },
+    {
+      "id": "bescherming-3",
+      "name": "Reddingsdeken",
+      "category": "bescherming",
+      "quantity": "1 per persoon",
+      "priority": "recommended",
+      "scenarios": ["general", "evacuatie", "overstroming"],
+      "notes": "Isolatiedeken tegen onderkoeling",
+      "affiliateUrl": "https://www.bol.com/nl/nl/s/?searchtext=reddingsdeken+folie",
+      "affiliateSource": "bol"
+    },
+    {
+      "id": "koeling-1",
+      "name": "Handventilator",
+      "category": "koeling",
+      "quantity": "1 per persoon",
+      "priority": "recommended",
+      "scenarios": ["hittegolf"],
+      "notes": "Batterij of handmatig, verkoeling zonder stroom",
+      "affiliateUrl": "https://www.bol.com/nl/nl/s/?searchtext=handventilator+batterij",
+      "affiliateSource": "bol"
+    },
+    {
+      "id": "koeling-2",
+      "name": "Koelelementen",
+      "category": "koeling",
+      "quantity": "2-4 stuks",
+      "priority": "recommended",
+      "scenarios": ["hittegolf"],
+      "notes": "Bewaar in vriezer, gebruik bij extreme hitte",
+      "affiliateUrl": "https://www.bol.com/nl/nl/s/?searchtext=koelelementen+koelbox",
+      "affiliateSource": "bol"
+    },
+    {
+      "id": "koeling-3",
+      "name": "Zonnebrandcrème",
+      "category": "koeling",
+      "quantity": "1 fles SPF 30+",
+      "priority": "recommended",
+      "scenarios": ["hittegolf", "evacuatie"],
+      "notes": "Bescherming bij langdurig buiten zijn",
+      "affiliateUrl": "https://www.bol.com/nl/nl/s/?searchtext=zonnebrand+factor+50",
+      "affiliateSource": "bol"
+    },
+    {
+      "id": "communicatie-1",
+      "name": "Noodradio (DAB+/FM)",
+      "category": "communicatie",
+      "quantity": "1 per huishouden",
+      "priority": "critical",
+      "scenarios": ["general", "stroomstoring", "overstroming", "cyberaanval"],
+      "notes": "Met batterijen of opwindbaar. NPO Radio 1 zendt noodinformatie uit",
+      "affiliateUrl": "https://www.bol.com/nl/nl/s/?searchtext=noodradio+opwindbaar",
+      "affiliateSource": "bol"
+    },
+    {
+      "id": "communicatie-2",
+      "name": "OV-chipkaart met saldo",
+      "category": "communicatie",
+      "quantity": "1 per gezinslid",
+      "priority": "recommended",
+      "scenarios": ["evacuatie", "cyberaanval"],
+      "notes": "Werkt ook als pinnen niet lukt"
+    },
+    {
+      "id": "baby-1",
+      "name": "Luiers",
+      "category": "baby",
+      "quantity": "Voorraad voor 3 dagen",
+      "priority": "critical",
+      "scenarios": ["general", "stroomstoring", "hittegolf", "wateruitval", "evacuatie", "overstroming", "cyberaanval"],
+      "notes": "Voldoende voor minimaal 72 uur"
+    },
+    {
+      "id": "baby-2",
+      "name": "Flesvoeding",
+      "category": "baby",
+      "quantity": "Voorraad voor 3 dagen",
+      "priority": "critical",
+      "scenarios": ["general", "stroomstoring", "hittegolf", "wateruitval", "evacuatie", "overstroming", "cyberaanval"],
+      "notes": "Poedermelk en schoon water, of kant-en-klare flesjes"
+    },
+    {
+      "id": "baby-3",
+      "name": "Babydoekjes",
+      "category": "baby",
+      "quantity": "2 pakken",
+      "priority": "critical",
+      "scenarios": ["general", "wateruitval", "evacuatie"],
+      "notes": "Extra belangrijk bij wateruitval"
+    },
+    {
+      "id": "baby-4",
+      "name": "Kindervoeding potjes",
+      "category": "baby",
+      "quantity": "Voorraad voor 3 dagen",
+      "priority": "critical",
+      "scenarios": ["general", "stroomstoring", "evacuatie"],
+      "notes": "Houdbare potjes, geen koeling nodig"
+    },
+    {
+      "id": "huisdieren-1",
+      "name": "Dierenvoer",
+      "category": "huisdieren",
+      "quantity": "Voorraad voor 3 dagen",
+      "priority": "critical",
+      "scenarios": ["general", "stroomstoring", "hittegolf", "wateruitval", "evacuatie", "overstroming", "cyberaanval"],
+      "notes": "Droogvoer gaat langer mee dan natvoer"
+    },
+    {
+      "id": "huisdieren-2",
+      "name": "Drinkbak + extra water",
+      "category": "huisdieren",
+      "quantity": "1 bak + 2L water per dag",
+      "priority": "critical",
+      "scenarios": ["general", "wateruitval", "evacuatie"],
+      "notes": "Vergeet je huisdier niet bij wateropslag"
+    },
+    {
+      "id": "huisdieren-3",
+      "name": "Transportbox/riem",
+      "category": "huisdieren",
+      "quantity": "1 per huisdier",
+      "priority": "critical",
+      "scenarios": ["evacuatie", "overstroming"],
+      "notes": "Essentieel voor snelle evacuatie met huisdier"
+    },
+    {
+      "id": "huisdieren-4",
+      "name": "Medicijnen huisdier",
+      "category": "huisdieren",
+      "quantity": "Voorraad voor 1 week",
+      "priority": "recommended",
+      "scenarios": ["general", "evacuatie"],
+      "notes": "Indien van toepassing"
+    },
+    {
+      "id": "overstroming-1",
+      "name": "Waterdichte tas/rugzak",
+      "category": "bescherming",
+      "quantity": "1 per huishouden",
+      "priority": "critical",
+      "scenarios": ["overstroming", "evacuatie"],
+      "notes": "Voor documenten en elektronica",
+      "affiliateUrl": "https://www.bol.com/nl/nl/s/?searchtext=waterdichte+tas+rugzak",
+      "affiliateSource": "bol"
+    },
+    {
+      "id": "overstroming-2",
+      "name": "Waadpak/laarzen",
+      "category": "bescherming",
+      "quantity": "1 paar per volwassene",
+      "priority": "recommended",
+      "scenarios": ["overstroming"],
+      "notes": "Hoge laarzen of waadpak voor door water lopen",
+      "affiliateUrl": "https://www.bol.com/nl/nl/s/?searchtext=waadpak+laarzen+hoog",
+      "affiliateSource": "bol"
+    },
+    {
+      "id": "overstroming-3",
+      "name": "Zandzakken (leeg)",
+      "category": "bescherming",
+      "quantity": "10-20 stuks",
+      "priority": "optional",
+      "scenarios": ["overstroming"],
+      "notes": "Om water tegen te houden bij je woning",
+      "affiliateUrl": "https://www.bol.com/nl/nl/s/?searchtext=zandzakken+overstromingen",
+      "affiliateSource": "bol"
+    }
+  ],
+  "ui": {
+    "title": "Noodpakket Samenstellen",
+    "subtitle": "Stel je persoonlijke noodpakket samen op basis van jouw situatie",
+    "scenarioStep": {
+      "title": "Kies je scenario",
+      "description": "Selecteer waarvoor je je wilt voorbereiden"
+    },
+    "familyStep": {
+      "title": "Jouw huishouden",
+      "adults": "Volwassenen",
+      "babies": "Baby's of kleine kinderen",
+      "pets": "Huisdieren"
+    },
+    "itemsStep": {
+      "title": "Jouw checklist",
+      "critical": "Essentieel",
+      "recommended": "Aanbevolen",
+      "optional": "Optioneel",
+      "addAll": "Alles aanvinken",
+      "clearAll": "Alles wissen"
+    },
+    "progress": {
+      "title": "Voortgang",
+      "complete": "Je noodpakket is compleet!",
+      "milestones": {
+        "25": "Goed begin! Je hebt de basis.",
+        "50": "Halverwege! Je bent goed op weg.",
+        "75": "Bijna klaar! Nog even doorzetten.",
+        "100": "Gefeliciteerd! Je bent voorbereid."
+      }
+    },
+    "actions": {
+      "buyOnBol": "Bekijk op Bol.com",
+      "exportPdf": "Download checklist (PDF)",
+      "share": "Deel je pakket",
+      "reset": "Opnieuw beginnen"
+    },
+    "empty": {
+      "title": "Geen items geselecteerd",
+      "description": "Vink items aan om je noodpakket samen te stellen"
+    }
+  }
+}

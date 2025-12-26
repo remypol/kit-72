@@ -1,0 +1,58 @@
+---
+import BaseLayout from '../../../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../../../components/ui/Breadcrumbs.astro';
+import WaterCalculator from '../../../../components/tools/WaterCalculator';
+---
+
+<BaseLayout
+  title="Wasser-Rechner — Kit-72"
+  description="Berechne, wie viel Wasser du für dein Notfallpaket brauchst. Interaktive Tool mit persönlicher Berechnung für deine Familie."
+  locale="de"
+  dateModified="2025-12-15"
+  schemaType="HowTo"
+  schemaData={{
+    name: 'Wie viel Wasser brauchst du für einen Notfall',
+    description: 'Berechne die Wassermenge in Litern, die deine Familie für 72 Stunden Selbstversorgung benötigt. Inklusive Haustiere und verschiedene Verwendungszwecke.',
+    totalTime: 'PT2M',
+    step: [
+      {
+        '@type': 'HowToStep',
+        position: 1,
+        name: 'Gib die Personenanzahl ein',
+        text: 'Wähle, wie viele Erwachsene, Kinder (4-12 Jahre) und Babys (0-3 Jahre) in deinem Haushalt leben. Erwachsene brauchen mehr Wasser als Kinder.',
+      },
+      {
+        '@type': 'HowToStep',
+        position: 2,
+        name: 'Füge Haustiere hinzu',
+        text: 'Gib an, ob du Hunde oder Katzen hast. Haustiere brauchen etwa 50-100ml Wasser pro kg Körpergewicht pro Tag.',
+      },
+      {
+        '@type': 'HowToStep',
+        position: 3,
+        name: 'Wähle die Dauer',
+        text: 'Wähle, für wie viele Tage du vorbereitet sein möchtest. Die Mindestempfehlung des BBK beträgt 72 Stunden (3 Tage).',
+      },
+      {
+        '@type': 'HowToStep',
+        position: 4,
+        name: 'Passe die Bedingungen an',
+        text: 'Wähle, ob du warmes Wetter erwartest (erhöht den Bedarf) und dein gewünschtes Komfortniveau (minimal, standard oder komfortabel).',
+      },
+    ],
+  }}
+>
+  <section class="py-12 md:py-16">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6">
+      <div class="mb-8">
+        <Breadcrumbs locale="de" />
+        <h1 class="text-4xl font-bold mb-4">Wasser-Rechner</h1>
+        <p class="text-xl text-[--color-text-secondary]">
+          Berechne genau, wie viel Wasser du für deine Familie brauchst. Das BBK empfiehlt 2 Liter Trinkwasser pro Person pro Tag.
+        </p>
+      </div>
+
+      <WaterCalculator locale="de" client:load />
+    </div>
+  </section>
+</BaseLayout>

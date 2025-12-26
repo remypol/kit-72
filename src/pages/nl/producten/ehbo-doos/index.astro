@@ -1,0 +1,199 @@
+---
+import BaseLayout from '../../../../layouts/BaseLayout.astro';
+import Breadcrumb from '../../../../components/layout/Breadcrumb.astro';
+import Icon from '../../../../components/ui/Icon.astro';
+import HeroImage from '../../../../components/content/HeroImage.astro';
+---
+
+<BaseLayout
+  title="EHBO-doos: Wat moet erin? Inhoud & Koopgids"
+  description="De juiste EHBO-doos voor je noodpakket. Inhoud, kwaliteit en onderhoud."
+  locale="nl"
+  dateModified="2025-12-16"
+  schemaType="Article"
+  alternates={{
+    de: '/de/produkte/erste-hilfe-kasten/',
+  }}
+>
+  <section class="py-16">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6">
+      <Breadcrumb items={[{ label: 'Producten', href: '/nl/producten/' }, { label: 'EHBO-doos' }]} class="mb-4" locale="nl" />
+      <h1 class="text-4xl font-bold mb-6">EHBO-doos</h1>
+
+      <div class="mb-8">
+        <HeroImage
+          src="/images/shared/first-aid-kit-open.webp"
+          alt="EHBO-doos inhoud voor noodvoorbereiding"
+          priority={true}
+        />
+      </div>
+
+      <div class="prose prose-lg">
+        <p class="lead">
+          Een goede EHBO-doos behandelt kleine verwondingen en overbrugt
+          de tijd tot professionele hulp komt. In een crisissituatie kan
+          dit <strong>doorslaggevend</strong> zijn.
+        </p>
+
+        <!-- Key Message -->
+        <div class="card p-6 my-8 bg-[--color-bg-tertiary] not-prose">
+          <h3 class="text-lg font-semibold mb-3 flex items-center gap-2">
+            <Icon name="Heart" size={20} class="text-red-500" />
+            Kennis is belangrijker dan materiaal
+          </h3>
+          <p class="text-sm text-[--color-text-secondary]">
+            De beste EHBO-doos is nutteloos zonder kennis.
+            <strong>Volg een EHBO-cursus!</strong> Het Rode Kruis en het Oranje Kruis
+            bieden landelijk cursussen aan — vaak in een paar uur.
+          </p>
+        </div>
+
+        <h2>Kant-en-klare doos vs. zelf samenstellen?</h2>
+
+        <h3>Kant-en-klare doos (aanbevolen voor beginners)</h3>
+        <ul>
+          <li>✓ Voldoet aan BHV-normen met minimumuitrusting</li>
+          <li>✓ Direct inzetbaar</li>
+          <li>✓ Overzichtelijk georganiseerd</li>
+          <li>✗ Vaak zonder medicijnen</li>
+          <li>✗ Niet op persoonlijke behoeften afgestemd</li>
+        </ul>
+
+        <h3>Zelf samenstellen</h3>
+        <ul>
+          <li>✓ Precies op jouw behoeften afgestemd</li>
+          <li>✓ Kun je medicijnen toevoegen</li>
+          <li>✗ Vereist kennis over benodigdheden</li>
+          <li>✗ Tijdrovender</li>
+        </ul>
+
+        <div class="card p-6 my-8 bg-[--color-accent-subtle] not-prose">
+          <p class="font-medium mb-2">💡 Beste oplossing</p>
+          <p class="text-sm text-[--color-text-secondary]">
+            Koop een <strong>standaard kant-en-klare EHBO-doos</strong> en vul deze aan
+            met persoonlijke medicijnen en extra materiaal.
+          </p>
+        </div>
+
+        <h2>Essentiële inhoud</h2>
+
+        <h3>Verbandmateriaal</h3>
+        <ul>
+          <li>Pleisters in verschillende maten (minimaal 20 stuks)</li>
+          <li>Steriele kompressen 10x10 cm (10+ stuks)</li>
+          <li>Zwachtels 6 cm en 8 cm</li>
+          <li>Elastische zwachtels</li>
+          <li>Mitella (2 stuks)</li>
+          <li>Verbandpakjes</li>
+          <li>Fixeerpleister / Leukoplast</li>
+        </ul>
+
+        <h3>Instrumenten</h3>
+        <ul>
+          <li>Verbandschaar (afgeronde punten)</li>
+          <li>Pincet</li>
+          <li>Wegwerphandschoenen (4+ paar, latexvrij)</li>
+          <li>Reddingsdeken</li>
+          <li>Koelcompres (instant)</li>
+        </ul>
+
+        <h3>Extra aanbevolen</h3>
+        <ul>
+          <li>Wondontsmettingsmiddel (Betadine o.d.)</li>
+          <li>Koortsthermometer</li>
+          <li>Tekentang</li>
+          <li>Splinterpincet</li>
+          <li>Oogspoelingoplossing</li>
+        </ul>
+
+        <h2>Medicijnen toevoegen</h2>
+        <div class="card p-4 my-6 border-l-4 border-l-amber-500 bg-amber-50 dark:bg-amber-950/30 not-prose">
+          <p class="text-sm">
+            <strong>⚠️ Belangrijk:</strong> Medicijnen zijn in kant-en-klare dozen meestal niet inbegrepen.
+            Voeg ze zelf toe en let op onverdraagzaamheden en wisselwerkingen.
+          </p>
+        </div>
+
+        <ul>
+          <li><strong>Pijnstillers:</strong> Paracetamol, Ibuprofen</li>
+          <li><strong>Diarreemiddel:</strong> Loperamide, Norit</li>
+          <li><strong>ORS-poeder:</strong> Bij diarree/overgeven</li>
+          <li><strong>Antihistaminicum:</strong> Bij allergische reacties</li>
+          <li><strong>Wondzalf:</strong> Bepanthen o.d.</li>
+        </ul>
+
+        <h2>Persoonlijke medicijnen</h2>
+        <p>
+          <strong>Extreem belangrijk:</strong> Houd receptmedicijnen
+          voor <strong>minimaal 7-14 dagen</strong> op voorraad:
+        </p>
+        <ul>
+          <li>Bloeddrukmedicijnen</li>
+          <li>Insuline en diabetesbenodigdheden</li>
+          <li>Hartmedicijnen</li>
+          <li>Astma-inhalator</li>
+          <li>Schildkliermedicijnen</li>
+          <li>Anticonceptiepil</li>
+        </ul>
+
+        <h2>Opslag en onderhoud</h2>
+        <ul>
+          <li><strong>Toegankelijk:</strong> Alle gezinsleden weten waar hij staat</li>
+          <li><strong>Droog:</strong> Niet in de badkamer (te vochtig)</li>
+          <li><strong>Koel:</strong> Niet in de zon of bij de verwarming</li>
+          <li><strong>Controleren:</strong> Elke 3 maanden houdbaarheidsdatums checken</li>
+        </ul>
+
+        <h2>Aanbevolen merken</h2>
+        <ul>
+          <li><strong>Heka:</strong> Nederlandse fabrikant, BHV-conform</li>
+          <li><strong>Utermöhlen:</strong> Professionele kwaliteit</li>
+          <li><strong>First Aid Only:</strong> Breed assortiment</li>
+        </ul>
+
+        <h2>Checklist</h2>
+        <ul>
+          <li>☐ Standaard EHBO-doos</li>
+          <li>☐ Persoonlijke medicijnen voor 7+ dagen</li>
+          <li>☐ Actuele medicijnenlijst bijgevoegd</li>
+          <li>☐ Alle houdbaarheidsdatums gecontroleerd</li>
+          <li>☐ Opslaglocatie bij iedereen bekend</li>
+          <li>☐ EHBO-cursus gevolgd</li>
+          <li>☐ Volgende onderhoudsdatum genoteerd</li>
+        </ul>
+      </div>
+
+      <!-- Links -->
+      <div class="mt-12 grid sm:grid-cols-2 gap-4">
+        <div class="card p-6 bg-[--color-bg-tertiary]">
+          <h3 class="font-semibold mb-2">EHBO-dozen op Bol.com</h3>
+          <p class="text-sm text-[--color-text-secondary] mb-4">
+            Complete EHBO-sets voor huishouden en gezin.
+          </p>
+          <a
+            href="https://www.bol.com/nl/nl/s/?searchtext=ehbo+doos+compleet"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex items-center gap-2 text-[--color-accent-primary] hover:underline"
+          >
+            Bekijk op Bol.com →
+          </a>
+        </div>
+        <div class="card p-6 bg-[--color-bg-tertiary]">
+          <h3 class="font-semibold mb-2">EHBO-cursus vinden</h3>
+          <p class="text-sm text-[--color-text-secondary] mb-4">
+            Het Rode Kruis biedt landelijk cursussen aan.
+          </p>
+          <a
+            href="https://www.rodekruis.nl/ehbo-cursus/"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex items-center gap-2 text-[--color-accent-primary] hover:underline"
+          >
+            Rode Kruis cursussen →
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

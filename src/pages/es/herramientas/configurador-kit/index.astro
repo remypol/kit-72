@@ -1,0 +1,154 @@
+---
+import BaseLayout from '../../../../layouts/BaseLayout.astro';
+import KitBuilder from '../../../../components/tools/KitBuilder';
+---
+
+<BaseLayout
+  title="Configurador de Kit de Emergencia — Kit-72"
+  description="Crea tu checklist personalizado de kit de emergencia. Selecciona escenario, añade bebés y mascotas, y obtén una lista imprimible."
+  dateModified="2025-12-15"
+  schemaType="HowTo"
+  schemaData={{
+    name: 'Cómo crear tu kit de emergencia personalizado',
+    description: 'Guía paso a paso para configurar un kit de emergencia de 72 horas adaptado a tu familia, mascotas y escenario específico.',
+    totalTime: 'PT10M',
+    estimatedCost: {
+      '@type': 'MonetaryAmount',
+      currency: 'EUR',
+      value: '150-300',
+    },
+    tool: [
+      { '@type': 'HowToTool', name: 'Esta herramienta online' },
+      { '@type': 'HowToTool', name: 'Impresora (opcional)' },
+    ],
+    step: [
+      {
+        '@type': 'HowToStep',
+        position: 1,
+        name: 'Selecciona tu escenario',
+        text: 'Elige el escenario principal para el que quieres prepararte: apagón, ola de calor, corte de agua o evacuación. Cada escenario añade items específicos a tu checklist.',
+      },
+      {
+        '@type': 'HowToStep',
+        position: 2,
+        name: 'Indica tu familia',
+        text: 'Selecciona si tienes bebés o niños pequeños (se añadirán pañales, biberones, etc.) y si tienes mascotas (se añadirá comida, transportín, etc.).',
+      },
+      {
+        '@type': 'HowToStep',
+        position: 3,
+        name: 'Marca los items que ya tienes',
+        text: 'Revisa la lista y marca los items que ya tienes en casa. Verás tu progreso en porcentaje y podrás identificar qué te falta.',
+      },
+      {
+        '@type': 'HowToStep',
+        position: 4,
+        name: 'Guarda o imprime tu checklist',
+        text: 'Exporta tu checklist personalizado a PDF para imprimirlo, o guárdalo online para acceder desde cualquier dispositivo. Tu progreso se guarda automáticamente.',
+      },
+    ],
+  }}
+>
+  <section class="py-16">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6">
+      <!-- Header -->
+      <div class="mb-12">
+        <nav class="text-sm mb-4">
+          <ol class="flex items-center gap-2 text-[--color-text-muted]">
+            <li><a href="/es/" class="hover:text-[--color-accent-primary]">Inicio</a></li>
+            <li>/</li>
+            <li><a href="/es/herramientas/" class="hover:text-[--color-accent-primary]">Herramientas</a></li>
+            <li>/</li>
+            <li class="text-[--color-text-primary]">Configurador de Kit</li>
+          </ol>
+        </nav>
+        <h1 class="mb-4">Configurador de Kit de Emergencia</h1>
+        <p class="text-lg text-[--color-text-secondary]">
+          Crea tu checklist personalizado según el escenario que quieras preparar.
+          Marca los items que ya tienes y descarga o imprime tu lista.
+        </p>
+      </div>
+
+      <!-- Info Box -->
+      <div class="card p-6 mb-8 border-l-4 border-l-[--color-accent-primary]">
+        <h3 class="font-semibold mb-2 text-[--color-text-primary]">¿Cómo funciona?</h3>
+        <ol class="text-sm text-[--color-text-secondary] space-y-1 list-decimal list-inside">
+          <li>Selecciona el escenario principal para el que quieres prepararte</li>
+          <li>Indica si tienes bebés o mascotas para añadir items específicos</li>
+          <li>Marca los items que ya tienes para ver tu progreso</li>
+          <li>Imprime o guarda tu checklist personalizado</li>
+        </ol>
+      </div>
+
+      <!-- Kit Builder Component - client:visible hydrates when scrolled into view -->
+      <KitBuilder client:visible />
+
+      <!-- Related Links -->
+      <div class="mt-12 card p-6 bg-[--color-bg-tertiary] print:hidden">
+        <h3 class="font-semibold mb-4">Guías relacionadas</h3>
+        <div class="grid sm:grid-cols-2 gap-4">
+          <a
+            href="/es/kit-72-horas/"
+            class="flex items-center gap-3 p-3 bg-[--color-bg-secondary] rounded-lg hover:bg-[--color-bg-primary] transition-colors"
+          >
+            <span class="text-2xl">🎒</span>
+            <div>
+              <div class="font-medium text-sm">Kit 72 Horas</div>
+              <div class="text-xs text-[--color-text-muted]">Guía completa de la mochila</div>
+            </div>
+          </a>
+          <a
+            href="/es/kit-de-emergencia/"
+            class="flex items-center gap-3 p-3 bg-[--color-bg-secondary] rounded-lg hover:bg-[--color-bg-primary] transition-colors"
+          >
+            <span class="text-2xl">📦</span>
+            <div>
+              <div class="font-medium text-sm">Kit de Emergencia</div>
+              <div class="text-xs text-[--color-text-muted]">Todo lo que debes saber</div>
+            </div>
+          </a>
+          <a
+            href="/es/escenarios/prepararse-apagon/"
+            class="flex items-center gap-3 p-3 bg-[--color-bg-secondary] rounded-lg hover:bg-[--color-bg-primary] transition-colors"
+          >
+            <span class="text-2xl">⚡</span>
+            <div>
+              <div class="font-medium text-sm">Prepararse para Apagón</div>
+              <div class="text-xs text-[--color-text-muted]">Guía específica</div>
+            </div>
+          </a>
+          <a
+            href="/es/herramientas/calculadora-agua/"
+            class="flex items-center gap-3 p-3 bg-[--color-bg-secondary] rounded-lg hover:bg-[--color-bg-primary] transition-colors"
+          >
+            <span class="text-2xl">💧</span>
+            <div>
+              <div class="font-medium text-sm">Calculadora de Agua</div>
+              <div class="text-xs text-[--color-text-muted]">Calcula tu necesidad exacta</div>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  @media print {
+    :global(header),
+    :global(footer),
+    :global(nav) {
+      display: none !important;
+    }
+
+    :global(body) {
+      background: white !important;
+      color: black !important;
+    }
+
+    :global(.card) {
+      border: 1px solid #ccc !important;
+      background: white !important;
+    }
+  }
+</style>

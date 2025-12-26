@@ -1,0 +1,52 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import Breadcrumb from '../../../components/layout/Breadcrumb.astro';
+---
+
+<BaseLayout title="Noodpakket Samenstellen — Kit-72" description="Complete gids voor het samenstellen van je noodpakket." locale="nl">
+  <section class="py-16">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6">
+      <Breadcrumb items={[{ label: 'Noodpakket Samenstellen' }]} class="mb-4" locale="nl" />
+      <h1 class="text-4xl font-bold mb-6">Noodpakket Samenstellen</h1>
+      
+      <div class="prose prose-lg">
+        <p>Een compleet noodpakket samenstellen hoeft niet ingewikkeld te zijn. Volg deze stappen.</p>
+        
+        <h2>Stap 1: Bepaal je behoeften</h2>
+        <ul>
+          <li>Hoeveel mensen in je huishouden?</li>
+          <li>Zijn er baby's, ouderen of huisdieren?</li>
+          <li>Medische behoeften?</li>
+        </ul>
+
+        <h2>Stap 2: Begin met de basis</h2>
+        <ol>
+          <li><strong>Water</strong> — 3 liter per persoon per dag</li>
+          <li><strong>Voedsel</strong> — Houdbaar, geen bereiding nodig</li>
+          <li><strong>Verlichting</strong> — Zaklamp met batterijen</li>
+          <li><strong>EHBO</strong> — Basisset plus persoonlijke medicijnen</li>
+        </ol>
+
+        <h2>Stap 3: Voeg comfort toe</h2>
+        <ul>
+          <li>Powerbank voor je telefoon</li>
+          <li>Noodradio</li>
+          <li>Contant geld (€70 per volwassene, €30 per kind)</li>
+          <li>Kopieën van belangrijke documenten</li>
+        </ul>
+
+        <h2>Stap 4: Personaliseer</h2>
+        <p>Voeg items toe voor jouw specifieke situatie: babyspullen, medicijnen, huisdierbenodigdheden.</p>
+
+        <div class="not-prose mt-8">
+          <a href="/nl/noodpakket-72-uur/" class="inline-flex items-center gap-2 px-6 py-3 bg-[--color-accent-primary] text-[--color-bg-primary] font-semibold rounded hover:bg-[--color-accent-hover] transition-colors">
+            Bekijk de complete checklist
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+            </svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

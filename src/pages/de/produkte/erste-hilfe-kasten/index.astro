@@ -1,0 +1,207 @@
+---
+import BaseLayout from '../../../../layouts/BaseLayout.astro';
+import Breadcrumb from '../../../../components/layout/Breadcrumb.astro';
+import Icon from '../../../../components/ui/Icon.astro';
+import HeroImage from '../../../../components/content/HeroImage.astro';
+---
+
+<BaseLayout
+  title="Erste-Hilfe-Kasten: Was gehört rein? Inhalt & Kaufratgeber"
+  description="Der richtige Erste-Hilfe-Kasten für dein Notfallpaket. Inhalt, Qualität und Wartung."
+  locale="de"
+  dateModified="2025-12-15"
+  schemaType="Article"
+>
+  <section class="py-16">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6">
+      <Breadcrumb items={[{ label: 'Produkte', href: '/de/produkte/' }, { label: 'Erste-Hilfe-Kasten' }]} class="mb-4" locale="de" />
+      <h1 class="text-4xl font-bold mb-6">Erste-Hilfe-Kasten</h1>
+
+      <div class="mb-8">
+        <HeroImage
+          src="/images/shared/first-aid-kit-open.webp"
+          alt="Erste-Hilfe-Kasten Inhalt für Notfallvorsorge"
+          priority={true}
+        />
+      </div>
+
+      <div class="prose prose-lg">
+        <p class="lead">
+          Ein guter Erste-Hilfe-Kasten behandelt kleine Verletzungen und überbrückt
+          die Zeit, bis professionelle Hilfe kommt. In einer Krisensituation kann
+          das <strong>entscheidend</strong> sein.
+        </p>
+
+        <!-- Key Message -->
+        <div class="card p-6 my-8 bg-[--color-bg-tertiary] not-prose">
+          <h3 class="text-lg font-semibold mb-3 flex items-center gap-2">
+            <Icon name="Heart" size={20} class="text-red-500" />
+            Wissen ist wichtiger als Material
+          </h3>
+          <p class="text-sm text-[--color-text-secondary]">
+            Der beste Erste-Hilfe-Kasten nützt nichts ohne Wissen.
+            <strong>Besuche einen Erste-Hilfe-Kurs!</strong> Das DRK bietet
+            bundesweit Kurse an — oft in wenigen Stunden.
+          </p>
+        </div>
+
+        <h2>Fertigkasten vs. selbst zusammenstellen?</h2>
+
+        <h3>Fertigkasten (empfohlen für Einsteiger)</h3>
+        <ul>
+          <li>✓ DIN-Norm garantiert Mindestausstattung</li>
+          <li>✓ Sofort einsatzbereit</li>
+          <li>✓ Übersichtlich organisiert</li>
+          <li>✗ Oft ohne Medikamente</li>
+          <li>✗ Nicht auf persönliche Bedürfnisse angepasst</li>
+        </ul>
+
+        <h3>Selbst zusammenstellen</h3>
+        <ul>
+          <li>✓ Genau auf deine Bedürfnisse angepasst</li>
+          <li>✓ Kannst Medikamente hinzufügen</li>
+          <li>✗ Erfordert Wissen über Bedarf</li>
+          <li>✗ Zeitaufwändiger</li>
+        </ul>
+
+        <div class="card p-6 my-8 bg-[--color-accent-subtle] not-prose">
+          <p class="font-medium mb-2">💡 Beste Lösung</p>
+          <p class="text-sm text-[--color-text-secondary]">
+            Kaufe einen <strong>DIN-konformen Fertigkasten</strong> und ergänze ihn
+            mit persönlichen Medikamenten und zusätzlichem Material.
+          </p>
+        </div>
+
+        <h2>DIN-Normen für Erste-Hilfe-Kästen</h2>
+        <ul>
+          <li><strong>DIN 13157:</strong> Kleiner Betriebsverbandkasten (gut für Haushalte)</li>
+          <li><strong>DIN 13164:</strong> Kfz-Verbandkasten (Pflicht im Auto)</li>
+          <li><strong>DIN 13169:</strong> Großer Betriebsverbandkasten</li>
+        </ul>
+
+        <h2>Wesentlicher Inhalt</h2>
+
+        <h3>Verbandmaterial</h3>
+        <ul>
+          <li>Pflaster verschiedener Größen (mindestens 20 Stück)</li>
+          <li>Sterile Kompressen 10x10 cm (10+ Stück)</li>
+          <li>Mullbinden 6 cm und 8 cm</li>
+          <li>Elastische Binden</li>
+          <li>Dreiecktuch (2 Stück)</li>
+          <li>Verbandpäckchen</li>
+          <li>Fixierpflaster / Leukoplast</li>
+        </ul>
+
+        <h3>Instrumente</h3>
+        <ul>
+          <li>Verbandsschere (abgerundete Spitzen)</li>
+          <li>Pinzette</li>
+          <li>Einmalhandschuhe (4+ Paar, latexfrei)</li>
+          <li>Rettungsdecke</li>
+          <li>Kühlkompresse (Instant)</li>
+        </ul>
+
+        <h3>Zusätzlich empfohlen</h3>
+        <ul>
+          <li>Wunddesinfektionsmittel (Octenisept o.ä.)</li>
+          <li>Fieberthermometer</li>
+          <li>Zeckenzange</li>
+          <li>Splitterpinzette</li>
+          <li>Augenspüllösung</li>
+        </ul>
+
+        <h2>Medikamente ergänzen</h2>
+        <div class="card p-4 my-6 border-l-4 border-l-amber-500 bg-amber-50 dark:bg-amber-950/30 not-prose">
+          <p class="text-sm">
+            <strong>⚠️ Wichtig:</strong> Medikamente sind in Fertigkästen meist nicht enthalten.
+            Füge sie selbst hinzu und beachte Unverträglichkeiten und Wechselwirkungen.
+          </p>
+        </div>
+
+        <ul>
+          <li><strong>Schmerzmittel:</strong> Paracetamol, Ibuprofen</li>
+          <li><strong>Durchfallmittel:</strong> Loperamid, Kohletabletten</li>
+          <li><strong>Elektrolytpulver:</strong> Bei Durchfall/Erbrechen</li>
+          <li><strong>Antihistaminikum:</strong> Bei allergischen Reaktionen</li>
+          <li><strong>Wundsalbe:</strong> Bepanthen o.ä.</li>
+        </ul>
+
+        <h2>Persönliche Medikamente</h2>
+        <p>
+          <strong>Extrem wichtig:</strong> Halte verschreibungspflichtige Medikamente
+          für <strong>mindestens 7-14 Tage</strong> vorrätig:
+        </p>
+        <ul>
+          <li>Blutdruckmedikamente</li>
+          <li>Insulin und Diabetiker-Zubehör</li>
+          <li>Herzmedikamente</li>
+          <li>Asthma-Spray</li>
+          <li>Schilddrüsenmedikamente</li>
+          <li>Antibabypille</li>
+        </ul>
+
+        <h2>Aufbewahrung und Wartung</h2>
+        <ul>
+          <li><strong>Zugänglich:</strong> Alle Familienmitglieder wissen, wo er ist</li>
+          <li><strong>Trocken:</strong> Nicht im Badezimmer (zu feucht)</li>
+          <li><strong>Kühl:</strong> Nicht in der Sonne oder am Heizkörper</li>
+          <li><strong>Prüfen:</strong> Alle 3 Monate Verfallsdaten kontrollieren</li>
+        </ul>
+
+        <h2>Empfohlene Marken</h2>
+        <ul>
+          <li><strong>Leina-Werke:</strong> Deutscher Hersteller, DIN-konform</li>
+          <li><strong>Söhngen:</strong> Professionelle Qualität</li>
+          <li><strong>Holthaus Medical:</strong> Breites Sortiment</li>
+        </ul>
+
+        <h2>Checkliste</h2>
+        <ul>
+          <li>☐ DIN-konformer Grundkasten</li>
+          <li>☐ Persönliche Medikamente für 7+ Tage</li>
+          <li>☐ Aktuelle Medikamentenliste beigelegt</li>
+          <li>☐ Alle Verfallsdaten geprüft</li>
+          <li>☐ Aufbewahrungsort allen bekannt</li>
+          <li>☐ Erste-Hilfe-Kurs absolviert</li>
+          <li>☐ Nächster Wartungstermin notiert</li>
+        </ul>
+      </div>
+
+      <!-- Links -->
+      <div class="mt-12 grid sm:grid-cols-2 gap-4">
+        <div class="card p-6 bg-[--color-bg-tertiary]">
+          <h3 class="font-semibold mb-2">Erste-Hilfe-Kästen auf Amazon.de</h3>
+          <p class="text-sm text-[--color-text-secondary] mb-4">
+            DIN-konforme Verbandkästen für Haushalt und Familie.
+          </p>
+          <a
+            href="https://www.amazon.de/s?k=erste+hilfe+kasten+din&tag=kit72de-21"
+            target="_blank"
+            rel="noopener noreferrer sponsored"
+            class="inline-flex items-center gap-2 text-[--color-accent-primary] hover:underline"
+          >
+            Auf Amazon ansehen →
+          </a>
+        </div>
+        <div class="card p-6 bg-[--color-bg-tertiary]">
+          <h3 class="font-semibold mb-2">Erste-Hilfe-Kurs finden</h3>
+          <p class="text-sm text-[--color-text-secondary] mb-4">
+            Das DRK bietet bundesweit Kurse an.
+          </p>
+          <a
+            href="https://www.drk.de/hilfe-in-deutschland/kurse-im-ueberblick/erste-hilfe/"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex items-center gap-2 text-[--color-accent-primary] hover:underline"
+          >
+            DRK-Kurse ansehen →
+          </a>
+        </div>
+      </div>
+
+      <p class="text-xs text-[--color-text-muted] mt-4 text-center">
+        * Affiliate-Link — du zahlst nicht mehr, wir erhalten eine kleine Provision.
+      </p>
+    </div>
+  </section>
+</BaseLayout>

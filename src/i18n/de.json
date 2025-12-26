@@ -1,0 +1,315 @@
+{
+  "meta": {
+    "locale": "de",
+    "hreflang": "de-DE",
+    "name": "Deutsch",
+    "flag": "🇩🇪"
+  },
+  "site": {
+    "title": "Kit-72",
+    "description": "Ratgeber und Tools für dein 72-Stunden-Notfallpaket. Personalisierte Checklisten, Rechner und praktische Tipps.",
+    "tagline": "Ratgeber und Tools für dein Notfallpaket. Praktische Informationen, ohne Panikmache."
+  },
+  "nav": {
+    "home": "Startseite",
+    "guides": "Ratgeber",
+    "scenarios": "Szenarien",
+    "components": "Produkte",
+    "tools": "Tools",
+    "search": "Suchen",
+    "configurator": "Konfigurator"
+  },
+  "footer": {
+    "copyright": "Alle Rechte vorbehalten.",
+    "affiliateNote": "Diese Website enthält Affiliate-Links.",
+    "moreInfo": "Mehr Informationen",
+    "legal": "Rechtliches"
+  },
+  "common": {
+    "readMore": "Weiterlesen",
+    "learnMore": "Mehr erfahren",
+    "viewAll": "Alle anzeigen",
+    "close": "Schließen",
+    "back": "Zurück",
+    "next": "Weiter",
+    "previous": "Zurück",
+    "loading": "Laden...",
+    "error": "Fehler",
+    "success": "Erfolg",
+    "comingSoon": "Demnächst",
+    "lastUpdated": "Zuletzt aktualisiert",
+    "author": "Team Kit-72"
+  },
+  "accessibility": {
+    "skipToContent": "Zum Hauptinhalt springen",
+    "mainNavigation": "Hauptnavigation",
+    "chooseLanguage": "Sprache wählen"
+  },
+  "kitBuilder": {
+    "title": "Notfallpaket Zusammenstellen",
+    "addToKit": "Zum Paket hinzufügen",
+    "removeFromKit": "Aus Paket entfernen",
+    "yourKit": "Dein Paket",
+    "emptyKit": "Dein Paket ist leer",
+    "itemsSelected": "Artikel ausgewählt",
+    "exportPdf": "PDF exportieren",
+    "shareKit": "Paket teilen",
+    "resetKit": "Paket zurücksetzen",
+    "storageKey": "kit72_builder_de",
+    "urlParams": {
+      "scenario": "szenario",
+      "babies": "baby",
+      "pets": "haustier"
+    },
+    "progress": {
+      "label": "Fortschritt Notfallpaket",
+      "completed": "abgeschlossen",
+      "complete": "Vollständig",
+      "critical": "kritisch"
+    },
+    "resumeBanner": {
+      "title": "Fortschritt gespeichert",
+      "itemsMarked": "Artikel markiert",
+      "restart": "Neu beginnen"
+    },
+    "quickPresets": {
+      "title": "Schnellstart",
+      "solo": { "label": "Ich lebe allein", "description": "Basis-Einzelpaket" },
+      "family": { "label": "Familie mit Kindern", "description": "Komplettes Familienpaket" },
+      "pets": { "label": "Mit Haustieren", "description": "Inklusive Hund/Katze" },
+      "evacuation": { "label": "Fluchtrucksack", "description": "15 Min zum Verlassen" }
+    },
+    "scenariosSection": {
+      "title": "Wähle dein Szenario",
+      "general": { "label": "Allgemeines Paket", "description": "Grundvorbereitung 72h" },
+      "stromausfall": { "label": "Stromausfall", "description": "Längerer Stromausfall" },
+      "hitzewelle": { "label": "Hitzewelle", "description": "Extreme Temperaturen" },
+      "wasserausfall": { "label": "Wasserausfall", "description": "Keine Wasserversorgung" },
+      "evakuierung": { "label": "Evakuierung", "description": "Notausgang" },
+      "ueberschwemmung": { "label": "Überschwemmung", "description": "Hochwasser oder Überflutung" },
+      "cyberangriff": { "label": "Cyberangriff", "description": "Ausfall digitaler Systeme" }
+    },
+    "familySection": {
+      "title": "Dein Haushalt",
+      "babies": { "label": "Babys oder Kleinkinder", "description": "Fügt Windeln, Flaschen usw. hinzu" },
+      "pets": { "label": "Haustiere", "description": "Fügt Futter, Transportbox usw. hinzu" }
+    },
+    "progressSection": {
+      "title": "Fortschritt deines Pakets",
+      "complete": "Paket vollständig!",
+      "items": "Artikel:",
+      "criticalLabel": "Kritisch:",
+      "congratulations": "Herzlichen Glückwunsch! Dein Notfallpaket ist fertig",
+      "missingCritical": "Dir fehlen noch {count} kritische Artikel",
+      "allCriticalDone": "Alle kritischen Artikel erledigt"
+    },
+    "priority": {
+      "critical": "Kritisch",
+      "recommended": "Empfohlen",
+      "optional": "Optional"
+    },
+    "actions": {
+      "print": "Drucken",
+      "share": "Teilen",
+      "reset": "Zurücksetzen",
+      "buy": "Kaufen"
+    },
+    "autoSave": "Dein Fortschritt wird automatisch gespeichert",
+    "linkCopied": "Link kopiert",
+    "milestones": {
+      "25": "25% geschafft - Guter Anfang!",
+      "50": "50% - Du bist auf halbem Weg!",
+      "75": "75% - Fast fertig!",
+      "100": "100% - Paket vollständig!"
+    },
+    "print": {
+      "siteName": "Kit-72.com",
+      "tagline": "Notfallvorsorge",
+      "generated": "Erstellt:",
+      "scenario": "Szenario:",
+      "withBabies": "Mit Babys",
+      "withPets": "Mit Haustieren",
+      "scanQr": "Scannen für Online-Version:",
+      "url": "kit-72.com/de/tools/notfallpaket-zusammenstellen/"
+    },
+    "categories": {
+      "Wasser": "Wasser",
+      "Nahrung": "Nahrung",
+      "Beleuchtung": "Beleuchtung",
+      "Energie": "Energie",
+      "Erste-Hilfe": "Erste Hilfe",
+      "Hygiene": "Hygiene",
+      "Dokumente": "Dokumente",
+      "Werkzeuge": "Werkzeuge",
+      "Schutz": "Schutz",
+      "Kühlung": "Kühlung",
+      "Baby": "Baby",
+      "Haustiere": "Haustiere",
+      "Überschwemmung": "Überschwemmung"
+    }
+  },
+  "calculators": {
+    "water": {
+      "title": "Wasser-Rechner",
+      "quickSetup": "Schnellkonfiguration",
+      "presets": {
+        "solo": { "label": "Allein", "sublabel": "1 Erwachsener, 3 Tage" },
+        "couple": { "label": "Paar", "sublabel": "2 Erwachsene, 3 Tage" },
+        "family": { "label": "Familie", "sublabel": "2 Erwachsene, 2 Kinder" },
+        "withPet": { "label": "Mit Haustier", "sublabel": "2 Erwachsene, 1 Hund" }
+      },
+      "people": {
+        "title": "Personen",
+        "adults": "Erwachsene",
+        "children": "Kinder (4-12 Jahre)",
+        "babies": "Babys (0-3 Jahre)",
+        "total": "gesamt"
+      },
+      "pets": {
+        "title": "Haustiere",
+        "dogs": "Hunde",
+        "cats": "Katzen",
+        "total": "gesamt"
+      },
+      "duration": {
+        "title": "Dauer",
+        "daysLabel": "Tage Autonomie",
+        "day": "Tag",
+        "days": "Tage",
+        "recommended": "72h empfohlen"
+      },
+      "conditions": {
+        "title": "Bedingungen",
+        "climate": "Klima",
+        "normal": "Normal",
+        "hot": "Extreme Hitze",
+        "comfort": "Komfortniveau",
+        "minimal": "Minimal",
+        "standard": "Standard",
+        "comfortable": "Komfortabel"
+      },
+      "calculate": "Wasserbedarf berechnen",
+      "calculating": "Berechne...",
+      "result": {
+        "title": "Gesamtbedarf",
+        "forDays": "für {days} Tage",
+        "perDay": "/Tag",
+        "person": "Person",
+        "people": "Personen",
+        "pet": "Haustier",
+        "pets": "Haustiere",
+        "hotClimate": "Warmes Klima",
+        "normalClimate": "Normales Klima",
+        "comfortLevel": "Komfort"
+      },
+      "breakdown": {
+        "drinking": "Trinken",
+        "cooking": "Kochen",
+        "hygiene": "Hygiene",
+        "sanitation": "WC",
+        "pets": "Haustiere"
+      },
+      "storage": {
+        "title": "Wie lagern",
+        "subtitle": "Praktische Tipps für deine Vorräte",
+        "bottles5L": "5L Flaschen",
+        "drinkingOnly": "Nur zum Trinken",
+        "containers20L": "20L Kanister",
+        "generalUse": "Hygiene und allgemein",
+        "alternative": "Alternative: 8L",
+        "easierToMove": "Leichter zu transportieren"
+      },
+      "products": {
+        "title": "Empfohlene Produkte",
+        "subtitle": "Wasserspeicher-Lösungen bei Amazon Deutschland",
+        "bestSeller": "Bestseller",
+        "viewMore": "Mehr Wasserspeicher-Produkte ansehen",
+        "viewAt": "Bei Amazon ansehen"
+      },
+      "tip": "Vergiss deine Haustiere nicht! Hunde und Katzen brauchen auch etwa 50-100ml Wasser pro kg Körpergewicht pro Tag."
+    },
+    "power": {
+      "title": "Energie-Rechner",
+      "duration": {
+        "title": "Dauer des Notfalls",
+        "subtitle": "Wie viele Tage möchtest du überbrücken?",
+        "24h": "24h",
+        "72h": "72h",
+        "1week": "1 Woche",
+        "2weeks": "2 Wochen",
+        "shortEmergency": "Kurzer Notfall",
+        "standardKit": "Standard-Paket",
+        "extendedEmergency": "Längerer Notfall",
+        "maxPreparation": "Maximale Vorbereitung"
+      },
+      "devices": {
+        "title": "Geräte zum Laden",
+        "subtitle": "Wähle die Anzahl von jedem",
+        "active": "aktiv",
+        "actives": "aktiv",
+        "categories": {
+          "communication": "Kommunikation",
+          "lighting": "Beleuchtung",
+          "medical": "Medizinisch",
+          "other": "Sonstiges"
+        },
+        "items": {
+          "smartphone": "Smartphone",
+          "tablet": "Tablet",
+          "smartwatch": "Smartwatch",
+          "headlamp": "Stirnlampe",
+          "lantern": "Campinglampe",
+          "radio": "Notfallradio",
+          "cpap": "CPAP tragbar",
+          "nebulizer": "Vernebler"
+        },
+        "perDay": "×/Tag",
+        "every": "alle",
+        "daysInterval": "Tage",
+        "addCustom": "Eigenes Gerät hinzufügen",
+        "deviceName": "Gerätename",
+        "add": "Hinzufügen"
+      },
+      "safety": {
+        "title": "Sicherheitsmarge",
+        "subtitle": "Batterien verlieren bei Kälte und Nutzung an Effizienz",
+        "tight": "Knapp",
+        "noBuffer": "Kein Puffer",
+        "minimum": "Minimum",
+        "buffer20": "+20% Puffer",
+        "recommended": "Empfohlen",
+        "buffer30": "+30% Puffer",
+        "conservative": "Konservativ",
+        "buffer50": "+50% Puffer"
+      },
+      "calculating": "Berechne...",
+      "result": {
+        "title": "Dein Energiebedarf",
+        "days": "Tage",
+        "devices": "Geräte",
+        "totalCapacity": "Empfohlene Gesamtkapazität",
+        "consumption": "Verbrauch",
+        "losses": "+30% Verluste",
+        "margin": "Marge",
+        "breakdown": "Aufschlüsselung pro Gerät",
+        "summary": "Bedarfsübersicht",
+        "recommended": "Empfohlen"
+      },
+      "products": {
+        "title": "Empfohlene Produkte",
+        "subtitle": "Auswahl an Powerbanks von zuverlässigen Marken bei Amazon",
+        "idealForYou": "Ideal für dich",
+        "viewMore": "Mehr Powerbanks bei Amazon ansehen",
+        "viewAt": "Bei Amazon ansehen"
+      },
+      "tips": {
+        "coldWeather": "Batterien verlieren bei 0°C bis zu 30% ihrer Kapazität.",
+        "solarPanel": "Ein 21W Solarpanel kann bei längeren Notfällen helfen."
+      },
+      "empty": {
+        "title": "Keine Geräte ausgewählt",
+        "subtitle": "Füge mindestens ein Gerät hinzu, um deinen Energiebedarf zu berechnen."
+      }
+    }
+  }
+}

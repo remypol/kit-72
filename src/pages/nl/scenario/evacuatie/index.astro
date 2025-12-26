@@ -1,0 +1,1087 @@
+---
+/**
+ * Evacuatie Scenario Page - Dutch Evacuation Preparedness
+ *
+ * NL-specific context:
+ * - Flooding is #1 evacuation reason in NL
+ * - NL-Alert system for emergency warnings
+ * - Rijksoverheid evacuation guidance
+ * - OV-chipkaart for public transport evacuation
+ * - €70/€30 cash recommendation per Rijksoverheid
+ */
+import BaseLayout from '../../../../layouts/BaseLayout.astro';
+import TLDRBlock from '../../../../components/hub/TLDRBlock.astro';
+import CollapsibleSection from '../../../../components/hub/CollapsibleSection.astro';
+import PhaseTabs from '../../../../components/hub/PhaseTabs.tsx';
+import InteractiveChecklist from '../../../../components/hub/InteractiveChecklist.tsx';
+import StickyActionBar from '../../../../components/hub/StickyActionBar.tsx';
+import Icon from '../../../../components/ui/Icon.astro';
+import HeroImage from '../../../../components/content/HeroImage.astro';
+
+const scenarioKey = 'evacuatie';
+
+// Custom phases for evacuation
+const customPhases = [
+  { id: 'voorbereiden', label: 'Voorbereiden', icon: 'shield' },
+  { id: 'evacueren', label: 'Evacueren', icon: 'activity' },
+  { id: 'na', label: 'Na', icon: 'check-circle' },
+];
+
+// Phase content - Dutch specific
+const phases = {
+  voorbereiden: [
+    {
+      title: 'Maak een noodtas klaar',
+      detail: 'Een tas die altijd klaar staat. Maximaal 10-15kg. Controleer elk half jaar.',
+      tip: 'Check vervaldatum medicijnen, kleding die nog past...'
+    },
+    {
+      title: 'Bepaal twee ontmoetingspunten',
+      detail: 'Eén dichtbij huis, één buiten de wijk. Iedereen in het gezin kent beide.',
+      tip: null
+    },
+    {
+      title: 'Kies een contactpersoon buiten de regio',
+      detail: 'Familie of vriend die iedereen belt om te checken. Tijdens rampen zijn lokale lijnen overbelast.',
+      tip: 'Bellen naar buiten de regio lukt vaak wel'
+    },
+    {
+      title: 'Ken twee vluchtroutes',
+      detail: 'De hoofdroute kan geblokkeerd zijn. Oefen beide met de auto én te voet.',
+      tip: null
+    },
+    {
+      title: 'Verdeel taken',
+      detail: 'Wie pakt de tas, wie de huisdieren, wie helpt kinderen/ouderen.',
+      tip: 'Doe minstens één keer per jaar een oefening'
+    },
+    {
+      title: 'Zorg voor documenten',
+      detail: 'ID, zorgpas, verzekeringspapieren. Kopieën in waterdichte hoes.',
+      tip: "Foto's van documenten ook op je telefoon"
+    },
+  ],
+  evacueren: [
+    {
+      title: 'Bij officieel evacuatiebevel: GA',
+      detail: 'Wacht niet. Autoriteiten geven dit bevel niet lichtvaardig.',
+      tip: null
+    },
+    {
+      title: 'Pak de noodtas en vertrek',
+      detail: 'Verspil geen tijd met zoeken. De tas is al klaar.',
+      tip: 'Spullen zijn vervangbaar, mensen niet'
+    },
+    {
+      title: 'Sluit gas en stroom af als er tijd is',
+      detail: 'Gaskraan dicht, hoofdschakelaar uit. Alleen als je tijd hebt.',
+      tip: null
+    },
+    {
+      title: 'Volg de officiele routes',
+      detail: 'Autoriteiten weten welke gebieden veilig zijn. Neem geen sluiproutes.',
+      tip: null
+    },
+    {
+      title: 'Neem huisdieren mee',
+      detail: 'Laat ze NOOIT achter. Transportbox en voer zit in de noodtas.',
+      tip: 'Veel mensen gaan terug voor huisdieren en brengen zichzelf in gevaar'
+    },
+    {
+      title: 'Meld je bij het ontmoetingspunt',
+      detail: 'Bel de contactpersoon buiten de regio. Kort bericht: "Ik ben oké, ik ga naar [locatie]".',
+      tip: null
+    },
+  ],
+  na: [
+    {
+      title: 'Ga niet terug tot het veilig is',
+      detail: 'Autoriteiten melden wanneer je terug mag.',
+      tip: null
+    },
+    {
+      title: 'Documenteer schade',
+      detail: "Maak foto's van alles voordat je iets aanraakt. Voor verzekering en claims.",
+      tip: null
+    },
+    {
+      title: 'Controleer veiligheid van je woning',
+      detail: 'Gas, elektriciteit, constructie. Bij twijfel: ga niet naar binnen.',
+      tip: 'Ruikt het naar gas? Niets aansteken, ventileren en melden'
+    },
+    {
+      title: 'Vul je noodtas aan',
+      detail: 'Alles wat je hebt gebruikt of beschadigd is. De volgende noodsituatie kan snel komen.',
+      tip: null
+    },
+  ],
+};
+
+// When to evacuate - NL specific triggers
+const evacuationTriggers = [
+  { trigger: 'Officieel evacuatiebevel (NL-Alert)', action: 'DIRECT EVACUEREN', severity: 'critical' },
+  { trigger: 'Dreigende dijkdoorbraak', action: 'Evacueren naar hoger gelegen gebied', severity: 'critical' },
+  { trigger: 'Brand in de buurt (rook zichtbaar)', action: 'Voorbereiden/Evacueren als het dichterbij komt', severity: 'warning' },
+  { trigger: 'Overstroming dreigt', action: 'Verticaal evacueren of weg', severity: 'critical' },
+  { trigger: 'Lekkage gevaarlijke stoffen', action: 'Evacueren tegen de wind in', severity: 'critical' },
+  { trigger: 'Je gevoel zegt: gevaar', action: 'Vertrouw je instinct, evacueer', severity: 'warning' },
+];
+
+// Checklist categories - NL products with Bol.com links
+const checklistCategories = [
+  {
+    id: 'documenten',
+    name: 'Documenten',
+    icon: 'file',
+    items: [
+      { id: 'id', name: 'ID-kaart/Paspoort originelen', priority: 'critical' as const },
+      { id: 'zorgpas', name: 'Zorgpas / Europese zorgkaart', priority: 'critical' as const },
+      { id: 'kopien-waterdicht', name: 'Kopieën documenten in waterdichte hoes', priority: 'critical' as const, affiliateUrl: 'https://www.bol.com/nl/nl/s/?searchtext=waterdichte+documenten+hoes' },
+      { id: 'contant', name: 'Contant geld (€70 volw. / €30 kind)', priority: 'critical' as const, notes: 'Per Rijksoverheid advies' },
+      { id: 'ov-chipkaart', name: 'OV-chipkaart met saldo', priority: 'critical' as const, notes: 'Voor evacuatie met OV' },
+      { id: 'contactlijst', name: 'Geprinte contactenlijst', priority: 'critical' as const },
+    ]
+  },
+  {
+    id: 'basis',
+    name: 'Basis overleven',
+    icon: 'backpack',
+    items: [
+      { id: 'water', name: 'Water (1.5L min/persoon)', priority: 'critical' as const, affiliateUrl: 'https://www.bol.com/nl/nl/s/?searchtext=drinkfles+1+liter' },
+      { id: 'eten', name: 'Niet-bederfelijk voedsel', priority: 'critical' as const, notes: 'Repen, noten, crackers' },
+      { id: 'zaklamp', name: 'Zaklamp + extra batterijen', priority: 'critical' as const, affiliateUrl: 'https://www.bol.com/nl/nl/s/?searchtext=led+zaklamp' },
+      { id: 'reddingsdeken', name: 'Reddingsdeken', priority: 'critical' as const, affiliateUrl: 'https://www.bol.com/nl/nl/s/?searchtext=reddingsdeken' },
+      { id: 'fluitje', name: 'Fluitje', priority: 'recommended' as const, notes: 'Om hulp te roepen', affiliateUrl: 'https://www.bol.com/nl/nl/s/?searchtext=noodfluitje' },
+      { id: 'zakmes', name: 'Zakmes/multitool', priority: 'recommended' as const, affiliateUrl: 'https://www.bol.com/nl/nl/s/?searchtext=multitool' },
+    ]
+  },
+  {
+    id: 'communicatie',
+    name: 'Communicatie en energie',
+    icon: 'smartphone',
+    items: [
+      { id: 'telefoon', name: 'Telefoon opgeladen', priority: 'critical' as const },
+      { id: 'oplader', name: 'Oplader + kabel', priority: 'critical' as const },
+      { id: 'powerbank', name: 'Powerbank (10.000mAh+)', priority: 'critical' as const, affiliateUrl: 'https://www.bol.com/nl/nl/s/?searchtext=powerbank+10000mah' },
+      { id: 'radio', name: 'Radio op batterijen', priority: 'recommended' as const, notes: 'Voor NL-Alert en nieuws', affiliateUrl: 'https://www.bol.com/nl/nl/s/?searchtext=draagbare+radio+batterij' },
+    ]
+  },
+  {
+    id: 'gezondheid',
+    name: 'Gezondheid',
+    icon: 'heart',
+    items: [
+      { id: 'medicijnen', name: 'Persoonlijke medicatie (7+ dagen)', priority: 'critical' as const },
+      { id: 'ehbo', name: 'EHBO-setje', priority: 'critical' as const, affiliateUrl: 'https://www.bol.com/nl/nl/s/?searchtext=ehbo+set+compact' },
+      { id: 'bril', name: 'Reserve bril/lenzen', priority: 'recommended' as const },
+    ]
+  },
+  {
+    id: 'hygiene',
+    name: 'Hygiene',
+    icon: 'sparkles',
+    items: [
+      { id: 'doekjes', name: 'Vochtige doekjes', priority: 'critical' as const, affiliateUrl: 'https://www.bol.com/nl/nl/s/?searchtext=vochtige+doekjes' },
+      { id: 'handgel', name: 'Desinfecterende handgel', priority: 'critical' as const },
+      { id: 'tandenborstel', name: 'Tandenborstel + pasta', priority: 'recommended' as const },
+      { id: 'menstruatie', name: 'Menstruatieproducten', priority: 'critical' as const, notes: 'Indien van toepassing' },
+    ]
+  },
+  {
+    id: 'kleding',
+    name: 'Kleding en bescherming',
+    icon: 'shirt',
+    items: [
+      { id: 'setje', name: 'Complete set kleding', priority: 'recommended' as const },
+      { id: 'schoenen', name: 'Stevige loopschoenen', priority: 'critical' as const },
+      { id: 'regenjas', name: 'Regenjas', priority: 'recommended' as const },
+    ]
+  },
+];
+
+// Special needs groups - Dutch context
+const specialNeeds = [
+  { group: 'Kinderen', icon: 'Baby', essentials: 'Luiers, flesje, voeding, troostknuffel' },
+  { group: 'Ouderen', icon: 'Users', essentials: 'Extra medicijnen, bril, gehoorapparaat, contactgegevens arts' },
+  { group: 'Huisdieren', icon: 'Dog', essentials: 'Transportbox, voer 3-5 dagen, dierenartsdocumenten' },
+];
+
+// Common mistakes
+const mistakes = [
+  { error: 'Te lang wachten', fix: 'Bij bevel of serieuze twijfel: evacueer VOOR het misgaat' },
+  { error: 'Te veel willen meenemen', fix: 'De noodtas is al klaar. Pak die en ga' },
+  { error: 'Geen ontmoetingspunt afgesproken', fix: 'Bepaal 2 punten vooraf, oefen met het gezin' },
+  { error: 'Huisdieren achterlaten', fix: 'Ze horen IN het plan. Transportbox klaar' },
+];
+
+// FAQs - Dutch context
+const faqs = [
+  {
+    question: 'Hoeveel tijd heb ik om te evacueren?',
+    answer: 'Dat hangt af van de situatie: een brand kan minuten geven, een evacuatiebevel meestal meer. Handel alsof je 15 minuten hebt.'
+  },
+  {
+    question: 'Moet ik gas en stroom afsluiten?',
+    answer: 'Als je tijd hebt, ja. Is de evacuatie urgent, GA. Je leven is belangrijker.'
+  },
+  {
+    question: 'Kan ik teruggaan voor iets dat ik vergat?',
+    answer: 'GA NOOIT terug naar een gevarenzone voor spullen. Bezittingen zijn vervangbaar.'
+  },
+  {
+    question: 'Waar ga ik naartoe zonder familie buiten de regio?',
+    answer: 'Gemeenten openen opvanglocaties (sporthallen, scholen). Luister naar de radio voor locaties.'
+  },
+  {
+    question: 'Wat als ik te voet moet evacueren?',
+    answer: 'Daarom weegt de noodtas max 10-15kg. Ken ook looproutes uit je wijk.'
+  },
+  {
+    question: 'Hoe ontvang ik NL-Alert berichten?',
+    answer: 'NL-Alert komt automatisch op je telefoon binnen bij noodsituaties. Zorg dat je telefoon aan staat en bereik heeft.'
+  },
+];
+---
+
+<BaseLayout
+  title="Evacuatie: Wat meenemen? Noodtas pakken in 10 minuten"
+  description="Complete evacuatiegids voor Nederland. Wat in je noodtas, gezinsplan, ontmoetingspunten en checklist. Rijksoverheid richtlijnen."
+  locale="nl"
+  schemaType="HowTo"
+  dateModified="2025-12-15"
+  alternates={{
+    es: '/es/escenarios/kit-evacuacion/',
+    de: '/de/szenarien/evakuierung/',
+  }}
+  schemaData={{
+    step: [
+      { '@type': 'HowToStep', name: 'Maak een noodtas klaar', text: 'Een tas die altijd klaar staat. Maximaal 10-15kg. Controleer elk half jaar.' },
+      { '@type': 'HowToStep', name: 'Bepaal twee ontmoetingspunten', text: 'Eén dichtbij huis, één buiten de wijk. Iedereen in het gezin kent beide.' },
+      { '@type': 'HowToStep', name: 'Kies een contactpersoon buiten de regio', text: 'Familie of vriend die iedereen belt. Bellen naar buiten de regio lukt vaak wel.' },
+      { '@type': 'HowToStep', name: 'Ken twee vluchtroutes', text: 'De hoofdroute kan geblokkeerd zijn. Oefen beide met de auto én te voet.' },
+      { '@type': 'HowToStep', name: 'Bij officieel bevel: GA', text: 'Wacht niet. Autoriteiten geven dit bevel niet lichtvaardig.' },
+      { '@type': 'HowToStep', name: 'Pak de noodtas en vertrek', text: 'Verspil geen tijd. Spullen zijn vervangbaar, mensen niet.' },
+      { '@type': 'HowToStep', name: 'Volg officiele routes', text: 'Autoriteiten weten welke gebieden veilig zijn. Neem geen sluiproutes.' },
+    ],
+    totalTime: 'PT30M',
+    supply: [
+      { '@type': 'HowToSupply', name: 'ID-kaart/Paspoort' },
+      { '@type': 'HowToSupply', name: 'Water (1.5L min/persoon)' },
+      { '@type': 'HowToSupply', name: 'Niet-bederfelijk voedsel' },
+      { '@type': 'HowToSupply', name: 'Zaklamp + batterijen' },
+      { '@type': 'HowToSupply', name: 'Powerbank (10.000mAh+)' },
+      { '@type': 'HowToSupply', name: 'Persoonlijke medicatie (7+ dagen)' },
+      { '@type': 'HowToSupply', name: 'Reddingsdeken' },
+    ],
+  }}
+  faqData={faqs}
+>
+  <main class="scenario-page">
+    <!-- Header -->
+    <header class="scenario-header">
+      <nav class="scenario-breadcrumb">
+        <a href="/nl/scenario/" class="breadcrumb-back">
+          <Icon name="ChevronLeft" size={20} />
+        </a>
+        <span class="breadcrumb-current">Evacuatie</span>
+      </nav>
+
+      <div class="scenario-title-row">
+        <div class="scenario-icon scenario-icon--emerald">
+          <Icon name="Car" size={28} />
+        </div>
+        <div class="scenario-title-content">
+          <h1 class="scenario-title">Evacuatie Voorbereiden</h1>
+          <div class="scenario-meta">
+            <span class="meta-item">10 min</span>
+            <span class="meta-divider">·</span>
+            <span class="meta-item">Bijgewerkt dec 2025</span>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Hero Image -->
+    <section class="scenario-section">
+      <HeroImage
+        src="/images/shared/family-evacuation.webp"
+        alt="Gezin met noodtassen tijdens evacuatie"
+        priority={true}
+      />
+    </section>
+
+    <!-- TL;DR -->
+    <section class="scenario-section">
+      <TLDRBlock
+        summary="Twijfel je of je moet evacueren? Evacueer. Liever een nacht weg voor niets dan in gevaar blijven. Je noodtas moet klaar staan om in 5 minuten te vertrekken. Maximaal 10-15kg."
+        keyStat="5 minuten"
+        keyStatLabel="Vertrek binnen"
+        locale="nl"
+      />
+    </section>
+
+    <!-- When to Evacuate -->
+    <section class="scenario-section">
+      <h2 class="section-title">
+        <Icon name="AlertTriangle" size={24} />
+        Wanneer evacueren?
+      </h2>
+      <div class="triggers-list">
+        {evacuationTriggers.map((item) => (
+          <div class={`trigger-item trigger-item--${item.severity}`}>
+            <div class="trigger-content">
+              <span class="trigger-text">{item.trigger}</span>
+              <span class={`trigger-action trigger-action--${item.severity}`}>{item.action}</span>
+            </div>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <!-- Phase Tabs -->
+    <PhaseTabs
+      client:idle
+      scenarioKey={scenarioKey}
+      phases={customPhases}
+    />
+
+    <!-- Phase: Voorbereiden -->
+    <section id="voorbereiden" class="phase-section">
+      <div class="phase-header">
+        <span class="phase-number">1</span>
+        <div class="phase-title-group">
+          <h2 class="phase-title">Voorbereiden op evacuatie</h2>
+          <p class="phase-subtitle">Voordat er iets gebeurt</p>
+        </div>
+      </div>
+
+      <div class="phase-steps">
+        {phases.voorbereiden.map((step, index) => (
+          <CollapsibleSection
+            title={step.title}
+            summary={step.detail}
+            step={index + 1}
+            variant="card"
+          >
+            <p>{step.detail}</p>
+            {step.tip && (
+              <div class="step-tip">
+                <Icon name="Lightbulb" size={16} />
+                <span>{step.tip}</span>
+              </div>
+            )}
+          </CollapsibleSection>
+        ))}
+      </div>
+    </section>
+
+    <!-- Phase: Evacueren -->
+    <section id="evacueren" class="phase-section">
+      <div class="phase-header">
+        <span class="phase-number phase-number--warning">2</span>
+        <div class="phase-title-group">
+          <h2 class="phase-title">Tijdens de evacuatie</h2>
+          <p class="phase-subtitle">Als het moment komt</p>
+        </div>
+      </div>
+
+      <!-- Critical Warning -->
+      <div class="warning-box">
+        <div class="warning-icon">
+          <Icon name="AlertTriangle" size={24} />
+        </div>
+        <div class="warning-content">
+          <strong>Gouden regel</strong>
+          <p>Spullen zijn vervangbaar, mensen NIET. Verspil geen tijd met dingen redden.</p>
+        </div>
+      </div>
+
+      <div class="phase-steps">
+        {phases.evacueren.map((step, index) => (
+          <CollapsibleSection
+            title={step.title}
+            summary={step.detail}
+            step={index + 1}
+            variant="card"
+          >
+            <p>{step.detail}</p>
+            {step.tip && (
+              <div class="step-tip">
+                <Icon name="Lightbulb" size={16} />
+                <span>{step.tip}</span>
+              </div>
+            )}
+          </CollapsibleSection>
+        ))}
+      </div>
+    </section>
+
+    <!-- Phase: Na -->
+    <section id="na" class="phase-section">
+      <div class="phase-header">
+        <span class="phase-number phase-number--success">3</span>
+        <div class="phase-title-group">
+          <h2 class="phase-title">Na de evacuatie</h2>
+          <p class="phase-subtitle">Als het voorbij is</p>
+        </div>
+      </div>
+
+      <div class="phase-steps">
+        {phases.na.map((step, index) => (
+          <CollapsibleSection
+            title={step.title}
+            summary={step.detail}
+            step={index + 1}
+            variant="card"
+          >
+            <p>{step.detail}</p>
+            {step.tip && (
+              <div class="step-tip">
+                <Icon name="Lightbulb" size={16} />
+                <span>{step.tip}</span>
+              </div>
+            )}
+          </CollapsibleSection>
+        ))}
+      </div>
+    </section>
+
+    <!-- Special Needs -->
+    <section class="scenario-section">
+      <h2 class="section-title">Speciale behoeften</h2>
+      <div class="special-needs-grid">
+        {specialNeeds.map((item) => (
+          <div class="special-need-card">
+            <div class="special-need-icon">
+              <Icon name={item.icon as any} size={20} />
+            </div>
+            <div class="special-need-content">
+              <h3 class="special-need-title">{item.group}</h3>
+              <p class="special-need-text">{item.essentials}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <!-- Common Mistakes -->
+    <section class="scenario-section">
+      <h2 class="section-title">Veelgemaakte fouten</h2>
+      <div class="mistakes-list">
+        {mistakes.map((item) => (
+          <div class="mistake-item">
+            <div class="mistake-error">
+              <Icon name="X" size={16} />
+              <span>{item.error}</span>
+            </div>
+            <div class="mistake-fix">
+              <Icon name="Check" size={16} />
+              <span>{item.fix}</span>
+            </div>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <!-- Interactive Checklist -->
+    <section class="scenario-section">
+      <h2 class="section-title">
+        <Icon name="CheckSquare" size={24} />
+        Je evacuatie checklist
+      </h2>
+      <p class="section-intro">
+        Vink af wat je al in je noodtas hebt. Je voortgang wordt automatisch opgeslagen.
+      </p>
+      <InteractiveChecklist
+        client:idle
+        storageKey={`${scenarioKey}_nl`}
+        categories={checklistCategories}
+        title="Noodtas inhoud"
+      />
+    </section>
+
+    <!-- FAQs -->
+    <section class="scenario-section">
+      <h2 class="section-title">Veelgestelde vragen</h2>
+      <div class="faq-list">
+        {faqs.map((faq) => (
+          <details class="faq-item">
+            <summary class="faq-question">
+              <span>{faq.question}</span>
+              <Icon name="ChevronDown" size={20} />
+            </summary>
+            <div class="faq-answer">
+              <p>{faq.answer}</p>
+            </div>
+          </details>
+        ))}
+      </div>
+    </section>
+
+    <!-- Sources -->
+    <section class="scenario-section">
+      <details class="sources-block">
+        <summary class="sources-header">
+          <Icon name="BookOpen" size={18} />
+          <span>Bronnen en referenties</span>
+          <Icon name="ChevronDown" size={16} />
+        </summary>
+        <div class="sources-content">
+          <ul>
+            <li><a href="https://www.rijksoverheid.nl/onderwerpen/veiligheidsregios-en-crisisbeheersing/vraag-en-antwoord/wat-moet-ik-doen-bij-een-evacuatie" target="_blank" rel="noopener">Rijksoverheid - Evacuatie</a></li>
+            <li><a href="https://crisis.nl/" target="_blank" rel="noopener">Crisis.nl - Nationale crisiswebsite</a></li>
+            <li><a href="https://www.rodekruis.nl/" target="_blank" rel="noopener">Rode Kruis Nederland</a></li>
+            <li><a href="https://www.government.nl/topics/emergency-number-112/nl-alert" target="_blank" rel="noopener">NL-Alert informatie</a></li>
+          </ul>
+        </div>
+      </details>
+    </section>
+
+    <!-- Related Scenarios -->
+    <section class="scenario-section">
+      <h2 class="section-title">Gerelateerde scenario's</h2>
+      <div class="related-grid">
+        <a href="/nl/scenario/overstroming/" class="related-card related-card--blue">
+          <Icon name="Waves" size={24} />
+          <span>Overstroming</span>
+        </a>
+        <a href="/nl/scenario/stroomstoring/" class="related-card related-card--amber">
+          <Icon name="Zap" size={24} />
+          <span>Stroomstoring</span>
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <!-- Sticky Action Bar -->
+  <StickyActionBar
+    client:idle
+    actionText="Mijn noodpakket"
+    actionUrl="/nl/tools/noodpakket-samenstellen/"
+    dismissKey={`scenario_${scenarioKey}_nl`}
+    label="Volgende stap:"
+    locale="nl"
+  />
+</BaseLayout>
+
+<style>
+  .scenario-page {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 0 16px 120px;
+  }
+
+  .scenario-header {
+    padding: 16px 0 24px;
+  }
+
+  .scenario-breadcrumb {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 16px;
+  }
+
+  .breadcrumb-back {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    background: var(--color-bg-secondary);
+    border-radius: 10px;
+    color: var(--color-text-secondary);
+    transition: all 0.15s ease;
+  }
+
+  .breadcrumb-back:hover {
+    background: var(--color-bg-tertiary);
+    color: var(--color-text-primary);
+  }
+
+  .breadcrumb-current {
+    font-size: 14px;
+    color: var(--color-text-muted);
+  }
+
+  .scenario-title-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+  }
+
+  .scenario-icon {
+    flex-shrink: 0;
+    width: 56px;
+    height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 16px;
+  }
+
+  .scenario-icon--emerald {
+    background: rgba(16, 185, 129, 0.15);
+    color: #10b981;
+  }
+
+  .scenario-title-content {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .scenario-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--color-text-primary);
+    margin: 0 0 6px;
+    line-height: 1.2;
+  }
+
+  .scenario-meta {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    color: var(--color-text-muted);
+  }
+
+  .meta-divider {
+    opacity: 0.5;
+  }
+
+  .scenario-section {
+    margin-bottom: 32px;
+  }
+
+  .section-title {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: var(--color-text-primary);
+    margin: 0 0 12px;
+  }
+
+  .section-intro {
+    font-size: 14px;
+    color: var(--color-text-muted);
+    margin: 0 0 16px;
+  }
+
+  /* Triggers */
+  .triggers-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .trigger-item {
+    display: flex;
+    align-items: center;
+    padding: 12px 16px;
+    background: var(--color-bg-secondary);
+    border-radius: 12px;
+    border-left: 4px solid;
+  }
+
+  .trigger-item--critical {
+    border-left-color: #ef4444;
+  }
+
+  .trigger-item--warning {
+    border-left-color: #f59e0b;
+  }
+
+  .trigger-content {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .trigger-text {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--color-text-primary);
+  }
+
+  .trigger-action {
+    font-size: 12px;
+    font-weight: 600;
+  }
+
+  .trigger-action--critical {
+    color: #ef4444;
+  }
+
+  .trigger-action--warning {
+    color: #f59e0b;
+  }
+
+  /* Phase sections */
+  .phase-section {
+    padding: 24px 0;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .phase-section:last-of-type {
+    border-bottom: none;
+  }
+
+  .phase-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    margin-bottom: 20px;
+  }
+
+  .phase-number {
+    flex-shrink: 0;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--color-accent-subtle);
+    color: var(--color-accent-primary);
+    font-size: 18px;
+    font-weight: 700;
+    border-radius: 12px;
+  }
+
+  .phase-number--warning {
+    background: rgba(239, 68, 68, 0.15);
+    color: #ef4444;
+  }
+
+  .phase-number--success {
+    background: rgba(34, 197, 94, 0.15);
+    color: #22c55e;
+  }
+
+  .phase-title-group {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .phase-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--color-text-primary);
+    margin: 0 0 4px;
+  }
+
+  .phase-subtitle {
+    font-size: 14px;
+    color: var(--color-text-muted);
+    margin: 0;
+  }
+
+  .phase-steps {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .step-tip {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    margin-top: 12px;
+    padding: 10px 12px;
+    background: var(--color-accent-subtle);
+    border-radius: 8px;
+    font-size: 13px;
+    color: var(--color-accent-primary);
+  }
+
+  .step-tip svg {
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  /* Warning Box */
+  .warning-box {
+    display: flex;
+    gap: 16px;
+    padding: 16px;
+    margin-bottom: 20px;
+    background: rgba(239, 68, 68, 0.1);
+    border: 1px solid rgba(239, 68, 68, 0.3);
+    border-radius: 12px;
+  }
+
+  .warning-icon {
+    flex-shrink: 0;
+    color: #ef4444;
+  }
+
+  .warning-content {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .warning-content strong {
+    display: block;
+    font-size: 14px;
+    color: #ef4444;
+    margin-bottom: 4px;
+  }
+
+  .warning-content p {
+    font-size: 13px;
+    color: var(--color-text-secondary);
+    margin: 0;
+  }
+
+  /* Special Needs */
+  .special-needs-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+  }
+
+  .special-need-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 16px 12px;
+    background: var(--color-bg-secondary);
+    border: 1px solid var(--color-border);
+    border-radius: 12px;
+  }
+
+  .special-need-icon {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(16, 185, 129, 0.1);
+    color: #10b981;
+    border-radius: 10px;
+    margin-bottom: 10px;
+  }
+
+  .special-need-title {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--color-text-primary);
+    margin: 0 0 6px;
+  }
+
+  .special-need-text {
+    font-size: 12px;
+    color: var(--color-text-muted);
+    line-height: 1.4;
+    margin: 0;
+  }
+
+  /* Mistakes */
+  .mistakes-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .mistake-item {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    padding: 14px;
+    background: var(--color-bg-secondary);
+    border-radius: 12px;
+  }
+
+  .mistake-error,
+  .mistake-fix {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    font-size: 13px;
+  }
+
+  .mistake-error {
+    color: #ef4444;
+  }
+
+  .mistake-fix {
+    color: #22c55e;
+  }
+
+  .mistake-error svg,
+  .mistake-fix svg {
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  /* FAQs */
+  .faq-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .faq-item {
+    background: var(--color-bg-secondary);
+    border: 1px solid var(--color-border);
+    border-radius: 12px;
+    overflow: hidden;
+  }
+
+  .faq-question {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 14px 16px;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--color-text-primary);
+    cursor: pointer;
+    list-style: none;
+  }
+
+  .faq-question::-webkit-details-marker {
+    display: none;
+  }
+
+  .faq-question svg {
+    flex-shrink: 0;
+    color: var(--color-text-muted);
+    transition: transform 0.2s ease;
+  }
+
+  .faq-item[open] .faq-question svg {
+    transform: rotate(180deg);
+  }
+
+  .faq-answer {
+    padding: 0 16px 14px;
+  }
+
+  .faq-answer p {
+    font-size: 14px;
+    color: var(--color-text-secondary);
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  /* Sources */
+  .sources-block {
+    background: var(--color-bg-secondary);
+    border-radius: 12px;
+    overflow: hidden;
+  }
+
+  .sources-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 16px;
+    font-size: 14px;
+    color: var(--color-text-muted);
+    cursor: pointer;
+    list-style: none;
+  }
+
+  .sources-header::-webkit-details-marker {
+    display: none;
+  }
+
+  .sources-header svg:last-child {
+    margin-left: auto;
+    transition: transform 0.2s ease;
+  }
+
+  .sources-block[open] .sources-header svg:last-child {
+    transform: rotate(180deg);
+  }
+
+  .sources-content {
+    padding: 0 16px 14px;
+  }
+
+  .sources-content ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .sources-content li {
+    margin-bottom: 8px;
+  }
+
+  .sources-content a {
+    font-size: 13px;
+    color: var(--color-accent-primary);
+    text-decoration: none;
+  }
+
+  .sources-content a:hover {
+    text-decoration: underline;
+  }
+
+  /* Related Scenarios */
+  .related-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+
+  .related-card {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 16px;
+    border-radius: 12px;
+    text-decoration: none;
+    transition: transform 0.15s ease;
+  }
+
+  .related-card:hover {
+    transform: translateY(-2px);
+  }
+
+  .related-card span {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--color-text-primary);
+  }
+
+  .related-card--blue {
+    background: rgba(59, 130, 246, 0.1);
+    border: 1px solid rgba(59, 130, 246, 0.2);
+    color: #3b82f6;
+  }
+
+  .related-card--amber {
+    background: rgba(245, 158, 11, 0.1);
+    border: 1px solid rgba(245, 158, 11, 0.2);
+    color: #f59e0b;
+  }
+
+  @media (max-width: 480px) {
+    .scenario-page {
+      padding: 0 12px 120px;
+    }
+
+    .scenario-title {
+      font-size: 1.25rem;
+    }
+
+    .special-needs-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .mistake-item {
+      grid-template-columns: 1fr;
+    }
+
+    .related-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

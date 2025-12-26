@@ -1,0 +1,196 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import Breadcrumb from '../../../components/layout/Breadcrumb.astro';
+import ComponentCard from '../../../components/content/ComponentCard.astro';
+import Icon from '../../../components/ui/Icon.astro';
+
+const components = [
+  {
+    title: 'Linternas',
+    description: 'Tipos de linternas, lúmenes, pilas y cuántas necesitas para tu kit de emergencia.',
+    href: '/es/componentes/linternas/',
+    icon: 'Flashlight',
+    priceRange: '40-80€',
+    features: ['LED de alta potencia', 'Pilas o recargable', 'Resistente al agua']
+  },
+  {
+    title: 'Powerbanks',
+    description: 'Baterías externas: capacidades, tipos, y cuánta energía necesitas para 72 horas.',
+    href: '/es/componentes/powerbanks/',
+    icon: 'Battery',
+    priceRange: '50-150€',
+    features: ['20.000+ mAh', 'Carga rápida', 'Múltiples puertos']
+  },
+  {
+    title: 'Radios de Emergencia',
+    description: 'Radios AM/FM, walkies PMR446 y cómo mantenerte informado sin internet.',
+    href: '/es/componentes/radios-emergencia/',
+    icon: 'Radio',
+    priceRange: '40-100€',
+    features: ['AM/FM/WB', 'Carga solar/manivela', 'Linterna integrada']
+  },
+  {
+    title: 'Bidones de Agua',
+    description: 'Recipientes seguros, materiales, capacidades y cómo almacenar agua correctamente.',
+    href: '/es/componentes/bidones-agua/',
+    icon: 'Droplet',
+    priceRange: '30-60€',
+    features: ['Grado alimentario', 'Apilables', 'Con grifo']
+  },
+  {
+    title: 'Comida de Emergencia',
+    description: 'Conservas, alimentos deshidratados, calorías y cómo planificar tus reservas.',
+    href: '/es/componentes/comida-emergencia/',
+    icon: 'UtensilsCrossed',
+    priceRange: '30-50€/persona',
+    features: ['Larga duración', 'Sin cocinar', 'Alto en calorías']
+  },
+  {
+    title: 'Botiquín Básico',
+    description: 'Contenido esencial, medicamentos, adaptaciones especiales y mantenimiento.',
+    href: '/es/componentes/botiquin-basico/',
+    icon: 'Heart',
+    priceRange: '40-60€',
+    features: ['25+ artículos', 'Medicamentos básicos', 'Organizado']
+  },
+  {
+    title: 'Mochilas',
+    description: 'Capacidades, cómo cargar correctamente y qué buscar en una mochila de emergencia.',
+    href: '/es/componentes/mochilas/',
+    icon: 'Backpack',
+    priceRange: '50-100€',
+    features: ['40-60L capacidad', 'Impermeable', 'Sistema de carga']
+  }
+];
+
+const totalBudget = {
+  min: 280,
+  max: 600,
+  note: 'Para 1 persona con kit completo'
+};
+
+const priorityOrder = [
+  { step: 1, icon: 'Droplet', title: 'Agua + Bidones', description: 'Sin agua solo sobrevives 3 días. Es lo más crítico.', priority: 'critical' },
+  { step: 2, icon: 'Flashlight', title: 'Iluminación (Linternas)', description: 'Sin luz no puedes hacer nada de noche. Económico y esencial.', priority: 'critical' },
+  { step: 3, icon: 'Heart', title: 'Botiquín básico', description: 'Tratar heridas menores puede evitar problemas mayores.', priority: 'high' },
+  { step: 4, icon: 'UtensilsCrossed', title: 'Comida de emergencia', description: 'Puedes sobrevivir semanas sin comer, pero la energía importa.', priority: 'high' },
+  { step: 5, icon: 'Battery', title: 'Energía (Powerbanks)', description: 'Mantén tu móvil con batería para comunicarte.', priority: 'medium' },
+  { step: 6, icon: 'Radio', title: 'Radio de emergencia', description: 'Información oficial cuando no hay internet.', priority: 'medium' },
+  { step: 7, icon: 'Backpack', title: 'Mochila de evacuación', description: 'Para llevarte todo si tienes que evacuar.', priority: 'low' },
+];
+
+function getPriorityColor(priority: string) {
+  switch (priority) {
+    case 'critical': return 'bg-red-500 text-white';
+    case 'high': return 'bg-[--color-accent-primary] text-[--color-bg-primary]';
+    case 'medium': return 'bg-[--color-accent-secondary] text-[--color-bg-primary]';
+    default: return 'bg-[--color-bg-tertiary] text-[--color-text-primary]';
+  }
+}
+---
+
+<BaseLayout
+  title="Kit de emergencia: ¿Qué comprar? Guía de productos por prioridad"
+  description="Guía de todos los componentes de un kit de emergencia 72 horas: linternas, powerbanks, radios, agua, comida, botiquín y mochilas."
+>
+  <section class="py-16">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6">
+      <!-- Header -->
+      <div class="mb-12">
+        <Breadcrumb items={[{ label: 'Componentes' }]} class="mb-4" />
+        <h1 class="mb-4">Componentes del Kit</h1>
+        <p class="text-lg text-[--color-text-secondary] max-w-3xl">
+          Cada componente de tu kit de emergencia tiene características específicas que debes conocer.
+          Estas guías te ayudan a elegir los productos correctos y entender qué necesitas realmente.
+        </p>
+      </div>
+
+      <!-- Budget Overview -->
+      <div class="card p-6 mb-12 border-l-4 border-l-[--color-accent-primary]">
+        <h2 class="text-lg font-semibold mb-2 text-[--color-text-primary] flex items-center gap-2">
+          <Icon name="Wallet" size={20} class="text-[--color-accent-primary]" />
+          Presupuesto total estimado
+        </h2>
+        <p class="text-[--color-text-secondary] mb-4">
+          Un kit 72 horas completo para <strong>1 persona</strong> cuesta aproximadamente:
+        </p>
+        <div class="flex items-baseline gap-2">
+          <span class="text-3xl font-bold text-[--color-accent-primary]">{totalBudget.min}-{totalBudget.max}€</span>
+          <span class="text-sm text-[--color-text-muted]">{totalBudget.note}</span>
+        </div>
+        <p class="text-sm text-[--color-text-muted] mt-2">
+          Puedes empezar con lo esencial (~200€) e ir completando gradualmente.
+        </p>
+      </div>
+
+      <!-- Components Grid -->
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+        {components.map((component) => (
+          <ComponentCard {...component} />
+        ))}
+      </div>
+
+      <!-- Priority Guide -->
+      <div class="card p-8 mb-12">
+        <h2 class="text-xl font-bold mb-6 text-center text-[--color-text-primary]">Orden de prioridad</h2>
+        <p class="text-center text-[--color-text-secondary] mb-6">
+          Si tienes presupuesto limitado, sigue este orden:
+        </p>
+
+        <div class="max-w-2xl mx-auto">
+          <div class="space-y-4">
+            {priorityOrder.map((item) => (
+              <div class="flex items-center gap-4">
+                <div class={`flex-shrink-0 w-10 h-10 rounded-full flex items-center justify-center font-bold ${getPriorityColor(item.priority)}`}>
+                  {item.step}
+                </div>
+                <div class="flex-1">
+                  <h3 class="font-semibold text-[--color-text-primary] flex items-center gap-2">
+                    <Icon name={item.icon as any} size={18} class="text-[--color-accent-primary]" />
+                    {item.title}
+                  </h3>
+                  <p class="text-sm text-[--color-text-secondary]">{item.description}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      <!-- Quick Links -->
+      <div class="card p-6 bg-[--color-bg-tertiary] mb-8">
+        <h3 class="font-semibold mb-4 text-center text-[--color-text-primary]">¿No sabes por dónde empezar?</h3>
+        <p class="text-center text-[--color-text-secondary] mb-4">
+          Usa nuestras herramientas para calcular exactamente lo que necesitas:
+        </p>
+        <div class="flex flex-wrap gap-4 justify-center">
+          <a
+            href="/es/herramientas/configurador-kit/"
+            class="btn btn-primary"
+          >
+            <Icon name="Settings" size={18} />
+            Configurador de Kit
+          </a>
+          <a
+            href="/es/herramientas/calculadora-agua/"
+            class="btn btn-secondary"
+          >
+            <Icon name="Droplet" size={18} />
+            Calculadora de Agua
+          </a>
+        </div>
+      </div>
+
+      <!-- Back to Kit -->
+      <div class="text-center">
+        <a
+          href="/es/kit-72-horas/"
+          class="inline-flex items-center gap-2 text-[--color-accent-primary] hover:underline"
+        >
+          <Icon name="ArrowLeft" size={16} />
+          Volver a Kit 72 Horas Completo
+        </a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

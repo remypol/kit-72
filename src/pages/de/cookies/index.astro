@@ -1,0 +1,33 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import Breadcrumb from '../../../components/layout/Breadcrumb.astro';
+---
+
+<BaseLayout title="Cookie-Richtlinie — Kit-72" description="Informationen über Cookies auf Kit-72." locale="de">
+  <section class="py-16">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6">
+      <Breadcrumb items={[{ label: 'Cookies' }]} class="mb-4" locale="de" />
+      <h1 class="text-4xl font-bold mb-6">Cookie-Richtlinie</h1>
+
+      <div class="prose prose-lg">
+        <p><em>Zuletzt aktualisiert: Dezember 2025</em></p>
+
+        <h2>Was sind Cookies?</h2>
+        <p>Cookies sind kleine Textdateien, die auf deinem Gerät gespeichert werden, wenn du eine Website besuchst.</p>
+
+        <h2>Welche Cookies verwenden wir?</h2>
+        <h3>Notwendige Cookies</h3>
+        <p>Diese sind für den Betrieb der Website unerlässlich, z.B. um deine Spracheinstellung zu speichern.</p>
+
+        <h3>Analyse-Cookies</h3>
+        <p>Wir verwenden datenschutzfreundliche Analysen, um zu verstehen, wie die Website genutzt wird, ohne personenbezogene Daten zu sammeln.</p>
+
+        <h2>Cookies verwalten</h2>
+        <p>Du kannst Cookies über deine Browsereinstellungen verwalten. Beachte: Das Deaktivieren von Cookies kann die Funktionalität einschränken.</p>
+
+        <h2>Drittanbieter-Cookies</h2>
+        <p>Wir verwenden keine Tracking-Cookies von Drittanbietern wie Google Analytics oder Facebook Pixel.</p>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

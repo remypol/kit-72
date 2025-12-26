@@ -1,0 +1,292 @@
+---
+/**
+ * Apagón España 2024 - Event-Specific Page
+ *
+ * Topical content about the massive blackout that affected Spain and Portugal
+ * on April 28, 2024. High search interest, provides context and lessons learned.
+ */
+import BaseLayout from '../../../../layouts/BaseLayout.astro';
+import Breadcrumb from '../../../../components/layout/Breadcrumb.astro';
+import Icon from '../../../../components/ui/Icon.astro';
+import HeroImage from '../../../../components/content/HeroImage.astro';
+
+const timeline = [
+  { time: '12:33', event: 'Caída de frecuencia detectada en la red eléctrica', severity: 'warning' },
+  { time: '12:35', event: 'Desconexión automática de la interconexión Francia-España', severity: 'critical' },
+  { time: '12:36', event: 'Apagón masivo en España peninsular y Portugal', severity: 'critical' },
+  { time: '12:40', event: 'Colapso del transporte: metros, trenes, semáforos', severity: 'high' },
+  { time: '13:00', event: 'Hospitales operando con generadores de emergencia', severity: 'high' },
+  { time: '14:30', event: 'Primeras zonas comienzan a recuperar suministro', severity: 'info' },
+  { time: '18:00', event: 'Mayoría del suministro restaurado', severity: 'info' },
+];
+
+const impacts = [
+  { sector: 'Transporte', description: 'Metro, Cercanías y AVE paralizados. Semáforos apagados causaron caos vial.', icon: 'Train' },
+  { sector: 'Comunicaciones', description: 'Redes móviles saturadas. Muchas antenas sin backup de batería.', icon: 'Wifi' },
+  { sector: 'Comercio', description: 'TPVs sin funcionar. Solo efectivo. Supermercados cerrados.', icon: 'ShoppingCart' },
+  { sector: 'Sanidad', description: 'Hospitales en generadores. Algunas consultas y centros de salud cerrados.', icon: 'Heart' },
+  { sector: 'Hogares', description: 'Ascensores atrapados. Frigoríficos sin frío. Calefacción/AC apagados.', icon: 'Home' },
+];
+
+const lessons = [
+  {
+    title: 'El efectivo sigue siendo rey',
+    description: 'Sin electricidad, no hay datáfonos, cajeros ni Bizum. Quienes tenían efectivo pudieron comprar.',
+    action: 'Guarda 50-100€ en casa en billetes pequeños'
+  },
+  {
+    title: 'Las baterías de los móviles no duran',
+    description: 'Con las redes saturadas, los móviles gastaban batería buscando señal constantemente.',
+    action: 'Ten siempre una powerbank cargada (20.000+ mAh)'
+  },
+  {
+    title: 'La información es poder',
+    description: 'Sin internet ni TV, muchos no sabían qué pasaba. La radio fue clave.',
+    action: 'Ten una radio con pilas o dinamo en casa'
+  },
+  {
+    title: 'Los supermercados cierran inmediatamente',
+    description: 'Sin TPVs ni sistemas de inventario, las tiendas cierran. No puedes "ir a comprar".',
+    action: 'Mantén siempre comida para 72h en casa'
+  },
+  {
+    title: 'El agua puede fallar también',
+    description: 'Las bombas de agua necesitan electricidad. Algunos edificios perdieron presión.',
+    action: 'Almacena 9 litros de agua por persona'
+  },
+];
+
+const faqs = [
+  {
+    question: '¿Qué causó el apagón de abril 2024?',
+    answer: 'La causa exacta sigue bajo investigación. Se produjo una caída brusca de frecuencia en la red que provocó la desconexión automática de la interconexión con Francia, aislando la península ibérica y causando el colapso del sistema.'
+  },
+  {
+    question: '¿Cuántas personas se vieron afectadas?',
+    answer: 'Aproximadamente 50 millones de personas en España y Portugal se quedaron sin electricidad durante varias horas.'
+  },
+  {
+    question: '¿Puede volver a pasar?',
+    answer: 'Sí. La red eléctrica es compleja y eventos similares pueden ocurrir por fallos técnicos, ciberataques, fenómenos meteorológicos extremos o problemas en la generación. La preparación es esencial.'
+  },
+  {
+    question: '¿Cuánto duró el apagón?',
+    answer: 'El apagón total duró aproximadamente 5-6 horas en la mayoría de zonas, aunque algunas áreas tardaron más en recuperar el suministro. Los servicios de transporte tardaron más en normalizarse.'
+  },
+  {
+    question: '¿Qué hizo bien España en la respuesta?',
+    answer: 'Los hospitales mantuvieron operaciones con generadores, los servicios de emergencia coordinaron bien, y la restauración progresiva evitó una segunda caída. REE actuó según protocolos establecidos.'
+  },
+];
+---
+
+<BaseLayout
+  title="Apagón España Abril 2024: Qué Pasó y Lecciones Aprendidas — Kit-72"
+  description="Análisis del gran apagón de España y Portugal en abril 2024. Qué ocurrió, cómo afectó a millones de personas y qué lecciones podemos aprender para estar preparados."
+  locale="es"
+  dateModified="2025-12-16"
+  schemaType="Article"
+  schemaData={{
+    headline: 'Apagón España Abril 2024: Análisis y Lecciones',
+    datePublished: '2024-04-28',
+    dateModified: '2025-12-16',
+  }}
+  faqData={faqs}
+>
+  <section class="py-16">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6">
+      <Breadcrumb
+        items={[
+          { label: 'Escenarios', href: '/es/escenarios/' },
+          { label: 'Apagón España 2024' }
+        ]}
+        class="mb-4"
+        locale="es"
+      />
+
+      <header class="mb-8">
+        <div class="flex items-center gap-2 text-sm text-[--color-text-muted] mb-2">
+          <Icon name="Calendar" size={16} />
+          <span>28 de abril de 2024</span>
+          <span class="mx-2">•</span>
+          <span>12 min de lectura</span>
+        </div>
+        <h1 class="text-4xl font-bold mb-4">
+          Apagón España 2024: Qué Pasó y Cómo Prepararse
+        </h1>
+        <p class="text-xl text-[--color-text-secondary]">
+          El 28 de abril de 2024, España y Portugal sufrieron el mayor apagón de su historia.
+          50 millones de personas sin luz. Este es el análisis de lo que ocurrió y las lecciones
+          que debemos aprender.
+        </p>
+      </header>
+
+      <HeroImage
+        src="/images/shared/power-outage-candles.webp"
+        alt="Preparación para apagón - iluminación de emergencia"
+        priority={true}
+      />
+
+      <div class="prose prose-lg mt-8">
+
+        <!-- Key Stats -->
+        <div class="not-prose grid sm:grid-cols-3 gap-4 my-8">
+          <div class="card p-4 text-center">
+            <p class="text-3xl font-bold text-[--color-accent-primary]">50M</p>
+            <p class="text-sm text-[--color-text-secondary]">Personas afectadas</p>
+          </div>
+          <div class="card p-4 text-center">
+            <p class="text-3xl font-bold text-[--color-accent-primary]">5-6h</p>
+            <p class="text-sm text-[--color-text-secondary]">Duración media</p>
+          </div>
+          <div class="card p-4 text-center">
+            <p class="text-3xl font-bold text-[--color-accent-primary]">2</p>
+            <p class="text-sm text-[--color-text-secondary]">Países afectados</p>
+          </div>
+        </div>
+
+        <h2>Cronología del Apagón</h2>
+        <p>
+          Todo comenzó poco después del mediodía. En cuestión de minutos, la península
+          ibérica quedó a oscuras.
+        </p>
+
+        <div class="not-prose my-8">
+          <div class="space-y-3">
+            {timeline.map((item) => (
+              <div class={`flex items-start gap-4 p-4 rounded-lg border-l-4 ${
+                item.severity === 'critical' ? 'border-l-red-500 bg-red-50 dark:bg-red-950/20' :
+                item.severity === 'high' ? 'border-l-amber-500 bg-amber-50 dark:bg-amber-950/20' :
+                item.severity === 'warning' ? 'border-l-yellow-500 bg-yellow-50 dark:bg-yellow-950/20' :
+                'border-l-green-500 bg-green-50 dark:bg-green-950/20'
+              }`}>
+                <span class="font-mono font-bold text-lg min-w-[60px]">{item.time}</span>
+                <span class="text-[--color-text-primary]">{item.event}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <h2>Impacto por Sectores</h2>
+        <p>
+          El apagón no solo apagó las luces. Paralizó la vida moderna tal como la conocemos.
+        </p>
+
+        <div class="not-prose grid sm:grid-cols-2 gap-4 my-8">
+          {impacts.map((impact) => (
+            <div class="card p-4">
+              <div class="flex items-center gap-3 mb-2">
+                <div class="w-10 h-10 rounded-full bg-[--color-accent-subtle] flex items-center justify-center">
+                  <Icon name={impact.icon} size={20} class="text-[--color-accent-primary]" />
+                </div>
+                <h3 class="font-semibold">{impact.sector}</h3>
+              </div>
+              <p class="text-sm text-[--color-text-secondary]">{impact.description}</p>
+            </div>
+          ))}
+        </div>
+
+        <h2>5 Lecciones que Debemos Aprender</h2>
+        <p>
+          Este apagón fue un simulacro involuntario. Nos mostró exactamente qué falla
+          cuando desaparece la electricidad. Estas son las lecciones clave:
+        </p>
+
+        <div class="not-prose space-y-6 my-8">
+          {lessons.map((lesson, index) => (
+            <div class="card p-6">
+              <div class="flex items-start gap-4">
+                <span class="flex-shrink-0 w-8 h-8 rounded-full bg-[--color-accent-primary] text-[--color-bg-primary] flex items-center justify-center font-bold">
+                  {index + 1}
+                </span>
+                <div>
+                  <h3 class="font-semibold text-lg mb-2">{lesson.title}</h3>
+                  <p class="text-[--color-text-secondary] mb-3">{lesson.description}</p>
+                  <div class="flex items-center gap-2 text-sm font-medium text-[--color-accent-primary]">
+                    <Icon name="ArrowRight" size={16} />
+                    <span>{lesson.action}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <h2>¿Estás Preparado para el Próximo?</h2>
+        <p>
+          El apagón de 2024 duró solo unas horas. Pero la próxima vez podría ser
+          más largo. Un ciberataque, un fenómeno meteorológico extremo o un fallo
+          en cascada podrían causar cortes de días.
+        </p>
+        <p>
+          <strong>La buena noticia:</strong> prepararse es sencillo y económico.
+          Con los elementos básicos puedes estar listo para cualquier corte.
+        </p>
+
+        <!-- CTA Box -->
+        <div class="not-prose card p-6 my-8 bg-[--color-accent-subtle] border-2 border-[--color-accent-primary]">
+          <h3 class="font-semibold text-xl mb-3">Prepárate en 3 pasos</h3>
+          <ol class="space-y-2 mb-4">
+            <li class="flex items-center gap-2">
+              <span class="w-6 h-6 rounded-full bg-[--color-accent-primary] text-[--color-bg-primary] flex items-center justify-center text-sm font-bold">1</span>
+              <span>Lee nuestra <a href="/es/escenarios/prepararse-apagon/" class="text-[--color-accent-primary] hover:underline font-medium">guía completa de apagones</a></span>
+            </li>
+            <li class="flex items-center gap-2">
+              <span class="w-6 h-6 rounded-full bg-[--color-accent-primary] text-[--color-bg-primary] flex items-center justify-center text-sm font-bold">2</span>
+              <span>Usa nuestro <a href="/es/herramientas/configurador-kit/" class="text-[--color-accent-primary] hover:underline font-medium">configurador de kit</a> personalizado</span>
+            </li>
+            <li class="flex items-center gap-2">
+              <span class="w-6 h-6 rounded-full bg-[--color-accent-primary] text-[--color-bg-primary] flex items-center justify-center text-sm font-bold">3</span>
+              <span>Revisa los <a href="/es/componentes/" class="text-[--color-accent-primary] hover:underline font-medium">componentes esenciales</a></span>
+            </li>
+          </ol>
+        </div>
+
+        <h2>Preguntas Frecuentes</h2>
+
+        <div class="not-prose space-y-4 my-8">
+          {faqs.map((faq) => (
+            <details class="card p-4 group">
+              <summary class="font-semibold cursor-pointer list-none flex items-center justify-between">
+                {faq.question}
+                <Icon name="ChevronDown" size={20} class="transform group-open:rotate-180 transition-transform" />
+              </summary>
+              <p class="mt-3 text-[--color-text-secondary]">{faq.answer}</p>
+            </details>
+          ))}
+        </div>
+
+        <h2>Conclusión</h2>
+        <p>
+          El apagón de abril de 2024 fue un recordatorio brutal de lo dependientes que somos
+          de la electricidad. Pero también fue una oportunidad para aprender.
+        </p>
+        <p>
+          No podemos evitar que ocurran apagones. Pero sí podemos estar preparados.
+          Y la preparación empieza hoy, no cuando ya es tarde.
+        </p>
+
+      </div>
+
+      <!-- Related Links -->
+      <div class="mt-12 grid sm:grid-cols-2 gap-4">
+        <a href="/es/escenarios/prepararse-apagon/" class="card p-6 hover:border-[--color-accent-primary] transition-colors group">
+          <h3 class="font-semibold mb-2 group-hover:text-[--color-accent-primary]">
+            Guía: Prepararse para un Apagón
+          </h3>
+          <p class="text-sm text-[--color-text-secondary]">
+            Pasos detallados antes, durante y después de un corte de luz.
+          </p>
+        </a>
+        <a href="/es/componentes/powerbanks/" class="card p-6 hover:border-[--color-accent-primary] transition-colors group">
+          <h3 class="font-semibold mb-2 group-hover:text-[--color-accent-primary]">
+            Powerbanks para Emergencias
+          </h3>
+          <p class="text-sm text-[--color-text-secondary]">
+            Cómo elegir la batería externa adecuada para tu kit.
+          </p>
+        </a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

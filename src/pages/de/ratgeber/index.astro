@@ -1,0 +1,98 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import Breadcrumb from '../../../components/layout/Breadcrumb.astro';
+import Icon from '../../../components/ui/Icon.astro';
+
+const guides = [
+  {
+    title: 'Wasser Lagern',
+    description: 'Wie du sicher Trinkwasser für Notfälle aufbewahrst.',
+    href: '/de/ratgeber/wasser-lagerung/',
+    icon: 'Droplet',
+  },
+  {
+    title: 'Lebensmittel Lagern',
+    description: 'Langlebige Lebensmittel und richtige Lagerung.',
+    href: '/de/ratgeber/lebensmittel-lagerung/',
+    icon: 'UtensilsCrossed',
+  },
+  {
+    title: 'Erste-Hilfe-Set',
+    description: 'Zusammenstellung und Wartung deiner Erste-Hilfe-Vorräte.',
+    href: '/de/ratgeber/erste-hilfe-set/',
+    icon: 'Heart',
+  },
+  {
+    title: 'Energie & Kommunikation',
+    description: 'Verbunden und informiert bleiben ohne Strom.',
+    href: '/de/ratgeber/energie-kommunikation/',
+    icon: 'Radio',
+  },
+];
+---
+
+<BaseLayout
+  title="Ratgeber — Kit-72"
+  description="Umfassende Ratgeber für dein Notfallpaket: Wasser, Lebensmittel, Erste Hilfe und Kommunikation."
+  locale="de"
+>
+  <section class="py-16">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6">
+      <div class="mb-12">
+        <Breadcrumb items={[{ label: 'Ratgeber' }]} class="mb-4" locale="de" />
+        <h1 class="text-4xl font-bold mb-4">Ratgeber</h1>
+        <p class="text-xl text-[--color-text-secondary]">
+          Umfassende Informationen zu jedem Bestandteil deiner Notfallvorsorge.
+        </p>
+      </div>
+
+      <!-- BBK Reference -->
+      <div class="card p-4 mb-8 border-l-4 border-l-[--color-accent-primary] bg-[--color-bg-tertiary]">
+        <p class="text-sm text-[--color-text-secondary]">
+          <strong>📚 Basierend auf offiziellen Empfehlungen:</strong> Unsere Ratgeber orientieren sich
+          an den Empfehlungen des Bundesamts für Bevölkerungsschutz und Katastrophenhilfe (BBK).
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-6">
+        {guides.map((guide) => (
+          <a href={guide.href} class="card p-6 hover:border-[--color-accent-primary] transition-colors group block">
+            <div class="flex items-start gap-4">
+              <div class="w-12 h-12 flex-shrink-0 flex items-center justify-center bg-[--color-bg-tertiary] rounded-lg text-[--color-accent-primary] group-hover:bg-[--color-accent-primary] group-hover:text-[--color-bg-primary] transition-colors">
+                <Icon name={guide.icon} size={24} />
+              </div>
+              <div>
+                <h2 class="text-lg font-semibold text-[--color-text-primary] mb-1">{guide.title}</h2>
+                <p class="text-sm text-[--color-text-secondary]">{guide.description}</p>
+              </div>
+            </div>
+          </a>
+        ))}
+      </div>
+
+      <!-- CTA to Tools -->
+      <div class="mt-12 card p-6 bg-[--color-bg-tertiary] text-center">
+        <h3 class="font-semibold mb-2">Genau wissen, was du brauchst?</h3>
+        <p class="text-sm text-[--color-text-secondary] mb-4">
+          Nutze unsere interaktiven Tools für personalisierte Berechnungen.
+        </p>
+        <div class="flex flex-wrap gap-4 justify-center">
+          <a
+            href="/de/tools/wasser-rechner/"
+            class="inline-flex items-center gap-2 px-4 py-2 bg-[--color-accent-primary] text-[--color-bg-primary] font-medium rounded hover:bg-[--color-accent-hover] transition-colors"
+          >
+            <Icon name="Droplet" size={16} />
+            Wasser-Rechner
+          </a>
+          <a
+            href="/de/tools/notfallpaket-zusammenstellen/"
+            class="inline-flex items-center gap-2 px-4 py-2 border border-[--color-border-primary] text-[--color-text-primary] font-medium rounded hover:border-[--color-accent-primary] transition-colors"
+          >
+            <Icon name="Settings" size={16} />
+            Paket-Konfigurator
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

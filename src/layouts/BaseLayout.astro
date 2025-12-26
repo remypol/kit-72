@@ -1,0 +1,509 @@
+---
+import '../styles/global.css';
+import Header from '../components/layout/Header.astro';
+import Footer from '../components/layout/Footer.astro';
+import BottomNav from '../components/layout/BottomNav';
+import { getAlternatesForPath, type Locale } from '../data/hreflang-map';
+
+interface BreadcrumbItem {
+  name: string;
+  url: string;
+}
+
+interface FAQItem {
+  question: string;
+  answer: string;
+}
+
+interface Props {
+  title: string;
+  description?: string;
+  canonicalUrl?: string;
+  ogImage?: string;
+  noIndex?: boolean;
+  hideBottomNav?: boolean;
+  /** Schema.org structured data type */
+  schemaType?: 'WebPage' | 'Article' | 'FAQPage' | 'HowTo' | 'Product' | 'SoftwareApplication';
+  /** Additional schema.org data */
+  schemaData?: Record<string, unknown>;
+  /** FAQ data for FAQPage schema (separate from main schemaType) */
+  faqData?: FAQItem[];
+  /** Breadcrumb trail for navigation and SEO */
+  breadcrumbs?: BreadcrumbItem[];
+  /** Last modified date for content freshness signals */
+  dateModified?: string;
+  /** Published date for articles */
+  datePublished?: string;
+  /** Author name for content attribution */
+  author?: string;
+  /** Current locale for i18n */
+  locale?: Locale;
+  /** Alternate URLs for hreflang (key = locale, value = full URL path) - auto-detected if not provided */
+  alternates?: Partial<Record<Locale, string>>;
+}
+
+// Locale configuration
+const localeConfig: Record<Locale, { hreflang: string; ogLocale: string; htmlLang: string }> = {
+  es: { hreflang: 'es-ES', ogLocale: 'es_ES', htmlLang: 'es' },
+  nl: { hreflang: 'nl-NL', ogLocale: 'nl_NL', htmlLang: 'nl' },
+  de: { hreflang: 'de-DE', ogLocale: 'de_DE', htmlLang: 'de' },
+};
+
+// Detect locale from URL path (default to 'es' for backwards compatibility)
+const pathLocale = Astro.url.pathname.split('/')[1] as Locale;
+const detectedLocale: Locale = ['es', 'nl', 'de'].includes(pathLocale) ? pathLocale : 'es';
+
+// Auto-detect alternates from centralized hreflang map if not explicitly provided
+const autoAlternates = getAlternatesForPath(Astro.url.pathname);
+
+// Default descriptions per locale
+const defaultDescriptions: Record<Locale, string> = {
+  es: 'Guías y herramientas para preparar tu kit de emergencia de 72 horas. Checklists personalizados, calculadoras y consejos prácticos.',
+  nl: 'Gidsen en tools voor je 72-uurs noodpakket. Gepersonaliseerde checklists, calculators en praktische tips.',
+  de: 'Ratgeber und Tools für dein 72-Stunden-Notfallpaket. Personalisierte Checklisten, Rechner und praktische Tipps.',
+};
+
+// Default authors per locale
+const defaultAuthors: Record<Locale, string> = {
+  es: 'Equipo Kit-72',
+  nl: 'Team Kit-72',
+  de: 'Team Kit-72',
+};
+
+// Default OG images per locale
+const defaultOgImages: Record<Locale, string> = {
+  es: '/images/og-es.jpg',
+  nl: '/images/og-nl.jpg',
+  de: '/images/og-de.jpg',
+};
+
+const {
+  title,
+  description,
+  canonicalUrl = Astro.url.href,
+  ogImage,
+  noIndex = false,
+  hideBottomNav = false,
+  schemaType = 'WebPage',
+  schemaData = {},
+  faqData = [],
+  breadcrumbs = [],
+  dateModified,
+  datePublished,
+  author,
+  locale = detectedLocale,
+  alternates = autoAlternates, // Use centralized hreflang map by default
+} = Astro.props;
+
+// Use locale-specific OG image if not explicitly provided
+const finalOgImage = ogImage || defaultOgImages[locale] || '/images/og-default.jpg';
+// Ensure absolute URL for OG image
+const absoluteOgImage = finalOgImage.startsWith('http') ? finalOgImage : `https://kit-72.com${finalOgImage}`;
+
+// Use locale-specific defaults
+const finalDescription = description || defaultDescriptions[locale];
+const finalAuthor = author || defaultAuthors[locale];
+const currentLocaleConfig = localeConfig[locale];
+
+const siteTitle = 'Kit-72';
+// Avoid duplicate "Kit-72" in title - check if already present
+const fullTitle = title === siteTitle || title.includes('Kit-72') ? title : `${title} | ${siteTitle}`;
+const gaId = import.meta.env.PUBLIC_GA_ID || 'G-C3TZMVCB4K';
+const currentPath = Astro.url.pathname;
+
+// Section name mappings per locale
+const sectionNamesPerLocale: Record<Locale, Record<string, string>> = {
+  es: {
+    'escenarios': 'Escenarios',
+    'guias': 'Guías',
+    'componentes': 'Componentes',
+    'herramientas': 'Herramientas',
+    'kit-de-emergencia': 'Kit de Emergencia',
+    'kit-72-horas': 'Kit 72 Horas',
+    'prepararse-apagon': 'Apagón',
+    'prepararse-ola-calor': 'Ola de Calor',
+    'prepararse-corte-agua': 'Corte de Agua',
+    'kit-evacuacion': 'Evacuación',
+    'almacenamiento-agua': 'Almacenamiento de Agua',
+    'almacenamiento-comida': 'Almacenamiento de Comida',
+    'botiquin-primeros-auxilios': 'Botiquín',
+    'energia-comunicacion': 'Energía y Comunicación',
+    'linternas': 'Linternas',
+    'powerbanks': 'Powerbanks',
+    'radios-emergencia': 'Radios',
+    'bidones-agua': 'Bidones',
+    'comida-emergencia': 'Comida',
+    'botiquin-basico': 'Botiquín',
+    'mochilas': 'Mochilas',
+    'calculadora-agua': 'Calculadora de Agua',
+    'calculadora-energia': 'Calculadora de Energía',
+    'configurador-kit': 'Configurador',
+  },
+  nl: {
+    'scenario': 'Scenario\'s',
+    'gidsen': 'Gidsen',
+    'producten': 'Producten',
+    'tools': 'Tools',
+    'noodpakket-samenstellen': 'Noodpakket Samenstellen',
+    'noodpakket-72-uur': 'Noodpakket 72 Uur',
+    'stroomstoring': 'Stroomstoring',
+    'hittegolf': 'Hittegolf',
+    'wateruitval': 'Wateruitval',
+    'evacuatie': 'Evacuatie',
+    'overstroming': 'Overstroming',
+    'cyberaanval': 'Cyberaanval',
+    'water-opslaan': 'Water Opslaan',
+    'voedsel-opslaan': 'Voedsel Opslaan',
+    'ehbo-kit': 'EHBO Kit',
+    'energie-communicatie': 'Energie & Communicatie',
+    'zaklampen': 'Zaklampen',
+    'powerbanks': 'Powerbanks',
+    'noodradio': 'Noodradio',
+    'wateropslag': 'Wateropslag',
+    'noodvoedsel': 'Noodvoedsel',
+    'ehbo-doos': 'EHBO Doos',
+    'noodtassen': 'Noodtassen',
+    'water-calculator': 'Water Calculator',
+    'energie-calculator': 'Energie Calculator',
+  },
+  de: {
+    'szenarien': 'Szenarien',
+    'ratgeber': 'Ratgeber',
+    'produkte': 'Produkte',
+    'tools': 'Tools',
+    'notfallausruestung': 'Notfallausrüstung',
+    'notfallpaket-72-stunden': 'Notfallpaket 72 Stunden',
+    'stromausfall': 'Stromausfall',
+    'hitzewelle': 'Hitzewelle',
+    'wasserausfall': 'Wasserausfall',
+    'evakuierung': 'Evakuierung',
+    'ueberschwemmung': 'Überschwemmung',
+    'cyberangriff': 'Cyberangriff',
+    'wasser-lagerung': 'Wasser Lagerung',
+    'lebensmittel-lagerung': 'Lebensmittel Lagerung',
+    'erste-hilfe-set': 'Erste-Hilfe-Set',
+    'energie-kommunikation': 'Energie & Kommunikation',
+    'taschenlampen': 'Taschenlampen',
+    'powerbanks': 'Powerbanks',
+    'notfallradio': 'Notfallradio',
+    'wasserspeicher': 'Wasserspeicher',
+    'notnahrung': 'Notnahrung',
+    'erste-hilfe-kasten': 'Erste-Hilfe-Kasten',
+    'notfallrucksack': 'Notfallrucksack',
+    'wasser-rechner': 'Wasser-Rechner',
+    'energie-rechner': 'Energie-Rechner',
+    'notfallpaket-zusammenstellen': 'Notfallpaket Zusammenstellen',
+  },
+};
+
+// Home names per locale
+const homeNames: Record<Locale, string> = {
+  es: 'Inicio',
+  nl: 'Home',
+  de: 'Startseite',
+};
+
+// Auto-generate breadcrumbs from URL if not provided
+const autoBreadcrumbs: BreadcrumbItem[] = breadcrumbs.length > 0 ? breadcrumbs : (() => {
+  const segments = currentPath.split('/').filter(Boolean);
+  const crumbs: BreadcrumbItem[] = [{ name: homeNames[locale], url: `/${locale}/` }];
+  const sectionNames = sectionNamesPerLocale[locale];
+
+  let pathSoFar = '';
+  for (let i = 0; i < segments.length; i++) {
+    const segment = segments[i];
+    if (['es', 'nl', 'de'].includes(segment)) continue; // Skip language prefix
+
+    pathSoFar += `/${segment}`;
+    const name = sectionNames[segment] || segment.charAt(0).toUpperCase() + segment.slice(1).replace(/-/g, ' ');
+
+    // Only add if it's a meaningful section (not the current page or if it's the last segment)
+    if (i < segments.length - 1 || segments.length <= 2) {
+      crumbs.push({ name, url: `/${locale}${pathSoFar}/` });
+    }
+  }
+
+  return crumbs;
+})();
+
+// Build Schema.org JSON-LD - Main page schema
+const baseSchema = {
+  '@context': 'https://schema.org',
+  '@type': schemaType,
+  name: title,
+  headline: title,
+  description: finalDescription,
+  url: canonicalUrl,
+  inLanguage: currentLocaleConfig.htmlLang,
+  ...(dateModified && { dateModified }),
+  ...(datePublished && { datePublished }),
+  ...(finalAuthor && {
+    author: {
+      '@type': 'Organization',
+      name: finalAuthor,
+      url: 'https://kit-72.com',
+    }
+  }),
+  isPartOf: {
+    '@type': 'WebSite',
+    name: 'Kit-72',
+    url: 'https://kit-72.com',
+    potentialAction: {
+      '@type': 'SearchAction',
+      target: {
+        '@type': 'EntryPoint',
+        urlTemplate: `https://kit-72.com/${locale}/?q={search_term_string}`
+      },
+      'query-input': 'required name=search_term_string'
+    }
+  },
+  publisher: {
+    '@type': 'Organization',
+    name: 'Kit-72',
+    url: 'https://kit-72.com',
+    logo: {
+      '@type': 'ImageObject',
+      url: 'https://kit-72.com/favicon.svg',
+      width: 512,
+      height: 512,
+    },
+  },
+  mainEntityOfPage: {
+    '@type': 'WebPage',
+    '@id': canonicalUrl,
+  },
+  ...schemaData,
+};
+
+// Organization schema descriptions per locale
+const orgDescriptions: Record<Locale, { description: string; areaServed: string; knowsAbout: string[] }> = {
+  es: {
+    description: 'Guías y herramientas para preparación de emergencias en España. Checklists personalizados, calculadoras y consejos prácticos para kits de 72 horas.',
+    areaServed: 'España',
+    knowsAbout: ['Kit de emergencia', 'Preparación para desastres', 'Kit 72 horas', 'Supervivencia', 'Preparación familiar'],
+  },
+  nl: {
+    description: 'Gidsen en tools voor noodvoorbereiding in Nederland. Gepersonaliseerde checklists, calculators en praktische tips voor 72-uurs noodpakketten.',
+    areaServed: 'Nederland',
+    knowsAbout: ['Noodpakket', 'Rampenvoorbereiding', 'Noodpakket 72 uur', 'Zelfvoorzienend', 'Gezinsvoorbereiding'],
+  },
+  de: {
+    description: 'Ratgeber und Tools für Notfallvorsorge in Deutschland. Personalisierte Checklisten, Rechner und praktische Tipps für 72-Stunden-Notfallpakete.',
+    areaServed: 'Deutschland',
+    knowsAbout: ['Notfallpaket', 'Katastrophenvorsorge', 'Notfallpaket 72 Stunden', 'Selbstversorgung', 'Familienvorsorge'],
+  },
+};
+
+// Organization schema for homepage
+const organizationSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  '@id': 'https://kit-72.com/#organization',
+  name: 'Kit-72',
+  url: 'https://kit-72.com',
+  logo: {
+    '@type': 'ImageObject',
+    url: 'https://kit-72.com/favicon.svg',
+    width: 512,
+    height: 512,
+  },
+  description: orgDescriptions[locale].description,
+  foundingDate: '2024',
+  areaServed: {
+    '@type': 'Country',
+    name: orgDescriptions[locale].areaServed,
+  },
+  knowsAbout: orgDescriptions[locale].knowsAbout,
+  sameAs: [],
+};
+
+// WebSite schema for search box
+const websiteSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  '@id': 'https://kit-72.com/#website',
+  name: 'Kit-72',
+  url: 'https://kit-72.com',
+  description: defaultDescriptions[locale],
+  inLanguage: currentLocaleConfig.htmlLang,
+  publisher: {
+    '@id': 'https://kit-72.com/#organization'
+  },
+};
+
+// BreadcrumbList schema
+const breadcrumbSchema = autoBreadcrumbs.length > 1 ? {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: autoBreadcrumbs.map((crumb, index) => ({
+    '@type': 'ListItem',
+    position: index + 1,
+    name: crumb.name,
+    item: `https://kit-72.com${crumb.url}`,
+  })),
+} : null;
+
+// FAQPage schema (for pages with FAQ content)
+const faqSchema = faqData.length > 0 ? {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqData.map((faq) => ({
+    '@type': 'Question',
+    name: faq.question,
+    acceptedAnswer: {
+      '@type': 'Answer',
+      text: faq.answer,
+    },
+  })),
+} : null;
+
+// Skip link text per locale
+const skipLinkText: Record<Locale, string> = {
+  es: 'Saltar al contenido principal',
+  nl: 'Ga naar hoofdinhoud',
+  de: 'Zum Hauptinhalt springen',
+};
+
+// Build hreflang links array
+const hreflangLinks: { hreflang: string; href: string }[] = [];
+
+// Always add x-default pointing to language hub
+hreflangLinks.push({ hreflang: 'x-default', href: 'https://kit-72.com/' });
+
+// Add current locale
+hreflangLinks.push({
+  hreflang: currentLocaleConfig.hreflang,
+  href: `https://kit-72.com${canonicalUrl.replace(/^https?:\/\/[^\/]+/, '')}`,
+});
+
+// Add alternates if provided
+for (const [altLocale, altPath] of Object.entries(alternates)) {
+  if (altLocale !== locale && altPath) {
+    const altConfig = localeConfig[altLocale as Locale];
+    if (altConfig) {
+      hreflangLinks.push({
+        hreflang: altConfig.hreflang,
+        href: `https://kit-72.com${altPath}`,
+      });
+    }
+  }
+}
+---
+
+<!DOCTYPE html>
+<html lang={currentLocaleConfig.htmlLang}>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Primary Meta Tags -->
+  <title>{fullTitle}</title>
+  <meta name="title" content={fullTitle}>
+  <meta name="description" content={finalDescription}>
+  {noIndex && <meta name="robots" content="noindex, nofollow">}
+
+  <!-- Canonical -->
+  <link rel="canonical" href={canonicalUrl}>
+
+  <!-- hreflang tags for international SEO -->
+  {hreflangLinks.map(link => (
+    <link rel="alternate" hreflang={link.hreflang} href={link.href} />
+  ))}
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content={canonicalUrl}>
+  <meta property="og:title" content={fullTitle}>
+  <meta property="og:description" content={finalDescription}>
+  <meta property="og:image" content={absoluteOgImage}>
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:locale" content={currentLocaleConfig.ogLocale}>
+  <meta property="og:site_name" content={siteTitle}>
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:url" content={canonicalUrl}>
+  <meta name="twitter:title" content={fullTitle}>
+  <meta name="twitter:description" content={finalDescription}>
+  <meta name="twitter:image" content={absoluteOgImage}>
+
+  <!-- Favicon & PWA -->
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="manifest" href="/manifest.webmanifest">
+  <meta name="theme-color" content="#0a0f1a">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+  <!-- Preconnect & DNS prefetch for performance -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="dns-prefetch" href="https://www.googletagmanager.com">
+  <link rel="dns-prefetch" href="https://www.google-analytics.com">
+
+  <!-- Preload critical fonts for faster text rendering -->
+  <link
+    rel="preload"
+    href="https://fonts.gstatic.com/s/sourcesans3/v15/nwpBtKy2OAdR1K-IwhWudF-R9QMylBJAV3Bo8Ky462EM.woff2"
+    as="font"
+    type="font/woff2"
+    crossorigin
+  >
+
+  <!-- Google Analytics -->
+  <script async src={`https://www.googletagmanager.com/gtag/js?id=${gaId}`}></script>
+  <script define:vars={{ gaId }}>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', gaId);
+  </script>
+
+  <!-- Schema.org JSON-LD -->
+  <script type="application/ld+json" set:html={JSON.stringify(baseSchema)} />
+  {breadcrumbSchema && (
+    <script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
+  )}
+  {faqSchema && (
+    <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+  )}
+  {currentPath === `/${locale}/` && (
+    <script type="application/ld+json" set:html={JSON.stringify(organizationSchema)} />
+  )}
+  {currentPath === `/${locale}/` && (
+    <script type="application/ld+json" set:html={JSON.stringify(websiteSchema)} />
+  )}
+
+  <!-- Slot for page-specific head content -->
+  <slot name="head" />
+</head>
+<body class="min-h-screen flex flex-col">
+  <!-- Skip to content link for keyboard users -->
+  <a href="#main-content" class="skip-link">
+    {skipLinkText[locale]}
+  </a>
+
+  <Header locale={locale} />
+
+  <main id="main-content" class="flex-1" tabindex="-1">
+    <slot />
+  </main>
+
+  <Footer locale={locale} />
+
+  {/* Mobile Bottom Navigation - client:idle defers hydration until browser is idle */}
+  {!hideBottomNav && (
+    <BottomNav client:idle currentPath={currentPath} locale={locale} />
+  )}
+
+  {/* Unregister any existing service workers - they were causing download issues */}
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.getRegistrations().then(registrations => {
+        registrations.forEach(registration => registration.unregister());
+      });
+    }
+  </script>
+</body>
+</html>
