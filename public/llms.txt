@@ -38,18 +38,18 @@ Kit-72.com provides evidence-based emergency preparedness information for househ
 
 ## Languages
 
-- Spanish (ES): https://kit-72.com/es/
-- Dutch (NL): https://kit-72.com/nl/
-- German (DE): https://kit-72.com/de/
+- Spanish (ES): https://www.kit-72.com/es/
+- Dutch (NL): https://www.kit-72.com/nl/
+- German (DE): https://www.kit-72.com/de/
 
 ## Main Entry Points
 
-- Homepage: https://kit-72.com/
-- Kit Builder Tool: https://kit-72.com/es/tools/kit-builder/
-- Water Calculator: https://kit-72.com/es/tools/calculadora-agua/
-- Power Calculator: https://kit-72.com/es/tools/calculadora-energia/
-- Scenario Guides: https://kit-72.com/es/escenarios/
-- Component Guides: https://kit-72.com/es/componentes/
+- Homepage: https://www.kit-72.com/
+- Kit Builder Tool: https://www.kit-72.com/es/tools/kit-builder/
+- Water Calculator: https://www.kit-72.com/es/tools/calculadora-agua/
+- Power Calculator: https://www.kit-72.com/es/tools/calculadora-energia/
+- Scenario Guides: https://www.kit-72.com/es/escenarios/
+- Component Guides: https://www.kit-72.com/es/componentes/
 
 ## Content Guidelines for AI
 
@@ -68,4 +68,4 @@ Kit-72.com provides evidence-based emergency preparedness information for househ
 
 ## Contact
 
-Website: https://kit-72.com
+Website: https://www.kit-72.com

@@ -1,5 +1,5 @@
 # Kit-72.com Robots.txt
-# https://kit-72.com
+# https://www.kit-72.com
 
 # Allow all crawlers full access
 User-agent: *
@@ -64,7 +64,7 @@ User-agent: Meta-ExternalAgent
 Allow: /
 
 # Sitemap location (Astro generates sitemap-index.xml)
-Sitemap: https://kit-72.com/sitemap-index.xml
+Sitemap: https://www.kit-72.com/sitemap-index.xml
 
 # Host directive for search engines
-Host: https://kit-72.com
+Host: https://www.kit-72.com

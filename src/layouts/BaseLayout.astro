@@ -98,7 +98,7 @@ const {
 // Use locale-specific OG image if not explicitly provided
 const finalOgImage = ogImage || defaultOgImages[locale] || '/images/og-default.jpg';
 // Ensure absolute URL for OG image
-const absoluteOgImage = finalOgImage.startsWith('http') ? finalOgImage : `https://kit-72.com${finalOgImage}`;
+const absoluteOgImage = finalOgImage.startsWith('http') ? finalOgImage : `https://www.kit-72.com${finalOgImage}`;
 
 // Use locale-specific defaults
 const finalDescription = description || defaultDescriptions[locale];
@@ -241,18 +241,18 @@ const baseSchema = {
     author: {
       '@type': 'Organization',
       name: finalAuthor,
-      url: 'https://kit-72.com',
+      url: 'https://www.kit-72.com',
     }
   }),
   isPartOf: {
     '@type': 'WebSite',
     name: 'Kit-72',
-    url: 'https://kit-72.com',
+    url: 'https://www.kit-72.com',
     potentialAction: {
       '@type': 'SearchAction',
       target: {
         '@type': 'EntryPoint',
-        urlTemplate: `https://kit-72.com/${locale}/?q={search_term_string}`
+        urlTemplate: `https://www.kit-72.com/${locale}/?q={search_term_string}`
       },
       'query-input': 'required name=search_term_string'
     }
@@ -260,10 +260,10 @@ const baseSchema = {
   publisher: {
     '@type': 'Organization',
     name: 'Kit-72',
-    url: 'https://kit-72.com',
+    url: 'https://www.kit-72.com',
     logo: {
       '@type': 'ImageObject',
-      url: 'https://kit-72.com/favicon.svg',
+      url: 'https://www.kit-72.com/favicon.svg',
       width: 512,
       height: 512,
     },
@@ -298,12 +298,12 @@ const orgDescriptions: Record<Locale, { description: string; areaServed: string;
 const organizationSchema = {
   '@context': 'https://schema.org',
   '@type': 'Organization',
-  '@id': 'https://kit-72.com/#organization',
+  '@id': 'https://www.kit-72.com/#organization',
   name: 'Kit-72',
-  url: 'https://kit-72.com',
+  url: 'https://www.kit-72.com',
   logo: {
     '@type': 'ImageObject',
-    url: 'https://kit-72.com/favicon.svg',
+    url: 'https://www.kit-72.com/favicon.svg',
     width: 512,
     height: 512,
   },
@@ -321,13 +321,13 @@ const organizationSchema = {
 const websiteSchema = {
   '@context': 'https://schema.org',
   '@type': 'WebSite',
-  '@id': 'https://kit-72.com/#website',
+  '@id': 'https://www.kit-72.com/#website',
   name: 'Kit-72',
-  url: 'https://kit-72.com',
+  url: 'https://www.kit-72.com',
   description: defaultDescriptions[locale],
   inLanguage: currentLocaleConfig.htmlLang,
   publisher: {
-    '@id': 'https://kit-72.com/#organization'
+    '@id': 'https://www.kit-72.com/#organization'
   },
 };
 
@@ -339,7 +339,7 @@ const breadcrumbSchema = autoBreadcrumbs.length > 1 ? {
     '@type': 'ListItem',
     position: index + 1,
     name: crumb.name,
-    item: `https://kit-72.com${crumb.url}`,
+    item: `https://www.kit-72.com${crumb.url}`,
   })),
 } : null;
 
@@ -381,12 +381,12 @@ const skipLinkText: Record<Locale, string> = {
 const hreflangLinks: { hreflang: string; href: string }[] = [];
 
 // Always add x-default pointing to language hub
-hreflangLinks.push({ hreflang: 'x-default', href: 'https://kit-72.com/' });
+hreflangLinks.push({ hreflang: 'x-default', href: 'https://www.kit-72.com/' });
 
 // Add current locale
 hreflangLinks.push({
   hreflang: currentLocaleConfig.hreflang,
-  href: `https://kit-72.com${canonicalUrl.replace(/^https?:\/\/[^\/]+/, '')}`,
+  href: `https://www.kit-72.com${canonicalUrl.replace(/^https?:\/\/[^\/]+/, '')}`,
 });
 
 // Add alternates if provided
@@ -396,7 +396,7 @@ for (const [altLocale, altPath] of Object.entries(alternates)) {
     if (altConfig) {
       hreflangLinks.push({
         hreflang: altConfig.hreflang,
-        href: `https://kit-72.com${altPath}`,
+        href: `https://www.kit-72.com${altPath}`,
       });
     }
   }

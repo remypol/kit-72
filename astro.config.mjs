@@ -8,7 +8,7 @@ import sitemap from '@astrojs/sitemap';
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://kit-72.com',
+  site: 'https://www.kit-72.com',
 
   // Static output for Caddy serving
   output: 'static',
@@ -87,12 +87,12 @@ export default defineConfig({
         const url = item.url;
 
         // Language hub (x-default)
-        if (url === 'https://kit-72.com/') {
+        if (url === 'https://www.kit-72.com/') {
           priority = 0.3; // Lower priority - it's just a language selector
           changefreq = 'monthly';
         }
         // Homepage for each locale
-        else if (url.match(/^https:\/\/kit-72\.com\/(es|nl|de)\/$/)) {
+        else if (url.match(/^https:\/\/www\.kit-72\.com\/(es|nl|de)\/$/)) {
           priority = 1.0;
           changefreq = 'weekly';
         }
