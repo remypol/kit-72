@@ -208,26 +208,6 @@ const chargingTips = [
   'Las baterías externas pierden capacidad con el frío intenso'
 ];
 
-// Generate ItemList + Product schema for rich results
-const productSchema = {
-  '@type': 'ItemList',
-  itemListElement: amazonProducts.map((product, index) => ({
-    '@type': 'ListItem',
-    position: index + 1,
-    item: {
-      '@type': 'Product',
-      name: product.name,
-      description: product.description,
-      aggregateRating: {
-        '@type': 'AggregateRating',
-        ratingValue: product.rating,
-        bestRating: 5,
-        worstRating: 1,
-        ratingCount: 100
-      }
-    }
-  }))
-};
 ---
 
 <BaseLayout
@@ -236,7 +216,6 @@ const productSchema = {
   locale="es"
   dateModified="2025-12-15"
   schemaType="Article"
-  schemaData={productSchema}
 >
   <section class="py-16">
     <div class="max-w-4xl mx-auto px-4 sm:px-6">
