@@ -357,6 +357,19 @@ const faqSchema = faqData.length > 0 ? {
   })),
 } : null;
 
+// Speakable schema for voice search (Google Assistant, Alexa, etc.)
+// Applied to Article and WebPage types with meaningful content
+const speakableSchema = (schemaType === 'Article' || schemaType === 'WebPage') ? {
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  '@id': `${canonicalUrl}#speakable`,
+  speakable: {
+    '@type': 'SpeakableSpecification',
+    cssSelector: ['h1', '.intro', '.summary', '.key-points', 'article > p:first-of-type'],
+  },
+  url: canonicalUrl,
+} : null;
+
 // Skip link text per locale
 const skipLinkText: Record<Locale, string> = {
   es: 'Saltar al contenido principal',
@@ -483,6 +496,9 @@ for (const [altLocale, altPath] of Object.entries(alternates)) {
   )}
   {currentPath === `/${locale}/` && (
     <script type="application/ld+json" set:html={JSON.stringify(websiteSchema)} />
+  )}
+  {speakableSchema && (
+    <script type="application/ld+json" set:html={JSON.stringify(speakableSchema)} />
   )}
 
   <!-- Slot for page-specific head content -->

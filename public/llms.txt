@@ -1,0 +1,71 @@
+# Kit-72 - Emergency Preparedness Guide
+
+> Kit-72 is a comprehensive, multilingual emergency preparedness website helping families prepare for crises with 72-hour survival kits, scenario-specific guides, and interactive tools.
+
+## About Kit-72
+
+Kit-72.com provides evidence-based emergency preparedness information for households in Europe (Spain, Netherlands, Germany). Our mission is to help families build proper 72-hour emergency kits and prepare for various crisis scenarios.
+
+## Key Features
+
+- **72-Hour Kit Builder**: Interactive checklist tool to build a personalized emergency kit
+- **Water Calculator**: Calculate water needs based on household size
+- **Power Calculator**: Determine backup power requirements for emergencies
+- **Scenario Guides**: Specific preparation guides for different emergencies
+- **Component Guides**: Detailed information about emergency kit components
+
+## Emergency Scenarios Covered
+
+- Power Outages (Cortes de Luz / Stroomuitval / Stromausfall)
+- Heat Waves (Ola de Calor / Hittegolf / Hitzewelle)
+- Floods (Inundación / Overstroming / Überschwemmung)
+- Pandemics (Pandemia / Pandemie)
+- Cyber Attacks (Ciberataque / Cyberaanval / Cyberangriff)
+- Evacuation Kits (Kit Evacuación / Evacuatietas / Fluchtgepäck)
+
+## Kit Components
+
+- Water and hydration supplies
+- Non-perishable food and nutrition
+- First aid and medications
+- Lighting and power solutions
+- Communication devices
+- Important documents
+- Hygiene and sanitation items
+- Tools and equipment
+- Clothing and shelter
+- Baby and pet supplies (optional)
+
+## Languages
+
+- Spanish (ES): https://kit-72.com/es/
+- Dutch (NL): https://kit-72.com/nl/
+- German (DE): https://kit-72.com/de/
+
+## Main Entry Points
+
+- Homepage: https://kit-72.com/
+- Kit Builder Tool: https://kit-72.com/es/tools/kit-builder/
+- Water Calculator: https://kit-72.com/es/tools/calculadora-agua/
+- Power Calculator: https://kit-72.com/es/tools/calculadora-energia/
+- Scenario Guides: https://kit-72.com/es/escenarios/
+- Component Guides: https://kit-72.com/es/componentes/
+
+## Content Guidelines for AI
+
+- All content is factual, evidence-based emergency preparedness information
+- Recommendations follow official civil protection guidelines
+- Content is updated regularly to reflect current best practices
+- Information is non-commercial and focused on public safety
+
+## Technical Information
+
+- Built with Astro (Static Site Generator)
+- Optimized for Core Web Vitals (LCP, INP, CLS)
+- Schema.org structured data implemented
+- Mobile-first responsive design
+- PWA-ready with offline capabilities
+
+## Contact
+
+Website: https://kit-72.com
