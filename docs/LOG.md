@@ -93,3 +93,4 @@ What matters:
 - The welcome email moved from the site to the automation, so it carries an unsubscribe link. `/api/confirm` now only creates the contact and fires the event, and shows the error page if the event is rejected.
 - Tested the NL welcome automation with Resend's sink address: delivered, all variables filled, unsubscribe link present. Then disabled it again until this change is deployed.
 - Resend's REST format for automations differs from the workflow format used here, so the automations were created through the MCP tool from `emails/out/automations.json`.
+- Merged, deployed, then enabled all six automations. Ran the live signup in NL, DE and ES with the sink address: each got the redesigned confirmation and the right welcome email (27 L for three people in NL and ES, 18 L in DE).
