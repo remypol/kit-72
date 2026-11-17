@@ -170,7 +170,7 @@ export function firstHourPage(d, needs) {
   ]);
 
   const flood = steps([
-    ['Zoek de hoogste plek in huis op.', `Je maaiveld ligt op ${nl(d.elevation ?? 0, 1)} m ${d.elevation >= 0 ? 'boven' : 'onder'} NAP. Kijk of je er via een dakraam uit kunt.`],
+    ['Zoek de hoogste plek in huis op.', `Je maaiveld ligt op ${nl(Math.abs(d.elevation ?? 0), 1)} m ${d.elevation >= 0 ? 'boven' : 'onder'} NAP. Kijk of je er via een dakraam uit kunt.`],
     ['Gashoofdkraan dicht, elektriciteit uit, stekkers eruit.', null],
     ['Leg een zware zak in toilet, wasbak en putjes.', 'Dan komt het rioolwater niet omhoog.'],
     ['Neem water, eten, medicijnen, radio en zaklamp mee naar boven.', 'Ook warme kleding, dekens en je identiteitsbewijs.'],

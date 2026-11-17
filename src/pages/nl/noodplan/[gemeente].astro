@@ -118,6 +118,15 @@ const faq = [
         title={`Woon je in ${g.name}? Maak je eigen noodhandboek`}
         body="De cijfers hierboven gelden voor de gemeente als geheel. Het handboek rekent voor jouw adres: de hoogte van je eigen perceel, de spoedeisende hulp die je met de auto het snelst bereikt en een kaart van je buurt. Vier pagina's, gratis."
       />
+      <figure class="gm-peek">
+        <a href="/nl/noodhandboek/#voorbeeld">
+          <img src="/images/handboek/voorbeeld-pagina-1.jpg" alt="Voorbeeld van pagina 1 van het noodhandboek, gemaakt voor het stadhuis van Rotterdam" width="778" height="1100" loading="lazy" decoding="async" />
+        </a>
+        <figcaption>
+          Zo ziet pagina 1 eruit, hier voor het stadhuis van Rotterdam. In het jouwe staan je eigen straat, hoogte en buurt.
+          <a href="/nl/noodhandboek/#voorbeeld">Vergelijk drie adressen</a>
+        </figcaption>
+      </figure>
     </section>
 
     <section class="gm-text">
@@ -231,8 +240,41 @@ const faq = [
     font-size: 0.92rem;
   }
   .gm-cta {
-    max-width: 44rem;
+    display: grid;
+    gap: var(--space-8);
     margin-block: var(--space-4) var(--space-12);
+  }
+  @media (min-width: 960px) {
+    .gm-cta {
+      grid-template-columns: minmax(0, 44rem) minmax(0, 1fr);
+      align-items: start;
+    }
+  }
+  .gm-peek {
+    margin: 0;
+    max-width: 20rem;
+    justify-self: center;
+  }
+  .gm-peek img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border: 1px solid var(--color-border);
+    border-radius: 3px;
+    box-shadow: 0 18px 30px -16px rgba(16, 35, 27, 0.45);
+    transform: rotate(1.5deg);
+  }
+  .gm-peek figcaption {
+    margin-top: var(--space-4);
+    font-size: 0.9rem;
+    color: var(--color-text-secondary);
+  }
+  .gm-peek figcaption a {
+    color: var(--color-accent);
+    font-weight: 650;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    white-space: nowrap;
   }
   .gm-text {
     max-width: 44rem;

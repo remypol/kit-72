@@ -157,3 +157,10 @@ What matters:
 - SEO pages: `/nl/noodplan/` and one page per municipality (343 URLs), each with the form, four questions as FAQ structured data and links to six neighbours. Sitemap now has 438 URLs. `scripts/seo_audit.py`: no long titles, no duplicate titles, no orphan pages, no hreflang problems.
 - Still a pilot: map, nearby points and routes come from public OpenStreetMap services meant for light use.
 
+
+## 17. Preview on the handbook page (2026-11-17)
+
+- The owner approved going live and asked for a preview that shows the handbook is personal.
+- `src/components/growth/HandbookPreview.astro`: page 1 for three town halls (Rotterdam, Almere, Vaals) with different households; a visitor switches between them and sees the five personal items change. The figures and images come from `handbook/scripts/samples.mjs` (needs Chrome and pdftoppm); only public buildings belong in that list. Municipality pages show a small page 1 next to the form.
+- Found while doing this: the sample image for page 1 was a wrong crop (parts of pages 2 and 3). The script now cuts the images from the pdf.
+- Fixed in the handbook: an address below sea level printed "-3,5 m onder NAP" (now "3,5 m onder NAP"), and a street that starts with a lower-case letter is capitalised in the heading.

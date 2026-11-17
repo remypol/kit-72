@@ -146,7 +146,7 @@ export function renderHtml(d, { web = false } = {}) {
   const flood = d.floodRisk.length
     ? { value: 'Ja', note: d.floodRisk.map((t) => t.replace(/^\S+ type (\w) - /, 'type $1: ')).join('; ') }
     : { value: 'Nee', note: 'niet in een aangewezen overstromingsrisicogebied' };
-  const elev = d.elevation == null ? 'onbekend' : `${nl(d.elevation, 1)} m`;
+  const elev = d.elevation == null ? 'onbekend' : `${nl(Math.abs(d.elevation), 1)} m`;
   const hospitals = d.hospitals.slice(0, 2);
   const region = d.region;
   const today = new Date(d.generated).toLocaleDateString('nl-NL', { day: 'numeric', month: 'long', year: 'numeric' });
@@ -210,7 +210,7 @@ ${web ? WEB_BAR : ''}
   <div>
     <div class="brand">${LOGO}<span>Kit-72</span></div>
     <p class="over">Noodhandboek voor</p>
-    <h1>${esc(street)}</h1>
+    <h1>${esc(street.charAt(0).toUpperCase() + street.slice(1))}</h1>
     <p class="place">${esc(place)}</p>
   </div>
   <div class="meta"><span class="proof">BÈTA</span><br><br><strong>${h.adults} ${h.adults === 1 ? 'volwassene' : 'volwassenen'}${h.children ? `, ${h.children} ${h.children === 1 ? 'kind' : 'kinderen'}` : ''}${h.pets ? `, ${h.pets} huisdier${h.pets > 1 ? 'en' : ''}` : ''}</strong><br>Gemaakt op ${today}<br>Controleer de gegevens jaarlijks</div>

@@ -1,0 +1,83 @@
+{
+  "generated": "2026-11-17",
+  "samples": [
+    {
+      "id": "rotterdam",
+      "what": "Stadhuis Rotterdam",
+      "street": "Coolsingel 40",
+      "place": "Rotterdam",
+      "image": "/images/handboek/voorbeeld-rotterdam-1.jpg",
+      "household": "2 volwassenen, 1 kind",
+      "water": 27,
+      "cash": 170,
+      "level": "0,4 m boven NAP",
+      "flood": true,
+      "hospital": {
+        "name": "Erasmus Medisch Centrum",
+        "place": "Rotterdam",
+        "minutes": 4,
+        "allDay": true
+      },
+      "hospitalNight": null,
+      "broadcaster": "Radio Rijnmond",
+      "dab": "5B",
+      "shop": {
+        "name": "Albert Heijn",
+        "metres": 130,
+        "minutes": 2
+      }
+    },
+    {
+      "id": "almere",
+      "what": "Stadhuis Almere",
+      "street": "Stadhuisplein 1",
+      "place": "Almere",
+      "image": "/images/handboek/voorbeeld-almere-1.jpg",
+      "household": "1 volwassene",
+      "water": 9,
+      "cash": 70,
+      "level": "3,5 m onder NAP",
+      "flood": true,
+      "hospital": {
+        "name": "Flevoziekenhuis",
+        "place": "Almere",
+        "minutes": 2,
+        "allDay": true
+      },
+      "hospitalNight": null,
+      "broadcaster": "Omroep Flevoland",
+      "dab": "8B",
+      "shop": {
+        "name": "Gembira",
+        "metres": 150,
+        "minutes": 2
+      }
+    },
+    {
+      "id": "vaals",
+      "what": "Gemeentehuis Vaals",
+      "street": "Von Clermontplein 15",
+      "place": "Vaals",
+      "image": "/images/handboek/voorbeeld-vaals-1.jpg",
+      "household": "2 volwassenen, 2 kinderen, 1 huisdier",
+      "water": 37,
+      "cash": 200,
+      "level": "199,9 m boven NAP",
+      "flood": false,
+      "hospital": {
+        "name": "Zuyderland locatie Heerlen",
+        "place": "Heerlen",
+        "minutes": 18,
+        "allDay": true
+      },
+      "hospitalNight": null,
+      "broadcaster": "L1 Radio",
+      "dab": "7C",
+      "shop": {
+        "name": "Albert Heijn",
+        "metres": 320,
+        "minutes": 4
+      }
+    }
+  ]
+}

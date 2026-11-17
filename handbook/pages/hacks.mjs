@@ -70,7 +70,7 @@ const personal = (text, d, needs) =>
   esc(text)
     .replaceAll('{radio}', esc(d.region?.broadcaster ?? 'je regionale omroep'))
     .replaceAll('{water}', String(needs.water))
-    .replaceAll('{elevation}', d.elevation == null ? 'onbekend' : `${Number(d.elevation).toLocaleString('nl-NL', { minimumFractionDigits: 1, maximumFractionDigits: 1 })} m ${d.elevation >= 0 ? 'boven' : 'onder'} NAP`);
+    .replaceAll('{elevation}', d.elevation == null ? 'onbekend' : `${Math.abs(d.elevation).toLocaleString('nl-NL', { minimumFractionDigits: 1, maximumFractionDigits: 1 })} m ${d.elevation >= 0 ? 'boven' : 'onder'} NAP`);
 
 export function hacksPage(d, needs) {
   const inFloodZone = d.floodRisk.length > 0;
