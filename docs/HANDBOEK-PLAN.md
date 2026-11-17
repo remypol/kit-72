@@ -1,6 +1,6 @@
 # Persoonlijk noodhandboek: plan
 
-Geschreven op 17 november 2026. Status: plan, er is nog niets gebouwd.
+Geschreven op 17 november 2026. Status: fase 0 is gebouwd en getest op drie adressen; de uitkomst staat onderaan. Er wordt nog niets verkocht.
 
 ## Het idee
 
@@ -108,3 +108,161 @@ Doorgaan na fase 1 alleen als de adrescheck laat zien dat mensen willen betalen.
 2. Prijs: € 19,99 als start, of testen met € 14,99 en € 24,99.
 3. Wie beantwoordt vragen van kopers.
 4. Eerst alleen Nederland (mijn advies), of meteen drie landen.
+
+## Fase 0: uitkomst (17 november 2026)
+
+Gebouwd in `handbook/`. Eén opdracht maakt van een adres een pdf van één pagina:
+
+```bash
+node handbook/build.mjs "Coolsingel 40, Rotterdam" --adults 2 --children 1 --pets 0
+```
+
+De uitvoer komt in `handbook/out/` en staat niet in git, omdat er adressen in staan. Een eerste run duurt ongeveer 35 seconden; antwoorden van de bronnen worden lokaal bewaard, daarna gaat het in een paar seconden.
+
+### Met de hand gecontroleerd
+
+Drie adressen: een landelijk adres in de gemeente Apeldoorn, Coolsingel 40 in Rotterdam en 's Gravenhof 2 in Zutphen.
+
+| Feit | Bron | Landelijk | Rotterdam | Zutphen |
+|---|---|---|---|---|
+| Adres, gemeente, waterschap | PDOK Locatieserver | klopt | klopt | klopt |
+| Hoogte van het maaiveld | AHN via PDOK | 16,5 m, aannemelijk | 0,4 m, aannemelijk | 10,5 m, aannemelijk |
+| In overstromingsrisicogebied | Rijkswaterstaat via PDOK | nee, klopt | ja, achter de dijk, klopt | ja, achter de dijk, klopt |
+| Veiligheidsregio en rampenzender | CBS via PDOK, eigen tabel | klopt | klopt | klopt |
+| Storingsnummer stroom en gas | Netbeheer Nederland | klopt | klopt | klopt |
+| Spoedeisende hulp | RIVM, opgave van de ziekenhuizen | klopt | klopt | klopt |
+| Supermarkt, apotheek, huisarts | OpenStreetMap | aannemelijk | aannemelijk | deels |
+| AED en drinkwaterpunt | OpenStreetMap | niet gevonden | gevonden | gevonden |
+
+"Aannemelijk" betekent: past bij wat bekend is over de plek, maar niet nagemeten bij een tweede bron.
+
+### Wat fout ging en waarom
+
+- **Spoedeisende hulp uit OpenStreetMap was niet bruikbaar.** In Rotterdam stond het Sophia Kinderziekenhuis bovenaan, waar een volwassene niet terechtkan. In Zutphen ontbrak het ziekenhuis in de stad zelf, omdat het in OpenStreetMap niet als spoedeisende hulp is gemarkeerd; het handboek stuurde je naar Deventer, 17 km verder.
+- **Opgelost met de lijst van het RIVM.** Het RIVM publiceert de antwoorden van alle ziekenhuizen op de vragenlijst "Aanbod SEH's en Acute Verloskunde 2026" als open data zonder gebruiksbeperking (versie 7 juli 2026). `handbook/scripts/seh_from_rivm.py` maakt daarvan `handbook/data/seh-nl.json`: 79 locaties, elk op het eigen adres geplaatst via PDOK, waarvan 3 niet dag en nacht open zijn (Amstelveen, Schiedam, Zutphen). Het handboek toont de snelst bereikbare locatie; is die 's nachts dicht, dan staat dat erbij en is de tweede regel de snelst bereikbare die altijd open is. Na deze wijziging: Rotterdam geeft Erasmus MC en Franciscus Gasthuis, Zutphen geeft Gelre Zutphen ('s nachts dicht) en Deventer.
+- **PDOK kiest stil een ander huisnummer** als het gevraagde niet bestaat. De opdracht waarschuwt daar nu voor; de adrescheck moet het adres laten bevestigen.
+- **Hoogte onder een gebouw bestaat niet.** Het hoogtemodel heeft geen waarde onder bebouwing en een adrespunt ligt op het gebouw. De code meet nu een ring van punten op 15 tot 40 meter en neemt de middelste waarde.
+- **De Overpass-servers van OpenStreetMap lagen de hele middag plat.** De code gebruikt nu de kaart-API van OpenStreetMap voor alles binnen een kilometer en zoekdiensten (Photon, Nominatim) voor wat verder weg ligt. Dit bevestigt het plan: voor verkoop moeten de punten in eigen beheer staan.
+- **AED's staan maar deels in OpenStreetMap.** Op het platteland vond de proef er geen. De landelijke AED-registratie is niet openbaar; dit onderdeel belooft dus "AED's die in OpenStreetMap staan", niet "de dichtstbijzijnde AED".
+- **"Supermarkt" in OpenStreetMap is ruim.** In Zutphen kwam een natuurwinkel als dichtstbijzijnde supermarkt uit de bus.
+- **Verwachte waterdiepte ontbreekt nog.** De dienst van LIWO reageerde niet. Wel bewezen: of een adres in een aangewezen overstromingsrisicogebied ligt, en van welk type.
+
+### Oordeel
+
+De tien feiten op de pagina zijn nu automatisch op te halen en kloppen voor de drie testadressen. Drie daarvan (hoogte, supermarkt en huisarts) zijn aannemelijk maar niet bij een tweede bron nagemeten. Fase 0 heeft daarmee bewezen wat het moest bewijzen, met twee open punten die het plan al noemde:
+
+1. De waterdiepte van LIWO opnieuw proberen, of de kaarten als bestand ophalen. Tot die tijd zegt het handboek alleen of je in een overstromingsrisicogebied woont.
+2. De tabel met rampenzenders aanvullen van 2 naar 25 veiligheidsregio's.
+
+De lijst van het RIVM verschijnt jaarlijks; de tabel krijgt dus een jaarlijkse verversing, en tussentijdse sluitingen moeten apart gevolgd worden.
+
+## Pagina 2: het eerste uur (17 november 2026)
+
+Op verzoek toegevoegd: concrete eerste stappen, met infographics. De pagina staat in `handbook/pages/first-hour.mjs`; de cijfers en de bron per stap staan in `handbook/data/first-hour-sources.json`.
+
+| Blok | Wat erop staat | Persoonlijk |
+|---|---|---|
+| De stroom valt uit | acht stappen, tekening van een bad met de flessen drinkwater ernaast, balkjes voor koelkast en vriezer | aantal flessen en liters, naam van de rampenzender |
+| Er komt geen water uit de kraan | vier stappen, 6 liter per spoelbeurt, 3 minuten koken | liters per dag en voor 72 uur |
+| Het water komt | zes stappen, tekening van hoe weinig water al gevaarlijk is | alleen voor adressen in overstromingsrisicogebied, met de eigen maaiveldhoogte |
+| NL-Alert: ramen en deuren dicht | vijf stappen, tekening van een dicht huis | voor alle andere adressen |
+| Je moet weg | afvinklijst voor de tas | bedrag aan contant geld, regels voor kinderen en huisdieren |
+
+### Wat de bronnen wel en niet dekken
+
+Alle adviezen zijn nagelopen bij officiële bronnen (Denk Vooruit, Rijksoverheid, overstroomik.nl, Voedingscentrum, Rode Kruis, brandweer.nl, waterbedrijven, netbeheerders, Drinkwaterbesluit). Wat daaruit kwam:
+
+- **"Vul direct je bad" staat nergens als advies bij stroomuitval.** Wel officieel: de waterdruk kan wegvallen (Denk Vooruit), boven de derde verdieping valt de pomp in een flat uit (Vitens, NIPV), en het bad vullen wordt geadviseerd bij een dreigende overstroming (Rijksoverheid) en een aangekondigde wateronderbreking (Dunea). De stap staat er daarom in, met die reden erbij. Waterbedrijven moeten zelf tien dagen zonder stroom kunnen leveren; de stap is dus vooral van belang in hoogbouw.
+- **Geschrapt omdat geen officiële bron het zegt:** één lamp aan laten, sms'en in plaats van bellen, water uit de boiler of de stortbak drinken, kaarsen afraden (ze staan juist op de officiële lijsten; de brandweer geeft wel regels).
+- **Waterdiepte:** de bekende cijfers 15, 30 en 60 cm komen van de Amerikaanse weerdienst en kloppen niet met de Nederlandse bronnen. Op de pagina staan alleen de Nederlandse: enkelhoog stromend water kan je omver trekken (Rode Kruis), bij 15 cm kan een auto niet meer rijden (overstroomik.nl).
+- **Koelkast 4 uur, vriezer 24 tot 48 uur** zijn schattingen van het Voedingscentrum; dat staat erbij.
+- **Noodwater:** drie liter per persoon per dag staat in het Drinkwaterbesluit; de 24 uur komt van Denk Vooruit en de Rijksoverheid.
+
+De opmaak wordt bij het bouwen gecontroleerd: het pdf moet precies vier vellen zijn, anders geeft de opdracht een waarschuwing.
+
+## Pagina 3 en 4: slimme trucs en het noodplan (17 november 2026)
+
+De eigenaar wil niet alleen officieel advies: juist de trucs die de overheid niet noemt maken de gids anders dan een folder. Daarom staat het officiële advies op pagina 2 en staan de trucs apart op pagina 3, met erbij dat het geen officieel advies is.
+
+**Pagina 3, slimme trucs** (`handbook/pages/hacks.mjs`, inhoud in `handbook/data/hacks-nl.json`): vier getekende trucs (flessen invriezen, lamp van een fles, doorkoken in een dekbed, munt op een bevroren beker) en ruim twintig trucs in vijf thema's, plus een thema dat van het adres afhangt (hoogwater, of weggaan). Per truc staat in het databestand waar de toets op rust: een instantie, verslagen van lange storingen, of gewone natuurkunde.
+
+**Pagina 4, jouw noodplan** (`handbook/pages/plan.mjs`): acht bekende trucs die je niet moet doen, invulvelden voor mensen en voor waar alles in huis zit, en een lijst om elk halfjaar na te lopen met de datum van de volgende keer.
+
+### De toets
+
+Elke truc moest twee vragen doorstaan: werkt het, en kan het kwaad als je het doet zoals het er staat. Een onderzoek liep 46 trucs na uit preppergemeenschappen en verslagen uit Texas (2021), Oekraïne en Spanje (2025).
+
+- **Aangepast door de toets:** de munt op een bevroren beker bewijst maar één kant op (onderin is ontdooid geweest; bovenop zegt niets). Doorkoken in een dekbed kreeg de regel dat je het binnen een paar uur eet of eerst opkookt, omdat de pan na vijf uur rond de 50 graden zit.
+- **Weggelaten:** eten op het balkon bewaren (de Amerikaanse voedselautoriteit raadt het af; zonder thermometer weet je het niet), dekens over de vriezer (weinig winst), water uit een elektrische boiler tappen (kan, maar te bewerkelijk om veilig in één regel te zetten), drinken uit de stortbak (bronnen spreken elkaar tegen), en een dosering voor bleek (te makkelijk verkeerd te lezen; het handboek zegt koken).
+- **Naar "doe dit niet":** de bloempotkachel, het fornuis als kachel, verbranding binnen, de motor in de garage, een aggregaat op een stopcontact, spullen in de vaatwasser, drinken uit cv of regenton, en eten keuren op geur.
+
+Wat niet bij een instantie te toetsen viel staat er als ervaring van anderen in; dat geldt onder meer voor de breekstaafjes, de vaste plek voor lampen en het briefje op de deur.
+
+## Verdienmodel: gratis handboek, betaald door partners (17 november 2026)
+
+De eigenaar wil geen producten verkopen en verwacht niet dat consumenten voor het handboek betalen. Besloten richting: het handboek is gratis in ruil voor een e-mailadres, en de opbrengst komt van partners die betalen als een lezer via ons iets afsluit of aanvraagt. Losse persoonsgegevens verkopen doen we niet: het levert weinig op, vraagt aparte toestemming per doel, en een lijst met adressen waar geld en voorraad in huis ligt mag nooit rondgaan.
+
+### Wat is nagezocht
+
+Een onderzoek liep de Nederlandse programma's na (107 pagina's geopend); daarnaast is in het Awin-account zelf gezocht.
+
+| Categorie | Programma | Netwerk | Openbare vergoeding | Hoe het werkt |
+|---|---|---|---|---|
+| Woonverzekering | Univé | Awin | tot € 90 per afgesloten verzekering | doorklikken; geen vooringevulde gegevens |
+| Woonverzekering | Centraal Beheer, FBTO, Interpolis, ANWB, ABN AMRO, a.s.r., InShared, Allianz Direct | Awin | pas zichtbaar na toelating | gesloten programma's met screening |
+| Offertes (zonnepanelen, isolatie) | Slimster | Daisycon of eigen programma | € 3 tot 20 per offerteaanvraag | enige die aanvragen uit ons eigen formulier aanneemt |
+| Offertes | Offertevergelijker | Daisycon | tot € 31,50 | doorklikken |
+| Beveiliging | WoonVeilig | Daisycon | tot € 70 | voorwaarden achter de inlog |
+| Beveiliging | Verisure NL | Daisycon | tot € 20 | terugbelverzoek |
+| Personenalarm | Nederlandse Senioren Alarmering | Daisycon | tot € 52,50 | voorwaarden achter de inlog |
+| Noodstroom | EcoFlow NL, ALLPOWERS NL | Awin | 5 % van de aankoop | productverkoop |
+| Energie | Overstappen, Independer Energie, Gaslicht.com | Awin | € 20 per contract (Overstappen) | doorklikken |
+
+### Wat dit verandert aan het idee
+
+- **Bijna niemand betaalt voor een vinkje in ons handboek.** Vrijwel alle programma's betalen pas als de lezer doorklikt en bij de partner zelf afsluit. Alleen Slimster neemt aanvragen uit ons eigen formulier aan.
+- **Overstroming door een dijkdoorbraak is niet te verzekeren.** Schade door zee of grote rivieren is voor vrijwel alle huishoudens niet gedekt; schade door kleine rivieren, kanalen en extreme regen meestal wel (Verbond van Verzekeraars, Consumentenbond). Het aanbod "dekt je verzekering een overstroming?" kan dus alleen eerlijk als uitleg, met daarna een gewone vergelijking van woonverzekeringen.
+- **Een thuisbatterij werkt meestal niet bij een stroomstoring** (Milieu Centraal). Voor batterij-offertes is geen Nederlandse vergoeding per aanvraag gevonden. Het eerlijke aanbod is noodstroom die wel werkt: een powerstation.
+- **Regels.** Per aanbod een eigen, niet vooraf aangevinkt vakje, de ontvanger bij naam, en het handboek mag er niet van afhangen. Wie gebeld gaat worden moet daar sinds 1 juli 2026 uitdrukkelijk mee instemmen (ACM). Verzekeraars eisen dat de site zich aan de regels van de AFM houdt.
+
+### Rekensom, bijgesteld
+
+De eerdere schatting van € 1,40 per handboek ging uit van een vinkje dat direct geld oplevert. Met doorklikken ligt het lager. Een eigen inschatting, niet gemeten: € 0,50 tot € 1 per handboek als er een offerteformulier in de stroom zit, anders eerder € 0,10 tot € 0,30. Voor € 10.000 per maand zijn dat 10.000 tot 20.000 handboeken per maand in het gunstige geval.
+
+### Awin
+
+Kit-72 is toegevoegd als tweede site aan Awin-account 2996923; de Britse watersite in dat account is niet aangeraakt. De aanvraag bij ration1.de staat nog open. Beide Awin-accounts hebben het Verenigd Koninkrijk als hoofdregio en een beschrijving van de watersite; Nederlandse adverteerders zien dat bij hun beoordeling.
+
+Aangemeld op 17 november 2026, alle vier in afwachting van goedkeuring: Univé NL, EcoFlow NL, ALLPOWERS NL en Overstappen NL. Voor Slimster, WoonVeilig en het personenalarm is een Daisycon-account nodig; dat is er nog niet.
+
+## Fase 1: het gratis handboek op de site (17 november 2026)
+
+Gebouwd op verzoek van de eigenaar: het handboek is gratis, in ruil voor een e-mailadres.
+
+### Hoe het loopt
+
+1. **Aanvragen** op `/nl/noodhandboek/` (of op een gemeentepagina): postcode, huisnummer, huishouden en e-mailadres. `api/handbook-request.js` controleert bij PDOK dat het adres precies bestaat en mailt een persoonlijke link.
+2. **Openen.** De link leidt naar `/nl/noodhandboek/mijn/`. Die pagina stuurt de sleutel uit de link naar `api/handbook.js`, dat op dat moment alle gegevens ophaalt en het handboek van vier pagina's teruggeeft. Lokaal duurt dat ongeveer zes seconden.
+3. **Printen of bewaren** met de knop bovenaan. Er wordt geen pdf op de server gemaakt; de browser doet dat.
+
+### Privacy, zoals gebouwd
+
+- Adres en huishouden worden nergens opgeslagen. Ze zitten versleuteld (AES-256-GCM) in de link.
+- De sleutel staat achter het hekje in de link. Dat deel wordt niet meegestuurd bij het opvragen van de pagina en komt dus niet in statistieken of serverlogs.
+- Het e-mailadres gaat alleen naar de lijst als de aanvrager het vakje voor tips en herinneringen aanvinkt. Dat vakje staat uit. Dit is de voorzichtige keuze: het handboek hangt niet af van toestemming voor e-mail. Wie het vakje verplicht wil maken, moet dat eerst juridisch laten toetsen.
+- De privacypagina beschrijft dit, inclusief de diensten waar de coördinaten naartoe gaan.
+
+### Wat nog een proef blijft
+
+- **De databronnen voor kaart, punten in de buurt en routes** zijn openbare diensten van OpenStreetMap, Photon en OSRM. Die zijn bedoeld voor licht gebruik. Bij de huidige bezoekersaantallen is dat geen probleem; bij duizenden handboeken per maand moeten de punten in eigen beheer komen, zoals het plan al zei.
+- **Verwachte waterdiepte** ontbreekt nog steeds.
+- Het handboek draagt daarom het label "bèta".
+
+## Pagina's per gemeente (17 november 2026)
+
+Voor het zoekverkeer: `/nl/noodplan/` met een pagina voor elk van de 342 gemeenten. `handbook/scripts/gemeenten.mjs` bouwt de gegevens (`src/data/gemeenten-nl.json`) uit dezelfde bronnen als het handboek.
+
+Per gemeente staat er: de rampenzender met alle FM-frequenties en het DAB-blok, de veiligheidsregio met website, de twee dichtstbijzijnde spoedeisende hulpen, het waterschap, en een steekproef van zestien punten bij woningen die laat zien welk deel in overstromingsrisicogebied ligt en tussen welke hoogtes het maaiveld ligt. Elke pagina heeft het aanvraagformulier voor het handboek, vier vragen met antwoord (ook als gestructureerde gegevens voor Google) en links naar de buurgemeenten.
+
+De rampenzenders en frequenties komen van Denk Vooruit; de websites van alle 25 veiligheidsregio's zijn stuk voor stuk geopend en gecontroleerd.
+

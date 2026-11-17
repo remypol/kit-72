@@ -174,5 +174,15 @@
       "destination": "/es/",
       "permanent": false
     }
-  ]
+  ],
+  "functions": {
+    "api/handbook.js": {
+      "includeFiles": "handbook/{data,lib,pages}/**",
+      "maxDuration": 120
+    },
+    "api/handbook-request.js": {
+      "includeFiles": "handbook/{data,lib}/**",
+      "maxDuration": 30
+    }
+  }
 }

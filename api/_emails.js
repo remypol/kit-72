@@ -39,6 +39,25 @@ const COPY = {
   },
 };
 
+/** The email that delivers the personal handbook link (Dutch only for now). */
+export function handbookEmail(label, url) {
+  const lead = `Je noodhandboek voor ${label} staat klaar. Het wordt gemaakt op het moment dat je het opent, met de gegevens van die dag.`;
+  const how = 'Open het op een computer of telefoon en kies "Print of bewaar als pdf". Bewaar deze e-mail: met dezelfde link maak je over een halfjaar een nieuwe versie.';
+  const privacy = 'Je adres staat versleuteld in de link en wordt niet door ons bewaard.';
+  const html = shell({
+    locale: 'nl',
+    preheader: 'Vier pagina\u2019s voor jouw adres, klaar om te printen.',
+    heading: 'Je noodhandboek staat klaar',
+    body: p(esc(lead)) + button(url, 'Open mijn noodhandboek') + p(esc(how)) + p(esc(privacy), { soft: true, small: true }),
+    footer: `Je ontvangt deze e-mail omdat dit adres is ingevuld op kit-72.com. ${footLink(siteUrl() + PATHS.nl.privacy, 'Privacy')}`,
+  });
+  return {
+    subject: `Je noodhandboek voor ${label}`,
+    html,
+    text: `${lead}\n\nOpen mijn noodhandboek: ${url}\n\n${how}\n\n${privacy}`,
+  };
+}
+
 export function confirmEmail(sub, confirmUrl) {
   const c = COPY[sub.locale];
   const html = shell({

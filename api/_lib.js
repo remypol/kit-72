@@ -11,7 +11,7 @@
  * Required env: RESEND_API_KEY, SUBSCRIBE_SECRET, EMAIL_FROM
  * Optional env: RESEND_SEGMENT_ID, SITE_URL
  */
-import { createHmac, timingSafeEqual } from 'node:crypto';
+import { createCipheriv, createDecipheriv, createHash, createHmac, randomBytes, timingSafeEqual } from 'node:crypto';
 
 export const LOCALES = ['nl', 'de', 'es'];
 export const TOKEN_MAX_AGE_MS = 7 * 24 * 60 * 60 * 1000;
@@ -55,6 +55,37 @@ export function verify(token, secret = process.env.SUBSCRIBE_SECRET, now = Date.
   return payload;
 }
 
+/**
+ * Sealed tokens for the handbook link. Unlike sign(), the payload is
+ * encrypted (AES-256-GCM), because it holds a home address and the link sits
+ * in a mailbox. The key is derived from SUBSCRIBE_SECRET.
+ */
+const sealKey = (secret) => createHash('sha256').update(`${secret}:handbook`).digest();
+export const HANDBOOK_LINK_MAX_AGE_MS = 400 * 24 * 60 * 60 * 1000;
+
+export function seal(payload, secret = process.env.SUBSCRIBE_SECRET) {
+  if (!secret) throw new Error('SUBSCRIBE_SECRET is not set');
+  const iv = randomBytes(12);
+  const cipher = createCipheriv('aes-256-gcm', sealKey(secret), iv);
+  const body = Buffer.concat([cipher.update(JSON.stringify(payload), 'utf8'), cipher.final()]);
+  return Buffer.concat([iv, cipher.getAuthTag(), body]).toString('base64url');
+}
+
+export function unseal(token, maxAgeMs = HANDBOOK_LINK_MAX_AGE_MS, secret = process.env.SUBSCRIBE_SECRET, now = Date.now()) {
+  if (!secret || typeof token !== 'string' || token.length > 2000) return null;
+  try {
+    const raw = Buffer.from(token, 'base64url');
+    if (raw.length < 29) return null;
+    const decipher = createDecipheriv('aes-256-gcm', sealKey(secret), raw.subarray(0, 12));
+    decipher.setAuthTag(raw.subarray(12, 28));
+    const payload = JSON.parse(Buffer.concat([decipher.update(raw.subarray(28)), decipher.final()]).toString('utf8'));
+    if (typeof payload.ts !== 'number' || now - payload.ts > maxAgeMs) return null;
+    return payload;
+  } catch {
+    return null;
+  }
+}
+
 const EMAIL_RE = /^[^\s@<>"]+@[^\s@<>"]+\.[a-z]{2,}$/i;
 const int = (v, min, max, dflt) => {
   const n = Number.parseInt(v, 10);
@@ -75,6 +106,17 @@ export function parseSubscription(input) {
     pets: int(input.pets, 0, 12, 0),
     source: String(input.source || 'unknown').replace(/[^a-z0-9_-]/gi, '').slice(0, 40) || 'unknown',
   };
+}
+
+/** Validates the handbook form. Returns null if unusable. Dutch addresses only. */
+export function parseHandbookRequest(input) {
+  const sub = parseSubscription({ ...input, locale: 'nl', source: 'handbook' });
+  if (!sub) return null;
+  const postcode = String(input.postcode || '').replace(/\s+/g, '').toUpperCase();
+  const number = String(input.number || '').trim();
+  const suffix = String(input.suffix || '').replace(/[^a-z0-9]/gi, '').toUpperCase().slice(0, 6);
+  if (!/^\d{4}[A-Z]{2}$/.test(postcode) || !/^\d{1,5}$/.test(number)) return { ...sub, addressError: true };
+  return { ...sub, postcode, number, suffix, tips: input.tips === true };
 }
 
 export async function resend(path, body) {

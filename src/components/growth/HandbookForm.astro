@@ -1,0 +1,260 @@
+---
+/**
+ * Request form for the free personal handbook (Dutch addresses only).
+ * Posts to /api/handbook-request, which checks the address and emails a
+ * personal link. Nothing is stored; see api/handbook-request.js.
+ */
+import { routes } from '../../data/site';
+
+interface Props {
+  /** where the form sits, for analytics (e.g. "landing", "gemeente") */
+  source: string;
+  title?: string;
+  body?: string;
+}
+
+const {
+  source,
+  title = 'Vraag je handboek aan',
+  body = 'Vul je adres en huishouden in. Je krijgt een e-mail met een persoonlijke link; het handboek wordt gemaakt op het moment dat je hem opent.',
+} = Astro.props;
+const id = `hb-${source}`;
+---
+
+<section class="hb" data-handbook-form data-source={source} aria-labelledby={`${id}-title`}>
+  <h2 id={`${id}-title`} class="hb__title">{title}</h2>
+  <p class="hb__body">{body}</p>
+  <form class="hb__form" novalidate>
+    <div class="hb__row hb__row--address">
+      <label class="hb__field">
+        <span>Postcode</span>
+        <input name="postcode" type="text" autocomplete="postal-code" inputmode="text" maxlength="7" placeholder="1234 AB" required />
+      </label>
+      <label class="hb__field hb__field--small">
+        <span>Huisnummer</span>
+        <input name="number" type="text" inputmode="numeric" maxlength="5" placeholder="12" required />
+      </label>
+      <label class="hb__field hb__field--small">
+        <span>Toevoeging</span>
+        <input name="suffix" type="text" maxlength="6" placeholder="A" autocomplete="off" />
+      </label>
+    </div>
+    <div class="hb__row">
+      <label class="hb__field hb__field--small">
+        <span>Volwassenen</span>
+        <input name="adults" type="number" min="1" max="12" value="2" inputmode="numeric" />
+      </label>
+      <label class="hb__field hb__field--small">
+        <span>Kinderen</span>
+        <input name="children" type="number" min="0" max="12" value="0" inputmode="numeric" />
+      </label>
+      <label class="hb__field hb__field--small">
+        <span>Huisdieren</span>
+        <input name="pets" type="number" min="0" max="12" value="0" inputmode="numeric" />
+      </label>
+    </div>
+    <label class="hb__field">
+      <span>E-mailadres</span>
+      <input name="email" type="email" autocomplete="email" inputmode="email" placeholder="naam@voorbeeld.nl" required />
+    </label>
+    <!-- honeypot: hidden from people, filled by bots -->
+    <input class="hb__hp" type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" />
+    <label class="hb__check">
+      <input type="checkbox" name="tips" />
+      <span>Stuur me ook drie korte tips en twee keer per jaar een herinnering om mijn handboek en voorraad na te lopen.</span>
+    </label>
+    <button class="btn btn-primary btn-lg hb__button" type="submit" data-label="Stuur mij de link" data-sending="Adres controleren…">Stuur mij de link</button>
+    <p class="hb__status" role="status" aria-live="polite"></p>
+    <p class="hb__privacy">
+      Je adres wordt alleen gebruikt om het handboek te maken en wordt niet bewaard. <a href={routes.nl.privacy}>Privacy</a>.
+    </p>
+  </form>
+</section>
+
+<style>
+  .hb {
+    background: var(--color-deep);
+    color: #fff;
+    border-radius: var(--radius-lg);
+    padding: var(--space-6);
+  }
+  @media (min-width: 640px) {
+    .hb {
+      padding: var(--space-8);
+    }
+  }
+  .hb__title {
+    color: #fff;
+    font-size: clamp(1.35rem, 2.4vw, 1.7rem);
+    margin-bottom: var(--space-2);
+  }
+  .hb__body {
+    color: #cfe3d7;
+    margin-bottom: var(--space-5);
+  }
+  .hb__form {
+    display: grid;
+    gap: var(--space-4);
+  }
+  .hb__row {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: var(--space-3);
+  }
+  .hb__row--address {
+    grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr) minmax(0, 1fr);
+  }
+  .hb__field {
+    display: grid;
+    gap: var(--space-1);
+    font-weight: 650;
+    font-size: 0.95rem;
+  }
+  .hb__field input {
+    width: 100%;
+    min-height: 48px;
+    padding: 0 var(--space-3);
+    font: inherit;
+    font-size: 16px;
+    font-weight: 400;
+    color: var(--color-text-primary);
+    background: #fff;
+    border: 2px solid #fff;
+    border-radius: var(--radius-md);
+  }
+  .hb__field input:focus-visible,
+  .hb__check input:focus-visible {
+    outline: 3px solid var(--color-signal);
+    outline-offset: 2px;
+  }
+  .hb__field input[aria-invalid='true'] {
+    border-color: #ffb4a8;
+  }
+  .hb__hp {
+    position: absolute;
+    left: -9999px;
+    width: 1px;
+    height: 1px;
+    opacity: 0;
+  }
+  .hb__check {
+    display: flex;
+    gap: var(--space-3);
+    align-items: flex-start;
+    font-size: 0.95rem;
+    color: #e6f1ea;
+    cursor: pointer;
+  }
+  .hb__check input {
+    width: 20px;
+    height: 20px;
+    margin-top: 2px;
+    accent-color: var(--color-signal);
+    flex: none;
+  }
+  .hb__button {
+    justify-self: start;
+  }
+  .hb__status {
+    font-weight: 650;
+    min-height: 1.5em;
+  }
+  .hb__status[data-state='ok'] {
+    color: var(--color-signal);
+  }
+  .hb__status[data-state='error'] {
+    color: #ffc9bf;
+  }
+  .hb__privacy {
+    font-size: 0.85rem;
+    color: #b9d2c4;
+  }
+  .hb__privacy a {
+    color: inherit;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+  .hb[data-done] .hb__row,
+  .hb[data-done] .hb__field,
+  .hb[data-done] .hb__check,
+  .hb[data-done] .hb__button,
+  .hb[data-done] .hb__privacy {
+    display: none;
+  }
+  @media print {
+    .hb {
+      display: none;
+    }
+  }
+</style>
+
+<script>
+  const EMAIL_RE = /^[^\s@<>"]+@[^\s@<>"]+\.[a-z]{2,}$/i;
+  const ERRORS: Record<string, string> = {
+    invalid_address: 'Vul een postcode in zoals 1234 AB en een huisnummer.',
+    address_not_found: 'Dit adres vinden we niet. Controleer postcode, huisnummer en toevoeging.',
+    invalid_email: 'Vul een geldig e-mailadres in.',
+    lookup_failed: 'Het adres opzoeken lukt nu niet. Probeer het over een minuut opnieuw.',
+    send_failed: 'De e-mail versturen lukt nu niet. Probeer het over een minuut opnieuw.',
+    not_configured: 'De e-mail versturen lukt nu niet. Probeer het later opnieuw.',
+  };
+
+  document.querySelectorAll<HTMLElement>('[data-handbook-form]').forEach((root) => {
+    const form = root.querySelector('form')!;
+    const field = (name: string) => form.querySelector<HTMLInputElement>(`input[name=${name}]`)!;
+    const button = form.querySelector<HTMLButtonElement>('button')!;
+    const status = form.querySelector<HTMLElement>('.hb__status')!;
+    const say = (state: 'ok' | 'error' | '', text = '') => {
+      status.dataset.state = state;
+      status.textContent = text;
+    };
+    const invalid = (input: HTMLInputElement, text: string) => {
+      input.setAttribute('aria-invalid', 'true');
+      input.focus();
+      say('error', text);
+    };
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      form.querySelectorAll('[aria-invalid]').forEach((el) => el.removeAttribute('aria-invalid'));
+      const postcode = field('postcode').value.replace(/\s+/g, '').toUpperCase();
+      const number = field('number').value.trim();
+      const email = field('email').value.trim();
+      if (!/^\d{4}[A-Z]{2}$/.test(postcode)) return invalid(field('postcode'), 'Vul een postcode in zoals 1234 AB.');
+      if (!/^\d{1,5}$/.test(number)) return invalid(field('number'), 'Vul je huisnummer in, alleen het cijfer.');
+      if (!EMAIL_RE.test(email)) return invalid(field('email'), ERRORS.invalid_email);
+
+      button.disabled = true;
+      button.textContent = button.dataset.sending || '';
+      say('');
+      try {
+        const res = await fetch('/api/handbook-request', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            postcode,
+            number,
+            suffix: field('suffix').value.trim(),
+            adults: field('adults').value,
+            children: field('children').value,
+            pets: field('pets').value,
+            email,
+            tips: field('tips').checked,
+            website: field('website').value,
+          }),
+        });
+        const data = await res.json().catch(() => ({}));
+        if (!res.ok) throw new Error(data.error || String(res.status));
+        root.setAttribute('data-done', '');
+        say('ok', `De link is onderweg naar ${email}${data.label ? `, voor ${data.label}` : ''}. Geen e-mail binnen een paar minuten? Kijk dan in je map met ongewenste e-mail.`);
+        window.gtag?.('event', 'generate_lead', { source: `handbook_${root.dataset.source}`, locale: 'nl' });
+      } catch (err) {
+        const code = err instanceof Error ? err.message : '';
+        if (code === 'address_not_found' || code === 'invalid_address') field('postcode').setAttribute('aria-invalid', 'true');
+        say('error', ERRORS[code] || 'Er ging iets mis. Probeer het over een minuut opnieuw.');
+        button.disabled = false;
+        button.textContent = button.dataset.label || '';
+      }
+    });
+  });
+</script>

@@ -84,6 +84,10 @@ export default defineConfig({
         if (page.includes('/aangemeld/') || page.includes('/angemeldet/') || page.includes('/suscrito/')) {
           return false;
         }
+        // The page a personal handbook link opens on
+        if (page.includes('/noodhandboek/mijn/')) {
+          return false;
+        }
         return true;
       },
       // Custom sitemap serialization for better SEO
@@ -108,6 +112,16 @@ export default defineConfig({
         else if (url.includes('/kit-de-emergencia/') || url.includes('/kit-72-horas/') || url.includes('/comprar-kit-emergencia/') || url.includes('/noodpakket-kopen/') || url.includes('/notfallrucksack-kaufen/')) {
           priority = 0.9;
           changefreq = 'weekly';
+        }
+        // Free personal handbook and the hub of municipality pages (NL)
+        else if (url.endsWith('/nl/noodhandboek/') || url.endsWith('/nl/noodplan/')) {
+          priority = 0.9;
+          changefreq = 'weekly';
+        }
+        // One page per municipality (NL)
+        else if (url.includes('/nl/noodplan/')) {
+          priority = 0.6;
+          changefreq = 'monthly';
         }
         // Pillar content (NL)
         else if (url.includes('/noodpakket-samenstellen/') || url.includes('/noodpakket-72-uur/')) {

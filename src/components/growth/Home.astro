@@ -76,6 +76,18 @@ const steppers = [
   </div>
 </section>
 
+{locale === 'nl' && (
+  <section class="hbband">
+    <div class="wrap hbband__inner">
+      <div>
+        <h2 class="hbband__title">Nieuw: een gratis noodhandboek voor jouw adres</h2>
+        <p class="hbband__body">Vier pagina's die alleen voor jouw huis kloppen: hoogte, overstromingsrisico, spoedeisende hulp, rampenzender en wat je het eerste uur doet.</p>
+      </div>
+      <a class="btn btn-primary btn-lg" href="/nl/noodhandboek/">Maak mijn handboek</a>
+    </div>
+  </section>
+)}
+
 <section class="why">
   <div class="wrap why__grid">
     <h2 class="why__title">{c.whyTitle}</h2>
@@ -189,6 +201,28 @@ const steppers = [
 </section>
 
 <style>
+  .hbband {
+    background: var(--color-deep);
+    color: #fff;
+  }
+  .hbband__inner {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-6);
+    padding-block: var(--space-8);
+  }
+  .hbband__title {
+    color: #fff;
+    font-size: clamp(1.3rem, 2.6vw, 1.8rem);
+  }
+  .hbband__body {
+    color: #cfe3d7;
+    margin-top: var(--space-2);
+    max-width: 58ch;
+  }
+
   .wrap {
     max-width: 72rem;
     margin-inline: auto;

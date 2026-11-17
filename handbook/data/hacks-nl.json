@@ -1,0 +1,376 @@
+{
+  "_note": "Tricks for handbook/pages/hacks.mjs. Not official advice. Each was vetted on two questions: does it work, and can it hurt someone who follows it as written. 'basis' says what the check rests on: 'authority' (an agency, utility, fire service or extension service confirms the mechanism or the condition), 'firsthand' (accounts of long outages) or 'common' (basic physics or electronics, no source needed). 'when' limits an entry to flood-zone addresses, others, or households with children or pets.",
+  "checked": "2026-11-17",
+  "intro": "Geen officieel advies. Wel getoetst op twee vragen: werkt het, en kan het kwaad als je het doet zoals het hier staat?",
+  "featured": [
+    {
+      "fig": "frozen",
+      "title": "Vries nu flessen water in",
+      "text": "Een volle vriezer blijft langer koud. Bij uitval heb je koelelementen en later drinkwater. Niet tot de rand vullen en geen glas: ijs zet uit.",
+      "basis": "authority",
+      "src": [
+        "https://www.foodsafetynews.com/2017/03/usda-food-safety-tips-for-areas-affected-by-the-northeast-storm",
+        "https://www.voedingscentrum.nl/nl/service/vraag-en-antwoord/boodschappen-doen/moet-ik-een-noodpakket-met-eten-en-drinken-in-huis-hebben.aspx"
+      ]
+    },
+    {
+      "fig": "lantern",
+      "title": "Maak een lamp van een fles",
+      "text": "Zet een zaklamp of hoofdlamp tegen een volle fles water of een melkpak. Het licht spreidt zich door de kamer. Op een wit plafond richten werkt ook.",
+      "basis": "common",
+      "src": []
+    },
+    {
+      "fig": "haybox",
+      "title": "Kook door in een dekbed",
+      "text": "Laat rijst, pasta, aardappels of soep vijf minuten doorkoken. Deksel erop, pan in een dekbed, weg van het fornuis. Eet het binnen een paar uur of kook het eerst weer op.",
+      "basis": "authority",
+      "src": [
+        "https://www.lowimpact.org/posts/haybox-retained-heat-cooking-and-food-safety/"
+      ]
+    },
+    {
+      "fig": "coin",
+      "title": "Munt op een bevroren beker",
+      "text": "Ligt de munt na een storing onderin het ijs? Dan is alles ontdooid geweest: gooi bederfelijk eten weg. Ligt hij nog bovenop, dan bewijst dat niets.",
+      "basis": "authority",
+      "src": [
+        "https://brunswick.ces.ncsu.edu/news/coin-in-the-cup-risky/"
+      ]
+    }
+  ],
+  "groups": [
+    {
+      "title": "Water en toilet",
+      "items": [
+        {
+          "title": "Bad vol? Check de stop, doe de deur dicht",
+          "text": "Een lekkende stop merk je pas de volgende ochtend. Met kleine kinderen in huis blijft de badkamerdeur dicht. Drinkwater bewaar je in pannen met een deksel.",
+          "basis": "firsthand",
+          "src": [
+            "https://apartmentprepper.com/what-texas-preppers-found-out-during-the-deep-freeze"
+          ]
+        },
+        {
+          "title": "Kook één keer, vul de thermoskannen",
+          "text": "Dan heb je de hele dag heet water zonder opnieuw te stoken.",
+          "basis": "firsthand",
+          "src": [
+            "https://frontliner.ua/en/how-to-stay-warm-in-an-apartment-during-outages/"
+          ]
+        },
+        {
+          "title": "Emmer met dubbele vuilniszak als noodtoilet",
+          "text": "Strooi er na elk gebruik zaagsel, kattenbakkorrels of versnipperd papier over. Knoop de zak elke dag dicht.",
+          "basis": "authority",
+          "src": [
+            "https://bijlagen.nos.nl/artikel-24778431/260226_digitaal_toegankelijke_versie_folder_noodsituatie_Waterschap_Zuiderzeeland.pdf",
+            "https://www.phlush.org/emergency-sanitation/"
+          ]
+        },
+        {
+          "title": "Begane grond? Handdoek over de wc-pot",
+          "text": "Bril en deksel dicht, iets zwaars erop. Zo komt er geen rioolwater omhoog als de gemalen stilvallen. Spoel zo weinig mogelijk door.",
+          "basis": "authority",
+          "src": [
+            "https://bijlagen.nos.nl/artikel-24778431/260226_digitaal_toegankelijke_versie_folder_noodsituatie_Waterschap_Zuiderzeeland.pdf"
+          ]
+        },
+        {
+          "title": "Papieren borden en handgel",
+          "text": "Geen afwas, dus geen water kwijt aan de vaat.",
+          "basis": "firsthand",
+          "src": [
+            "https://homesteadsurvivalsite.com/power-outage-hacks"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Koud en eten",
+      "items": [
+        {
+          "title": "Eerst de koelkast, dan de vriezer, dan de kast",
+          "text": "Eet in die volgorde. Wat je echt wilt bewaren gaat in één keer naar een koelbox.",
+          "basis": "firsthand",
+          "src": [
+            "https://clemson.edu/extension/food/canning/canning-tips/52dealing-with-power-outages.html"
+          ]
+        },
+        {
+          "title": "Vriest het? Maak buiten ijs",
+          "text": "Zet bakken water buiten en leg het ijs in de koelkast of koelbox. Het eten zelf zet je niet buiten: zon en dieren.",
+          "basis": "authority",
+          "src": [
+            "https://www.foodsafetynews.com/2017/03/usda-food-safety-tips-for-areas-affected-by-the-northeast-storm"
+          ]
+        },
+        {
+          "title": "Steek het gasfornuis aan met een lucifer",
+          "text": "Eerst de vlam bij de brander, dan het gas laag open. Raam op een kier, blijf erbij. De oven lukt zo niet.",
+          "basis": "authority",
+          "src": [
+            "https://products.geappliances.com/appliance/gea-support-search-content?contentId=19226",
+            "https://www.rivm.nl/ggd-richtlijn-mmk-koolmonoxide/voorlichting-koolmonoxide/risicos-verbrandingstoestellen"
+          ]
+        },
+        {
+          "title": "Hang een koolmonoxidemelder op batterijen",
+          "text": "Overal waar een vlam brandt. Koolmonoxide ruik je niet.",
+          "basis": "authority",
+          "src": [
+            "https://www.cdc.gov/carbon-monoxide/about/index.html",
+            "https://www.rivm.nl/ggd-richtlijn-mmk-koolmonoxide/voorlichting-koolmonoxide/risicos-verbrandingstoestellen"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Licht en stroom",
+      "items": [
+        {
+          "title": "Zet uit wat aan stond, laat één lamp aan",
+          "text": "Kookplaat, oven, strijkijzer. Aan de lamp zie je dat de stroom terug is; zet apparaten daarna één voor één aan.",
+          "basis": "authority",
+          "src": [
+            "https://www.ready.gov/power-outages"
+          ]
+        },
+        {
+          "title": "Hoofdlamp in plaats van zaklamp",
+          "text": "Twee handen vrij. Geef alle lampen één vaste plek; in het donker vind je niets terug.",
+          "basis": "firsthand",
+          "src": [
+            "https://survivalblog.com/c-tue-mar-9/"
+          ]
+        },
+        {
+          "title": "Breekstaafjes voor kinderen en de trap",
+          "text": "Of led-waxinelichtjes. Licht zonder vlam.",
+          "basis": "firsthand",
+          "src": [
+            "https://homesteadsurvivalsite.com/power-outage-hacks"
+          ]
+        },
+        {
+          "title": "Je laptop is een powerbank",
+          "text": "Een volle laptop laadt je telefoon een paar keer op.",
+          "basis": "common",
+          "src": []
+        },
+        {
+          "title": "Powerstation: eerst telefoons en één lamp",
+          "text": "Nooit een waterkoker of kachel; die trekken hem in minuten leeg.",
+          "basis": "common",
+          "src": []
+        },
+        {
+          "title": "De auto is lader en radio",
+          "text": "Buiten in de open lucht, nooit in de garage. Houd de tank halfvol: pompen werken niet zonder stroom.",
+          "basis": "authority",
+          "src": [
+            "https://www.cdc.gov/carbon-monoxide/about/index.html",
+            "https://www.popsci.com/story/diy/how-to-stay-warm-without-power/"
+          ]
+        },
+        {
+          "title": "Zoek nu het rode koord van de garagedeur",
+          "text": "Daarmee ontgrendel je hem met de hand. Alleen trekken als de deur helemaal dicht is.",
+          "basis": "authority",
+          "src": [
+            "https://store.geniecompany.com/blogs/genie-blog/the-power-is-out-how-to-open-your-garage-door-manually"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Warm blijven",
+      "items": [
+        {
+          "title": "Zet een tent op in de woonkamer",
+          "text": "Of bouw een hut van dekens over het bed. Een kleine ruimte warm je op met je eigen lichaam. Geen vlam erin.",
+          "basis": "firsthand",
+          "src": [
+            "https://www.apr.org/2026-01-26/ukrainians-are-sharing-hacks-online-on-how-to-survive-winter-power-cuts",
+            "https://www.popsci.com/story/diy/how-to-stay-warm-without-power/"
+          ]
+        },
+        {
+          "title": "Kruik: heet, niet kokend",
+          "text": "In een handdoek gewikkeld blijft hij uren warm.",
+          "basis": "firsthand",
+          "src": [
+            "https://www.apr.org/2026-01-26/ukrainians-are-sharing-hacks-online-on-how-to-survive-winter-power-cuts"
+          ]
+        },
+        {
+          "title": "Zon erin, schemer eruit",
+          "text": "Gordijnen overdag open aan de zonkant, dicht zodra het donker wordt. Een handdoek voor de kier onder de deur.",
+          "basis": "firsthand",
+          "src": [
+            "https://www.popsci.com/story/diy/how-to-stay-warm-without-power/"
+          ]
+        },
+        {
+          "title": "Ga droog de nacht in",
+          "text": "Schone droge kleren, muts en sokken. Schuif het bed een stuk van de buitenmuur af.",
+          "basis": "firsthand",
+          "src": [
+            "https://frontliner.ua/en/how-to-stay-warm-in-an-apartment-during-outages/"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Contact en geld",
+      "items": [
+        {
+          "title": "Stuur een bericht, bel niet",
+          "text": "Een sms vraagt minder van het netwerk en van je batterij.",
+          "basis": "authority",
+          "src": [
+            "https://www.fcc.gov/fcc-fema-emergency-tips"
+          ]
+        },
+        {
+          "title": "Bewaar klein geld",
+          "text": "Briefjes van 5 en 10 en munten: wisselen lukt niet.",
+          "basis": "authority",
+          "src": [
+            "https://www.dnb.nl/betalen/contant-geld-in-jouw-noodpakket/"
+          ]
+        },
+        {
+          "title": "Spreek één verzamelplek af",
+          "text": "En één contactpersoon buiten de regio die iedereen belt. Schrijf het op in je noodplan op de volgende pagina.",
+          "basis": "firsthand",
+          "src": [
+            "https://survivalblog.com/c-tue-mar-9/"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Als het water komt",
+      "when": "flood",
+      "items": [
+        {
+          "title": "Zet de auto vroeg op hoger gelegen grond",
+          "text": "Jouw maaiveld ligt op {elevation}. Doe het voordat het water er is, niet erna.",
+          "basis": "authority",
+          "src": [
+            "https://derby.gov.uk/environment-and-planning/flooding-land-drainage/before-during-after-a-flood/"
+          ]
+        },
+        {
+          "title": "Fotografeer elke kamer",
+          "text": "Voor de verzekering. Papieren en foto's gaan naar boven, in dichte zakjes.",
+          "basis": "authority",
+          "src": [
+            "https://derby.gov.uk/environment-and-planning/flooding-land-drainage/before-during-after-a-flood/"
+          ]
+        },
+        {
+          "title": "Vuilniszakken met tuinaarde als zandzak",
+          "text": "Met een stuk plastic eronder houden ze ondiep water even tegen. Reken op zes zakken voor één deur. Staat het water al binnen, dan helpt het niet meer.",
+          "basis": "authority",
+          "src": [
+            "https://assets.publishing.service.gov.uk/government/uploads/system/uploads/attachment_data/file/892489/Sandbags-and-how-to-use-them-properly-for-flood-protection.pdf"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Als je weg moet",
+      "when": "noflood",
+      "items": [
+        {
+          "title": "Fotografeer elke kamer",
+          "text": "Voor de verzekering. Een halve minuut per kamer is genoeg.",
+          "basis": "authority",
+          "src": [
+            "https://derby.gov.uk/environment-and-planning/flooding-land-drainage/before-during-after-a-flood/"
+          ]
+        },
+        {
+          "title": "Hang een briefje op de deur",
+          "text": "Wie er woont, waar je heen bent en je telefoonnummer.",
+          "basis": "firsthand",
+          "src": []
+        }
+      ]
+    }
+  ],
+  "dont": [
+    {
+      "title": "Kachel van bloempot en waxinelichtjes",
+      "why": "Geeft geen extra warmte; de pot kan barsten en het kaarsvet kan vlam vatten.",
+      "src": [
+        "https://www.nhnieuws.nl/nieuws/310228/je-huis-op-een-alternatieve-manier-verwarmen-beter-van-niet-aldus-de-brandweer",
+        "https://nos.nl/l/2446168"
+      ]
+    },
+    {
+      "title": "Gasfornuis of oven als kachel",
+      "why": "Koolmonoxide. Een maaltijd koken met het raam op een kier kan wel.",
+      "src": [
+        "https://www.cdc.gov/carbon-monoxide/about/index.html",
+        "https://www.ready.gov/power-outages"
+      ]
+    },
+    {
+      "title": "Barbecue, campingbrander of aggregaat binnen",
+      "why": "Ook niet in de garage of op een dicht balkon: koolmonoxide.",
+      "src": [
+        "https://www.cdc.gov/carbon-monoxide/about/index.html",
+        "https://www.brandweer.nl/onderwerpen/barbecueen/"
+      ]
+    },
+    {
+      "title": "Motor laten draaien in de garage",
+      "why": "Ook met de garagedeur open: koolmonoxide.",
+      "src": [
+        "https://www.cdc.gov/carbon-monoxide/about/index.html"
+      ]
+    },
+    {
+      "title": "Aggregaat of accu op een stopcontact aansluiten",
+      "why": "Dat zet de kabel in de straat onder stroom: levensgevaarlijk voor monteurs en buren.",
+      "src": [
+        "https://archive.cdc.gov/www_cdc_gov/disasters/poweroutage/workersafety.html"
+      ]
+    },
+    {
+      "title": "Waardevolle spullen in de vaatwasser",
+      "why": "Die houdt water binnen, niet buiten.",
+      "src": [
+        "https://www.snopes.com/dishwasher-hurricane/"
+      ]
+    },
+    {
+      "title": "Drinken uit cv, radiator, waterbed of regenton",
+      "why": "Daar zitten chemicaliën of ziektekiemen in die je er niet uit kookt.",
+      "src": [
+        "https://www.cdc.gov/water-emergency/about/index.html",
+        "https://extension.oregonstate.edu/catalog/pub/em9285-s",
+        "https://bijlagen.nos.nl/artikel-24778431/260226_digitaal_toegankelijke_versie_folder_noodsituatie_Waterschap_Zuiderzeeland.pdf"
+      ]
+    },
+    {
+      "title": "Ontdooid eten keuren op geur of smaak",
+      "why": "Je ruikt en proeft niet of het koud is gebleven.",
+      "src": [
+        "https://brunswick.ces.ncsu.edu/news/coin-in-the-cup-risky/"
+      ]
+    }
+  ],
+  "leftOut": [
+    "Fridge food on the balcony: USDA advises against it; it only works with a thermometer in a closed, shaded box at fridge temperature, which most Dutch winter days do not give.",
+    "Blankets over the freezer: small gain, and a risk of overheating when the power returns.",
+    "Draining an electric storage boiler for drinking water: works (CDC), but needs the power off, cooling down and a drain most Dutch boilers do not have as a simple tap. Too fiddly to print safely.",
+    "Toilet cistern as drinking water: US sources conflict.",
+    "Bleach dosing: authorities give a dose, but it depends on the bleach strength and is too easy to get wrong from a printed line. The handbook says boil.",
+    "Heated bricks on the hob, and running a central-heating boiler from a power station: unsafe or unverified."
+  ],
+  "footer": "Deze trucs komen van mensen die lange storingen meemaakten (Texas 2021, Oekraïne, Spanje 2025) en uit preppergemeenschappen. Kit-72 heeft ze op 17 november 2026 getoetst; waar het kon aan een instantie als de CDC, de USDA, de brandweer of een waterschap. Spreekt een truc het officiële advies tegen, dan gaat het officiële advies voor. kit-72.com"
+}

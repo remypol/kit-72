@@ -118,3 +118,49 @@ What matters:
 
 - The owner wanted the line that every rich American has a shelter. Checked: the source is Reid Hoffman's estimate in The New Yorker (2017) that more than half of Silicon Valley billionaires have "apocalypse insurance", confirmed through Business Insider's report of it (the New Yorker page itself could not be fetched). The homepages now say that, with the source, instead of "every".
 - Handbook plan in docs/HANDBOEK-PLAN.md (Dutch). Probed the data sources with a test address in Rotterdam: PDOK geocoding and AHN elevation work in under half a second; live OpenStreetMap queries took 34 s; the nearest OSM "hospitals" were eye clinics; EU-wide elevation was 8 m off; the LIWO flood-depth service did not respond. Public shelters do not exist in the Netherlands, so that part of the idea is dropped.
+
+## 12. Handbook phase 0: proof for three addresses (2026-11-17)
+
+- Built `handbook/`: `node handbook/build.mjs "<address>"` geocodes with PDOK, reads elevation (AHN), flood-risk zone (Rijkswaterstaat) and safety region (CBS), finds nearby points and hospitals in OpenStreetMap, routes with OSRM, draws its own map from OSM ways and prints a one-page A4 PDF with headless Chrome. Output and cache are gitignored because they contain addresses.
+- Hand check on three addresses (a rural one near Apeldoorn, Rotterdam centre, Zutphen centre): address, water board, elevation, flood-risk zone, safety region, emergency broadcaster and outage number are right. **Emergency departments from OpenStreetMap were wrong in two of three**: Rotterdam lists a children's hospital first, Zutphen misses the hospital in town (not tagged as emergency in OSM; its emergency department is open 8:00 to 21:00 per a 2024 ministerial answer).
+- Fixed with RIVM's open data (2026 questionnaire answers per hospital, no use restrictions; the owner approved the download): `handbook/scripts/seh_from_rivm.py` builds `handbook/data/seh-nl.json` with 79 locations placed on their own address through PDOK, 3 of them closed at night. The page prints the quickest department by road and, if that one closes at night, the quickest that is always open. Re-checked: Rotterdam now gives Erasmus MC and Franciscus Gasthuis, Zutphen gives Gelre Zutphen (closed at night) and Deventer.
+- Things that broke on the way: all Overpass servers were down, so the code now uses the OSM map API plus Photon and Nominatim; AHN has no terrain value under buildings, so elevation is the median of a ring of points around the house; LIWO flood depth still unreachable.
+- Details and the check table are at the end of docs/HANDBOEK-PLAN.md.
+
+## 13. Handbook page 2: "Het eerste uur" (2026-11-17)
+
+- The owner asked for concrete first steps and tricks ("fill your bath right away") with good infographics. Added a second page: power outage (dark panel with a bath drawing and the household's bottles of drinking water, fridge and freezer bars), no tap water, a flood card or a "close windows and doors" card depending on the address, and a tick list for leaving.
+- A sub-agent checked 20 candidate claims against official Dutch sources (128 fetches). Sources per step are in `handbook/data/first-hour-sources.json`. Dropped for lack of a source: leave one lamp on, text instead of calling, drinking from the boiler or cistern. "Fill the bath" is not official advice for outages; it is kept with the reason that is official (pressure can drop, booster pumps in flats stop). The US 15/30/60 cm flood figures contradict the Dutch ones, so only the Dutch ones are printed.
+- `.page` now uses min-height so an over-full page spills onto a third sheet and the build warns; a fixed height hid overflow before.
+
+## 14. Handbook pages 3 and 4: tricks and the household plan (2026-11-17)
+
+- The owner pushed back on official-only advice: the tricks the government does not mention are the point. Kept page 2 official and added page 3 "Slimme trucs", labelled as not official, and page 4 with a "do not do this" list, write-in fields and a half-yearly checklist.
+- A sub-agent collected and vetted 46 tricks (88 fetches). The filter was two questions: does it work, and can it hurt someone following it as written. Changed by the vetting: the coin-on-ice trick only proves a thaw when the coin has sunk; hay-box cooking got a re-boil rule. Left out: fridge food on the balcony, blankets on the freezer, draining a storage boiler, cistern water, bleach dosing. `handbook/data/hacks-nl.json` records per trick what the check rests on and what was left out.
+- Layout: CSS columns did not balance in print and pushed the footer onto an extra sheet, so the three trick columns are now dealt out in code. The build expects exactly four sheets.
+
+## 15. Monetisation rethink and Awin (2026-11-17)
+
+- The owner rejected selling the handbook, B2B to estate agents and a kit subscription. Direction now: free handbook for an email address, revenue from partners. Selling raw personal data was advised against.
+- A sub-agent checked Dutch pay-per-lead and pay-per-sale programmes (107 fetches). Nearly all pay on a tracked click-out, not on a lead submitted from our form; Slimster is the exception. Public payouts range from EUR 3 to 90. Two facts that change the offers: flooding from primary defences is uninsurable for nearly all households, and most home batteries do not work in an outage.
+- Awin: the owner logged in; two publisher accounts exist (2996923 and 3091503), both set up for tapwater.uk. Added https://www.kit-72.com as a promotional space on 2996923 (sectors Home & Garden, Electronic Accessories); nothing else changed. The ration1.de application is still pending. Insurers on Awin hide commission rates until a publisher is accepted.
+- Details in docs/HANDBOEK-PLAN.md under "Verdienmodel".
+- Applied from Awin account 2996923, with kit-72.com as the promotional space, to Univé NL, EcoFlow NL, ALLPOWERS NL and Overstappen NL; all four show "Pending Approval". The first two messages mention the site's visitor count; the owner asked for a sales pitch without it, so the last two and the promotional-space description leave it out. No figures were invented.
+
+## 16. Free handbook live flow and municipality pages (2026-11-17)
+
+- The owner's instruction: carry on until everything is finished, include SEO, create pages and submit them in Search Console.
+- Free handbook: `/nl/noodhandboek/` (form), `api/handbook-request.js` (exact address check at PDOK, emails a personal link), `/nl/noodhandboek/mijn/` (opens the link), `api/handbook.js` (collects the facts and returns the four pages as HTML with a print button). The address is not stored; it is encrypted in the URL fragment of the link. The email address joins the Resend list only when the optional box is ticked.
+- Local test of both functions with Resend stubbed: 17 checks pass. On the Vercel preview (reached with `vercel curl`, preview-only test secret): address validation works and a full handbook comes back in 8.8 s. The preview has no Resend key (the production key is marked sensitive and cannot be copied), so sending the email was tested after going live instead.
+- Nationwide: all 25 safety regions with broadcaster, FM transmitters and DAB block (Denk Vooruit); each region's website opened and checked. Hospital place names tidied ("Hoorn Nh" and similar).
+- `handbook/scripts/gemeenten.mjs` builds `src/data/gemeenten-nl.json` for 342 municipalities. Things that went wrong on the way: the first run did its sampling one request at a time and took over 15 minutes; eleven municipalities got no safety region because the middle of the place lies in water (Lelystad, Urk, Hoorn and others) or in a Belgian enclave (Baarle-Nassau). Fixed by anchoring on the nearest address inside the municipality and by choosing the largest place where no place carries the municipality's name.
+- SEO pages: `/nl/noodplan/` and one page per municipality (343 URLs), each with the form, four questions as FAQ structured data and links to six neighbours. Sitemap now has 438 URLs. `scripts/seo_audit.py`: no long titles, no duplicate titles, no orphan pages, no hreflang problems.
+- Still a pilot: map, nearby points and routes come from public OpenStreetMap services meant for light use.
+
+
+## 17. Preview on the handbook page (2026-11-17)
+
+- The owner approved going live and asked for a preview that shows the handbook is personal.
+- `src/components/growth/HandbookPreview.astro`: page 1 for three town halls (Rotterdam, Almere, Vaals) with different households; a visitor switches between them and sees the five personal items change. The figures and images come from `handbook/scripts/samples.mjs` (needs Chrome and pdftoppm); only public buildings belong in that list. Municipality pages show a small page 1 next to the form.
+- Found while doing this: the sample image for page 1 was a wrong crop (parts of pages 2 and 3). The script now cuts the images from the pdf.
+- Fixed in the handbook: an address below sea level printed "-3,5 m onder NAP" (now "3,5 m onder NAP"), and a street that starts with a lower-case letter is capitalised in the heading.
