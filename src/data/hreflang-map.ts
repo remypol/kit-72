@@ -77,12 +77,13 @@ export const hreflangMap: Record<string, PageMapping> = {
     nl: '/nl/scenario/evacuatie/',
     de: '/de/szenarien/evakuierung/',
   },
-  // NL-specific scenarios (no ES equivalent)
   'scenario-flooding': {
+    es: '/es/escenarios/inundacion/',
     nl: '/nl/scenario/overstroming/',
     de: '/de/szenarien/hochwasser/',
   },
   'scenario-cyber-attack': {
+    es: '/es/escenarios/ciberataque/',
     nl: '/nl/scenario/cyberaanval/',
     de: '/de/szenarien/cyberangriff/',
   },
@@ -184,7 +185,18 @@ export const hreflangMap: Record<string, PageMapping> = {
     de: '/de/tools/energie-rechner/',
   },
 
+  // === OFFICIAL ADVICE (country-specific, paired where both exist) ===
+  'official-advice': {
+    nl: '/nl/denk-vooruit/',
+    de: '/de/bbk-notfallvorsorge/',
+  },
+
   // === LEGAL PAGES ===
+  'legal-identity': {
+    es: '/es/aviso-legal/',
+    nl: '/nl/colofon/',
+    de: '/de/impressum/',
+  },
   'legal-privacy': {
     es: '/es/privacidad/',
     nl: '/nl/privacy/',

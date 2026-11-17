@@ -34,19 +34,35 @@ const relatedItems = [
     icon: 'Calculator'
   }
 ];
+
+const faqs = [
+  {
+    question: 'Hoe lang kun je kraanwater bewaren?',
+    answer: 'Kraanwater in een schone, voedselveilige jerrycan ververs je ongeveer elk half jaar. Bewaar het koel en donker en schrijf de vuldatum op de jerrycan.',
+  },
+  {
+    question: 'Hoeveel water moet je opslaan per persoon?',
+    answer: 'De overheid adviseert 3 liter per persoon per dag. Voor 72 uur is dat 9 liter per persoon, dus 36 liter voor een gezin van vier.',
+  },
+  {
+    question: 'Waarin kun je drinkwater het beste opslaan?',
+    answer: 'Ongeopend flessenwater is het eenvoudigst. Voor kraanwater gebruik je een voedselveilige jerrycan van HDPE. Gebruik geen flessen waar melk, sap of chemicaliën in hebben gezeten.',
+  },
+];
 ---
 
 <BaseLayout
-  title="Water Opslaan — Kit-72"
-  description="Hoe je veilig drinkwater opslaat voor noodsituaties. Rijksoverheid-aanbevelingen voor 72 uur watervoorraad."
+  title="Water opslaan voor nood: hoeveel en hoe lang houdbaar"
+  description="Drinkwater opslaan voor noodsituaties: hoeveel liter per persoon, in welke flessen of jerrycans, hoe lang kraanwater houdbaar is en waar je het bewaart."
   locale="nl"
-  dateModified="2025-12-15"
+  faqData={faqs}
+  dateModified="2026-11-17"
   schemaType="Article"
 >
   <section class="py-16">
     <div class="max-w-3xl mx-auto px-4 sm:px-6">
-      <Breadcrumb items={[{ label: 'Gidsen', href: '/nl/gidsen/' }, { label: 'Water Opslaan' }]} class="mb-4" locale="nl" />
-      <h1 class="text-4xl font-bold mb-6">Water Opslaan</h1>
+      <Breadcrumb items={[{ label: 'Gidsen', href: '/nl/gidsen/' }, { label: 'Water opslaan' }]} class="mb-4" locale="nl" />
+      <h1 class="text-4xl font-bold mb-6">Water opslaan voor noodsituaties</h1>
 
       <div class="prose prose-lg">
         <p class="lead">
@@ -98,9 +114,30 @@ const relatedItems = [
           <li><strong>Vorstvrij</strong> — bevroren water kan containers beschadigen</li>
         </ul>
 
-        <h2>Houdbaarheid</h2>
+        <h2>Hoeveel water voor hoeveel mensen?</h2>
         <p>
-          Ongeopend flessenwater is praktisch onbeperkt houdbaar, maar voor optimale kwaliteit:
+          Voor 72 uur is het 9 liter per persoon. Een huishouden van twee heeft 18 liter nodig, een
+          gezin van vier 36 liter. Reken per huisdier ongeveer een liter extra. Dat zijn een paar
+          kratten flessen of twee jerrycans van 20 liter. Je precieze voorraad reken je uit met de
+          <a href="/nl/tools/water-calculator/">watercalculator</a>.
+        </p>
+
+        <h2>Hoe lang kun je kraanwater bewaren?</h2>
+        <p>
+          Kraanwater dat je zelf in een schone, voedselveilige jerrycan doet, ververs je ongeveer
+          elk half jaar. Het bederft niet van de ene op de andere dag, maar smaak en kwaliteit
+          lopen langzaam terug. Zo blijft het het langst goed:
+        </p>
+        <ul>
+          <li>Maak de jerrycan goed schoon en vul hem tot de rand</li>
+          <li>Sluit hem goed af en schrijf de vuldatum erop</li>
+          <li>Zet hem koel en donker weg</li>
+          <li>Gebruik het oude water bij het verversen voor de planten of om schoon te maken</li>
+        </ul>
+
+        <h2>Houdbaarheid in het kort</h2>
+        <p>
+          Ongeopend flessenwater blijft het langst goed:
         </p>
         <ul>
           <li><strong>Mineraalwater (ongeopend):</strong> 1-2 jaar optimaal, daarna nog drinkbaar</li>

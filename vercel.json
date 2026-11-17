@@ -65,6 +65,114 @@
       "source": "/es/escenarios/apagon-espana-2024",
       "destination": "/es/escenarios/apagon-espana-2025/",
       "permanent": true
+    },
+    {
+      "source": "/",
+      "has": [
+        {
+          "type": "header",
+          "key": "accept-language",
+          "value": "nl.*"
+        }
+      ],
+      "missing": [
+        {
+          "type": "query",
+          "key": "choose"
+        }
+      ],
+      "destination": "/nl/",
+      "permanent": false
+    },
+    {
+      "source": "/",
+      "has": [
+        {
+          "type": "header",
+          "key": "accept-language",
+          "value": "de.*"
+        }
+      ],
+      "missing": [
+        {
+          "type": "query",
+          "key": "choose"
+        }
+      ],
+      "destination": "/de/",
+      "permanent": false
+    },
+    {
+      "source": "/",
+      "has": [
+        {
+          "type": "header",
+          "key": "accept-language",
+          "value": "es.*"
+        }
+      ],
+      "missing": [
+        {
+          "type": "query",
+          "key": "choose"
+        }
+      ],
+      "destination": "/es/",
+      "permanent": false
+    },
+    {
+      "source": "/",
+      "has": [
+        {
+          "type": "header",
+          "key": "x-vercel-ip-country",
+          "value": "(NL|BE)"
+        }
+      ],
+      "missing": [
+        {
+          "type": "query",
+          "key": "choose"
+        }
+      ],
+      "destination": "/nl/",
+      "permanent": false
+    },
+    {
+      "source": "/",
+      "has": [
+        {
+          "type": "header",
+          "key": "x-vercel-ip-country",
+          "value": "(DE|AT|CH)"
+        }
+      ],
+      "missing": [
+        {
+          "type": "query",
+          "key": "choose"
+        }
+      ],
+      "destination": "/de/",
+      "permanent": false
+    },
+    {
+      "source": "/",
+      "has": [
+        {
+          "type": "header",
+          "key": "x-vercel-ip-country",
+          "value": "(ES)"
+        }
+      ],
+      "missing": [
+        {
+          "type": "query",
+          "key": "choose"
+        }
+      ],
+      "destination": "/es/",
+      "permanent": false
     }
   ]
 }

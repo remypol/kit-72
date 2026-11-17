@@ -94,3 +94,14 @@ What matters:
 - Tested the NL welcome automation with Resend's sink address: delivered, all variables filled, unsubscribe link present. Then disabled it again until this change is deployed.
 - Resend's REST format for automations differs from the workflow format used here, so the automations were created through the MCP tool from `emails/out/automations.json`.
 - Merged, deployed, then enabled all six automations. Ran the live signup in NL, DE and ES with the sink address: each got the redesigned confirmation and the right welcome email (27 L for three people in NL and ES, 18 L in DE).
+
+## 9. Brand, company details, organic search (2026-11-17, afternoon)
+
+- Search Console baseline recorded in docs/SEO.md. Key finding: the submitted sitemap is the non-www URL, last read in January, with 0 discovered pages; 35 of about 100 pages are indexed.
+- Company details taken from invoicenavigator.eu at the owner's instruction (CCC Impact B.V.). Added colofon (NL), Impressum (DE), aviso legal (ES); privacy pages now name the controller. The contact address is the Invoice Navigator one until Kit-72 has its own inbox.
+- Cookie pages were wrong: the German one said Google Analytics was not used. Rewritten for all three languages, with a button to change the analytics choice.
+- New logo: a carry case with a handle carrying "72". `scripts/brand.mjs` generates favicon, app icons and share images from one drawing; the old share images were still the dark design.
+- Root URL now redirects by language, then country; the fallback page is redesigned.
+- SEO changes listed in docs/SEO.md. `scripts/seo_audit.py` reports no long titles, duplicate titles, orphan pages or unreturned hreflang links.
+- Partner accounts: applied to ration1 on Awin (publisher 2996923), pending. Amazon: the login in Chrome has **no** PartnerNet account, so `kit72de-21` and `kit72es-21` may never have been real tags for this owner. Started a new amazon.de sign-up for CCC Impact B.V. with preferred ID `kit72de`; it stopped at Amazon's puzzle check, which the owner has to complete. bol.com: not started; needs the owner's login.
+- Resend test leftovers removed (test contact, probe automation). Confirmation email delivered to the owner's real mailbox.

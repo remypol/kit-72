@@ -2,6 +2,7 @@
 import ArticleLayout from '../../../layouts/ArticleLayout.astro';
 
 const tocItems = [
+  { id: 'ueberlebenspaket-inhalt', label: 'Was gehört hinein? Die Kurzfassung' },
   { id: 'was-ist', label: 'Was ist ein Notfallpaket?' },
   { id: 'warum-72-stunden', label: 'Warum 72 Stunden?' },
   { id: 'inhalt', label: 'Essentieller Inhalt' },
@@ -204,9 +205,9 @@ const faqs = [
 
 <ArticleLayout
   faqData={faqs}
-  title="Notfallpaket 72 Stunden: Vollständiger Ratgeber"
-  description="Notfallpaket 72 Stunden: Vollständige Checkliste, genaue Mengen und praktische Tipps nach BBK-Richtlinien."
-  updatedDate="2025-12-15"
+  title="Notfallpaket 72 Stunden: Was gehört ins Überlebenspaket?"
+  description="Was gehört in ein Notfallpaket (Überlebenspaket) für 72 Stunden? Die vollständige Liste mit Mengen pro Person nach BBK-Empfehlung, zum Abhaken."
+  updatedDate="2026-11-17"
   author="Team Kit-72"
   readTime="14 min"
   breadcrumbs={breadcrumbs}
@@ -234,6 +235,30 @@ const faqs = [
   </nav>
 
   <!-- Main Content -->
+  <section id="ueberlebenspaket-inhalt" class="mb-12">
+    <h2>Was gehört in ein Überlebenspaket für 72 Stunden?</h2>
+    <p>
+      Ein Überlebenspaket, vom BBK Notgepäck genannt, enthält alles, womit eine Person
+      drei Tage ohne Hilfe auskommt. Die Kurzfassung:
+    </p>
+    <ol>
+      <li><strong>Wasser:</strong> 2 Liter pro Person und Tag, also 6 Liter für 72 Stunden</li>
+      <li><strong>Essen:</strong> haltbare Lebensmittel, die weder Kühlung noch Kochen brauchen</li>
+      <li><strong>Licht:</strong> Taschenlampe und Ersatzbatterien</li>
+      <li><strong>Information:</strong> Batterieradio oder Kurbelradio</li>
+      <li><strong>Strom:</strong> eine geladene Powerbank für das Handy</li>
+      <li><strong>Erste Hilfe:</strong> Verbandskasten und persönliche Medikamente</li>
+      <li><strong>Dokumente und Bargeld:</strong> Kopien der wichtigsten Papiere, wasserdicht verpackt</li>
+      <li><strong>Wärme und Hygiene:</strong> Decke oder Schlafsack, wetterfeste Kleidung, Hygieneartikel</li>
+    </ol>
+    <p>
+      Die genauen Mengen pro Person stehen weiter unten. Im
+      <a href="/de/tools/notfallpaket-zusammenstellen/">Konfigurator</a> hakst du ab, was du
+      schon hast, und siehst, was noch fehlt. Wer lieber fertig kauft, findet im
+      <a href="/de/notfallrucksack-kaufen/">Preisvergleich</a>, was Pakete kosten und was nie dabei ist.
+    </p>
+  </section>
+
   <section id="was-ist" class="mb-12">
     <h2>Was ist ein Notfallpaket 72 Stunden?</h2>
     <p>

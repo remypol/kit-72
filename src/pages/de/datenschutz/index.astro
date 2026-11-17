@@ -3,7 +3,7 @@ import BaseLayout from '../../../layouts/BaseLayout.astro';
 import Breadcrumb from '../../../components/layout/Breadcrumb.astro';
 ---
 
-<BaseLayout title="Datenschutzerklärung — Kit-72" description="Wie wir mit deinen Daten umgehen." locale="de" hideSignup>
+<BaseLayout title="Datenschutzerklärung — Kit-72" description="Welche Daten Kit-72 erhebt, wofür und wie lange, und wie du dich abmeldest oder deine Daten löschen lässt." locale="de" hideSignup>
   <section class="py-16">
     <div class="max-w-3xl mx-auto px-4 sm:px-6">
       <Breadcrumb items={[{ label: 'Datenschutz' }]} class="mb-4" locale="de" />
@@ -66,8 +66,13 @@ import Breadcrumb from '../../../components/layout/Breadcrumb.astro';
           E-Mail. Außerdem kannst du dich bei einer Datenschutzaufsichtsbehörde beschweren.
         </p>
 
-        <h2>Kontakt</h2>
-        <p>Fragen zum Datenschutz? Kontaktiere uns über unsere Website.</p>
+        <h2>Verantwortlicher</h2>
+        <p>
+          Verantwortlich für die Verarbeitung ist die CCC Impact B.V., Zwolseweg 210, 7315 GP Apeldoorn,
+          Niederlande (KvK 90941284). Fragen zum Datenschutz sowie Anträge auf Auskunft oder Löschung
+          sendest du an <a href="mailto:hello@invoicenavigator.eu?subject=Kit-72%20Datenschutz">hello@invoicenavigator.eu</a>,
+          bitte mit "Kit-72" im Betreff. Alle Angaben zum Anbieter stehen im <a href="/de/impressum/">Impressum</a>.
+        </p>
       </div>
     </div>
   </section>

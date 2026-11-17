@@ -6,6 +6,22 @@ import type { Locale } from './hreflang-map';
 
 export type { Locale };
 
+/**
+ * The legal entity behind Kit-72 (same company as invoicenavigator.eu).
+ * Used on the colofon / Impressum / aviso legal pages, the privacy pages and
+ * in the Organization schema.
+ */
+export const company = {
+  name: 'CCC Impact B.V.',
+  street: 'Zwolseweg 210',
+  postalCode: '7315 GP',
+  city: 'Apeldoorn',
+  representedBy: 'Hugo Pol',
+  kvk: '90941284',
+  vat: 'NL865503515B01',
+  email: 'hello@invoicenavigator.eu',
+} as const;
+
 /** Litres of water per person per day in the official advice of each country. */
 export const WATER_PER_DAY: Record<Locale, number> = { nl: 3, es: 3, de: 2 };
 
@@ -27,6 +43,9 @@ export interface Routes {
   privacy: string;
   affiliate: string;
   editorial: string;
+  legal: string;
+  /** page explaining the government's own advice, where one exists */
+  official: string | null;
   scenarios: { href: string; label: string; icon: string }[];
   categories: CategoryLink[];
 }
@@ -43,6 +62,8 @@ export const routes: Record<Locale, Routes> = {
     privacy: '/nl/privacy/',
     affiliate: '/nl/affiliate-disclaimer/',
     editorial: '/nl/redactioneel-beleid/',
+    legal: '/nl/colofon/',
+    official: '/nl/denk-vooruit/',
     scenarios: [
       { href: '/nl/scenario/stroomstoring/', label: 'Stroomstoring', icon: 'Zap' },
       { href: '/nl/scenario/overstroming/', label: 'Overstroming', icon: 'Waves' },
@@ -72,6 +93,8 @@ export const routes: Record<Locale, Routes> = {
     privacy: '/de/datenschutz/',
     affiliate: '/de/affiliate-hinweis/',
     editorial: '/de/redaktionelle-richtlinien/',
+    legal: '/de/impressum/',
+    official: '/de/bbk-notfallvorsorge/',
     scenarios: [
       { href: '/de/szenarien/stromausfall/', label: 'Stromausfall', icon: 'Zap' },
       { href: '/de/szenarien/hochwasser/', label: 'Hochwasser', icon: 'Waves' },
@@ -101,6 +124,8 @@ export const routes: Record<Locale, Routes> = {
     privacy: '/es/privacidad/',
     affiliate: '/es/afiliados/',
     editorial: '/es/politica-editorial/',
+    legal: '/es/aviso-legal/',
+    official: null,
     scenarios: [
       { href: '/es/escenarios/prepararse-apagon/', label: 'Apagón', icon: 'Zap' },
       { href: '/es/escenarios/inundacion/', label: 'Inundación', icon: 'Waves' },
@@ -166,7 +191,7 @@ export interface HomeCopy {
 export const homeCopy: Record<Locale, HomeCopy> = {
   nl: {
     title: 'Noodpakket samenstellen voor 72 uur: jouw lijst in 2 minuten | Kit-72',
-    description: 'Bereken wat jouw huishouden nodig heeft voor 72 uur en stel zelf je noodpakket samen. Gratis checklist volgens het advies van de Rijksoverheid, zonder dure kant-en-klare pakketten.',
+    description: 'Bereken wat jouw huishouden nodig heeft voor 72 uur en stel zelf je noodpakket samen. Gratis checklist volgens het advies van de Rijksoverheid.',
     h1: 'Wat heeft jouw huishouden nodig voor 72 uur?',
     lead: 'Vul in met hoeveel jullie zijn. Je ziet meteen hoeveel water en eten je in huis moet hebben volgens het advies van de Rijksoverheid.',
     adults: 'Volwassenen',
@@ -215,7 +240,7 @@ export const homeCopy: Record<Locale, HomeCopy> = {
   },
   de: {
     title: 'Notfallvorrat für 72 Stunden: deine Liste in 2 Minuten | Kit-72',
-    description: 'Berechne, was dein Haushalt für 72 Stunden braucht, und stelle deinen Notvorrat selbst zusammen. Kostenlose Checkliste nach BBK-Empfehlung, ohne teure Fertigpakete.',
+    description: 'Berechne, was dein Haushalt für 72 Stunden braucht, und stelle deinen Notvorrat selbst zusammen. Kostenlose Checkliste nach BBK-Empfehlung.',
     h1: 'Was braucht dein Haushalt für 72 Stunden?',
     lead: 'Gib an, wie viele ihr seid. Du siehst sofort, wie viel Wasser und Essen du nach der Empfehlung des BBK im Haus haben solltest.',
     adults: 'Erwachsene',
@@ -262,7 +287,7 @@ export const homeCopy: Record<Locale, HomeCopy> = {
   },
   es: {
     title: 'Kit de emergencia para 72 horas: tu lista en 2 minutos | Kit-72',
-    description: 'Calcula lo que necesita tu hogar para 72 horas y monta tú mismo el kit de emergencia. Lista gratuita según las recomendaciones de Protección Civil, sin kits caros ya hechos.',
+    description: 'Calcula lo que necesita tu hogar para 72 horas y monta tú mismo el kit de emergencia. Lista gratuita según las recomendaciones de Protección Civil.',
     h1: '¿Qué necesita tu hogar para aguantar 72 horas?',
     lead: 'Indica cuántos sois. Verás al momento cuánta agua y comida conviene tener en casa según las recomendaciones de Protección Civil.',
     adults: 'Adultos',

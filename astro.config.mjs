@@ -76,6 +76,10 @@ export default defineConfig({
         if (page.includes('/afiliados/') || page.includes('/affiliate-disclaimer/') || page.includes('/affiliate-hinweis/')) {
           return false;
         }
+        // Legal identity pages
+        if (page.includes('/colofon/') || page.includes('/impressum/') || page.includes('/aviso-legal/')) {
+          return false;
+        }
         // Confirmation pages after email signup
         if (page.includes('/aangemeld/') || page.includes('/angemeldet/') || page.includes('/suscrito/')) {
           return false;
