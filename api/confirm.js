@@ -11,12 +11,14 @@ export async function GET(request) {
   const done = PATHS[sub.locale].done;
   try {
     const n = needs(sub);
+    // Prefixed: contact properties are account-wide in Resend, and the account
+    // may be shared with other projects.
     const properties = {
-      locale: sub.locale,
-      household_size: String(n.people),
-      has_children: String(sub.children > 0),
-      has_pets: String(sub.pets > 0),
-      signup_source: sub.source,
+      kit72_locale: sub.locale,
+      kit72_household_size: String(n.people),
+      kit72_has_children: String(sub.children > 0),
+      kit72_has_pets: String(sub.pets > 0),
+      kit72_signup_source: sub.source,
     };
     const base = { email: sub.email, unsubscribed: false };
     if (process.env.RESEND_SEGMENT_ID) base.segments = [{ id: process.env.RESEND_SEGMENT_ID }];

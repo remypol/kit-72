@@ -16,8 +16,13 @@ interface Props {
 const { locale, source, variant = 'card' } = Astro.props;
 const c = signupCopy[locale];
 const id = `signup-${source}`;
+
+// Off until email sending is configured (Resend domain + keys in Vercel).
+// Set PUBLIC_SIGNUP_ENABLED=true and redeploy to show the form.
+const enabled = import.meta.env.PUBLIC_SIGNUP_ENABLED === 'true';
 ---
 
+{enabled && (
 <section class:list={['signup', `signup--${variant}`]} data-signup data-locale={locale} data-source={source} aria-labelledby={`${id}-title`}>
   <div class="signup__inner">
     <div class="signup__text">
@@ -42,6 +47,7 @@ const id = `signup-${source}`;
     </form>
   </div>
 </section>
+)}
 
 <style>
   .signup {

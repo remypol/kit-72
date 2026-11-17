@@ -4,10 +4,13 @@ The site sends two emails itself (`api/_emails.js`): the confirmation and the we
 
 ## Setup in Resend
 
+Status 2026-11-17: blocked. The existing Resend account is at its plan's domain limit (10 domains, all used by other projects), so `kit-72.com` could not be added. Either upgrade that plan or, better, use a separate Resend account for Kit-72: contacts, unsubscribe status and properties are account-wide, so a separate account is the only full isolation from the other projects. A segment named "Kit-72" already exists in the current account.
+
 1. Verify the sending domain and create an API key.
-2. Create contact properties (all text): `locale`, `household_size`, `has_children`, `has_pets`, `signup_source`. Without them the endpoint still saves the contact, just without the properties.
+2. Create contact properties (all text): `kit72_locale`, `kit72_household_size`, `kit72_has_children`, `kit72_has_pets`, `kit72_signup_source`. They are prefixed because properties are account-wide. Without them the endpoint still saves the contact, just without the properties.
 3. Optional: create a segment and set `RESEND_SEGMENT_ID`.
-4. Create one automation per language, trigger `kit72.subscribed`, condition `payload.locale`, with the steps below.
+4. Set `PUBLIC_SIGNUP_ENABLED=true` in Vercel and redeploy; the form is hidden until then.
+5. Create one automation per language, trigger `kit72.subscribed`, condition `payload.locale`, with the steps below.
 
 Event payload: `locale`, `household_size`, `water_litres`, `source`.
 

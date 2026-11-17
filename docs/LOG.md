@@ -66,3 +66,10 @@ What matters:
 - Translating the day 3 / 8 / 15 emails to DE and ES, and creating the Resend automations: the account is yours and needs a verified domain first.
 - A margin product or bulk-sales page: a business decision, see GROWTH-PLAN.md section 5.
 - Real-API test of the email endpoints and a production deploy.
+
+## 6. Go-live (2026-11-17, later)
+
+- The Vercel project had **no environment variables at all**, so the deployed build would not have tagged a single link (the Amazon.es tag only existed in the local `.env`). Set `PUBLIC_AMAZON_TAG_ES`, `PUBLIC_AMAZON_TAG_DE`, `SUBSCRIBE_SECRET`, `EMAIL_FROM`, `SITE_URL` for production, and the same for the `growth-overhaul` preview branch.
+- Resend: the account holds 10 verified domains for other projects and is at its plan limit, so `kit-72.com` could not be added. Nothing belonging to other projects was changed. Created only a segment named "Kit-72". No API key was created.
+- Because email cannot send yet, the signup form is now behind `PUBLIC_SIGNUP_ENABLED` (off). Contact properties renamed with a `kit72_` prefix, since properties are account-wide.
+- DNS for kit-72.com is at Squarespace Domains; the root SPF is `v=spf1 -all` and there is no MX, so the Resend records still have to be added there once the domain exists in Resend.
