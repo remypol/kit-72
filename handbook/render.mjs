@@ -99,7 +99,30 @@ function drawMap(home, features, markers, radius = 1000) {
   </svg>`;
 }
 
-export function renderHtml(d) {
+/** Screen-only chrome for the version served by the site: a bar with a print button, pages shown as sheets. */
+const WEB_CSS = `
+@media screen{
+  body{background:#e9eee8;padding:16mm 0 10mm}
+  .page{margin:0 auto 8mm;background:#fff;box-shadow:0 1mm 6mm rgba(16,35,27,.18)}
+  .webbar{position:fixed;inset:0 0 auto 0;z-index:5;background:#0a3d26;color:#fff;display:flex;justify-content:center;align-items:center;gap:5mm;padding:2.6mm 4mm;font-size:11pt}
+  .webbar button{font:inherit;font-weight:700;background:#ffd21f;color:#1a1a00;border:0;border-bottom:.8mm solid #d4a900;border-radius:1.6mm;padding:1.8mm 5mm;cursor:pointer}
+  .webbar button:focus-visible{outline:.8mm solid #fff;outline-offset:.6mm}
+}
+@media print{.webbar{display:none}}
+`;
+const WEB_BAR = `<div class="webbar"><span>Dit is jouw noodhandboek.</span><button type="button" onclick="window.print()">Print of bewaar als pdf</button></div>
+<script>(function(){function fit(){var w=document.documentElement.clientWidth;document.body.style.zoom=w<820?(w/820).toFixed(3):''}fit();addEventListener('resize',fit);addEventListener('beforeprint',function(){document.body.style.zoom=''});addEventListener('afterprint',fit)})()</script>`;
+
+/**
+ * d: the collected facts (handbook/collect.mjs). With { web: true } the page
+ * is meant to be served by the site: fonts come from /fonts and a print bar
+ * is added. Without it the fonts are read from node_modules, for the local
+ * PDF build.
+ */
+export function renderHtml(d, { web = false } = {}) {
+  const fontUrl = web
+    ? { archivo: '/fonts/archivo-wdth.woff2', publicSans: '/fonts/public-sans-wght.woff2' }
+    : { archivo: font('@fontsource-variable/archivo', 'archivo-latin-wdth-normal.woff2'), publicSans: font('@fontsource-variable/public-sans', 'public-sans-latin-wght-normal.woff2') };
   const { address: a, household: h } = d;
   // "Straat 1, 1234AB Plaats" becomes a large street line and a smaller place line
   const [street, ...restOfLabel] = a.label.split(', ');
@@ -128,10 +151,10 @@ export function renderHtml(d) {
   const region = d.region;
   const today = new Date(d.generated).toLocaleDateString('nl-NL', { day: 'numeric', month: 'long', year: 'numeric' });
 
-  return `<!doctype html><html lang="nl"><head><meta charset="utf-8"><title>Noodhandboek ${esc(a.label)}</title>
+  return `<!doctype html><html lang="nl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="robots" content="noindex, nofollow"><title>Noodhandboek ${esc(a.label)}</title>
 <style>
-@font-face{font-family:'Archivo Variable';font-weight:100 900;font-stretch:62% 125%;src:url('${font('@fontsource-variable/archivo', 'archivo-latin-wdth-normal.woff2')}') format('woff2-variations')}
-@font-face{font-family:'Public Sans Variable';font-weight:100 900;src:url('${font('@fontsource-variable/public-sans', 'public-sans-latin-wght-normal.woff2')}') format('woff2-variations')}
+@font-face{font-family:'Archivo Variable';font-weight:100 900;font-stretch:62% 125%;src:url('${fontUrl.archivo}') format('woff2-variations')}
+@font-face{font-family:'Public Sans Variable';font-weight:100 900;src:url('${fontUrl.publicSans}') format('woff2-variations')}
 @page{size:A4;margin:0}
 *{box-sizing:border-box;margin:0;padding:0}
 html{-webkit-print-color-adjust:exact;print-color-adjust:exact}
@@ -180,7 +203,8 @@ tr:first-child td{border-top:.6mm solid #10231b}
 .box li b{font-weight:700;white-space:nowrap}
 footer{font-size:6.8pt;color:#5f6e65;line-height:1.35;border-top:.2mm solid #c9d3c9;padding-top:2mm}
 .proof{background:#ffd21f;color:#1a1a00;font-weight:700;padding:.6mm 2mm;border-radius:1mm;font-size:7pt}
-${firstHourCss}${hacksCss}${planCss}</style></head><body>
+${firstHourCss}${hacksCss}${planCss}${web ? WEB_CSS : ''}</style></head><body>
+${web ? WEB_BAR : ''}
 <section class="page">
 <header>
   <div>
@@ -189,7 +213,7 @@ ${firstHourCss}${hacksCss}${planCss}</style></head><body>
     <h1>${esc(street)}</h1>
     <p class="place">${esc(place)}</p>
   </div>
-  <div class="meta"><span class="proof">PROEFVERSIE, FASE 0</span><br><br><strong>${h.adults} ${h.adults === 1 ? 'volwassene' : 'volwassenen'}${h.children ? `, ${h.children} ${h.children === 1 ? 'kind' : 'kinderen'}` : ''}${h.pets ? `, ${h.pets} huisdier${h.pets > 1 ? 'en' : ''}` : ''}</strong><br>Gemaakt op ${today}<br>Controleer de gegevens jaarlijks</div>
+  <div class="meta"><span class="proof">BÈTA</span><br><br><strong>${h.adults} ${h.adults === 1 ? 'volwassene' : 'volwassenen'}${h.children ? `, ${h.children} ${h.children === 1 ? 'kind' : 'kinderen'}` : ''}${h.pets ? `, ${h.pets} huisdier${h.pets > 1 ? 'en' : ''}` : ''}</strong><br>Gemaakt op ${today}<br>Controleer de gegevens jaarlijks</div>
 </header>
 
 <section class="top">
@@ -245,7 +269,7 @@ ${firstHourCss}${hacksCss}${planCss}</style></head><body>
 </section>
 
 <footer>
-  Proefversie om de gegevensbronnen te testen; nog niet bedoeld om op te vertrouwen. Bronnen: adres en waterschap PDOK Locatieserver; hoogte Actueel Hoogtebestand Nederland;
+  Bètaversie: de gegevens komen uit openbare bronnen en kunnen fouten bevatten; controleer wat voor jou belangrijk is. Bronnen: adres en waterschap PDOK Locatieserver; hoogte Actueel Hoogtebestand Nederland;
   overstromingsrisicogebied Rijkswaterstaat (Richtlijn Overstromingsrisico's); veiligheidsregio CBS; spoedeisende hulp RIVM (Vragenlijst aanbod SEH's 2026); punten in de buurt en kaart OpenStreetMap; routes OSRM.
   De verwachte waterdiepte bij een overstroming ontbreekt nog.
   Dit handboek vervangt geen aanwijzingen van hulpdiensten. kit-72.com

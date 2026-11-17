@@ -1,0 +1,286 @@
+---
+/**
+ * Landing page for the free personal handbook. The form sends a personal
+ * link by email; the handbook itself is built by api/handbook.js when that
+ * link is opened.
+ */
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import HandbookForm from '../../../components/growth/HandbookForm.astro';
+
+const pages = [
+  {
+    img: '/images/handboek/voorbeeld-pagina-1.jpg',
+    title: 'Jouw adres in feiten',
+    points: ['Hoe hoog je huis ligt ten opzichte van NAP', 'Of je in overstromingsrisicogebied woont', 'De twee spoedeisende hulpen die je het snelst bereikt', 'Kaart met supermarkt, apotheek, AED en huisarts', 'Wat je voor 72 uur in huis moet hebben'],
+  },
+  {
+    img: '/images/handboek/voorbeeld-pagina-2.jpg',
+    title: 'Het eerste uur',
+    points: ['Acht stappen als de stroom uitvalt', 'Wat je doet als er geen water uit de kraan komt', 'Hoogwater of ramen en deuren dicht, wat bij jouw adres hoort', 'Een afvinklijst voor als je weg moet'],
+  },
+  {
+    img: '/images/handboek/voorbeeld-pagina-3.jpg',
+    title: 'Slimme trucs',
+    points: ['Ruim twintig trucs van mensen die lange storingen meemaakten', 'Elke truc getoetst: werkt het, en kan het kwaad?', 'Geen officieel advies, en dat staat erbij'],
+  },
+  {
+    img: '/images/handboek/voorbeeld-pagina-4.jpg',
+    title: 'Jouw noodplan',
+    points: ['Acht bekende trucs die je niet moet doen', 'Invulvelden voor mensen en voor waar alles in huis zit', 'De frequenties van jouw rampenzender', 'Een lijst om elk halfjaar na te lopen'],
+  },
+];
+
+const faq = [
+  {
+    question: 'Is het noodhandboek echt gratis?',
+    answer: 'Ja. Je vult je adres, je huishouden en je e-mailadres in en krijgt een persoonlijke link. Er zijn geen kosten en je zit nergens aan vast.',
+  },
+  {
+    question: 'Wat doen jullie met mijn adres?',
+    answer: 'Het adres wordt alleen gebruikt om het handboek te maken. Het staat versleuteld in de link in je e-mail en wordt niet door ons bewaard. Je e-mailadres bewaren we alleen als je zelf aanvinkt dat je tips en herinneringen wilt ontvangen.',
+  },
+  {
+    question: 'Waar komen de gegevens vandaan?',
+    answer: 'Uit openbare bronnen: het adressenbestand van de overheid (PDOK), het Actueel Hoogtebestand Nederland, de overstromingsrisicogebieden van Rijkswaterstaat, de veiligheidsregio volgens het CBS, de opgave van ziekenhuizen aan het RIVM en OpenStreetMap voor de punten in de buurt.',
+  },
+  {
+    question: 'Werkt het voor elk adres?',
+    answer: 'Voor elk Nederlands adres met een postcode en huisnummer. Punten in de buurt, zoals AED\'s, komen uit OpenStreetMap en zijn op het platteland niet altijd compleet; het handboek zegt het als iets niet gevonden is.',
+  },
+  {
+    question: 'Hoe krijg ik er een pdf van?',
+    answer: 'Open de link uit de e-mail en kies "Print of bewaar als pdf". Het handboek is vier pagina\'s op A4. Met dezelfde link maak je later een nieuwe versie met de gegevens van die dag.',
+  },
+];
+---
+
+<BaseLayout
+  title="Gratis noodhandboek voor jouw adres"
+  description="Vul je adres in en krijg gratis een noodhandboek dat alleen voor jouw huis klopt: hoogte, overstromingsrisico, spoedeisende hulp en rampenzender."
+  locale="nl"
+  hideSignup
+  faqData={faq}
+  ogImage="/images/handboek/voorbeeld-pagina-1.jpg"
+  breadcrumbs={[
+    { name: 'Home', url: '/nl/' },
+    { name: 'Noodhandboek', url: '/nl/noodhandboek/' },
+  ]}
+>
+  <section class="hbl-hero">
+    <div class="hbl-hero__inner">
+      <div class="hbl-hero__text">
+        <h1>Een noodhandboek dat alleen voor jouw adres klopt</h1>
+        <p class="hbl-hero__lead">
+          De folder van de overheid is voor iedereen dezelfde. Dit handboek weet hoe hoog jouw huis ligt, welke spoedeisende hulp je het snelst bereikt, welke zender je aanzet en wat jouw huishouden voor 72 uur nodig heeft. Vier pagina's, gratis, klaar om te printen.
+        </p>
+        <ul class="hbl-hero__list">
+          <li>Gemaakt uit openbare bronnen op het moment dat je het opent</li>
+          <li>Je adres wordt niet bewaard</li>
+          <li>Voor elk Nederlands adres</li>
+        </ul>
+        <a class="hbl-hero__sample" href="/images/handboek/voorbeeld-pagina-1.jpg">Bekijk een voorbeeld: het stadhuis van Rotterdam</a>
+      </div>
+      <HandbookForm source="landing" />
+    </div>
+  </section>
+
+  <section class="hbl-block">
+    <div class="hbl-wrap">
+      <h2>Wat erin staat</h2>
+      <div class="hbl-pages">
+        {pages.map((p, i) => (
+          <article class="hbl-page">
+            <a href={p.img} class="hbl-page__img">
+              <img src={p.img} alt={`Voorbeeld van pagina ${i + 1} van het noodhandboek: ${p.title.toLowerCase()}`} width="778" height="1100" loading="lazy" decoding="async" />
+            </a>
+            <h3>{p.title}</h3>
+            <ul>
+              {p.points.map((point) => <li>{point}</li>)}
+            </ul>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="hbl-block hbl-block--tint">
+    <div class="hbl-wrap hbl-wrap--narrow">
+      <h2>Zo werkt het</h2>
+      <ol class="hbl-steps">
+        <li><strong>Vul je postcode, huisnummer en huishouden in.</strong> We controleren of het adres bestaat.</li>
+        <li><strong>Open de link in je e-mail.</strong> Op dat moment halen we de gegevens op en bouwen we je handboek. Dat duurt een paar seconden.</li>
+        <li><strong>Print het of bewaar het als pdf.</strong> Hang pagina 2 aan de binnenkant van de meterkast en vul pagina 4 met pen in.</li>
+        <li><strong>Maak over een halfjaar een nieuwe versie</strong> met dezelfde link. Adressen, openingstijden en houdbaarheidsdata veranderen.</li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="hbl-block">
+    <div class="hbl-wrap hbl-wrap--narrow">
+      <h2>Liever eerst je gemeente bekijken?</h2>
+      <p>
+        Voor elke gemeente staat op een rij welke rampenzender erbij hoort, waar de dichtstbijzijnde spoedeisende hulp is en hoeveel van de gemeente in overstromingsrisicogebied ligt.
+        <a href="/nl/noodplan/">Zoek je gemeente op</a>.
+      </p>
+    </div>
+  </section>
+
+  <section class="hbl-block hbl-block--tint">
+    <div class="hbl-wrap hbl-wrap--narrow">
+      <h2>Veelgestelde vragen</h2>
+      <dl class="hbl-faq">
+        {faq.map((f) => (
+          <>
+            <dt>{f.question}</dt>
+            <dd>{f.answer}</dd>
+          </>
+        ))}
+      </dl>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .hbl-hero {
+    background: var(--color-background-secondary, #f4f7f3);
+    border-bottom: 1px solid var(--color-border);
+  }
+  .hbl-hero__inner {
+    max-width: 72rem;
+    margin-inline: auto;
+    padding: var(--space-10) var(--space-4) var(--space-12);
+    display: grid;
+    gap: var(--space-8);
+  }
+  @media (min-width: 920px) {
+    .hbl-hero__inner {
+      grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
+      gap: var(--space-12);
+      align-items: start;
+      padding-block: var(--space-16);
+    }
+  }
+  .hbl-hero h1 {
+    font-size: clamp(2rem, 4.6vw, 3.1rem);
+    line-height: 1.06;
+    margin-bottom: var(--space-4);
+  }
+  .hbl-hero__lead {
+    font-size: 1.15rem;
+    color: var(--color-text-secondary);
+    max-width: 52ch;
+  }
+  .hbl-hero__list {
+    list-style: none;
+    padding: 0;
+    margin-block: var(--space-6);
+    display: grid;
+    gap: var(--space-2);
+  }
+  .hbl-hero__list li {
+    padding-left: 1.6rem;
+    position: relative;
+    font-weight: 600;
+  }
+  .hbl-hero__list li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.42em;
+    width: 0.7rem;
+    height: 0.7rem;
+    border-radius: 2px;
+    background: var(--color-signal);
+    border: 1.5px solid var(--color-text-primary);
+  }
+  .hbl-hero__sample {
+    font-weight: 650;
+    color: var(--color-accent);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+  .hbl-block {
+    padding-block: var(--space-12);
+  }
+  .hbl-block--tint {
+    background: var(--color-background-secondary, #f4f7f3);
+  }
+  .hbl-wrap {
+    max-width: 72rem;
+    margin-inline: auto;
+    padding-inline: var(--space-4);
+  }
+  .hbl-wrap--narrow {
+    max-width: 46rem;
+  }
+  .hbl-block h2 {
+    font-size: clamp(1.5rem, 3vw, 2.1rem);
+    margin-bottom: var(--space-6);
+  }
+  .hbl-block p {
+    font-size: 1.08rem;
+    color: var(--color-text-secondary);
+  }
+  .hbl-block p a {
+    color: var(--color-accent);
+    font-weight: 650;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+  .hbl-pages {
+    display: grid;
+    gap: var(--space-8);
+    grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+  }
+  .hbl-page__img {
+    display: block;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    box-shadow: 0 6px 18px rgba(16, 35, 27, 0.1);
+    margin-bottom: var(--space-4);
+  }
+  .hbl-page__img img {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+  .hbl-page h3 {
+    font-size: 1.2rem;
+    margin-bottom: var(--space-2);
+  }
+  .hbl-page ul {
+    list-style: disc;
+    padding-left: 1.1rem;
+    color: var(--color-text-secondary);
+    display: grid;
+    gap: var(--space-1);
+  }
+  .hbl-steps {
+    list-style: decimal;
+    padding-left: 1.4rem;
+    display: grid;
+    gap: var(--space-4);
+    font-size: 1.08rem;
+    color: var(--color-text-secondary);
+  }
+  .hbl-steps strong {
+    color: var(--color-text-primary);
+  }
+  .hbl-steps li::marker {
+    font-weight: 800;
+    color: var(--color-accent);
+  }
+  .hbl-faq dt {
+    font-weight: 750;
+    font-size: 1.1rem;
+    margin-top: var(--space-6);
+  }
+  .hbl-faq dt:first-child {
+    margin-top: 0;
+  }
+  .hbl-faq dd {
+    margin: var(--space-2) 0 0;
+    color: var(--color-text-secondary);
+  }
+</style>

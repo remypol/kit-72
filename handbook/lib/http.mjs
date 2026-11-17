@@ -7,12 +7,15 @@ import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-const CACHE = join(dirname(fileURLToPath(import.meta.url)), '..', '.cache');
-const UA = 'kit72-handbook-proof/0.1';
+// The disk cache is for local runs. A serverless function has no writable project folder
+// and must always fetch fresh data, so the cache is off there.
+const CACHE = process.env.VERCEL || process.env.KIT72_NO_CACHE ? null : join(dirname(fileURLToPath(import.meta.url)), '..', '.cache');
+const UA = 'kit72-handbook/0.2 (+https://www.kit-72.com)';
 
 export async function getJson(url, { body, timeoutMs = 25000, cache = true } = {}) {
+  if (!CACHE) cache = false;
   const key = createHash('sha1').update(url + (body ?? '')).digest('hex');
-  const file = join(CACHE, key + '.json');
+  const file = cache ? join(CACHE, key + '.json') : null;
   if (cache && existsSync(file)) return JSON.parse(readFileSync(file, 'utf8'));
   const res = await fetch(url, {
     method: body ? 'POST' : 'GET',

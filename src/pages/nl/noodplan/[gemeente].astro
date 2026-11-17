@@ -1,0 +1,279 @@
+---
+/**
+ * One page per Dutch municipality: which emergency broadcaster to tune to,
+ * the nearest emergency departments, flood risk and ground level, with the
+ * free address-level handbook as the next step.
+ */
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import HandbookForm from '../../../components/growth/HandbookForm.astro';
+import { gemeenten, bySlug, broadcasters, checked, nl, nap, floodSentence, floodShort, floodType, type Gemeente } from '../../../data/gemeenten';
+
+export function getStaticPaths() {
+  return gemeenten.map((g) => ({ params: { gemeente: g.slug }, props: { g } }));
+}
+
+const { g } = Astro.props as { g: Gemeente };
+const radio = g.broadcaster ? broadcasters[g.broadcaster] : null;
+const fm = radio ? radio.fm.map(([place, mhz]) => `${mhz.replace('.', ',')} (${place})`).join(', ') : '';
+const [first, second] = g.seh;
+const sehText = (s: (typeof g.seh)[number]) => `${s.name} in ${s.place}, ${nl(s.km)} km hemelsbreed${s.allDay ? '' : ', ’s nachts gesloten'}`;
+const types = g.flood.types.map(floodType);
+const neighbours = g.neighbours.map((slug) => bySlug.get(slug)!).filter(Boolean);
+const checkedDate = new Date(checked).toLocaleDateString('nl-NL', { day: 'numeric', month: 'long', year: 'numeric' });
+const from = g.centre.place === g.name ? g.name : `${g.centre.place} (gemeente ${g.name})`;
+
+// The longest title that still fits in a search result (60 characters).
+const title = [`Noodplan ${g.name}: rampenzender, SEH en overstroming`, `Noodplan ${g.name}: rampenzender en SEH`, `Noodplan ${g.name}`].find((t) => t.length <= 60) ?? `Noodplan ${g.name}`;
+const descriptionBase = `${g.name}: rampenzender ${g.broadcaster ?? 'van je regio'}, spoedeisende hulp in ${first.place} en het overstromingsrisico.`;
+const description = [`${descriptionBase} Plus een gratis noodhandboek voor jouw adres.`, `${descriptionBase} Met gratis noodhandboek.`].find((t) => t.length <= 160) ?? descriptionBase;
+
+const faq = [
+  g.broadcaster && {
+    question: `Welke rampenzender hoort bij ${g.name}?`,
+    answer: `${g.broadcaster}. FM-frequenties: ${fm}. Op DAB+ zit de zender in blok ${radio!.dab}. Bij een ramp geeft de veiligheidsregio via deze zender aanwijzingen.`,
+  },
+  {
+    question: `Waar is de dichtstbijzijnde spoedeisende hulp bij ${g.name}?`,
+    answer: `Vanaf ${from} is dat ${sehText(first)}.${second ? ` Daarna: ${sehText(second)}.` : ''} Bij levensgevaar bel je 112.`,
+  },
+  {
+    question: `Ligt ${g.name} in overstromingsrisicogebied?`,
+    answer: `${floodSentence(g)} Het is een steekproef van ${g.flood.sampled} punten; voor je eigen adres geeft het gratis noodhandboek het precieze antwoord.`,
+  },
+  g.region && {
+    question: `Onder welke veiligheidsregio valt ${g.name}?`,
+    answer: `Onder Veiligheidsregio ${g.region}${g.regionWebsite ? ` (${g.regionWebsite})` : ''}. De veiligheidsregio coördineert brandweer, geneeskundige hulp en crisisbeheersing en informeert inwoners bij een ramp.`,
+  },
+].filter(Boolean) as { question: string; answer: string }[];
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  locale="nl"
+  hideSignup
+  faqData={faq}
+  dateModified={checked}
+  breadcrumbs={[
+    { name: 'Home', url: '/nl/' },
+    { name: 'Noodplan per gemeente', url: '/nl/noodplan/' },
+    { name: g.name, url: `/nl/noodplan/${g.slug}/` },
+  ]}
+>
+  <article class="gm">
+    <header class="gm-head">
+      <p class="gm-crumb"><a href="/nl/noodplan/">Noodplan per gemeente</a>{g.province && <span> / {g.province}</span>}</p>
+      <h1>Noodplan voor {g.name}</h1>
+      <p class="gm-lead">
+        Welke zender je aanzet, waar de spoedeisende hulp is en hoe het zit met hoogwater in {g.name}. Onderaan maak je gratis een noodhandboek dat klopt voor je eigen adres.
+      </p>
+    </header>
+
+    <section class="gm-facts" aria-label={`Feiten over ${g.name}`}>
+      <div class="gm-fact">
+        <h2>Rampenzender</h2>
+        <p class="gm-big">{g.broadcaster ?? 'Onbekend'}</p>
+        {radio && <p>FM {fm}. DAB+: blok {radio.dab}.</p>}
+        <p class="gm-note">Zet je radio er nu op af. Op batterijen werkt hij ook als de stroom uitvalt.</p>
+      </div>
+      <div class="gm-fact">
+        <h2>Spoedeisende hulp</h2>
+        <p class="gm-big">{first.name}</p>
+        <p>{first.place}, {nl(first.km)} km hemelsbreed vanaf {from}{first.allDay ? ', dag en nacht open' : ''}.{!first.allDay && <strong> ’s Nachts gesloten.</strong>}</p>
+        {second && <p>Daarna: {second.name} in {second.place}, {nl(second.km)} km{second.allDay ? ', dag en nacht open' : ''}.</p>}
+        <p class="gm-note">Bij levensgevaar bel je 112 en ga je niet zelf rijden.</p>
+      </div>
+      <div class="gm-fact">
+        <h2>Overstromingsrisicogebied</h2>
+        <p class="gm-big">{floodShort(g)}</p>
+        <p>{floodSentence(g)}</p>
+        {types.length > 0 && <p>Soort gebied: {types.join('; ')}.</p>}
+      </div>
+      <div class="gm-fact">
+        <h2>Hoogte van het maaiveld</h2>
+        {g.level ? (
+          <>
+            <p class="gm-big">{nl(g.level.min)} tot {nl(g.level.max)} m</p>
+            <p>Ten opzichte van NAP, gemeten op {g.level.n} punten bij woningen. De middelste waarde ligt op {nap(g.level.median)}.</p>
+          </>
+        ) : (
+          <p class="gm-big">Onbekend</p>
+        )}
+      </div>
+      <div class="gm-fact">
+        <h2>Veiligheidsregio</h2>
+        <p class="gm-big">{g.region ?? 'Onbekend'}</p>
+        {g.regionWebsite && <p>Aanwijzingen bij een ramp staan op <a href={`https://${g.regionWebsite}`} rel="noopener">{g.regionWebsite}</a>.</p>}
+      </div>
+      <div class="gm-fact">
+        <h2>{g.waterBoards.length > 1 ? 'Waterschappen' : 'Waterschap'}</h2>
+        <p class="gm-big">{g.waterBoards.length ? g.waterBoards.join(', ') : 'Onbekend'}</p>
+        <p>Het waterschap beheert dijken en waterstanden. Storing in stroom of gas meld je op 0800-9009.</p>
+      </div>
+    </section>
+
+    <section class="gm-cta">
+      <HandbookForm
+        source="gemeente"
+        title={`Woon je in ${g.name}? Maak je eigen noodhandboek`}
+        body="De cijfers hierboven gelden voor de gemeente als geheel. Het handboek rekent voor jouw adres: de hoogte van je eigen perceel, de spoedeisende hulp die je met de auto het snelst bereikt en een kaart van je buurt. Vier pagina's, gratis."
+      />
+    </section>
+
+    <section class="gm-text">
+      <h2>Wat je in {g.name} nu kunt doen</h2>
+      <ol>
+        <li><strong>Stel je radio af op {g.broadcaster ?? 'je regionale omroep'}</strong> en schrijf de frequentie die je ontvangt op de radio.</li>
+        <li><strong>Leg voor 72 uur water en eten klaar.</strong> Reken op 3 liter water per persoon per dag. <a href="/nl/tools/noodpakket-samenstellen/">Stel je lijst samen</a>.</li>
+        <li><strong>Weet waar je heen gaat.</strong> De dichtstbijzijnde spoedeisende hulp is {first.name} in {first.place}{first.allDay ? '' : ', maar die is ’s nachts gesloten'}.</li>
+        <li><strong>{g.flood.inZone > 0 ? 'Bedenk wat je doet bij hoogwater.' : 'Reken vooral op uitval van stroom en water.'}</strong>
+          {g.flood.inZone > 0
+            ? <span> Lees <a href="/nl/scenario/overstroming/">wat je doet bij een overstroming</a>.</span>
+            : <span> Lees <a href="/nl/scenario/stroomstoring/">wat je doet bij een stroomstoring</a>.</span>}
+        </li>
+      </ol>
+    </section>
+
+    {neighbours.length > 0 && (
+      <section class="gm-text">
+        <h2>Gemeenten in de buurt</h2>
+        <ul class="gm-links">
+          {neighbours.map((n) => <li><a href={`/nl/noodplan/${n.slug}/`}>Noodplan {n.name}</a></li>)}
+        </ul>
+      </section>
+    )}
+
+    <section class="gm-text gm-faq">
+      <h2>Veelgestelde vragen over {g.name}</h2>
+      <dl>
+        {faq.map((f) => (
+          <>
+            <dt>{f.question}</dt>
+            <dd>{f.answer}</dd>
+          </>
+        ))}
+      </dl>
+    </section>
+
+    <footer class="gm-src">
+      <p>
+        Bronnen: gemeentegrenzen en veiligheidsregio's van het CBS; rampenzenders en frequenties van Denk Vooruit (Rijksoverheid); spoedeisende hulp volgens de opgave van ziekenhuizen aan het RIVM (2026);
+        overstromingsrisicogebieden van Rijkswaterstaat; hoogte uit het Actueel Hoogtebestand Nederland; waterschappen uit het adressenbestand van PDOK.
+        Overstromingsrisico en hoogte zijn een steekproef van {g.flood.sampled} punten bij woningen en geen uitspraak over elk adres. Afstanden zijn hemelsbreed. Gecontroleerd op {checkedDate}.
+      </p>
+    </footer>
+  </article>
+</BaseLayout>
+
+<style>
+  .gm {
+    max-width: 68rem;
+    margin-inline: auto;
+    padding: var(--space-8) var(--space-4) var(--space-16);
+  }
+  .gm-crumb {
+    font-size: 0.9rem;
+    color: var(--color-text-secondary);
+    margin-bottom: var(--space-3);
+  }
+  .gm-crumb a {
+    color: var(--color-accent);
+    font-weight: 650;
+  }
+  .gm-head h1 {
+    font-size: clamp(2rem, 4.6vw, 3rem);
+    line-height: 1.06;
+  }
+  .gm-lead {
+    margin-top: var(--space-4);
+    font-size: 1.15rem;
+    color: var(--color-text-secondary);
+    max-width: 62ch;
+  }
+  .gm-facts {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr));
+    gap: 0 var(--space-8);
+    margin-block: var(--space-10);
+  }
+  .gm-fact {
+    border-top: 3px solid var(--color-text-primary);
+    padding-block: var(--space-4) var(--space-8);
+  }
+  .gm-fact h2 {
+    font-size: 0.95rem;
+    font-weight: 650;
+    color: var(--color-text-secondary);
+    letter-spacing: 0;
+    margin-bottom: var(--space-1);
+  }
+  .gm-big {
+    font-family: var(--font-display, inherit);
+    font-weight: 750;
+    font-size: clamp(1.4rem, 2.6vw, 1.8rem);
+    line-height: 1.12;
+    margin-bottom: var(--space-2);
+  }
+  .gm-fact p + p {
+    margin-top: var(--space-2);
+  }
+  .gm-fact p:not(.gm-big) {
+    color: var(--color-text-secondary);
+  }
+  .gm-fact a,
+  .gm-text a {
+    color: var(--color-accent);
+    font-weight: 650;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+  .gm-note {
+    font-size: 0.92rem;
+  }
+  .gm-cta {
+    max-width: 44rem;
+    margin-block: var(--space-4) var(--space-12);
+  }
+  .gm-text {
+    max-width: 44rem;
+    margin-bottom: var(--space-10);
+  }
+  .gm-text h2 {
+    font-size: clamp(1.4rem, 2.8vw, 1.9rem);
+    margin-bottom: var(--space-4);
+  }
+  .gm-text ol {
+    list-style: decimal;
+    padding-left: 1.4rem;
+    display: grid;
+    gap: var(--space-3);
+    color: var(--color-text-secondary);
+    font-size: 1.05rem;
+  }
+  .gm-text ol strong {
+    color: var(--color-text-primary);
+  }
+  .gm-links {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2) var(--space-6);
+  }
+  .gm-faq dt {
+    font-weight: 750;
+    font-size: 1.08rem;
+    margin-top: var(--space-5);
+  }
+  .gm-faq dd {
+    margin: var(--space-2) 0 0;
+    color: var(--color-text-secondary);
+  }
+  .gm-src {
+    max-width: 52rem;
+    border-top: 1px solid var(--color-border);
+    padding-top: var(--space-4);
+    font-size: 0.88rem;
+    color: var(--color-text-secondary);
+  }
+</style>

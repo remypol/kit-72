@@ -1,5 +1,5 @@
 /**
- * Phase 0 proof: one Dutch address in, one A4 handbook page out.
+ * Command-line build: one Dutch address in, a four-page A4 handbook out.
  *
  *   node handbook/build.mjs "Coolsingel 40, Rotterdam" --adults 2 --children 1 --pets 0
  *
@@ -10,9 +10,8 @@ import { execFileSync } from 'node:child_process';
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
-import { geocode, elevation, floodRisk, safetyRegion } from './lib/pdok.mjs';
-import { nearby, mapFeatures, route } from './lib/osm.mjs';
-import { emergencyDepartments, sehSource } from './lib/seh.mjs';
+import { geocode } from './lib/pdok.mjs';
+import { collect } from './collect.mjs';
 import { renderHtml } from './render.mjs';
 
 const here = dirname(fileURLToPath(import.meta.url));
@@ -25,58 +24,14 @@ const flag = (name, dflt) => {
 };
 const household = { adults: flag('adults', 2), children: flag('children', 0), pets: flag('pets', 0) };
 
-const step = async (label, fn, fallback) => {
-  const t = Date.now();
-  try {
-    const v = await fn();
-    console.log(`  ok   ${label} (${((Date.now() - t) / 1000).toFixed(1)} s)`);
-    return v;
-  } catch (err) {
-    console.log(`  FAIL ${label}: ${err.message}`);
-    return fallback;
-  }
-};
-
 console.log(`Adres: ${query}`);
 const address = await geocode(query);
 console.log(`  ->   ${address.label}`);
 // PDOK matches loosely: a house number that does not exist silently becomes a neighbour
 const asked = query.match(/\d+/)?.[0];
 if (asked && address.houseNumber != null && String(address.houseNumber) !== asked) console.log(`  LET OP: gevraagd huisnummer ${asked}, gevonden ${address.houseNumber}`);
-const [elev, flood, region] = await Promise.all([
-  step('hoogte (AHN)', () => elevation(address), null),
-  step('overstromingsrisicogebied', () => floodRisk(address), []),
-  step('veiligheidsregio', () => safetyRegion(address), null),
-]);
-const near = await step('punten in de buurt (OpenStreetMap)', () => nearby(address), null);
-const hospitals = await step('spoedeisende hulp (RIVM)', () => emergencyDepartments(address), []);
-const area = await step('kaartgegevens (OpenStreetMap)', () => mapFeatures(address), null);
-const features = area?.ways ?? null;
-// Inside the map square the map data is complete; beyond it only the search service knows more.
-if (near && area) for (const [kind, list] of Object.entries(area.pois)) if (list.length) near[kind] = list;
-
-if (near) for (const list of Object.values(near)) {
-  const first = list[0];
-  if (!first) continue;
-  first.walk = await route(address, first, 'walking');
-  // beyond two kilometres nobody walks for groceries; give the cycling time as well
-  if (first.walk && first.walk.metres > 2000) first.bike = await route(address, first, 'cycling');
-}
-
-const regions = JSON.parse(readFileSync(join(here, 'data', 'regions-nl.json'), 'utf8'));
-const data = {
-  generated: new Date().toISOString(),
-  address,
-  household,
-  elevation: elev,
-  floodRisk: flood,
-  safetyRegion: region,
-  region: regions.regions[region] ?? null,
-  nearby: near,
-  hospitals,
-  sehSource,
-  mapFeatures: features,
-};
+const data = await collect(address, household, console.log);
+const features = data.mapFeatures;
 
 const out = join(here, 'out');
 mkdirSync(out, { recursive: true });

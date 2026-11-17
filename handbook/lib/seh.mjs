@@ -8,6 +8,9 @@ import { metres } from './http.mjs';
 import { route } from './osm.mjs';
 
 const table = JSON.parse(readFileSync(new URL('../data/seh-nl.json', import.meta.url), 'utf8'));
+// RIVM writes some place names in registry style.
+const PLACE = { 'Hoorn Nh': 'Hoorn', 's-Gravenhage': 'Den Haag', 's-Hertogenbosch': '’s-Hertogenbosch', 'Capelle a/d IJssel': 'Capelle aan den IJssel', 'Bergen Op Zoom': 'Bergen op Zoom', 'Amsterdam Zuidoost': 'Amsterdam' };
+for (const x of table.locations) x.place = PLACE[x.place] ?? x.place;
 export const sehSource = { ...table.source, checked: table.checked };
 
 /**
@@ -21,7 +24,7 @@ export async function emergencyDepartments(home) {
     .map((x) => ({ ...x, dist: metres(home, x) }))
     .sort((a, b) => a.dist - b.dist)
     .slice(0, 5);
-  for (const x of near) x.drive = await route(home, x, 'driving');
+  await Promise.all(near.map(async (x) => { x.drive = await route(home, x, 'driving'); }));
   const time = (x) => x.drive?.minutes ?? (x.dist / 1000) * 1.6; // no route: assume 1.6 minutes per straight-line km
   near.sort((a, b) => time(a) - time(b));
   const [first, ...rest] = near;

@@ -235,3 +235,34 @@ Kit-72 is toegevoegd als tweede site aan Awin-account 2996923; de Britse watersi
 
 Aangemeld op 17 november 2026, alle vier in afwachting van goedkeuring: Univé NL, EcoFlow NL, ALLPOWERS NL en Overstappen NL. Voor Slimster, WoonVeilig en het personenalarm is een Daisycon-account nodig; dat is er nog niet.
 
+## Fase 1: het gratis handboek op de site (17 november 2026)
+
+Gebouwd op verzoek van de eigenaar: het handboek is gratis, in ruil voor een e-mailadres.
+
+### Hoe het loopt
+
+1. **Aanvragen** op `/nl/noodhandboek/` (of op een gemeentepagina): postcode, huisnummer, huishouden en e-mailadres. `api/handbook-request.js` controleert bij PDOK dat het adres precies bestaat en mailt een persoonlijke link.
+2. **Openen.** De link leidt naar `/nl/noodhandboek/mijn/`. Die pagina stuurt de sleutel uit de link naar `api/handbook.js`, dat op dat moment alle gegevens ophaalt en het handboek van vier pagina's teruggeeft. Lokaal duurt dat ongeveer zes seconden.
+3. **Printen of bewaren** met de knop bovenaan. Er wordt geen pdf op de server gemaakt; de browser doet dat.
+
+### Privacy, zoals gebouwd
+
+- Adres en huishouden worden nergens opgeslagen. Ze zitten versleuteld (AES-256-GCM) in de link.
+- De sleutel staat achter het hekje in de link. Dat deel wordt niet meegestuurd bij het opvragen van de pagina en komt dus niet in statistieken of serverlogs.
+- Het e-mailadres gaat alleen naar de lijst als de aanvrager het vakje voor tips en herinneringen aanvinkt. Dat vakje staat uit. Dit is de voorzichtige keuze: het handboek hangt niet af van toestemming voor e-mail. Wie het vakje verplicht wil maken, moet dat eerst juridisch laten toetsen.
+- De privacypagina beschrijft dit, inclusief de diensten waar de coördinaten naartoe gaan.
+
+### Wat nog een proef blijft
+
+- **De databronnen voor kaart, punten in de buurt en routes** zijn openbare diensten van OpenStreetMap, Photon en OSRM. Die zijn bedoeld voor licht gebruik. Bij de huidige bezoekersaantallen is dat geen probleem; bij duizenden handboeken per maand moeten de punten in eigen beheer komen, zoals het plan al zei.
+- **Verwachte waterdiepte** ontbreekt nog steeds.
+- Het handboek draagt daarom het label "bèta".
+
+## Pagina's per gemeente (17 november 2026)
+
+Voor het zoekverkeer: `/nl/noodplan/` met een pagina voor elk van de 342 gemeenten. `handbook/scripts/gemeenten.mjs` bouwt de gegevens (`src/data/gemeenten-nl.json`) uit dezelfde bronnen als het handboek.
+
+Per gemeente staat er: de rampenzender met alle FM-frequenties en het DAB-blok, de veiligheidsregio met website, de twee dichtstbijzijnde spoedeisende hulpen, het waterschap, en een steekproef van zestien punten bij woningen die laat zien welk deel in overstromingsrisicogebied ligt en tussen welke hoogtes het maaiveld ligt. Elke pagina heeft het aanvraagformulier voor het handboek, vier vragen met antwoord (ook als gestructureerde gegevens voor Google) en links naar de buurgemeenten.
+
+De rampenzenders en frequenties komen van Denk Vooruit; de websites van alle 25 veiligheidsregio's zijn stuk voor stuk geopend en gecontroleerd.
+

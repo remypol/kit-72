@@ -1,0 +1,91 @@
+---
+/**
+ * Where the link from the email lands. The token is in the URL fragment, so
+ * it never reaches the server in a page request or an analytics hit. This
+ * page posts it to /api/handbook and replaces itself with the handbook.
+ */
+import BaseLayout from '../../../../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="Je noodhandboek wordt gemaakt" locale="nl" noIndex hideSignup hideBottomNav>
+  <section class="mine" data-handbook-loader>
+    <div data-state="loading">
+      <h1>Je noodhandboek wordt gemaakt</h1>
+      <p>We halen nu de gegevens voor jouw adres op: hoogte, overstromingsrisico, spoedeisende hulp en de kaart van je buurt. Dat duurt meestal een paar seconden, soms een halve minuut.</p>
+      <div class="mine__bar" role="progressbar" aria-label="Bezig met maken"><span></span></div>
+    </div>
+    <div data-state="expired" hidden>
+      <h1>Deze link werkt niet meer</h1>
+      <p>De link is verlopen of onvolledig. Vraag je handboek opnieuw aan; dat kost een halve minuut.</p>
+      <a href="/nl/noodhandboek/" class="btn btn-primary btn-lg">Opnieuw aanvragen</a>
+    </div>
+    <div data-state="failed" hidden>
+      <h1>Het maken is niet gelukt</h1>
+      <p>Een van de bronnen gaf geen antwoord. Probeer het over een minuut opnieuw; je link blijft geldig.</p>
+      <button type="button" class="btn btn-primary btn-lg" data-retry>Opnieuw proberen</button>
+    </div>
+  </section>
+</BaseLayout>
+
+<script>
+  const root = document.querySelector<HTMLElement>('[data-handbook-loader]')!;
+  const show = (state: string) => root.querySelectorAll<HTMLElement>('[data-state]').forEach((el) => (el.hidden = el.dataset.state !== state));
+
+  async function load() {
+    const token = new URLSearchParams(location.hash.slice(1)).get('t');
+    if (!token) return show('expired');
+    show('loading');
+    try {
+      const res = await fetch('/api/handbook', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ t: token }) });
+      if (res.status === 410 || res.status === 404) return show('expired');
+      if (!res.ok) return show('failed');
+      const html = await res.text();
+      window.gtag?.('event', 'handbook_opened', { locale: 'nl' });
+      // Replace this page with the handbook; the address bar keeps the personal link.
+      document.open();
+      document.write(html);
+      document.close();
+    } catch {
+      show('failed');
+    }
+  }
+  root.querySelector('[data-retry]')?.addEventListener('click', load);
+  load();
+</script>
+
+<style>
+  .mine {
+    max-width: 40rem;
+    margin-inline: auto;
+    padding: var(--space-16) var(--space-4) var(--space-24);
+  }
+  .mine h1 {
+    font-size: clamp(1.9rem, 4.2vw, 2.6rem);
+  }
+  .mine p {
+    margin-block: var(--space-4) var(--space-6);
+    font-size: 1.12rem;
+    color: var(--color-text-secondary);
+  }
+  .mine__bar {
+    height: 6px;
+    border-radius: 3px;
+    background: var(--color-border);
+    overflow: hidden;
+  }
+  .mine__bar span {
+    display: block;
+    height: 100%;
+    width: 40%;
+    border-radius: 3px;
+    background: var(--color-accent);
+    animation: mine-slide 1.4s ease-in-out infinite;
+  }
+  @keyframes mine-slide {
+    from { transform: translateX(-100%); }
+    to { transform: translateX(250%); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .mine__bar span { animation: none; width: 100%; opacity: 0.5; }
+  }
+</style>

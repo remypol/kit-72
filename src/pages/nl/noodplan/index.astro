@@ -1,0 +1,141 @@
+---
+/**
+ * Hub for the municipality pages: all 342, grouped by province, with a
+ * filter box. Also the place to start the free address-level handbook.
+ */
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import HandbookForm from '../../../components/growth/HandbookForm.astro';
+import { gemeenten, checked } from '../../../data/gemeenten';
+
+const provinces = [...new Set(gemeenten.map((g) => g.province ?? 'Overig'))].sort((a, b) => a.localeCompare(b, 'nl'));
+const byProvince = provinces.map((p) => ({ name: p, items: gemeenten.filter((g) => (g.province ?? 'Overig') === p) }));
+---
+
+<BaseLayout
+  title="Noodplan per gemeente: rampenzender en SEH"
+  description={`Voor alle ${gemeenten.length} gemeenten: welke rampenzender erbij hoort, waar de dichtstbijzijnde spoedeisende hulp is en hoeveel in overstromingsrisicogebied ligt.`}
+  locale="nl"
+  hideSignup
+  dateModified={checked}
+  breadcrumbs={[
+    { name: 'Home', url: '/nl/' },
+    { name: 'Noodplan per gemeente', url: '/nl/noodplan/' },
+  ]}
+>
+  <section class="np">
+    <header class="np-head">
+      <h1>Noodplan per gemeente</h1>
+      <p>
+        Voor alle {gemeenten.length} gemeenten staat op een rij welke rampenzender je aanzet, waar de dichtstbijzijnde spoedeisende hulp is, onder welke veiligheidsregio je valt en hoeveel van de gemeente in overstromingsrisicogebied ligt.
+      </p>
+      <label class="np-search">
+        <span>Zoek je gemeente</span>
+        <input type="search" placeholder="Bijvoorbeeld Apeldoorn" autocomplete="off" data-np-filter />
+      </label>
+      <p class="np-none" data-np-none hidden>Geen gemeente gevonden. Controleer de spelling, of vul hieronder je postcode in.</p>
+    </header>
+
+    {byProvince.map((p) => (
+      <section class="np-prov" data-np-group>
+        <h2>{p.name}</h2>
+        <ul>
+          {p.items.map((g) => <li data-np-item data-name={g.name.toLowerCase()}><a href={`/nl/noodplan/${g.slug}/`}>{g.name}</a></li>)}
+        </ul>
+      </section>
+    ))}
+
+    <div class="np-form">
+      <HandbookForm
+        source="noodplan"
+        title="Of maak direct een handboek voor je eigen adres"
+        body="De gemeentepagina's geven het beeld voor de hele gemeente. Het gratis noodhandboek rekent voor jouw adres: vier pagina's, klaar om te printen."
+      />
+    </div>
+  </section>
+</BaseLayout>
+
+<script>
+  const input = document.querySelector<HTMLInputElement>('[data-np-filter]');
+  const none = document.querySelector<HTMLElement>('[data-np-none]');
+  input?.addEventListener('input', () => {
+    const q = input.value.trim().toLowerCase();
+    let shown = 0;
+    document.querySelectorAll<HTMLElement>('[data-np-group]').forEach((group) => {
+      let any = false;
+      group.querySelectorAll<HTMLElement>('[data-np-item]').forEach((li) => {
+        const match = !q || (li.dataset.name || '').includes(q);
+        li.hidden = !match;
+        if (match) any = true;
+      });
+      group.hidden = !any;
+      if (any) shown++;
+    });
+    if (none) none.hidden = shown > 0;
+  });
+</script>
+
+<style>
+  .np {
+    max-width: 72rem;
+    margin-inline: auto;
+    padding: var(--space-8) var(--space-4) var(--space-16);
+  }
+  .np-head h1 {
+    font-size: clamp(2rem, 4.6vw, 3rem);
+  }
+  .np-head p {
+    margin-top: var(--space-4);
+    font-size: 1.12rem;
+    color: var(--color-text-secondary);
+    max-width: 62ch;
+  }
+  .np-search {
+    display: grid;
+    gap: var(--space-2);
+    margin-top: var(--space-6);
+    max-width: 26rem;
+    font-weight: 650;
+  }
+  .np-search input {
+    min-height: 48px;
+    padding: 0 var(--space-4);
+    font: inherit;
+    font-size: 16px;
+    border: 2px solid var(--color-text-primary);
+    border-radius: var(--radius-md);
+    background: #fff;
+  }
+  .np-search input:focus-visible {
+    outline: 3px solid var(--color-signal);
+    outline-offset: 2px;
+  }
+  .np-prov {
+    margin-top: var(--space-10);
+  }
+  .np-prov h2 {
+    font-size: 1.3rem;
+    border-bottom: 3px solid var(--color-text-primary);
+    padding-bottom: var(--space-2);
+    margin-bottom: var(--space-4);
+  }
+  .np-prov ul {
+    list-style: none;
+    padding: 0;
+    columns: 12rem;
+    column-gap: var(--space-8);
+  }
+  .np-prov li {
+    break-inside: avoid;
+    padding-block: 0.2rem;
+  }
+  .np-prov a {
+    color: var(--color-accent);
+    font-weight: 600;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+  .np-form {
+    max-width: 44rem;
+    margin-top: var(--space-16);
+  }
+</style>

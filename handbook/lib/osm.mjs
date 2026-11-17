@@ -21,24 +21,26 @@ const KINDS = {
 
 /** Nearest points of interest per kind, nearest first. */
 export async function nearby(home) {
-  const out = {};
-  for (const [kind, [tag, radiusKm]] of Object.entries(KINDS)) {
-    const url = `https://photon.komoot.io/reverse?lat=${home.lat}&lon=${home.lon}&radius=${radiusKm}&limit=5&osm_tag=${tag}`;
-    let features = [];
-    try {
-      features = (await getJson(url)).features ?? [];
-    } catch {
-      /* one missing kind should not sink the page */
-    }
-    out[kind] = features
-      .map((f) => {
-        const p = f.properties;
-        const pos = { lat: f.geometry.coordinates[1], lon: f.geometry.coordinates[0] };
-        return { name: p.name ?? null, street: p.street ? `${p.street} ${p.housenumber ?? ''}`.trim() : null, city: p.city ?? null, ...pos, dist: metres(home, pos) };
-      })
-      .sort((a, b) => a.dist - b.dist);
-  }
-  return out;
+  const entries = await Promise.all(
+    Object.entries(KINDS).map(async ([kind, [tag, radiusKm]]) => {
+      const url = `https://photon.komoot.io/reverse?lat=${home.lat}&lon=${home.lon}&radius=${radiusKm}&limit=5&osm_tag=${tag}`;
+      let features = [];
+      try {
+        features = (await getJson(url)).features ?? [];
+      } catch {
+        /* one missing kind should not sink the page */
+      }
+      const list = features
+        .map((f) => {
+          const p = f.properties;
+          const pos = { lat: f.geometry.coordinates[1], lon: f.geometry.coordinates[0] };
+          return { name: p.name ?? null, street: p.street ? `${p.street} ${p.housenumber ?? ''}`.trim() : null, city: p.city ?? null, ...pos, dist: metres(home, pos) };
+        })
+        .sort((x, y) => x.dist - y.dist);
+      return [kind, list];
+    }),
+  );
+  return Object.fromEntries(entries);
 }
 
 /**
@@ -59,7 +61,7 @@ export async function mapFeatures(home, radius = 1150) {
       if (depth >= 3 || !/400/.test(err.message)) throw err;
       const mx = (w + e) / 2;
       const my = (s + n) / 2;
-      for (const q of [[w, s, mx, my], [mx, s, e, my], [w, my, mx, n], [mx, my, e, n]]) await load(...q, depth + 1);
+      await Promise.all([[w, s, mx, my], [mx, s, e, my], [w, my, mx, n], [mx, my, e, n]].map((q) => load(...q, depth + 1)));
     }
   }
   await load(home.lon - dLon, home.lat - dLat, home.lon + dLon, home.lat + dLat);

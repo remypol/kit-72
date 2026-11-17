@@ -23,6 +23,8 @@ export const planCss = `
 .pl-grid{display:grid;grid-template-columns:1fr 1fr;gap:0 8mm}
 .pl-grid h3{font-family:'Archivo Variable',Arial,sans-serif;font-stretch:112%;font-weight:750;font-size:10.5pt;border-bottom:.6mm solid #10231b;padding-bottom:1mm}
 .pl-field{border-bottom:.3mm solid #10231b;height:12.4mm;display:flex;align-items:flex-start;padding-top:1.1mm;font-size:7.8pt;color:#43544b}
+.pl-radio{border-left:1.2mm solid #0a7a43;padding:.6mm 0 .6mm 3.4mm;font-size:8.8pt;line-height:1.35}
+.pl-radio b{font-weight:700}
 .pl-check{background:#f4f7f3;border-radius:3mm;padding:3.6mm 5.5mm 3.4mm}
 .pl-check .hd{display:flex;justify-content:space-between;align-items:baseline;gap:6mm;margin-bottom:2.2mm}
 .pl-check h2{font-size:12.5pt;margin:0}
@@ -67,6 +69,12 @@ export function planPage(d, needs) {
     ['Dit handboek opnieuw gemaakt', 'adressen en openingstijden veranderen'],
   ];
 
+  // the regional emergency broadcaster with every FM transmitter; which one comes in depends on where you are
+  const r = d.region;
+  const radio = r?.fm?.length
+    ? `<p class="pl-radio"><b>Stel je radio nu af op ${esc(r.broadcaster)}.</b> FM ${r.fm.map(([place, mhz]) => `${esc(mhz.replace('.', ','))} (${esc(place)})`).join(', ')}${r.dab ? `; op DAB+ is het blok ${esc(r.dab)}` : ''}. Plak de frequentie die je ontvangt op de radio.</p>`
+    : '';
+
   return `<section class="page">
 <div class="fh-head">
   <h1>Jouw noodplan</h1>
@@ -88,6 +96,7 @@ export function planPage(d, needs) {
   </div>
 </div>
 
+${radio}
 <div class="pl-check">
   <div class="hd"><h2>Elk halfjaar nalopen</h2><p class="next">Volgende keer: <b>${nextDate}</b></p></div>
   <ul>${checks.map(([head, sub]) => `<li>${esc(head)}${sub ? `<span>${esc(sub)}</span>` : ''}</li>`).join('')}</ul>
