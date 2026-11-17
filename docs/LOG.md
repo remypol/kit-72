@@ -73,3 +73,14 @@ What matters:
 - Resend: the account holds 10 verified domains for other projects and is at its plan limit, so `kit-72.com` could not be added. Nothing belonging to other projects was changed. Created only a segment named "Kit-72". No API key was created.
 - Because email cannot send yet, the signup form is now behind `PUBLIC_SIGNUP_ENABLED` (off). Contact properties renamed with a `kit72_` prefix, since properties are account-wide.
 - DNS for kit-72.com is at Squarespace Domains; the root SPF is `v=spf1 -all` and there is no MX, so the Resend records still have to be added there once the domain exists in Resend.
+
+## 7. Email live (2026-11-17, later still)
+
+- A domain slot was freed in Resend. Added `kit-72.com`, created the five `kit72_` contact properties and a key named `kit-72-site`; stored the key and segment ID in Vercel.
+- DNS at Squarespace Domains: added DKIM (`resend._domainkey`), MX and SPF on `send`. All three verified by Resend; the DKIM value in DNS matches byte for byte.
+- **Side effect:** saving the MX record made Squarespace drop its "Email Security" preset (root SPF `-all`, DMARC `p=reject`, wildcard null DKIM). Website records were not affected. DMARC must be re-added by hand.
+- Squarespace asks for a fresh Google login before DNS edits; the `rsend` CNAME is filled in but not saved because that prompt came back.
+- Redeployed production with the keys, ran the full flow against the live site with Resend's test address (all steps passed), then set `PUBLIC_SIGNUP_ENABLED=true` and redeployed. The form is live on content pages.
+- Privacy pages (NL, DE, ES) rewritten to describe the email signup, Resend as processor and consent-gated analytics; they previously said no personal data was stored. The NL and DE privacy pages no longer show the signup form.
+- Gaps found, not fixed: the privacy pages give no contact address, and the German site has no Impressum.
+- After the owner logged in to Squarespace again: `rsend` CNAME saved; root SPF and DMARC re-added as custom records with their previous values. Checked at the authoritative nameserver.

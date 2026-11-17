@@ -3,27 +3,66 @@ import BaseLayout from '../../../layouts/BaseLayout.astro';
 import Breadcrumb from '../../../components/layout/Breadcrumb.astro';
 ---
 
-<BaseLayout title="Privacybeleid — Kit-72" description="Hoe we omgaan met je gegevens." locale="nl">
+<BaseLayout title="Privacybeleid — Kit-72" description="Hoe we omgaan met je gegevens." locale="nl" hideSignup>
   <section class="py-16">
     <div class="max-w-3xl mx-auto px-4 sm:px-6">
       <Breadcrumb items={[{ label: 'Privacy' }]} class="mb-4" locale="nl" />
       <h1 class="text-4xl font-bold mb-6">Privacybeleid</h1>
       
       <div class="prose prose-lg">
-        <p><em>Laatst bijgewerkt: december 2025</em></p>
-        
+        <p><em>Laatst bijgewerkt: november 2026</em></p>
+
         <h2>Welke gegevens verzamelen we?</h2>
-        <p>Kit-72.com verzamelt minimale gegevens:</p>
         <ul>
-          <li>Anonieme analytics (paginabezoeken, geen persoonlijke data)</li>
-          <li>Lokale opslag in je browser voor de noodpakket-configurator</li>
+          <li><strong>Je e-mailadres</strong>, alleen als je zelf je lijst aanvraagt (zie hieronder)</li>
+          <li><strong>Bezoekstatistieken</strong>, alleen als je daar toestemming voor geeft</li>
+          <li><strong>Je keuzes in de tools</strong> (afgevinkte spullen, grootte van je huishouden): die blijven in je eigen browser en komen niet bij ons terecht</li>
         </ul>
 
-        <h2>Cookies</h2>
-        <p>We gebruiken alleen functionele cookies voor de werking van de site. Geen tracking cookies van derden.</p>
+        <h2>E-mail: je lijst en de herinnering</h2>
+        <p>
+          Vraag je je noodpakketlijst per e-mail aan, dan sturen we eerst een bevestigingsmail.
+          Pas als je op de link daarin klikt, bewaren we je adres. Zonder bevestiging bewaren we niets.
+        </p>
+        <p>Wat we dan bewaren:</p>
+        <ul>
+          <li>je e-mailadres</li>
+          <li>de taal van de site</li>
+          <li>het aantal personen in je huishouden, en of er kinderen of huisdieren zijn, als je dat hebt ingevuld</li>
+          <li>op welke pagina je je hebt aangemeld</li>
+        </ul>
+        <p>
+          We gebruiken dit om je je lijst te sturen en je twee keer per jaar te herinneren aan het
+          controleren van houdbaarheidsdata. De grondslag is je toestemming. Je kunt je in elke e-mail
+          afmelden; daarna sturen we je niets meer.
+        </p>
+        <p>
+          Het versturen en bewaren loopt via Resend (Resend, Inc., Verenigde Staten), dat de gegevens
+          in onze opdracht verwerkt. We verkopen of delen je adres niet met anderen.
+        </p>
+
+        <h2>Statistieken en cookies</h2>
+        <p>
+          We gebruiken Google Analytics om te zien welke pagina's gelezen worden en op welke
+          winkellinks geklikt wordt. Google Analytics wordt pas geladen nadat je in de cookiemelding
+          "ja" hebt gekozen, en plaatst dan cookies. Kies je "nee", dan laden we het niet. Je keuze
+          bewaren we in je browser. Meer hierover staat in ons <a href="/nl/cookies/">cookiebeleid</a>.
+        </p>
 
         <h2>Affiliate links</h2>
-        <p>Sommige links naar producten zijn affiliate links. Als je via deze links koopt, ontvangen wij een kleine commissie zonder extra kosten voor jou.</p>
+        <p>
+          Sommige links naar winkels zijn affiliate links. Koop je via zo'n link, dan ontvangen wij
+          soms een kleine commissie, zonder extra kosten voor jou. Na de klik ben je op de site van de
+          winkel en geldt het privacybeleid van die winkel; die kan cookies plaatsen om de aankoop aan
+          ons toe te schrijven. Zie ook onze <a href="/nl/affiliate-disclaimer/">uitleg over affiliate links</a>.
+        </p>
+
+        <h2>Je rechten</h2>
+        <p>
+          Onder de AVG mag je je gegevens inzien, laten verbeteren of laten verwijderen, en je
+          toestemming intrekken. Afmelden kan via de link in elke e-mail. Je kunt ook een klacht
+          indienen bij de Autoriteit Persoonsgegevens.
+        </p>
 
         <h2>Contact</h2>
         <p>Vragen over privacy? Neem contact op via onze website.</p>
