@@ -58,7 +58,7 @@ const containerTypes = [
     cons: ['Más cara por litro', 'Plástico de un uso', 'Ocupa espacio'],
     bestFor: 'Reserva de bebida principal, evacuación',
     capacity: '0.5-8L',
-    icon: 'Bottle'
+    icon: 'GlassWater'
   },
   {
     name: 'Garrafas alimentarias',
@@ -270,31 +270,31 @@ const commonMistakes = [
       <!-- Header -->
       <div class="mb-12">
         <nav class="text-sm mb-4">
-          <ol class="flex items-center gap-2 text-[--color-text-muted]">
-            <li><a href="/es/" class="hover:text-[--color-accent-primary]">Inicio</a></li>
+          <ol class="flex items-center gap-2 text-(--color-text-muted)">
+            <li><a href="/es/" class="hover:text-(--color-accent-primary)">Inicio</a></li>
             <li>/</li>
-            <li><a href="/es/componentes/" class="hover:text-[--color-accent-primary]">Componentes</a></li>
+            <li><a href="/es/componentes/" class="hover:text-(--color-accent-primary)">Componentes</a></li>
             <li>/</li>
-            <li class="text-[--color-text-primary]">Bidones de Agua</li>
+            <li class="text-(--color-text-primary)">Bidones de Agua</li>
           </ol>
         </nav>
         <h1 class="mb-4 flex items-center gap-3">
-          <Icon name="Droplet" size={32} class="text-[--color-accent-primary]" />
+          <Icon name="Droplet" size={32} class="text-(--color-accent-primary)" />
           Bidones y Almacenamiento de Agua
         </h1>
-        <p class="text-lg text-[--color-text-secondary]">
+        <p class="text-lg text-(--color-text-secondary)">
           El agua es lo más crítico en emergencias. Sin ella solo sobrevives 3 días.
           Elegir los recipientes correctos y almacenar bien es fundamental.
         </p>
       </div>
 
       <!-- Quick Recommendation -->
-      <div class="card p-6 mb-8 border-l-4 border-l-[--color-accent-primary]">
-        <h3 class="font-semibold mb-2 text-[--color-text-primary] flex items-center gap-2">
-          <Icon name="Droplet" size={20} class="text-[--color-accent-primary]" />
+      <div class="card p-6 mb-8 border-l-4 border-l-(--color-accent-primary)">
+        <h3 class="font-semibold mb-2 text-(--color-text-primary) flex items-center gap-2">
+          <Icon name="Droplet" size={20} class="text-(--color-accent-primary)" />
           Recomendación rápida
         </h3>
-        <p class="text-[--color-text-secondary] m-0">
+        <p class="text-(--color-text-secondary) m-0">
           <strong>Mínimo:</strong> 9 litros por persona para 3 días (3L/día).
           <strong>Ideal:</strong> 20-30 litros por persona combinando botellas y bidones.
           <strong>Presupuesto:</strong> 20-50€ en contenedores reutilizables.
@@ -302,50 +302,50 @@ const commonMistakes = [
       </div>
 
       <!-- Quick Calculator -->
-      <div class="card p-6 mb-8 bg-[--color-bg-tertiary]">
-        <h3 class="font-semibold mb-4 text-[--color-text-primary] flex items-center gap-2">
-          <Icon name="Calculator" size={20} class="text-[--color-accent-primary]" />
+      <div class="card p-6 mb-8 bg-(--color-bg-tertiary)">
+        <h3 class="font-semibold mb-4 text-(--color-text-primary) flex items-center gap-2">
+          <Icon name="Calculator" size={20} class="text-(--color-accent-primary)" />
           Calcula tu necesidad
         </h3>
-        <div class="text-sm text-[--color-text-secondary] space-y-3">
+        <div class="text-sm text-(--color-text-secondary) space-y-3">
           <p><strong>Fórmula:</strong> Personas × 3L × Días = Litros totales</p>
           <div class="grid grid-cols-3 gap-4 text-center">
-            <div class="p-3 bg-[--color-bg-primary] rounded">
-              <p class="text-2xl font-bold text-[--color-accent-primary]">9L</p>
+            <div class="p-3 bg-(--color-bg-primary) rounded">
+              <p class="text-2xl font-bold text-(--color-accent-primary)">9L</p>
               <p class="text-xs">1 persona / 3 días</p>
             </div>
-            <div class="p-3 bg-[--color-bg-primary] rounded">
-              <p class="text-2xl font-bold text-[--color-accent-primary]">36L</p>
+            <div class="p-3 bg-(--color-bg-primary) rounded">
+              <p class="text-2xl font-bold text-(--color-accent-primary)">36L</p>
               <p class="text-xs">4 personas / 3 días</p>
             </div>
-            <div class="p-3 bg-[--color-bg-primary] rounded">
-              <p class="text-2xl font-bold text-[--color-accent-primary]">84L</p>
+            <div class="p-3 bg-(--color-bg-primary) rounded">
+              <p class="text-2xl font-bold text-(--color-accent-primary)">84L</p>
               <p class="text-xs">4 personas / 7 días</p>
             </div>
           </div>
-          <p class="text-xs text-[--color-text-muted]">Esto es el mínimo. Añade más para mascotas, clima caluroso o mayor confort.</p>
+          <p class="text-xs text-(--color-text-muted)">Esto es el mínimo. Añade más para mascotas, clima caluroso o mayor confort.</p>
         </div>
       </div>
 
       <!-- Container Types -->
       <div class="mb-12">
-        <h2 class="text-2xl font-bold mb-6 text-[--color-text-primary]">Tipos de recipientes</h2>
+        <h2 class="text-2xl font-bold mb-6 text-(--color-text-primary)">Tipos de recipientes</h2>
 
         <div class="space-y-4">
           {containerTypes.map((type) => (
             <div class="card p-6">
               <div class="flex items-start gap-4">
-                <div class="w-12 h-12 flex items-center justify-center bg-[--color-bg-tertiary] rounded-lg flex-shrink-0">
-                  <Icon name={type.icon as any} size={28} class="text-[--color-accent-primary]" />
+                <div class="w-12 h-12 flex items-center justify-center bg-(--color-bg-tertiary) rounded-lg flex-shrink-0">
+                  <Icon name={type.icon as any} size={28} class="text-(--color-accent-primary)" />
                 </div>
                 <div class="flex-1">
                   <div class="flex items-center gap-3 mb-2">
-                    <h3 class="font-semibold text-[--color-text-primary]">{type.name}</h3>
-                    <span class="text-xs px-2 py-1 bg-[--color-bg-tertiary] text-[--color-text-muted] rounded">
+                    <h3 class="font-semibold text-(--color-text-primary)">{type.name}</h3>
+                    <span class="text-xs px-2 py-1 bg-(--color-bg-tertiary) text-(--color-text-muted) rounded">
                       {type.capacity}
                     </span>
                   </div>
-                  <p class="text-sm text-[--color-text-secondary] mb-3">{type.description}</p>
+                  <p class="text-sm text-(--color-text-secondary) mb-3">{type.description}</p>
 
                   <div class="grid sm:grid-cols-3 gap-4 text-sm">
                     <div>
@@ -353,7 +353,7 @@ const commonMistakes = [
                         <Icon name="CircleCheck" size={14} />
                         Pros
                       </span>
-                      <ul class="mt-1 space-y-1 text-[--color-text-muted]">
+                      <ul class="mt-1 space-y-1 text-(--color-text-muted)">
                         {type.pros.map((pro) => <li>• {pro}</li>)}
                       </ul>
                     </div>
@@ -362,16 +362,16 @@ const commonMistakes = [
                         <Icon name="CircleX" size={14} />
                         Contras
                       </span>
-                      <ul class="mt-1 space-y-1 text-[--color-text-muted]">
+                      <ul class="mt-1 space-y-1 text-(--color-text-muted)">
                         {type.cons.map((con) => <li>• {con}</li>)}
                       </ul>
                     </div>
                     <div>
-                      <span class="text-[--color-accent-primary] font-medium flex items-center gap-1">
+                      <span class="text-(--color-accent-primary) font-medium flex items-center gap-1">
                         <Icon name="Star" size={14} />
                         Ideal para
                       </span>
-                      <p class="mt-1 text-[--color-text-muted]">{type.bestFor}</p>
+                      <p class="mt-1 text-(--color-text-muted)">{type.bestFor}</p>
                     </div>
                   </div>
                 </div>
@@ -383,12 +383,12 @@ const commonMistakes = [
 
       <!-- Safe Materials -->
       <div class="mb-12">
-        <h2 class="text-2xl font-bold mb-6 text-[--color-text-primary]">Materiales seguros (y cuáles evitar)</h2>
+        <h2 class="text-2xl font-bold mb-6 text-(--color-text-primary)">Materiales seguros (y cuáles evitar)</h2>
 
         <div class="card overflow-hidden">
           <div class="overflow-x-auto">
             <table class="w-full text-sm">
-              <thead class="bg-[--color-bg-tertiary]">
+              <thead class="bg-(--color-bg-tertiary)">
                 <tr>
                   <th class="text-center py-3 px-2 w-10"></th>
                   <th class="text-left py-3 px-4">Material</th>
@@ -396,15 +396,15 @@ const commonMistakes = [
                   <th class="text-left py-3 px-4">Notas</th>
                 </tr>
               </thead>
-              <tbody class="text-[--color-text-secondary]">
+              <tbody class="text-(--color-text-secondary)">
                 {materials.map((mat, i) => (
-                  <tr class={`${i % 2 === 0 ? 'bg-[--color-bg-secondary]' : ''} ${!mat.safe ? 'opacity-60' : ''}`}>
+                  <tr class={`${i % 2 === 0 ? 'bg-(--color-bg-secondary)' : ''} ${!mat.safe ? 'opacity-60' : ''}`}>
                     <td class="py-3 px-2 text-center">
-                      <Icon name={mat.icon as any} size={18} class={mat.icon === 'CircleCheck' ? 'text-green-400' : mat.icon === 'AlertTriangle' ? 'text-[--color-status-warning]' : 'text-red-400'} />
+                      <Icon name={mat.icon as any} size={18} class={mat.icon === 'CircleCheck' ? 'text-green-400' : mat.icon === 'AlertTriangle' ? 'text-(--color-status-warning)' : 'text-red-400'} />
                     </td>
-                    <td class="py-3 px-4 font-medium text-[--color-text-primary]">{mat.name}</td>
+                    <td class="py-3 px-4 font-medium text-(--color-text-primary)">{mat.name}</td>
                     <td class="py-3 px-4 text-center">
-                      <span class="inline-flex items-center justify-center w-6 h-6 border border-[--color-border] rounded text-xs">
+                      <span class="inline-flex items-center justify-center w-6 h-6 border border-(--color-border) rounded text-xs">
                         {mat.code}
                       </span>
                     </td>
@@ -414,7 +414,7 @@ const commonMistakes = [
               </tbody>
             </table>
           </div>
-          <div class="p-4 bg-[--color-bg-tertiary] text-xs text-[--color-text-muted]">
+          <div class="p-4 bg-(--color-bg-tertiary) text-xs text-(--color-text-muted)">
             Busca el símbolo de reciclaje con el número en el fondo del recipiente. HDPE (#2) es el mejor.
           </div>
         </div>
@@ -422,23 +422,23 @@ const commonMistakes = [
 
       <!-- Water Treatment -->
       <div class="mb-12">
-        <h2 class="text-2xl font-bold mb-6 text-[--color-text-primary]">Tratamiento y conservación</h2>
+        <h2 class="text-2xl font-bold mb-6 text-(--color-text-primary)">Tratamiento y conservación</h2>
 
         <div class="card overflow-hidden">
           <div class="overflow-x-auto">
             <table class="w-full text-sm">
-              <thead class="bg-[--color-bg-tertiary]">
+              <thead class="bg-(--color-bg-tertiary)">
                 <tr>
                   <th class="text-left py-3 px-4">Método</th>
                   <th class="text-center py-3 px-4">Duración</th>
                   <th class="text-left py-3 px-4">Notas</th>
                 </tr>
               </thead>
-              <tbody class="text-[--color-text-secondary]">
+              <tbody class="text-(--color-text-secondary)">
                 {waterTreatment.map((treat, i) => (
-                  <tr class={i % 2 === 0 ? 'bg-[--color-bg-secondary]' : ''}>
-                    <td class="py-3 px-4 font-medium text-[--color-text-primary]">{treat.method}</td>
-                    <td class="py-3 px-4 text-center font-bold text-[--color-accent-primary]">{treat.duration}</td>
+                  <tr class={i % 2 === 0 ? 'bg-(--color-bg-secondary)' : ''}>
+                    <td class="py-3 px-4 font-medium text-(--color-text-primary)">{treat.method}</td>
+                    <td class="py-3 px-4 text-center font-bold text-(--color-accent-primary)">{treat.duration}</td>
                     <td class="py-3 px-4 text-xs">{treat.notes}</td>
                   </tr>
                 ))}
@@ -447,10 +447,10 @@ const commonMistakes = [
           </div>
         </div>
 
-        <div class="mt-4 p-4 bg-[--color-status-info]/10 border border-[--color-status-info]/30 rounded-lg">
-          <p class="text-sm text-[--color-text-secondary] m-0 flex items-start gap-2">
-            <Icon name="Lightbulb" size={18} class="text-[--color-status-info] flex-shrink-0 mt-0.5" />
-            <span><strong class="text-[--color-status-info]">Consejo:</strong> El agua del grifo en España ya
+        <div class="mt-4 p-4 bg-(--color-status-info)/10 border border-(--color-status-info)/30 rounded-lg">
+          <p class="text-sm text-(--color-text-secondary) m-0 flex items-start gap-2">
+            <Icon name="Lightbulb" size={18} class="text-(--color-status-info) flex-shrink-0 mt-0.5" />
+            <span><strong class="text-(--color-status-info)">Consejo:</strong> El agua del grifo en España ya
             viene tratada y dura 6 meses sin problemas si se almacena correctamente (oscuro, fresco, cerrado).</span>
           </p>
         </div>
@@ -458,13 +458,13 @@ const commonMistakes = [
 
       <!-- Storage Locations -->
       <div class="mb-12">
-        <h2 class="text-2xl font-bold mb-6 text-[--color-text-primary]">Dónde almacenar</h2>
+        <h2 class="text-2xl font-bold mb-6 text-(--color-text-primary)">Dónde almacenar</h2>
 
         <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
           {storageLocations.map((loc) => (
             <div class="card p-4">
-              <h3 class="font-semibold text-[--color-text-primary] mb-1">{loc.location}</h3>
-              <p class="text-xs text-[--color-text-muted] mb-2">{loc.temp}</p>
+              <h3 class="font-semibold text-(--color-text-primary) mb-1">{loc.location}</h3>
+              <p class="text-xs text-(--color-text-muted) mb-2">{loc.temp}</p>
               <p class="text-sm text-green-400 mb-1 flex items-center gap-1">
                 <Icon name="CircleCheck" size={14} />
                 {loc.pros}
@@ -477,10 +477,10 @@ const commonMistakes = [
           ))}
         </div>
 
-        <div class="mt-4 p-4 bg-[--color-status-warning]/10 border border-[--color-status-warning]/30 rounded-lg">
-          <p class="text-sm text-[--color-text-secondary] m-0 flex items-start gap-2">
-            <Icon name="AlertTriangle" size={18} class="text-[--color-status-warning] flex-shrink-0 mt-0.5" />
-            <span><strong class="text-[--color-status-warning]">Regla de oro:</strong> Oscuro, fresco (10-20°C),
+        <div class="mt-4 p-4 bg-(--color-status-warning)/10 border border-(--color-status-warning)/30 rounded-lg">
+          <p class="text-sm text-(--color-text-secondary) m-0 flex items-start gap-2">
+            <Icon name="AlertTriangle" size={18} class="text-(--color-status-warning) flex-shrink-0 mt-0.5" />
+            <span><strong class="text-(--color-status-warning)">Regla de oro:</strong> Oscuro, fresco (10-20°C),
             alejado de productos químicos y gasolina. NUNCA al sol directo.</span>
           </p>
         </div>
@@ -488,32 +488,32 @@ const commonMistakes = [
 
       <!-- Recommendations -->
       <div class="mb-12">
-        <h2 class="text-2xl font-bold mb-6 text-[--color-text-primary]">Recomendaciones por uso</h2>
+        <h2 class="text-2xl font-bold mb-6 text-(--color-text-primary)">Recomendaciones por uso</h2>
 
         <div class="space-y-4">
           {recommendations.map((rec) => (
-            <div class={`card p-6 ${rec.priority === 'essential' ? 'border-l-4 border-l-red-500' : rec.priority === 'recommended' ? 'border-l-4 border-l-[--color-accent-primary]' : ''}`}>
+            <div class={`card p-6 ${rec.priority === 'essential' ? 'border-l-4 border-l-red-500' : rec.priority === 'recommended' ? 'border-l-4 border-l-(--color-accent-primary)' : ''}`}>
               <div class="flex items-start justify-between gap-4 mb-3">
                 <div>
-                  <span class={`text-xs px-2 py-1 rounded ${rec.priority === 'essential' ? 'bg-red-500/20 text-red-400' : rec.priority === 'recommended' ? 'bg-[--color-accent-primary]/20 text-[--color-accent-primary]' : 'bg-[--color-bg-tertiary] text-[--color-text-muted]'}`}>
+                  <span class={`text-xs px-2 py-1 rounded ${rec.priority === 'essential' ? 'bg-red-500/20 text-red-400' : rec.priority === 'recommended' ? 'bg-(--color-accent-primary)/20 text-(--color-accent-primary)' : 'bg-(--color-bg-tertiary) text-(--color-text-muted)'}`}>
                     {rec.priority === 'essential' ? 'Esencial' : rec.priority === 'recommended' ? 'Recomendado' : 'Opcional'}
                   </span>
-                  <span class="text-xs text-[--color-text-muted] ml-2">{rec.type}</span>
+                  <span class="text-xs text-(--color-text-muted) ml-2">{rec.type}</span>
                 </div>
-                <span class="font-bold text-[--color-accent-primary]">{rec.price}</span>
+                <span class="font-bold text-(--color-accent-primary)">{rec.price}</span>
               </div>
 
-              <h3 class="font-semibold text-[--color-text-primary] mb-2">{rec.name}</h3>
+              <h3 class="font-semibold text-(--color-text-primary) mb-2">{rec.name}</h3>
 
               <div class="flex flex-wrap gap-2 mb-3">
                 {rec.features.map((feature) => (
-                  <span class="text-xs px-2 py-1 bg-[--color-bg-tertiary] text-[--color-text-muted] rounded">
+                  <span class="text-xs px-2 py-1 bg-(--color-bg-tertiary) text-(--color-text-muted) rounded">
                     {feature}
                   </span>
                 ))}
               </div>
 
-              <p class="text-sm text-[--color-text-secondary] m-0">
+              <p class="text-sm text-(--color-text-secondary) m-0">
                 <strong>Veredicto:</strong> {rec.verdict}
               </p>
             </div>
@@ -523,37 +523,37 @@ const commonMistakes = [
 
       <!-- Suggested Kit -->
       <div class="mb-12">
-        <h2 class="text-2xl font-bold mb-6 text-[--color-text-primary]">Kit de agua sugerido</h2>
+        <h2 class="text-2xl font-bold mb-6 text-(--color-text-primary)">Kit de agua sugerido</h2>
 
         <div class="card p-6">
-          <p class="text-sm text-[--color-text-secondary] mb-4">
+          <p class="text-sm text-(--color-text-secondary) mb-4">
             Para una familia de 4 personas para 3 días:
           </p>
 
           <div class="overflow-x-auto">
             <table class="w-full text-sm">
               <thead>
-                <tr class="border-b border-[--color-border]">
+                <tr class="border-b border-(--color-border)">
                   <th class="text-left py-2">Artículo</th>
                   <th class="text-center py-2">Cantidad</th>
                   <th class="text-left py-2">Notas</th>
                 </tr>
               </thead>
-              <tbody class="text-[--color-text-secondary]">
+              <tbody class="text-(--color-text-secondary)">
                 {kitSuggestion.map((item) => (
-                  <tr class="border-b border-[--color-border]">
+                  <tr class="border-b border-(--color-border)">
                     <td class="py-2">{item.item}</td>
-                    <td class="py-2 text-center font-bold text-[--color-accent-primary]">{item.qty}</td>
-                    <td class="py-2 text-xs text-[--color-text-muted]">{item.notes}</td>
+                    <td class="py-2 text-center font-bold text-(--color-accent-primary)">{item.qty}</td>
+                    <td class="py-2 text-xs text-(--color-text-muted)">{item.notes}</td>
                   </tr>
                 ))}
               </tbody>
             </table>
           </div>
 
-          <div class="mt-4 pt-4 border-t border-[--color-border] text-center">
-            <p class="text-sm text-[--color-text-muted]">
-              Inversión aproximada: <strong class="text-[--color-accent-primary]">30-60€</strong> (contenedores reutilizables)
+          <div class="mt-4 pt-4 border-t border-(--color-border) text-center">
+            <p class="text-sm text-(--color-text-muted)">
+              Inversión aproximada: <strong class="text-(--color-accent-primary)">30-60€</strong> (contenedores reutilizables)
             </p>
           </div>
         </div>
@@ -561,8 +561,8 @@ const commonMistakes = [
 
       <!-- Product Recommendations -->
       <div class="mb-12">
-        <h2 class="text-2xl font-bold mb-6 text-[--color-text-primary] flex items-center gap-2">
-          <Icon name="ShoppingCart" size={24} class="text-[--color-accent-primary]" />
+        <h2 class="text-2xl font-bold mb-6 text-(--color-text-primary) flex items-center gap-2">
+          <Icon name="ShoppingCart" size={24} class="text-(--color-accent-primary)" />
           Productos recomendados
         </h2>
         <ProductGrid products={amazonProducts} title="Bidones y accesorios para agua" />
@@ -570,11 +570,11 @@ const commonMistakes = [
 
       <!-- Common Mistakes -->
       <div class="card p-6 mb-8 border-l-4 border-l-red-500">
-        <h3 class="font-semibold mb-4 text-[--color-text-primary] flex items-center gap-2">
+        <h3 class="font-semibold mb-4 text-(--color-text-primary) flex items-center gap-2">
           <Icon name="CircleX" size={20} class="text-red-400" />
           Errores comunes a evitar
         </h3>
-        <ul class="grid sm:grid-cols-2 gap-2 text-sm text-[--color-text-secondary]">
+        <ul class="grid sm:grid-cols-2 gap-2 text-sm text-(--color-text-secondary)">
           {commonMistakes.map((mistake) => (
             <li>• {mistake}</li>
           ))}
@@ -583,24 +583,24 @@ const commonMistakes = [
 
       <!-- Rotation Schedule -->
       <div class="card p-6 mb-8">
-        <h3 class="font-semibold mb-4 text-[--color-text-primary] flex items-center gap-2">
-          <Icon name="Calendar" size={20} class="text-[--color-accent-primary]" />
+        <h3 class="font-semibold mb-4 text-(--color-text-primary) flex items-center gap-2">
+          <Icon name="Calendar" size={20} class="text-(--color-accent-primary)" />
           Calendario de rotación
         </h3>
-        <div class="space-y-3 text-sm text-[--color-text-secondary]">
+        <div class="space-y-3 text-sm text-(--color-text-secondary)">
           <div class="flex items-center gap-3">
-            <span class="font-mono bg-[--color-bg-tertiary] px-2 py-1 rounded">Cada 6 meses</span>
+            <span class="font-mono bg-(--color-bg-tertiary) px-2 py-1 rounded">Cada 6 meses</span>
             <span>Rotar agua del grifo almacenada en bidones</span>
           </div>
           <div class="flex items-center gap-3">
-            <span class="font-mono bg-[--color-bg-tertiary] px-2 py-1 rounded">Cada 2 años</span>
+            <span class="font-mono bg-(--color-bg-tertiary) px-2 py-1 rounded">Cada 2 años</span>
             <span>Revisar agua embotellada comercial (caducidad)</span>
           </div>
           <div class="flex items-center gap-3">
-            <span class="font-mono bg-[--color-bg-tertiary] px-2 py-1 rounded">Cada 5 años</span>
+            <span class="font-mono bg-(--color-bg-tertiary) px-2 py-1 rounded">Cada 5 años</span>
             <span>Renovar pastillas potabilizadoras</span>
           </div>
-          <p class="text-xs text-[--color-text-muted] mt-2">
+          <p class="text-xs text-(--color-text-muted) mt-2">
             Consejo: Usa el sistema FIFO (primero en entrar, primero en salir). Pon fecha en cada bidón.
           </p>
         </div>
@@ -608,17 +608,17 @@ const commonMistakes = [
 
       <!-- Add to Kit Section -->
       <div class="card p-6 mb-8 bg-gradient-to-r from-blue-500/10 to-blue-600/5 border border-blue-500/20">
-        <h3 class="font-semibold mb-4 text-[--color-text-primary] flex items-center gap-2">
+        <h3 class="font-semibold mb-4 text-(--color-text-primary) flex items-center gap-2">
           <Icon name="CheckSquare" size={20} class="text-blue-400" />
           Añadir a tu checklist
         </h3>
-        <p class="text-sm text-[--color-text-secondary] mb-4">
+        <p class="text-sm text-(--color-text-secondary) mb-4">
           Marca estos items en tu Kit Builder para llevar un seguimiento de tu preparación.
         </p>
         <div class="flex flex-wrap gap-3">
           {relatedKitItems.map((item) => (
-            <div class="flex items-center gap-2 bg-[--color-bg-secondary] rounded-lg px-3 py-2">
-              <span class="text-sm text-[--color-text-primary]">{item.name}</span>
+            <div class="flex items-center gap-2 bg-(--color-bg-secondary) rounded-lg px-3 py-2">
+              <span class="text-sm text-(--color-text-primary)">{item.name}</span>
               <AddToKitButton client:idle itemId={item.id} size="sm" />
             </div>
           ))}
@@ -629,13 +629,13 @@ const commonMistakes = [
       <div class="flex flex-wrap gap-4 justify-center">
         <a
           href="/es/guias/almacenamiento-agua/"
-          class="inline-flex items-center gap-2 px-4 py-2 border border-[--color-border] text-sm font-medium rounded hover:border-[--color-accent-primary] hover:text-[--color-accent-primary] transition-colors"
+          class="inline-flex items-center gap-2 px-4 py-2 border border-(--color-border) text-sm font-medium rounded hover:border-(--color-accent-primary) hover:text-(--color-accent-primary) transition-colors"
         >
           Guía completa: Almacenamiento de Agua
         </a>
         <a
           href="/es/herramientas/calculadora-agua/"
-          class="inline-flex items-center gap-2 px-4 py-2 bg-[--color-accent-primary] text-[--color-bg-primary] text-sm font-medium rounded hover:bg-[--color-accent-secondary] transition-colors"
+          class="inline-flex items-center gap-2 px-4 py-2 bg-(--color-accent-primary) text-(--color-bg-primary) text-sm font-medium rounded hover:bg-(--color-accent-secondary) transition-colors"
         >
           Calculadora de Agua →
         </a>

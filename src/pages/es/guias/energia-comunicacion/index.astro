@@ -285,12 +285,12 @@ const faqSchema = {
   schemaData={faqSchema}
 >
   <!-- TOC Slot -->
-  <nav slot="toc" class="p-4 bg-[--color-bg-tertiary] rounded-lg">
-    <h2 class="text-sm font-semibold mb-3 text-[--color-text-primary]">En esta página</h2>
+  <nav slot="toc" class="p-4 bg-(--color-bg-tertiary) rounded-lg">
+    <h2 class="text-sm font-semibold mb-3 text-(--color-text-primary)">En esta página</h2>
     <ul class="space-y-2 text-sm">
       {tocItems.map((item) => (
         <li>
-          <a href={`#${item.id}`} class="text-[--color-text-secondary] hover:text-[--color-accent-primary] transition-colors">
+          <a href={`#${item.id}`} class="text-(--color-text-secondary) hover:text-(--color-accent-primary) transition-colors">
             {item.label}
           </a>
         </li>
@@ -299,9 +299,9 @@ const faqSchema = {
   </nav>
 
   <!-- Main Content -->
-  <div class="card p-6 mb-8 not-prose border-l-4 border-l-[--color-status-info]">
-    <p class="text-[--color-text-secondary] m-0">
-      <strong class="text-[--color-text-primary]">Lo esencial:</strong> Prioriza mantener el móvil cargado
+  <div class="card p-6 mb-8 not-prose border-l-4 border-l-(--color-status-info)">
+    <p class="text-(--color-text-secondary) m-0">
+      <strong class="text-(--color-text-primary)">Lo esencial:</strong> Prioriza mantener el móvil cargado
       (comunicación + múltiples funciones). Un powerbank de 20.000 mAh te da 4-5 cargas.
       Ten una radio con pilas para información cuando no haya internet. Y siempre: linternas LED con pilas de repuesto.
     </p>
@@ -316,18 +316,18 @@ const faqSchema = {
     <div class="space-y-4 my-6 not-prose">
       {energyPriorities.map((item) => (
         <div class="card p-5 flex items-start gap-4">
-          <div class="flex-shrink-0 w-12 h-12 flex items-center justify-center bg-[--color-bg-tertiary] rounded-full">
+          <div class="flex-shrink-0 w-12 h-12 flex items-center justify-center bg-(--color-bg-tertiary) rounded-full">
             <span class="text-2xl">{item.icon}</span>
           </div>
           <div class="flex-1">
             <div class="flex items-center gap-3 mb-1">
-              <span class="px-2 py-0.5 text-xs font-bold bg-[--color-accent-primary] text-[--color-bg-primary] rounded">
+              <span class="px-2 py-0.5 text-xs font-bold bg-(--color-accent-primary) text-(--color-bg-primary) rounded">
                 #{item.priority}
               </span>
-              <h3 class="font-semibold text-[--color-text-primary] m-0 text-base">{item.device}</h3>
+              <h3 class="font-semibold text-(--color-text-primary) m-0 text-base">{item.device}</h3>
             </div>
-            <p class="text-sm text-[--color-text-secondary] mb-1">{item.why}</p>
-            <p class="text-xs text-[--color-text-muted] m-0">Consumo: {item.consumption}</p>
+            <p class="text-sm text-(--color-text-secondary) mb-1">{item.why}</p>
+            <p class="text-xs text-(--color-text-muted) m-0">Consumo: {item.consumption}</p>
           </div>
         </div>
       ))}
@@ -343,35 +343,35 @@ const faqSchema = {
           <div class="flex items-start justify-between mb-4">
             <div>
               <h3 class="text-lg font-semibold m-0">{option.type}</h3>
-              <p class="text-sm text-[--color-text-muted]">{option.capacity}</p>
+              <p class="text-sm text-(--color-text-muted)">{option.capacity}</p>
             </div>
-            <span class="px-3 py-1 text-sm bg-[--color-bg-tertiary] rounded">{option.priceRange}</span>
+            <span class="px-3 py-1 text-sm bg-(--color-bg-tertiary) rounded">{option.priceRange}</span>
           </div>
           <div class="grid md:grid-cols-3 gap-4 mb-4">
             <div>
-              <h4 class="text-sm font-semibold text-[--color-status-success] mb-2">Ventajas</h4>
+              <h4 class="text-sm font-semibold text-(--color-status-success) mb-2">Ventajas</h4>
               <ul class="space-y-1">
                 {option.pros.map((pro) => (
-                  <li class="flex items-center gap-2 text-sm text-[--color-text-secondary]">
-                    <span class="text-[--color-status-success]">+</span> {pro}
+                  <li class="flex items-center gap-2 text-sm text-(--color-text-secondary)">
+                    <span class="text-(--color-status-success)">+</span> {pro}
                   </li>
                 ))}
               </ul>
             </div>
             <div>
-              <h4 class="text-sm font-semibold text-[--color-status-critical] mb-2">Inconvenientes</h4>
+              <h4 class="text-sm font-semibold text-(--color-status-critical) mb-2">Inconvenientes</h4>
               <ul class="space-y-1">
                 {option.cons.map((con) => (
-                  <li class="flex items-center gap-2 text-sm text-[--color-text-secondary]">
-                    <span class="text-[--color-status-critical]">-</span> {con}
+                  <li class="flex items-center gap-2 text-sm text-(--color-text-secondary)">
+                    <span class="text-(--color-status-critical)">-</span> {con}
                   </li>
                 ))}
               </ul>
             </div>
             <div>
-              <h4 class="text-sm font-semibold text-[--color-accent-primary] mb-2">Mejor para</h4>
-              <p class="text-sm text-[--color-text-secondary]">{option.bestFor}</p>
-              <p class="text-xs text-[--color-text-muted] mt-2">≈ {option.charges}</p>
+              <h4 class="text-sm font-semibold text-(--color-accent-primary) mb-2">Mejor para</h4>
+              <p class="text-sm text-(--color-text-secondary)">{option.bestFor}</p>
+              <p class="text-xs text-(--color-text-muted) mt-2">≈ {option.charges}</p>
             </div>
           </div>
         </div>
@@ -400,26 +400,26 @@ const faqSchema = {
             <tr>
               <td class="font-medium">{item.device}</td>
               <td>{item.watts}</td>
-              <td class="text-[--color-accent-primary] font-medium">{item.whPerCharge}</td>
-              <td class="text-sm text-[--color-text-secondary]">{item.notes}</td>
+              <td class="text-(--color-accent-primary) font-medium">{item.whPerCharge}</td>
+              <td class="text-sm text-(--color-text-secondary)">{item.notes}</td>
             </tr>
           ))}
         </tbody>
       </table>
     </div>
 
-    <div class="card p-6 my-6 not-prose bg-[--color-accent-subtle] border-[--color-border-accent]">
-      <h3 class="font-semibold text-[--color-text-primary] mb-3 text-base">📊 Ejemplo de cálculo</h3>
-      <p class="text-sm text-[--color-text-secondary] mb-2">
+    <div class="card p-6 my-6 not-prose bg-(--color-accent-subtle) border-(--color-border-accent)">
+      <h3 class="font-semibold text-(--color-text-primary) mb-3 text-base">📊 Ejemplo de cálculo</h3>
+      <p class="text-sm text-(--color-text-secondary) mb-2">
         Familia de 4, apagón de 3 días, uso moderado:
       </p>
-      <ul class="text-sm text-[--color-text-secondary] space-y-1 mb-3">
+      <ul class="text-sm text-(--color-text-secondary) space-y-1 mb-3">
         <li>• 4 móviles × 3 cargas × 15 Wh = <strong>180 Wh</strong></li>
         <li>• Iluminación LED 5h/día × 10W × 3 días = <strong>150 Wh</strong></li>
         <li>• Radio 4h/día × 1W × 3 días = <strong>12 Wh</strong></li>
         <li>• <strong>Total: ~350 Wh</strong></li>
       </ul>
-      <p class="text-sm text-[--color-text-primary]">
+      <p class="text-sm text-(--color-text-primary)">
         Solución: 2 powerbanks de 20.000 mAh (≈150 Wh cada uno) + pilas para linternas
         <br/>O una estación portátil de 500 Wh
       </p>
@@ -438,18 +438,18 @@ const faqSchema = {
           <h3 class="text-lg font-semibold mb-3">{method.method}</h3>
           <div class="grid md:grid-cols-2 gap-4 mb-3">
             <div>
-              <span class="text-[--color-status-success] text-sm">+</span>
-              <span class="text-sm text-[--color-text-secondary] ml-2">{method.pros}</span>
+              <span class="text-(--color-status-success) text-sm">+</span>
+              <span class="text-sm text-(--color-text-secondary) ml-2">{method.pros}</span>
             </div>
             <div>
-              <span class="text-[--color-status-critical] text-sm">-</span>
-              <span class="text-sm text-[--color-text-secondary] ml-2">{method.cons}</span>
+              <span class="text-(--color-status-critical) text-sm">-</span>
+              <span class="text-sm text-(--color-text-secondary) ml-2">{method.cons}</span>
             </div>
           </div>
-          <p class="text-sm text-[--color-text-secondary] mb-2">
+          <p class="text-sm text-(--color-text-secondary) mb-2">
             <strong>Cuándo usar:</strong> {method.when}
           </p>
-          <p class="text-xs text-[--color-accent-primary] bg-[--color-bg-tertiary] p-2 rounded m-0">
+          <p class="text-xs text-(--color-accent-primary) bg-(--color-bg-tertiary) p-2 rounded m-0">
             💡 {method.tips}
           </p>
         </div>
@@ -467,16 +467,16 @@ const faqSchema = {
       {phoneBatteryTips.map((tip) => (
         <div class="card p-4">
           <div class="flex items-center justify-between mb-2">
-            <h3 class="font-semibold text-[--color-text-primary] m-0 text-base">{tip.tip}</h3>
+            <h3 class="font-semibold text-(--color-text-primary) m-0 text-base">{tip.tip}</h3>
             <span class={`px-2 py-0.5 text-xs rounded ${
-              tip.saving === 'Alto' ? 'bg-[--color-status-success]/20 text-[--color-status-success]' :
-              tip.saving === 'Medio' ? 'bg-[--color-status-warning]/20 text-[--color-status-warning]' :
-              'bg-[--color-status-info]/20 text-[--color-status-info]'
+              tip.saving === 'Alto' ? 'bg-(--color-status-success)/20 text-(--color-status-success)' :
+              tip.saving === 'Medio' ? 'bg-(--color-status-warning)/20 text-(--color-status-warning)' :
+              'bg-(--color-status-info)/20 text-(--color-status-info)'
             }`}>
               Ahorro {tip.saving}
             </span>
           </div>
-          <p class="text-sm text-[--color-text-secondary] m-0">{tip.detail}</p>
+          <p class="text-sm text-(--color-text-secondary) m-0">{tip.detail}</p>
         </div>
       ))}
     </div>
@@ -503,17 +503,17 @@ const faqSchema = {
             <tr>
               <td class="font-medium">{option.type}</td>
               <td>{option.runtime}</td>
-              <td class="text-sm text-[--color-text-secondary]">{option.pros}</td>
-              <td class="text-sm text-[--color-text-secondary]">{option.recommended}</td>
+              <td class="text-sm text-(--color-text-secondary)">{option.pros}</td>
+              <td class="text-sm text-(--color-text-secondary)">{option.recommended}</td>
             </tr>
           ))}
         </tbody>
       </table>
     </div>
 
-    <div class="card p-6 my-6 not-prose bg-[--color-status-critical]/10 border border-[--color-status-critical]/30">
-      <h3 class="font-semibold text-[--color-status-critical] mb-2 text-base">⚠️ Seguridad con velas</h3>
-      <ul class="space-y-1 text-sm text-[--color-text-secondary]">
+    <div class="card p-6 my-6 not-prose bg-(--color-status-critical)/10 border border-(--color-status-critical)/30">
+      <h3 class="font-semibold text-(--color-status-critical) mb-2 text-base">⚠️ Seguridad con velas</h3>
+      <ul class="space-y-1 text-sm text-(--color-text-secondary)">
         <li>• NUNCA dejar sin supervisión</li>
         <li>• Mantener alejadas de cortinas, papel, niños y mascotas</li>
         <li>• Usar portavelas estables y no inflamables</li>
@@ -529,14 +529,14 @@ const faqSchema = {
     <div class="space-y-4 my-8">
       {faqs.map((faq) => (
         <details class="card group">
-          <summary class="px-6 py-4 cursor-pointer list-none flex items-center justify-between hover:bg-[--color-bg-tertiary] transition-colors">
-            <span class="font-medium text-[--color-text-primary] pr-4">{faq.question}</span>
-            <svg class="w-5 h-5 text-[--color-text-muted] transform transition-transform group-open:rotate-180 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <summary class="px-6 py-4 cursor-pointer list-none flex items-center justify-between hover:bg-(--color-bg-tertiary) transition-colors">
+            <span class="font-medium text-(--color-text-primary) pr-4">{faq.question}</span>
+            <svg class="w-5 h-5 text-(--color-text-muted) transform transition-transform group-open:rotate-180 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
             </svg>
           </summary>
           <div class="px-6 pb-4">
-            <p class="text-[--color-text-secondary] m-0">{faq.answer}</p>
+            <p class="text-(--color-text-secondary) m-0">{faq.answer}</p>
           </div>
         </details>
       ))}
@@ -561,19 +561,19 @@ const faqSchema = {
   </div>
 
   <!-- CTA Slot -->
-  <div slot="cta" class="card p-8 text-center bg-[--color-bg-tertiary]">
+  <div slot="cta" class="card p-8 text-center bg-(--color-bg-tertiary)">
     <h3 class="text-xl font-semibold mb-4">Calcula tu energía necesaria</h3>
-    <p class="text-[--color-text-secondary] mb-6">
+    <p class="text-(--color-text-secondary) mb-6">
       Usa nuestra calculadora para saber qué capacidad de batería necesitas.
     </p>
     <div class="flex flex-wrap gap-4 justify-center">
-      <a href="/es/herramientas/calculadora-energia/" class="inline-flex items-center gap-2 px-6 py-3 bg-[--color-accent-primary] text-[--color-bg-primary] font-semibold rounded hover:bg-[--color-accent-hover] transition-colors">
+      <a href="/es/herramientas/calculadora-energia/" class="inline-flex items-center gap-2 px-6 py-3 bg-(--color-accent-primary) text-(--color-bg-primary) font-semibold rounded hover:bg-(--color-accent-hover) transition-colors">
         Calcular mi energía
         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
         </svg>
       </a>
-      <a href="/es/escenarios/prepararse-apagon/" class="inline-flex items-center gap-2 px-6 py-3 border border-[--color-border] text-[--color-text-primary] font-medium rounded hover:border-[--color-accent-primary] hover:text-[--color-accent-primary] transition-colors">
+      <a href="/es/escenarios/prepararse-apagon/" class="inline-flex items-center gap-2 px-6 py-3 border border-(--color-border) text-(--color-text-primary) font-medium rounded hover:border-(--color-accent-primary) hover:text-(--color-accent-primary) transition-colors">
         Guía: Prepararse para apagón
       </a>
     </div>

@@ -216,31 +216,31 @@ const commonMistakes = [
       <!-- Header -->
       <div class="mb-12">
         <nav class="text-sm mb-4">
-          <ol class="flex items-center gap-2 text-[--color-text-muted]">
-            <li><a href="/es/" class="hover:text-[--color-accent-primary]">Inicio</a></li>
+          <ol class="flex items-center gap-2 text-(--color-text-muted)">
+            <li><a href="/es/" class="hover:text-(--color-accent-primary)">Inicio</a></li>
             <li>/</li>
-            <li><a href="/es/componentes/" class="hover:text-[--color-accent-primary]">Componentes</a></li>
+            <li><a href="/es/componentes/" class="hover:text-(--color-accent-primary)">Componentes</a></li>
             <li>/</li>
-            <li class="text-[--color-text-primary]">Botiquín Básico</li>
+            <li class="text-(--color-text-primary)">Botiquín Básico</li>
           </ol>
         </nav>
         <h1 class="mb-4 flex items-center gap-3">
-          <Icon name="Heart" size={32} class="text-[--color-accent-primary]" />
+          <Icon name="Heart" size={32} class="text-(--color-accent-primary)" />
           Botiquín de Primeros Auxilios
         </h1>
-        <p class="text-lg text-[--color-text-secondary]">
+        <p class="text-lg text-(--color-text-secondary)">
           En emergencias, los servicios médicos pueden tardar. Un botiquín bien equipado
           te permite tratar heridas menores y estabilizar situaciones hasta que llegue ayuda.
         </p>
       </div>
 
       <!-- Quick Recommendation -->
-      <div class="card p-6 mb-8 border-l-4 border-l-[--color-accent-primary]">
-        <h3 class="font-semibold mb-2 text-[--color-text-primary] flex items-center gap-2">
-          <Icon name="Bandage" size={20} class="text-[--color-accent-primary]" />
+      <div class="card p-6 mb-8 border-l-4 border-l-(--color-accent-primary)">
+        <h3 class="font-semibold mb-2 text-(--color-text-primary) flex items-center gap-2">
+          <Icon name="Bandage" size={20} class="text-(--color-accent-primary)" />
           Recomendación rápida
         </h3>
-        <p class="text-[--color-text-secondary] m-0">
+        <p class="text-(--color-text-secondary) m-0">
           <strong>Mínimo:</strong> Tiritas, gasas, antiséptico, vendas, analgésicos, termómetro.
           <strong>Ideal:</strong> Botiquín organizado con 25-30 artículos + medicamentos básicos.
           <strong>Presupuesto:</strong> 30-60€ para botiquín completo.
@@ -248,10 +248,10 @@ const commonMistakes = [
       </div>
 
       <!-- Warning -->
-      <div class="p-4 bg-[--color-status-warning]/10 border border-[--color-status-warning]/30 rounded-lg mb-8">
-        <p class="text-sm text-[--color-text-secondary] m-0 flex items-start gap-2">
-          <Icon name="AlertTriangle" size={18} class="text-[--color-status-warning] flex-shrink-0 mt-0.5" />
-          <span><strong class="text-[--color-status-warning]">Importante:</strong> Un botiquín NO sustituye
+      <div class="p-4 bg-(--color-status-warning)/10 border border-(--color-status-warning)/30 rounded-lg mb-8">
+        <p class="text-sm text-(--color-text-secondary) m-0 flex items-start gap-2">
+          <Icon name="AlertTriangle" size={18} class="text-(--color-status-warning) flex-shrink-0 mt-0.5" />
+          <span><strong class="text-(--color-status-warning)">Importante:</strong> Un botiquín NO sustituye
           la atención médica profesional. Ante emergencias graves, llama siempre al <strong>112</strong>.
           Esta guía es para heridas menores y estabilización temporal.</span>
         </p>
@@ -259,21 +259,21 @@ const commonMistakes = [
 
       <!-- Kit Types -->
       <div class="mb-12">
-        <h2 class="text-2xl font-bold mb-6 text-[--color-text-primary]">Tipos de botiquín</h2>
+        <h2 class="text-2xl font-bold mb-6 text-(--color-text-primary)">Tipos de botiquín</h2>
 
         <div class="grid sm:grid-cols-2 gap-4">
           {kitTypes.map((kit) => (
             <div class="card p-6">
               <div class="flex items-start gap-3 mb-3">
-                <div class="w-12 h-12 flex items-center justify-center bg-[--color-bg-tertiary] rounded-lg flex-shrink-0">
-                  <Icon name={kit.icon as any} size={28} class="text-[--color-accent-primary]" />
+                <div class="w-12 h-12 flex items-center justify-center bg-(--color-bg-tertiary) rounded-lg flex-shrink-0">
+                  <Icon name={kit.icon as any} size={28} class="text-(--color-accent-primary)" />
                 </div>
                 <div>
-                  <h3 class="font-semibold text-[--color-text-primary]">{kit.name}</h3>
-                  <span class="text-xs text-[--color-text-muted]">{kit.items}</span>
+                  <h3 class="font-semibold text-(--color-text-primary)">{kit.name}</h3>
+                  <span class="text-xs text-(--color-text-muted)">{kit.items}</span>
                 </div>
               </div>
-              <p class="text-sm text-[--color-text-secondary] mb-3">{kit.description}</p>
+              <p class="text-sm text-(--color-text-secondary) mb-3">{kit.description}</p>
               <div class="text-sm space-y-1">
                 <p class="text-green-400 flex items-center gap-1">
                   <Icon name="CircleCheck" size={14} />
@@ -283,7 +283,7 @@ const commonMistakes = [
                   <Icon name="CircleX" size={14} />
                   {kit.cons.join(', ')}
                 </p>
-                <p class="text-[--color-accent-primary] flex items-center gap-1">
+                <p class="text-(--color-accent-primary) flex items-center gap-1">
                   <Icon name="Star" size={14} />
                   {kit.bestFor}
                 </p>
@@ -295,11 +295,11 @@ const commonMistakes = [
 
       <!-- Essential Contents -->
       <div class="mb-12">
-        <h2 class="text-2xl font-bold mb-6 text-[--color-text-primary]">Contenido esencial</h2>
+        <h2 class="text-2xl font-bold mb-6 text-(--color-text-primary)">Contenido esencial</h2>
 
         {Object.entries(essentialContents).map(([category, items]) => (
           <div class="card p-6 mb-4">
-            <h3 class="font-semibold text-[--color-accent-primary] mb-4 capitalize">
+            <h3 class="font-semibold text-(--color-accent-primary) mb-4 capitalize">
               {category === 'vendajes' ? '🩹 Vendajes y apósitos' :
                category === 'antisepticos' ? '🧴 Antisépticos y limpieza' :
                category === 'instrumentos' ? '🔧 Instrumentos' :
@@ -308,21 +308,21 @@ const commonMistakes = [
             <div class="overflow-x-auto">
               <table class="w-full text-sm">
                 <thead>
-                  <tr class="border-b border-[--color-border]">
+                  <tr class="border-b border-(--color-border)">
                     <th class="text-left py-2">Artículo</th>
                     <th class="text-center py-2">Cantidad</th>
                     <th class="text-left py-2">Notas</th>
                     <th class="text-center py-2">Prioridad</th>
                   </tr>
                 </thead>
-                <tbody class="text-[--color-text-secondary]">
+                <tbody class="text-(--color-text-secondary)">
                   {items.map((item) => (
-                    <tr class="border-b border-[--color-border]">
-                      <td class="py-2 font-medium text-[--color-text-primary]">{item.item}</td>
+                    <tr class="border-b border-(--color-border)">
+                      <td class="py-2 font-medium text-(--color-text-primary)">{item.item}</td>
                       <td class="py-2 text-center">{item.qty}</td>
-                      <td class="py-2 text-xs text-[--color-text-muted]">{item.notes}</td>
+                      <td class="py-2 text-xs text-(--color-text-muted)">{item.notes}</td>
                       <td class="py-2 text-center">
-                        <span class={`text-xs px-2 py-1 rounded ${item.priority === 'essential' ? 'bg-red-500/20 text-red-400' : item.priority === 'recommended' ? 'bg-[--color-accent-primary]/20 text-[--color-accent-primary]' : 'bg-[--color-bg-tertiary] text-[--color-text-muted]'}`}>
+                        <span class={`text-xs px-2 py-1 rounded ${item.priority === 'essential' ? 'bg-red-500/20 text-red-400' : item.priority === 'recommended' ? 'bg-(--color-accent-primary)/20 text-(--color-accent-primary)' : 'bg-(--color-bg-tertiary) text-(--color-text-muted)'}`}>
                           {item.priority === 'essential' ? 'Esencial' : item.priority === 'recommended' ? 'Recomendado' : 'Opcional'}
                         </span>
                       </td>
@@ -337,15 +337,15 @@ const commonMistakes = [
 
       <!-- Medications -->
       <div class="mb-12">
-        <h2 class="text-2xl font-bold mb-6 text-[--color-text-primary] flex items-center gap-2">
-          <Icon name="Pill" size={24} class="text-[--color-accent-primary]" />
+        <h2 class="text-2xl font-bold mb-6 text-(--color-text-primary) flex items-center gap-2">
+          <Icon name="Pill" size={24} class="text-(--color-accent-primary)" />
           Medicamentos básicos
         </h2>
 
         <div class="card overflow-hidden">
           <div class="overflow-x-auto">
             <table class="w-full text-sm">
-              <thead class="bg-[--color-bg-tertiary]">
+              <thead class="bg-(--color-bg-tertiary)">
                 <tr>
                   <th class="text-left py-3 px-4">Medicamento</th>
                   <th class="text-left py-3 px-4">Uso</th>
@@ -353,19 +353,19 @@ const commonMistakes = [
                   <th class="text-left py-3 px-4">Notas</th>
                 </tr>
               </thead>
-              <tbody class="text-[--color-text-secondary]">
+              <tbody class="text-(--color-text-secondary)">
                 {medications.map((med, i) => (
-                  <tr class={i % 2 === 0 ? 'bg-[--color-bg-secondary]' : ''}>
-                    <td class="py-3 px-4 font-medium text-[--color-text-primary]">{med.name}</td>
+                  <tr class={i % 2 === 0 ? 'bg-(--color-bg-secondary)' : ''}>
+                    <td class="py-3 px-4 font-medium text-(--color-text-primary)">{med.name}</td>
                     <td class="py-3 px-4">{med.use}</td>
                     <td class="py-3 px-4 text-center">{med.qty}</td>
-                    <td class="py-3 px-4 text-xs text-[--color-text-muted]">{med.notes}</td>
+                    <td class="py-3 px-4 text-xs text-(--color-text-muted)">{med.notes}</td>
                   </tr>
                 ))}
               </tbody>
             </table>
           </div>
-          <div class="p-4 bg-[--color-bg-tertiary] text-xs text-[--color-text-muted]">
+          <div class="p-4 bg-(--color-bg-tertiary) text-xs text-(--color-text-muted)">
             <strong>Nota:</strong> Consulta con tu médico antes de tomar cualquier medicamento.
             Guarda siempre el prospecto con cada medicamento.
           </div>
@@ -374,13 +374,13 @@ const commonMistakes = [
 
       <!-- Special Additions -->
       <div class="mb-12">
-        <h2 class="text-2xl font-bold mb-6 text-[--color-text-primary]">Adaptaciones especiales</h2>
+        <h2 class="text-2xl font-bold mb-6 text-(--color-text-primary)">Adaptaciones especiales</h2>
 
         <div class="grid sm:grid-cols-2 gap-4">
           {specialAdditions.map((group) => (
             <div class="card p-6">
-              <h3 class="font-semibold text-[--color-accent-primary] mb-3">{group.group}</h3>
-              <ul class="space-y-1 text-sm text-[--color-text-secondary]">
+              <h3 class="font-semibold text-(--color-accent-primary) mb-3">{group.group}</h3>
+              <ul class="space-y-1 text-sm text-(--color-text-secondary)">
                 {group.items.map((item) => (
                   <li>• {item}</li>
                 ))}
@@ -392,21 +392,21 @@ const commonMistakes = [
 
       <!-- Maintenance -->
       <div class="mb-12">
-        <h2 class="text-2xl font-bold mb-6 text-[--color-text-primary] flex items-center gap-2">
-          <Icon name="Calendar" size={24} class="text-[--color-accent-primary]" />
+        <h2 class="text-2xl font-bold mb-6 text-(--color-text-primary) flex items-center gap-2">
+          <Icon name="Calendar" size={24} class="text-(--color-accent-primary)" />
           Mantenimiento
         </h2>
 
         <div class="card p-6">
           <div class="space-y-3">
             {maintenanceSchedule.map((task) => (
-              <div class="flex items-start gap-4 border-b border-[--color-border] pb-3 last:border-0">
-                <span class="font-mono text-xs px-2 py-1 bg-[--color-bg-tertiary] rounded whitespace-nowrap">
+              <div class="flex items-start gap-4 border-b border-(--color-border) pb-3 last:border-0">
+                <span class="font-mono text-xs px-2 py-1 bg-(--color-bg-tertiary) rounded whitespace-nowrap">
                   {task.freq}
                 </span>
                 <div>
-                  <p class="font-medium text-[--color-text-primary]">{task.task}</p>
-                  <p class="text-sm text-[--color-text-muted]">{task.notes}</p>
+                  <p class="font-medium text-(--color-text-primary)">{task.task}</p>
+                  <p class="text-sm text-(--color-text-muted)">{task.notes}</p>
                 </div>
               </div>
             ))}
@@ -416,22 +416,22 @@ const commonMistakes = [
 
       <!-- Storage -->
       <div class="mb-12">
-        <h2 class="text-2xl font-bold mb-6 text-[--color-text-primary]">📍 Dónde guardarlo</h2>
+        <h2 class="text-2xl font-bold mb-6 text-(--color-text-primary)">📍 Dónde guardarlo</h2>
 
         <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
           {storageLocations.map((loc) => (
             <div class="card p-4">
-              <h3 class="font-semibold text-[--color-text-primary] mb-1">{loc.location}</h3>
-              <span class="text-xs text-[--color-accent-primary]">{loc.access}</span>
-              <p class="text-sm text-[--color-text-secondary] mt-2">{loc.notes}</p>
+              <h3 class="font-semibold text-(--color-text-primary) mb-1">{loc.location}</h3>
+              <span class="text-xs text-(--color-accent-primary)">{loc.access}</span>
+              <p class="text-sm text-(--color-text-secondary) mt-2">{loc.notes}</p>
             </div>
           ))}
         </div>
 
-        <div class="mt-4 p-4 bg-[--color-status-info]/10 border border-[--color-status-info]/30 rounded-lg">
-          <p class="text-sm text-[--color-text-secondary] m-0 flex items-start gap-2">
-            <Icon name="Lightbulb" size={18} class="text-[--color-status-info] flex-shrink-0 mt-0.5" />
-            <span><strong class="text-[--color-status-info]">Consejo:</strong> Ten un botiquín principal
+        <div class="mt-4 p-4 bg-(--color-status-info)/10 border border-(--color-status-info)/30 rounded-lg">
+          <p class="text-sm text-(--color-text-secondary) m-0 flex items-start gap-2">
+            <Icon name="Lightbulb" size={18} class="text-(--color-status-info) flex-shrink-0 mt-0.5" />
+            <span><strong class="text-(--color-status-info)">Consejo:</strong> Ten un botiquín principal
             completo y kits reducidos en coche y mochila de emergencia. Que <strong>todos en casa</strong>
             sepan dónde está.</span>
           </p>
@@ -440,26 +440,26 @@ const commonMistakes = [
 
       <!-- Suggested Kit -->
       <div class="mb-12">
-        <h2 class="text-2xl font-bold mb-6 text-[--color-text-primary]">Kit básico sugerido</h2>
+        <h2 class="text-2xl font-bold mb-6 text-(--color-text-primary)">Kit básico sugerido</h2>
 
         <div class="card p-6">
-          <p class="text-sm text-[--color-text-secondary] mb-4">
+          <p class="text-sm text-(--color-text-secondary) mb-4">
             Botiquín esencial para una familia de 2-4 personas:
           </p>
 
           <div class="grid sm:grid-cols-2 gap-2 text-sm">
             {kitSuggestion.map((item) => (
-              <div class="flex items-center gap-2 py-1 border-b border-[--color-border]">
-                <span class="font-bold text-[--color-accent-primary] w-8 text-center">{item.qty}</span>
-                <span class="text-[--color-text-primary]">{item.item}</span>
-                <span class="text-xs text-[--color-text-muted] ml-auto">{item.notes}</span>
+              <div class="flex items-center gap-2 py-1 border-b border-(--color-border)">
+                <span class="font-bold text-(--color-accent-primary) w-8 text-center">{item.qty}</span>
+                <span class="text-(--color-text-primary)">{item.item}</span>
+                <span class="text-xs text-(--color-text-muted) ml-auto">{item.notes}</span>
               </div>
             ))}
           </div>
 
-          <div class="mt-4 pt-4 border-t border-[--color-border] text-center">
-            <p class="text-sm text-[--color-text-muted]">
-              Inversión aproximada: <strong class="text-[--color-accent-primary]">40-60€</strong>
+          <div class="mt-4 pt-4 border-t border-(--color-border) text-center">
+            <p class="text-sm text-(--color-text-muted)">
+              Inversión aproximada: <strong class="text-(--color-accent-primary)">40-60€</strong>
             </p>
           </div>
         </div>
@@ -467,8 +467,8 @@ const commonMistakes = [
 
       <!-- Product Recommendations -->
       <div class="mb-12">
-        <h2 class="text-2xl font-bold mb-6 text-[--color-text-primary] flex items-center gap-2">
-          <Icon name="ShoppingCart" size={24} class="text-[--color-accent-primary]" />
+        <h2 class="text-2xl font-bold mb-6 text-(--color-text-primary) flex items-center gap-2">
+          <Icon name="ShoppingCart" size={24} class="text-(--color-accent-primary)" />
           Productos recomendados
         </h2>
         <ProductGrid products={amazonProducts} title="Botiquines y material sanitario" />
@@ -476,11 +476,11 @@ const commonMistakes = [
 
       <!-- Common Mistakes -->
       <div class="card p-6 mb-8 border-l-4 border-l-red-500">
-        <h3 class="font-semibold mb-4 text-[--color-text-primary] flex items-center gap-2">
+        <h3 class="font-semibold mb-4 text-(--color-text-primary) flex items-center gap-2">
           <Icon name="CircleX" size={20} class="text-red-400" />
           Errores comunes a evitar
         </h3>
-        <ul class="grid sm:grid-cols-2 gap-2 text-sm text-[--color-text-secondary]">
+        <ul class="grid sm:grid-cols-2 gap-2 text-sm text-(--color-text-secondary)">
           {commonMistakes.map((mistake) => (
             <li>• {mistake}</li>
           ))}
@@ -489,23 +489,23 @@ const commonMistakes = [
 
       <!-- Emergency Numbers -->
       <div class="card p-6 mb-8 bg-red-500/10 border border-red-500/30">
-        <h3 class="font-semibold mb-4 text-[--color-text-primary]">📞 Números de emergencia</h3>
+        <h3 class="font-semibold mb-4 text-(--color-text-primary)">📞 Números de emergencia</h3>
         <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 text-center">
           <div>
             <p class="text-2xl font-bold text-red-400">112</p>
-            <p class="text-xs text-[--color-text-muted]">Emergencias</p>
+            <p class="text-xs text-(--color-text-muted)">Emergencias</p>
           </div>
           <div>
             <p class="text-2xl font-bold text-red-400">061</p>
-            <p class="text-xs text-[--color-text-muted]">Urgencias sanitarias</p>
+            <p class="text-xs text-(--color-text-muted)">Urgencias sanitarias</p>
           </div>
           <div>
             <p class="text-2xl font-bold text-red-400">091</p>
-            <p class="text-xs text-[--color-text-muted]">Policía Nacional</p>
+            <p class="text-xs text-(--color-text-muted)">Policía Nacional</p>
           </div>
           <div>
             <p class="text-2xl font-bold text-red-400">080</p>
-            <p class="text-xs text-[--color-text-muted]">Bomberos</p>
+            <p class="text-xs text-(--color-text-muted)">Bomberos</p>
           </div>
         </div>
       </div>
@@ -514,13 +514,13 @@ const commonMistakes = [
       <div class="flex flex-wrap gap-4 justify-center">
         <a
           href="/es/guias/botiquin-primeros-auxilios/"
-          class="inline-flex items-center gap-2 px-4 py-2 border border-[--color-border] text-sm font-medium rounded hover:border-[--color-accent-primary] hover:text-[--color-accent-primary] transition-colors"
+          class="inline-flex items-center gap-2 px-4 py-2 border border-(--color-border) text-sm font-medium rounded hover:border-(--color-accent-primary) hover:text-(--color-accent-primary) transition-colors"
         >
           Guía completa: Primeros Auxilios
         </a>
         <a
           href="/es/herramientas/configurador-kit/"
-          class="inline-flex items-center gap-2 px-4 py-2 bg-[--color-accent-primary] text-[--color-bg-primary] text-sm font-medium rounded hover:bg-[--color-accent-secondary] transition-colors"
+          class="inline-flex items-center gap-2 px-4 py-2 bg-(--color-accent-primary) text-(--color-bg-primary) text-sm font-medium rounded hover:bg-(--color-accent-secondary) transition-colors"
         >
           Configurador de Kit →
         </a>

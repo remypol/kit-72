@@ -76,6 +76,10 @@ export default defineConfig({
         if (page.includes('/afiliados/') || page.includes('/affiliate-disclaimer/') || page.includes('/affiliate-hinweis/')) {
           return false;
         }
+        // Confirmation pages after email signup
+        if (page.includes('/aangemeld/') || page.includes('/angemeldet/') || page.includes('/suscrito/')) {
+          return false;
+        }
         return true;
       },
       // Custom sitemap serialization for better SEO
@@ -97,7 +101,7 @@ export default defineConfig({
           changefreq = 'weekly';
         }
         // Pillar content (ES)
-        else if (url.includes('/kit-de-emergencia/') || url.includes('/kit-72-horas/')) {
+        else if (url.includes('/kit-de-emergencia/') || url.includes('/kit-72-horas/') || url.includes('/comprar-kit-emergencia/') || url.includes('/noodpakket-kopen/') || url.includes('/notfallrucksack-kaufen/')) {
           priority = 0.9;
           changefreq = 'weekly';
         }
@@ -142,14 +146,10 @@ export default defineConfig({
           changefreq = 'monthly';
         }
 
-        // Add lastmod date (today's date for freshness signal)
-        const today = new Date().toISOString().split('T')[0];
-
         return {
           ...item,
           priority,
           changefreq,
-          lastmod: today,
         };
       },
       i18n: {

@@ -47,11 +47,11 @@ const allItems: BreadcrumbItem[] = [
 ---
 
 <nav class={`breadcrumb ${className}`} aria-label="Breadcrumb">
-  <ol class="flex flex-wrap items-center gap-2 text-sm text-[--color-text-muted]">
+  <ol class="flex flex-wrap items-center gap-2 text-sm text-(--color-text-muted)">
     {allItems.map((item, index) => (
       <>
         {index > 0 && (
-          <li class="text-[--color-border]" aria-hidden="true">
+          <li class="text-(--color-border)" aria-hidden="true">
             <Icon name="ChevronRight" size={14} />
           </li>
         )}
@@ -59,12 +59,12 @@ const allItems: BreadcrumbItem[] = [
           {item.href && index < allItems.length - 1 ? (
             <a
               href={item.href}
-              class="hover:text-[--color-accent-primary] transition-colors"
+              class="hover:text-(--color-accent-primary) transition-colors"
             >
               {item.label}
             </a>
           ) : (
-            <span class="text-[--color-text-secondary]" aria-current={index === allItems.length - 1 ? 'page' : undefined}>
+            <span class="text-(--color-text-secondary)" aria-current={index === allItems.length - 1 ? 'page' : undefined}>
               {item.label}
             </span>
           )}

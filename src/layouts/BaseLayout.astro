@@ -3,7 +3,10 @@ import '../styles/global.css';
 import Header from '../components/layout/Header.astro';
 import Footer from '../components/layout/Footer.astro';
 import BottomNav from '../components/layout/BottomNav';
+import ListSignup from '../components/growth/ListSignup.astro';
+import ConsentBanner from '../components/growth/ConsentBanner.astro';
 import { getAlternatesForPath, type Locale } from '../data/hreflang-map';
+import { routes } from '../data/site';
 
 interface BreadcrumbItem {
   name: string;
@@ -22,6 +25,8 @@ interface Props {
   ogImage?: string;
   noIndex?: boolean;
   hideBottomNav?: boolean;
+  /** Hide the email signup band above the footer */
+  hideSignup?: boolean;
   /** Schema.org structured data type */
   schemaType?: 'WebPage' | 'Article' | 'FAQPage' | 'HowTo' | 'Product' | 'SoftwareApplication';
   /** Additional schema.org data */
@@ -84,6 +89,7 @@ const {
   ogImage,
   noIndex = false,
   hideBottomNav = false,
+  hideSignup = false,
   schemaType = 'WebPage',
   schemaData = {},
   faqData = [],
@@ -111,6 +117,11 @@ const fullTitle = title === siteTitle || title.includes('Kit-72') ? title : `${t
 const gaId = import.meta.env.PUBLIC_GA_ID || 'G-C3TZMVCB4K';
 const currentPath = Astro.url.pathname;
 
+// Signup band on every content page; pages that place their own form (or are
+// legal/utility pages) opt out.
+const ownSignup = [routes[locale].home, routes[locale].compare, routes[locale].builder];
+const showSignup = !hideSignup && !noIndex && !ownSignup.includes(currentPath);
+
 // Section name mappings per locale
 const sectionNamesPerLocale: Record<Locale, Record<string, string>> = {
   es: {
@@ -120,6 +131,7 @@ const sectionNamesPerLocale: Record<Locale, Record<string, string>> = {
     'herramientas': 'Herramientas',
     'kit-de-emergencia': 'Kit de Emergencia',
     'kit-72-horas': 'Kit 72 Horas',
+    'comprar-kit-emergencia': 'Comprar o montar',
     'prepararse-apagon': 'Apagón',
     'prepararse-ola-calor': 'Ola de Calor',
     'prepararse-corte-agua': 'Corte de Agua',
@@ -146,6 +158,7 @@ const sectionNamesPerLocale: Record<Locale, Record<string, string>> = {
     'tools': 'Tools',
     'noodpakket-samenstellen': 'Noodpakket Samenstellen',
     'noodpakket-72-uur': 'Noodpakket 72 Uur',
+    'noodpakket-kopen': 'Kopen of samenstellen',
     'stroomstoring': 'Stroomstoring',
     'hittegolf': 'Hittegolf',
     'wateruitval': 'Wateruitval',
@@ -173,6 +186,7 @@ const sectionNamesPerLocale: Record<Locale, Record<string, string>> = {
     'tools': 'Tools',
     'notfallausruestung': 'Notfallausrüstung',
     'notfallpaket-72-stunden': 'Notfallpaket 72 Stunden',
+    'notfallrucksack-kaufen': 'Kaufen oder packen',
     'stromausfall': 'Stromausfall',
     'hitzewelle': 'Hitzewelle',
     'wasserausfall': 'Wasserausfall',
@@ -445,43 +459,9 @@ for (const [altLocale, altPath] of Object.entries(alternates)) {
   <link rel="icon" type="image/svg+xml" href="/favicon.svg">
   <link rel="apple-touch-icon" href="/apple-touch-icon.png">
   <link rel="manifest" href={`/manifest-${locale}.webmanifest`}>
-  <meta name="theme-color" content="#0a0f1a">
+  <meta name="theme-color" content="#0a3d26">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-
-  <!-- Preconnect for external resources -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="dns-prefetch" href="https://www.googletagmanager.com">
-  <link rel="dns-prefetch" href="https://www.google-analytics.com">
-
-  <!-- Google Fonts - loaded via link instead of CSS @import for better performance -->
-  <link
-    rel="preload"
-    href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=JetBrains+Mono:wght@400;500;600&family=Source+Sans+3:wght@300;400;500;600;700&display=swap"
-    as="style"
-  >
-  <link
-    rel="stylesheet"
-    href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=JetBrains+Mono:wght@400;500;600&family=Source+Sans+3:wght@300;400;500;600;700&display=swap"
-    media="print"
-    onload="this.media='all'"
-  >
-  <noscript>
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=JetBrains+Mono:wght@400;500;600&family=Source+Sans+3:wght@300;400;500;600;700&display=swap"
-    >
-  </noscript>
-
-  <!-- Google Analytics -->
-  <script async src={`https://www.googletagmanager.com/gtag/js?id=${gaId}`}></script>
-  <script define:vars={{ gaId }}>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', gaId);
-  </script>
 
   <!-- Schema.org JSON-LD -->
   <script type="application/ld+json" set:html={JSON.stringify(baseSchema)} />
@@ -516,7 +496,15 @@ for (const [altLocale, altPath] of Object.entries(alternates)) {
     <slot />
   </main>
 
+  {showSignup && <ListSignup locale={locale} source="page-end" variant="band" />}
+
   <Footer locale={locale} />
+
+  <ConsentBanner locale={locale} gaId={gaId} />
+
+  <script>
+    import '../scripts/outbound';
+  </script>
 
   {/* Mobile Bottom Navigation - client:idle defers hydration until browser is idle */}
   {!hideBottomNav && (

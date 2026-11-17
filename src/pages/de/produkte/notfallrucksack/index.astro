@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../../../layouts/BaseLayout.astro';
+import ShopBox from '../../../../components/growth/ShopBox.astro';
 import Breadcrumb from '../../../../components/layout/Breadcrumb.astro';
 import Icon from '../../../../components/ui/Icon.astro';
 import HeroImage from '../../../../components/content/HeroImage.astro';
@@ -25,6 +26,8 @@ import HeroImage from '../../../../components/content/HeroImage.astro';
         />
       </div>
 
+      <ShopBox locale="de" category="notfallrucksack" />
+
       <div class="prose prose-lg">
         <p class="lead">
           Bei einer Evakuierung hast du vielleicht nur <strong>Minuten, um zu packen</strong>.
@@ -33,21 +36,21 @@ import HeroImage from '../../../../components/content/HeroImage.astro';
         </p>
 
         <!-- Size Guide -->
-        <div class="card p-6 my-8 bg-[--color-bg-tertiary] not-prose">
+        <div class="card p-6 my-8 bg-(--color-bg-tertiary) not-prose">
           <h3 class="text-lg font-semibold mb-4 flex items-center gap-2">
-            <Icon name="Backpack" size={20} class="text-[--color-accent-primary]" />
+            <Icon name="Backpack" size={20} class="text-(--color-accent-primary)" />
             Größenempfehlung
           </h3>
           <div class="space-y-3 text-sm">
-            <div class="flex justify-between items-center p-3 bg-[--color-bg-secondary] rounded">
+            <div class="flex justify-between items-center p-3 bg-(--color-bg-secondary) rounded">
               <span>1 Person, 72 Stunden</span>
               <span class="font-semibold">30-40 Liter</span>
             </div>
-            <div class="flex justify-between items-center p-3 bg-[--color-bg-secondary] rounded">
+            <div class="flex justify-between items-center p-3 bg-(--color-bg-secondary) rounded">
               <span>1 Person + Kind</span>
               <span class="font-semibold">40-50 Liter</span>
             </div>
-            <div class="flex justify-between items-center p-3 bg-[--color-bg-secondary] rounded">
+            <div class="flex justify-between items-center p-3 bg-(--color-bg-secondary) rounded">
               <span>Familie (gemeinsamer)</span>
               <span class="font-semibold">50-65 Liter</span>
             </div>
@@ -74,9 +77,9 @@ import HeroImage from '../../../../components/content/HeroImage.astro';
           <li><strong>Regenhülle:</strong> Zusätzlicher Schutz, oft im Lieferumfang</li>
         </ul>
 
-        <div class="card p-6 my-8 bg-[--color-accent-subtle] not-prose">
+        <div class="card p-6 my-8 bg-(--color-accent-subtle) not-prose">
           <p class="font-medium mb-2">💡 Tipp: Doppelter Schutz</p>
-          <p class="text-sm text-[--color-text-secondary]">
+          <p class="text-sm text-(--color-text-secondary)">
             Verpacke wichtige Dokumente, Elektronik und Kleidung in <strong>wasserdichten
             Beuteln</strong> im Rucksack — auch wenn der Rucksack selbst wasserdicht ist.
           </p>
@@ -106,41 +109,41 @@ import HeroImage from '../../../../components/content/HeroImage.astro';
         <div class="overflow-x-auto not-prose my-6">
           <table class="w-full text-sm">
             <thead>
-              <tr class="border-b border-[--color-border-primary]">
+              <tr class="border-b border-(--color-border-primary)">
                 <th class="text-left py-2">Kategorie</th>
                 <th class="text-left py-2">Inhalt</th>
               </tr>
             </thead>
             <tbody>
-              <tr class="border-b border-[--color-border-secondary]">
+              <tr class="border-b border-(--color-border-secondary)">
                 <td class="py-2 font-semibold">Wasser</td>
                 <td class="py-2">3L Wasser + Entkeimungstabletten</td>
               </tr>
-              <tr class="border-b border-[--color-border-secondary]">
+              <tr class="border-b border-(--color-border-secondary)">
                 <td class="py-2 font-semibold">Nahrung</td>
                 <td class="py-2">Energieriegel, Nüsse, Trockenfrüchte</td>
               </tr>
-              <tr class="border-b border-[--color-border-secondary]">
+              <tr class="border-b border-(--color-border-secondary)">
                 <td class="py-2 font-semibold">Licht</td>
                 <td class="py-2">Taschenlampe + Stirnlampe + Batterien</td>
               </tr>
-              <tr class="border-b border-[--color-border-secondary]">
+              <tr class="border-b border-(--color-border-secondary)">
                 <td class="py-2 font-semibold">Kommunikation</td>
                 <td class="py-2">Powerbank, Ladekabel, Kurbelradio</td>
               </tr>
-              <tr class="border-b border-[--color-border-secondary]">
+              <tr class="border-b border-(--color-border-secondary)">
                 <td class="py-2 font-semibold">Erste Hilfe</td>
                 <td class="py-2">Kompaktes EHBO-Set + persönl. Medikamente</td>
               </tr>
-              <tr class="border-b border-[--color-border-secondary]">
+              <tr class="border-b border-(--color-border-secondary)">
                 <td class="py-2 font-semibold">Dokumente</td>
                 <td class="py-2">Kopien: Ausweis, Versicherung, Kontakte</td>
               </tr>
-              <tr class="border-b border-[--color-border-secondary]">
+              <tr class="border-b border-(--color-border-secondary)">
                 <td class="py-2 font-semibold">Kleidung</td>
                 <td class="py-2">Wechselwäsche, Regenjacke</td>
               </tr>
-              <tr class="border-b border-[--color-border-secondary]">
+              <tr class="border-b border-(--color-border-secondary)">
                 <td class="py-2 font-semibold">Bargeld</td>
                 <td class="py-2">50-100€ in kleinen Scheinen + Münzen</td>
               </tr>
@@ -187,21 +190,21 @@ import HeroImage from '../../../../components/content/HeroImage.astro';
       </div>
 
       <!-- Amazon Link -->
-      <div class="mt-12 card p-6 bg-[--color-bg-tertiary]">
+      <div class="mt-12 card p-6 bg-(--color-bg-tertiary)">
         <h3 class="font-semibold mb-2">Notfallrucksäcke auf Amazon.de</h3>
-        <p class="text-sm text-[--color-text-secondary] mb-4">
+        <p class="text-sm text-(--color-text-secondary) mb-4">
           Empfohlene Rucksäcke 40-50 Liter mit gutem Tragesystem.
         </p>
         <a
           href="https://www.amazon.de/s?k=wanderrucksack+40+liter&tag=kit72de-21"
           target="_blank"
           rel="noopener noreferrer sponsored"
-          class="inline-flex items-center gap-2 px-4 py-2 bg-[--color-accent-primary] text-[--color-bg-primary] font-medium rounded hover:bg-[--color-accent-hover] transition-colors"
+          class="inline-flex items-center gap-2 px-4 py-2 bg-(--color-accent-primary) text-(--color-bg-primary) font-medium rounded hover:bg-(--color-accent-hover) transition-colors"
         >
           Auf Amazon ansehen
           <Icon name="ExternalLink" size={16} />
         </a>
-        <p class="text-xs text-[--color-text-muted] mt-3">
+        <p class="text-xs text-(--color-text-muted) mt-3">
           * Affiliate-Link — du zahlst nicht mehr, wir erhalten eine kleine Provision.
         </p>
       </div>

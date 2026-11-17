@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../../../layouts/BaseLayout.astro';
+import ShopBox from '../../../../components/growth/ShopBox.astro';
 import Breadcrumb from '../../../../components/layout/Breadcrumb.astro';
 import Icon from '../../../../components/ui/Icon.astro';
 import HeroImage from '../../../../components/content/HeroImage.astro';
@@ -28,6 +29,8 @@ import HeroImage from '../../../../components/content/HeroImage.astro';
         />
       </div>
 
+      <ShopBox locale="nl" category="noodtassen" />
+
       <div class="prose prose-lg">
         <p class="lead">
           Bij een evacuatie heb je misschien maar <strong>minuten om in te pakken</strong>.
@@ -36,21 +39,21 @@ import HeroImage from '../../../../components/content/HeroImage.astro';
         </p>
 
         <!-- Size Guide -->
-        <div class="card p-6 my-8 bg-[--color-bg-tertiary] not-prose">
+        <div class="card p-6 my-8 bg-(--color-bg-tertiary) not-prose">
           <h3 class="text-lg font-semibold mb-4 flex items-center gap-2">
-            <Icon name="Backpack" size={20} class="text-[--color-accent-primary]" />
+            <Icon name="Backpack" size={20} class="text-(--color-accent-primary)" />
             Formaat Aanbeveling
           </h3>
           <div class="space-y-3 text-sm">
-            <div class="flex justify-between items-center p-3 bg-[--color-bg-secondary] rounded">
+            <div class="flex justify-between items-center p-3 bg-(--color-bg-secondary) rounded">
               <span>1 persoon, 72 uur</span>
               <span class="font-semibold">30-40 liter</span>
             </div>
-            <div class="flex justify-between items-center p-3 bg-[--color-bg-secondary] rounded">
+            <div class="flex justify-between items-center p-3 bg-(--color-bg-secondary) rounded">
               <span>1 persoon + kind</span>
               <span class="font-semibold">40-50 liter</span>
             </div>
-            <div class="flex justify-between items-center p-3 bg-[--color-bg-secondary] rounded">
+            <div class="flex justify-between items-center p-3 bg-(--color-bg-secondary) rounded">
               <span>Gezin (gezamenlijk)</span>
               <span class="font-semibold">50-65 liter</span>
             </div>
@@ -77,9 +80,9 @@ import HeroImage from '../../../../components/content/HeroImage.astro';
           <li><strong>Regenhoes:</strong> Extra bescherming, vaak bijgeleverd</li>
         </ul>
 
-        <div class="card p-6 my-8 bg-[--color-accent-subtle] not-prose">
+        <div class="card p-6 my-8 bg-(--color-accent-subtle) not-prose">
           <p class="font-medium mb-2">💡 Tip: Dubbele bescherming</p>
-          <p class="text-sm text-[--color-text-secondary]">
+          <p class="text-sm text-(--color-text-secondary)">
             Verpak belangrijke documenten, elektronica en kleding in <strong>waterdichte
             zakken</strong> in de rugzak — ook als de rugzak zelf waterdicht is.
           </p>
@@ -109,41 +112,41 @@ import HeroImage from '../../../../components/content/HeroImage.astro';
         <div class="overflow-x-auto not-prose my-6">
           <table class="w-full text-sm">
             <thead>
-              <tr class="border-b border-[--color-border-primary]">
+              <tr class="border-b border-(--color-border-primary)">
                 <th class="text-left py-2">Categorie</th>
                 <th class="text-left py-2">Inhoud</th>
               </tr>
             </thead>
             <tbody>
-              <tr class="border-b border-[--color-border-secondary]">
+              <tr class="border-b border-(--color-border-secondary)">
                 <td class="py-2 font-semibold">Water</td>
                 <td class="py-2">3L water + zuiveringstabletten</td>
               </tr>
-              <tr class="border-b border-[--color-border-secondary]">
+              <tr class="border-b border-(--color-border-secondary)">
                 <td class="py-2 font-semibold">Voedsel</td>
                 <td class="py-2">Energierepen, noten, gedroogd fruit</td>
               </tr>
-              <tr class="border-b border-[--color-border-secondary]">
+              <tr class="border-b border-(--color-border-secondary)">
                 <td class="py-2 font-semibold">Licht</td>
                 <td class="py-2">Zaklamp + hoofdlamp + batterijen</td>
               </tr>
-              <tr class="border-b border-[--color-border-secondary]">
+              <tr class="border-b border-(--color-border-secondary)">
                 <td class="py-2 font-semibold">Communicatie</td>
                 <td class="py-2">Powerbank, laadkabel, noodradio</td>
               </tr>
-              <tr class="border-b border-[--color-border-secondary]">
+              <tr class="border-b border-(--color-border-secondary)">
                 <td class="py-2 font-semibold">Eerste hulp</td>
                 <td class="py-2">Compacte EHBO-set + persoonl. medicijnen</td>
               </tr>
-              <tr class="border-b border-[--color-border-secondary]">
+              <tr class="border-b border-(--color-border-secondary)">
                 <td class="py-2 font-semibold">Documenten</td>
                 <td class="py-2">Kopieën: ID, verzekering, contacten</td>
               </tr>
-              <tr class="border-b border-[--color-border-secondary]">
+              <tr class="border-b border-(--color-border-secondary)">
                 <td class="py-2 font-semibold">Kleding</td>
                 <td class="py-2">Wisselkleding, regenjack</td>
               </tr>
-              <tr class="border-b border-[--color-border-secondary]">
+              <tr class="border-b border-(--color-border-secondary)">
                 <td class="py-2 font-semibold">Contant geld</td>
                 <td class="py-2">€50-100 in kleine biljetten + munten</td>
               </tr>
@@ -190,16 +193,16 @@ import HeroImage from '../../../../components/content/HeroImage.astro';
       </div>
 
       <!-- Shop Link -->
-      <div class="mt-12 card p-6 bg-[--color-bg-tertiary]">
+      <div class="mt-12 card p-6 bg-(--color-bg-tertiary)">
         <h3 class="font-semibold mb-2">Noodtassen op Bol.com</h3>
-        <p class="text-sm text-[--color-text-secondary] mb-4">
+        <p class="text-sm text-(--color-text-secondary) mb-4">
           Aanbevolen rugzakken 40-50 liter met goed draagsysteem.
         </p>
         <a
           href="https://www.bol.com/nl/nl/s/?searchtext=wandelrugzak+40+liter"
           target="_blank"
           rel="noopener noreferrer"
-          class="inline-flex items-center gap-2 px-4 py-2 bg-[--color-accent-primary] text-[--color-bg-primary] font-medium rounded hover:bg-[--color-accent-hover] transition-colors"
+          class="inline-flex items-center gap-2 px-4 py-2 bg-(--color-accent-primary) text-(--color-bg-primary) font-medium rounded hover:bg-(--color-accent-hover) transition-colors"
         >
           Bekijk op Bol.com
           <Icon name="ExternalLink" size={16} />

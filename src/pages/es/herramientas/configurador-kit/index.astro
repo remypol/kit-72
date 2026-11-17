@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../../../layouts/BaseLayout.astro';
+import ListSignup from '../../../../components/growth/ListSignup.astro';
 import KitBuilder from '../../../../components/tools/KitBuilder';
 ---
 
@@ -54,25 +55,25 @@ import KitBuilder from '../../../../components/tools/KitBuilder';
       <!-- Header -->
       <div class="mb-12">
         <nav class="text-sm mb-4">
-          <ol class="flex items-center gap-2 text-[--color-text-muted]">
-            <li><a href="/es/" class="hover:text-[--color-accent-primary]">Inicio</a></li>
+          <ol class="flex items-center gap-2 text-(--color-text-muted)">
+            <li><a href="/es/" class="hover:text-(--color-accent-primary)">Inicio</a></li>
             <li>/</li>
-            <li><a href="/es/herramientas/" class="hover:text-[--color-accent-primary]">Herramientas</a></li>
+            <li><a href="/es/herramientas/" class="hover:text-(--color-accent-primary)">Herramientas</a></li>
             <li>/</li>
-            <li class="text-[--color-text-primary]">Configurador de Kit</li>
+            <li class="text-(--color-text-primary)">Configurador de Kit</li>
           </ol>
         </nav>
         <h1 class="mb-4">Configurador de Kit de Emergencia</h1>
-        <p class="text-lg text-[--color-text-secondary]">
+        <p class="text-lg text-(--color-text-secondary)">
           Crea tu checklist personalizado según el escenario que quieras preparar.
           Marca los items que ya tienes y descarga o imprime tu lista.
         </p>
       </div>
 
       <!-- Info Box -->
-      <div class="card p-6 mb-8 border-l-4 border-l-[--color-accent-primary]">
-        <h3 class="font-semibold mb-2 text-[--color-text-primary]">¿Cómo funciona?</h3>
-        <ol class="text-sm text-[--color-text-secondary] space-y-1 list-decimal list-inside">
+      <div class="card p-6 mb-8 border-l-4 border-l-(--color-accent-primary)">
+        <h3 class="font-semibold mb-2 text-(--color-text-primary)">¿Cómo funciona?</h3>
+        <ol class="text-sm text-(--color-text-secondary) space-y-1 list-decimal list-inside">
           <li>Selecciona el escenario principal para el que quieres prepararte</li>
           <li>Indica si tienes bebés o mascotas para añadir items específicos</li>
           <li>Marca los items que ya tienes para ver tu progreso</li>
@@ -84,53 +85,54 @@ import KitBuilder from '../../../../components/tools/KitBuilder';
       <KitBuilder client:visible />
 
       <!-- Related Links -->
-      <div class="mt-12 card p-6 bg-[--color-bg-tertiary] print:hidden">
+      <div class="mt-12 card p-6 bg-(--color-bg-tertiary) print:hidden">
         <h3 class="font-semibold mb-4">Guías relacionadas</h3>
         <div class="grid sm:grid-cols-2 gap-4">
           <a
             href="/es/kit-72-horas/"
-            class="flex items-center gap-3 p-3 bg-[--color-bg-secondary] rounded-lg hover:bg-[--color-bg-primary] transition-colors"
+            class="flex items-center gap-3 p-3 bg-(--color-bg-secondary) rounded-lg hover:bg-(--color-bg-primary) transition-colors"
           >
             <span class="text-2xl">🎒</span>
             <div>
               <div class="font-medium text-sm">Kit 72 Horas</div>
-              <div class="text-xs text-[--color-text-muted]">Guía completa de la mochila</div>
+              <div class="text-xs text-(--color-text-muted)">Guía completa de la mochila</div>
             </div>
           </a>
           <a
             href="/es/kit-de-emergencia/"
-            class="flex items-center gap-3 p-3 bg-[--color-bg-secondary] rounded-lg hover:bg-[--color-bg-primary] transition-colors"
+            class="flex items-center gap-3 p-3 bg-(--color-bg-secondary) rounded-lg hover:bg-(--color-bg-primary) transition-colors"
           >
             <span class="text-2xl">📦</span>
             <div>
               <div class="font-medium text-sm">Kit de Emergencia</div>
-              <div class="text-xs text-[--color-text-muted]">Todo lo que debes saber</div>
+              <div class="text-xs text-(--color-text-muted)">Todo lo que debes saber</div>
             </div>
           </a>
           <a
             href="/es/escenarios/prepararse-apagon/"
-            class="flex items-center gap-3 p-3 bg-[--color-bg-secondary] rounded-lg hover:bg-[--color-bg-primary] transition-colors"
+            class="flex items-center gap-3 p-3 bg-(--color-bg-secondary) rounded-lg hover:bg-(--color-bg-primary) transition-colors"
           >
             <span class="text-2xl">⚡</span>
             <div>
               <div class="font-medium text-sm">Prepararse para Apagón</div>
-              <div class="text-xs text-[--color-text-muted]">Guía específica</div>
+              <div class="text-xs text-(--color-text-muted)">Guía específica</div>
             </div>
           </a>
           <a
             href="/es/herramientas/calculadora-agua/"
-            class="flex items-center gap-3 p-3 bg-[--color-bg-secondary] rounded-lg hover:bg-[--color-bg-primary] transition-colors"
+            class="flex items-center gap-3 p-3 bg-(--color-bg-secondary) rounded-lg hover:bg-(--color-bg-primary) transition-colors"
           >
             <span class="text-2xl">💧</span>
             <div>
               <div class="font-medium text-sm">Calculadora de Agua</div>
-              <div class="text-xs text-[--color-text-muted]">Calcula tu necesidad exacta</div>
+              <div class="text-xs text-(--color-text-muted)">Calcula tu necesidad exacta</div>
             </div>
           </a>
         </div>
       </div>
     </div>
   </section>
+  <ListSignup locale="es" source="builder" variant="band" />
 </BaseLayout>
 
 <style>

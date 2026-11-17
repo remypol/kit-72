@@ -41,13 +41,13 @@ const hasHalfStar = rating ? rating % 1 >= 0.5 : false;
 <div class="product-card card p-4 mb-4 not-prose">
   <div class="flex gap-4">
     {image && (
-      <div class="w-20 h-20 flex-shrink-0 bg-[--color-bg-tertiary] rounded-lg overflow-hidden">
+      <div class="w-20 h-20 flex-shrink-0 bg-(--color-bg-tertiary) rounded-lg overflow-hidden">
         <img src={image} alt={name} class="w-full h-full object-cover" loading="lazy" />
       </div>
     )}
     <div class="flex-1 min-w-0">
       <div class="flex items-start justify-between gap-2 mb-1">
-        <h4 class="font-semibold text-[--color-text-primary] m-0 text-base">{name}</h4>
+        <h4 class="font-semibold text-(--color-text-primary) m-0 text-base">{name}</h4>
         {badge && (
           <span class={`text-xs px-2 py-0.5 rounded border flex-shrink-0 ${badgeStyles[badge].class}`}>
             {badgeStyles[badge].text}
@@ -56,12 +56,12 @@ const hasHalfStar = rating ? rating % 1 >= 0.5 : false;
       </div>
 
       {description && (
-        <p class="text-sm text-[--color-text-secondary] m-0 mb-2">{description}</p>
+        <p class="text-sm text-(--color-text-secondary) m-0 mb-2">{description}</p>
       )}
 
       <div class="flex items-center gap-3 flex-wrap">
         {price && (
-          <span class="font-bold text-[--color-accent-primary]">{price}</span>
+          <span class="font-bold text-(--color-accent-primary)">{price}</span>
         )}
 
         {rating && (
@@ -70,10 +70,10 @@ const hasHalfStar = rating ? rating % 1 >= 0.5 : false;
               <Icon
                 name="Star"
                 size={14}
-                class={i < fullStars ? 'text-amber-400 fill-current' : (i === fullStars && hasHalfStar) ? 'text-amber-400' : 'text-[--color-text-muted]'}
+                class={i < fullStars ? 'text-amber-400 fill-current' : (i === fullStars && hasHalfStar) ? 'text-amber-400' : 'text-(--color-text-muted)'}
               />
             ))}
-            <span class="text-xs text-[--color-text-muted] ml-1">{rating}</span>
+            <span class="text-xs text-(--color-text-muted) ml-1">{rating}</span>
           </div>
         )}
       </div>
@@ -81,7 +81,7 @@ const hasHalfStar = rating ? rating % 1 >= 0.5 : false;
       {features.length > 0 && (
         <div class="flex flex-wrap gap-1 mt-2">
           {features.map((feature) => (
-            <span class="text-xs px-2 py-0.5 bg-[--color-bg-tertiary] text-[--color-text-muted] rounded">
+            <span class="text-xs px-2 py-0.5 bg-(--color-bg-tertiary) text-(--color-text-muted) rounded">
               {feature}
             </span>
           ))}
@@ -94,7 +94,7 @@ const hasHalfStar = rating ? rating % 1 >= 0.5 : false;
     href={amazonUrl}
     target="_blank"
     rel="noopener sponsored"
-    class="mt-3 w-full inline-flex items-center justify-center gap-2 px-4 py-2 bg-[--color-accent-primary] text-[--color-bg-primary] text-sm font-semibold rounded hover:bg-[--color-accent-hover] transition-colors"
+    class="mt-3 w-full inline-flex items-center justify-center gap-2 px-4 py-2 bg-(--color-accent-primary) text-(--color-bg-primary) text-sm font-semibold rounded hover:bg-(--color-accent-hover) transition-colors"
   >
     Ver en Amazon
     <Icon name="ExternalLink" size={14} />

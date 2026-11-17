@@ -23,14 +23,14 @@ const { title, products, disclaimer = true } = Astro.props;
 
 <div class="product-grid my-8">
   {disclaimer && (
-    <div class="text-xs text-[--color-text-muted] mb-4 p-3 bg-[--color-bg-tertiary] rounded-lg">
+    <div class="text-xs text-(--color-text-muted) mb-4 p-3 bg-(--color-bg-tertiary) rounded-lg">
       <strong>Aviso:</strong> Como afiliado de Amazon, Kit-72 obtiene ingresos por las compras realizadas a través de estos enlaces.
-      Los precios y disponibilidad pueden variar. Última actualización: {new Date().toLocaleDateString('es-ES')}.
+      Los precios y la disponibilidad se consultan en la tienda.
     </div>
   )}
 
   {title && (
-    <h3 class="font-semibold text-lg text-[--color-text-primary] mb-4">{title}</h3>
+    <h3 class="font-semibold text-lg text-(--color-text-primary) mb-4">{title}</h3>
   )}
 
   <div class="grid sm:grid-cols-2 gap-4">

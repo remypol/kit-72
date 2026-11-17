@@ -42,9 +42,9 @@ const typeIcons: Record<string, string> = {
 const finalTitle = title || defaultTitles[locale];
 ---
 
-<aside class="mt-12 pt-8 border-t border-[--color-border]">
+<aside class="mt-12 pt-8 border-t border-(--color-border)">
   <h3 class="text-lg font-semibold mb-4 flex items-center gap-2">
-    <Icon name="Link" size={20} class="text-[--color-accent-primary]" />
+    <Icon name="Link" size={20} class="text-(--color-accent-primary)" />
     {finalTitle}
   </h3>
   <div class="grid sm:grid-cols-2 gap-3">
@@ -53,29 +53,29 @@ const finalTitle = title || defaultTitles[locale];
         href={item.href}
         class="card card-lift p-4 flex items-start gap-3 no-underline group"
       >
-        <div class="flex-shrink-0 w-10 h-10 rounded-lg bg-[--color-accent-subtle] flex items-center justify-center group-hover:bg-[--color-accent-muted] transition-colors">
+        <div class="flex-shrink-0 w-10 h-10 rounded-lg bg-(--color-accent-subtle) flex items-center justify-center group-hover:bg-(--color-accent-muted) transition-colors">
           <Icon
             name={item.icon || typeIcons[item.type || 'guide'] || 'ArrowRight'}
             size={20}
-            class="text-[--color-accent-primary]"
+            class="text-(--color-accent-primary)"
           />
         </div>
         <div class="flex-1 min-w-0">
           {item.type && (
-            <span class="text-xs font-medium text-[--color-text-muted] uppercase tracking-wider">
+            <span class="text-xs font-medium text-(--color-text-muted) uppercase tracking-wider">
               {typeLabels[locale][item.type]}
             </span>
           )}
-          <p class="font-medium text-[--color-text-primary] group-hover:text-[--color-accent-primary] transition-colors">
+          <p class="font-medium text-(--color-text-primary) group-hover:text-(--color-accent-primary) transition-colors">
             {item.title}
           </p>
           {item.description && (
-            <p class="text-sm text-[--color-text-secondary] mt-1 line-clamp-2">
+            <p class="text-sm text-(--color-text-secondary) mt-1 line-clamp-2">
               {item.description}
             </p>
           )}
         </div>
-        <Icon name="ChevronRight" size={16} class="text-[--color-text-muted] group-hover:text-[--color-accent-primary] transition-colors flex-shrink-0 mt-1" />
+        <Icon name="ChevronRight" size={16} class="text-(--color-text-muted) group-hover:text-(--color-accent-primary) transition-colors flex-shrink-0 mt-1" />
       </a>
     ))}
   </div>

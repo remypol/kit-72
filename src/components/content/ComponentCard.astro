@@ -42,40 +42,40 @@ const {
   class={`card card-interactive group p-6 flex flex-col ${className}`}
 >
   <div class="flex items-start justify-between mb-4">
-    <div class="w-12 h-12 flex items-center justify-center bg-[--color-bg-tertiary] rounded-lg group-hover:bg-[--color-accent-subtle] transition-colors">
-      <Icon name={icon as any} size={24} class="text-[--color-text-secondary] group-hover:text-[--color-accent-primary] transition-colors" />
+    <div class="w-12 h-12 flex items-center justify-center bg-(--color-bg-tertiary) rounded-lg group-hover:bg-(--color-accent-subtle) transition-colors">
+      <Icon name={icon as any} size={24} class="text-(--color-text-secondary) group-hover:text-(--color-accent-primary) transition-colors" />
     </div>
     {priceRange && (
-      <span class="text-sm text-[--color-text-muted]">
+      <span class="text-sm text-(--color-text-muted)">
         {priceRange}
       </span>
     )}
   </div>
 
-  <h2 class="text-lg font-semibold mb-2 group-hover:text-[--color-accent-primary] transition-colors">
+  <h2 class="text-lg font-semibold mb-2 group-hover:text-(--color-accent-primary) transition-colors">
     {title}
   </h2>
 
-  <p class="text-sm text-[--color-text-secondary] mb-4 flex-1">
+  <p class="text-sm text-(--color-text-secondary) mb-4 flex-1">
     {description}
   </p>
 
   {keyFeatures.length > 0 && (
     <ul class="mb-4 space-y-1">
       {keyFeatures.slice(0, 3).map((feature) => (
-        <li class="flex items-center gap-2 text-xs text-[--color-text-muted]">
-          <Icon name="Check" size={12} class="text-[--color-success]" />
+        <li class="flex items-center gap-2 text-xs text-(--color-text-muted)">
+          <Icon name="Check" size={12} class="text-(--color-success)" />
           {feature}
         </li>
       ))}
     </ul>
   )}
 
-  <div class="flex items-center justify-between mt-auto pt-2 border-t border-[--color-border-subtle]">
-    <span class="text-sm text-[--color-accent-primary] font-medium">
+  <div class="flex items-center justify-between mt-auto pt-2 border-t border-(--color-border-subtle)">
+    <span class="text-sm text-(--color-accent-primary) font-medium">
       Ver guía
     </span>
-    <span class="text-[--color-accent-primary] group-hover:translate-x-1 transition-transform">
+    <span class="text-(--color-accent-primary) group-hover:translate-x-1 transition-transform">
       <Icon name="ArrowRight" size={16} />
     </span>
   </div>

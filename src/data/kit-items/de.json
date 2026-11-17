@@ -12,7 +12,7 @@
       "label": "Basis-Kit",
       "icon": "Backpack",
       "description": "72h Grundversorgung",
-      "color": "from-[--color-accent-primary]/20 to-[--color-accent-secondary]/10",
+      "color": "from-(--color-accent-primary)/20 to-(--color-accent-secondary)/10",
       "time": "10 Min"
     },
     "stromausfall": {

@@ -78,7 +78,7 @@ const comingSoon = [
       <div class="mb-12">
         <Breadcrumb items={[{ label: 'Escenarios' }]} class="mb-4" />
         <h1 class="mb-4">Escenarios de Emergencia</h1>
-        <p class="text-lg text-[--color-text-secondary] max-w-2xl">
+        <p class="text-lg text-(--color-text-secondary) max-w-2xl">
           Cada situación requiere preparación específica. Elige tu escenario para obtener
           un checklist adaptado y consejos prácticos paso a paso.
         </p>
@@ -92,8 +92,8 @@ const comingSoon = [
       </div>
 
       <!-- Coming Soon -->
-      <div class="border-t border-[--color-border] pt-12">
-        <h2 class="text-xl font-semibold mb-6 text-[--color-text-secondary]">Próximamente</h2>
+      <div class="border-t border-(--color-border) pt-12">
+        <h2 class="text-xl font-semibold mb-6 text-(--color-text-secondary)">Próximamente</h2>
         <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
           {comingSoon.map((item) => (
             <ScenarioCard
@@ -108,9 +108,9 @@ const comingSoon = [
       </div>
 
       <!-- CTA -->
-      <div class="mt-16 card p-8 text-center bg-[--color-bg-tertiary]">
+      <div class="mt-16 card p-8 text-center bg-(--color-bg-tertiary)">
         <h2 class="text-xl font-semibold mb-4">¿No sabes por dónde empezar?</h2>
-        <p class="text-[--color-text-secondary] mb-6 max-w-xl mx-auto">
+        <p class="text-(--color-text-secondary) mb-6 max-w-xl mx-auto">
           Crea tu kit personalizado según tu situación familiar. Nuestro configurador
           te guía paso a paso y genera un checklist imprimible.
         </p>

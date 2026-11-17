@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../../../layouts/BaseLayout.astro';
+import ShopBox from '../../../../components/growth/ShopBox.astro';
 import Breadcrumb from '../../../../components/layout/Breadcrumb.astro';
 import Icon from '../../../../components/ui/Icon.astro';
 import HeroImage from '../../../../components/content/HeroImage.astro';
@@ -28,6 +29,8 @@ import HeroImage from '../../../../components/content/HeroImage.astro';
         />
       </div>
 
+      <ShopBox locale="nl" category="ehbo-doos" />
+
       <div class="prose prose-lg">
         <p class="lead">
           Een goede EHBO-doos behandelt kleine verwondingen en overbrugt
@@ -36,12 +39,12 @@ import HeroImage from '../../../../components/content/HeroImage.astro';
         </p>
 
         <!-- Key Message -->
-        <div class="card p-6 my-8 bg-[--color-bg-tertiary] not-prose">
+        <div class="card p-6 my-8 bg-(--color-bg-tertiary) not-prose">
           <h3 class="text-lg font-semibold mb-3 flex items-center gap-2">
             <Icon name="Heart" size={20} class="text-red-500" />
             Kennis is belangrijker dan materiaal
           </h3>
-          <p class="text-sm text-[--color-text-secondary]">
+          <p class="text-sm text-(--color-text-secondary)">
             De beste EHBO-doos is nutteloos zonder kennis.
             <strong>Volg een EHBO-cursus!</strong> Het Rode Kruis en het Oranje Kruis
             bieden landelijk cursussen aan — vaak in een paar uur.
@@ -67,9 +70,9 @@ import HeroImage from '../../../../components/content/HeroImage.astro';
           <li>✗ Tijdrovender</li>
         </ul>
 
-        <div class="card p-6 my-8 bg-[--color-accent-subtle] not-prose">
+        <div class="card p-6 my-8 bg-(--color-accent-subtle) not-prose">
           <p class="font-medium mb-2">💡 Beste oplossing</p>
-          <p class="text-sm text-[--color-text-secondary]">
+          <p class="text-sm text-(--color-text-secondary)">
             Koop een <strong>standaard kant-en-klare EHBO-doos</strong> en vul deze aan
             met persoonlijke medicijnen en extra materiaal.
           </p>
@@ -165,30 +168,30 @@ import HeroImage from '../../../../components/content/HeroImage.astro';
 
       <!-- Links -->
       <div class="mt-12 grid sm:grid-cols-2 gap-4">
-        <div class="card p-6 bg-[--color-bg-tertiary]">
+        <div class="card p-6 bg-(--color-bg-tertiary)">
           <h3 class="font-semibold mb-2">EHBO-dozen op Bol.com</h3>
-          <p class="text-sm text-[--color-text-secondary] mb-4">
+          <p class="text-sm text-(--color-text-secondary) mb-4">
             Complete EHBO-sets voor huishouden en gezin.
           </p>
           <a
             href="https://www.bol.com/nl/nl/s/?searchtext=ehbo+doos+compleet"
             target="_blank"
             rel="noopener noreferrer"
-            class="inline-flex items-center gap-2 text-[--color-accent-primary] hover:underline"
+            class="inline-flex items-center gap-2 text-(--color-accent-primary) hover:underline"
           >
             Bekijk op Bol.com →
           </a>
         </div>
-        <div class="card p-6 bg-[--color-bg-tertiary]">
+        <div class="card p-6 bg-(--color-bg-tertiary)">
           <h3 class="font-semibold mb-2">EHBO-cursus vinden</h3>
-          <p class="text-sm text-[--color-text-secondary] mb-4">
+          <p class="text-sm text-(--color-text-secondary) mb-4">
             Het Rode Kruis biedt landelijk cursussen aan.
           </p>
           <a
             href="https://www.rodekruis.nl/ehbo-cursus/"
             target="_blank"
             rel="noopener noreferrer"
-            class="inline-flex items-center gap-2 text-[--color-accent-primary] hover:underline"
+            class="inline-flex items-center gap-2 text-(--color-accent-primary) hover:underline"
           >
             Rode Kruis cursussen →
           </a>

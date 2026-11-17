@@ -273,12 +273,12 @@ const faqSchema = {
   schemaData={faqSchema}
 >
   <!-- TOC Slot -->
-  <nav slot="toc" class="p-4 bg-[--color-bg-tertiary] rounded-lg">
-    <h2 class="text-sm font-semibold mb-3 text-[--color-text-primary]">En esta página</h2>
+  <nav slot="toc" class="p-4 bg-(--color-bg-tertiary) rounded-lg">
+    <h2 class="text-sm font-semibold mb-3 text-(--color-text-primary)">En esta página</h2>
     <ul class="space-y-2 text-sm">
       {tocItems.map((item) => (
         <li>
-          <a href={`#${item.id}`} class="text-[--color-text-secondary] hover:text-[--color-accent-primary] transition-colors">
+          <a href={`#${item.id}`} class="text-(--color-text-secondary) hover:text-(--color-accent-primary) transition-colors">
             {item.label}
           </a>
         </li>
@@ -287,9 +287,9 @@ const faqSchema = {
   </nav>
 
   <!-- Main Content -->
-  <div class="card p-6 mb-8 not-prose border-l-4 border-l-[--color-status-info]">
-    <p class="text-[--color-text-secondary] m-0">
-      <strong class="text-[--color-text-primary]">Lo esencial:</strong> Almacena comida que realmente comas,
+  <div class="card p-6 mb-8 not-prose border-l-4 border-l-(--color-status-info)">
+    <p class="text-(--color-text-secondary) m-0">
+      <strong class="text-(--color-text-primary)">Lo esencial:</strong> Almacena comida que realmente comas,
       que no requiera refrigeración, y que al menos la mitad sea comestible sin cocinar.
       Sistema FIFO (primero en entrar, primero en salir) para rotar. Mínimo 3 días, ideal 1-2 semanas.
     </p>
@@ -301,8 +301,8 @@ const faqSchema = {
     <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4 my-6 not-prose">
       {storageTips.map((tip) => (
         <div class="card p-5">
-          <h3 class="font-semibold text-[--color-text-primary] mb-2 text-base">{tip.tip}</h3>
-          <p class="text-sm text-[--color-text-secondary] m-0">{tip.description}</p>
+          <h3 class="font-semibold text-(--color-text-primary) mb-2 text-base">{tip.tip}</h3>
+          <p class="text-sm text-(--color-text-secondary) m-0">{tip.description}</p>
         </div>
       ))}
     </div>
@@ -318,27 +318,27 @@ const faqSchema = {
     <div class="space-y-6 my-8">
       {foodCategories.map((cat) => (
         <div class="card overflow-hidden">
-          <div class={`px-6 py-4 border-b border-[--color-border] ${
-            cat.priority === 'critical' ? 'bg-[--color-status-critical]/10' : 'bg-[--color-bg-tertiary]'
+          <div class={`px-6 py-4 border-b border-(--color-border) ${
+            cat.priority === 'critical' ? 'bg-(--color-status-critical)/10' : 'bg-(--color-bg-tertiary)'
           }`}>
             <h3 class="flex items-center gap-3 text-lg font-semibold m-0">
               <span class="text-2xl">{cat.icon}</span>
               {cat.category}
               {cat.priority === 'critical' && (
-                <span class="px-2 py-0.5 text-xs bg-[--color-status-critical]/20 text-[--color-status-critical] rounded">
+                <span class="px-2 py-0.5 text-xs bg-(--color-status-critical)/20 text-(--color-status-critical) rounded">
                   Prioritario
                 </span>
               )}
             </h3>
           </div>
-          <div class="divide-y divide-[--color-border]">
+          <div class="divide-y divide-(--color-border)">
             {cat.items.map((item) => (
               <div class="px-6 py-3 flex items-center justify-between">
                 <div>
-                  <span class="font-medium text-[--color-text-primary]">{item.name}</span>
-                  <span class="text-sm text-[--color-text-muted] ml-2">— {item.notes}</span>
+                  <span class="font-medium text-(--color-text-primary)">{item.name}</span>
+                  <span class="text-sm text-(--color-text-muted) ml-2">— {item.notes}</span>
                 </div>
-                <span class="text-sm text-[--color-accent-primary] font-medium">{item.duration}</span>
+                <span class="text-sm text-(--color-accent-primary) font-medium">{item.duration}</span>
               </div>
             ))}
           </div>
@@ -367,20 +367,20 @@ const faqSchema = {
           {caloriesGuide.map((item) => (
             <tr>
               <td class="font-medium">{item.item}</td>
-              <td class="text-[--color-accent-primary] font-semibold">{item.calories} kcal</td>
-              <td class="text-sm text-[--color-text-secondary]">{item.notes}</td>
+              <td class="text-(--color-accent-primary) font-semibold">{item.calories} kcal</td>
+              <td class="text-sm text-(--color-text-secondary)">{item.notes}</td>
             </tr>
           ))}
         </tbody>
       </table>
     </div>
 
-    <div class="card p-6 my-6 not-prose bg-[--color-accent-subtle] border-[--color-border-accent]">
-      <h3 class="font-semibold text-[--color-text-primary] mb-3 text-base">📊 Ejemplo: 3 días para 1 persona</h3>
-      <p class="text-sm text-[--color-text-secondary] mb-2">
+    <div class="card p-6 my-6 not-prose bg-(--color-accent-subtle) border-(--color-border-accent)">
+      <h3 class="font-semibold text-(--color-text-primary) mb-3 text-base">📊 Ejemplo: 3 días para 1 persona</h3>
+      <p class="text-sm text-(--color-text-secondary) mb-2">
         Objetivo: ~6.000 calorías (2.000 × 3 días)
       </p>
-      <ul class="text-sm text-[--color-text-secondary] space-y-1">
+      <ul class="text-sm text-(--color-text-secondary) space-y-1">
         <li>• 6 barritas energéticas (1.200 kcal)</li>
         <li>• 4 latas de atún/sardinas (400 kcal)</li>
         <li>• 2 latas de legumbres (560 kcal)</li>
@@ -399,22 +399,22 @@ const faqSchema = {
     </p>
 
     <div class="card p-6 my-6 not-prose">
-      <h3 class="font-semibold text-[--color-text-primary] mb-4 text-base">Sistema de despensa profunda</h3>
-      <ol class="space-y-3 text-sm text-[--color-text-secondary]">
+      <h3 class="font-semibold text-(--color-text-primary) mb-4 text-base">Sistema de despensa profunda</h3>
+      <ol class="space-y-3 text-sm text-(--color-text-secondary)">
         <li class="flex gap-3">
-          <span class="flex-shrink-0 w-6 h-6 flex items-center justify-center bg-[--color-accent-primary] text-[--color-bg-primary] rounded-full text-xs font-bold">1</span>
+          <span class="flex-shrink-0 w-6 h-6 flex items-center justify-center bg-(--color-accent-primary) text-(--color-bg-primary) rounded-full text-xs font-bold">1</span>
           <span>Mantén siempre 2-3 unidades extra de cada producto que uses normalmente</span>
         </li>
         <li class="flex gap-3">
-          <span class="flex-shrink-0 w-6 h-6 flex items-center justify-center bg-[--color-accent-primary] text-[--color-bg-primary] rounded-full text-xs font-bold">2</span>
+          <span class="flex-shrink-0 w-6 h-6 flex items-center justify-center bg-(--color-accent-primary) text-(--color-bg-primary) rounded-full text-xs font-bold">2</span>
           <span>Cuando abras la última unidad de algo, añádelo a la lista de compra</span>
         </li>
         <li class="flex gap-3">
-          <span class="flex-shrink-0 w-6 h-6 flex items-center justify-center bg-[--color-accent-primary] text-[--color-bg-primary] rounded-full text-xs font-bold">3</span>
+          <span class="flex-shrink-0 w-6 h-6 flex items-center justify-center bg-(--color-accent-primary) text-(--color-bg-primary) rounded-full text-xs font-bold">3</span>
           <span>Las compras nuevas van al fondo, consume del frente (FIFO)</span>
         </li>
         <li class="flex gap-3">
-          <span class="flex-shrink-0 w-6 h-6 flex items-center justify-center bg-[--color-accent-primary] text-[--color-bg-primary] rounded-full text-xs font-bold">4</span>
+          <span class="flex-shrink-0 w-6 h-6 flex items-center justify-center bg-(--color-accent-primary) text-(--color-bg-primary) rounded-full text-xs font-bold">4</span>
           <span>Así siempre tienes reserva fresca sin desperdicio</span>
         </li>
       </ol>
@@ -430,11 +430,11 @@ const faqSchema = {
     <div class="grid md:grid-cols-2 gap-4 my-6 not-prose">
       {noToCookMeals.map((meal) => (
         <div class="card p-5">
-          <h3 class="font-semibold text-[--color-text-primary] mb-3 text-base">{meal.meal}</h3>
+          <h3 class="font-semibold text-(--color-text-primary) mb-3 text-base">{meal.meal}</h3>
           <ul class="space-y-1">
             {meal.options.map((option) => (
-              <li class="flex items-center gap-2 text-sm text-[--color-text-secondary]">
-                <span class="w-1.5 h-1.5 bg-[--color-accent-primary] rounded-full flex-shrink-0"></span>
+              <li class="flex items-center gap-2 text-sm text-(--color-text-secondary)">
+                <span class="w-1.5 h-1.5 bg-(--color-accent-primary) rounded-full flex-shrink-0"></span>
                 {option}
               </li>
             ))}
@@ -456,13 +456,13 @@ const faqSchema = {
           </h3>
           <ul class="space-y-1 mb-4">
             {need.needs.map((item) => (
-              <li class="flex items-center gap-2 text-sm text-[--color-text-secondary]">
-                <span class="w-1.5 h-1.5 bg-[--color-accent-primary] rounded-full flex-shrink-0"></span>
+              <li class="flex items-center gap-2 text-sm text-(--color-text-secondary)">
+                <span class="w-1.5 h-1.5 bg-(--color-accent-primary) rounded-full flex-shrink-0"></span>
                 {item}
               </li>
             ))}
           </ul>
-          <p class="text-xs text-[--color-text-muted] bg-[--color-bg-tertiary] p-2 rounded m-0">
+          <p class="text-xs text-(--color-text-muted) bg-(--color-bg-tertiary) p-2 rounded m-0">
             💡 {need.tips}
           </p>
         </div>
@@ -479,11 +479,11 @@ const faqSchema = {
           <div class="flex items-start gap-4">
             <span class="text-2xl flex-shrink-0">⚠️</span>
             <div>
-              <h3 class="font-semibold text-[--color-text-primary] mb-1 text-base">{item.mistake}</h3>
-              <p class="text-sm text-[--color-text-secondary] mb-2">
+              <h3 class="font-semibold text-(--color-text-primary) mb-1 text-base">{item.mistake}</h3>
+              <p class="text-sm text-(--color-text-secondary) mb-2">
                 <strong>Por qué es problema:</strong> {item.why}
               </p>
-              <p class="text-sm text-[--color-accent-primary] m-0">
+              <p class="text-sm text-(--color-accent-primary) m-0">
                 <strong>Solución:</strong> {item.solution}
               </p>
             </div>
@@ -499,14 +499,14 @@ const faqSchema = {
     <div class="space-y-4 my-8">
       {faqs.map((faq) => (
         <details class="card group">
-          <summary class="px-6 py-4 cursor-pointer list-none flex items-center justify-between hover:bg-[--color-bg-tertiary] transition-colors">
-            <span class="font-medium text-[--color-text-primary] pr-4">{faq.question}</span>
-            <svg class="w-5 h-5 text-[--color-text-muted] transform transition-transform group-open:rotate-180 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <summary class="px-6 py-4 cursor-pointer list-none flex items-center justify-between hover:bg-(--color-bg-tertiary) transition-colors">
+            <span class="font-medium text-(--color-text-primary) pr-4">{faq.question}</span>
+            <svg class="w-5 h-5 text-(--color-text-muted) transform transition-transform group-open:rotate-180 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
             </svg>
           </summary>
           <div class="px-6 pb-4">
-            <p class="text-[--color-text-secondary] m-0">{faq.answer}</p>
+            <p class="text-(--color-text-secondary) m-0">{faq.answer}</p>
           </div>
         </details>
       ))}
@@ -536,19 +536,19 @@ const faqSchema = {
   </div>
 
   <!-- CTA Slot -->
-  <div slot="cta" class="card p-8 text-center bg-[--color-bg-tertiary]">
+  <div slot="cta" class="card p-8 text-center bg-(--color-bg-tertiary)">
     <h3 class="text-xl font-semibold mb-4">Crea tu lista personalizada</h3>
-    <p class="text-[--color-text-secondary] mb-6">
+    <p class="text-(--color-text-secondary) mb-6">
       Usa nuestro configurador para generar un checklist adaptado a tu familia.
     </p>
     <div class="flex flex-wrap gap-4 justify-center">
-      <a href="/es/herramientas/configurador-kit/" class="inline-flex items-center gap-2 px-6 py-3 bg-[--color-accent-primary] text-[--color-bg-primary] font-semibold rounded hover:bg-[--color-accent-hover] transition-colors">
+      <a href="/es/herramientas/configurador-kit/" class="inline-flex items-center gap-2 px-6 py-3 bg-(--color-accent-primary) text-(--color-bg-primary) font-semibold rounded hover:bg-(--color-accent-hover) transition-colors">
         Crear mi kit
         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
         </svg>
       </a>
-      <a href="/es/guias/almacenamiento-agua/" class="inline-flex items-center gap-2 px-6 py-3 border border-[--color-border] text-[--color-text-primary] font-medium rounded hover:border-[--color-accent-primary] hover:text-[--color-accent-primary] transition-colors">
+      <a href="/es/guias/almacenamiento-agua/" class="inline-flex items-center gap-2 px-6 py-3 border border-(--color-border) text-(--color-text-primary) font-medium rounded hover:border-(--color-accent-primary) hover:text-(--color-accent-primary) transition-colors">
         Guía de almacenamiento de agua
       </a>
     </div>

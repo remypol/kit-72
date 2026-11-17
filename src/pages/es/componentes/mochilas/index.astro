@@ -234,31 +234,31 @@ const commonMistakes = [
       <!-- Header -->
       <div class="mb-12">
         <nav class="text-sm mb-4">
-          <ol class="flex items-center gap-2 text-[--color-text-muted]">
-            <li><a href="/es/" class="hover:text-[--color-accent-primary]">Inicio</a></li>
+          <ol class="flex items-center gap-2 text-(--color-text-muted)">
+            <li><a href="/es/" class="hover:text-(--color-accent-primary)">Inicio</a></li>
             <li>/</li>
-            <li><a href="/es/componentes/" class="hover:text-[--color-accent-primary]">Componentes</a></li>
+            <li><a href="/es/componentes/" class="hover:text-(--color-accent-primary)">Componentes</a></li>
             <li>/</li>
-            <li class="text-[--color-text-primary]">Mochilas</li>
+            <li class="text-(--color-text-primary)">Mochilas</li>
           </ol>
         </nav>
         <h1 class="mb-4 flex items-center gap-3">
-          <Icon name="Backpack" size={32} class="text-[--color-accent-primary]" />
+          <Icon name="Backpack" size={32} class="text-(--color-accent-primary)" />
           Mochilas de Emergencia
         </h1>
-        <p class="text-lg text-[--color-text-secondary]">
+        <p class="text-lg text-(--color-text-secondary)">
           La mochila es el contenedor de todo tu kit de supervivencia. Elegir la correcta
           y saber cargarla bien puede marcar la diferencia entre evacuación cómoda o agotadora.
         </p>
       </div>
 
       <!-- Quick Recommendation -->
-      <div class="card p-6 mb-8 border-l-4 border-l-[--color-accent-primary]">
-        <h3 class="font-semibold mb-2 text-[--color-text-primary] flex items-center gap-2">
-          <Icon name="Backpack" size={20} class="text-[--color-accent-primary]" />
+      <div class="card p-6 mb-8 border-l-4 border-l-(--color-accent-primary)">
+        <h3 class="font-semibold mb-2 text-(--color-text-primary) flex items-center gap-2">
+          <Icon name="Backpack" size={20} class="text-(--color-accent-primary)" />
           Recomendación rápida
         </h3>
-        <p class="text-[--color-text-secondary] m-0">
+        <p class="text-(--color-text-secondary) m-0">
           <strong>Capacidad ideal:</strong> 35-45L por adulto para kit 72h completo.
           <strong>Clave:</strong> Cinturón lumbar + funda impermeable.
           <strong>Presupuesto:</strong> 50-100€ para una mochila de calidad.
@@ -266,10 +266,10 @@ const commonMistakes = [
       </div>
 
       <!-- Weight Warning -->
-      <div class="p-4 bg-[--color-status-warning]/10 border border-[--color-status-warning]/30 rounded-lg mb-8">
-        <p class="text-sm text-[--color-text-secondary] m-0 flex items-start gap-2">
-          <Icon name="AlertTriangle" size={18} class="text-[--color-status-warning] flex-shrink-0 mt-0.5" />
-          <span><strong class="text-[--color-status-warning]">Regla del peso:</strong> No cargues más del
+      <div class="p-4 bg-(--color-status-warning)/10 border border-(--color-status-warning)/30 rounded-lg mb-8">
+        <p class="text-sm text-(--color-text-secondary) m-0 flex items-start gap-2">
+          <Icon name="AlertTriangle" size={18} class="text-(--color-status-warning) flex-shrink-0 mt-0.5" />
+          <span><strong class="text-(--color-status-warning)">Regla del peso:</strong> No cargues más del
           <strong>15% de tu peso corporal</strong> si no estás en forma, o 20% máximo si lo estás.
           Una mochila demasiado pesada te agotará rápidamente.</span>
         </p>
@@ -277,23 +277,23 @@ const commonMistakes = [
 
       <!-- Backpack Types -->
       <div class="mb-12">
-        <h2 class="text-2xl font-bold mb-6 text-[--color-text-primary]">Tipos de mochilas</h2>
+        <h2 class="text-2xl font-bold mb-6 text-(--color-text-primary)">Tipos de mochilas</h2>
 
         <div class="space-y-4">
           {backpackTypes.map((type) => (
             <div class="card p-6">
               <div class="flex items-start gap-4">
-                <div class="w-12 h-12 flex items-center justify-center bg-[--color-bg-tertiary] rounded-lg flex-shrink-0">
-                  <Icon name={type.icon as any} size={28} class="text-[--color-accent-primary]" />
+                <div class="w-12 h-12 flex items-center justify-center bg-(--color-bg-tertiary) rounded-lg flex-shrink-0">
+                  <Icon name={type.icon as any} size={28} class="text-(--color-accent-primary)" />
                 </div>
                 <div class="flex-1">
                   <div class="flex items-center gap-3 mb-2">
-                    <h3 class="font-semibold text-[--color-text-primary]">{type.name}</h3>
-                    <span class="text-xs px-2 py-1 bg-[--color-bg-tertiary] text-[--color-text-muted] rounded">
+                    <h3 class="font-semibold text-(--color-text-primary)">{type.name}</h3>
+                    <span class="text-xs px-2 py-1 bg-(--color-bg-tertiary) text-(--color-text-muted) rounded">
                       {type.capacity}
                     </span>
                   </div>
-                  <p class="text-sm text-[--color-text-secondary] mb-3">{type.description}</p>
+                  <p class="text-sm text-(--color-text-secondary) mb-3">{type.description}</p>
 
                   <div class="grid sm:grid-cols-3 gap-4 text-sm">
                     <div>
@@ -301,7 +301,7 @@ const commonMistakes = [
                         <Icon name="CircleCheck" size={14} />
                         Pros
                       </span>
-                      <ul class="mt-1 space-y-1 text-[--color-text-muted]">
+                      <ul class="mt-1 space-y-1 text-(--color-text-muted)">
                         {type.pros.map((pro) => <li>• {pro}</li>)}
                       </ul>
                     </div>
@@ -310,16 +310,16 @@ const commonMistakes = [
                         <Icon name="CircleX" size={14} />
                         Contras
                       </span>
-                      <ul class="mt-1 space-y-1 text-[--color-text-muted]">
+                      <ul class="mt-1 space-y-1 text-(--color-text-muted)">
                         {type.cons.map((con) => <li>• {con}</li>)}
                       </ul>
                     </div>
                     <div>
-                      <span class="text-[--color-accent-primary] font-medium flex items-center gap-1">
+                      <span class="text-(--color-accent-primary) font-medium flex items-center gap-1">
                         <Icon name="Star" size={14} />
                         Ideal para
                       </span>
-                      <p class="mt-1 text-[--color-text-muted]">{type.bestFor}</p>
+                      <p class="mt-1 text-(--color-text-muted)">{type.bestFor}</p>
                     </div>
                   </div>
                 </div>
@@ -331,16 +331,16 @@ const commonMistakes = [
 
       <!-- Key Features -->
       <div class="mb-12">
-        <h2 class="text-2xl font-bold mb-6 text-[--color-text-primary]">Características a buscar</h2>
+        <h2 class="text-2xl font-bold mb-6 text-(--color-text-primary)">Características a buscar</h2>
 
         <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
           {keyFeatures.map((feature) => (
             <div class="card p-4">
-              <div class="w-10 h-10 flex items-center justify-center bg-[--color-bg-tertiary] rounded-lg mb-2">
-                <Icon name={feature.icon as any} size={22} class="text-[--color-accent-primary]" />
+              <div class="w-10 h-10 flex items-center justify-center bg-(--color-bg-tertiary) rounded-lg mb-2">
+                <Icon name={feature.icon as any} size={22} class="text-(--color-accent-primary)" />
               </div>
-              <h3 class="font-semibold text-[--color-text-primary] mb-1">{feature.name}</h3>
-              <p class="text-sm text-[--color-text-secondary]">{feature.description}</p>
+              <h3 class="font-semibold text-(--color-text-primary) mb-1">{feature.name}</h3>
+              <p class="text-sm text-(--color-text-secondary)">{feature.description}</p>
             </div>
           ))}
         </div>
@@ -348,32 +348,32 @@ const commonMistakes = [
 
       <!-- Recommendations -->
       <div class="mb-12">
-        <h2 class="text-2xl font-bold mb-6 text-[--color-text-primary]">Recomendaciones por presupuesto</h2>
+        <h2 class="text-2xl font-bold mb-6 text-(--color-text-primary)">Recomendaciones por presupuesto</h2>
 
         <div class="space-y-4">
           {recommendations.map((rec) => (
-            <div class={`card p-6 ${rec.priority === 'essential' ? 'border-l-4 border-l-red-500' : rec.priority === 'recommended' ? 'border-l-4 border-l-[--color-accent-primary]' : ''}`}>
+            <div class={`card p-6 ${rec.priority === 'essential' ? 'border-l-4 border-l-red-500' : rec.priority === 'recommended' ? 'border-l-4 border-l-(--color-accent-primary)' : ''}`}>
               <div class="flex items-start justify-between gap-4 mb-3">
                 <div>
-                  <span class={`text-xs px-2 py-1 rounded ${rec.priority === 'essential' ? 'bg-red-500/20 text-red-400' : rec.priority === 'recommended' ? 'bg-[--color-accent-primary]/20 text-[--color-accent-primary]' : 'bg-[--color-bg-tertiary] text-[--color-text-muted]'}`}>
+                  <span class={`text-xs px-2 py-1 rounded ${rec.priority === 'essential' ? 'bg-red-500/20 text-red-400' : rec.priority === 'recommended' ? 'bg-(--color-accent-primary)/20 text-(--color-accent-primary)' : 'bg-(--color-bg-tertiary) text-(--color-text-muted)'}`}>
                     {rec.priority === 'essential' ? 'Esencial' : rec.priority === 'recommended' ? 'Recomendada' : 'Opcional'}
                   </span>
-                  <span class="text-xs text-[--color-text-muted] ml-2">{rec.type}</span>
+                  <span class="text-xs text-(--color-text-muted) ml-2">{rec.type}</span>
                 </div>
-                <span class="font-bold text-[--color-accent-primary]">{rec.price}</span>
+                <span class="font-bold text-(--color-accent-primary)">{rec.price}</span>
               </div>
 
-              <h3 class="font-semibold text-[--color-text-primary] mb-2">{rec.name}</h3>
+              <h3 class="font-semibold text-(--color-text-primary) mb-2">{rec.name}</h3>
 
               <div class="flex flex-wrap gap-2 mb-3">
                 {rec.features.map((feature) => (
-                  <span class="text-xs px-2 py-1 bg-[--color-bg-tertiary] text-[--color-text-muted] rounded">
+                  <span class="text-xs px-2 py-1 bg-(--color-bg-tertiary) text-(--color-text-muted) rounded">
                     {feature}
                   </span>
                 ))}
               </div>
 
-              <p class="text-sm text-[--color-text-secondary] m-0">
+              <p class="text-sm text-(--color-text-secondary) m-0">
                 <strong>Veredicto:</strong> {rec.verdict}
               </p>
             </div>
@@ -383,25 +383,25 @@ const commonMistakes = [
 
       <!-- Packing Order -->
       <div class="mb-12">
-        <h2 class="text-2xl font-bold mb-6 text-[--color-text-primary]">Cómo cargar la mochila</h2>
+        <h2 class="text-2xl font-bold mb-6 text-(--color-text-primary)">Cómo cargar la mochila</h2>
 
         <div class="card p-6">
           <div class="space-y-4">
             {packingOrder.map((zone, index) => (
-              <div class="flex items-start gap-4 border-b border-[--color-border] pb-4 last:border-0">
-                <div class="flex-shrink-0 w-8 h-8 bg-[--color-accent-primary] text-[--color-bg-primary] rounded-full flex items-center justify-center font-bold text-sm">
+              <div class="flex items-start gap-4 border-b border-(--color-border) pb-4 last:border-0">
+                <div class="flex-shrink-0 w-8 h-8 bg-(--color-accent-primary) text-(--color-bg-primary) rounded-full flex items-center justify-center font-bold text-sm">
                   {index + 1}
                 </div>
                 <div class="flex-1">
-                  <h4 class="font-semibold text-[--color-text-primary] mb-1">{zone.zone}</h4>
+                  <h4 class="font-semibold text-(--color-text-primary) mb-1">{zone.zone}</h4>
                   <div class="flex flex-wrap gap-2 mb-2">
                     {zone.items.map((item) => (
-                      <span class="text-xs px-2 py-1 bg-[--color-bg-tertiary] text-[--color-text-muted] rounded">
+                      <span class="text-xs px-2 py-1 bg-(--color-bg-tertiary) text-(--color-text-muted) rounded">
                         {item}
                       </span>
                     ))}
                   </div>
-                  <p class="text-sm text-[--color-text-secondary] flex items-start gap-1">
+                  <p class="text-sm text-(--color-text-secondary) flex items-start gap-1">
                     <Icon name="Lightbulb" size={14} class="flex-shrink-0 mt-0.5" />
                     {zone.tip}
                   </p>
@@ -414,36 +414,36 @@ const commonMistakes = [
 
       <!-- Kit Contents -->
       <div class="mb-12">
-        <h2 class="text-2xl font-bold mb-6 text-[--color-text-primary]">Contenido kit 72h (ejemplo)</h2>
+        <h2 class="text-2xl font-bold mb-6 text-(--color-text-primary)">Contenido kit 72h (ejemplo)</h2>
 
         <div class="card overflow-hidden">
           <div class="overflow-x-auto">
             <table class="w-full text-sm">
-              <thead class="bg-[--color-bg-tertiary]">
+              <thead class="bg-(--color-bg-tertiary)">
                 <tr>
                   <th class="text-left py-3 px-4">Categoría</th>
                   <th class="text-left py-3 px-4">Artículos</th>
                   <th class="text-right py-3 px-4">Peso aprox.</th>
                 </tr>
               </thead>
-              <tbody class="text-[--color-text-secondary]">
+              <tbody class="text-(--color-text-secondary)">
                 {kitContents72h.map((cat, i) => (
-                  <tr class={i % 2 === 0 ? 'bg-[--color-bg-secondary]' : ''}>
-                    <td class="py-3 px-4 font-medium text-[--color-text-primary]">{cat.category}</td>
+                  <tr class={i % 2 === 0 ? 'bg-(--color-bg-secondary)' : ''}>
+                    <td class="py-3 px-4 font-medium text-(--color-text-primary)">{cat.category}</td>
                     <td class="py-3 px-4 text-xs">{cat.items.join(', ')}</td>
                     <td class="py-3 px-4 text-right font-mono">{cat.weight}</td>
                   </tr>
                 ))}
               </tbody>
-              <tfoot class="bg-[--color-bg-tertiary]">
+              <tfoot class="bg-(--color-bg-tertiary)">
                 <tr>
-                  <td colspan="2" class="py-3 px-4 font-bold text-[--color-text-primary]">Total aproximado</td>
-                  <td class="py-3 px-4 text-right font-bold text-[--color-accent-primary]">~7.3 kg</td>
+                  <td colspan="2" class="py-3 px-4 font-bold text-(--color-text-primary)">Total aproximado</td>
+                  <td class="py-3 px-4 text-right font-bold text-(--color-accent-primary)">~7.3 kg</td>
                 </tr>
               </tfoot>
             </table>
           </div>
-          <div class="p-4 bg-[--color-bg-tertiary] text-xs text-[--color-text-muted]">
+          <div class="p-4 bg-(--color-bg-tertiary) text-xs text-(--color-text-muted)">
             * El agua es lo más pesado. 3L = 3kg. Considera filtro + menos agua inicial si el peso es problema.
           </div>
         </div>
@@ -451,24 +451,24 @@ const commonMistakes = [
 
       <!-- Weight Guidelines -->
       <div class="mb-12">
-        <h2 class="text-2xl font-bold mb-6 text-[--color-text-primary]">Guía de peso máximo</h2>
+        <h2 class="text-2xl font-bold mb-6 text-(--color-text-primary)">Guía de peso máximo</h2>
 
         <div class="card overflow-hidden">
           <div class="overflow-x-auto">
             <table class="w-full text-sm">
-              <thead class="bg-[--color-bg-tertiary]">
+              <thead class="bg-(--color-bg-tertiary)">
                 <tr>
                   <th class="text-left py-3 px-4">Grupo</th>
                   <th class="text-center py-3 px-4">Máximo recomendado</th>
                   <th class="text-left py-3 px-4">Ejemplo</th>
                 </tr>
               </thead>
-              <tbody class="text-[--color-text-secondary]">
+              <tbody class="text-(--color-text-secondary)">
                 {weightGuidelines.map((guide, i) => (
-                  <tr class={i % 2 === 0 ? 'bg-[--color-bg-secondary]' : ''}>
-                    <td class="py-3 px-4 font-medium text-[--color-text-primary]">{guide.group}</td>
+                  <tr class={i % 2 === 0 ? 'bg-(--color-bg-secondary)' : ''}>
+                    <td class="py-3 px-4 font-medium text-(--color-text-primary)">{guide.group}</td>
                     <td class="py-3 px-4 text-center">{guide.max}</td>
-                    <td class="py-3 px-4 font-mono text-[--color-accent-primary]">{guide.example}</td>
+                    <td class="py-3 px-4 font-mono text-(--color-accent-primary)">{guide.example}</td>
                   </tr>
                 ))}
               </tbody>
@@ -479,11 +479,11 @@ const commonMistakes = [
 
       <!-- Maintenance -->
       <div class="card p-6 mb-8">
-        <h3 class="font-semibold mb-4 text-[--color-text-primary] flex items-center gap-2">
-          <Icon name="Wrench" size={20} class="text-[--color-accent-primary]" />
+        <h3 class="font-semibold mb-4 text-(--color-text-primary) flex items-center gap-2">
+          <Icon name="Wrench" size={20} class="text-(--color-accent-primary)" />
           Mantenimiento de la mochila
         </h3>
-        <ul class="grid sm:grid-cols-2 gap-2 text-sm text-[--color-text-secondary]">
+        <ul class="grid sm:grid-cols-2 gap-2 text-sm text-(--color-text-secondary)">
           {maintenanceTips.map((tip) => (
             <li>• {tip}</li>
           ))}
@@ -492,8 +492,8 @@ const commonMistakes = [
 
       <!-- Product Recommendations -->
       <div class="mb-12">
-        <h2 class="text-2xl font-bold mb-6 text-[--color-text-primary] flex items-center gap-2">
-          <Icon name="ShoppingCart" size={24} class="text-[--color-accent-primary]" />
+        <h2 class="text-2xl font-bold mb-6 text-(--color-text-primary) flex items-center gap-2">
+          <Icon name="ShoppingCart" size={24} class="text-(--color-accent-primary)" />
           Productos recomendados
         </h2>
         <ProductGrid products={amazonProducts} title="Mochilas para tu kit de emergencia" />
@@ -501,11 +501,11 @@ const commonMistakes = [
 
       <!-- Common Mistakes -->
       <div class="card p-6 mb-8 border-l-4 border-l-red-500">
-        <h3 class="font-semibold mb-4 text-[--color-text-primary] flex items-center gap-2">
+        <h3 class="font-semibold mb-4 text-(--color-text-primary) flex items-center gap-2">
           <Icon name="CircleX" size={20} class="text-red-400" />
           Errores comunes
         </h3>
-        <ul class="grid sm:grid-cols-2 gap-2 text-sm text-[--color-text-secondary]">
+        <ul class="grid sm:grid-cols-2 gap-2 text-sm text-(--color-text-secondary)">
           {commonMistakes.map((mistake) => (
             <li>• {mistake}</li>
           ))}
@@ -513,12 +513,12 @@ const commonMistakes = [
       </div>
 
       <!-- Pro Tips -->
-      <div class="card p-6 mb-8 bg-[--color-bg-tertiary]">
-        <h3 class="font-semibold mb-4 text-[--color-text-primary] flex items-center gap-2">
-          <Icon name="Lightbulb" size={20} class="text-[--color-accent-primary]" />
+      <div class="card p-6 mb-8 bg-(--color-bg-tertiary)">
+        <h3 class="font-semibold mb-4 text-(--color-text-primary) flex items-center gap-2">
+          <Icon name="Lightbulb" size={20} class="text-(--color-accent-primary)" />
           Consejos profesionales
         </h3>
-        <div class="space-y-3 text-sm text-[--color-text-secondary]">
+        <div class="space-y-3 text-sm text-(--color-text-secondary)">
           <p><strong>Prueba con peso:</strong> Carga la mochila y camina 30 minutos ANTES de necesitarla. Ajusta correas.</p>
           <p><strong>Bolsas de organización:</strong> Usa bolsas de colores por categoría (rojo=botiquín, azul=agua, etc.).</p>
           <p><strong>Acceso rápido:</strong> Lo más urgente (documentos, linterna, botiquín) debe ser accesible sin abrir todo.</p>
@@ -531,13 +531,13 @@ const commonMistakes = [
       <div class="flex flex-wrap gap-4 justify-center">
         <a
           href="/es/escenarios/kit-evacuacion/"
-          class="inline-flex items-center gap-2 px-4 py-2 border border-[--color-border] text-sm font-medium rounded hover:border-[--color-accent-primary] hover:text-[--color-accent-primary] transition-colors"
+          class="inline-flex items-center gap-2 px-4 py-2 border border-(--color-border) text-sm font-medium rounded hover:border-(--color-accent-primary) hover:text-(--color-accent-primary) transition-colors"
         >
           Escenario: Kit de Evacuación
         </a>
         <a
           href="/es/herramientas/configurador-kit/"
-          class="inline-flex items-center gap-2 px-4 py-2 bg-[--color-accent-primary] text-[--color-bg-primary] text-sm font-medium rounded hover:bg-[--color-accent-secondary] transition-colors"
+          class="inline-flex items-center gap-2 px-4 py-2 bg-(--color-accent-primary) text-(--color-bg-primary) text-sm font-medium rounded hover:bg-(--color-accent-secondary) transition-colors"
         >
           Configurador de Kit →
         </a>

@@ -72,7 +72,7 @@ const benefits = [
       <div class="mb-12">
         <Breadcrumb items={[{ label: 'Herramientas' }]} class="mb-4" />
         <h1 class="mb-4">Herramientas Gratuitas</h1>
-        <p class="text-lg text-[--color-text-secondary] max-w-2xl">
+        <p class="text-lg text-(--color-text-secondary) max-w-2xl">
           Calculadoras y configuradores para que sepas exactamente qué necesitas.
           Sin registro, sin complicaciones.
         </p>
@@ -86,10 +86,10 @@ const benefits = [
       </div>
 
       <!-- Benefits Section -->
-      <div class="mt-16 card p-8 bg-[--color-bg-tertiary]">
+      <div class="mt-16 card p-8 bg-(--color-bg-tertiary)">
         <div class="max-w-2xl mx-auto text-center">
           <h2 class="text-xl font-semibold mb-4">¿Por qué usar estas herramientas?</h2>
-          <p class="text-[--color-text-secondary] mb-6">
+          <p class="text-(--color-text-secondary) mb-6">
             Las recomendaciones genéricas ("10 litros de agua") no tienen en cuenta tu situación
             específica. Estas herramientas calculan cantidades exactas basadas en tu familia,
             mascotas y escenario, para que no compres de más ni de menos.
@@ -97,11 +97,11 @@ const benefits = [
           <div class="grid sm:grid-cols-3 gap-6 text-left">
             {benefits.map((benefit) => (
               <div>
-                <div class="w-10 h-10 flex items-center justify-center bg-[--color-bg-secondary] rounded mb-3">
-                  <Icon name={benefit.icon as any} size={20} class="text-[--color-accent-primary]" />
+                <div class="w-10 h-10 flex items-center justify-center bg-(--color-bg-secondary) rounded mb-3">
+                  <Icon name={benefit.icon as any} size={20} class="text-(--color-accent-primary)" />
                 </div>
                 <h4 class="font-semibold mb-1">{benefit.title}</h4>
-                <p class="text-sm text-[--color-text-secondary]">
+                <p class="text-sm text-(--color-text-secondary)">
                   {benefit.description}
                 </p>
               </div>

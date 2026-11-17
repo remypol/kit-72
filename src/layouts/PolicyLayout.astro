@@ -24,6 +24,7 @@ const formatDate = (dateStr: string) => {
 ---
 
 <BaseLayout
+  hideSignup
   title={title}
   description={description}
   noIndex={false}
@@ -32,15 +33,15 @@ const formatDate = (dateStr: string) => {
     <div class="max-w-3xl mx-auto px-4 sm:px-6">
       <!-- Breadcrumbs -->
       <nav class="mb-8" aria-label="Breadcrumb">
-        <ol class="flex items-center gap-2 text-sm text-[--color-text-muted]">
+        <ol class="flex items-center gap-2 text-sm text-(--color-text-muted)">
           <li>
-            <a href="/es/" class="hover:text-[--color-accent-primary] transition-colors">
+            <a href="/es/" class="hover:text-(--color-accent-primary) transition-colors">
               Inicio
             </a>
           </li>
-          <li class="text-[--color-border]">/</li>
+          <li class="text-(--color-border)">/</li>
           <li>
-            <span class="text-[--color-text-secondary]">{title}</span>
+            <span class="text-(--color-text-secondary)">{title}</span>
           </li>
         </ol>
       </nav>
@@ -49,7 +50,7 @@ const formatDate = (dateStr: string) => {
       <header class="mb-12">
         <h1 class="text-3xl mb-4">{title}</h1>
         {updatedDate && (
-          <p class="text-sm text-[--color-text-muted]">
+          <p class="text-sm text-(--color-text-muted)">
             Última actualización: {formatDate(updatedDate)}
           </p>
         )}

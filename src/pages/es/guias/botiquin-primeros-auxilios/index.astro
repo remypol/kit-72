@@ -289,12 +289,12 @@ const faqSchema = {
   schemaData={faqSchema}
 >
   <!-- TOC Slot -->
-  <nav slot="toc" class="p-4 bg-[--color-bg-tertiary] rounded-lg">
-    <h2 class="text-sm font-semibold mb-3 text-[--color-text-primary]">En esta página</h2>
+  <nav slot="toc" class="p-4 bg-(--color-bg-tertiary) rounded-lg">
+    <h2 class="text-sm font-semibold mb-3 text-(--color-text-primary)">En esta página</h2>
     <ul class="space-y-2 text-sm">
       {tocItems.map((item) => (
         <li>
-          <a href={`#${item.id}`} class="text-[--color-text-secondary] hover:text-[--color-accent-primary] transition-colors">
+          <a href={`#${item.id}`} class="text-(--color-text-secondary) hover:text-(--color-accent-primary) transition-colors">
             {item.label}
           </a>
         </li>
@@ -303,9 +303,9 @@ const faqSchema = {
   </nav>
 
   <!-- Main Content -->
-  <div class="card p-6 mb-8 not-prose border-l-4 border-l-[--color-status-warning]">
-    <p class="text-[--color-text-secondary] m-0">
-      <strong class="text-[--color-text-primary]">Importante:</strong> Esta guía es informativa.
+  <div class="card p-6 mb-8 not-prose border-l-4 border-l-(--color-status-warning)">
+    <p class="text-(--color-text-secondary) m-0">
+      <strong class="text-(--color-text-primary)">Importante:</strong> Esta guía es informativa.
       El botiquín sirve para primeros auxilios menores. Ante cualquier lesión grave o duda,
       llama al <strong>112</strong>. No sustituye la atención médica profesional ni la formación en primeros auxilios.
     </p>
@@ -321,27 +321,27 @@ const faqSchema = {
     <div class="space-y-6 my-8">
       {basicContents.map((cat) => (
         <div class="card overflow-hidden">
-          <div class={`px-6 py-4 border-b border-[--color-border] ${
-            cat.priority === 'critical' ? 'bg-[--color-status-critical]/10' : 'bg-[--color-bg-tertiary]'
+          <div class={`px-6 py-4 border-b border-(--color-border) ${
+            cat.priority === 'critical' ? 'bg-(--color-status-critical)/10' : 'bg-(--color-bg-tertiary)'
           }`}>
             <h3 class="flex items-center gap-3 text-lg font-semibold m-0">
               <span class="text-2xl">{cat.icon}</span>
               {cat.category}
               {cat.priority === 'critical' && (
-                <span class="px-2 py-0.5 text-xs bg-[--color-status-critical]/20 text-[--color-status-critical] rounded">
+                <span class="px-2 py-0.5 text-xs bg-(--color-status-critical)/20 text-(--color-status-critical) rounded">
                   Esencial
                 </span>
               )}
             </h3>
           </div>
-          <div class="divide-y divide-[--color-border]">
+          <div class="divide-y divide-(--color-border)">
             {cat.items.map((item) => (
               <div class="px-6 py-3 flex items-center justify-between">
                 <div>
-                  <span class="font-medium text-[--color-text-primary]">{item.name}</span>
-                  <span class="text-sm text-[--color-text-muted] ml-2">— {item.notes}</span>
+                  <span class="font-medium text-(--color-text-primary)">{item.name}</span>
+                  <span class="text-sm text-(--color-text-muted) ml-2">— {item.notes}</span>
                 </div>
-                <span class="text-sm text-[--color-accent-primary] font-medium">{item.quantity}</span>
+                <span class="text-sm text-(--color-accent-primary) font-medium">{item.quantity}</span>
               </div>
             ))}
           </div>
@@ -359,8 +359,8 @@ const faqSchema = {
 
     <div class="grid md:grid-cols-2 gap-4 my-6 not-prose">
       <div class="card p-5">
-        <h3 class="font-semibold text-[--color-text-primary] mb-3 text-base">✓ Buenas prácticas</h3>
-        <ul class="space-y-2 text-sm text-[--color-text-secondary]">
+        <h3 class="font-semibold text-(--color-text-primary) mb-3 text-base">✓ Buenas prácticas</h3>
+        <ul class="space-y-2 text-sm text-(--color-text-secondary)">
           <li>• Usar bolsitas transparentes con etiquetas</li>
           <li>• Agrupar por función (vendajes, antisépticos, medicamentos)</li>
           <li>• Mantener todo en un contenedor rígido o bolsa dedicada</li>
@@ -369,8 +369,8 @@ const faqSchema = {
         </ul>
       </div>
       <div class="card p-5">
-        <h3 class="font-semibold text-[--color-text-primary] mb-3 text-base">✗ Errores comunes</h3>
-        <ul class="space-y-2 text-sm text-[--color-text-secondary]">
+        <h3 class="font-semibold text-(--color-text-primary) mb-3 text-base">✗ Errores comunes</h3>
+        <ul class="space-y-2 text-sm text-(--color-text-secondary)">
           <li>• Mezclar todo en una caja sin orden</li>
           <li>• No marcar fechas de caducidad</li>
           <li>• Guardar medicamentos fuera de su envase original</li>
@@ -403,17 +403,17 @@ const faqSchema = {
             <tr>
               <td class="font-medium">{med.type}</td>
               <td class="text-sm">{med.examples}</td>
-              <td class="text-sm text-[--color-text-secondary]">{med.uses}</td>
-              <td class="text-sm text-[--color-text-muted]">{med.notes}</td>
+              <td class="text-sm text-(--color-text-secondary)">{med.uses}</td>
+              <td class="text-sm text-(--color-text-muted)">{med.notes}</td>
             </tr>
           ))}
         </tbody>
       </table>
     </div>
 
-    <div class="card p-6 my-6 not-prose bg-[--color-status-critical]/10 border border-[--color-status-critical]/30">
-      <h3 class="font-semibold text-[--color-status-critical] mb-2 text-base">⚠️ Limitaciones importantes</h3>
-      <ul class="space-y-1 text-sm text-[--color-text-secondary]">
+    <div class="card p-6 my-6 not-prose bg-(--color-status-critical)/10 border border-(--color-status-critical)/30">
+      <h3 class="font-semibold text-(--color-status-critical) mb-2 text-base">⚠️ Limitaciones importantes</h3>
+      <ul class="space-y-1 text-sm text-(--color-text-secondary)">
         {limitaciones.map((limit) => (
           <li>• {limit}</li>
         ))}
@@ -436,8 +436,8 @@ const faqSchema = {
           </h3>
           <ul class="space-y-1">
             {sit.additions.map((item) => (
-              <li class="flex items-center gap-2 text-sm text-[--color-text-secondary]">
-                <span class="w-1.5 h-1.5 bg-[--color-accent-primary] rounded-full flex-shrink-0"></span>
+              <li class="flex items-center gap-2 text-sm text-(--color-text-secondary)">
+                <span class="w-1.5 h-1.5 bg-(--color-accent-primary) rounded-full flex-shrink-0"></span>
                 {item}
               </li>
             ))}
@@ -472,9 +472,9 @@ const faqSchema = {
       </table>
     </div>
 
-    <div class="card p-6 my-6 not-prose bg-[--color-accent-subtle] border-[--color-border-accent]">
-      <h3 class="font-semibold text-[--color-text-primary] mb-3 text-base">💡 Truco: Pon una alarma</h3>
-      <p class="text-sm text-[--color-text-secondary]">
+    <div class="card p-6 my-6 not-prose bg-(--color-accent-subtle) border-(--color-border-accent)">
+      <h3 class="font-semibold text-(--color-text-primary) mb-3 text-base">💡 Truco: Pon una alarma</h3>
+      <p class="text-sm text-(--color-text-secondary)">
         Crea una alarma recurrente en el móvil (ej: primer día de cada estación) para revisar
         el botiquín. Hazlo coincidir con otra rutina para no olvidarlo.
       </p>
@@ -487,11 +487,11 @@ const faqSchema = {
     <div class="space-y-4 my-6 not-prose">
       {storageLocations.map((loc) => (
         <div class="card p-5">
-          <h3 class="font-semibold text-[--color-text-primary] mb-2 text-base">{loc.location}</h3>
-          <p class="text-sm text-[--color-text-secondary] mb-1">
+          <h3 class="font-semibold text-(--color-text-primary) mb-2 text-base">{loc.location}</h3>
+          <p class="text-sm text-(--color-text-secondary) mb-1">
             <strong>Ubicación:</strong> {loc.where}
           </p>
-          <p class="text-xs text-[--color-text-muted] m-0">
+          <p class="text-xs text-(--color-text-muted) m-0">
             💡 {loc.notes}
           </p>
         </div>
@@ -505,14 +505,14 @@ const faqSchema = {
     <div class="space-y-4 my-8">
       {faqs.map((faq) => (
         <details class="card group">
-          <summary class="px-6 py-4 cursor-pointer list-none flex items-center justify-between hover:bg-[--color-bg-tertiary] transition-colors">
-            <span class="font-medium text-[--color-text-primary] pr-4">{faq.question}</span>
-            <svg class="w-5 h-5 text-[--color-text-muted] transform transition-transform group-open:rotate-180 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <summary class="px-6 py-4 cursor-pointer list-none flex items-center justify-between hover:bg-(--color-bg-tertiary) transition-colors">
+            <span class="font-medium text-(--color-text-primary) pr-4">{faq.question}</span>
+            <svg class="w-5 h-5 text-(--color-text-muted) transform transition-transform group-open:rotate-180 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
             </svg>
           </summary>
           <div class="px-6 pb-4">
-            <p class="text-[--color-text-secondary] m-0">{faq.answer}</p>
+            <p class="text-(--color-text-secondary) m-0">{faq.answer}</p>
           </div>
         </details>
       ))}
@@ -542,20 +542,20 @@ const faqSchema = {
   </div>
 
   <!-- CTA Slot -->
-  <div slot="cta" class="card p-8 text-center bg-[--color-bg-tertiary]">
+  <div slot="cta" class="card p-8 text-center bg-(--color-bg-tertiary)">
     <h3 class="text-xl font-semibold mb-4">Crea tu kit completo</h3>
-    <p class="text-[--color-text-secondary] mb-6">
+    <p class="text-(--color-text-secondary) mb-6">
       El botiquín es parte de tu kit de emergencia. Usa nuestro configurador
       para crear una lista completa personalizada.
     </p>
     <div class="flex flex-wrap gap-4 justify-center">
-      <a href="/es/herramientas/configurador-kit/" class="inline-flex items-center gap-2 px-6 py-3 bg-[--color-accent-primary] text-[--color-bg-primary] font-semibold rounded hover:bg-[--color-accent-hover] transition-colors">
+      <a href="/es/herramientas/configurador-kit/" class="inline-flex items-center gap-2 px-6 py-3 bg-(--color-accent-primary) text-(--color-bg-primary) font-semibold rounded hover:bg-(--color-accent-hover) transition-colors">
         Crear mi kit
         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
         </svg>
       </a>
-      <a href="/es/kit-72-horas/" class="inline-flex items-center gap-2 px-6 py-3 border border-[--color-border] text-[--color-text-primary] font-medium rounded hover:border-[--color-accent-primary] hover:text-[--color-accent-primary] transition-colors">
+      <a href="/es/kit-72-horas/" class="inline-flex items-center gap-2 px-6 py-3 border border-(--color-border) text-(--color-text-primary) font-medium rounded hover:border-(--color-accent-primary) hover:text-(--color-accent-primary) transition-colors">
         Ver Kit 72 Horas completo
       </a>
     </div>

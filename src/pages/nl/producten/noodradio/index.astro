@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../../../layouts/BaseLayout.astro';
+import ShopBox from '../../../../components/growth/ShopBox.astro';
 import Breadcrumb from '../../../../components/layout/Breadcrumb.astro';
 import Icon from '../../../../components/ui/Icon.astro';
 import HeroImage from '../../../../components/content/HeroImage.astro';
@@ -28,6 +29,8 @@ import HeroImage from '../../../../components/content/HeroImage.astro';
         />
       </div>
 
+      <ShopBox locale="nl" category="noodradio" />
+
       <div class="prose prose-lg">
         <p class="lead">
           Als stroom, internet en mobiele netwerken uitvallen, is de radio vaak de
@@ -36,22 +39,22 @@ import HeroImage from '../../../../components/content/HeroImage.astro';
         </p>
 
         <!-- Key Info -->
-        <div class="card p-6 my-8 bg-[--color-bg-tertiary] not-prose">
+        <div class="card p-6 my-8 bg-(--color-bg-tertiary) not-prose">
           <h3 class="text-lg font-semibold mb-4 flex items-center gap-2">
-            <Icon name="Radio" size={20} class="text-[--color-accent-primary]" />
+            <Icon name="Radio" size={20} class="text-(--color-accent-primary)" />
             Belangrijke Frequenties
           </h3>
           <div class="space-y-2 text-sm">
-            <div class="flex justify-between items-center p-3 bg-[--color-bg-secondary] rounded">
+            <div class="flex justify-between items-center p-3 bg-(--color-bg-secondary) rounded">
               <span>NPO Radio 1</span>
               <span class="font-semibold">98.9 MHz (FM) / DAB+</span>
             </div>
-            <div class="flex justify-between items-center p-3 bg-[--color-bg-secondary] rounded">
+            <div class="flex justify-between items-center p-3 bg-(--color-bg-secondary) rounded">
               <span>Regionale omroep</span>
               <span class="font-semibold">Zoek je lokale frequentie</span>
             </div>
           </div>
-          <p class="text-xs text-[--color-text-muted] mt-3">
+          <p class="text-xs text-(--color-text-muted) mt-3">
             💡 Noteer de frequenties van je lokale omroep — zij informeren bij regionale incidenten.
           </p>
         </div>
@@ -88,9 +91,9 @@ import HeroImage from '../../../../components/content/HeroImage.astro';
           Echter hoger stroomverbruik — minder ideaal voor noodgevallen.
         </p>
 
-        <div class="card p-6 my-8 bg-[--color-accent-subtle] not-prose">
+        <div class="card p-6 my-8 bg-(--color-accent-subtle) not-prose">
           <p class="font-medium mb-2">💡 Aanbeveling</p>
-          <p class="text-sm text-[--color-text-secondary]">
+          <p class="text-sm text-(--color-text-secondary)">
             Prioriteit: <strong>FM + AM</strong>. DAB+ is een nice-to-have,
             maar niet essentieel voor noodsituaties.
           </p>
@@ -109,27 +112,27 @@ import HeroImage from '../../../../components/content/HeroImage.astro';
         <div class="overflow-x-auto not-prose my-6">
           <table class="w-full text-sm">
             <thead>
-              <tr class="border-b border-[--color-border-primary]">
+              <tr class="border-b border-(--color-border-primary)">
                 <th class="text-left py-2">Stroombron</th>
                 <th class="text-left py-2">Gebruiksduur</th>
                 <th class="text-left py-2">Opmerking</th>
               </tr>
             </thead>
             <tbody>
-              <tr class="border-b border-[--color-border-secondary]">
+              <tr class="border-b border-(--color-border-secondary)">
                 <td class="py-2">3x AAA batterijen</td>
                 <td class="py-2">8-12 uur</td>
-                <td class="py-2 text-[--color-text-muted]">Reserve inplannen</td>
+                <td class="py-2 text-(--color-text-muted)">Reserve inplannen</td>
               </tr>
-              <tr class="border-b border-[--color-border-secondary]">
+              <tr class="border-b border-(--color-border-secondary)">
                 <td class="py-2">1 min. draaien</td>
                 <td class="py-2">5-10 min. radio</td>
-                <td class="py-2 text-[--color-text-muted]">Vermoeiend op den duur</td>
+                <td class="py-2 text-(--color-text-muted)">Vermoeiend op den duur</td>
               </tr>
-              <tr class="border-b border-[--color-border-secondary]">
+              <tr class="border-b border-(--color-border-secondary)">
                 <td class="py-2">Zonnepaneel (volle zon)</td>
                 <td class="py-2">Laadt interne accu</td>
-                <td class="py-2 text-[--color-text-muted]">Langzaam, maar duurzaam</td>
+                <td class="py-2 text-(--color-text-muted)">Langzaam, maar duurzaam</td>
               </tr>
             </tbody>
           </table>
@@ -156,16 +159,16 @@ import HeroImage from '../../../../components/content/HeroImage.astro';
       </div>
 
       <!-- Shop Link -->
-      <div class="mt-12 card p-6 bg-[--color-bg-tertiary]">
+      <div class="mt-12 card p-6 bg-(--color-bg-tertiary)">
         <h3 class="font-semibold mb-2">Noodradio's op Bol.com</h3>
-        <p class="text-sm text-[--color-text-secondary] mb-4">
+        <p class="text-sm text-(--color-text-secondary) mb-4">
           Aanbevolen dynamo-radio's met zonnepaneel en zaklamp.
         </p>
         <a
           href="https://www.bol.com/nl/nl/s/?searchtext=noodradio+dynamo+solar"
           target="_blank"
           rel="noopener noreferrer"
-          class="inline-flex items-center gap-2 px-4 py-2 bg-[--color-accent-primary] text-[--color-bg-primary] font-medium rounded hover:bg-[--color-accent-hover] transition-colors"
+          class="inline-flex items-center gap-2 px-4 py-2 bg-(--color-accent-primary) text-(--color-bg-primary) font-medium rounded hover:bg-(--color-accent-hover) transition-colors"
         >
           Bekijk op Bol.com
           <Icon name="ExternalLink" size={16} />

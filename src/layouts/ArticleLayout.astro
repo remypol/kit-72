@@ -110,12 +110,12 @@ const filteredBreadcrumbs = breadcrumbs.filter(b => !homeLabels.includes(b.label
       <header class="mb-12">
         <h1 class="animate-in mb-6">{title}</h1>
 
-        <p class="animate-in-delay-1 text-lg text-[--color-text-secondary] leading-relaxed mb-6">
+        <p class="animate-in-delay-1 text-lg text-(--color-text-secondary) leading-relaxed mb-6">
           {description}
         </p>
 
         <!-- Meta info -->
-        <div class="animate-in-delay-2 flex flex-wrap items-center gap-4 text-sm text-[--color-text-muted]">
+        <div class="animate-in-delay-2 flex flex-wrap items-center gap-4 text-sm text-(--color-text-muted)">
           {displayAuthor && (
             <span class="flex items-center gap-2">
               <Icon name="User" size={16} />

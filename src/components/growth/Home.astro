@@ -1,0 +1,622 @@
+---
+/**
+ * Homepage body, shared by all three locales.
+ * The hero is a working calculator: household in, 72-hour needs out.
+ */
+import Icon from '../ui/Icon.astro';
+import ListSignup from './ListSignup.astro';
+import { homeCopy, routes, WATER_PER_DAY, type Locale } from '../../data/site';
+import faqs from '../../data/home-faq.json';
+
+interface Props {
+  locale: Locale;
+}
+const { locale } = Astro.props;
+const c = homeCopy[locale];
+const r = routes[locale];
+const faq = faqs[locale];
+const steppers = [
+  { key: 'adults', label: c.adults, min: 1, value: 2 },
+  { key: 'children', label: c.children, min: 0, value: 0 },
+  { key: 'pets', label: c.pets, min: 0, value: 0 },
+];
+---
+
+<section class="hero" data-calc data-water-per-day={WATER_PER_DAY[locale]}>
+  <div class="wrap hero__grid">
+    <div class="hero__ask">
+      <h1 class="hero__title">{c.h1}</h1>
+      <p class="hero__lead">{c.lead}</p>
+
+      <div class="steppers">
+        {steppers.map((s) => (
+          <div class="stepper" data-stepper={s.key} data-min={s.min}>
+            <span class="stepper__label" id={`st-${s.key}`}>{s.label}</span>
+            <div class="stepper__ctl" role="group" aria-labelledby={`st-${s.key}`}>
+              <button type="button" class="stepper__btn" data-step="-1" aria-label={`${s.label}: ${c.fewer}`}>
+                <Icon name="Minus" size={18} />
+              </button>
+              <output class="stepper__value" aria-live="polite">{s.value}</output>
+              <button type="button" class="stepper__btn" data-step="1" aria-label={`${s.label}: ${c.more}`}>
+                <Icon name="Plus" size={18} />
+              </button>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <a href={r.builder} class="btn btn-primary btn-lg hero__cta">{c.cta}</a>
+      <p class="hero__note">{c.ctaNote}</p>
+    </div>
+
+    <div class="sign" aria-live="polite">
+      <p class="sign__title">{c.panelTitle}</p>
+      <dl class="sign__rows">
+        <div class="sign__row">
+          <dt>{c.water}<small>{c.waterNote}</small></dt>
+          <dd><span data-out="water">{2 * WATER_PER_DAY[locale] * 3}</span> <span class="sign__unit">{c.waterUnit}</span></dd>
+        </div>
+        <div class="sign__row">
+          <dt>{c.meals}<small>{c.mealsNote}</small></dt>
+          <dd><span data-out="meals">18</span></dd>
+        </div>
+        <div class="sign__row">
+          <dt>{c.lights}<small>{c.lightsNote}</small></dt>
+          <dd><span data-out="lights">2</span></dd>
+        </div>
+        {c.cash && (
+          <div class="sign__row">
+            <dt>{c.cash}<small>{c.cashNote}</small></dt>
+            <dd><span class="sign__unit">€</span> <span data-out="cash">140</span></dd>
+          </div>
+        )}
+      </dl>
+      <p class="sign__source">{c.panelSource}</p>
+    </div>
+  </div>
+</section>
+
+<section class="block">
+  <div class="wrap own">
+    <div>
+      <h2>{c.ownTitle}</h2>
+      <p class="block__lead">{c.ownBody}</p>
+      <a href={r.compare} class="textlink">{c.ownCta}</a>
+    </div>
+    <ol class="own__steps">
+      {c.ownPoints.map((p) => <li>{p}</li>)}
+    </ol>
+  </div>
+</section>
+
+<section class="block block--tint">
+  <div class="wrap">
+    <h2>{c.missingTitle}</h2>
+    <p class="block__lead">{c.missingLead}</p>
+    <ul class="rows">
+      {r.categories.map((cat) => (
+        <li>
+          <a href={cat.href} class="rowlink">
+            <span class="rowlink__icon"><Icon name={cat.icon as any} size={22} /></span>
+            <span class="rowlink__label">{cat.label}</span>
+            <span class="rowlink__hint">{cat.hint}</span>
+            <Icon name="ChevronRight" size={20} class="rowlink__go" />
+          </a>
+        </li>
+      ))}
+    </ul>
+  </div>
+</section>
+
+<section class="block">
+  <div class="wrap">
+    <h2>{c.scenariosTitle}</h2>
+    <p class="block__lead">{c.scenariosLead}</p>
+    <ul class="tiles">
+      {r.scenarios.map((s) => (
+        <li>
+          <a href={s.href} class="tile">
+            <Icon name={s.icon as any} size={26} />
+            <span>{s.label}</span>
+          </a>
+        </li>
+      ))}
+    </ul>
+
+    <h3 class="tools__title">{c.toolsTitle}</h3>
+    <div class="tools">
+      <a href={r.water} class="rowlink rowlink--boxed">
+        <span class="rowlink__icon"><Icon name="Droplets" size={22} /></span>
+        <span class="rowlink__label">{c.toolWater}</span>
+        <span class="rowlink__hint">{c.toolWaterHint}</span>
+        <Icon name="ChevronRight" size={20} class="rowlink__go" />
+      </a>
+      <a href={r.power} class="rowlink rowlink--boxed">
+        <span class="rowlink__icon"><Icon name="BatteryCharging" size={22} /></span>
+        <span class="rowlink__label">{c.toolPower}</span>
+        <span class="rowlink__hint">{c.toolPowerHint}</span>
+        <Icon name="ChevronRight" size={20} class="rowlink__go" />
+      </a>
+    </div>
+  </div>
+</section>
+
+<ListSignup locale={locale} source="home" variant="band" />
+
+<section class="block">
+  <div class="wrap">
+    <h2>{c.howTitle}</h2>
+    <div class="how">
+      {c.how.map((h) => (
+        <div>
+          <h3>{h.title}</h3>
+          <p>{h.body}</p>
+        </div>
+      ))}
+    </div>
+    <p class="how__links">
+      <a href={r.editorial} class="textlink">{c.howLinks.editorial}</a>
+      <a href={r.affiliate} class="textlink">{c.howLinks.affiliate}</a>
+    </p>
+  </div>
+</section>
+
+<section class="block block--tint">
+  <div class="wrap wrap--narrow">
+    <h2>{c.faqTitle}</h2>
+    <div class="faq">
+      {faq.map((f) => (
+        <details>
+          <summary>{f.q}</summary>
+          <p>{f.a}</p>
+        </details>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .wrap {
+    max-width: 72rem;
+    margin-inline: auto;
+    padding-inline: var(--space-4);
+  }
+  @media (min-width: 640px) {
+    .wrap {
+      padding-inline: var(--space-6);
+    }
+  }
+  .wrap--narrow {
+    max-width: 48rem;
+  }
+
+  /* ---------- Hero ---------- */
+  .hero {
+    background: var(--color-bg-secondary);
+    border-bottom: 1px solid var(--color-border);
+    padding-block: var(--space-10) var(--space-12);
+  }
+  .hero__grid {
+    display: grid;
+    gap: var(--space-8);
+  }
+  @media (min-width: 900px) {
+    .hero {
+      padding-block: var(--space-16) var(--space-20);
+    }
+    .hero__grid {
+      grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+      gap: var(--space-16);
+      align-items: center;
+    }
+  }
+  .hero__title {
+    font-size: clamp(2.1rem, 4.6vw, 3.4rem);
+    max-width: 14ch;
+  }
+  .hero__lead {
+    margin-top: var(--space-4);
+    font-size: 1.15rem;
+    color: var(--color-text-secondary);
+    max-width: 46ch;
+  }
+  .steppers {
+    margin-top: var(--space-6);
+    border-top: 2px solid var(--color-text-primary);
+    max-width: 26rem;
+  }
+  .stepper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-block: var(--space-2);
+    border-bottom: 1px solid var(--color-border);
+  }
+  .stepper__label {
+    font-weight: 650;
+  }
+  .stepper__ctl {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+  }
+  .stepper__btn {
+    width: 44px;
+    height: 44px;
+    display: grid;
+    place-items: center;
+    border: 1.5px solid var(--color-text-primary);
+    border-radius: var(--radius-md);
+    background: var(--color-bg-secondary);
+    color: var(--color-text-primary);
+    cursor: pointer;
+  }
+  .stepper__btn:hover:not(:disabled) {
+    background: var(--color-bg-tertiary);
+  }
+  .stepper__btn:disabled {
+    opacity: 0.3;
+    cursor: default;
+  }
+  .stepper__value {
+    min-width: 2.2ch;
+    text-align: center;
+    font-family: var(--font-display);
+    font-weight: 750;
+    font-size: 1.5rem;
+    font-variant-numeric: tabular-nums;
+  }
+  .hero__cta {
+    margin-top: var(--space-6);
+    padding-inline: var(--space-8);
+    font-size: 1.1rem;
+  }
+  .hero__note {
+    margin-top: var(--space-3);
+    font-size: 0.95rem;
+    color: var(--color-text-tertiary);
+  }
+
+  /* The result panel is drawn like a safe-condition sign */
+  .sign {
+    background: var(--color-accent);
+    color: #fff;
+    border-radius: 14px;
+    padding: var(--space-6);
+    box-shadow: inset 0 0 0 5px var(--color-accent), inset 0 0 0 7px #fff;
+  }
+  @media (min-width: 900px) {
+    .sign {
+      padding: var(--space-8) var(--space-10);
+    }
+  }
+  .sign__title {
+    font-family: var(--font-display);
+    font-stretch: 112%;
+    font-weight: 800;
+    font-size: 1.25rem;
+    letter-spacing: -0.01em;
+    padding-bottom: var(--space-3);
+    border-bottom: 2px solid #fff;
+  }
+  .sign__row {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: var(--space-4);
+    padding-block: var(--space-3);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.35);
+  }
+  .sign__row dt {
+    font-weight: 650;
+    font-size: 1.05rem;
+  }
+  .sign__row dt small {
+    display: block;
+    font-weight: 400;
+    font-size: 0.85rem;
+    color: #d6efe0;
+  }
+  .sign__row dd {
+    font-family: var(--font-display);
+    font-stretch: 100%;
+    font-weight: 800;
+    font-size: clamp(2rem, 4.5vw, 2.9rem);
+    line-height: 1;
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+  }
+  .sign__unit {
+    font-size: 0.42em;
+    font-weight: 650;
+  }
+  .sign__source {
+    margin-top: var(--space-4);
+    font-size: 0.82rem;
+    color: #d6efe0;
+  }
+
+  /* ---------- Blocks ---------- */
+  .block {
+    padding-block: var(--space-12);
+  }
+  @media (min-width: 900px) {
+    .block {
+      padding-block: var(--space-20);
+    }
+  }
+  .block--tint {
+    background: var(--color-bg-tertiary);
+  }
+  .block__lead {
+    margin-top: var(--space-3);
+    font-size: 1.1rem;
+    color: var(--color-text-secondary);
+    max-width: 58ch;
+  }
+  .textlink {
+    display: inline-block;
+    margin-top: var(--space-5);
+    font-weight: 650;
+    text-decoration: underline;
+    text-decoration-thickness: 2px;
+    text-underline-offset: 4px;
+  }
+
+  .own {
+    display: grid;
+    gap: var(--space-8);
+  }
+  @media (min-width: 900px) {
+    .own {
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-16);
+      align-items: start;
+    }
+  }
+  /* a real sequence: check, see, buy */
+  .own__steps {
+    counter-reset: step;
+    border-top: 2px solid var(--color-text-primary);
+  }
+  .own__steps li {
+    counter-increment: step;
+    display: grid;
+    grid-template-columns: 2.5rem 1fr;
+    align-items: baseline;
+    padding-block: var(--space-4);
+    border-bottom: 1px solid var(--color-border);
+    font-size: 1.1rem;
+  }
+  .own__steps li::before {
+    content: counter(step);
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 1.4rem;
+    color: var(--color-accent);
+  }
+
+  .rows {
+    margin-top: var(--space-8);
+    border-top: 2px solid var(--color-text-primary);
+  }
+  .rowlink {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    grid-template-areas: 'icon label go' 'icon hint go';
+    column-gap: var(--space-4);
+    align-items: center;
+    padding: var(--space-4) var(--space-2);
+    border-bottom: 1px solid var(--color-border);
+    color: var(--color-text-primary);
+  }
+  @media (min-width: 760px) {
+    .rowlink {
+      grid-template-columns: auto 16rem 1fr auto;
+      grid-template-areas: 'icon label hint go';
+    }
+  }
+  .rowlink:hover {
+    background: var(--color-bg-secondary);
+    color: var(--color-text-primary);
+  }
+  .rowlink--boxed {
+    background: var(--color-bg-secondary);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    padding-inline: var(--space-4);
+  }
+  .rowlink--boxed:hover {
+    border-color: var(--color-accent);
+  }
+  @media (min-width: 760px) {
+    .rowlink--boxed {
+      grid-template-columns: auto 1fr auto;
+      grid-template-areas: 'icon label go' 'icon hint go';
+    }
+  }
+  .rowlink__icon {
+    grid-area: icon;
+    color: var(--color-accent);
+    display: grid;
+  }
+  .rowlink__label {
+    grid-area: label;
+    font-family: var(--font-display);
+    font-stretch: 108%;
+    font-weight: 700;
+    font-size: 1.15rem;
+  }
+  .rowlink__hint {
+    grid-area: hint;
+    color: var(--color-text-secondary);
+  }
+  .rowlink :global(.rowlink__go) {
+    grid-area: go;
+    color: var(--color-text-tertiary);
+  }
+
+  .tiles {
+    margin-top: var(--space-8);
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--space-3);
+  }
+  @media (min-width: 760px) {
+    .tiles {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+  }
+  @media (min-width: 1040px) {
+    .tiles {
+      grid-template-columns: repeat(6, minmax(0, 1fr));
+    }
+  }
+  .tile {
+    display: grid;
+    gap: var(--space-3);
+    align-content: space-between;
+    min-height: 7rem;
+    padding: var(--space-4);
+    background: var(--color-bg-secondary);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    color: var(--color-text-primary);
+    font-weight: 650;
+  }
+  .tile :global(svg) {
+    color: var(--color-accent);
+  }
+  .tile:hover {
+    border-color: var(--color-accent);
+    color: var(--color-accent-hover);
+  }
+  .tools__title {
+    margin-top: var(--space-12);
+  }
+  .tools {
+    margin-top: var(--space-4);
+    display: grid;
+    gap: var(--space-3);
+  }
+  @media (min-width: 760px) {
+    .tools {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  .how {
+    margin-top: var(--space-8);
+    display: grid;
+    gap: var(--space-6);
+  }
+  @media (min-width: 760px) {
+    .how {
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--space-10);
+    }
+  }
+  .how > div {
+    border-top: 2px solid var(--color-text-primary);
+    padding-top: var(--space-4);
+  }
+  .how p {
+    margin-top: var(--space-2);
+    color: var(--color-text-secondary);
+  }
+  .how__links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-6);
+  }
+
+  .faq {
+    margin-top: var(--space-6);
+    border-top: 2px solid var(--color-text-primary);
+  }
+  .faq details {
+    border-bottom: 1px solid var(--color-border);
+  }
+  .faq summary {
+    cursor: pointer;
+    padding: var(--space-4) var(--space-8) var(--space-4) 0;
+    font-weight: 650;
+    font-size: 1.1rem;
+    list-style: none;
+    position: relative;
+  }
+  .faq summary::-webkit-details-marker {
+    display: none;
+  }
+  .faq summary::after {
+    content: '+';
+    position: absolute;
+    right: var(--space-2);
+    top: 50%;
+    translate: 0 -50%;
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--color-accent);
+  }
+  .faq details[open] summary::after {
+    content: '–';
+  }
+  .faq details p {
+    padding-bottom: var(--space-5);
+    color: var(--color-text-secondary);
+    max-width: 65ch;
+  }
+</style>
+
+<script>
+  const KEY = 'kit72_household';
+  const root = document.querySelector<HTMLElement>('[data-calc]');
+  if (root) {
+    const perDay = Number(root.dataset.waterPerDay) || 3;
+    const state: Record<string, number> = { adults: 2, children: 0, pets: 0 };
+    try {
+      const saved = JSON.parse(localStorage.getItem(KEY) || '{}');
+      for (const k of Object.keys(state)) {
+        if (Number.isInteger(saved[k]) && saved[k] >= 0 && saved[k] <= 12) state[k] = saved[k];
+      }
+      if (state.adults < 1) state.adults = 1;
+    } catch {
+      /* private mode: keep defaults */
+    }
+
+    const out = (name: string) => root.querySelector<HTMLElement>(`[data-out="${name}"]`);
+    const render = () => {
+      const people = state.adults + state.children;
+      const set = (name: string, v: number) => {
+        const el = out(name);
+        if (el) el.textContent = String(v);
+      };
+      set('water', people * perDay * 3 + state.pets);
+      set('meals', people * 9);
+      set('lights', Math.max(2, people));
+      set('cash', state.adults * 70 + state.children * 30);
+      root.querySelectorAll<HTMLElement>('[data-stepper]').forEach((el) => {
+        const key = el.dataset.stepper!;
+        const min = Number(el.dataset.min);
+        el.querySelector('output')!.textContent = String(state[key]);
+        el.querySelector<HTMLButtonElement>('[data-step="-1"]')!.disabled = state[key] <= min;
+        el.querySelector<HTMLButtonElement>('[data-step="1"]')!.disabled = state[key] >= 12;
+      });
+    };
+
+    root.addEventListener('click', (e) => {
+      const btn = (e.target as Element).closest<HTMLButtonElement>('[data-step]');
+      if (!btn) return;
+      const key = btn.closest<HTMLElement>('[data-stepper]')!.dataset.stepper!;
+      state[key] += Number(btn.dataset.step);
+      try {
+        localStorage.setItem(KEY, JSON.stringify(state));
+      } catch {
+        /* ignore */
+      }
+      render();
+    });
+    render();
+  }
+</script>

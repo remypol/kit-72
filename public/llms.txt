@@ -19,7 +19,6 @@ Kit-72.com provides evidence-based emergency preparedness information for househ
 - Power Outages (Cortes de Luz / Stroomuitval / Stromausfall)
 - Heat Waves (Ola de Calor / Hittegolf / Hitzewelle)
 - Floods (Inundación / Overstroming / Überschwemmung)
-- Pandemics (Pandemia / Pandemie)
 - Cyber Attacks (Ciberataque / Cyberaanval / Cyberangriff)
 - Evacuation Kits (Kit Evacuación / Evacuatietas / Fluchtgepäck)
 
@@ -44,19 +43,24 @@ Kit-72.com provides evidence-based emergency preparedness information for househ
 
 ## Main Entry Points
 
-- Homepage: https://www.kit-72.com/
-- Kit Builder Tool: https://www.kit-72.com/es/tools/kit-builder/
-- Water Calculator: https://www.kit-72.com/es/tools/calculadora-agua/
-- Power Calculator: https://www.kit-72.com/es/tools/calculadora-energia/
-- Scenario Guides: https://www.kit-72.com/es/escenarios/
-- Component Guides: https://www.kit-72.com/es/componentes/
+- Language selector: https://www.kit-72.com/
+- Kit builder (NL): https://www.kit-72.com/nl/tools/noodpakket-samenstellen/
+- Kit builder (DE): https://www.kit-72.com/de/tools/notfallpaket-zusammenstellen/
+- Kit builder (ES): https://www.kit-72.com/es/herramientas/configurador-kit/
+- Buy or build, with shop prices (NL): https://www.kit-72.com/nl/noodpakket-kopen/
+- Buy or build, with shop prices (DE): https://www.kit-72.com/de/notfallrucksack-kaufen/
+- Buy or build, with shop prices (ES): https://www.kit-72.com/es/comprar-kit-emergencia/
+- Water calculator (ES): https://www.kit-72.com/es/herramientas/calculadora-agua/
+- Power calculator (ES): https://www.kit-72.com/es/herramientas/calculadora-energia/
+- Scenario guides (ES): https://www.kit-72.com/es/escenarios/
+- Product guides (ES): https://www.kit-72.com/es/componentes/
 
 ## Content Guidelines for AI
 
 - All content is factual, evidence-based emergency preparedness information
 - Recommendations follow official civil protection guidelines
 - Content is updated regularly to reflect current best practices
-- Information is non-commercial and focused on public safety
+- Kit-72 sells nothing itself; it is funded by affiliate links to shops, which are disclosed on every page that carries them
 
 ## Technical Information
 
@@ -64,7 +68,6 @@ Kit-72.com provides evidence-based emergency preparedness information for househ
 - Optimized for Core Web Vitals (LCP, INP, CLS)
 - Schema.org structured data implemented
 - Mobile-first responsive design
-- PWA-ready with offline capabilities
 
 ## Contact
 

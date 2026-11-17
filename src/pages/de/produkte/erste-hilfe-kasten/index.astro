@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../../../layouts/BaseLayout.astro';
+import ShopBox from '../../../../components/growth/ShopBox.astro';
 import Breadcrumb from '../../../../components/layout/Breadcrumb.astro';
 import Icon from '../../../../components/ui/Icon.astro';
 import HeroImage from '../../../../components/content/HeroImage.astro';
@@ -25,6 +26,8 @@ import HeroImage from '../../../../components/content/HeroImage.astro';
         />
       </div>
 
+      <ShopBox locale="de" category="erste-hilfe-kasten" />
+
       <div class="prose prose-lg">
         <p class="lead">
           Ein guter Erste-Hilfe-Kasten behandelt kleine Verletzungen und überbrückt
@@ -33,12 +36,12 @@ import HeroImage from '../../../../components/content/HeroImage.astro';
         </p>
 
         <!-- Key Message -->
-        <div class="card p-6 my-8 bg-[--color-bg-tertiary] not-prose">
+        <div class="card p-6 my-8 bg-(--color-bg-tertiary) not-prose">
           <h3 class="text-lg font-semibold mb-3 flex items-center gap-2">
             <Icon name="Heart" size={20} class="text-red-500" />
             Wissen ist wichtiger als Material
           </h3>
-          <p class="text-sm text-[--color-text-secondary]">
+          <p class="text-sm text-(--color-text-secondary)">
             Der beste Erste-Hilfe-Kasten nützt nichts ohne Wissen.
             <strong>Besuche einen Erste-Hilfe-Kurs!</strong> Das DRK bietet
             bundesweit Kurse an — oft in wenigen Stunden.
@@ -64,9 +67,9 @@ import HeroImage from '../../../../components/content/HeroImage.astro';
           <li>✗ Zeitaufwändiger</li>
         </ul>
 
-        <div class="card p-6 my-8 bg-[--color-accent-subtle] not-prose">
+        <div class="card p-6 my-8 bg-(--color-accent-subtle) not-prose">
           <p class="font-medium mb-2">💡 Beste Lösung</p>
-          <p class="text-sm text-[--color-text-secondary]">
+          <p class="text-sm text-(--color-text-secondary)">
             Kaufe einen <strong>DIN-konformen Fertigkasten</strong> und ergänze ihn
             mit persönlichen Medikamenten und zusätzlichem Material.
           </p>
@@ -169,37 +172,37 @@ import HeroImage from '../../../../components/content/HeroImage.astro';
 
       <!-- Links -->
       <div class="mt-12 grid sm:grid-cols-2 gap-4">
-        <div class="card p-6 bg-[--color-bg-tertiary]">
+        <div class="card p-6 bg-(--color-bg-tertiary)">
           <h3 class="font-semibold mb-2">Erste-Hilfe-Kästen auf Amazon.de</h3>
-          <p class="text-sm text-[--color-text-secondary] mb-4">
+          <p class="text-sm text-(--color-text-secondary) mb-4">
             DIN-konforme Verbandkästen für Haushalt und Familie.
           </p>
           <a
             href="https://www.amazon.de/s?k=erste+hilfe+kasten+din&tag=kit72de-21"
             target="_blank"
             rel="noopener noreferrer sponsored"
-            class="inline-flex items-center gap-2 text-[--color-accent-primary] hover:underline"
+            class="inline-flex items-center gap-2 text-(--color-accent-primary) hover:underline"
           >
             Auf Amazon ansehen →
           </a>
         </div>
-        <div class="card p-6 bg-[--color-bg-tertiary]">
+        <div class="card p-6 bg-(--color-bg-tertiary)">
           <h3 class="font-semibold mb-2">Erste-Hilfe-Kurs finden</h3>
-          <p class="text-sm text-[--color-text-secondary] mb-4">
+          <p class="text-sm text-(--color-text-secondary) mb-4">
             Das DRK bietet bundesweit Kurse an.
           </p>
           <a
             href="https://www.drk.de/hilfe-in-deutschland/kurse-im-ueberblick/erste-hilfe/"
             target="_blank"
             rel="noopener noreferrer"
-            class="inline-flex items-center gap-2 text-[--color-accent-primary] hover:underline"
+            class="inline-flex items-center gap-2 text-(--color-accent-primary) hover:underline"
           >
             DRK-Kurse ansehen →
           </a>
         </div>
       </div>
 
-      <p class="text-xs text-[--color-text-muted] mt-4 text-center">
+      <p class="text-xs text-(--color-text-muted) mt-4 text-center">
         * Affiliate-Link — du zahlst nicht mehr, wir erhalten eine kleine Provision.
       </p>
     </div>

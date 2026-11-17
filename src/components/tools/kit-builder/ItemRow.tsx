@@ -4,6 +4,7 @@
 
 import { Icon } from '../../ui/Icon';
 import type { KitItem } from './types';
+import { decorateUrl } from '../../../lib/affiliate';
 
 interface ItemRowProps {
   item: KitItem;
@@ -45,7 +46,9 @@ export function ItemRow({
   translations,
 }: ItemRowProps) {
   const styles = priorityStyles[item.priority];
-  const affiliateUrl = item.affiliateUrl || item.amazonUrl;
+  const rawUrl = item.affiliateUrl || item.amazonUrl;
+  const link = rawUrl ? decorateUrl(rawUrl) : null;
+  const affiliateUrl = link?.url;
 
   return (
     <div
@@ -54,7 +57,7 @@ export function ItemRow({
         transition-all duration-200
         ${isChecked
           ? 'bg-emerald-500/5 border-l-emerald-500'
-          : 'hover:bg-[--color-bg-tertiary] active:bg-[--color-bg-tertiary]'
+          : 'hover:bg-(--color-bg-tertiary) active:bg-(--color-bg-tertiary)'
         }
       `}
       style={{ animationDelay: `${index * 0.03}s` }}
@@ -72,7 +75,7 @@ export function ItemRow({
               w-6 h-6 rounded-lg border-2 transition-all duration-200 flex items-center justify-center
               ${isChecked
                 ? 'bg-emerald-500 border-emerald-500'
-                : `border-[--color-border] ${styles.ring}`
+                : `border-(--color-border) ${styles.ring}`
               }
             `}>
               {isChecked && <Icon name="check" size={14} className="text-white" />}
@@ -83,7 +86,7 @@ export function ItemRow({
           <div className="flex-1 min-w-0">
             {/* Name row with badge */}
             <div className="flex items-center gap-2 flex-wrap">
-              <span className={`text-base md:text-sm font-medium transition-all duration-200 ${isChecked ? 'line-through text-[--color-text-muted]' : 'text-[--color-text-primary]'}`}>
+              <span className={`text-base md:text-sm font-medium transition-all duration-200 ${isChecked ? 'line-through text-(--color-text-muted)' : 'text-(--color-text-primary)'}`}>
                 {item.name}
               </span>
               {item.priority === 'critical' && !isChecked && (
@@ -95,13 +98,13 @@ export function ItemRow({
 
             {/* Notes */}
             {item.notes && (
-              <p className="text-sm text-[--color-text-muted] mt-1.5 leading-relaxed break-words">
+              <p className="text-sm text-(--color-text-muted) mt-1.5 leading-relaxed break-words">
                 {item.notes}
               </p>
             )}
 
             {/* Quantity */}
-            <p className={`text-sm mt-1.5 break-words ${isChecked ? 'text-[--color-text-muted]' : 'text-[--color-text-secondary]'}`}>
+            <p className={`text-sm mt-1.5 break-words ${isChecked ? 'text-(--color-text-muted)' : 'text-(--color-text-secondary)'}`}>
               {item.quantity}
             </p>
           </div>
@@ -114,9 +117,12 @@ export function ItemRow({
           <a
             href={affiliateUrl}
             target="_blank"
-            rel="noopener noreferrer"
+            rel="sponsored nofollow noopener"
+            data-aff={link?.merchant ?? undefined}
+            data-aff-tagged={link?.tagged ? '1' : '0'}
+            data-placement="kit-builder"
             onClick={(e) => e.stopPropagation()}
-            className="inline-flex items-center gap-2 px-4 py-2.5 text-sm font-medium rounded-xl bg-amber-500/10 text-amber-400 hover:bg-amber-500/20 active:bg-amber-500/30 transition-colors print:hidden touch-manipulation"
+            className="inline-flex items-center gap-2 px-3 py-2 text-sm font-semibold rounded-md border border-(--color-border) bg-(--color-bg-secondary) text-(--color-accent-primary) hover:border-(--color-accent) transition-colors print:hidden touch-manipulation"
           >
             <Icon name="shoppingCart" size={16} />
             <span>{translations.buy}</span>

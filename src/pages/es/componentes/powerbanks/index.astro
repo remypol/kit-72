@@ -222,19 +222,19 @@ const chargingTips = [
       <!-- Header -->
       <div class="mb-12">
         <nav class="text-sm mb-4">
-          <ol class="flex items-center gap-2 text-[--color-text-muted]">
-            <li><a href="/es/" class="hover:text-[--color-accent-primary]">Inicio</a></li>
+          <ol class="flex items-center gap-2 text-(--color-text-muted)">
+            <li><a href="/es/" class="hover:text-(--color-accent-primary)">Inicio</a></li>
             <li>/</li>
-            <li><a href="/es/componentes/" class="hover:text-[--color-accent-primary]">Componentes</a></li>
+            <li><a href="/es/componentes/" class="hover:text-(--color-accent-primary)">Componentes</a></li>
             <li>/</li>
-            <li class="text-[--color-text-primary]">Powerbanks</li>
+            <li class="text-(--color-text-primary)">Powerbanks</li>
           </ol>
         </nav>
         <h1 class="mb-4 flex items-center gap-3">
-          <Icon name="Battery" size={32} class="text-[--color-accent-primary]" />
+          <Icon name="Battery" size={32} class="text-(--color-accent-primary)" />
           Powerbanks y Baterías Externas
         </h1>
-        <p class="text-lg text-[--color-text-secondary]">
+        <p class="text-lg text-(--color-text-secondary)">
           En emergencias, tu teléfono es linterna, radio, mapa y comunicación con el mundo.
           Sin batería, te quedas incomunicado. Los powerbanks son esenciales.
         </p>
@@ -251,39 +251,39 @@ const chargingTips = [
       />
 
       <!-- How much do I need? -->
-      <div class="card p-6 mb-8 bg-[--color-bg-tertiary]">
-        <h3 class="font-semibold mb-4 text-[--color-text-primary] flex items-center gap-2">
-          <Icon name="Calculator" size={20} class="text-[--color-accent-primary]" />
+      <div class="card p-6 mb-8 bg-(--color-bg-tertiary)">
+        <h3 class="font-semibold mb-4 text-(--color-text-primary) flex items-center gap-2">
+          <Icon name="Calculator" size={20} class="text-(--color-accent-primary)" />
           ¿Cuánta capacidad necesito?
         </h3>
-        <div class="space-y-3 text-sm text-[--color-text-secondary]">
+        <div class="space-y-3 text-sm text-(--color-text-secondary)">
           <p><strong>Regla simple:</strong> Multiplica la batería de tu móvil × 3 × días × personas</p>
           <p><strong>Ejemplo:</strong> 2 personas, 3 días, móviles de 4.000 mAh cada uno:</p>
-          <p class="font-mono bg-[--color-bg-primary] p-2 rounded">4.000 × 3 × 3 × 2 = 72.000 mAh teóricos</p>
-          <p>Con pérdidas por conversión (~30%), necesitas: <strong class="text-[--color-accent-primary]">~50.000 mAh reales</strong></p>
-          <p class="text-xs text-[--color-text-muted]">Esto equivale a 2x powerbanks de 26.000 mAh o 3x de 20.000 mAh</p>
+          <p class="font-mono bg-(--color-bg-primary) p-2 rounded">4.000 × 3 × 3 × 2 = 72.000 mAh teóricos</p>
+          <p>Con pérdidas por conversión (~30%), necesitas: <strong class="text-(--color-accent-primary)">~50.000 mAh reales</strong></p>
+          <p class="text-xs text-(--color-text-muted)">Esto equivale a 2x powerbanks de 26.000 mAh o 3x de 20.000 mAh</p>
         </div>
       </div>
 
       <!-- Types -->
       <div class="mb-12">
-        <h2 class="text-2xl font-bold mb-6 text-[--color-text-primary]">Tipos de powerbanks</h2>
+        <h2 class="text-2xl font-bold mb-6 text-(--color-text-primary)">Tipos de powerbanks</h2>
 
         <div class="space-y-4">
           {powerbankTypes.map((type) => (
             <div class="card p-6">
               <div class="flex items-start gap-4">
-                <div class="w-12 h-12 flex items-center justify-center bg-[--color-bg-tertiary] rounded-lg flex-shrink-0">
-                  <Icon name={type.icon as any} size={28} class="text-[--color-accent-primary]" />
+                <div class="w-12 h-12 flex items-center justify-center bg-(--color-bg-tertiary) rounded-lg flex-shrink-0">
+                  <Icon name={type.icon as any} size={28} class="text-(--color-accent-primary)" />
                 </div>
                 <div class="flex-1">
                   <div class="flex items-center gap-3 mb-2">
-                    <h3 class="font-semibold text-[--color-text-primary]">{type.name}</h3>
-                    <span class="text-xs px-2 py-1 bg-[--color-bg-tertiary] text-[--color-text-muted] rounded">
+                    <h3 class="font-semibold text-(--color-text-primary)">{type.name}</h3>
+                    <span class="text-xs px-2 py-1 bg-(--color-bg-tertiary) text-(--color-text-muted) rounded">
                       {type.charges}
                     </span>
                   </div>
-                  <p class="text-sm text-[--color-text-secondary] mb-3">{type.description}</p>
+                  <p class="text-sm text-(--color-text-secondary) mb-3">{type.description}</p>
 
                   <div class="grid sm:grid-cols-3 gap-4 text-sm">
                     <div>
@@ -291,7 +291,7 @@ const chargingTips = [
                         <Icon name="CircleCheck" size={14} />
                         Pros
                       </span>
-                      <ul class="mt-1 space-y-1 text-[--color-text-muted]">
+                      <ul class="mt-1 space-y-1 text-(--color-text-muted)">
                         {type.pros.map((pro) => <li>• {pro}</li>)}
                       </ul>
                     </div>
@@ -300,16 +300,16 @@ const chargingTips = [
                         <Icon name="CircleX" size={14} />
                         Contras
                       </span>
-                      <ul class="mt-1 space-y-1 text-[--color-text-muted]">
+                      <ul class="mt-1 space-y-1 text-(--color-text-muted)">
                         {type.cons.map((con) => <li>• {con}</li>)}
                       </ul>
                     </div>
                     <div>
-                      <span class="text-[--color-accent-primary] font-medium flex items-center gap-1">
+                      <span class="text-(--color-accent-primary) font-medium flex items-center gap-1">
                         <Icon name="Star" size={14} />
                         Ideal para
                       </span>
-                      <p class="mt-1 text-[--color-text-muted]">{type.bestFor}</p>
+                      <p class="mt-1 text-(--color-text-muted)">{type.bestFor}</p>
                     </div>
                   </div>
                 </div>
@@ -321,18 +321,18 @@ const chargingTips = [
 
       <!-- Key Features -->
       <div class="mb-12">
-        <h2 class="text-2xl font-bold mb-6 text-[--color-text-primary]">Características a buscar</h2>
+        <h2 class="text-2xl font-bold mb-6 text-(--color-text-primary)">Características a buscar</h2>
 
         <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
           {features.map((feature) => (
             <div class="card p-4">
               <div class="flex items-start gap-3">
-                <div class="w-10 h-10 flex items-center justify-center bg-[--color-bg-tertiary] rounded-lg flex-shrink-0">
-                  <Icon name={feature.icon as any} size={22} class="text-[--color-accent-primary]" />
+                <div class="w-10 h-10 flex items-center justify-center bg-(--color-bg-tertiary) rounded-lg flex-shrink-0">
+                  <Icon name={feature.icon as any} size={22} class="text-(--color-accent-primary)" />
                 </div>
                 <div>
-                  <h3 class="font-semibold text-[--color-text-primary]">{feature.name}</h3>
-                  <p class="text-sm text-[--color-text-secondary]">{feature.description}</p>
+                  <h3 class="font-semibold text-(--color-text-primary)">{feature.name}</h3>
+                  <p class="text-sm text-(--color-text-secondary)">{feature.description}</p>
                 </div>
               </div>
             </div>
@@ -342,12 +342,12 @@ const chargingTips = [
 
       <!-- Device Charges Table -->
       <div class="mb-12">
-        <h2 class="text-2xl font-bold mb-6 text-[--color-text-primary]">¿Cuántas cargas por dispositivo?</h2>
+        <h2 class="text-2xl font-bold mb-6 text-(--color-text-primary)">¿Cuántas cargas por dispositivo?</h2>
 
         <div class="card overflow-hidden">
           <div class="overflow-x-auto">
             <table class="w-full text-sm">
-              <thead class="bg-[--color-bg-tertiary]">
+              <thead class="bg-(--color-bg-tertiary)">
                 <tr>
                   <th class="text-left py-3 px-4">Dispositivo</th>
                   <th class="text-center py-3 px-4">Batería</th>
@@ -355,19 +355,19 @@ const chargingTips = [
                   <th class="text-center py-3 px-4">Con 20K mAh</th>
                 </tr>
               </thead>
-              <tbody class="text-[--color-text-secondary]">
+              <tbody class="text-(--color-text-secondary)">
                 {deviceCharges.map((device, i) => (
-                  <tr class={i % 2 === 0 ? 'bg-[--color-bg-secondary]' : ''}>
-                    <td class="py-3 px-4 font-medium text-[--color-text-primary]">{device.device}</td>
+                  <tr class={i % 2 === 0 ? 'bg-(--color-bg-secondary)' : ''}>
+                    <td class="py-3 px-4 font-medium text-(--color-text-primary)">{device.device}</td>
                     <td class="py-3 px-4 text-center">{device.battery}</td>
                     <td class="py-3 px-4 text-center">{device.with10k}x</td>
-                    <td class="py-3 px-4 text-center font-bold text-[--color-accent-primary]">{device.with20k}x</td>
+                    <td class="py-3 px-4 text-center font-bold text-(--color-accent-primary)">{device.with20k}x</td>
                   </tr>
                 ))}
               </tbody>
             </table>
           </div>
-          <div class="p-4 bg-[--color-bg-tertiary] text-xs text-[--color-text-muted]">
+          <div class="p-4 bg-(--color-bg-tertiary) text-xs text-(--color-text-muted)">
             * Valores aproximados. La eficiencia real es ~70% por pérdidas en conversión de voltaje.
           </div>
         </div>
@@ -383,32 +383,32 @@ const chargingTips = [
 
       <!-- Recommendations -->
       <div class="mb-12">
-        <h2 class="text-2xl font-bold mb-6 text-[--color-text-primary]">Recomendaciones por uso</h2>
+        <h2 class="text-2xl font-bold mb-6 text-(--color-text-primary)">Recomendaciones por uso</h2>
 
         <div class="space-y-4">
           {recommendations.map((rec) => (
-            <div class={`card p-6 ${rec.priority === 'essential' ? 'border-l-4 border-l-red-500' : rec.priority === 'recommended' ? 'border-l-4 border-l-[--color-accent-primary]' : ''}`}>
+            <div class={`card p-6 ${rec.priority === 'essential' ? 'border-l-4 border-l-red-500' : rec.priority === 'recommended' ? 'border-l-4 border-l-(--color-accent-primary)' : ''}`}>
               <div class="flex items-start justify-between gap-4 mb-3">
                 <div>
-                  <span class={`text-xs px-2 py-1 rounded ${rec.priority === 'essential' ? 'bg-red-500/20 text-red-400' : rec.priority === 'recommended' ? 'bg-[--color-accent-primary]/20 text-[--color-accent-primary]' : 'bg-[--color-bg-tertiary] text-[--color-text-muted]'}`}>
+                  <span class={`text-xs px-2 py-1 rounded ${rec.priority === 'essential' ? 'bg-red-500/20 text-red-400' : rec.priority === 'recommended' ? 'bg-(--color-accent-primary)/20 text-(--color-accent-primary)' : 'bg-(--color-bg-tertiary) text-(--color-text-muted)'}`}>
                     {rec.priority === 'essential' ? 'Esencial' : rec.priority === 'recommended' ? 'Recomendado' : 'Opcional'}
                   </span>
-                  <span class="text-xs text-[--color-text-muted] ml-2">{rec.type}</span>
+                  <span class="text-xs text-(--color-text-muted) ml-2">{rec.type}</span>
                 </div>
-                <span class="font-bold text-[--color-accent-primary]">{rec.price}</span>
+                <span class="font-bold text-(--color-accent-primary)">{rec.price}</span>
               </div>
 
-              <h3 class="font-semibold text-[--color-text-primary] mb-2">{rec.name}</h3>
+              <h3 class="font-semibold text-(--color-text-primary) mb-2">{rec.name}</h3>
 
               <div class="flex flex-wrap gap-2 mb-3">
                 {rec.features.map((feature) => (
-                  <span class="text-xs px-2 py-1 bg-[--color-bg-tertiary] text-[--color-text-muted] rounded">
+                  <span class="text-xs px-2 py-1 bg-(--color-bg-tertiary) text-(--color-text-muted) rounded">
                     {feature}
                   </span>
                 ))}
               </div>
 
-              <p class="text-sm text-[--color-text-secondary] m-0">
+              <p class="text-sm text-(--color-text-secondary) m-0">
                 <strong>Veredicto:</strong> {rec.verdict}
               </p>
             </div>
@@ -418,37 +418,37 @@ const chargingTips = [
 
       <!-- Suggested Kit -->
       <div class="mb-12">
-        <h2 class="text-2xl font-bold mb-6 text-[--color-text-primary]">Kit de energía sugerido</h2>
+        <h2 class="text-2xl font-bold mb-6 text-(--color-text-primary)">Kit de energía sugerido</h2>
 
         <div class="card p-6">
-          <p class="text-sm text-[--color-text-secondary] mb-4">
+          <p class="text-sm text-(--color-text-secondary) mb-4">
             Para una familia de 2 adultos + 1 niño:
           </p>
 
           <div class="overflow-x-auto">
             <table class="w-full text-sm">
               <thead>
-                <tr class="border-b border-[--color-border]">
+                <tr class="border-b border-(--color-border)">
                   <th class="text-left py-2">Artículo</th>
                   <th class="text-center py-2">Cantidad</th>
                   <th class="text-left py-2">Notas</th>
                 </tr>
               </thead>
-              <tbody class="text-[--color-text-secondary]">
+              <tbody class="text-(--color-text-secondary)">
                 {kitSuggestion.map((item) => (
-                  <tr class="border-b border-[--color-border]">
+                  <tr class="border-b border-(--color-border)">
                     <td class="py-2">{item.item}</td>
-                    <td class="py-2 text-center font-bold text-[--color-accent-primary]">{item.qty}</td>
-                    <td class="py-2 text-xs text-[--color-text-muted]">{item.notes}</td>
+                    <td class="py-2 text-center font-bold text-(--color-accent-primary)">{item.qty}</td>
+                    <td class="py-2 text-xs text-(--color-text-muted)">{item.notes}</td>
                   </tr>
                 ))}
               </tbody>
             </table>
           </div>
 
-          <div class="mt-4 pt-4 border-t border-[--color-border] text-center">
-            <p class="text-sm text-[--color-text-muted]">
-              Inversión aproximada: <strong class="text-[--color-accent-primary]">80-150€</strong>
+          <div class="mt-4 pt-4 border-t border-(--color-border) text-center">
+            <p class="text-sm text-(--color-text-muted)">
+              Inversión aproximada: <strong class="text-(--color-accent-primary)">80-150€</strong>
             </p>
           </div>
         </div>
@@ -456,8 +456,8 @@ const chargingTips = [
 
       <!-- Product Recommendations -->
       <div class="mb-12">
-        <h2 class="text-2xl font-bold mb-6 text-[--color-text-primary] flex items-center gap-2">
-          <Icon name="ShoppingCart" size={24} class="text-[--color-accent-primary]" />
+        <h2 class="text-2xl font-bold mb-6 text-(--color-text-primary) flex items-center gap-2">
+          <Icon name="ShoppingCart" size={24} class="text-(--color-accent-primary)" />
           Productos recomendados
         </h2>
         <ProductGrid products={amazonProducts} title="Powerbanks para tu kit de emergencia" />
@@ -465,11 +465,11 @@ const chargingTips = [
 
       <!-- Tips -->
       <div class="card p-6 mb-8">
-        <h3 class="font-semibold mb-4 text-[--color-text-primary] flex items-center gap-2">
-          <Icon name="Lightbulb" size={20} class="text-[--color-accent-primary]" />
+        <h3 class="font-semibold mb-4 text-(--color-text-primary) flex items-center gap-2">
+          <Icon name="Lightbulb" size={20} class="text-(--color-accent-primary)" />
           Consejos para maximizar la batería
         </h3>
-        <ul class="grid sm:grid-cols-2 gap-2 text-sm text-[--color-text-secondary]">
+        <ul class="grid sm:grid-cols-2 gap-2 text-sm text-(--color-text-secondary)">
           {chargingTips.map((tip) => (
             <li>• {tip}</li>
           ))}
@@ -477,28 +477,28 @@ const chargingTips = [
       </div>
 
       <!-- Warning -->
-      <div class="p-4 bg-[--color-status-warning]/10 border border-[--color-status-warning]/30 rounded-lg mb-8">
-        <p class="text-sm text-[--color-text-secondary] m-0 flex items-start gap-2">
-          <Icon name="AlertTriangle" size={18} class="text-[--color-status-warning] flex-shrink-0 mt-0.5" />
-          <span><strong class="text-[--color-status-warning]">Aviso de seguridad:</strong> No compres
+      <div class="p-4 bg-(--color-status-warning)/10 border border-(--color-status-warning)/30 rounded-lg mb-8">
+        <p class="text-sm text-(--color-text-secondary) m-0 flex items-start gap-2">
+          <Icon name="AlertTriangle" size={18} class="text-(--color-status-warning) flex-shrink-0 mt-0.5" />
+          <span><strong class="text-(--color-status-warning)">Aviso de seguridad:</strong> No compres
           powerbanks de marcas desconocidas muy baratos. Las baterías de mala calidad pueden
           sobrecalentarse o incluso incendiarse. Marcas fiables: Anker, Xiaomi, Samsung, RAVPower.</span>
         </p>
       </div>
 
       <!-- Add to Kit Section -->
-      <div class="card p-6 mb-8 bg-gradient-to-r from-[--color-accent-primary]/10 to-[--color-accent-secondary]/5 border border-[--color-accent-primary]/20">
-        <h3 class="font-semibold mb-4 text-[--color-text-primary] flex items-center gap-2">
-          <Icon name="CheckSquare" size={20} class="text-[--color-accent-primary]" />
+      <div class="card p-6 mb-8 bg-gradient-to-r from-(--color-accent-primary)/10 to-(--color-accent-secondary)/5 border border-(--color-accent-primary)/20">
+        <h3 class="font-semibold mb-4 text-(--color-text-primary) flex items-center gap-2">
+          <Icon name="CheckSquare" size={20} class="text-(--color-accent-primary)" />
           Añadir a tu checklist
         </h3>
-        <p class="text-sm text-[--color-text-secondary] mb-4">
+        <p class="text-sm text-(--color-text-secondary) mb-4">
           Marca estos items en tu Kit Builder para llevar un seguimiento de tu preparación.
         </p>
         <div class="flex flex-wrap gap-3">
           {relatedKitItems.map((item) => (
-            <div class="flex items-center gap-2 bg-[--color-bg-secondary] rounded-lg px-3 py-2">
-              <span class="text-sm text-[--color-text-primary]">{item.name}</span>
+            <div class="flex items-center gap-2 bg-(--color-bg-secondary) rounded-lg px-3 py-2">
+              <span class="text-sm text-(--color-text-primary)">{item.name}</span>
               <AddToKitButton client:idle itemId={item.id} size="sm" />
             </div>
           ))}
@@ -509,19 +509,19 @@ const chargingTips = [
       <div class="flex flex-wrap gap-4 justify-center">
         <a
           href="/es/componentes/radios-emergencia/"
-          class="inline-flex items-center gap-2 px-4 py-2 border border-[--color-border] text-sm font-medium rounded hover:border-[--color-accent-primary] hover:text-[--color-accent-primary] transition-colors"
+          class="inline-flex items-center gap-2 px-4 py-2 border border-(--color-border) text-sm font-medium rounded hover:border-(--color-accent-primary) hover:text-(--color-accent-primary) transition-colors"
         >
           Ver Radios de Emergencia →
         </a>
         <a
           href="/es/guias/energia-comunicacion/"
-          class="inline-flex items-center gap-2 px-4 py-2 border border-[--color-border] text-sm font-medium rounded hover:border-[--color-accent-primary] hover:text-[--color-accent-primary] transition-colors"
+          class="inline-flex items-center gap-2 px-4 py-2 border border-(--color-border) text-sm font-medium rounded hover:border-(--color-accent-primary) hover:text-(--color-accent-primary) transition-colors"
         >
           Guía: Energía y Comunicación
         </a>
         <a
           href="/es/herramientas/calculadora-energia/"
-          class="inline-flex items-center gap-2 px-4 py-2 bg-[--color-accent-primary] text-[--color-bg-primary] text-sm font-medium rounded hover:bg-[--color-accent-secondary] transition-colors"
+          class="inline-flex items-center gap-2 px-4 py-2 bg-(--color-accent-primary) text-(--color-bg-primary) text-sm font-medium rounded hover:bg-(--color-accent-secondary) transition-colors"
         >
           Calculadora de Energía
         </a>

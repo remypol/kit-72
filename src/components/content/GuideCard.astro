@@ -43,31 +43,31 @@ const {
   class={`card card-interactive group p-6 flex flex-col ${className}`}
 >
   <div class="flex items-start justify-between mb-4">
-    <span class="text-[--color-accent-primary]">
+    <span class="text-(--color-accent-primary)">
       <Icon name={icon as any} size={32} />
     </span>
     {readTime && (
-      <span class="flex items-center gap-1 px-2 py-0.5 text-xs bg-[--color-bg-tertiary] text-[--color-text-muted] rounded">
+      <span class="flex items-center gap-1 px-2 py-0.5 text-xs bg-(--color-bg-tertiary) text-(--color-text-muted) rounded">
         <Icon name="Clock" size={12} />
         {readTime}
       </span>
     )}
   </div>
 
-  <h2 class="text-xl font-semibold mb-2 group-hover:text-[--color-accent-primary] transition-colors">
+  <h2 class="text-xl font-semibold mb-2 group-hover:text-(--color-accent-primary) transition-colors">
     {title}
   </h2>
 
-  <p class="text-[--color-text-secondary] mb-4 flex-1">
+  <p class="text-(--color-text-secondary) mb-4 flex-1">
     {description}
   </p>
 
   {topics.length > 0 && (
     <div class="mb-4">
-      <p class="text-xs text-[--color-text-muted] mb-2">Temas cubiertos:</p>
+      <p class="text-xs text-(--color-text-muted) mb-2">Temas cubiertos:</p>
       <ul class="flex flex-wrap gap-2">
         {topics.map((topic) => (
-          <li class="px-2 py-0.5 text-xs bg-[--color-bg-tertiary] text-[--color-text-secondary] rounded">
+          <li class="px-2 py-0.5 text-xs bg-(--color-bg-tertiary) text-(--color-text-secondary) rounded">
             {topic}
           </li>
         ))}
@@ -76,10 +76,10 @@ const {
   )}
 
   <div class="flex items-center justify-between mt-auto">
-    <span class="text-sm text-[--color-accent-primary] font-medium">
+    <span class="text-sm text-(--color-accent-primary) font-medium">
       Leer guía
     </span>
-    <span class="text-[--color-accent-primary] group-hover:translate-x-1 transition-transform">
+    <span class="text-(--color-accent-primary) group-hover:translate-x-1 transition-transform">
       <Icon name="ArrowRight" size={20} />
     </span>
   </div>

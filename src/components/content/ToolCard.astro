@@ -40,21 +40,21 @@ const {
 
 <div class={`card p-6 flex flex-col ${className}`}>
   <div class="flex items-center gap-4 mb-4">
-    <div class="w-12 h-12 flex items-center justify-center bg-[--color-accent-subtle] rounded-lg">
-      <Icon name={icon as any} size={24} class="text-[--color-accent-primary]" />
+    <div class="w-12 h-12 flex items-center justify-center bg-(--color-accent-subtle) rounded-lg">
+      <Icon name={icon as any} size={24} class="text-(--color-accent-primary)" />
     </div>
     <h2 class="text-xl font-semibold">{title}</h2>
   </div>
 
-  <p class="text-[--color-text-secondary] mb-4 flex-1">
+  <p class="text-(--color-text-secondary) mb-4 flex-1">
     {description}
   </p>
 
   {features.length > 0 && (
     <ul class="mb-6 space-y-2">
       {features.map((feature) => (
-        <li class="flex items-center gap-2 text-sm text-[--color-text-secondary]">
-          <Icon name="Check" size={16} class="text-[--color-success]" />
+        <li class="flex items-center gap-2 text-sm text-(--color-text-secondary)">
+          <Icon name="Check" size={16} class="text-(--color-success)" />
           {feature}
         </li>
       ))}

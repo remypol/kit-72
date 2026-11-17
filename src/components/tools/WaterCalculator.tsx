@@ -222,37 +222,37 @@ function NumberStepper({
   color?: 'accent' | 'blue' | 'green';
 }) {
   const colorClasses = {
-    accent: 'bg-[--color-accent-primary]/10 text-[--color-accent-primary]',
+    accent: 'bg-(--color-accent-primary)/10 text-(--color-accent-primary)',
     blue: 'bg-blue-500/10 text-blue-400',
     green: 'bg-green-500/10 text-green-400',
   };
 
   return (
-    <div className="flex items-center justify-between p-4 rounded-xl bg-[--color-bg-secondary] border border-[--color-border] hover:border-[--color-border-accent] transition-all group">
+    <div className="flex items-center justify-between p-4 rounded-xl bg-(--color-bg-secondary) border border-(--color-border) hover:border-(--color-border-accent) transition-all group">
       <div className="flex items-center gap-3">
         {icon && (
           <div className={`w-10 h-10 rounded-lg flex items-center justify-center ${colorClasses[color]} transition-transform group-hover:scale-110`}>
             <Icon name={icon} size={20} />
           </div>
         )}
-        <span className="font-medium text-[--color-text-primary]">{label}</span>
+        <span className="font-medium text-(--color-text-primary)">{label}</span>
       </div>
       <div className="flex items-center gap-1">
         <button
           onClick={() => onChange(Math.max(min, value - 1))}
           disabled={value <= min}
-          className="w-11 h-11 rounded-lg bg-[--color-bg-tertiary] hover:bg-[--color-accent-primary]/20 disabled:opacity-30 disabled:cursor-not-allowed transition-all active:scale-95 flex items-center justify-center"
+          className="w-11 h-11 rounded-lg bg-(--color-bg-tertiary) hover:bg-(--color-accent-primary)/20 disabled:opacity-30 disabled:cursor-not-allowed transition-all active:scale-95 flex items-center justify-center"
           aria-label="Decrease"
         >
           <Icon name="minus" size={18} />
         </button>
-        <div className="w-14 h-11 flex items-center justify-center font-mono text-xl font-bold text-[--color-text-primary]">
+        <div className="w-14 h-11 flex items-center justify-center font-mono text-xl font-bold text-(--color-text-primary)">
           {value}
         </div>
         <button
           onClick={() => onChange(Math.min(max, value + 1))}
           disabled={value >= max}
-          className="w-11 h-11 rounded-lg bg-[--color-bg-tertiary] hover:bg-[--color-accent-primary]/20 disabled:opacity-30 disabled:cursor-not-allowed transition-all active:scale-95 flex items-center justify-center"
+          className="w-11 h-11 rounded-lg bg-(--color-bg-tertiary) hover:bg-(--color-accent-primary)/20 disabled:opacity-30 disabled:cursor-not-allowed transition-all active:scale-95 flex items-center justify-center"
           aria-label="Increase"
         >
           <Icon name="plus" size={18} />
@@ -276,7 +276,7 @@ function SegmentedControl<T extends string>({
 }) {
   return (
     <div className="space-y-3">
-      <label className="block text-sm font-medium text-[--color-text-secondary]">{label}</label>
+      <label className="block text-sm font-medium text-(--color-text-secondary)">{label}</label>
       <div className="grid gap-2" style={{ gridTemplateColumns: `repeat(${options.length}, 1fr)` }}>
         {options.map((option) => (
           <button
@@ -284,8 +284,8 @@ function SegmentedControl<T extends string>({
             onClick={() => onChange(option.value)}
             className={`relative px-4 py-3 rounded-xl text-sm font-medium transition-all duration-200 ${
               value === option.value
-                ? 'bg-[--color-accent-primary] text-[--color-bg-primary] shadow-lg shadow-[--color-accent-primary]/25'
-                : 'bg-[--color-bg-tertiary] text-[--color-text-secondary] hover:bg-[--color-bg-elevated] hover:text-[--color-text-primary]'
+                ? 'bg-(--color-accent-primary) text-(--color-bg-primary) shadow-lg shadow-(--color-accent-primary)/25'
+                : 'bg-(--color-bg-tertiary) text-(--color-text-secondary) hover:bg-(--color-bg-elevated) hover:text-(--color-text-primary)'
             }`}
           >
             {option.label}
@@ -311,14 +311,14 @@ function PresetButton({
   return (
     <button
       onClick={onClick}
-      className="flex items-center gap-3 p-4 rounded-xl bg-[--color-bg-secondary] border border-[--color-border] hover:border-[--color-accent-primary] hover:bg-[--color-accent-primary]/5 transition-all group text-left"
+      className="flex items-center gap-3 p-4 rounded-xl bg-(--color-bg-secondary) border border-(--color-border) hover:border-(--color-accent-primary) hover:bg-(--color-accent-primary)/5 transition-all group text-left"
     >
-      <div className="w-10 h-10 rounded-lg bg-[--color-accent-primary]/10 flex items-center justify-center group-hover:bg-[--color-accent-primary]/20 transition-colors">
-        <Icon name={icon} size={20} className="text-[--color-accent-primary]" />
+      <div className="w-10 h-10 rounded-lg bg-(--color-accent-primary)/10 flex items-center justify-center group-hover:bg-(--color-accent-primary)/20 transition-colors">
+        <Icon name={icon} size={20} className="text-(--color-accent-primary)" />
       </div>
       <div>
-        <div className="font-medium text-[--color-text-primary]">{label}</div>
-        <div className="text-xs text-[--color-text-muted]">{sublabel}</div>
+        <div className="font-medium text-(--color-text-primary)">{label}</div>
+        <div className="text-xs text-(--color-text-muted)">{sublabel}</div>
       </div>
     </button>
   );
@@ -357,9 +357,9 @@ function WaterCategoryCard({
     >
       <div className="flex items-center gap-3 mb-2">
         <Icon name={icon} size={20} className={colorMap[color].split(' ').pop()} />
-        <span className="text-sm font-medium text-[--color-text-secondary]">{label}</span>
+        <span className="text-sm font-medium text-(--color-text-secondary)">{label}</span>
       </div>
-      <div className="text-2xl font-bold text-[--color-text-primary]">
+      <div className="text-2xl font-bold text-(--color-text-primary)">
         <AnimatedNumber value={value} suffix="L" />
       </div>
     </div>
@@ -452,7 +452,7 @@ function WaterCalculator({ locale = 'es' }: WaterCalculatorProps) {
     <div className="space-y-8">
       {/* Quick Presets */}
       <div>
-        <h3 className="text-sm font-medium text-[--color-text-muted] uppercase tracking-wider mb-4">
+        <h3 className="text-sm font-medium text-(--color-text-muted) uppercase tracking-wider mb-4">
           {t.quickSetup}
         </h3>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
@@ -467,12 +467,12 @@ function WaterCalculator({ locale = 'es' }: WaterCalculatorProps) {
         {/* People Section */}
         <div className="card p-6 space-y-4">
           <div className="flex items-center gap-2 mb-2">
-            <div className="w-8 h-8 rounded-lg bg-[--color-accent-primary]/10 flex items-center justify-center">
-              <Icon name="users" size={18} className="text-[--color-accent-primary]" />
+            <div className="w-8 h-8 rounded-lg bg-(--color-accent-primary)/10 flex items-center justify-center">
+              <Icon name="users" size={18} className="text-(--color-accent-primary)" />
             </div>
-            <h3 className="font-semibold text-[--color-text-primary]">{t.people.title}</h3>
+            <h3 className="font-semibold text-(--color-text-primary)">{t.people.title}</h3>
             {totalPeople > 0 && (
-              <span className="ml-auto text-sm font-mono bg-[--color-accent-primary]/10 text-[--color-accent-primary] px-2 py-0.5 rounded">
+              <span className="ml-auto text-sm font-mono bg-(--color-accent-primary)/10 text-(--color-accent-primary) px-2 py-0.5 rounded">
                 {totalPeople} {t.people.total}
               </span>
             )}
@@ -489,7 +489,7 @@ function WaterCalculator({ locale = 'es' }: WaterCalculatorProps) {
             <div className="w-8 h-8 rounded-lg bg-green-500/10 flex items-center justify-center">
               <Icon name="pawPrint" size={18} className="text-green-400" />
             </div>
-            <h3 className="font-semibold text-[--color-text-primary]">{t.pets.title}</h3>
+            <h3 className="font-semibold text-(--color-text-primary)">{t.pets.title}</h3>
             {hasPets && (
               <span className="ml-auto text-sm font-mono bg-green-500/10 text-green-400 px-2 py-0.5 rounded">
                 {dogs + cats} {t.pets.total}
@@ -510,13 +510,13 @@ function WaterCalculator({ locale = 'es' }: WaterCalculatorProps) {
             <div className="w-8 h-8 rounded-lg bg-blue-500/10 flex items-center justify-center">
               <Icon name="calendar" size={18} className="text-blue-400" />
             </div>
-            <h3 className="font-semibold text-[--color-text-primary]">{t.duration.title}</h3>
+            <h3 className="font-semibold text-(--color-text-primary)">{t.duration.title}</h3>
           </div>
 
           <div className="space-y-4">
             <div className="flex items-center justify-between">
-              <span className="text-sm text-[--color-text-muted]">{t.duration.daysLabel}</span>
-              <span className="text-2xl font-bold text-[--color-accent-primary] font-mono">{days}</span>
+              <span className="text-sm text-(--color-text-muted)">{t.duration.daysLabel}</span>
+              <span className="text-2xl font-bold text-(--color-accent-primary) font-mono">{days}</span>
             </div>
 
             <input
@@ -525,12 +525,12 @@ function WaterCalculator({ locale = 'es' }: WaterCalculatorProps) {
               max="14"
               value={days}
               onChange={(e) => setDays(parseInt(e.target.value))}
-              className="w-full h-2 rounded-full appearance-none cursor-pointer bg-[--color-bg-tertiary] accent-[--color-accent-primary]"
+              className="w-full h-2 rounded-full appearance-none cursor-pointer bg-(--color-bg-tertiary) accent-(--color-accent-primary)"
             />
 
-            <div className="flex justify-between text-xs text-[--color-text-muted]">
+            <div className="flex justify-between text-xs text-(--color-text-muted)">
               <span>1 {t.duration.day}</span>
-              <span className="text-[--color-accent-primary] font-medium">{t.duration.recommended}</span>
+              <span className="text-(--color-accent-primary) font-medium">{t.duration.recommended}</span>
               <span>14 {t.duration.days}</span>
             </div>
           </div>
@@ -542,7 +542,7 @@ function WaterCalculator({ locale = 'es' }: WaterCalculatorProps) {
             <div className="w-8 h-8 rounded-lg bg-orange-500/10 flex items-center justify-center">
               <Icon name="sun" size={18} className="text-orange-400" />
             </div>
-            <h3 className="font-semibold text-[--color-text-primary]">{t.conditions.title}</h3>
+            <h3 className="font-semibold text-(--color-text-primary)">{t.conditions.title}</h3>
           </div>
 
           <SegmentedControl
@@ -573,11 +573,11 @@ function WaterCalculator({ locale = 'es' }: WaterCalculatorProps) {
         <button
           onClick={calculateWater}
           disabled={isCalculating || totalPeople === 0}
-          className="inline-flex items-center gap-3 px-10 py-5 bg-gradient-to-r from-[--color-accent-primary] to-[--color-accent-hover] text-[--color-bg-primary] font-bold rounded-2xl hover:shadow-lg hover:shadow-[--color-accent-primary]/25 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300 text-lg active:scale-[0.98]"
+          className="inline-flex items-center gap-3 px-10 py-5 bg-gradient-to-r from-(--color-accent-primary) to-(--color-accent-hover) text-(--color-bg-primary) font-bold rounded-2xl hover:shadow-lg hover:shadow-(--color-accent-primary)/25 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300 text-lg active:scale-[0.98]"
         >
           {isCalculating ? (
             <>
-              <div className="w-5 h-5 border-2 border-[--color-bg-primary]/30 border-t-[--color-bg-primary] rounded-full animate-spin" />
+              <div className="w-5 h-5 border-2 border-(--color-bg-primary)/30 border-t-(--color-bg-primary) rounded-full animate-spin" />
               {t.calculating}
             </>
           ) : (
@@ -593,29 +593,29 @@ function WaterCalculator({ locale = 'es' }: WaterCalculatorProps) {
       {result && (
         <div ref={resultRef} className={`transition-all duration-500 ${showResults ? 'opacity-100' : 'opacity-0'}`}>
           {/* Hero Result Card */}
-          <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-[--color-accent-primary]/20 via-[--color-bg-tertiary] to-[--color-bg-secondary] border-2 border-[--color-accent-primary]/30 p-8 mb-6">
+          <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-(--color-accent-primary)/20 via-(--color-bg-tertiary) to-(--color-bg-secondary) border-2 border-(--color-accent-primary)/30 p-8 mb-6">
             {/* Decorative elements */}
-            <div className="absolute top-0 right-0 w-64 h-64 bg-[--color-accent-primary]/5 rounded-full blur-3xl" />
+            <div className="absolute top-0 right-0 w-64 h-64 bg-(--color-accent-primary)/5 rounded-full blur-3xl" />
             <div className="absolute bottom-0 left-0 w-48 h-48 bg-blue-500/5 rounded-full blur-3xl" />
 
             <div className="relative">
               <div className="flex items-center justify-center gap-3 mb-4">
-                <Icon name="droplet" size={32} className="text-[--color-accent-primary]" />
-                <h3 className="text-xl font-semibold text-[--color-text-secondary]">{t.result.title}</h3>
+                <Icon name="droplet" size={32} className="text-(--color-accent-primary)" />
+                <h3 className="text-xl font-semibold text-(--color-text-secondary)">{t.result.title}</h3>
               </div>
 
               <div className="text-center mb-6">
-                <div className="text-7xl md:text-8xl font-bold text-[--color-text-primary] mb-2 tracking-tight">
+                <div className="text-7xl md:text-8xl font-bold text-(--color-text-primary) mb-2 tracking-tight">
                   <AnimatedNumber value={result.total} suffix="L" />
                 </div>
-                <p className="text-lg text-[--color-text-secondary]">
-                  {t.result.forDays.replace('{days}', String(days))} · <span className="text-[--color-accent-primary] font-semibold">{result.perDay}L{t.result.perDay}</span>
+                <p className="text-lg text-(--color-text-secondary)">
+                  {t.result.forDays.replace('{days}', String(days))} · <span className="text-(--color-accent-primary) font-semibold">{result.perDay}L{t.result.perDay}</span>
                 </p>
               </div>
 
               {/* Quick summary badges */}
               <div className="flex flex-wrap justify-center gap-2">
-                <span className="px-3 py-1 rounded-full bg-[--color-bg-primary]/50 text-sm text-[--color-text-secondary]">
+                <span className="px-3 py-1 rounded-full bg-(--color-bg-primary)/50 text-sm text-(--color-text-secondary)">
                   {totalPeople} {totalPeople === 1 ? t.result.person : t.result.people}
                 </span>
                 {hasPets && (
@@ -646,51 +646,51 @@ function WaterCalculator({ locale = 'es' }: WaterCalculatorProps) {
 
           {/* Storage Suggestions */}
           <div
-            className={`card p-6 bg-[--color-bg-tertiary] transition-all duration-500 delay-500 ${
+            className={`card p-6 bg-(--color-bg-tertiary) transition-all duration-500 delay-500 ${
               showResults ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
             }`}
           >
             <div className="flex items-center gap-3 mb-4">
-              <div className="w-10 h-10 rounded-xl bg-[--color-accent-primary]/10 flex items-center justify-center">
-                <Icon name="lightbulb" size={20} className="text-[--color-accent-primary]" />
+              <div className="w-10 h-10 rounded-xl bg-(--color-accent-primary)/10 flex items-center justify-center">
+                <Icon name="lightbulb" size={20} className="text-(--color-accent-primary)" />
               </div>
               <div>
-                <h4 className="font-semibold text-[--color-text-primary]">{t.storage.title}</h4>
-                <p className="text-sm text-[--color-text-muted]">{t.storage.subtitle}</p>
+                <h4 className="font-semibold text-(--color-text-primary)">{t.storage.title}</h4>
+                <p className="text-sm text-(--color-text-muted)">{t.storage.subtitle}</p>
               </div>
             </div>
 
             <div className="grid md:grid-cols-3 gap-4">
-              <div className="p-4 rounded-xl bg-[--color-bg-secondary] border border-[--color-border]">
+              <div className="p-4 rounded-xl bg-(--color-bg-secondary) border border-(--color-border)">
                 <div className="text-2xl font-bold text-blue-400 mb-1">
                   {Math.ceil(result.drinking / 5)}
                 </div>
-                <div className="text-sm text-[--color-text-secondary]">
+                <div className="text-sm text-(--color-text-secondary)">
                   <span className="font-medium">{t.storage.bottles5L}</span>
                   <br />
-                  <span className="text-[--color-text-muted]">{t.storage.drinkingOnly}</span>
+                  <span className="text-(--color-text-muted)">{t.storage.drinkingOnly}</span>
                 </div>
               </div>
 
-              <div className="p-4 rounded-xl bg-[--color-bg-secondary] border border-[--color-border]">
+              <div className="p-4 rounded-xl bg-(--color-bg-secondary) border border-(--color-border)">
                 <div className="text-2xl font-bold text-orange-400 mb-1">
                   {Math.ceil((result.total - result.drinking) / 20)}
                 </div>
-                <div className="text-sm text-[--color-text-secondary]">
+                <div className="text-sm text-(--color-text-secondary)">
                   <span className="font-medium">{t.storage.containers20L}</span>
                   <br />
-                  <span className="text-[--color-text-muted]">{t.storage.generalUse}</span>
+                  <span className="text-(--color-text-muted)">{t.storage.generalUse}</span>
                 </div>
               </div>
 
-              <div className="p-4 rounded-xl bg-[--color-bg-secondary] border border-[--color-border]">
+              <div className="p-4 rounded-xl bg-(--color-bg-secondary) border border-(--color-border)">
                 <div className="text-2xl font-bold text-green-400 mb-1">
                   {Math.ceil(result.total / 8)}
                 </div>
-                <div className="text-sm text-[--color-text-secondary]">
+                <div className="text-sm text-(--color-text-secondary)">
                   <span className="font-medium">{t.storage.alternative}</span>
                   <br />
-                  <span className="text-[--color-text-muted]">{t.storage.easierToMove}</span>
+                  <span className="text-(--color-text-muted)">{t.storage.easierToMove}</span>
                 </div>
               </div>
             </div>
@@ -707,8 +707,8 @@ function WaterCalculator({ locale = 'es' }: WaterCalculatorProps) {
                 <Icon name="shoppingCart" size={20} className="text-blue-400" />
               </div>
               <div>
-                <h4 className="font-semibold text-[--color-text-primary]">{t.products.title}</h4>
-                <p className="text-sm text-[--color-text-muted]">{t.products.subtitle}</p>
+                <h4 className="font-semibold text-(--color-text-primary)">{t.products.title}</h4>
+                <p className="text-sm text-(--color-text-muted)">{t.products.subtitle}</p>
               </div>
             </div>
 
@@ -723,7 +723,7 @@ function WaterCalculator({ locale = 'es' }: WaterCalculatorProps) {
                     block p-4 rounded-xl border transition-all duration-200 hover:scale-[1.02] hover:shadow-lg
                     ${i === 0
                       ? 'bg-gradient-to-br from-blue-500/10 to-blue-600/5 border-blue-500/30'
-                      : 'bg-[--color-bg-tertiary] border-[--color-border] hover:border-blue-500/50'
+                      : 'bg-(--color-bg-tertiary) border-(--color-border) hover:border-blue-500/50'
                     }
                   `}
                 >
@@ -735,20 +735,20 @@ function WaterCalculator({ locale = 'es' }: WaterCalculatorProps) {
                   )}
                   <div className="flex items-start justify-between gap-2 mb-2">
                     <div>
-                      <h5 className="font-medium text-[--color-text-primary] text-sm">{product.name}</h5>
-                      <p className="text-xs text-[--color-text-muted]">{product.capacity}</p>
+                      <h5 className="font-medium text-(--color-text-primary) text-sm">{product.name}</h5>
+                      <p className="text-xs text-(--color-text-muted)">{product.capacity}</p>
                     </div>
                     <span className="text-sm font-bold text-blue-400 whitespace-nowrap">{product.price}</span>
                   </div>
                   <div className="flex flex-wrap gap-1 mb-2">
                     {product.features.map((feature, j) => (
-                      <span key={j} className="text-xs px-2 py-0.5 rounded-full bg-[--color-bg-secondary] text-[--color-text-muted]">
+                      <span key={j} className="text-xs px-2 py-0.5 rounded-full bg-(--color-bg-secondary) text-(--color-text-muted)">
                         {feature}
                       </span>
                     ))}
                   </div>
                   <div className="flex items-center justify-between">
-                    <span className="text-xs text-[--color-text-muted]">{product.bestFor}</span>
+                    <span className="text-xs text-(--color-text-muted)">{product.bestFor}</span>
                     <span className="text-xs text-blue-400 flex items-center gap-1">
                       {t.products.viewAt} <Icon name="externalLink" size={12} />
                     </span>
@@ -765,14 +765,14 @@ function WaterCalculator({ locale = 'es' }: WaterCalculatorProps) {
                   href={product.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-3 p-3 rounded-xl bg-[--color-bg-tertiary] border border-[--color-border] hover:border-blue-500/50 transition-all"
+                  className="flex items-center gap-3 p-3 rounded-xl bg-(--color-bg-tertiary) border border-(--color-border) hover:border-blue-500/50 transition-all"
                 >
                   <div className="flex-1">
-                    <h5 className="font-medium text-[--color-text-primary] text-sm">{product.name}</h5>
-                    <p className="text-xs text-[--color-text-muted]">{product.bestFor}</p>
+                    <h5 className="font-medium text-(--color-text-primary) text-sm">{product.name}</h5>
+                    <p className="text-xs text-(--color-text-muted)">{product.bestFor}</p>
                   </div>
                   <span className="text-sm font-bold text-blue-400">{product.price}</span>
-                  <Icon name="externalLink" size={14} className="text-[--color-text-muted]" />
+                  <Icon name="externalLink" size={14} className="text-(--color-text-muted)" />
                 </a>
               ))}
             </div>
@@ -781,7 +781,7 @@ function WaterCalculator({ locale = 'es' }: WaterCalculatorProps) {
               href={locale === 'nl' ? 'https://www.bol.com/nl/nl/s/?searchtext=wateropslag+noodvoorraad' : locale === 'de' ? 'https://www.amazon.de/s?k=wasserspeicher+notfall' : 'https://www.amazon.es/s?k=almacenamiento+agua+emergencia'}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center justify-center gap-2 p-3 rounded-xl border border-[--color-border] text-sm text-[--color-text-secondary] hover:border-blue-500 hover:text-blue-400 transition-colors"
+              className="flex items-center justify-center gap-2 p-3 rounded-xl border border-(--color-border) text-sm text-(--color-text-secondary) hover:border-blue-500 hover:text-blue-400 transition-colors"
             >
               <Icon name="externalLink" size={16} />
               {t.products.viewMore}

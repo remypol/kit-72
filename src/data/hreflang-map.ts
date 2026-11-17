@@ -38,6 +38,11 @@ export const hreflangMap: Record<string, PageMapping> = {
     nl: '/nl/noodpakket-72-uur/',
     de: '/de/notfallpaket-72-stunden/',
   },
+  'buy-or-build': {
+    es: '/es/comprar-kit-emergencia/',
+    nl: '/nl/noodpakket-kopen/',
+    de: '/de/notfallrucksack-kaufen/',
+  },
   'emergency-kit': {
     es: '/es/kit-de-emergencia/',
     nl: '/nl/noodpakket-samenstellen/',

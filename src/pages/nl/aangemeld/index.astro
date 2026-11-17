@@ -1,0 +1,43 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { routes } from '../../../data/site';
+const r = routes.nl;
+---
+
+<BaseLayout title="Je staat op de lijst" locale="nl" noIndex>
+  <section class="thanks">
+    <div data-state="ok">
+      <h1>Je adres is bevestigd</h1>
+      <p>Je lijst is onderweg naar je inbox. Over zes maanden sturen we je een korte herinnering om water, eten en batterijen te controleren.</p>
+      <a href={r.builder} class="btn btn-primary btn-lg">Verder met mijn lijst</a>
+    </div>
+    <div data-state="error" hidden>
+      <h1>Er ging iets mis bij het bevestigen</h1>
+      <p>Je adres is niet opgeslagen. Vraag je lijst opnieuw aan; dat kost een halve minuut.</p>
+      <a href={r.home} class="btn btn-primary btn-lg">Opnieuw aanvragen</a>
+    </div>
+  </section>
+</BaseLayout>
+
+<script>
+  if (new URLSearchParams(location.search).get('status') === 'error') {
+    document.querySelector<HTMLElement>('[data-state="ok"]')!.hidden = true;
+    document.querySelector<HTMLElement>('[data-state="error"]')!.hidden = false;
+  }
+</script>
+
+<style>
+  .thanks {
+    max-width: 40rem;
+    margin-inline: auto;
+    padding: var(--space-16) var(--space-4) var(--space-24);
+  }
+  .thanks h1 {
+    font-size: clamp(2rem, 4.4vw, 2.8rem);
+  }
+  .thanks p {
+    margin-block: var(--space-4) var(--space-6);
+    font-size: 1.15rem;
+    color: var(--color-text-secondary);
+  }
+</style>

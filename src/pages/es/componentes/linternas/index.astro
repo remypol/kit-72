@@ -171,31 +171,31 @@ const kitSuggestion = [
       <!-- Header -->
       <div class="mb-12">
         <nav class="text-sm mb-4">
-          <ol class="flex items-center gap-2 text-[--color-text-muted]">
-            <li><a href="/es/" class="hover:text-[--color-accent-primary]">Inicio</a></li>
+          <ol class="flex items-center gap-2 text-(--color-text-muted)">
+            <li><a href="/es/" class="hover:text-(--color-accent-primary)">Inicio</a></li>
             <li>/</li>
-            <li><a href="/es/componentes/" class="hover:text-[--color-accent-primary]">Componentes</a></li>
+            <li><a href="/es/componentes/" class="hover:text-(--color-accent-primary)">Componentes</a></li>
             <li>/</li>
-            <li class="text-[--color-text-primary]">Linternas</li>
+            <li class="text-(--color-text-primary)">Linternas</li>
           </ol>
         </nav>
         <h1 class="mb-4 flex items-center gap-3">
-          <Icon name="Flashlight" size={32} class="text-[--color-accent-primary]" />
+          <Icon name="Flashlight" size={32} class="text-(--color-accent-primary)" />
           Linternas de Emergencia
         </h1>
-        <p class="text-lg text-[--color-text-secondary]">
+        <p class="text-lg text-(--color-text-secondary)">
           La iluminación es crítica en emergencias. Sin luz, todo se complica: encontrar cosas,
           moverse con seguridad, pedir ayuda. Esta guía te ayuda a elegir las linternas correctas.
         </p>
       </div>
 
       <!-- Quick Recommendation -->
-      <div class="card p-6 mb-8 border-l-4 border-l-[--color-accent-primary]">
-        <h3 class="font-semibold mb-2 text-[--color-text-primary] flex items-center gap-2">
-          <Icon name="Lightbulb" size={20} class="text-[--color-accent-primary]" />
+      <div class="card p-6 mb-8 border-l-4 border-l-(--color-accent-primary)">
+        <h3 class="font-semibold mb-2 text-(--color-text-primary) flex items-center gap-2">
+          <Icon name="Lightbulb" size={20} class="text-(--color-accent-primary)" />
           Recomendación rápida
         </h3>
-        <p class="text-[--color-text-secondary] m-0">
+        <p class="text-(--color-text-secondary) m-0">
           <strong>Mínimo:</strong> 2 linternas de mano LED + 1 frontal + pilas de repuesto.
           <strong>Presupuesto:</strong> 40-60€ total. No escatimes en luz.
         </p>
@@ -203,23 +203,23 @@ const kitSuggestion = [
 
       <!-- Types of Flashlights -->
       <div class="mb-12">
-        <h2 class="text-2xl font-bold mb-6 text-[--color-text-primary]">Tipos de linternas</h2>
+        <h2 class="text-2xl font-bold mb-6 text-(--color-text-primary)">Tipos de linternas</h2>
 
         <div class="space-y-4">
           {flashlightTypes.map((type) => (
             <div class="card p-6">
               <div class="flex items-start gap-4">
-                <div class="w-12 h-12 flex items-center justify-center bg-[--color-bg-tertiary] rounded-lg flex-shrink-0">
-                  <Icon name={type.icon as any} size={28} class="text-[--color-accent-primary]" />
+                <div class="w-12 h-12 flex items-center justify-center bg-(--color-bg-tertiary) rounded-lg flex-shrink-0">
+                  <Icon name={type.icon as any} size={28} class="text-(--color-accent-primary)" />
                 </div>
                 <div class="flex-1">
                   <div class="flex items-center gap-3 mb-2">
-                    <h3 class="font-semibold text-[--color-text-primary]">{type.name}</h3>
-                    <span class="text-xs px-2 py-1 bg-[--color-bg-tertiary] text-[--color-text-muted] rounded">
+                    <h3 class="font-semibold text-(--color-text-primary)">{type.name}</h3>
+                    <span class="text-xs px-2 py-1 bg-(--color-bg-tertiary) text-(--color-text-muted) rounded">
                       {type.lumens} lm
                     </span>
                   </div>
-                  <p class="text-sm text-[--color-text-secondary] mb-3">{type.description}</p>
+                  <p class="text-sm text-(--color-text-secondary) mb-3">{type.description}</p>
 
                   <div class="grid sm:grid-cols-3 gap-4 text-sm">
                     <div>
@@ -227,7 +227,7 @@ const kitSuggestion = [
                         <Icon name="CircleCheck" size={14} />
                         Pros
                       </span>
-                      <ul class="mt-1 space-y-1 text-[--color-text-muted]">
+                      <ul class="mt-1 space-y-1 text-(--color-text-muted)">
                         {type.pros.map((pro) => <li>• {pro}</li>)}
                       </ul>
                     </div>
@@ -236,16 +236,16 @@ const kitSuggestion = [
                         <Icon name="CircleX" size={14} />
                         Contras
                       </span>
-                      <ul class="mt-1 space-y-1 text-[--color-text-muted]">
+                      <ul class="mt-1 space-y-1 text-(--color-text-muted)">
                         {type.cons.map((con) => <li>• {con}</li>)}
                       </ul>
                     </div>
                     <div>
-                      <span class="text-[--color-accent-primary] font-medium flex items-center gap-1">
+                      <span class="text-(--color-accent-primary) font-medium flex items-center gap-1">
                         <Icon name="Star" size={14} />
                         Ideal para
                       </span>
-                      <p class="mt-1 text-[--color-text-muted]">{type.bestFor}</p>
+                      <p class="mt-1 text-(--color-text-muted)">{type.bestFor}</p>
                     </div>
                   </div>
                 </div>
@@ -257,18 +257,18 @@ const kitSuggestion = [
 
       <!-- Key Features -->
       <div class="mb-12">
-        <h2 class="text-2xl font-bold mb-6 text-[--color-text-primary]">Características clave</h2>
+        <h2 class="text-2xl font-bold mb-6 text-(--color-text-primary)">Características clave</h2>
 
         <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
           {features.map((feature) => (
             <div class="card p-4">
               <div class="flex items-start gap-3">
-                <div class="w-10 h-10 flex items-center justify-center bg-[--color-bg-tertiary] rounded-lg flex-shrink-0">
-                  <Icon name={feature.icon as any} size={22} class="text-[--color-accent-primary]" />
+                <div class="w-10 h-10 flex items-center justify-center bg-(--color-bg-tertiary) rounded-lg flex-shrink-0">
+                  <Icon name={feature.icon as any} size={22} class="text-(--color-accent-primary)" />
                 </div>
                 <div>
-                  <h3 class="font-semibold text-[--color-text-primary]">{feature.name}</h3>
-                  <p class="text-sm text-[--color-text-secondary]">{feature.description}</p>
+                  <h3 class="font-semibold text-(--color-text-primary)">{feature.name}</h3>
+                  <p class="text-sm text-(--color-text-secondary)">{feature.description}</p>
                 </div>
               </div>
             </div>
@@ -278,32 +278,32 @@ const kitSuggestion = [
 
       <!-- Recommendations -->
       <div class="mb-12">
-        <h2 class="text-2xl font-bold mb-6 text-[--color-text-primary]">Recomendaciones por tipo</h2>
+        <h2 class="text-2xl font-bold mb-6 text-(--color-text-primary)">Recomendaciones por tipo</h2>
 
         <div class="space-y-4">
           {recommendations.map((rec) => (
-            <div class={`card p-6 ${rec.priority === 'essential' ? 'border-l-4 border-l-red-500' : rec.priority === 'recommended' ? 'border-l-4 border-l-[--color-accent-primary]' : ''}`}>
+            <div class={`card p-6 ${rec.priority === 'essential' ? 'border-l-4 border-l-red-500' : rec.priority === 'recommended' ? 'border-l-4 border-l-(--color-accent-primary)' : ''}`}>
               <div class="flex items-start justify-between gap-4 mb-3">
                 <div>
-                  <span class={`text-xs px-2 py-1 rounded ${rec.priority === 'essential' ? 'bg-red-500/20 text-red-400' : rec.priority === 'recommended' ? 'bg-[--color-accent-primary]/20 text-[--color-accent-primary]' : 'bg-[--color-bg-tertiary] text-[--color-text-muted]'}`}>
+                  <span class={`text-xs px-2 py-1 rounded ${rec.priority === 'essential' ? 'bg-red-500/20 text-red-400' : rec.priority === 'recommended' ? 'bg-(--color-accent-primary)/20 text-(--color-accent-primary)' : 'bg-(--color-bg-tertiary) text-(--color-text-muted)'}`}>
                     {rec.priority === 'essential' ? 'Esencial' : rec.priority === 'recommended' ? 'Recomendada' : 'Opcional'}
                   </span>
-                  <span class="text-xs text-[--color-text-muted] ml-2">{rec.type}</span>
+                  <span class="text-xs text-(--color-text-muted) ml-2">{rec.type}</span>
                 </div>
-                <span class="font-bold text-[--color-accent-primary]">{rec.price}</span>
+                <span class="font-bold text-(--color-accent-primary)">{rec.price}</span>
               </div>
 
-              <h3 class="font-semibold text-[--color-text-primary] mb-2">{rec.name}</h3>
+              <h3 class="font-semibold text-(--color-text-primary) mb-2">{rec.name}</h3>
 
               <div class="flex flex-wrap gap-2 mb-3">
                 {rec.features.map((feature) => (
-                  <span class="text-xs px-2 py-1 bg-[--color-bg-tertiary] text-[--color-text-muted] rounded">
+                  <span class="text-xs px-2 py-1 bg-(--color-bg-tertiary) text-(--color-text-muted) rounded">
                     {feature}
                   </span>
                 ))}
               </div>
 
-              <p class="text-sm text-[--color-text-secondary] m-0">
+              <p class="text-sm text-(--color-text-secondary) m-0">
                 <strong>Veredicto:</strong> {rec.verdict}
               </p>
             </div>
@@ -313,22 +313,22 @@ const kitSuggestion = [
 
       <!-- Battery Guide -->
       <div class="mb-12">
-        <h2 class="text-2xl font-bold mb-6 text-[--color-text-primary]">Guía de pilas</h2>
+        <h2 class="text-2xl font-bold mb-6 text-(--color-text-primary)">Guía de pilas</h2>
 
         <div class="card overflow-hidden">
           <div class="overflow-x-auto">
             <table class="w-full text-sm">
-              <thead class="bg-[--color-bg-tertiary]">
+              <thead class="bg-(--color-bg-tertiary)">
                 <tr>
                   <th class="text-left py-3 px-4">Tipo</th>
                   <th class="text-left py-3 px-4">Vida útil</th>
                   <th class="text-left py-3 px-4">Notas</th>
                 </tr>
               </thead>
-              <tbody class="text-[--color-text-secondary]">
+              <tbody class="text-(--color-text-secondary)">
                 {batteryGuide.map((battery, i) => (
-                  <tr class={i % 2 === 0 ? 'bg-[--color-bg-secondary]' : ''}>
-                    <td class="py-3 px-4 font-medium text-[--color-text-primary]">{battery.type}</td>
+                  <tr class={i % 2 === 0 ? 'bg-(--color-bg-secondary)' : ''}>
+                    <td class="py-3 px-4 font-medium text-(--color-text-primary)">{battery.type}</td>
                     <td class="py-3 px-4">{battery.shelf}</td>
                     <td class="py-3 px-4">{battery.notes}</td>
                   </tr>
@@ -338,10 +338,10 @@ const kitSuggestion = [
           </div>
         </div>
 
-        <div class="mt-4 p-4 bg-[--color-status-warning]/10 border border-[--color-status-warning]/30 rounded-lg">
-          <p class="text-sm text-[--color-text-secondary] m-0 flex items-start gap-2">
-            <Icon name="AlertTriangle" size={18} class="text-[--color-status-warning] flex-shrink-0 mt-0.5" />
-            <span><strong class="text-[--color-status-warning]">Consejo:</strong> Guarda las pilas
+        <div class="mt-4 p-4 bg-(--color-status-warning)/10 border border-(--color-status-warning)/30 rounded-lg">
+          <p class="text-sm text-(--color-text-secondary) m-0 flex items-start gap-2">
+            <Icon name="AlertTriangle" size={18} class="text-(--color-status-warning) flex-shrink-0 mt-0.5" />
+            <span><strong class="text-(--color-status-warning)">Consejo:</strong> Guarda las pilas
             FUERA de las linternas para evitar corrosión. Etiqueta con fecha de compra.</span>
           </p>
         </div>
@@ -349,37 +349,37 @@ const kitSuggestion = [
 
       <!-- Suggested Kit -->
       <div class="mb-12">
-        <h2 class="text-2xl font-bold mb-6 text-[--color-text-primary]">Kit de iluminación sugerido</h2>
+        <h2 class="text-2xl font-bold mb-6 text-(--color-text-primary)">Kit de iluminación sugerido</h2>
 
         <div class="card p-6">
-          <p class="text-sm text-[--color-text-secondary] mb-4">
+          <p class="text-sm text-(--color-text-secondary) mb-4">
             Para una familia de 2-4 personas en un piso:
           </p>
 
           <div class="overflow-x-auto">
             <table class="w-full text-sm">
               <thead>
-                <tr class="border-b border-[--color-border]">
+                <tr class="border-b border-(--color-border)">
                   <th class="text-left py-2">Artículo</th>
                   <th class="text-center py-2">Cantidad</th>
                   <th class="text-left py-2">Notas</th>
                 </tr>
               </thead>
-              <tbody class="text-[--color-text-secondary]">
+              <tbody class="text-(--color-text-secondary)">
                 {kitSuggestion.map((item) => (
-                  <tr class="border-b border-[--color-border]">
+                  <tr class="border-b border-(--color-border)">
                     <td class="py-2">{item.item}</td>
-                    <td class="py-2 text-center font-bold text-[--color-accent-primary]">{item.qty}</td>
-                    <td class="py-2 text-xs text-[--color-text-muted]">{item.notes}</td>
+                    <td class="py-2 text-center font-bold text-(--color-accent-primary)">{item.qty}</td>
+                    <td class="py-2 text-xs text-(--color-text-muted)">{item.notes}</td>
                   </tr>
                 ))}
               </tbody>
             </table>
           </div>
 
-          <div class="mt-4 pt-4 border-t border-[--color-border] text-center">
-            <p class="text-sm text-[--color-text-muted]">
-              Inversión aproximada: <strong class="text-[--color-accent-primary]">50-80€</strong>
+          <div class="mt-4 pt-4 border-t border-(--color-border) text-center">
+            <p class="text-sm text-(--color-text-muted)">
+              Inversión aproximada: <strong class="text-(--color-accent-primary)">50-80€</strong>
             </p>
           </div>
         </div>
@@ -387,8 +387,8 @@ const kitSuggestion = [
 
       <!-- Product Recommendations -->
       <div class="mb-12">
-        <h2 class="text-2xl font-bold mb-6 text-[--color-text-primary] flex items-center gap-2">
-          <Icon name="ShoppingCart" size={24} class="text-[--color-accent-primary]" />
+        <h2 class="text-2xl font-bold mb-6 text-(--color-text-primary) flex items-center gap-2">
+          <Icon name="ShoppingCart" size={24} class="text-(--color-accent-primary)" />
           Productos recomendados
         </h2>
         <ProductGrid products={amazonProducts} title="Linternas para tu kit de emergencia" />
@@ -396,11 +396,11 @@ const kitSuggestion = [
 
       <!-- Tips -->
       <div class="card p-6 mb-8">
-        <h3 class="font-semibold mb-4 text-[--color-text-primary] flex items-center gap-2">
-          <Icon name="Lightbulb" size={20} class="text-[--color-accent-primary]" />
+        <h3 class="font-semibold mb-4 text-(--color-text-primary) flex items-center gap-2">
+          <Icon name="Lightbulb" size={20} class="text-(--color-accent-primary)" />
           Consejos prácticos
         </h3>
-        <ul class="space-y-2 text-sm text-[--color-text-secondary]">
+        <ul class="space-y-2 text-sm text-(--color-text-secondary)">
           <li>• <strong>Ubicación fija:</strong> Cada linterna debe tener un lugar asignado que todos conozcan</li>
           <li>• <strong>Prueba mensual:</strong> Verifica que funcionan el primer día de cada mes</li>
           <li>• <strong>Velas como backup:</strong> Nunca como fuente principal (riesgo de incendio)</li>
@@ -411,18 +411,18 @@ const kitSuggestion = [
       </div>
 
       <!-- Add to Kit Section -->
-      <div class="card p-6 mb-8 bg-gradient-to-r from-[--color-accent-primary]/10 to-[--color-accent-secondary]/5 border border-[--color-accent-primary]/20">
-        <h3 class="font-semibold mb-4 text-[--color-text-primary] flex items-center gap-2">
-          <Icon name="CheckSquare" size={20} class="text-[--color-accent-primary]" />
+      <div class="card p-6 mb-8 bg-gradient-to-r from-(--color-accent-primary)/10 to-(--color-accent-secondary)/5 border border-(--color-accent-primary)/20">
+        <h3 class="font-semibold mb-4 text-(--color-text-primary) flex items-center gap-2">
+          <Icon name="CheckSquare" size={20} class="text-(--color-accent-primary)" />
           Añadir a tu checklist
         </h3>
-        <p class="text-sm text-[--color-text-secondary] mb-4">
+        <p class="text-sm text-(--color-text-secondary) mb-4">
           Marca estos items en tu Kit Builder para llevar un seguimiento de tu preparación.
         </p>
         <div class="flex flex-wrap gap-3">
           {relatedKitItems.map((item) => (
-            <div class="flex items-center gap-2 bg-[--color-bg-secondary] rounded-lg px-3 py-2">
-              <span class="text-sm text-[--color-text-primary]">{item.name}</span>
+            <div class="flex items-center gap-2 bg-(--color-bg-secondary) rounded-lg px-3 py-2">
+              <span class="text-sm text-(--color-text-primary)">{item.name}</span>
               <AddToKitButton client:idle itemId={item.id} size="sm" />
             </div>
           ))}
@@ -433,19 +433,19 @@ const kitSuggestion = [
       <div class="flex flex-wrap gap-4 justify-center">
         <a
           href="/es/componentes/powerbanks/"
-          class="inline-flex items-center gap-2 px-4 py-2 border border-[--color-border] text-sm font-medium rounded hover:border-[--color-accent-primary] hover:text-[--color-accent-primary] transition-colors"
+          class="inline-flex items-center gap-2 px-4 py-2 border border-(--color-border) text-sm font-medium rounded hover:border-(--color-accent-primary) hover:text-(--color-accent-primary) transition-colors"
         >
           Ver Powerbanks →
         </a>
         <a
           href="/es/guias/energia-comunicacion/"
-          class="inline-flex items-center gap-2 px-4 py-2 border border-[--color-border] text-sm font-medium rounded hover:border-[--color-accent-primary] hover:text-[--color-accent-primary] transition-colors"
+          class="inline-flex items-center gap-2 px-4 py-2 border border-(--color-border) text-sm font-medium rounded hover:border-(--color-accent-primary) hover:text-(--color-accent-primary) transition-colors"
         >
           Guía: Energía y Comunicación
         </a>
         <a
           href="/es/herramientas/configurador-kit/"
-          class="inline-flex items-center gap-2 px-4 py-2 bg-[--color-accent-primary] text-[--color-bg-primary] text-sm font-medium rounded hover:bg-[--color-accent-secondary] transition-colors"
+          class="inline-flex items-center gap-2 px-4 py-2 bg-(--color-accent-primary) text-(--color-bg-primary) text-sm font-medium rounded hover:bg-(--color-accent-secondary) transition-colors"
         >
           Configurar Mi Kit
         </a>
