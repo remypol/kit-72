@@ -233,3 +233,5 @@ De eerdere schatting van € 1,40 per handboek ging uit van een vinkje dat direc
 
 Kit-72 is toegevoegd als tweede site aan Awin-account 2996923; de Britse watersite in dat account is niet aangeraakt. De aanvraag bij ration1.de staat nog open. Beide Awin-accounts hebben het Verenigd Koninkrijk als hoofdregio en een beschrijving van de watersite; Nederlandse adverteerders zien dat bij hun beoordeling.
 
+Aangemeld op 17 november 2026, alle vier in afwachting van goedkeuring: Univé NL, EcoFlow NL, ALLPOWERS NL en Overstappen NL. Voor Slimster, WoonVeilig en het personenalarm is een Daisycon-account nodig; dat is er nog niet.
+
