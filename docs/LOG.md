@@ -133,3 +133,9 @@ What matters:
 - A sub-agent checked 20 candidate claims against official Dutch sources (128 fetches). Sources per step are in `handbook/data/first-hour-sources.json`. Dropped for lack of a source: leave one lamp on, text instead of calling, drinking from the boiler or cistern. "Fill the bath" is not official advice for outages; it is kept with the reason that is official (pressure can drop, booster pumps in flats stop). The US 15/30/60 cm flood figures contradict the Dutch ones, so only the Dutch ones are printed.
 - `.page` now uses min-height so an over-full page spills onto a third sheet and the build warns; a fixed height hid overflow before.
 
+## 14. Handbook pages 3 and 4: tricks and the household plan (2026-11-17)
+
+- The owner pushed back on official-only advice: the tricks the government does not mention are the point. Kept page 2 official and added page 3 "Slimme trucs", labelled as not official, and page 4 with a "do not do this" list, write-in fields and a half-yearly checklist.
+- A sub-agent collected and vetted 46 tricks (88 fetches). The filter was two questions: does it work, and can it hurt someone following it as written. Changed by the vetting: the coin-on-ice trick only proves a thaw when the coin has sunk; hay-box cooking got a re-boil rule. Left out: fridge food on the balcony, blankets on the freezer, draining a storage boiler, cistern water, bleach dosing. `handbook/data/hacks-nl.json` records per trick what the check rests on and what was left out.
+- Layout: CSS columns did not balance in print and pushed the footer onto an extra sheet, so the three trick columns are now dealt out in code. The build expects exactly four sheets.
+

@@ -89,9 +89,9 @@ const chrome = ['/Applications/Google Chrome.app/Contents/MacOS/Google Chrome', 
 if (chrome) {
   const pdf = join(out, `${slug}.pdf`);
   execFileSync(chrome, ['--headless=new', '--disable-gpu', '--no-pdf-header-footer', `--print-to-pdf=${pdf}`, pathToFileURL(htmlFile).href], { stdio: 'ignore' });
-  // two pages are expected; more means a page overflowed
+  // four pages are expected; more means a page overflowed
   const pages = (readFileSync(pdf, 'latin1').match(/\/Type\s*\/Page\b/g) ?? []).length;
-  console.log(`PDF: ${pdf}${pages !== 2 ? `  LET OP: ${pages} pagina's, de opmaak loopt over` : ''}`);
+  console.log(`PDF: ${pdf}${pages !== 4 ? `  LET OP: ${pages} pagina's, de opmaak loopt over` : ''}`);
 } else {
   console.log(`Geen Chrome gevonden; open ${htmlFile} en print naar PDF.`);
 }

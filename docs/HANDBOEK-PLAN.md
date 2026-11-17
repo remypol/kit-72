@@ -178,5 +178,23 @@ Alle adviezen zijn nagelopen bij officiële bronnen (Denk Vooruit, Rijksoverheid
 - **Koelkast 4 uur, vriezer 24 tot 48 uur** zijn schattingen van het Voedingscentrum; dat staat erbij.
 - **Noodwater:** drie liter per persoon per dag staat in het Drinkwaterbesluit; de 24 uur komt van Denk Vooruit en de Rijksoverheid.
 
-De opmaak wordt bij het bouwen gecontroleerd: het pdf moet precies twee vellen zijn, anders geeft de opdracht een waarschuwing.
+De opmaak wordt bij het bouwen gecontroleerd: het pdf moet precies vier vellen zijn, anders geeft de opdracht een waarschuwing.
+
+## Pagina 3 en 4: slimme trucs en het noodplan (17 november 2026)
+
+De eigenaar wil niet alleen officieel advies: juist de trucs die de overheid niet noemt maken de gids anders dan een folder. Daarom staat het officiële advies op pagina 2 en staan de trucs apart op pagina 3, met erbij dat het geen officieel advies is.
+
+**Pagina 3, slimme trucs** (`handbook/pages/hacks.mjs`, inhoud in `handbook/data/hacks-nl.json`): vier getekende trucs (flessen invriezen, lamp van een fles, doorkoken in een dekbed, munt op een bevroren beker) en ruim twintig trucs in vijf thema's, plus een thema dat van het adres afhangt (hoogwater, of weggaan). Per truc staat in het databestand waar de toets op rust: een instantie, verslagen van lange storingen, of gewone natuurkunde.
+
+**Pagina 4, jouw noodplan** (`handbook/pages/plan.mjs`): acht bekende trucs die je niet moet doen, invulvelden voor mensen en voor waar alles in huis zit, en een lijst om elk halfjaar na te lopen met de datum van de volgende keer.
+
+### De toets
+
+Elke truc moest twee vragen doorstaan: werkt het, en kan het kwaad als je het doet zoals het er staat. Een onderzoek liep 46 trucs na uit preppergemeenschappen en verslagen uit Texas (2021), Oekraïne en Spanje (2025).
+
+- **Aangepast door de toets:** de munt op een bevroren beker bewijst maar één kant op (onderin is ontdooid geweest; bovenop zegt niets). Doorkoken in een dekbed kreeg de regel dat je het binnen een paar uur eet of eerst opkookt, omdat de pan na vijf uur rond de 50 graden zit.
+- **Weggelaten:** eten op het balkon bewaren (de Amerikaanse voedselautoriteit raadt het af; zonder thermometer weet je het niet), dekens over de vriezer (weinig winst), water uit een elektrische boiler tappen (kan, maar te bewerkelijk om veilig in één regel te zetten), drinken uit de stortbak (bronnen spreken elkaar tegen), en een dosering voor bleek (te makkelijk verkeerd te lezen; het handboek zegt koken).
+- **Naar "doe dit niet":** de bloempotkachel, het fornuis als kachel, verbranding binnen, de motor in de garage, een aggregaat op een stopcontact, spullen in de vaatwasser, drinken uit cv of regenton, en eten keuren op geur.
+
+Wat niet bij een instantie te toetsen viel staat er als ervaring van anderen in; dat geldt onder meer voor de breekstaafjes, de vaste plek voor lampen en het briefje op de deur.
 

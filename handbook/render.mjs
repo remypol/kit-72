@@ -1,11 +1,13 @@
 /**
  * Turns the collected facts into HTML, one A4 sheet per page (printed to PDF
- * by headless Chrome). Page 1 is built here; page 2 is pages/first-hour.mjs. The map is drawn here as SVG from OpenStreetMap ways, so
+ * by headless Chrome). Page 1 is built here; pages 2 to 4 are pages/first-hour.mjs, pages/hacks.mjs and pages/plan.mjs. The map is drawn here as SVG from OpenStreetMap ways, so
  * no map tiles or tile licences are involved.
  */
 import { createRequire } from 'node:module';
 import { pathToFileURL } from 'node:url';
 import { firstHourCss, firstHourPage } from './pages/first-hour.mjs';
+import { hacksCss, hacksPage } from './pages/hacks.mjs';
+import { planCss, planPage } from './pages/plan.mjs';
 
 const require = createRequire(import.meta.url);
 const font = (pkg, file) => pathToFileURL(require.resolve(`${pkg}/files/${file}`)).href;
@@ -178,7 +180,7 @@ tr:first-child td{border-top:.6mm solid #10231b}
 .box li b{font-weight:700;white-space:nowrap}
 footer{font-size:6.8pt;color:#5f6e65;line-height:1.35;border-top:.2mm solid #c9d3c9;padding-top:2mm}
 .proof{background:#ffd21f;color:#1a1a00;font-weight:700;padding:.6mm 2mm;border-radius:1mm;font-size:7pt}
-${firstHourCss}</style></head><body>
+${firstHourCss}${hacksCss}${planCss}</style></head><body>
 <section class="page">
 <header>
   <div>
@@ -250,5 +252,7 @@ ${firstHourCss}</style></head><body>
 </footer>
 </section>
 ${firstHourPage(d, needs)}
+${hacksPage(d, needs)}
+${planPage(d, needs)}
 </body></html>`;
 }
