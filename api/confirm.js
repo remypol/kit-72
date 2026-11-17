@@ -1,5 +1,4 @@
-import { verify, resend, sendEmail, siteUrl, PATHS, needs } from './_lib.js';
-import { welcomeEmail } from './_emails.js';
+import { verify, resend, siteUrl, PATHS, needs, householdLabel } from './_lib.js';
 
 const redirect = (path) => new Response(null, { status: 302, headers: { Location: siteUrl() + path, 'Cache-Control': 'no-store' } });
 
@@ -32,15 +31,26 @@ export async function GET(request) {
       return redirect(done + '?status=error');
     }
 
-    const mail = await sendEmail({ to: sub.email, ...welcomeEmail(sub) });
-    if (!mail.ok) console.error('confirm: welcome email failed', mail.status, mail.data);
-
+    // The welcome email, the three tips and the reminders are Resend
+    // automations triggered by this event (see emails/ and docs/EMAILS.md).
     const event = await resend('/events/send', {
       event: 'kit72.subscribed',
       email: sub.email,
-      payload: { locale: sub.locale, household_size: n.people, water_litres: n.waterLitres, source: sub.source },
+      payload: {
+        locale: sub.locale,
+        household: householdLabel(n.people, sub.locale),
+        household_size: n.people,
+        water_litres: n.waterLitres,
+        meals: n.meals,
+        lights: n.lights,
+        cash_eur: n.cashEur,
+        source: sub.source,
+      },
     });
-    if (!event.ok) console.error('confirm: event not accepted', event.status, event.data);
+    if (!event.ok) {
+      console.error('confirm: event not accepted', event.status, event.data);
+      return redirect(done + '?status=error');
+    }
   } catch (err) {
     console.error('confirm: failed', err);
     return redirect(done + '?status=error');

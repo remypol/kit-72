@@ -1,0 +1,129 @@
+[
+  {
+    "file": "nl-welcome.html",
+    "name": "Kit-72 NL welcome",
+    "alias": "kit72-nl-welcome",
+    "subject": "Je noodpakketlijst voor 72 uur",
+    "variables": [
+      "HOUSEHOLD",
+      "WATER_LITRES",
+      "MEALS",
+      "LIGHTS",
+      "CASH_EUR"
+    ]
+  },
+  {
+    "file": "de-welcome.html",
+    "name": "Kit-72 DE welcome",
+    "alias": "kit72-de-welcome",
+    "subject": "Deine Notfallliste für 72 Stunden",
+    "variables": [
+      "HOUSEHOLD",
+      "WATER_LITRES",
+      "MEALS",
+      "LIGHTS"
+    ]
+  },
+  {
+    "file": "es-welcome.html",
+    "name": "Kit-72 ES welcome",
+    "alias": "kit72-es-welcome",
+    "subject": "Tu lista de emergencia para 72 horas",
+    "variables": [
+      "HOUSEHOLD",
+      "WATER_LITRES",
+      "MEALS",
+      "LIGHTS"
+    ]
+  },
+  {
+    "file": "nl-tip-water.html",
+    "name": "Kit-72 NL tip-water",
+    "alias": "kit72-nl-tip-water",
+    "subject": "Water: waar de meeste noodpakketten op stranden",
+    "variables": [
+      "WATER_LITRES"
+    ]
+  },
+  {
+    "file": "de-tip-water.html",
+    "name": "Kit-72 DE tip-water",
+    "alias": "kit72-de-tip-water",
+    "subject": "Wasser: daran scheitern die meisten Notvorräte",
+    "variables": [
+      "WATER_LITRES"
+    ]
+  },
+  {
+    "file": "es-tip-water.html",
+    "name": "Kit-72 ES tip-water",
+    "alias": "kit72-es-tip-water",
+    "subject": "Agua: donde fallan casi todos los kits",
+    "variables": [
+      "WATER_LITRES"
+    ]
+  },
+  {
+    "file": "nl-tip-light.html",
+    "name": "Kit-72 NL tip-light",
+    "alias": "kit72-nl-tip-light",
+    "subject": "Als het licht uitvalt",
+    "variables": []
+  },
+  {
+    "file": "de-tip-light.html",
+    "name": "Kit-72 DE tip-light",
+    "alias": "kit72-de-tip-light",
+    "subject": "Wenn das Licht ausgeht",
+    "variables": []
+  },
+  {
+    "file": "es-tip-light.html",
+    "name": "Kit-72 ES tip-light",
+    "alias": "kit72-es-tip-light",
+    "subject": "Cuando se va la luz",
+    "variables": []
+  },
+  {
+    "file": "nl-tip-buy.html",
+    "name": "Kit-72 NL tip-buy",
+    "alias": "kit72-nl-tip-buy",
+    "subject": "Kopen of zelf samenstellen: de prijzen",
+    "variables": []
+  },
+  {
+    "file": "de-tip-buy.html",
+    "name": "Kit-72 DE tip-buy",
+    "alias": "kit72-de-tip-buy",
+    "subject": "Kaufen oder selbst packen: die Preise",
+    "variables": []
+  },
+  {
+    "file": "es-tip-buy.html",
+    "name": "Kit-72 ES tip-buy",
+    "alias": "kit72-es-tip-buy",
+    "subject": "Comprar o montarlo tú: los precios",
+    "variables": []
+  },
+  {
+    "file": "nl-reminder.html",
+    "name": "Kit-72 NL reminder",
+    "alias": "kit72-nl-reminder",
+    "subject": "Vijf minuten: controleer je noodpakket",
+    "variables": []
+  },
+  {
+    "file": "de-reminder.html",
+    "name": "Kit-72 DE reminder",
+    "alias": "kit72-de-reminder",
+    "subject": "Fünf Minuten: prüfe deinen Notvorrat",
+    "variables": []
+  },
+  {
+    "file": "es-reminder.html",
+    "name": "Kit-72 ES reminder",
+    "alias": "kit72-es-reminder",
+    "subject": "Cinco minutos: revisa tu kit de emergencia",
+    "variables": []
+  }
+]

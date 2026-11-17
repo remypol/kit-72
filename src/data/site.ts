@@ -327,10 +327,10 @@ export interface SignupCopy {
 export const signupCopy: Record<Locale, SignupCopy> = {
   nl: {
     title: 'Krijg je lijst in je mailbox, en een seintje als je water over de datum gaat',
-    body: 'Je ontvangt je persoonlijke lijst. Daarna twee keer per jaar een korte herinnering om water, eten en batterijen te controleren. Verder niets.',
+    body: 'Je ontvangt je persoonlijke lijst en in de eerste twee weken drie korte tips. Daarna twee keer per jaar een herinnering om water, eten en batterijen te controleren.',
     email: 'E-mailadres',
     placeholder: 'naam@voorbeeld.nl',
-    consent: 'Ja, stuur me mijn lijst en de halfjaarlijkse herinnering.',
+    consent: 'Ja, stuur me mijn lijst, de drie tips en de halfjaarlijkse herinnering.',
     button: 'Stuur mijn lijst',
     sending: 'Bezig met versturen',
     success: 'Kijk in je inbox en bevestig je adres. Daarna komt je lijst eraan.',
@@ -341,10 +341,10 @@ export const signupCopy: Record<Locale, SignupCopy> = {
   },
   de: {
     title: 'Deine Liste per E-Mail, und eine Erinnerung, bevor dein Wasser abläuft',
-    body: 'Du bekommst deine persönliche Liste. Danach zweimal im Jahr eine kurze Erinnerung, Wasser, Lebensmittel und Batterien zu prüfen. Sonst nichts.',
+    body: 'Du bekommst deine persönliche Liste und in den ersten zwei Wochen drei kurze Tipps. Danach zweimal im Jahr eine Erinnerung, Wasser, Lebensmittel und Batterien zu prüfen.',
     email: 'E-Mail-Adresse',
     placeholder: 'name@beispiel.de',
-    consent: 'Ja, schickt mir meine Liste und die halbjährliche Erinnerung.',
+    consent: 'Ja, schickt mir meine Liste, die drei Tipps und die halbjährliche Erinnerung.',
     button: 'Liste senden',
     sending: 'Wird gesendet',
     success: 'Schau in dein Postfach und bestätige deine Adresse. Danach kommt deine Liste.',
@@ -355,10 +355,10 @@ export const signupCopy: Record<Locale, SignupCopy> = {
   },
   es: {
     title: 'Recibe tu lista por correo y un aviso antes de que caduque el agua',
-    body: 'Te enviamos tu lista personal. Después, dos veces al año, un recordatorio breve para revisar agua, comida y pilas. Nada más.',
+    body: 'Te enviamos tu lista personal y, en las dos primeras semanas, tres consejos breves. Después, dos veces al año, un recordatorio para revisar agua, comida y pilas.',
     email: 'Correo electrónico',
     placeholder: 'nombre@ejemplo.es',
-    consent: 'Sí, enviadme mi lista y el recordatorio semestral.',
+    consent: 'Sí, enviadme mi lista, los tres consejos y el recordatorio semestral.',
     button: 'Enviar mi lista',
     sending: 'Enviando',
     success: 'Mira tu bandeja de entrada y confirma tu dirección. Después llegará tu lista.',
