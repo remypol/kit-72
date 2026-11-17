@@ -105,3 +105,11 @@ What matters:
 - SEO changes listed in docs/SEO.md. `scripts/seo_audit.py` reports no long titles, duplicate titles, orphan pages or unreturned hreflang links.
 - Partner accounts: applied to ration1 on Awin (publisher 2996923), pending. Amazon: the login in Chrome has **no** PartnerNet account, so `kit72de-21` and `kit72es-21` may never have been real tags for this owner. Started a new amazon.de sign-up for CCC Impact B.V. with preferred ID `kit72de`; it stopped at Amazon's puzzle check, which the owner has to complete. bol.com: not started; needs the owner's login.
 - Resend test leftovers removed (test contact, probe automation). Confirmation email delivered to the owner's real mailbox.
+
+## 10. Explainer: can AI cause a power outage? (2026-11-17)
+
+- The owner asked for AI as a blackout cause to be covered as a topical angle. Research (sub-agent, 101 fetches) found **no documented case** of AI or AI data-centre demand cutting power to households, so the page says that first and then covers what is real: demand growth on congested grids, data centres dropping off the grid at once (NERC 2024, PJM 2026), AI in cyber attacks, and AI used by grid operators.
+- Pages: `/nl/gidsen/ai-stroomuitval/`, `/de/ratgeber/ki-stromausfall/`, `/es/guias/ia-apagon/`. Copy and 20 sources in `src/data/ai-grid.ts`; template `ExplainerPage.astro` turns `{id}` into numbered references and fails the build on an unknown source.
+- Left out because not verified at the source: TenneT's supply-security figures (a correction was reported), the number of Spanish grid-access requests, and press reports of flickering lights. Official Dutch sources do not name data centres as a cause of grid congestion, and the page says so.
+- Search check: in all three languages the direct question has no authoritative answer page; German results for "Blackout durch KI" are blogs and tabloid pieces.
+- Linked from the guide hubs, the header, and the blackout and cyber scenario pages.

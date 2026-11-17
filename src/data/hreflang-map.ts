@@ -111,6 +111,11 @@ export const hreflangMap: Record<string, PageMapping> = {
     nl: '/nl/gidsen/ehbo-kit/',
     de: '/de/ratgeber/erste-hilfe-set/',
   },
+  'guide-ai-grid': {
+    es: '/es/guias/ia-apagon/',
+    nl: '/nl/gidsen/ai-stroomuitval/',
+    de: '/de/ratgeber/ki-stromausfall/',
+  },
   'guide-energy-communication': {
     es: '/es/guias/energia-comunicacion/',
     nl: '/nl/gidsen/energie-communicatie/',
