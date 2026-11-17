@@ -6,10 +6,11 @@ The site sends two emails itself (`api/_emails.js`): the confirmation and the we
 
 Status 2026-11-17: **live.** `kit-72.com` is added to the existing Resend account (region eu-west-1) and sending works; the signup form is on (`PUBLIC_SIGNUP_ENABLED=true`). Tested on production with Resend's test address: confirmation email, confirm link, contact stored in the "Kit-72" segment with `kit72_` properties, welcome email, redirect.
 
+DNS at Squarespace Domains now holds: DKIM on `resend._domainkey`, MX and SPF on `send`, CNAME `rsend`, plus the restored root SPF (`v=spf1 -all`) and DMARC (`v=DMARC1; p=reject; sp=reject; adkim=s; aspf=s`). Adding the MX record had made Squarespace remove its "Email Security" preset; SPF and DMARC were put back as custom records with the same values. The empty wildcard DKIM record from that preset was not re-added.
+
 Still open:
 
-- The `rsend` CNAME (→ `send.forge.rmta.net`) is not saved yet, so Resend shows the domain as partially verified. Sending works without it.
-- Adding the MX record made Squarespace remove its "Email Security" preset: root SPF `v=spf1 -all`, DMARC `v=DMARC1; p=reject; sp=reject; adkim=s; aspf=s` and the empty wildcard DKIM. The domain currently has **no DMARC record**. Re-add DMARC as a custom TXT record on `_dmarc`.
+- DMARC alignment is expected to pass (Resend signs with `d=kit-72.com`), but it has only been tested against Resend's sink address, not a real mailbox. Sign up once with a real address to confirm the mail arrives.
 - The account is shared with other projects. Contacts and unsubscribe status are account-wide, and the `kit-72-site` key has full access because the endpoints need to create contacts. A separate Resend account would isolate this.
 - The three automations below are not created; only the two emails the site sends itself are live.
 - One test contact (`delivered@resend.dev`) is in the segment and can be deleted.

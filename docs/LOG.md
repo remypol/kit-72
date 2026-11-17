@@ -83,3 +83,4 @@ What matters:
 - Redeployed production with the keys, ran the full flow against the live site with Resend's test address (all steps passed), then set `PUBLIC_SIGNUP_ENABLED=true` and redeployed. The form is live on content pages.
 - Privacy pages (NL, DE, ES) rewritten to describe the email signup, Resend as processor and consent-gated analytics; they previously said no personal data was stored. The NL and DE privacy pages no longer show the signup form.
 - Gaps found, not fixed: the privacy pages give no contact address, and the German site has no Impressum.
+- After the owner logged in to Squarespace again: `rsend` CNAME saved; root SPF and DMARC re-added as custom records with their previous values. Checked at the authoritative nameserver.
