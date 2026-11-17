@@ -169,6 +169,10 @@ export interface HomeCopy {
   cashNote?: string;
   cta: string;
   ctaNote: string;
+  whyTitle: string;
+  whyBody: string;
+  whyPoint: string;
+  whySource: string;
   ownTitle: string;
   ownBody: string;
   ownPoints: string[];
@@ -212,6 +216,10 @@ export const homeCopy: Record<Locale, HomeCopy> = {
     cashNote: '€ 70 per volwassene, € 30 per kind',
     cta: 'Maak mijn lijst',
     ctaNote: 'Gratis, zonder account. Je vinkt af wat je al hebt.',
+    whyTitle: 'Een plan B is er niet alleen voor miljardairs',
+    whyBody: 'In Silicon Valley heeft naar schatting ruim de helft van de miljardairs een "apocalypsverzekering" geregeld, zoals een bunker of een huis in Nieuw-Zeeland. Dat zei LinkedIn-oprichter Reid Hoffman in 2017 tegen The New Yorker.',
+    whyPoint: 'Een gewoon huishouden heeft geen bunker nodig. Wel water, eten, licht en een plan voor 72 uur. Daarvoor is Kit-72 er: zo goed mogelijk voorbereid, met wat je grotendeels al in huis hebt.',
+    whySource: 'Bron: The New Yorker, 2017',
     ownTitle: 'De meeste spullen heb je al in huis',
     ownBody: 'Consumentenprogramma Kassa waarschuwt voor peperdure kant-en-klare noodpakketten. Terecht. Een pakket dat je zelf samenstelt past bij je gezin, en je betaalt alleen voor wat ontbreekt.',
     ownPoints: [
@@ -259,6 +267,10 @@ export const homeCopy: Record<Locale, HomeCopy> = {
     lightsNote: 'eine pro Person, mindestens zwei',
     cta: 'Meine Liste erstellen',
     ctaNote: 'Kostenlos, ohne Konto. Du hakst ab, was du schon hast.',
+    whyTitle: 'Ein Plan B ist nicht nur etwas für Milliardäre',
+    whyBody: 'Im Silicon Valley hat nach einer Schätzung mehr als die Hälfte der Milliardäre eine "Apokalypse-Versicherung" abgeschlossen, etwa einen Bunker oder ein Haus in Neuseeland. Das sagte LinkedIn-Gründer Reid Hoffman 2017 dem New Yorker.',
+    whyPoint: 'Ein normaler Haushalt braucht keinen Bunker. Aber Wasser, Essen, Licht und einen Plan für 72 Stunden. Dafür gibt es Kit-72: so gut wie möglich vorbereitet, mit dem, was größtenteils schon im Haus ist.',
+    whySource: 'Quelle: The New Yorker, 2017',
     ownTitle: 'Das meiste hast du schon zu Hause',
     ownBody: 'Fertige Notfallrucksäcke kosten schnell mehrere hundert Euro. Ein Vorrat, den du selbst zusammenstellst, passt zu deinem Haushalt, und du zahlst nur für das, was fehlt.',
     ownPoints: [
@@ -306,6 +318,10 @@ export const homeCopy: Record<Locale, HomeCopy> = {
     lightsNote: 'una por persona, mínimo dos',
     cta: 'Crear mi lista',
     ctaNote: 'Gratis y sin registro. Marcas lo que ya tienes.',
+    whyTitle: 'Un plan B no es solo cosa de multimillonarios',
+    whyBody: 'En Silicon Valley, según una estimación, más de la mitad de los multimillonarios tiene contratado algún "seguro contra el apocalipsis", como un búnker o una casa en Nueva Zelanda. Lo dijo en 2017 Reid Hoffman, fundador de LinkedIn, a The New Yorker.',
+    whyPoint: 'Un hogar normal no necesita un búnker. Sí agua, comida, luz y un plan para 72 horas. Para eso está Kit-72: lo mejor preparado posible, con lo que en gran parte ya tienes en casa.',
+    whySource: 'Fuente: The New Yorker, 2017',
     ownTitle: 'Casi todo lo tienes ya en casa',
     ownBody: 'Las mochilas de emergencia ya montadas cuestan fácilmente varios cientos de euros. Un kit que montas tú se ajusta a tu familia, y solo pagas lo que falta.',
     ownPoints: [

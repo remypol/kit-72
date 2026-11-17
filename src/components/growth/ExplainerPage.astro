@@ -1,0 +1,184 @@
+---
+/**
+ * A sourced explainer: short answer first, then sections, then what a
+ * household can do, then the source list with dates. Content comes from a
+ * data file so the three languages stay in step and every claim has a source.
+ */
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumb from '../layout/Breadcrumb.astro';
+import type { Locale } from '../../data/site';
+
+export interface Source {
+  /** short id used for [n] references in the text */
+  id: string;
+  org: string;
+  title: string;
+  date: string;
+  url: string;
+}
+export interface Section {
+  id: string;
+  heading: string;
+  /** paragraphs may contain <a>, <strong> and source references like <sup>[iea]</sup> written as {iea} */
+  paragraphs: string[];
+  bullets?: string[];
+}
+export interface Explainer {
+  title: string;
+  description: string;
+  h1: string;
+  crumbParent: { label: string; href: string };
+  crumb: string;
+  checkedLabel: string;
+  shortTitle: string;
+  short: string[];
+  sections: Section[];
+  doTitle: string;
+  doLead: string;
+  doSteps: { text: string; href?: string; link?: string }[];
+  cta: { label: string; href: string };
+  sourcesTitle: string;
+  sourcesNote: string;
+  faqTitle: string;
+  faq: { q: string; a: string }[];
+}
+
+interface Props {
+  locale: Locale;
+  content: Explainer;
+  sources: Source[];
+  checked: string;
+  published: string;
+}
+const { locale, content: c, sources, checked, published } = Astro.props;
+
+const dateFmt = new Intl.DateTimeFormat(locale === 'nl' ? 'nl-NL' : locale === 'de' ? 'de-DE' : 'es-ES', { day: 'numeric', month: 'long', year: 'numeric' });
+const fmt = (iso: string) => dateFmt.format(new Date(iso + 'T12:00:00Z'));
+
+// {id} in the copy becomes a numbered link to the source list
+const used: string[] = [];
+const refs = (html: string) =>
+  html.replace(/\{([a-z0-9-]+)\}/g, (_m, id: string) => {
+    if (!sources.some((s) => s.id === id)) throw new Error(`ExplainerPage: unknown source "${id}"`);
+    if (!used.includes(id)) used.push(id);
+    const n = used.indexOf(id) + 1;
+    return `<sup class="ref"><a href="#src-${id}" aria-label="${n}">${n}</a></sup>`;
+  });
+// resolve references in reading order before rendering
+const short = c.short.map(refs);
+const sections = c.sections.map((s) => ({ ...s, paragraphs: s.paragraphs.map(refs), bullets: s.bullets?.map(refs) }));
+const doSteps = c.doSteps;
+const ordered = used.map((id) => sources.find((s) => s.id === id)!);
+const faqData = c.faq.map((f) => ({ question: f.q, answer: f.a }));
+---
+
+<BaseLayout title={c.title} description={c.description} locale={locale} schemaType="Article" datePublished={published} dateModified={checked} faqData={faqData}>
+  <article class="xp">
+    <Breadcrumb items={[c.crumbParent, { label: c.crumb }]} class="mb-4" locale={locale} />
+    <h1>{c.h1}</h1>
+    <p class="xp__checked">{c.checkedLabel} <time datetime={checked}>{fmt(checked)}</time></p>
+
+    <section class="xp__short" aria-labelledby="xp-short">
+      <h2 id="xp-short">{c.shortTitle}</h2>
+      {short.map((p) => <p set:html={p} />)}
+    </section>
+
+    <div class="prose">
+      {sections.map((s) => (
+        <section id={s.id}>
+          <h2>{s.heading}</h2>
+          {s.paragraphs.map((p) => <p set:html={p} />)}
+          {s.bullets && <ul>{s.bullets.map((b) => <li set:html={b} />)}</ul>}
+        </section>
+      ))}
+
+      <section id="do">
+        <h2>{c.doTitle}</h2>
+        <p>{c.doLead}</p>
+        <ol>
+          {doSteps.map((d) => (
+            <li>
+              {d.text}
+              {d.href && <> <a href={d.href}>{d.link}</a></>}
+            </li>
+          ))}
+        </ol>
+        <p class="not-prose"><a href={c.cta.href} class="btn btn-primary btn-lg">{c.cta.label}</a></p>
+      </section>
+
+      <section id="faq">
+        <h2>{c.faqTitle}</h2>
+        {c.faq.map((f) => (<><h3>{f.q}</h3><p>{f.a}</p></>))}
+      </section>
+
+      <section id="sources" class="xp__sources">
+        <h2>{c.sourcesTitle}</h2>
+        <p>{c.sourcesNote}</p>
+        <ol>
+          {ordered.map((s) => (
+            <li id={`src-${s.id}`}>
+              {s.org}, <a href={s.url} rel="noopener nofollow" target="_blank">{s.title}</a>, {s.date}
+            </li>
+          ))}
+        </ol>
+      </section>
+    </div>
+  </article>
+</BaseLayout>
+
+<style>
+  .xp {
+    max-width: 48rem;
+    margin-inline: auto;
+    padding: var(--space-10) var(--space-4) var(--space-16);
+  }
+  @media (min-width: 640px) {
+    .xp {
+      padding-inline: var(--space-6);
+    }
+  }
+  .xp h1 {
+    font-size: clamp(2rem, 4.4vw, 3rem);
+  }
+  .xp__checked {
+    margin-top: var(--space-3);
+    font-size: 0.95rem;
+    color: var(--color-text-tertiary);
+  }
+  .xp__short {
+    margin-block: var(--space-8);
+    background: var(--color-bg-secondary);
+    border: 1px solid var(--color-border);
+    border-left: 6px solid var(--color-accent);
+    border-radius: var(--radius-lg);
+    padding: var(--space-6);
+  }
+  .xp__short h2 {
+    font-size: 1.4rem;
+  }
+  .xp__short p {
+    margin-top: var(--space-3);
+    max-width: 62ch;
+  }
+  .xp :global(.ref) {
+    font-size: 0.72em;
+    line-height: 0;
+    margin-left: 1px;
+  }
+  .xp :global(.ref a) {
+    text-decoration: none !important;
+    font-weight: 700;
+    padding: 0 2px;
+  }
+  .xp__sources ol {
+    font-size: 0.95rem;
+  }
+  .xp__sources li {
+    overflow-wrap: anywhere;
+  }
+  .xp .btn {
+    white-space: normal;
+    text-align: center;
+    margin-top: var(--space-2);
+  }
+</style>

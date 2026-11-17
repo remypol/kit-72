@@ -76,6 +76,19 @@ const steppers = [
   </div>
 </section>
 
+<section class="why">
+  <div class="wrap why__grid">
+    <h2 class="why__title">{c.whyTitle}</h2>
+    <div>
+      <p class="why__point">{c.whyPoint}</p>
+      <p class="why__body">
+        {c.whyBody}
+        <a href="https://www.newyorker.com/magazine/2017/01/30/doomsday-prep-for-the-super-rich" rel="noopener nofollow" target="_blank">{c.whySource}</a>
+      </p>
+    </div>
+  </div>
+</section>
+
 <section class="block">
   <div class="wrap own">
     <div>
@@ -334,6 +347,49 @@ const steppers = [
     margin-top: var(--space-4);
     font-size: 0.82rem;
     color: #d6efe0;
+  }
+
+  /* ---------- Why: the contrast that explains the site ---------- */
+  .why {
+    background: var(--color-deep);
+    color: #fff;
+    padding-block: var(--space-12);
+  }
+  @media (min-width: 900px) {
+    .why {
+      padding-block: var(--space-16);
+    }
+  }
+  .why__grid {
+    display: grid;
+    gap: var(--space-6);
+  }
+  @media (min-width: 900px) {
+    .why__grid {
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-16);
+      align-items: start;
+    }
+  }
+  .why__title {
+    color: #fff;
+    font-size: clamp(1.7rem, 3.4vw, 2.5rem);
+    max-width: 16ch;
+  }
+  .why__point {
+    font-size: 1.2rem;
+    line-height: 1.5;
+  }
+  .why__body {
+    margin-top: var(--space-4);
+    color: #cfe3d7;
+    font-size: 0.98rem;
+  }
+  .why__body a {
+    color: #fff;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    white-space: nowrap;
   }
 
   /* ---------- Blocks ---------- */
