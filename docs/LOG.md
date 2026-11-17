@@ -113,3 +113,8 @@ What matters:
 - Left out because not verified at the source: TenneT's supply-security figures (a correction was reported), the number of Spanish grid-access requests, and press reports of flickering lights. Official Dutch sources do not name data centres as a cause of grid congestion, and the page says so.
 - Search check: in all three languages the direct question has no authoritative answer page; German results for "Blackout durch KI" are blogs and tabloid pieces.
 - Linked from the guide hubs, the header, and the blackout and cyber scenario pages.
+
+## 11. "Why we exist" block and handbook plan (2026-11-17)
+
+- The owner wanted the line that every rich American has a shelter. Checked: the source is Reid Hoffman's estimate in The New Yorker (2017) that more than half of Silicon Valley billionaires have "apocalypse insurance", confirmed through Business Insider's report of it (the New Yorker page itself could not be fetched). The homepages now say that, with the source, instead of "every".
+- Handbook plan in docs/HANDBOEK-PLAN.md (Dutch). Probed the data sources with a test address in Rotterdam: PDOK geocoding and AHN elevation work in under half a second; live OpenStreetMap queries took 34 s; the nearest OSM "hospitals" were eye clinics; EU-wide elevation was 8 m off; the LIWO flood-depth service did not respond. Public shelters do not exist in the Netherlands, so that part of the idea is dropped.
