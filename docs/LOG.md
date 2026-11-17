@@ -139,3 +139,10 @@ What matters:
 - A sub-agent collected and vetted 46 tricks (88 fetches). The filter was two questions: does it work, and can it hurt someone following it as written. Changed by the vetting: the coin-on-ice trick only proves a thaw when the coin has sunk; hay-box cooking got a re-boil rule. Left out: fridge food on the balcony, blankets on the freezer, draining a storage boiler, cistern water, bleach dosing. `handbook/data/hacks-nl.json` records per trick what the check rests on and what was left out.
 - Layout: CSS columns did not balance in print and pushed the footer onto an extra sheet, so the three trick columns are now dealt out in code. The build expects exactly four sheets.
 
+## 15. Monetisation rethink and Awin (2026-11-17)
+
+- The owner rejected selling the handbook, B2B to estate agents and a kit subscription. Direction now: free handbook for an email address, revenue from partners. Selling raw personal data was advised against.
+- A sub-agent checked Dutch pay-per-lead and pay-per-sale programmes (107 fetches). Nearly all pay on a tracked click-out, not on a lead submitted from our form; Slimster is the exception. Public payouts range from EUR 3 to 90. Two facts that change the offers: flooding from primary defences is uninsurable for nearly all households, and most home batteries do not work in an outage.
+- Awin: the owner logged in; two publisher accounts exist (2996923 and 3091503), both set up for tapwater.uk. Added https://www.kit-72.com as a promotional space on 2996923 (sectors Home & Garden, Electronic Accessories); nothing else changed. The ration1.de application is still pending. Insurers on Awin hide commission rates until a publisher is accepted.
+- Details in docs/HANDBOEK-PLAN.md under "Verdienmodel".
+

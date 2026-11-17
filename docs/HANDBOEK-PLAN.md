@@ -198,3 +198,38 @@ Elke truc moest twee vragen doorstaan: werkt het, en kan het kwaad als je het do
 
 Wat niet bij een instantie te toetsen viel staat er als ervaring van anderen in; dat geldt onder meer voor de breekstaafjes, de vaste plek voor lampen en het briefje op de deur.
 
+## Verdienmodel: gratis handboek, betaald door partners (17 november 2026)
+
+De eigenaar wil geen producten verkopen en verwacht niet dat consumenten voor het handboek betalen. Besloten richting: het handboek is gratis in ruil voor een e-mailadres, en de opbrengst komt van partners die betalen als een lezer via ons iets afsluit of aanvraagt. Losse persoonsgegevens verkopen doen we niet: het levert weinig op, vraagt aparte toestemming per doel, en een lijst met adressen waar geld en voorraad in huis ligt mag nooit rondgaan.
+
+### Wat is nagezocht
+
+Een onderzoek liep de Nederlandse programma's na (107 pagina's geopend); daarnaast is in het Awin-account zelf gezocht.
+
+| Categorie | Programma | Netwerk | Openbare vergoeding | Hoe het werkt |
+|---|---|---|---|---|
+| Woonverzekering | Univé | Awin | tot € 90 per afgesloten verzekering | doorklikken; geen vooringevulde gegevens |
+| Woonverzekering | Centraal Beheer, FBTO, Interpolis, ANWB, ABN AMRO, a.s.r., InShared, Allianz Direct | Awin | pas zichtbaar na toelating | gesloten programma's met screening |
+| Offertes (zonnepanelen, isolatie) | Slimster | Daisycon of eigen programma | € 3 tot 20 per offerteaanvraag | enige die aanvragen uit ons eigen formulier aanneemt |
+| Offertes | Offertevergelijker | Daisycon | tot € 31,50 | doorklikken |
+| Beveiliging | WoonVeilig | Daisycon | tot € 70 | voorwaarden achter de inlog |
+| Beveiliging | Verisure NL | Daisycon | tot € 20 | terugbelverzoek |
+| Personenalarm | Nederlandse Senioren Alarmering | Daisycon | tot € 52,50 | voorwaarden achter de inlog |
+| Noodstroom | EcoFlow NL, ALLPOWERS NL | Awin | 5 % van de aankoop | productverkoop |
+| Energie | Overstappen, Independer Energie, Gaslicht.com | Awin | € 20 per contract (Overstappen) | doorklikken |
+
+### Wat dit verandert aan het idee
+
+- **Bijna niemand betaalt voor een vinkje in ons handboek.** Vrijwel alle programma's betalen pas als de lezer doorklikt en bij de partner zelf afsluit. Alleen Slimster neemt aanvragen uit ons eigen formulier aan.
+- **Overstroming door een dijkdoorbraak is niet te verzekeren.** Schade door zee of grote rivieren is voor vrijwel alle huishoudens niet gedekt; schade door kleine rivieren, kanalen en extreme regen meestal wel (Verbond van Verzekeraars, Consumentenbond). Het aanbod "dekt je verzekering een overstroming?" kan dus alleen eerlijk als uitleg, met daarna een gewone vergelijking van woonverzekeringen.
+- **Een thuisbatterij werkt meestal niet bij een stroomstoring** (Milieu Centraal). Voor batterij-offertes is geen Nederlandse vergoeding per aanvraag gevonden. Het eerlijke aanbod is noodstroom die wel werkt: een powerstation.
+- **Regels.** Per aanbod een eigen, niet vooraf aangevinkt vakje, de ontvanger bij naam, en het handboek mag er niet van afhangen. Wie gebeld gaat worden moet daar sinds 1 juli 2026 uitdrukkelijk mee instemmen (ACM). Verzekeraars eisen dat de site zich aan de regels van de AFM houdt.
+
+### Rekensom, bijgesteld
+
+De eerdere schatting van € 1,40 per handboek ging uit van een vinkje dat direct geld oplevert. Met doorklikken ligt het lager. Een eigen inschatting, niet gemeten: € 0,50 tot € 1 per handboek als er een offerteformulier in de stroom zit, anders eerder € 0,10 tot € 0,30. Voor € 10.000 per maand zijn dat 10.000 tot 20.000 handboeken per maand in het gunstige geval.
+
+### Awin
+
+Kit-72 is toegevoegd als tweede site aan Awin-account 2996923; de Britse watersite in dat account is niet aangeraakt. De aanvraag bij ration1.de staat nog open. Beide Awin-accounts hebben het Verenigd Koninkrijk als hoofdregio en een beschrijving van de watersite; Nederlandse adverteerders zien dat bij hun beoordeling.
+
