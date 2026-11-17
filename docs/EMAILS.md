@@ -1,6 +1,6 @@
 # Email lifecycle
 
-Status 2026-11-17: signup is live. The sequence below exists in Resend; see "Switching on" for what is enabled.
+Status 2026-11-17: signup and the full sequence are live.
 
 ## What is sent, and by what
 
@@ -38,11 +38,13 @@ To change an email: edit `content.mjs`, run `node emails/build.mjs`, then `RESEN
   - Every send after the welcome first checks `contact.unsubscribed`.
 - Event payload: `locale`, `household` ("3 personen"), `household_size`, `water_litres`, `meals`, `lights`, `cash_eur`, `source`.
 
-## Switching on
+## Status
 
-The automations were created **disabled**. Enable all six once this change is deployed: the previous version of `/api/confirm` sent its own welcome email, so enabling earlier would send two.
+All six automations are **enabled** (since 2026-11-17, after the matching site change was deployed). Tested on the live site in NL, DE and ES with Resend's sink address: confirmation email, confirm link, welcome email with the household's numbers and an unsubscribe link.
 
 If the automations are disabled or deleted, a confirmed subscriber gets no welcome email and no error is shown. Check Resend → Automations → Runs after any change.
+
+Not tested: the day 3, 8 and 15 emails and the reminders (they need the wait to pass), and delivery to a real mailbox.
 
 ## Things to know
 
@@ -50,7 +52,7 @@ If the automations are disabled or deleted, a confirmed subscriber gets no welco
 - **Re-subscribing.** Someone who unsubscribed and signs up again gets the welcome email but no tips or reminders, because their contact stays unsubscribed. Flipping it back would also re-subscribe them to other projects in the shared account.
 - **DNS** at Squarespace Domains: DKIM on `resend._domainkey`, MX and SPF on `send`, CNAME `rsend`, root SPF `v=spf1 -all`, DMARC `v=DMARC1; p=reject; sp=reject; adkim=s; aspf=s`. Adding an MX record makes Squarespace remove its "Email Security" preset; SPF and DMARC were re-added as custom records.
 - **Not yet checked with a real mailbox.** Everything was tested against Resend's sink address, which does not evaluate DMARC.
-- **Leftovers from testing:** contact `delivered@resend.dev` in the segment (one run of the NL welcome automation is waiting on it), and a disabled automation "Kit-72 probe (test, can be deleted)".
+- **Leftovers from testing:** contact `delivered@resend.dev` in the segment (several automation runs are waiting on it and will send to that sink address), and a disabled automation "Kit-72 probe (test, can be deleted)".
 
 ## On event
 
