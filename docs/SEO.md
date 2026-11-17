@@ -68,3 +68,12 @@ Three things stand out.
 - No new backlinks. Authority is the main reason Dutch pages rank at 55 to 90; content changes alone will not fix that. Candidates: municipalities and safety regions that link to practical checklists, local press around campaign moments.
 - Hub pages (`/nl/gidsen/`, `/nl/tools/`, `/de/ratgeber/`) are still thin lists.
 - The cyber-attack pages get impressions for business queries ("IT-Ausfall") that the page does not serve. Left alone.
+
+## Municipality pages and the free handbook (17 November 2026)
+
+- New: `/nl/noodhandboek/` (free personal handbook) and `/nl/noodplan/` with a page for each of the 342 municipalities. Target queries: "rampenzender <plaats>", "noodplan <gemeente>", "spoedeisende hulp <plaats>", "overstromingsrisico <gemeente>", "veiligheidsregio <gemeente>".
+- Each municipality page has its own numbers (broadcaster frequencies, distances to emergency departments, flood-risk share and ground level from a 16-point sample), so the pages are not copies of each other.
+- Internal links: header, footer and Dutch homepage link to the handbook; the hub links to every municipality; each municipality links to six neighbours.
+- The page a personal link opens on (`/nl/noodhandboek/mijn/`) is noindex and left out of the sitemap.
+- To watch in four to six weeks: how many of the 343 URLs are indexed, and which municipality queries get impressions.
+

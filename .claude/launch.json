@@ -21,6 +21,18 @@
         "emails/out/preview"
       ],
       "port": 3032
+    },
+    {
+      "name": "kit72-dist",
+      "runtimeExecutable": "python3",
+      "runtimeArgs": [
+        "-m",
+        "http.server",
+        "3033",
+        "--directory",
+        "dist"
+      ],
+      "port": 3033
     }
   ]
 }

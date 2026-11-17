@@ -147,3 +147,13 @@ What matters:
 - Details in docs/HANDBOEK-PLAN.md under "Verdienmodel".
 - Applied from Awin account 2996923, with kit-72.com as the promotional space, to Univé NL, EcoFlow NL, ALLPOWERS NL and Overstappen NL; all four show "Pending Approval". The first two messages mention the site's visitor count; the owner asked for a sales pitch without it, so the last two and the promotional-space description leave it out. No figures were invented.
 
+## 16. Free handbook live flow and municipality pages (2026-11-17)
+
+- The owner's instruction: carry on until everything is finished, include SEO, create pages and submit them in Search Console.
+- Free handbook: `/nl/noodhandboek/` (form), `api/handbook-request.js` (exact address check at PDOK, emails a personal link), `/nl/noodhandboek/mijn/` (opens the link), `api/handbook.js` (collects the facts and returns the four pages as HTML with a print button). The address is not stored; it is encrypted in the URL fragment of the link. The email address joins the Resend list only when the optional box is ticked.
+- Local test of both functions with Resend stubbed: 17 checks pass. On the Vercel preview (reached with `vercel curl`, preview-only test secret): address validation works and a full handbook comes back in 8.8 s. The preview has no Resend key (the production key is marked sensitive and cannot be copied), so sending the email was tested after going live instead.
+- Nationwide: all 25 safety regions with broadcaster, FM transmitters and DAB block (Denk Vooruit); each region's website opened and checked. Hospital place names tidied ("Hoorn Nh" and similar).
+- `handbook/scripts/gemeenten.mjs` builds `src/data/gemeenten-nl.json` for 342 municipalities. Things that went wrong on the way: the first run did its sampling one request at a time and took over 15 minutes; eleven municipalities got no safety region because the middle of the place lies in water (Lelystad, Urk, Hoorn and others) or in a Belgian enclave (Baarle-Nassau). Fixed by anchoring on the nearest address inside the municipality and by choosing the largest place where no place carries the municipality's name.
+- SEO pages: `/nl/noodplan/` and one page per municipality (343 URLs), each with the form, four questions as FAQ structured data and links to six neighbours. Sitemap now has 438 URLs. `scripts/seo_audit.py`: no long titles, no duplicate titles, no orphan pages, no hreflang problems.
+- Still a pilot: map, nearby points and routes come from public OpenStreetMap services meant for light use.
+
