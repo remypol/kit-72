@@ -4,7 +4,6 @@
  * The public Overpass servers were all down when this was written (502s and
  * timeouts), so the proof uses three other public OSM services instead:
  *   - Photon (reverse search with a tag filter) for the nearest shop, pharmacy…
- *   - Nominatim (search with extratags) for hospitals and their emergency tag
  *   - the OSM map API for the streets drawn on the map
  * None of these is meant for production traffic. A product needs its own
  * extract of OpenStreetMap, refreshed on a schedule.
@@ -40,32 +39,6 @@ export async function nearby(home) {
       .sort((a, b) => a.dist - b.dist);
   }
   return out;
-}
-
-/**
- * Hospitals that OpenStreetMap tags with emergency=yes, nearest first.
- * Nominatim returns at most 40 results per search, so the search starts with
- * a small box around the home and widens until two are found. It can still
- * miss a hospital whose emergency department is not tagged; the product
- * needs the official list.
- */
-export async function emergencyHospitals(home) {
-  const found = new Map();
-  for (const boxDeg of [0.12, 0.3, 0.6]) {
-    const box = [home.lon - boxDeg * 1.6, home.lat + boxDeg, home.lon + boxDeg * 1.6, home.lat - boxDeg].map((v) => v.toFixed(4)).join(',');
-    for (const q of ['ziekenhuis', 'hospital']) {
-      const rows = await getJson(`https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(q)}&format=jsonv2&extratags=1&addressdetails=1&limit=40&viewbox=${box}&bounded=1`);
-      for (const r of rows) {
-        if (r.type !== 'hospital' || r.extratags?.emergency !== 'yes') continue;
-        const pos = { lat: Number(r.lat), lon: Number(r.lon) };
-        const ad = r.address ?? {};
-        found.set(`${r.osm_type}${r.osm_id}`, { name: r.name, city: ad.city ?? ad.town ?? ad.village ?? ad.municipality ?? null, ...pos, dist: metres(home, pos) });
-      }
-      await new Promise((res) => setTimeout(res, 1100)); // Nominatim allows one request per second
-    }
-    if (found.size >= 2) break;
-  }
-  return [...found.values()].sort((x, y) => x.dist - y.dist);
 }
 
 /**

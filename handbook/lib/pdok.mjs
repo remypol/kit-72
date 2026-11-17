@@ -22,6 +22,7 @@ export async function geocode(query) {
     waterBoard: doc.waterschapsnaam,
     place: doc.woonplaatsnaam,
     postcode: doc.postcode,
+    houseNumber: doc.huisnummer ?? null,
   };
 }
 

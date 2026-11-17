@@ -130,7 +130,7 @@ Drie adressen: een landelijk adres in de gemeente Apeldoorn, Coolsingel 40 in Ro
 | In overstromingsrisicogebied | Rijkswaterstaat via PDOK | nee, klopt | ja, achter de dijk, klopt | ja, achter de dijk, klopt |
 | Veiligheidsregio en rampenzender | CBS via PDOK, eigen tabel | klopt | klopt | klopt |
 | Storingsnummer stroom en gas | Netbeheer Nederland | klopt | klopt | klopt |
-| Spoedeisende hulp | OpenStreetMap | klopt | **fout** | **fout** |
+| Spoedeisende hulp | RIVM, opgave van de ziekenhuizen | klopt | klopt | klopt |
 | Supermarkt, apotheek, huisarts | OpenStreetMap | aannemelijk | aannemelijk | deels |
 | AED en drinkwaterpunt | OpenStreetMap | niet gevonden | gevonden | gevonden |
 
@@ -138,8 +138,9 @@ Drie adressen: een landelijk adres in de gemeente Apeldoorn, Coolsingel 40 in Ro
 
 ### Wat fout ging en waarom
 
-- **Spoedeisende hulp uit OpenStreetMap is niet bruikbaar.** In Rotterdam staat het Sophia Kinderziekenhuis bovenaan, waar een volwassene niet terechtkan. In Zutphen ontbreekt het ziekenhuis in de stad zelf, omdat het in OpenStreetMap niet als spoedeisende hulp is gemarkeerd; het handboek stuurt je naar Deventer, 17 km verder. Die spoedeisende hulp in Zutphen is volgens een antwoord van de minister uit 2024 open van 8 tot 21 uur. Het handboek moet dus ook openingstijden kennen, en de dichtstbijzijnde locatie die dag en nacht open is apart noemen.
-- **De bron die dit oplost bestaat.** Het RIVM publiceert de antwoorden van alle ziekenhuizen op de vragenlijst "Aanbod SEH's en Acute Verloskunde 2026" als open data zonder gebruiksbeperking (data.rivm.nl, record `afbdf4b9-00f0-4d4e-a67e-fd3bbc8c833c`, een zip van 107 kB). Nog niet gedownload en verwerkt.
+- **Spoedeisende hulp uit OpenStreetMap was niet bruikbaar.** In Rotterdam stond het Sophia Kinderziekenhuis bovenaan, waar een volwassene niet terechtkan. In Zutphen ontbrak het ziekenhuis in de stad zelf, omdat het in OpenStreetMap niet als spoedeisende hulp is gemarkeerd; het handboek stuurde je naar Deventer, 17 km verder.
+- **Opgelost met de lijst van het RIVM.** Het RIVM publiceert de antwoorden van alle ziekenhuizen op de vragenlijst "Aanbod SEH's en Acute Verloskunde 2026" als open data zonder gebruiksbeperking (versie 7 juli 2026). `handbook/scripts/seh_from_rivm.py` maakt daarvan `handbook/data/seh-nl.json`: 79 locaties, elk op het eigen adres geplaatst via PDOK, waarvan 3 niet dag en nacht open zijn (Amstelveen, Schiedam, Zutphen). Het handboek toont de snelst bereikbare locatie; is die 's nachts dicht, dan staat dat erbij en is de tweede regel de snelst bereikbare die altijd open is. Na deze wijziging: Rotterdam geeft Erasmus MC en Franciscus Gasthuis, Zutphen geeft Gelre Zutphen ('s nachts dicht) en Deventer.
+- **PDOK kiest stil een ander huisnummer** als het gevraagde niet bestaat. De opdracht waarschuwt daar nu voor; de adrescheck moet het adres laten bevestigen.
 - **Hoogte onder een gebouw bestaat niet.** Het hoogtemodel heeft geen waarde onder bebouwing en een adrespunt ligt op het gebouw. De code meet nu een ring van punten op 15 tot 40 meter en neemt de middelste waarde.
 - **De Overpass-servers van OpenStreetMap lagen de hele middag plat.** De code gebruikt nu de kaart-API van OpenStreetMap voor alles binnen een kilometer en zoekdiensten (Photon, Nominatim) voor wat verder weg ligt. Dit bevestigt het plan: voor verkoop moeten de punten in eigen beheer staan.
 - **AED's staan maar deels in OpenStreetMap.** Op het platteland vond de proef er geen. De landelijke AED-registratie is niet openbaar; dit onderdeel belooft dus "AED's die in OpenStreetMap staan", niet "de dichtstbijzijnde AED".
@@ -148,8 +149,9 @@ Drie adressen: een landelijk adres in de gemeente Apeldoorn, Coolsingel 40 in Ro
 
 ### Oordeel
 
-Negen van de tien feiten zijn automatisch en juist op te halen. Het tiende, de spoedeisende hulp, is precies het feit waar een fout het meeste kwaad doet, en dat is met deze bron in twee van de drie gevallen fout. Fase 0 is daarmee niet af volgens het eigen criterium. Wat nog moet:
+De tien feiten op de pagina zijn nu automatisch op te halen en kloppen voor de drie testadressen. Drie daarvan (hoogte, supermarkt en huisarts) zijn aannemelijk maar niet bij een tweede bron nagemeten. Fase 0 heeft daarmee bewezen wat het moest bewijzen, met twee open punten die het plan al noemde:
 
-1. De lijst van het RIVM verwerken tot een eigen tabel met locatie, openingstijden en controledatum, en de drie adressen opnieuw controleren.
-2. De waterdiepte van LIWO opnieuw proberen, of de kaarten als bestand ophalen.
-3. De tabel met rampenzenders aanvullen van 2 naar 25 veiligheidsregio's.
+1. De waterdiepte van LIWO opnieuw proberen, of de kaarten als bestand ophalen. Tot die tijd zegt het handboek alleen of je in een overstromingsrisicogebied woont.
+2. De tabel met rampenzenders aanvullen van 2 naar 25 veiligheidsregio's.
+
+De lijst van het RIVM verschijnt jaarlijks; de tabel krijgt dus een jaarlijkse verversing, en tussentijdse sluitingen moeten apart gevolgd worden.

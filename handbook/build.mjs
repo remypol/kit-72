@@ -11,7 +11,8 @@ import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 import { geocode, elevation, floodRisk, safetyRegion } from './lib/pdok.mjs';
-import { nearby, emergencyHospitals, mapFeatures, route } from './lib/osm.mjs';
+import { nearby, mapFeatures, route } from './lib/osm.mjs';
+import { emergencyDepartments, sehSource } from './lib/seh.mjs';
 import { renderHtml } from './render.mjs';
 
 const here = dirname(fileURLToPath(import.meta.url));
@@ -39,19 +40,21 @@ const step = async (label, fn, fallback) => {
 console.log(`Adres: ${query}`);
 const address = await geocode(query);
 console.log(`  ->   ${address.label}`);
+// PDOK matches loosely: a house number that does not exist silently becomes a neighbour
+const asked = query.match(/\d+/)?.[0];
+if (asked && address.houseNumber != null && String(address.houseNumber) !== asked) console.log(`  LET OP: gevraagd huisnummer ${asked}, gevonden ${address.houseNumber}`);
 const [elev, flood, region] = await Promise.all([
   step('hoogte (AHN)', () => elevation(address), null),
   step('overstromingsrisicogebied', () => floodRisk(address), []),
   step('veiligheidsregio', () => safetyRegion(address), null),
 ]);
 const near = await step('punten in de buurt (OpenStreetMap)', () => nearby(address), null);
-const hospitals = await step('spoedeisende hulp (OpenStreetMap)', () => emergencyHospitals(address), []);
+const hospitals = await step('spoedeisende hulp (RIVM)', () => emergencyDepartments(address), []);
 const area = await step('kaartgegevens (OpenStreetMap)', () => mapFeatures(address), null);
 const features = area?.ways ?? null;
 // Inside the map square the map data is complete; beyond it only the search service knows more.
 if (near && area) for (const [kind, list] of Object.entries(area.pois)) if (list.length) near[kind] = list;
 
-for (const h of hospitals.slice(0, 2)) h.drive = await route(address, h, 'driving');
 if (near) for (const list of Object.values(near)) {
   const first = list[0];
   if (!first) continue;
@@ -71,6 +74,7 @@ const data = {
   region: regions.regions[region] ?? null,
   nearby: near,
   hospitals,
+  sehSource,
   mapFeatures: features,
 };
 

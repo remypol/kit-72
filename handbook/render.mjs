@@ -166,7 +166,7 @@ tr:first-child td{border-top:.6mm solid #10231b}
 .d{text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums;font-weight:650}
 .sub{color:#43544b;font-size:7.8pt}
 .hosp{margin-bottom:3mm}
-.warn{font-family:'Public Sans Variable',Arial,sans-serif;font-stretch:100%;letter-spacing:0;font-size:7pt;background:#ffd21f;color:#1a1a00;font-weight:700;padding:.4mm 1.4mm;border-radius:1mm;vertical-align:.5mm;margin-left:1.5mm}
+.warn{font-size:7pt;background:#ffd21f;color:#1a1a00;font-weight:700;padding:.3mm 1.3mm;border-radius:1mm;vertical-align:.3mm;margin-left:1mm;white-space:nowrap}
 .bottom{display:grid;grid-template-columns:1fr 1fr 1fr;gap:6mm;margin-top:auto}
 .box h2{border-bottom:.6mm solid #10231b;padding-bottom:1.2mm}
 .box li{list-style:none;padding:1.4mm 0;border-bottom:.2mm solid #c9d3c9;display:flex;justify-content:space-between;gap:3mm}
@@ -207,9 +207,9 @@ footer{font-size:6.8pt;color:#5f6e65;line-height:1.35;border-top:.2mm solid #c9d
   </div>
   <div>
     <div class="hosp">
-      <h2>Spoedeisende hulp <span class="warn">proef: nog niet gecontroleerd</span></h2>
-      <table>${hospitals.length ? hospitals.map((x) => `<tr><td><strong>${esc(x.name)}</strong>${x.city ? `<div class="sub">${esc(x.city)}</div>` : ''}</td><td class="d">${x.drive ? `${nl(x.drive.metres / 1000, 1)} km<div class="sub">${mins(x.drive.minutes)} met de auto</div>` : `${km(x.dist)}<div class="sub">hemelsbreed</div>`}</td></tr>`).join('') : '<tr><td>Niet gevonden; zoek zelf de dichtstbijzijnde spoedeisende hulp op.</td><td></td></tr>'}</table>
-      <p class="sub" style="margin-top:1mm">Bij levensgevaar bel je 112 en ga je niet zelf rijden.</p>
+      <h2>Spoedeisende hulp</h2>
+      <table>${hospitals.length ? hospitals.map((x) => `<tr><td><strong>${esc(x.name)}</strong>${x.allDay ? '' : ` <span class="warn">${x.night ? 'beperkt open' : '’s nachts dicht'}</span>`}<div class="sub">${esc(x.address)}, ${esc(x.place)}${x.allDay ? ', dag en nacht open' : ''}</div></td><td class="d">${x.drive ? `${nl(x.drive.metres / 1000, 1)} km<div class="sub">${mins(x.drive.minutes)} met de auto</div>` : `${km(x.dist)}<div class="sub">hemelsbreed</div>`}</td></tr>`).join('') : '<tr><td>Niet gevonden; zoek zelf de dichtstbijzijnde spoedeisende hulp op.</td><td></td></tr>'}</table>
+      <p class="sub" style="margin-top:1mm">Bij levensgevaar bel je 112 en ga je niet zelf rijden. Bron: RIVM, opgave van de ziekenhuizen, ${esc(d.sehSource?.version ?? '2026')}.</p>
     </div>
     <h2>Het dichtst bij huis</h2>
     <table>${rows.map((r) => r.missing
@@ -238,8 +238,8 @@ footer{font-size:6.8pt;color:#5f6e65;line-height:1.35;border-top:.2mm solid #c9d
 
 <footer>
   Proefversie om de gegevensbronnen te testen; nog niet bedoeld om op te vertrouwen. Bronnen: adres en waterschap PDOK Locatieserver; hoogte Actueel Hoogtebestand Nederland;
-  overstromingsrisicogebied Rijkswaterstaat (Richtlijn Overstromingsrisico's); veiligheidsregio CBS; punten in de buurt, ziekenhuizen en kaart OpenStreetMap; routes OSRM.
-  Ziekenhuizen komen uit OpenStreetMap (gemarkeerd als spoedeisende hulp) en zijn nog niet gecontroleerd aan de hand van de lijst van het RIVM. De verwachte waterdiepte bij een overstroming ontbreekt nog.
+  overstromingsrisicogebied Rijkswaterstaat (Richtlijn Overstromingsrisico's); veiligheidsregio CBS; spoedeisende hulp RIVM (Vragenlijst aanbod SEH's 2026); punten in de buurt en kaart OpenStreetMap; routes OSRM.
+  De verwachte waterdiepte bij een overstroming ontbreekt nog.
   Dit handboek vervangt geen aanwijzingen van hulpdiensten. kit-72.com
 </footer>
 </body></html>`;
