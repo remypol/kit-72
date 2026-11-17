@@ -1,0 +1,129 @@
+/**
+ * OpenStreetMap lookups for the proof.
+ *
+ * The public Overpass servers were all down when this was written (502s and
+ * timeouts), so the proof uses three other public OSM services instead:
+ *   - Photon (reverse search with a tag filter) for the nearest shop, pharmacy…
+ *   - Nominatim (search with extratags) for hospitals and their emergency tag
+ *   - the OSM map API for the streets drawn on the map
+ * None of these is meant for production traffic. A product needs its own
+ * extract of OpenStreetMap, refreshed on a schedule.
+ */
+import { getJson, metres } from './http.mjs';
+
+const KINDS = {
+  supermarket: ['shop:supermarket', 5],
+  pharmacy: ['amenity:pharmacy', 8],
+  defibrillator: ['emergency:defibrillator', 3],
+  drinking_water: ['amenity:drinking_water', 5],
+  doctors: ['amenity:doctors', 8],
+  fuel: ['amenity:fuel', 8],
+};
+
+/** Nearest points of interest per kind, nearest first. */
+export async function nearby(home) {
+  const out = {};
+  for (const [kind, [tag, radiusKm]] of Object.entries(KINDS)) {
+    const url = `https://photon.komoot.io/reverse?lat=${home.lat}&lon=${home.lon}&radius=${radiusKm}&limit=5&osm_tag=${tag}`;
+    let features = [];
+    try {
+      features = (await getJson(url)).features ?? [];
+    } catch {
+      /* one missing kind should not sink the page */
+    }
+    out[kind] = features
+      .map((f) => {
+        const p = f.properties;
+        const pos = { lat: f.geometry.coordinates[1], lon: f.geometry.coordinates[0] };
+        return { name: p.name ?? null, street: p.street ? `${p.street} ${p.housenumber ?? ''}`.trim() : null, city: p.city ?? null, ...pos, dist: metres(home, pos) };
+      })
+      .sort((a, b) => a.dist - b.dist);
+  }
+  return out;
+}
+
+/**
+ * Hospitals that OpenStreetMap tags with emergency=yes, nearest first.
+ * Nominatim returns at most 40 results per search, so the search starts with
+ * a small box around the home and widens until two are found. It can still
+ * miss a hospital whose emergency department is not tagged; the product
+ * needs the official list.
+ */
+export async function emergencyHospitals(home) {
+  const found = new Map();
+  for (const boxDeg of [0.12, 0.3, 0.6]) {
+    const box = [home.lon - boxDeg * 1.6, home.lat + boxDeg, home.lon + boxDeg * 1.6, home.lat - boxDeg].map((v) => v.toFixed(4)).join(',');
+    for (const q of ['ziekenhuis', 'hospital']) {
+      const rows = await getJson(`https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(q)}&format=jsonv2&extratags=1&addressdetails=1&limit=40&viewbox=${box}&bounded=1`);
+      for (const r of rows) {
+        if (r.type !== 'hospital' || r.extratags?.emergency !== 'yes') continue;
+        const pos = { lat: Number(r.lat), lon: Number(r.lon) };
+        const ad = r.address ?? {};
+        found.set(`${r.osm_type}${r.osm_id}`, { name: r.name, city: ad.city ?? ad.town ?? ad.village ?? ad.municipality ?? null, ...pos, dist: metres(home, pos) });
+      }
+      await new Promise((res) => setTimeout(res, 1100)); // Nominatim allows one request per second
+    }
+    if (found.size >= 2) break;
+  }
+  return [...found.values()].sort((x, y) => x.dist - y.dist);
+}
+
+/**
+ * Everything in a square around the home from the OSM map API: the streets,
+ * water and woods drawn on the map, and every tagged point of interest.
+ */
+export async function mapFeatures(home, radius = 1150) {
+  const dLat = radius / 111320;
+  const dLon = radius / (111320 * Math.cos((home.lat * Math.PI) / 180));
+  const elements = [];
+  // The map API refuses boxes with more than 50,000 nodes; split into quarters when that happens.
+  async function load(w, s, e, n, depth = 0) {
+    const bbox = [w, s, e, n].map((v) => v.toFixed(5)).join(',');
+    try {
+      const d = await getJson(`https://api.openstreetmap.org/api/0.6/map.json?bbox=${bbox}`, { timeoutMs: 60000 });
+      elements.push(...d.elements);
+    } catch (err) {
+      if (depth >= 3 || !/400/.test(err.message)) throw err;
+      const mx = (w + e) / 2;
+      const my = (s + n) / 2;
+      for (const q of [[w, s, mx, my], [mx, s, e, my], [w, my, mx, n], [mx, my, e, n]]) await load(...q, depth + 1);
+    }
+  }
+  await load(home.lon - dLon, home.lat - dLat, home.lon + dLon, home.lat + dLat);
+
+  const nodes = new Map();
+  for (const e of elements) if (e.type === 'node') nodes.set(e.id, { lat: e.lat, lon: e.lon });
+  const seen = new Set();
+  const ways = [];
+  const pois = Object.fromEntries(Object.keys(KINDS).map((k) => [k, []]));
+  const kindOf = (t) => (t.shop === 'supermarket' ? 'supermarket' : t.emergency === 'defibrillator' ? 'defibrillator' : pois[t.amenity] ? t.amenity : null);
+  for (const e of elements) {
+    if (seen.has(e.type + e.id)) continue;
+    seen.add(e.type + e.id);
+    const t = e.tags ?? {};
+    const line = e.type === 'way' ? e.nodes.map((id) => nodes.get(id)).filter(Boolean) : null;
+    // every tagged point in the box, named or not: this is complete where the search service is not
+    const kind = kindOf(t);
+    const pos = e.type === 'node' ? { lat: e.lat, lon: e.lon } : line?.[0];
+    if (kind && pos) {
+      pois[kind].push({ name: t.name ?? t.operator ?? t['defibrillator:location'] ?? null, street: t['addr:street'] ? `${t['addr:street']} ${t['addr:housenumber'] ?? ''}`.trim() : null, ...pos, dist: metres(home, pos) });
+    }
+    if (!line || line.length < 2) continue;
+    if (t.highway || t.waterway || t.natural === 'water' || t.railway === 'rail' || t.landuse === 'forest' || t.natural === 'wood') ways.push({ tags: t, line });
+  }
+  for (const list of Object.values(pois)) list.sort((x, y) => x.dist - y.dist);
+  return { ways, pois };
+}
+
+/** Driving or walking distance and time from the public OSRM servers. */
+export async function route(from, to, mode = 'driving') {
+  const host = { walking: 'https://routing.openstreetmap.de/routed-foot', cycling: 'https://routing.openstreetmap.de/routed-bike' }[mode] ?? 'https://router.project-osrm.org';
+  const profile = { walking: 'foot', cycling: 'bike' }[mode] ?? 'driving';
+  try {
+    const d = await getJson(`${host}/route/v1/${profile}/${from.lon},${from.lat};${to.lon},${to.lat}?overview=false`);
+    const r = d.routes?.[0];
+    return r ? { metres: r.distance, minutes: r.duration / 60 } : null;
+  } catch {
+    return null;
+  }
+}

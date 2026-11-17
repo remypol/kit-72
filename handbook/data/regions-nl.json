@@ -1,0 +1,13 @@
+{
+  "_note": "Per safety region. Regional public broadcasters are the designated emergency broadcaster for radio (Rijksoverheid). Only the regions used in the phase 0 proof are filled in; frequencies are left out because they were not verified.",
+  "checked": "2026-11-17",
+  "regions": {
+    "Noord- en Oost-Gelderland": { "broadcaster": "Omroep Gelderland", "website": "www.vnog.nl" },
+    "Rotterdam-Rijnmond": { "broadcaster": "Rijnmond", "website": "www.vr-rr.nl" }
+  },
+  "national": {
+    "emergency": "112",
+    "powerGasOutage": { "number": "0800-9009", "label": "Nationaal storingsnummer gas en stroom", "source": "gasenstroomstoringen.nl (Netbeheer Nederland)" },
+    "alerts": "NL-Alert op je telefoon"
+  }
+}

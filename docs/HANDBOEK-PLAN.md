@@ -1,6 +1,6 @@
 # Persoonlijk noodhandboek: plan
 
-Geschreven op 17 november 2026. Status: plan, er is nog niets gebouwd.
+Geschreven op 17 november 2026. Status: fase 0 is gebouwd en getest op drie adressen; de uitkomst staat onderaan. Er wordt nog niets verkocht.
 
 ## Het idee
 
@@ -108,3 +108,48 @@ Doorgaan na fase 1 alleen als de adrescheck laat zien dat mensen willen betalen.
 2. Prijs: € 19,99 als start, of testen met € 14,99 en € 24,99.
 3. Wie beantwoordt vragen van kopers.
 4. Eerst alleen Nederland (mijn advies), of meteen drie landen.
+
+## Fase 0: uitkomst (17 november 2026)
+
+Gebouwd in `handbook/`. Eén opdracht maakt van een adres een pdf van één pagina:
+
+```bash
+node handbook/build.mjs "Coolsingel 40, Rotterdam" --adults 2 --children 1 --pets 0
+```
+
+De uitvoer komt in `handbook/out/` en staat niet in git, omdat er adressen in staan. Een eerste run duurt ongeveer 35 seconden; antwoorden van de bronnen worden lokaal bewaard, daarna gaat het in een paar seconden.
+
+### Met de hand gecontroleerd
+
+Drie adressen: een landelijk adres in de gemeente Apeldoorn, Coolsingel 40 in Rotterdam en 's Gravenhof 2 in Zutphen.
+
+| Feit | Bron | Landelijk | Rotterdam | Zutphen |
+|---|---|---|---|---|
+| Adres, gemeente, waterschap | PDOK Locatieserver | klopt | klopt | klopt |
+| Hoogte van het maaiveld | AHN via PDOK | 16,5 m, aannemelijk | 0,4 m, aannemelijk | 10,5 m, aannemelijk |
+| In overstromingsrisicogebied | Rijkswaterstaat via PDOK | nee, klopt | ja, achter de dijk, klopt | ja, achter de dijk, klopt |
+| Veiligheidsregio en rampenzender | CBS via PDOK, eigen tabel | klopt | klopt | klopt |
+| Storingsnummer stroom en gas | Netbeheer Nederland | klopt | klopt | klopt |
+| Spoedeisende hulp | OpenStreetMap | klopt | **fout** | **fout** |
+| Supermarkt, apotheek, huisarts | OpenStreetMap | aannemelijk | aannemelijk | deels |
+| AED en drinkwaterpunt | OpenStreetMap | niet gevonden | gevonden | gevonden |
+
+"Aannemelijk" betekent: past bij wat bekend is over de plek, maar niet nagemeten bij een tweede bron.
+
+### Wat fout ging en waarom
+
+- **Spoedeisende hulp uit OpenStreetMap is niet bruikbaar.** In Rotterdam staat het Sophia Kinderziekenhuis bovenaan, waar een volwassene niet terechtkan. In Zutphen ontbreekt het ziekenhuis in de stad zelf, omdat het in OpenStreetMap niet als spoedeisende hulp is gemarkeerd; het handboek stuurt je naar Deventer, 17 km verder. Die spoedeisende hulp in Zutphen is volgens een antwoord van de minister uit 2024 open van 8 tot 21 uur. Het handboek moet dus ook openingstijden kennen, en de dichtstbijzijnde locatie die dag en nacht open is apart noemen.
+- **De bron die dit oplost bestaat.** Het RIVM publiceert de antwoorden van alle ziekenhuizen op de vragenlijst "Aanbod SEH's en Acute Verloskunde 2026" als open data zonder gebruiksbeperking (data.rivm.nl, record `afbdf4b9-00f0-4d4e-a67e-fd3bbc8c833c`, een zip van 107 kB). Nog niet gedownload en verwerkt.
+- **Hoogte onder een gebouw bestaat niet.** Het hoogtemodel heeft geen waarde onder bebouwing en een adrespunt ligt op het gebouw. De code meet nu een ring van punten op 15 tot 40 meter en neemt de middelste waarde.
+- **De Overpass-servers van OpenStreetMap lagen de hele middag plat.** De code gebruikt nu de kaart-API van OpenStreetMap voor alles binnen een kilometer en zoekdiensten (Photon, Nominatim) voor wat verder weg ligt. Dit bevestigt het plan: voor verkoop moeten de punten in eigen beheer staan.
+- **AED's staan maar deels in OpenStreetMap.** Op het platteland vond de proef er geen. De landelijke AED-registratie is niet openbaar; dit onderdeel belooft dus "AED's die in OpenStreetMap staan", niet "de dichtstbijzijnde AED".
+- **"Supermarkt" in OpenStreetMap is ruim.** In Zutphen kwam een natuurwinkel als dichtstbijzijnde supermarkt uit de bus.
+- **Verwachte waterdiepte ontbreekt nog.** De dienst van LIWO reageerde niet. Wel bewezen: of een adres in een aangewezen overstromingsrisicogebied ligt, en van welk type.
+
+### Oordeel
+
+Negen van de tien feiten zijn automatisch en juist op te halen. Het tiende, de spoedeisende hulp, is precies het feit waar een fout het meeste kwaad doet, en dat is met deze bron in twee van de drie gevallen fout. Fase 0 is daarmee niet af volgens het eigen criterium. Wat nog moet:
+
+1. De lijst van het RIVM verwerken tot een eigen tabel met locatie, openingstijden en controledatum, en de drie adressen opnieuw controleren.
+2. De waterdiepte van LIWO opnieuw proberen, of de kaarten als bestand ophalen.
+3. De tabel met rampenzenders aanvullen van 2 naar 25 veiligheidsregio's.

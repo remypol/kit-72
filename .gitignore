@@ -39,3 +39,7 @@ pnpm-debug.log*
 
 # Email design previews (node emails/build.mjs --preview)
 emails/out/preview/
+
+# Personal handbook: generated output and query cache contain addresses
+handbook/out/
+handbook/.cache/

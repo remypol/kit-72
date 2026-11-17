@@ -118,3 +118,12 @@ What matters:
 
 - The owner wanted the line that every rich American has a shelter. Checked: the source is Reid Hoffman's estimate in The New Yorker (2017) that more than half of Silicon Valley billionaires have "apocalypse insurance", confirmed through Business Insider's report of it (the New Yorker page itself could not be fetched). The homepages now say that, with the source, instead of "every".
 - Handbook plan in docs/HANDBOEK-PLAN.md (Dutch). Probed the data sources with a test address in Rotterdam: PDOK geocoding and AHN elevation work in under half a second; live OpenStreetMap queries took 34 s; the nearest OSM "hospitals" were eye clinics; EU-wide elevation was 8 m off; the LIWO flood-depth service did not respond. Public shelters do not exist in the Netherlands, so that part of the idea is dropped.
+
+## 12. Handbook phase 0: proof for three addresses (2026-11-17)
+
+- Built `handbook/`: `node handbook/build.mjs "<address>"` geocodes with PDOK, reads elevation (AHN), flood-risk zone (Rijkswaterstaat) and safety region (CBS), finds nearby points and hospitals in OpenStreetMap, routes with OSRM, draws its own map from OSM ways and prints a one-page A4 PDF with headless Chrome. Output and cache are gitignored because they contain addresses.
+- Hand check on three addresses (a rural one near Apeldoorn, Rotterdam centre, Zutphen centre): address, water board, elevation, flood-risk zone, safety region, emergency broadcaster and outage number are right. **Emergency departments from OpenStreetMap are wrong in two of three**: Rotterdam lists a children's hospital first, Zutphen misses the hospital in town (not tagged as emergency in OSM; its emergency department is open 8:00 to 21:00 per a 2024 ministerial answer).
+- Found the fix but did not apply it: RIVM publishes the 2026 questionnaire answers per hospital as open data (data.rivm.nl, 107 kB zip, no use restrictions).
+- Things that broke on the way: all Overpass servers were down, so the code now uses the OSM map API plus Photon and Nominatim; AHN has no terrain value under buildings, so elevation is the median of a ring of points around the house; LIWO flood depth still unreachable.
+- Details and the check table are at the end of docs/HANDBOEK-PLAN.md.
+
