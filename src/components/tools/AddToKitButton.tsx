@@ -112,8 +112,8 @@ export default function AddToKitButton({
       className={`
         inline-flex items-center ${sizeClasses}
         rounded-lg font-medium transition-all duration-200
-        bg-[--color-accent-primary]/10 text-[--color-accent-primary]
-        hover:bg-[--color-accent-primary] hover:text-[--color-bg-primary]
+        bg-(--color-accent-primary)/10 text-(--color-accent-primary)
+        hover:bg-(--color-accent-primary) hover:text-(--color-bg-primary)
         active:scale-95
         ${showFeedback ? 'bg-emerald-500 text-white' : ''}
       `}

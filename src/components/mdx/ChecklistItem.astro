@@ -23,15 +23,15 @@ const {
 } = Astro.props;
 
 const priorityStyles = {
-  critical: 'border-l-[--color-status-critical]',
-  recommended: 'border-l-[--color-accent-primary]',
-  optional: 'border-l-[--color-text-muted]',
+  critical: 'border-l-(--color-status-critical)',
+  recommended: 'border-l-(--color-accent-primary)',
+  optional: 'border-l-(--color-text-muted)',
 };
 
 const priorityLabels = {
   critical: { text: 'Esencial', class: 'bg-red-500/20 text-red-400' },
-  recommended: { text: 'Recomendado', class: 'bg-[--color-accent-primary]/20 text-[--color-accent-primary]' },
-  optional: { text: 'Opcional', class: 'bg-[--color-bg-tertiary] text-[--color-text-muted]' },
+  recommended: { text: 'Recomendado', class: 'bg-(--color-accent-primary)/20 text-(--color-accent-primary)' },
+  optional: { text: 'Opcional', class: 'bg-(--color-bg-tertiary) text-(--color-text-muted)' },
 };
 ---
 
@@ -43,15 +43,15 @@ const priorityLabels = {
   <input
     type="checkbox"
     id={`check-${id}`}
-    class="mt-1 w-5 h-5 rounded border-[--color-border] text-[--color-accent-primary] focus:ring-[--color-accent-primary] cursor-pointer"
+    class="mt-1 w-5 h-5 rounded border-(--color-border) text-(--color-accent-primary) focus:ring-(--color-accent-primary) cursor-pointer"
   />
   <label for={`check-${id}`} class="flex-1 cursor-pointer">
-    <span class="font-medium text-[--color-text-primary]">{label}</span>
+    <span class="font-medium text-(--color-text-primary)">{label}</span>
     {quantity && (
-      <span class="ml-2 text-sm text-[--color-text-muted]">({quantity})</span>
+      <span class="ml-2 text-sm text-(--color-text-muted)">({quantity})</span>
     )}
     {notes && (
-      <p class="text-sm text-[--color-text-secondary] mt-1 m-0">{notes}</p>
+      <p class="text-sm text-(--color-text-secondary) mt-1 m-0">{notes}</p>
     )}
   </label>
   <span class={`text-xs px-2 py-0.5 rounded flex-shrink-0 ${priorityLabels[priority].class}`}>

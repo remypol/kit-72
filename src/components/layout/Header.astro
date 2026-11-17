@@ -140,7 +140,9 @@ const currentPath = Astro.url.pathname;
 // Helper to check if a nav item is active
 function isActive(item: NavItem): boolean {
   if (item.href) {
-    return currentPath === item.href || currentPath.startsWith(item.href);
+    // the locale root would otherwise match every page
+    if (item.href === `/${locale}/`) return currentPath === item.href;
+    return currentPath.startsWith(item.href);
   }
   if (item.dropdown) {
     return item.dropdown.some(d => d.href && currentPath.startsWith(d.href));
@@ -149,14 +151,13 @@ function isActive(item: NavItem): boolean {
 }
 ---
 
-<header class="sticky top-0 z-[100] border-b border-[--color-border] bg-[--color-bg-primary] backdrop-blur-md">
+<header class="sticky top-0 z-[100] border-b border-(--color-border) bg-(--color-bg-secondary)">
   <div class="max-w-6xl mx-auto px-4 sm:px-6">
     <div class="flex items-center justify-between h-16">
       <!-- Logo -->
       <a href={`/${locale}/`} class="flex items-center gap-2 group">
-        <span class="text-2xl font-bold tracking-tight">
-          Kit<span class="text-[--color-accent-primary]">-72</span>
-        </span>
+        <span class="brand-mark" aria-hidden="true">72</span>
+        <span class="brand-word">Kit-72</span>
       </a>
 
       <!-- Desktop Navigation -->
@@ -170,8 +171,8 @@ function isActive(item: NavItem): boolean {
                 class:list={[
                   'nav-dropdown-trigger flex items-center gap-1 px-4 py-2 text-sm font-medium rounded transition-all duration-150',
                   isActive(item)
-                    ? 'text-[--color-accent-primary] bg-[--color-accent-subtle]'
-                    : 'text-[--color-text-secondary] hover:text-[--color-text-primary] hover:bg-[--color-bg-secondary]'
+                    ? 'text-(--color-accent-primary) bg-(--color-accent-subtle)'
+                    : 'text-(--color-text-secondary) hover:text-(--color-text-primary) hover:bg-(--color-bg-secondary)'
                 ]}
                 aria-haspopup="true"
                 aria-expanded="false"
@@ -180,23 +181,23 @@ function isActive(item: NavItem): boolean {
                 {item.label}
                 <Icon name="ChevronDown" size={16} class="transition-transform duration-150 group-hover:rotate-180" />
               </button>
-              <div class="nav-dropdown absolute top-full left-0 mt-1 w-64 py-2 bg-[#1a1d23] border border-[--color-border] rounded-xl shadow-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-150 z-[120]" style="isolation: isolate;">
+              <div class="nav-dropdown absolute top-full left-0 mt-1 w-64 py-2 bg-(--color-bg-secondary) border border-(--color-border) rounded-xl shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-150 z-[120]" style="isolation: isolate;">
                 {item.dropdown.map((dropItem) => (
                   dropItem.divider ? (
-                    <div class="my-2 border-t border-[--color-border-subtle]" />
+                    <div class="my-2 border-t border-(--color-border-subtle)" />
                   ) : (
                     <a
                       href={dropItem.href}
                       class:list={[
                         'block px-4 py-2 text-sm transition-colors',
                         currentPath === dropItem.href
-                          ? 'text-[--color-accent-primary] bg-[--color-accent-subtle]'
-                          : 'text-[--color-text-secondary] hover:text-[--color-text-primary] hover:bg-[--color-bg-elevated]'
+                          ? 'text-(--color-accent-primary) bg-(--color-accent-subtle)'
+                          : 'text-(--color-text-secondary) hover:text-(--color-text-primary) hover:bg-(--color-bg-elevated)'
                       ]}
                     >
                       <span class="font-medium">{dropItem.label}</span>
                       {dropItem.description && (
-                        <span class="block text-xs text-[--color-text-tertiary] mt-0.5">{dropItem.description}</span>
+                        <span class="block text-xs text-(--color-text-tertiary) mt-0.5">{dropItem.description}</span>
                       )}
                     </a>
                   )
@@ -210,10 +211,10 @@ function isActive(item: NavItem): boolean {
               class:list={[
                 'px-4 py-2 text-sm font-medium rounded transition-all duration-150',
                 item.highlight
-                  ? 'bg-[--color-accent-primary] text-[--color-bg-primary] hover:bg-[--color-accent-hover]'
+                  ? 'bg-(--color-accent-primary) text-white hover:bg-(--color-accent-hover)'
                   : isActive(item)
-                    ? 'text-[--color-accent-primary] bg-[--color-accent-subtle]'
-                    : 'text-[--color-text-secondary] hover:text-[--color-text-primary] hover:bg-[--color-bg-secondary]'
+                    ? 'text-(--color-accent-primary) bg-(--color-accent-subtle)'
+                    : 'text-(--color-text-secondary) hover:text-(--color-text-primary) hover:bg-(--color-bg-secondary)'
               ]}
             >
               {item.label}
@@ -225,7 +226,7 @@ function isActive(item: NavItem): boolean {
         <button
           type="button"
           id="desktop-search-button"
-          class="ml-2 p-2 text-[--color-text-secondary] hover:text-[--color-text-primary] hover:bg-[--color-bg-secondary] rounded transition-colors"
+          class="ml-2 p-2 text-(--color-text-secondary) hover:text-(--color-text-primary) hover:bg-(--color-bg-secondary) rounded transition-colors"
           aria-label={strings.search}
         >
           <Icon name="Search" size={20} />
@@ -237,7 +238,7 @@ function isActive(item: NavItem): boolean {
         <!-- CTA Button -->
         <a
           href={ctaLink}
-          class="ml-2 px-4 py-2 text-sm font-semibold bg-[--color-accent-primary] text-[--color-bg-primary] hover:bg-[--color-accent-hover] rounded transition-colors"
+          class="btn btn-primary btn-sm ml-2 !text-sm"
         >
           {strings.configurator}
         </a>

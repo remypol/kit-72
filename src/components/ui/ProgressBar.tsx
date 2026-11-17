@@ -15,7 +15,7 @@ interface ProgressBarProps {
 
 export function ProgressBar({
   percentage,
-  color = 'bg-[--color-accent-primary]',
+  color = 'bg-(--color-accent-primary)',
   delay = 0,
   height = 'h-2',
   className = '',
@@ -28,7 +28,7 @@ export function ProgressBar({
   }, [percentage, delay]);
 
   return (
-    <div className={`${height} bg-[--color-bg-tertiary] rounded-full overflow-hidden ${className}`}>
+    <div className={`${height} bg-(--color-bg-tertiary) rounded-full overflow-hidden ${className}`}>
       <div
         className={`h-full rounded-full transition-all duration-700 ease-out ${color}`}
         style={{ width: `${width}%` }}

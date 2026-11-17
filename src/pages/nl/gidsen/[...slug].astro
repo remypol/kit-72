@@ -69,12 +69,12 @@ const faqSchema = faqs.length > 0 ? {
   locale="nl"
 >
   {toc.length > 0 && (
-    <nav slot="toc" class="p-4 bg-[--color-bg-tertiary] rounded-lg mb-8">
-      <h2 class="text-sm font-semibold mb-3 text-[--color-text-primary]">Op deze pagina</h2>
+    <nav slot="toc" class="p-4 bg-(--color-bg-tertiary) rounded-lg mb-8">
+      <h2 class="text-sm font-semibold mb-3 text-(--color-text-primary)">Op deze pagina</h2>
       <ul class="space-y-2 text-sm">
         {toc.map((item) => (
           <li>
-            <a href={`#${item.id}`} class="text-[--color-text-secondary] hover:text-[--color-accent-primary] transition-colors">
+            <a href={`#${item.id}`} class="text-(--color-text-secondary) hover:text-(--color-accent-primary) transition-colors">
               {item.label}
             </a>
           </li>
@@ -91,14 +91,14 @@ const faqSchema = faqs.length > 0 ? {
       <div class="space-y-4 my-8">
         {faqs.map((faq) => (
           <details class="card group">
-            <summary class="px-6 py-4 cursor-pointer list-none flex items-center justify-between hover:bg-[--color-bg-tertiary] transition-colors">
-              <span class="font-medium text-[--color-text-primary] pr-4">{faq.question}</span>
-              <svg class="w-5 h-5 text-[--color-text-muted] transform transition-transform group-open:rotate-180 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <summary class="px-6 py-4 cursor-pointer list-none flex items-center justify-between hover:bg-(--color-bg-tertiary) transition-colors">
+              <span class="font-medium text-(--color-text-primary) pr-4">{faq.question}</span>
+              <svg class="w-5 h-5 text-(--color-text-muted) transform transition-transform group-open:rotate-180 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
               </svg>
             </summary>
             <div class="px-6 pb-4">
-              <p class="text-[--color-text-secondary] m-0">{faq.answer}</p>
+              <p class="text-(--color-text-secondary) m-0">{faq.answer}</p>
             </div>
           </details>
         ))}
@@ -122,14 +122,14 @@ const faqSchema = faqs.length > 0 ? {
   )}
 
   {ctaTitle && (
-    <div slot="cta" class="card p-8 text-center bg-[--color-bg-tertiary]">
+    <div slot="cta" class="card p-8 text-center bg-(--color-bg-tertiary)">
       <h3 class="text-xl font-semibold mb-4">{ctaTitle}</h3>
       {ctaDescription && (
-        <p class="text-[--color-text-secondary] mb-6">{ctaDescription}</p>
+        <p class="text-(--color-text-secondary) mb-6">{ctaDescription}</p>
       )}
       <div class="flex flex-wrap gap-4 justify-center">
         {ctaPrimaryUrl && ctaPrimaryText && (
-          <a href={ctaPrimaryUrl} class="inline-flex items-center gap-2 px-6 py-3 bg-[--color-accent-primary] text-[--color-bg-primary] font-semibold rounded hover:bg-[--color-accent-hover] transition-colors">
+          <a href={ctaPrimaryUrl} class="inline-flex items-center gap-2 px-6 py-3 bg-(--color-accent-primary) text-(--color-bg-primary) font-semibold rounded hover:bg-(--color-accent-hover) transition-colors">
             {ctaPrimaryText}
             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
@@ -137,7 +137,7 @@ const faqSchema = faqs.length > 0 ? {
           </a>
         )}
         {ctaSecondaryUrl && ctaSecondaryText && (
-          <a href={ctaSecondaryUrl} class="inline-flex items-center gap-2 px-6 py-3 border border-[--color-border] text-[--color-text-primary] font-medium rounded hover:border-[--color-accent-primary] hover:text-[--color-accent-primary] transition-colors">
+          <a href={ctaSecondaryUrl} class="inline-flex items-center gap-2 px-6 py-3 border border-(--color-border) text-(--color-text-primary) font-medium rounded hover:border-(--color-accent-primary) hover:text-(--color-accent-primary) transition-colors">
             {ctaSecondaryText}
           </a>
         )}

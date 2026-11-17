@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../../../layouts/BaseLayout.astro';
+import ListSignup from '../../../../components/growth/ListSignup.astro';
 import Breadcrumbs from '../../../../components/ui/Breadcrumbs.astro';
 import KitBuilder from '../../../../components/tools/KitBuilder';
 ---
@@ -56,7 +57,7 @@ import KitBuilder from '../../../../components/tools/KitBuilder';
       <div class="mb-8">
         <Breadcrumbs locale="de" />
         <h1 class="text-4xl font-bold mb-4">Notfallpaket Zusammenstellen</h1>
-        <p class="text-xl text-[--color-text-secondary]">
+        <p class="text-xl text-(--color-text-secondary)">
           Erstelle eine personalisierte Checkliste für deine Familie und Situation. Wähle dein Szenario, hake Artikel ab und teile oder drucke dein Paket.
         </p>
       </div>
@@ -64,4 +65,5 @@ import KitBuilder from '../../../../components/tools/KitBuilder';
       <KitBuilder locale="de" client:load />
     </div>
   </section>
+  <ListSignup locale="de" source="builder" variant="band" />
 </BaseLayout>

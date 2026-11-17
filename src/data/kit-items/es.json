@@ -12,7 +12,7 @@
       "label": "Kit General",
       "icon": "Backpack",
       "description": "Preparacion basica 72h",
-      "color": "from-[--color-accent-primary]/20 to-[--color-accent-secondary]/10",
+      "color": "from-(--color-accent-primary)/20 to-(--color-accent-secondary)/10",
       "time": "10 min"
     },
     "apagon": {

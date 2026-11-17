@@ -1,0 +1,282 @@
+---
+/**
+ * "Buy or build" comparison page, shared by all locales. Data: data/compare.ts
+ */
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Icon from '../ui/Icon.astro';
+import ListSignup from './ListSignup.astro';
+import { compareCopy, CHECKED } from '../../data/compare';
+import { routes, homeCopy, type Locale } from '../../data/site';
+
+interface Props {
+  locale: Locale;
+}
+const { locale } = Astro.props;
+const c = compareCopy[locale];
+const r = routes[locale];
+const dateFmt = new Intl.DateTimeFormat(locale === 'nl' ? 'nl-NL' : locale === 'de' ? 'de-DE' : 'es-ES', { day: 'numeric', month: 'long', year: 'numeric' });
+const checked = dateFmt.format(new Date(CHECKED + 'T12:00:00Z'));
+const faqData = c.faq.map((f) => ({ question: f.q, answer: f.a }));
+---
+
+<BaseLayout title={c.title} description={c.description} locale={locale} schemaType="Article" datePublished={CHECKED} dateModified={CHECKED} faqData={faqData}>
+  <article class="cmp">
+    <header class="cmp__head">
+      <h1>{c.h1}</h1>
+      <p class="cmp__checked">{c.checkedLabel} <time datetime={CHECKED}>{checked}</time></p>
+    </header>
+
+    <section class="verdict" aria-labelledby="verdict-title">
+      <h2 id="verdict-title">{c.verdictTitle}</h2>
+      {c.verdict.map((p) => <p>{p}</p>)}
+      <a href={r.builder} class="btn btn-primary btn-lg">{c.diyCta}</a>
+    </section>
+
+    <section>
+      <h2>{c.tableTitle}</h2>
+      <p class="cmp__lead">{c.tableLead}</p>
+      <div class="tablewrap" data-placement="compare-table">
+        <table>
+          <thead>
+            <tr><th>{c.cols.kit}</th><th>{c.cols.covers}</th><th class="num">{c.cols.price}</th><th><span class="sr-only">{c.cols.view}</span></th></tr>
+          </thead>
+          <tbody>
+            {c.rows.map((row) => (
+              <tr>
+                <td><strong>{row.name}</strong><small>{row.shop}</small></td>
+                <td>{row.covers}</td>
+                <td class="num price">{row.price}</td>
+                <td><a href={row.url} target="_blank" rel="nofollow noopener">{c.cols.view}<span class="sr-only">: {row.name}</span></a></td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <p class="cmp__note">{c.tableNote}</p>
+    </section>
+
+    <section>
+      <h2>{c.missingTitle}</h2>
+      <ul class="missing">
+        {c.missing.map((m) => <li><Icon name="X" size={18} />{m}</li>)}
+      </ul>
+      {c.missingSource && <p class="cmp__note">{c.missingSource}</p>}
+    </section>
+
+    <section class="when">
+      <div>
+        <h2>{c.diyTitle}</h2>
+        <ul>{c.diy.map((m) => <li>{m}</li>)}</ul>
+      </div>
+      <div>
+        <h2>{c.buyTitle}</h2>
+        <ul>{c.buy.map((m) => <li>{m}</li>)}</ul>
+      </div>
+    </section>
+
+    <section>
+      <h2>{c.partsTitle}</h2>
+      <p class="cmp__lead">{c.partsLead}</p>
+      <ul class="parts">
+        {r.categories.map((cat) => (
+          <li><a href={cat.href}><Icon name={cat.icon as any} size={20} /><span>{cat.label}</span></a></li>
+        ))}
+      </ul>
+    </section>
+
+    <section class="search" data-placement="compare-shops">
+      <h2>{c.searchTitle}</h2>
+      <p class="cmp__lead">{c.searchLead}</p>
+      <div class="search__links">
+        {c.searches.map((s) => <a href={s.url} class="btn btn-secondary">{s.label}<Icon name="ExternalLink" size={16} /></a>)}
+      </div>
+    </section>
+
+    <section>
+      <h2>{homeCopy[locale].faqTitle}</h2>
+      <dl class="qa">
+        {c.faq.map((f) => (<><dt>{f.q}</dt><dd>{f.a}</dd></>))}
+      </dl>
+    </section>
+  </article>
+
+  <ListSignup locale={locale} source="compare" variant="band" />
+</BaseLayout>
+
+<style>
+  .cmp {
+    max-width: 50rem;
+    margin-inline: auto;
+    padding: var(--space-10) var(--space-4) var(--space-16);
+  }
+  @media (min-width: 640px) {
+    .cmp {
+      padding-inline: var(--space-6);
+    }
+  }
+  .cmp > section {
+    margin-top: var(--space-12);
+  }
+  .cmp h2 {
+    font-size: clamp(1.4rem, 2.6vw, 1.8rem);
+  }
+  .cmp__head h1 {
+    font-size: clamp(2rem, 4.4vw, 3rem);
+  }
+  .cmp__checked {
+    margin-top: var(--space-3);
+    color: var(--color-text-tertiary);
+    font-size: 0.95rem;
+  }
+  .cmp__lead {
+    margin-top: var(--space-2);
+    color: var(--color-text-secondary);
+    max-width: 62ch;
+  }
+  .cmp__note {
+    margin-top: var(--space-3);
+    font-size: 0.95rem;
+    color: var(--color-text-secondary);
+    max-width: 65ch;
+  }
+  .verdict {
+    background: var(--color-bg-secondary);
+    border: 1px solid var(--color-border);
+    border-left: 6px solid var(--color-accent);
+    border-radius: var(--radius-lg);
+    padding: var(--space-6);
+    margin-top: var(--space-8) !important;
+  }
+  .verdict p {
+    margin-top: var(--space-3);
+    max-width: 62ch;
+  }
+  .verdict .btn {
+    margin-top: var(--space-5);
+    white-space: normal;
+    text-align: center;
+  }
+  .tablewrap {
+    margin-top: var(--space-5);
+    overflow-x: auto;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    background: var(--color-bg-secondary);
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.98rem;
+  }
+  th {
+    text-align: left;
+    background: var(--color-deep);
+    color: #fff;
+    font-weight: 650;
+    padding: var(--space-3) var(--space-4);
+    white-space: nowrap;
+  }
+  td {
+    padding: var(--space-3) var(--space-4);
+    border-top: 1px solid var(--color-border-subtle);
+    vertical-align: top;
+  }
+  td small {
+    display: block;
+    color: var(--color-text-tertiary);
+  }
+  .num {
+    text-align: right;
+    white-space: nowrap;
+  }
+  .price {
+    font-family: var(--font-display);
+    font-weight: 750;
+    font-variant-numeric: tabular-nums;
+    font-size: 1.05rem;
+  }
+  td a {
+    font-weight: 650;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    white-space: nowrap;
+  }
+  .missing {
+    margin-top: var(--space-4);
+    border-top: 2px solid var(--color-text-primary);
+  }
+  .missing li {
+    display: flex;
+    gap: var(--space-3);
+    align-items: flex-start;
+    padding-block: var(--space-3);
+    border-bottom: 1px solid var(--color-border);
+  }
+  .missing :global(svg) {
+    color: var(--color-critical);
+    flex: none;
+    margin-top: 4px;
+  }
+  .when {
+    display: grid;
+    gap: var(--space-8);
+  }
+  @media (min-width: 720px) {
+    .when {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+  .when h2 {
+    font-size: 1.25rem;
+    padding-bottom: var(--space-3);
+    border-bottom: 2px solid var(--color-text-primary);
+  }
+  .when li {
+    padding-block: var(--space-3);
+    border-bottom: 1px solid var(--color-border);
+  }
+  .parts {
+    margin-top: var(--space-5);
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(13rem, 1fr));
+    gap: var(--space-3);
+  }
+  .parts a {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    padding: var(--space-3) var(--space-4);
+    background: var(--color-bg-secondary);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    color: var(--color-text-primary);
+    font-weight: 650;
+  }
+  .parts a:hover {
+    border-color: var(--color-accent);
+  }
+  .parts :global(svg) {
+    color: var(--color-accent);
+    flex: none;
+  }
+  .search__links {
+    margin-top: var(--space-5);
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-3);
+  }
+  .qa {
+    margin-top: var(--space-4);
+    border-top: 2px solid var(--color-text-primary);
+  }
+  .qa dt {
+    font-weight: 700;
+    padding-top: var(--space-4);
+  }
+  .qa dd {
+    padding: var(--space-2) 0 var(--space-4);
+    border-bottom: 1px solid var(--color-border);
+    color: var(--color-text-secondary);
+    max-width: 65ch;
+  }
+</style>

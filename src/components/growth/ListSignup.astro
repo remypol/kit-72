@@ -1,0 +1,233 @@
+---
+/**
+ * Email capture: "send me my list + a reminder twice a year".
+ * Posts to /api/subscribe (double opt-in). Household size comes from the
+ * homepage calculator via localStorage when available.
+ */
+import { signupCopy, routes, type Locale } from '../../data/site';
+
+interface Props {
+  locale: Locale;
+  /** where the form sits, for attribution (e.g. "home", "article", "builder") */
+  source: string;
+  variant?: 'band' | 'card';
+}
+
+const { locale, source, variant = 'card' } = Astro.props;
+const c = signupCopy[locale];
+const id = `signup-${source}`;
+---
+
+<section class:list={['signup', `signup--${variant}`]} data-signup data-locale={locale} data-source={source} aria-labelledby={`${id}-title`}>
+  <div class="signup__inner">
+    <div class="signup__text">
+      <h2 id={`${id}-title`} class="signup__title">{c.title}</h2>
+      <p class="signup__body">{c.body}</p>
+    </div>
+    <form class="signup__form" novalidate>
+      <label class="signup__label" for={`${id}-email`}>{c.email}</label>
+      <div class="signup__row">
+        <input id={`${id}-email`} class="signup__input" type="email" name="email" autocomplete="email" inputmode="email" required placeholder={c.placeholder} />
+        <button class="btn btn-primary signup__button" type="submit" data-label={c.button} data-sending={c.sending}>{c.button}</button>
+      </div>
+      <!-- honeypot: hidden from people, filled by bots -->
+      <input class="signup__hp" type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" />
+      <label class="signup__consent">
+        <input type="checkbox" name="consent" required />
+        <span>{c.consent}</span>
+      </label>
+      <p class="signup__status" role="status" aria-live="polite"
+        data-success={c.success} data-error-email={c.errorEmail} data-error-consent={c.errorConsent} data-error-send={c.errorSend}></p>
+      <p class="signup__privacy"><a href={routes[locale].privacy}>{c.privacy}</a>.</p>
+    </form>
+  </div>
+</section>
+
+<style>
+  .signup {
+    background: var(--color-deep);
+    color: #fff;
+  }
+  .signup--card {
+    border-radius: var(--radius-lg);
+    margin-block: var(--space-12);
+  }
+  .signup__inner {
+    display: grid;
+    gap: var(--space-6);
+    padding: var(--space-8) var(--space-6);
+    max-width: 72rem;
+    margin-inline: auto;
+  }
+  .signup--band .signup__inner {
+    padding-block: var(--space-16);
+  }
+  @media (min-width: 860px) {
+    .signup__inner {
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-12);
+      align-items: start;
+      padding-inline: var(--space-10);
+    }
+  }
+  .signup__title {
+    color: #fff;
+    font-size: clamp(1.4rem, 2.6vw, 1.9rem);
+    margin-bottom: var(--space-3);
+  }
+  .signup__body {
+    color: #cfe3d7;
+    max-width: 44ch;
+  }
+  .signup__label {
+    display: block;
+    font-weight: 650;
+    margin-bottom: var(--space-2);
+  }
+  .signup__row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+  }
+  .signup__input {
+    flex: 1 1 14rem;
+    min-height: 48px;
+    padding: 0 var(--space-4);
+    font: inherit;
+    font-size: 16px;
+    color: var(--color-text-primary);
+    background: #fff;
+    border: 2px solid #fff;
+    border-radius: var(--radius-md);
+  }
+  .signup__input:focus-visible {
+    outline: 3px solid var(--color-signal);
+    outline-offset: 2px;
+  }
+  .signup__input[aria-invalid='true'] {
+    border-color: #ffb4a8;
+  }
+  .signup__button {
+    min-height: 48px;
+    flex: 0 0 auto;
+  }
+  .signup__hp {
+    position: absolute;
+    left: -9999px;
+    width: 1px;
+    height: 1px;
+    opacity: 0;
+  }
+  .signup__consent {
+    display: flex;
+    gap: var(--space-3);
+    align-items: flex-start;
+    margin-top: var(--space-4);
+    font-size: 0.95rem;
+    color: #e6f1ea;
+    cursor: pointer;
+  }
+  .signup__consent input {
+    width: 20px;
+    height: 20px;
+    margin-top: 2px;
+    accent-color: var(--color-signal);
+    flex: none;
+  }
+  .signup__status {
+    margin-top: var(--space-3);
+    font-weight: 650;
+    min-height: 1.5em;
+  }
+  .signup__status[data-state='ok'] {
+    color: var(--color-signal);
+  }
+  .signup__status[data-state='error'] {
+    color: #ffc9bf;
+  }
+  .signup__privacy {
+    font-size: 0.85rem;
+    color: #b9d2c4;
+  }
+  .signup__privacy a {
+    color: inherit;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+  .signup[data-done] .signup__row,
+  .signup[data-done] .signup__consent,
+  .signup[data-done] .signup__label {
+    display: none;
+  }
+  @media print {
+    .signup {
+      display: none;
+    }
+  }
+</style>
+
+<script>
+  const EMAIL_RE = /^[^\s@<>"]+@[^\s@<>"]+\.[a-z]{2,}$/i;
+
+  function household() {
+    try {
+      return JSON.parse(localStorage.getItem('kit72_household') || '{}');
+    } catch {
+      return {};
+    }
+  }
+
+  document.querySelectorAll<HTMLElement>('[data-signup]').forEach((root) => {
+    const form = root.querySelector('form')!;
+    const email = form.querySelector<HTMLInputElement>('input[name=email]')!;
+    const consent = form.querySelector<HTMLInputElement>('input[name=consent]')!;
+    const hp = form.querySelector<HTMLInputElement>('input[name=website]')!;
+    const button = form.querySelector<HTMLButtonElement>('button')!;
+    const status = form.querySelector<HTMLElement>('.signup__status')!;
+
+    const say = (state: 'ok' | 'error' | '', key?: string) => {
+      status.dataset.state = state;
+      status.textContent = key ? status.dataset[key] || '' : '';
+    };
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      email.removeAttribute('aria-invalid');
+      if (!EMAIL_RE.test(email.value.trim())) {
+        email.setAttribute('aria-invalid', 'true');
+        email.focus();
+        return say('error', 'errorEmail');
+      }
+      if (!consent.checked) {
+        consent.focus();
+        return say('error', 'errorConsent');
+      }
+      button.disabled = true;
+      button.textContent = button.dataset.sending || '';
+      say('');
+      try {
+        const res = await fetch('/api/subscribe', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            email: email.value.trim(),
+            consent: true,
+            website: hp.value,
+            locale: root.dataset.locale,
+            source: root.dataset.source,
+            ...household(),
+          }),
+        });
+        if (!res.ok) throw new Error(String(res.status));
+        root.setAttribute('data-done', '');
+        say('ok', 'success');
+        window.gtag?.('event', 'generate_lead', { source: root.dataset.source, locale: root.dataset.locale });
+        document.dispatchEvent(new CustomEvent('kit72:signup', { detail: { source: root.dataset.source } }));
+      } catch {
+        say('error', 'errorSend');
+        button.disabled = false;
+        button.textContent = button.dataset.label || '';
+      }
+    });
+  });
+</script>

@@ -54,5 +54,17 @@
         }
       ]
     }
+  ],
+  "redirects": [
+    {
+      "source": "/es/escenarios/apagon-espana-2024/",
+      "destination": "/es/escenarios/apagon-espana-2025/",
+      "permanent": true
+    },
+    {
+      "source": "/es/escenarios/apagon-espana-2024",
+      "destination": "/es/escenarios/apagon-espana-2025/",
+      "permanent": true
+    }
   ]
 }

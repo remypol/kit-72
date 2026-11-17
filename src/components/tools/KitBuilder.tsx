@@ -114,17 +114,17 @@ function KitBuilder({ locale = 'es', initialScenario, showPresets = true }: KitB
                 <Icon name="save" size={20} className="text-emerald-400" />
               </div>
               <div>
-                <span className="font-medium text-[--color-text-primary]">
+                <span className="font-medium text-(--color-text-primary)">
                   {kb.resumeBanner?.title || 'Progress saved'}
                 </span>
-                <span className="text-sm text-[--color-text-muted] block">
+                <span className="text-sm text-(--color-text-muted) block">
                   {checkedItems.size} {kb.resumeBanner?.itemsMarked || 'items marked'}
                 </span>
               </div>
             </div>
             <button
               onClick={resetChecklist}
-              className="text-sm text-[--color-text-muted] hover:text-rose-400 transition-colors"
+              className="text-sm text-(--color-text-muted) hover:text-rose-400 transition-colors"
             >
               {kb.resumeBanner?.restart || 'Start over'}
             </button>
@@ -136,8 +136,8 @@ function KitBuilder({ locale = 'es', initialScenario, showPresets = true }: KitB
       {showPresets && !hasStoredProgress && quickPresets.length > 0 && (
         <section className="card p-5 md:p-6">
           <div className="flex items-center gap-2 mb-4">
-            <Icon name="sparkles" size={24} className="text-[--color-accent-primary] md:w-5 md:h-5" />
-            <h3 className="text-xl md:text-lg font-semibold text-[--color-text-primary]">
+            <Icon name="sparkles" size={24} className="text-(--color-accent-primary) md:w-5 md:h-5" />
+            <h3 className="text-xl md:text-lg font-semibold text-(--color-text-primary)">
               {kb.quickPresets?.title || 'Quick start'}
             </h3>
           </div>
@@ -152,29 +152,29 @@ function KitBuilder({ locale = 'es', initialScenario, showPresets = true }: KitB
                     relative p-4 md:p-4 rounded-2xl md:rounded-xl text-left transition-all duration-200 border
                     active:scale-[0.98] touch-manipulation min-h-[120px] md:min-h-0
                     ${isSelected
-                      ? 'bg-gradient-to-br from-[--color-accent-primary]/20 to-[--color-accent-secondary]/10 border-[--color-accent-primary]/50 shadow-lg'
-                      : 'bg-gradient-to-br from-emerald-500/10 to-emerald-600/5 border-transparent hover:border-[--color-accent-primary]/30 hover:shadow-lg active:border-[--color-accent-primary]/30'
+                      ? 'bg-gradient-to-br from-(--color-accent-primary)/20 to-(--color-accent-secondary)/10 border-(--color-accent-primary)/50 shadow-lg'
+                      : 'bg-gradient-to-br from-emerald-500/10 to-emerald-600/5 border-transparent hover:border-(--color-accent-primary)/30 hover:shadow-lg active:border-(--color-accent-primary)/30'
                     }
                   `}
                 >
                   {isSelected && (
                     <div className="absolute top-3 right-3 md:top-2 md:right-2">
-                      <div className="w-6 h-6 md:w-5 md:h-5 rounded-full bg-[--color-accent-primary] flex items-center justify-center">
-                        <Icon name="check" size={14} className="text-[--color-bg-primary] md:w-3 md:h-3" />
+                      <div className="w-6 h-6 md:w-5 md:h-5 rounded-full bg-(--color-accent-primary) flex items-center justify-center">
+                        <Icon name="check" size={14} className="text-(--color-bg-primary) md:w-3 md:h-3" />
                       </div>
                     </div>
                   )}
-                  <div className={`w-12 h-12 md:w-10 md:h-10 rounded-xl mb-3 flex items-center justify-center ${isSelected ? 'bg-[--color-accent-primary]' : 'bg-[--color-bg-primary]/50'}`}>
+                  <div className={`w-12 h-12 md:w-10 md:h-10 rounded-xl mb-3 flex items-center justify-center ${isSelected ? 'bg-(--color-accent-primary)' : 'bg-(--color-bg-primary)/50'}`}>
                     <Icon
                       name={getPresetIcon(preset.id)}
                       size={24}
-                      className={`md:w-5 md:h-5 ${isSelected ? 'text-[--color-bg-primary]' : 'text-[--color-text-secondary]'}`}
+                      className={`md:w-5 md:h-5 ${isSelected ? 'text-(--color-bg-primary)' : 'text-(--color-text-secondary)'}`}
                     />
                   </div>
-                  <h4 className={`font-semibold text-base md:text-sm ${isSelected ? 'text-[--color-accent-primary]' : 'text-[--color-text-primary]'}`}>
+                  <h4 className={`font-semibold text-base md:text-sm ${isSelected ? 'text-(--color-accent-primary)' : 'text-(--color-text-primary)'}`}>
                     {preset.label}
                   </h4>
-                  <p className="text-sm md:text-xs text-[--color-text-muted] mt-1 leading-relaxed">
+                  <p className="text-sm md:text-xs text-(--color-text-muted) mt-1 leading-relaxed">
                     {preset.description}
                   </p>
                 </button>
@@ -186,7 +186,7 @@ function KitBuilder({ locale = 'es', initialScenario, showPresets = true }: KitB
 
       {/* Scenario Selection */}
       <section className="card p-5 md:p-6">
-        <h3 className="text-xl md:text-lg font-semibold mb-4 text-[--color-text-primary]">
+        <h3 className="text-xl md:text-lg font-semibold mb-4 text-(--color-text-primary)">
           {kb.scenariosSection?.title || 'Choose your scenario'}
         </h3>
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-3">
@@ -194,7 +194,7 @@ function KitBuilder({ locale = 'es', initialScenario, showPresets = true }: KitB
             const config = scenarios[s];
             const colorClass = config.color?.includes('from-')
               ? config.color.replace('from-', 'from-').replace(' to-', '/20 to-') + '/10'
-              : 'from-[--color-accent-primary]/20 to-[--color-accent-secondary]/10';
+              : 'from-(--color-accent-primary)/20 to-(--color-accent-secondary)/10';
             return (
               <ScenarioCard
                 key={s}
@@ -213,7 +213,7 @@ function KitBuilder({ locale = 'es', initialScenario, showPresets = true }: KitB
 
       {/* Family Options */}
       <section className="card p-5 md:p-6">
-        <h3 className="text-xl md:text-lg font-semibold mb-4 text-[--color-text-primary]">
+        <h3 className="text-xl md:text-lg font-semibold mb-4 text-(--color-text-primary)">
           {kb.familySection?.title || 'Your household'}
         </h3>
         <div className="grid sm:grid-cols-2 gap-4">
@@ -223,25 +223,25 @@ function KitBuilder({ locale = 'es', initialScenario, showPresets = true }: KitB
               p-5 md:p-4 rounded-2xl md:rounded-xl border-2 transition-all duration-200 flex items-center gap-4
               active:scale-[0.98] touch-manipulation
               ${hasBabies
-                ? 'border-[--color-accent-primary] bg-[--color-accent-primary]/10'
-                : 'border-[--color-border] hover:border-[--color-accent-primary]/50'
+                ? 'border-(--color-accent-primary) bg-(--color-accent-primary)/10'
+                : 'border-(--color-border) hover:border-(--color-accent-primary)/50'
               }
             `}
           >
-            <div className={`w-14 h-14 md:w-12 md:h-12 rounded-xl flex items-center justify-center flex-shrink-0 ${hasBabies ? 'bg-[--color-accent-primary]' : 'bg-[--color-bg-tertiary]'}`}>
-              <Icon name="baby" size={28} className={`md:w-6 md:h-6 ${hasBabies ? 'text-[--color-bg-primary]' : 'text-[--color-text-muted]'}`} />
+            <div className={`w-14 h-14 md:w-12 md:h-12 rounded-xl flex items-center justify-center flex-shrink-0 ${hasBabies ? 'bg-(--color-accent-primary)' : 'bg-(--color-bg-tertiary)'}`}>
+              <Icon name="baby" size={28} className={`md:w-6 md:h-6 ${hasBabies ? 'text-(--color-bg-primary)' : 'text-(--color-text-muted)'}`} />
             </div>
             <div className="text-left flex-1 min-w-0">
-              <span className={`font-semibold text-base md:text-sm block leading-tight ${hasBabies ? 'text-[--color-accent-primary]' : 'text-[--color-text-primary]'}`}>
+              <span className={`font-semibold text-base md:text-sm block leading-tight ${hasBabies ? 'text-(--color-accent-primary)' : 'text-(--color-text-primary)'}`}>
                 {kb.familySection?.babies?.label || 'Babies or young children'}
               </span>
-              <span className="text-sm md:text-xs text-[--color-text-muted] mt-1 block">
+              <span className="text-sm md:text-xs text-(--color-text-muted) mt-1 block">
                 {kb.familySection?.babies?.description || 'Adds diapers, bottles, etc.'}
               </span>
             </div>
             <div className="flex-shrink-0">
-              <div className={`w-7 h-7 md:w-6 md:h-6 rounded-full flex items-center justify-center transition-all ${hasBabies ? 'bg-[--color-accent-primary]' : 'border-2 border-[--color-border]'}`}>
-                {hasBabies && <Icon name="check" size={16} className="text-[--color-bg-primary] md:w-3.5 md:h-3.5" />}
+              <div className={`w-7 h-7 md:w-6 md:h-6 rounded-full flex items-center justify-center transition-all ${hasBabies ? 'bg-(--color-accent-primary)' : 'border-2 border-(--color-border)'}`}>
+                {hasBabies && <Icon name="check" size={16} className="text-(--color-bg-primary) md:w-3.5 md:h-3.5" />}
               </div>
             </div>
           </button>
@@ -252,25 +252,25 @@ function KitBuilder({ locale = 'es', initialScenario, showPresets = true }: KitB
               p-5 md:p-4 rounded-2xl md:rounded-xl border-2 transition-all duration-200 flex items-center gap-4
               active:scale-[0.98] touch-manipulation
               ${hasPets
-                ? 'border-[--color-accent-primary] bg-[--color-accent-primary]/10'
-                : 'border-[--color-border] hover:border-[--color-accent-primary]/50'
+                ? 'border-(--color-accent-primary) bg-(--color-accent-primary)/10'
+                : 'border-(--color-border) hover:border-(--color-accent-primary)/50'
               }
             `}
           >
-            <div className={`w-14 h-14 md:w-12 md:h-12 rounded-xl flex items-center justify-center flex-shrink-0 ${hasPets ? 'bg-[--color-accent-primary]' : 'bg-[--color-bg-tertiary]'}`}>
-              <Icon name="pawPrint" size={28} className={`md:w-6 md:h-6 ${hasPets ? 'text-[--color-bg-primary]' : 'text-[--color-text-muted]'}`} />
+            <div className={`w-14 h-14 md:w-12 md:h-12 rounded-xl flex items-center justify-center flex-shrink-0 ${hasPets ? 'bg-(--color-accent-primary)' : 'bg-(--color-bg-tertiary)'}`}>
+              <Icon name="pawPrint" size={28} className={`md:w-6 md:h-6 ${hasPets ? 'text-(--color-bg-primary)' : 'text-(--color-text-muted)'}`} />
             </div>
             <div className="text-left flex-1 min-w-0">
-              <span className={`font-semibold text-base md:text-sm block leading-tight ${hasPets ? 'text-[--color-accent-primary]' : 'text-[--color-text-primary]'}`}>
+              <span className={`font-semibold text-base md:text-sm block leading-tight ${hasPets ? 'text-(--color-accent-primary)' : 'text-(--color-text-primary)'}`}>
                 {kb.familySection?.pets?.label || 'Pets'}
               </span>
-              <span className="text-sm md:text-xs text-[--color-text-muted] mt-1 block">
+              <span className="text-sm md:text-xs text-(--color-text-muted) mt-1 block">
                 {kb.familySection?.pets?.description || 'Adds food, carrier, etc.'}
               </span>
             </div>
             <div className="flex-shrink-0">
-              <div className={`w-7 h-7 md:w-6 md:h-6 rounded-full flex items-center justify-center transition-all ${hasPets ? 'bg-[--color-accent-primary]' : 'border-2 border-[--color-border]'}`}>
-                {hasPets && <Icon name="check" size={16} className="text-[--color-bg-primary] md:w-3.5 md:h-3.5" />}
+              <div className={`w-7 h-7 md:w-6 md:h-6 rounded-full flex items-center justify-center transition-all ${hasPets ? 'bg-(--color-accent-primary)' : 'border-2 border-(--color-border)'}`}>
+                {hasPets && <Icon name="check" size={16} className="text-(--color-bg-primary) md:w-3.5 md:h-3.5" />}
               </div>
             </div>
           </button>
@@ -291,13 +291,13 @@ function KitBuilder({ locale = 'es', initialScenario, showPresets = true }: KitB
           <ProgressRing progress={progress} completedLabel={kb.progress?.completed || 'completed'} />
 
           <div className="flex-1 text-center sm:text-left">
-            <h3 className="text-xl font-bold text-[--color-text-primary] mb-2">
+            <h3 className="text-xl font-bold text-(--color-text-primary) mb-2">
               {progress >= 100 ? (kb.progressSection?.complete || 'Kit Complete!') : (kb.progressSection?.title || 'Kit Progress')}
             </h3>
             <div className="flex flex-wrap justify-center sm:justify-start gap-3 mb-4">
-              <div className="px-3 py-1.5 rounded-lg bg-[--color-bg-primary]/50 text-sm">
-                <span className="text-[--color-text-muted]">{kb.progressSection?.items || 'Items:'} </span>
-                <span className="font-medium text-[--color-text-primary]">{checkedItems.size}/{filteredItems.length}</span>
+              <div className="px-3 py-1.5 rounded-lg bg-(--color-bg-primary)/50 text-sm">
+                <span className="text-(--color-text-muted)">{kb.progressSection?.items || 'Items:'} </span>
+                <span className="font-medium text-(--color-text-primary)">{checkedItems.size}/{filteredItems.length}</span>
               </div>
               <div className={`px-3 py-1.5 rounded-lg text-sm ${criticalChecked === criticalItems.length ? 'bg-emerald-500/20' : 'bg-rose-500/20'}`}>
                 <span className={criticalChecked === criticalItems.length ? 'text-emerald-400' : 'text-rose-400'}>
@@ -312,7 +312,7 @@ function KitBuilder({ locale = 'es', initialScenario, showPresets = true }: KitB
                 <span className="font-medium">{kb.progressSection?.congratulations || 'Congratulations! Your kit is ready'}</span>
               </div>
             ) : (
-              <p className="text-sm text-[--color-text-muted]">
+              <p className="text-sm text-(--color-text-muted)">
                 {criticalChecked < criticalItems.length
                   ? (kb.progressSection?.missingCritical || 'You are missing {count} critical items').replace('{count}', String(criticalItems.length - criticalChecked))
                   : (kb.progressSection?.allCriticalDone || 'All critical items completed')
@@ -366,14 +366,14 @@ function KitBuilder({ locale = 'es', initialScenario, showPresets = true }: KitB
           <div className="flex flex-col md:flex-row gap-3 flex-1">
             <button
               onClick={printChecklist}
-              className="w-full md:w-auto inline-flex items-center justify-center gap-3 px-6 py-4 md:px-5 md:py-3 bg-[--color-accent-primary] text-[--color-bg-primary] font-semibold text-base md:text-sm rounded-2xl md:rounded-xl hover:bg-[--color-accent-secondary] transition-all duration-200 active:scale-[0.98] shadow-lg shadow-[--color-accent-primary]/20 touch-manipulation"
+              className="w-full md:w-auto inline-flex items-center justify-center gap-3 px-6 py-4 md:px-5 md:py-3 bg-(--color-accent-primary) text-(--color-bg-primary) font-semibold text-base md:text-sm rounded-2xl md:rounded-xl hover:bg-(--color-accent-secondary) transition-all duration-200 active:scale-[0.98] shadow-lg shadow-(--color-accent-primary)/20 touch-manipulation"
             >
               <Icon name="printer" size={22} className="md:w-[18px] md:h-[18px]" />
               {kb.actions?.print || 'Print'}
             </button>
             <button
               onClick={copyShareUrl}
-              className="w-full md:w-auto inline-flex items-center justify-center gap-3 px-6 py-4 md:px-5 md:py-3 bg-[--color-bg-tertiary] text-[--color-text-primary] font-semibold text-base md:text-sm md:font-medium rounded-2xl md:rounded-xl hover:bg-[--color-bg-secondary] active:bg-[--color-bg-secondary] transition-all duration-200 active:scale-[0.98] touch-manipulation"
+              className="w-full md:w-auto inline-flex items-center justify-center gap-3 px-6 py-4 md:px-5 md:py-3 bg-(--color-bg-tertiary) text-(--color-text-primary) font-semibold text-base md:text-sm md:font-medium rounded-2xl md:rounded-xl hover:bg-(--color-bg-secondary) active:bg-(--color-bg-secondary) transition-all duration-200 active:scale-[0.98] touch-manipulation"
             >
               <Icon name="share" size={22} className="md:w-[18px] md:h-[18px]" />
               {kb.actions?.share || 'Share'}
@@ -383,7 +383,7 @@ function KitBuilder({ locale = 'es', initialScenario, showPresets = true }: KitB
           <div className="flex md:flex-shrink-0">
             <button
               onClick={resetChecklist}
-              className="w-full md:w-auto inline-flex items-center justify-center gap-3 px-6 py-4 md:px-4 md:py-3 text-[--color-text-muted] hover:text-rose-400 active:text-rose-400 transition-colors rounded-2xl md:rounded-xl bg-[--color-bg-secondary] md:bg-transparent active:scale-[0.98] touch-manipulation"
+              className="w-full md:w-auto inline-flex items-center justify-center gap-3 px-6 py-4 md:px-4 md:py-3 text-(--color-text-muted) hover:text-rose-400 active:text-rose-400 transition-colors rounded-2xl md:rounded-xl bg-(--color-bg-secondary) md:bg-transparent active:scale-[0.98] touch-manipulation"
               title={kb.actions?.reset || 'Reset'}
             >
               <Icon name="refresh" size={22} className="md:w-[18px] md:h-[18px]" />
@@ -392,7 +392,7 @@ function KitBuilder({ locale = 'es', initialScenario, showPresets = true }: KitB
           </div>
         </div>
 
-        <div className="mt-4 pt-4 border-t border-[--color-border] flex items-center justify-center md:justify-start gap-2 text-sm text-[--color-text-muted]">
+        <div className="mt-4 pt-4 border-t border-(--color-border) flex items-center justify-center md:justify-start gap-2 text-sm text-(--color-text-muted)">
           <Icon name="save" size={16} className="md:w-3.5 md:h-3.5" />
           <span>{kb.autoSave || 'Your progress is saved automatically'}</span>
         </div>

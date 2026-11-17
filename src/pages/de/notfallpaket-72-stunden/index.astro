@@ -217,14 +217,14 @@ const faqs = [
   }}
 >
   <!-- TOC Slot -->
-  <nav slot="toc" class="p-4 bg-[--color-bg-tertiary] rounded-lg">
-    <h2 class="text-sm font-semibold mb-3 text-[--color-text-primary]">Auf dieser Seite</h2>
+  <nav slot="toc" class="p-4 bg-(--color-bg-tertiary) rounded-lg">
+    <h2 class="text-sm font-semibold mb-3 text-(--color-text-primary)">Auf dieser Seite</h2>
     <ul class="space-y-2 text-sm">
       {tocItems.map((item) => (
         <li>
           <a
             href={`#${item.id}`}
-            class="text-[--color-text-secondary] hover:text-[--color-accent-primary] transition-colors"
+            class="text-(--color-text-secondary) hover:text-(--color-accent-primary) transition-colors"
           >
             {item.label}
           </a>
@@ -250,8 +250,8 @@ const faqs = [
       <div class="flex items-start gap-4">
         <span class="text-3xl">🎒</span>
         <div>
-          <h3 class="font-semibold mb-2 text-[--color-text-primary] text-base">Das Konzept in einem Satz</h3>
-          <p class="text-[--color-text-secondary] m-0">
+          <h3 class="font-semibold mb-2 text-(--color-text-primary) text-base">Das Konzept in einem Satz</h3>
+          <p class="text-(--color-text-secondary) m-0">
             Eine Tasche die du in 5 Minuten packen und gehen kannst, in dem Wissen dass du alles hast
             was du und deine Familie die nächsten 3 Tage brauchen.
           </p>
@@ -259,8 +259,8 @@ const faqs = [
       </div>
     </div>
 
-    <div class="card p-6 my-6 not-prose bg-[--color-accent-subtle] border-[--color-border-accent]">
-      <p class="text-sm text-[--color-text-primary] m-0">
+    <div class="card p-6 my-6 not-prose bg-(--color-accent-subtle) border-(--color-border-accent)">
+      <p class="text-sm text-(--color-text-primary) m-0">
         <strong>📋 BBK-Empfehlung:</strong> Das Bundesamt für Bevölkerungsschutz und Katastrophenhilfe empfiehlt
         jeden Haushalt auf einen mehrtägigen Ausfall der Versorgung vorzubereiten. Diese Seite folgt den
         offiziellen Richtlinien und ergänzt sie mit praktischen Tipps.
@@ -286,24 +286,24 @@ const faqs = [
     <div class="grid md:grid-cols-3 gap-4 my-6 not-prose">
       <div class="card p-4">
         <div class="text-2xl mb-2">⏱️</div>
-        <h3 class="font-semibold mb-1 text-[--color-text-primary] text-base">Reaktionszeit</h3>
-        <p class="text-sm text-[--color-text-secondary] m-0">
+        <h3 class="font-semibold mb-1 text-(--color-text-primary) text-base">Reaktionszeit</h3>
+        <p class="text-sm text-(--color-text-secondary) m-0">
           72 Stunden ist die typische maximale Zeit für Hilfsdienste um Basisdienste
           in den meisten Situationen wiederherzustellen.
         </p>
       </div>
       <div class="card p-4">
         <div class="text-2xl mb-2">⚖️</div>
-        <h3 class="font-semibold mb-1 text-[--color-text-primary] text-base">Praktisches Gleichgewicht</h3>
-        <p class="text-sm text-[--color-text-secondary] m-0">
+        <h3 class="font-semibold mb-1 text-(--color-text-primary) text-base">Praktisches Gleichgewicht</h3>
+        <p class="text-sm text-(--color-text-secondary) m-0">
           Ausreichend um die meisten Notsituationen zu überbrücken, aber das Paket
           bleibt tragbar in Bezug auf Gewicht und Größe.
         </p>
       </div>
       <div class="card p-4">
         <div class="text-2xl mb-2">📊</div>
-        <h3 class="font-semibold mb-1 text-[--color-text-primary] text-base">Statistischer Fakt</h3>
-        <p class="text-sm text-[--color-text-secondary] m-0">
+        <h3 class="font-semibold mb-1 text-(--color-text-primary) text-base">Statistischer Fakt</h3>
+        <p class="text-sm text-(--color-text-secondary) m-0">
           95% der Notsituationen die Bürger betreffen werden innerhalb von
           72 Stunden gelöst oder stabilisiert.
         </p>
@@ -320,15 +320,15 @@ const faqs = [
 
     <div class="flex flex-wrap gap-3 my-4 not-prose">
       <span class="inline-flex items-center gap-2 px-3 py-1 badge-critical text-xs font-medium rounded">
-        <span class="w-2 h-2 bg-[--color-status-critical] rounded-full"></span>
+        <span class="w-2 h-2 bg-(--color-status-critical) rounded-full"></span>
         Kritisch — Unverzichtbar
       </span>
       <span class="inline-flex items-center gap-2 px-3 py-1 badge-warning text-xs font-medium rounded">
-        <span class="w-2 h-2 bg-[--color-status-warning] rounded-full"></span>
+        <span class="w-2 h-2 bg-(--color-status-warning) rounded-full"></span>
         Empfohlen — Sehr nützlich
       </span>
       <span class="inline-flex items-center gap-2 px-3 py-1 badge-info text-xs font-medium rounded">
-        <span class="w-2 h-2 bg-[--color-status-info] rounded-full"></span>
+        <span class="w-2 h-2 bg-(--color-status-info) rounded-full"></span>
         Optional — Wenn Platz ist
       </span>
     </div>
@@ -336,24 +336,24 @@ const faqs = [
     <div class="space-y-8 my-8">
       {essentialCategories.map((category) => (
         <div class="card overflow-hidden">
-          <div class="px-6 py-4 bg-[--color-bg-tertiary] border-b border-[--color-border]">
+          <div class="px-6 py-4 bg-(--color-bg-tertiary) border-b border-(--color-border)">
             <h3 class="flex items-center gap-3 text-lg font-semibold m-0">
               <span class="text-2xl">{category.icon}</span>
               {category.name}
             </h3>
           </div>
-          <div class="divide-y divide-[--color-border]">
+          <div class="divide-y divide-(--color-border)">
             {category.items.map((item) => (
               <div class="px-6 py-3 flex items-center justify-between">
                 <div class="flex items-center gap-3">
                   <span class={`w-2 h-2 rounded-full ${
-                    item.priority === 'critical' ? 'bg-[--color-status-critical]' :
-                    item.priority === 'recommended' ? 'bg-[--color-status-warning]' :
-                    'bg-[--color-status-info]'
+                    item.priority === 'critical' ? 'bg-(--color-status-critical)' :
+                    item.priority === 'recommended' ? 'bg-(--color-status-warning)' :
+                    'bg-(--color-status-info)'
                   }`}></span>
-                  <span class="font-medium text-[--color-text-primary]">{item.name}</span>
+                  <span class="font-medium text-(--color-text-primary)">{item.name}</span>
                 </div>
-                <span class="text-sm text-[--color-text-secondary]">{item.quantity}</span>
+                <span class="text-sm text-(--color-text-secondary)">{item.quantity}</span>
               </div>
             ))}
           </div>
@@ -375,28 +375,28 @@ const faqs = [
     <div class="card p-6 my-6 not-prose">
       <div class="space-y-4">
         <div class="flex items-start gap-4">
-          <span class="flex-shrink-0 w-8 h-8 flex items-center justify-center bg-[--color-status-critical] text-white rounded-full font-bold text-sm">1</span>
+          <span class="flex-shrink-0 w-8 h-8 flex items-center justify-center bg-(--color-status-critical) text-white rounded-full font-bold text-sm">1</span>
           <div>
-            <h3 class="font-semibold text-[--color-text-primary] text-base">Außen- und Seitentaschen</h3>
-            <p class="text-sm text-[--color-text-secondary] m-0">
+            <h3 class="font-semibold text-(--color-text-primary) text-base">Außen- und Seitentaschen</h3>
+            <p class="text-sm text-(--color-text-secondary) m-0">
               Taschenlampe, Pfeife, Snacks, Wasserflasche, Dokumente. Was du brauchst ohne den Rucksack zu öffnen.
             </p>
           </div>
         </div>
         <div class="flex items-start gap-4">
-          <span class="flex-shrink-0 w-8 h-8 flex items-center justify-center bg-[--color-status-warning] text-white rounded-full font-bold text-sm">2</span>
+          <span class="flex-shrink-0 w-8 h-8 flex items-center justify-center bg-(--color-status-warning) text-white rounded-full font-bold text-sm">2</span>
           <div>
-            <h3 class="font-semibold text-[--color-text-primary] text-base">Oberer Teil Hauptfach</h3>
-            <p class="text-sm text-[--color-text-secondary] m-0">
+            <h3 class="font-semibold text-(--color-text-primary) text-base">Oberer Teil Hauptfach</h3>
+            <p class="text-sm text-(--color-text-secondary) m-0">
               Erste-Hilfe-Set, Powerbank, Essen für ersten Tag, Regenponcho. Schneller Zugang aber geschützt.
             </p>
           </div>
         </div>
         <div class="flex items-start gap-4">
-          <span class="flex-shrink-0 w-8 h-8 flex items-center justify-center bg-[--color-status-info] text-white rounded-full font-bold text-sm">3</span>
+          <span class="flex-shrink-0 w-8 h-8 flex items-center justify-center bg-(--color-status-info) text-white rounded-full font-bold text-sm">3</span>
           <div>
-            <h3 class="font-semibold text-[--color-text-primary] text-base">Unterer Teil Rucksack</h3>
-            <p class="text-sm text-[--color-text-secondary] m-0">
+            <h3 class="font-semibold text-(--color-text-primary) text-base">Unterer Teil Rucksack</h3>
+            <p class="text-sm text-(--color-text-secondary) m-0">
               Wechselkleidung, Rettungsdecke, Werkzeug, Essen für Tag 2-3. Was du seltener brauchst.
             </p>
           </div>
@@ -412,9 +412,9 @@ const faqs = [
     </p>
 
     <div class="grid md:grid-cols-2 gap-6 my-6 not-prose">
-      <div class="card p-6 border-l-4 border-l-[--color-status-success]">
-        <h3 class="font-semibold mb-3 text-[--color-status-success] text-base">✓ Gute Standorte</h3>
-        <ul class="space-y-2 text-sm text-[--color-text-secondary]">
+      <div class="card p-6 border-l-4 border-l-(--color-status-success)">
+        <h3 class="font-semibold mb-3 text-(--color-status-success) text-base">✓ Gute Standorte</h3>
+        <ul class="space-y-2 text-sm text-(--color-text-secondary)">
           <li>Flurschrank (schneller Zugang)</li>
           <li>Bei der Garagentür</li>
           <li>Im Kofferraum (zweites Paket)</li>
@@ -422,9 +422,9 @@ const faqs = [
           <li>Auf dem Weg zum Ausgang</li>
         </ul>
       </div>
-      <div class="card p-6 border-l-4 border-l-[--color-status-critical]">
-        <h3 class="font-semibold mb-3 text-[--color-status-critical] text-base">✗ Schlechte Standorte</h3>
-        <ul class="space-y-2 text-sm text-[--color-text-secondary]">
+      <div class="card p-6 border-l-4 border-l-(--color-status-critical)">
+        <h3 class="font-semibold mb-3 text-(--color-status-critical) text-base">✗ Schlechte Standorte</h3>
+        <ul class="space-y-2 text-sm text-(--color-text-secondary)">
           <li>Keller ohne Alternativausgang</li>
           <li>Abstellraum weit von der Wohnung</li>
           <li>Hohe Schränke die schwer erreichbar sind</li>
@@ -451,8 +451,8 @@ const faqs = [
           </h3>
           <ul class="space-y-2 text-sm">
             {group.items.map((item) => (
-              <li class="flex items-center gap-2 text-[--color-text-secondary]">
-                <span class="w-1.5 h-1.5 bg-[--color-accent-primary] rounded-full flex-shrink-0"></span>
+              <li class="flex items-center gap-2 text-(--color-text-secondary)">
+                <span class="w-1.5 h-1.5 bg-(--color-accent-primary) rounded-full flex-shrink-0"></span>
                 {item}
               </li>
             ))}
@@ -497,11 +497,11 @@ const faqs = [
           <div class="flex items-start gap-4">
             <span class="text-2xl flex-shrink-0">⚠️</span>
             <div>
-              <h3 class="font-semibold text-[--color-text-primary] mb-1 text-base">{item.mistake}</h3>
-              <p class="text-sm text-[--color-text-secondary] mb-2">
+              <h3 class="font-semibold text-(--color-text-primary) mb-1 text-base">{item.mistake}</h3>
+              <p class="text-sm text-(--color-text-secondary) mb-2">
                 <strong>Warum ein Problem:</strong> {item.why}
               </p>
-              <p class="text-sm text-[--color-accent-primary] m-0">
+              <p class="text-sm text-(--color-accent-primary) m-0">
                 <strong>Lösung:</strong> {item.solution}
               </p>
             </div>
@@ -517,10 +517,10 @@ const faqs = [
     <div class="space-y-4 my-8">
       {faqs.map((faq) => (
         <details class="card group">
-          <summary class="px-6 py-4 cursor-pointer list-none flex items-center justify-between hover:bg-[--color-bg-tertiary] transition-colors">
-            <span class="font-medium text-[--color-text-primary] pr-4">{faq.question}</span>
+          <summary class="px-6 py-4 cursor-pointer list-none flex items-center justify-between hover:bg-(--color-bg-tertiary) transition-colors">
+            <span class="font-medium text-(--color-text-primary) pr-4">{faq.question}</span>
             <svg
-              class="w-5 h-5 text-[--color-text-muted] transform transition-transform group-open:rotate-180 flex-shrink-0"
+              class="w-5 h-5 text-(--color-text-muted) transform transition-transform group-open:rotate-180 flex-shrink-0"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
@@ -529,7 +529,7 @@ const faqs = [
             </svg>
           </summary>
           <div class="px-6 pb-4">
-            <p class="text-[--color-text-secondary] m-0">{faq.answer}</p>
+            <p class="text-(--color-text-secondary) m-0">{faq.answer}</p>
           </div>
         </details>
       ))}
@@ -564,16 +564,16 @@ const faqs = [
   </div>
 
   <!-- CTA Slot -->
-  <div slot="cta" class="card p-8 text-center bg-[--color-bg-tertiary]">
+  <div slot="cta" class="card p-8 text-center bg-(--color-bg-tertiary)">
     <h3 class="text-xl font-semibold mb-4">Willst du dein Paket personalisieren?</h3>
-    <p class="text-[--color-text-secondary] mb-6">
+    <p class="text-(--color-text-secondary) mb-6">
       Nutze unseren interaktiven Konfigurator um eine Checkliste zu erstellen die auf
       deine Familie, Haustiere und spezifische Situation angepasst ist.
     </p>
     <div class="flex flex-wrap gap-4 justify-center">
       <a
         href="/de/tools/notfallpaket-zusammenstellen/"
-        class="inline-flex items-center gap-2 px-6 py-3 bg-[--color-accent-primary] text-[--color-bg-primary] font-semibold rounded hover:bg-[--color-accent-hover] transition-colors"
+        class="inline-flex items-center gap-2 px-6 py-3 bg-(--color-accent-primary) text-(--color-bg-primary) font-semibold rounded hover:bg-(--color-accent-hover) transition-colors"
       >
         Mein Paket zusammenstellen
         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -582,7 +582,7 @@ const faqs = [
       </a>
       <a
         href="/de/notfallausruestung/"
-        class="inline-flex items-center gap-2 px-6 py-3 border border-[--color-border] text-[--color-text-primary] font-medium rounded hover:border-[--color-accent-primary] hover:text-[--color-accent-primary] transition-colors"
+        class="inline-flex items-center gap-2 px-6 py-3 border border-(--color-border) text-(--color-text-primary) font-medium rounded hover:border-(--color-accent-primary) hover:text-(--color-accent-primary) transition-colors"
       >
         Vollständiger Notfallausrüstung Ratgeber
       </a>

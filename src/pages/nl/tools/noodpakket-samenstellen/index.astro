@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../../../layouts/BaseLayout.astro';
+import ListSignup from '../../../../components/growth/ListSignup.astro';
 import Breadcrumbs from '../../../../components/ui/Breadcrumbs.astro';
 import KitBuilder from '../../../../components/tools/KitBuilder';
 ---
@@ -56,7 +57,7 @@ import KitBuilder from '../../../../components/tools/KitBuilder';
       <div class="mb-8">
         <Breadcrumbs locale="nl" />
         <h1 class="text-4xl font-bold mb-4">Noodpakket Samenstellen</h1>
-        <p class="text-xl text-[--color-text-secondary]">
+        <p class="text-xl text-(--color-text-secondary)">
           Maak een gepersonaliseerde checklist voor jouw gezin en situatie. Kies je scenario, vink items af en deel of print je pakket.
         </p>
       </div>
@@ -64,4 +65,5 @@ import KitBuilder from '../../../../components/tools/KitBuilder';
       <KitBuilder locale="nl" client:load />
     </div>
   </section>
+  <ListSignup locale="nl" source="builder" variant="band" />
 </BaseLayout>

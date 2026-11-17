@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../../../layouts/BaseLayout.astro';
+import ShopBox from '../../../../components/growth/ShopBox.astro';
 import Breadcrumb from '../../../../components/layout/Breadcrumb.astro';
 import Icon from '../../../../components/ui/Icon.astro';
 import HeroImage from '../../../../components/content/HeroImage.astro';
@@ -28,6 +29,8 @@ import HeroImage from '../../../../components/content/HeroImage.astro';
         />
       </div>
 
+      <ShopBox locale="nl" category="wateropslag" />
+
       <div class="prose prose-lg">
         <p class="lead">
           <strong>Water is het belangrijkste.</strong> Je overleeft slechts 3 dagen zonder water.
@@ -35,19 +38,19 @@ import HeroImage from '../../../../components/content/HeroImage.astro';
         </p>
 
         <!-- Quick Reference -->
-        <div class="card p-6 my-8 bg-[--color-bg-tertiary] not-prose">
+        <div class="card p-6 my-8 bg-(--color-bg-tertiary) not-prose">
           <h3 class="text-lg font-semibold mb-4 flex items-center gap-2">
-            <Icon name="Droplet" size={20} class="text-[--color-accent-primary]" />
+            <Icon name="Droplet" size={20} class="text-(--color-accent-primary)" />
             Waterbehoefte Overzicht
           </h3>
           <div class="grid sm:grid-cols-2 gap-4">
-            <div class="p-4 bg-[--color-bg-secondary] rounded-lg">
-              <p class="text-2xl font-bold text-[--color-accent-primary]">9 liter</p>
-              <p class="text-sm text-[--color-text-secondary]">per persoon voor 72 uur</p>
+            <div class="p-4 bg-(--color-bg-secondary) rounded-lg">
+              <p class="text-2xl font-bold text-(--color-accent-primary)">9 liter</p>
+              <p class="text-sm text-(--color-text-secondary)">per persoon voor 72 uur</p>
             </div>
-            <div class="p-4 bg-[--color-bg-secondary] rounded-lg">
-              <p class="text-2xl font-bold text-[--color-accent-primary]">36 liter</p>
-              <p class="text-sm text-[--color-text-secondary]">4-persoons huishouden, 72 uur</p>
+            <div class="p-4 bg-(--color-bg-secondary) rounded-lg">
+              <p class="text-2xl font-bold text-(--color-accent-primary)">36 liter</p>
+              <p class="text-sm text-(--color-text-secondary)">4-persoons huishouden, 72 uur</p>
             </div>
           </div>
         </div>
@@ -125,9 +128,9 @@ import HeroImage from '../../../../components/content/HeroImage.astro';
           <li><strong>Datum markeren:</strong> Vuldatum op container schrijven</li>
         </ol>
 
-        <div class="card p-6 my-8 bg-[--color-accent-subtle] not-prose">
+        <div class="card p-6 my-8 bg-(--color-accent-subtle) not-prose">
           <p class="font-medium mb-2">💡 Backup: Waterzuivering</p>
-          <p class="text-sm text-[--color-text-secondary]">
+          <p class="text-sm text-(--color-text-secondary)">
             Houd <strong>waterzuiveringstabletten</strong> (bijv. Micropur) bij de hand.
             In noodgevallen kunnen ze ook twijfelachtig water drinkbaar maken.
           </p>
@@ -152,16 +155,16 @@ import HeroImage from '../../../../components/content/HeroImage.astro';
       </div>
 
       <!-- Shop Link -->
-      <div class="mt-12 card p-6 bg-[--color-bg-tertiary]">
+      <div class="mt-12 card p-6 bg-(--color-bg-tertiary)">
         <h3 class="font-semibold mb-2">Jerrycans op Bol.com</h3>
-        <p class="text-sm text-[--color-text-secondary] mb-4">
+        <p class="text-sm text-(--color-text-secondary) mb-4">
           Aanbevolen voedselveilige jerrycans met kraan.
         </p>
         <a
           href="https://www.bol.com/nl/nl/s/?searchtext=waterjerrycan+voedselveilig"
           target="_blank"
           rel="noopener noreferrer"
-          class="inline-flex items-center gap-2 px-4 py-2 bg-[--color-accent-primary] text-[--color-bg-primary] font-medium rounded hover:bg-[--color-accent-hover] transition-colors"
+          class="inline-flex items-center gap-2 px-4 py-2 bg-(--color-accent-primary) text-(--color-bg-primary) font-medium rounded hover:bg-(--color-accent-hover) transition-colors"
         >
           Bekijk op Bol.com
           <Icon name="ExternalLink" size={16} />

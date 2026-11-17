@@ -60,7 +60,7 @@ function PowerBar({ percentage, color, delay = 0 }: { percentage: number; color:
   }, [percentage, delay]);
 
   return (
-    <div className="h-2 bg-[--color-bg-tertiary] rounded-full overflow-hidden">
+    <div className="h-2 bg-(--color-bg-tertiary) rounded-full overflow-hidden">
       <div
         className={`h-full rounded-full transition-all duration-700 ease-out ${color}`}
         style={{ width: `${width}%` }}
@@ -107,25 +107,25 @@ function DeviceCard({
       className={`
         relative p-4 rounded-xl border transition-all duration-300
         ${isActive
-          ? `bg-gradient-to-br ${colors.bg} border-[--color-border] shadow-lg`
-          : 'bg-[--color-bg-tertiary] border-transparent opacity-60 hover:opacity-80'
+          ? `bg-gradient-to-br ${colors.bg} border-(--color-border) shadow-lg`
+          : 'bg-(--color-bg-tertiary) border-transparent opacity-60 hover:opacity-80'
         }
       `}
     >
       {/* Device info */}
       <div className="flex items-start justify-between mb-3">
         <div className="flex-1 min-w-0">
-          <h4 className={`font-medium truncate ${isActive ? 'text-[--color-text-primary]' : 'text-[--color-text-muted]'}`}>
+          <h4 className={`font-medium truncate ${isActive ? 'text-(--color-text-primary)' : 'text-(--color-text-muted)'}`}>
             {device.name}
           </h4>
-          <p className="text-xs text-[--color-text-muted] mt-0.5">
+          <p className="text-xs text-(--color-text-muted) mt-0.5">
             {device.batteryMah.toLocaleString()} mAh · {device.chargesPerDay < 1 ? `${everyLabel} ${Math.round(1/device.chargesPerDay)} ${daysLabel}` : `${device.chargesPerDay}${perDayLabel}`}
           </p>
         </div>
 
         {/* Power consumption badge */}
         {isActive && (
-          <div className={`text-xs font-medium px-2 py-1 rounded-full ${colors.text} bg-[--color-bg-secondary]`}>
+          <div className={`text-xs font-medium px-2 py-1 rounded-full ${colors.text} bg-(--color-bg-secondary)`}>
             {(devicePower / 1000).toFixed(1)}K
           </div>
         )}
@@ -146,8 +146,8 @@ function DeviceCard({
           className={`
             w-10 h-10 rounded-xl flex items-center justify-center transition-all duration-200
             ${count === 0
-              ? 'bg-[--color-bg-secondary] text-[--color-text-muted] cursor-not-allowed'
-              : 'bg-[--color-bg-secondary] text-[--color-text-primary] hover:bg-[--color-accent-primary] hover:text-[--color-bg-primary] active:scale-95'
+              ? 'bg-(--color-bg-secondary) text-(--color-text-muted) cursor-not-allowed'
+              : 'bg-(--color-bg-secondary) text-(--color-text-primary) hover:bg-(--color-accent-primary) hover:text-(--color-bg-primary) active:scale-95'
             }
           `}
         >
@@ -156,14 +156,14 @@ function DeviceCard({
 
         <span className={`
           w-12 text-center text-2xl font-bold tabular-nums
-          ${isActive ? colors.text : 'text-[--color-text-muted]'}
+          ${isActive ? colors.text : 'text-(--color-text-muted)'}
         `}>
           {count}
         </span>
 
         <button
           onClick={() => onChange(count + 1)}
-          className="w-10 h-10 rounded-xl bg-[--color-bg-secondary] text-[--color-text-primary] hover:bg-[--color-accent-primary] hover:text-[--color-bg-primary] transition-all duration-200 active:scale-95 flex items-center justify-center"
+          className="w-10 h-10 rounded-xl bg-(--color-bg-secondary) text-(--color-text-primary) hover:bg-(--color-accent-primary) hover:text-(--color-bg-primary) transition-all duration-200 active:scale-95 flex items-center justify-center"
         >
           <Icon name="plus" size={18} />
         </button>
@@ -190,8 +190,8 @@ function DurationSelector({ days, onChange, presets }: {
             className={`
               p-3 rounded-xl text-center transition-all duration-200
               ${days === preset.value
-                ? 'bg-gradient-to-br from-[--color-accent-primary] to-[--color-accent-secondary] text-[--color-bg-primary] shadow-lg shadow-[--color-accent-primary]/20'
-                : 'bg-[--color-bg-tertiary] text-[--color-text-secondary] hover:bg-[--color-bg-secondary]'
+                ? 'bg-gradient-to-br from-(--color-accent-primary) to-(--color-accent-secondary) text-(--color-bg-primary) shadow-lg shadow-(--color-accent-primary)/20'
+                : 'bg-(--color-bg-tertiary) text-(--color-text-secondary) hover:bg-(--color-bg-secondary)'
               }
             `}
           >
@@ -202,17 +202,17 @@ function DurationSelector({ days, onChange, presets }: {
       </div>
 
       {/* Fine-tune slider */}
-      <div className="flex items-center gap-4 p-4 bg-[--color-bg-tertiary] rounded-xl">
-        <Icon name="clock" size={20} className="text-[--color-accent-primary] flex-shrink-0" />
+      <div className="flex items-center gap-4 p-4 bg-(--color-bg-tertiary) rounded-xl">
+        <Icon name="clock" size={20} className="text-(--color-accent-primary) flex-shrink-0" />
         <input
           type="range"
           min="1"
           max="14"
           value={days}
           onChange={(e) => onChange(parseInt(e.target.value))}
-          className="flex-1 accent-[--color-accent-primary] h-2 rounded-full"
+          className="flex-1 accent-(--color-accent-primary) h-2 rounded-full"
         />
-        <span className="text-xl font-bold text-[--color-accent-primary] w-16 text-right tabular-nums">
+        <span className="text-xl font-bold text-(--color-accent-primary) w-16 text-right tabular-nums">
           {days}d
         </span>
       </div>
@@ -237,7 +237,7 @@ function SafetySelector({ margin, onChange, options }: {
             p-3 rounded-xl text-center transition-all duration-200 relative
             ${margin === opt.value
               ? 'bg-gradient-to-br from-emerald-500/20 to-emerald-600/10 border-emerald-500/50 border text-emerald-400'
-              : 'bg-[--color-bg-tertiary] text-[--color-text-secondary] hover:bg-[--color-bg-secondary] border border-transparent'
+              : 'bg-(--color-bg-tertiary) text-(--color-text-secondary) hover:bg-(--color-bg-secondary) border border-transparent'
             }
           `}
         >
@@ -270,12 +270,12 @@ function PowerbankCard({
     <div className={`
       p-4 rounded-xl border transition-all duration-300
       ${isBest
-        ? 'bg-gradient-to-br from-[--color-accent-primary]/20 to-[--color-accent-secondary]/10 border-[--color-accent-primary]/50 shadow-lg'
-        : 'bg-[--color-bg-tertiary] border-[--color-border]'
+        ? 'bg-gradient-to-br from-(--color-accent-primary)/20 to-(--color-accent-secondary)/10 border-(--color-accent-primary)/50 shadow-lg'
+        : 'bg-(--color-bg-tertiary) border-(--color-border)'
       }
     `}>
       {isBest && (
-        <div className="flex items-center gap-1 text-xs text-[--color-accent-primary] font-medium mb-2">
+        <div className="flex items-center gap-1 text-xs text-(--color-accent-primary) font-medium mb-2">
           <Icon name="check" size={14} />
           {recommendedLabel}
         </div>
@@ -283,20 +283,20 @@ function PowerbankCard({
       <div className="flex items-center gap-3">
         <div className={`
           w-12 h-12 rounded-xl flex items-center justify-center
-          ${isBest ? 'bg-[--color-accent-primary] text-[--color-bg-primary]' : 'bg-[--color-bg-secondary] text-[--color-text-muted]'}
+          ${isBest ? 'bg-(--color-accent-primary) text-(--color-bg-primary)' : 'bg-(--color-bg-secondary) text-(--color-text-muted)'}
         `}>
           <Icon name="batteryFull" size={24} />
         </div>
         <div className="flex-1">
-          <h4 className={`font-medium ${isBest ? 'text-[--color-accent-primary]' : 'text-[--color-text-primary]'}`}>
+          <h4 className={`font-medium ${isBest ? 'text-(--color-accent-primary)' : 'text-(--color-text-primary)'}`}>
             {count}× {name}
           </h4>
-          <p className="text-xs text-[--color-text-muted]">
+          <p className="text-xs text-(--color-text-muted)">
             Total: {(capacity * count / 1000).toFixed(0)}K mAh
           </p>
         </div>
         <div className="text-right">
-          <span className={`text-lg font-bold ${isBest ? 'text-[--color-accent-primary]' : 'text-[--color-text-primary]'}`}>
+          <span className={`text-lg font-bold ${isBest ? 'text-(--color-accent-primary)' : 'text-(--color-text-primary)'}`}>
             ~{price}€
           </span>
         </div>
@@ -562,7 +562,7 @@ function ProductCard({ product, isRecommended = false, viewAtLabel = 'Ver en Ama
         block p-4 rounded-xl border transition-all duration-200 hover:scale-[1.02] hover:shadow-lg
         ${isRecommended
           ? 'bg-gradient-to-br from-emerald-500/10 to-emerald-600/5 border-emerald-500/30'
-          : 'bg-[--color-bg-tertiary] border-[--color-border] hover:border-[--color-accent-primary]/50'
+          : 'bg-(--color-bg-tertiary) border-(--color-border) hover:border-(--color-accent-primary)/50'
         }
       `}
     >
@@ -574,21 +574,21 @@ function ProductCard({ product, isRecommended = false, viewAtLabel = 'Ver en Ama
       )}
       <div className="flex items-start justify-between gap-3 mb-2">
         <div>
-          <h5 className="font-medium text-[--color-text-primary] text-sm">{product.name}</h5>
-          <p className="text-xs text-[--color-text-muted]">{product.brand} · {product.capacity.toLocaleString()} mAh</p>
+          <h5 className="font-medium text-(--color-text-primary) text-sm">{product.name}</h5>
+          <p className="text-xs text-(--color-text-muted)">{product.brand} · {product.capacity.toLocaleString()} mAh</p>
         </div>
-        <span className="text-sm font-bold text-[--color-accent-primary] whitespace-nowrap">{product.price}</span>
+        <span className="text-sm font-bold text-(--color-accent-primary) whitespace-nowrap">{product.price}</span>
       </div>
       <div className="flex flex-wrap gap-1 mb-2">
         {product.features.map((feature, i) => (
-          <span key={i} className="text-xs px-2 py-0.5 rounded-full bg-[--color-bg-secondary] text-[--color-text-muted]">
+          <span key={i} className="text-xs px-2 py-0.5 rounded-full bg-(--color-bg-secondary) text-(--color-text-muted)">
             {feature}
           </span>
         ))}
       </div>
       <div className="flex items-center justify-between">
-        <span className="text-xs text-[--color-text-muted]">{product.bestFor}</span>
-        <span className="text-xs text-[--color-accent-primary] flex items-center gap-1">
+        <span className="text-xs text-(--color-text-muted)">{product.bestFor}</span>
+        <span className="text-xs text-(--color-accent-primary) flex items-center gap-1">
           {viewAtLabel} <Icon name="externalLink" size={12} />
         </span>
       </div>
@@ -759,12 +759,12 @@ function PowerCalculator({ locale = 'es' }: PowerCalculatorProps) {
       {/* Duration Section */}
       <section className="card p-6">
         <div className="flex items-center gap-3 mb-4">
-          <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[--color-accent-primary]/20 to-[--color-accent-secondary]/10 flex items-center justify-center">
-            <Icon name="clock" size={20} className="text-[--color-accent-primary]" />
+          <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-(--color-accent-primary)/20 to-(--color-accent-secondary)/10 flex items-center justify-center">
+            <Icon name="clock" size={20} className="text-(--color-accent-primary)" />
           </div>
           <div>
-            <h3 className="font-semibold text-[--color-text-primary]">{t.duration.title}</h3>
-            <p className="text-sm text-[--color-text-muted]">{t.duration.subtitle}</p>
+            <h3 className="font-semibold text-(--color-text-primary)">{t.duration.title}</h3>
+            <p className="text-sm text-(--color-text-muted)">{t.duration.subtitle}</p>
           </div>
         </div>
         <DurationSelector days={days} onChange={setDays} presets={durationPresets} />
@@ -778,12 +778,12 @@ function PowerCalculator({ locale = 'es' }: PowerCalculatorProps) {
               <Icon name="zap" size={20} className="text-blue-400" />
             </div>
             <div>
-              <h3 className="font-semibold text-[--color-text-primary]">{t.devices.title}</h3>
-              <p className="text-sm text-[--color-text-muted]">{t.devices.subtitle}</p>
+              <h3 className="font-semibold text-(--color-text-primary)">{t.devices.title}</h3>
+              <p className="text-sm text-(--color-text-muted)">{t.devices.subtitle}</p>
             </div>
           </div>
           {activeDeviceCount > 0 && (
-            <div className="px-3 py-1 rounded-full bg-[--color-accent-primary]/20 text-[--color-accent-primary] text-sm font-medium">
+            <div className="px-3 py-1 rounded-full bg-(--color-accent-primary)/20 text-(--color-accent-primary) text-sm font-medium">
               {activeDeviceCount} {activeDeviceCount !== 1 ? t.devices.actives : t.devices.active}
             </div>
           )}
@@ -792,7 +792,7 @@ function PowerCalculator({ locale = 'es' }: PowerCalculatorProps) {
         <div className="space-y-6">
           {Object.entries(groupedDevices).map(([category, devices]) => (
             <div key={category}>
-              <h4 className="text-sm font-medium text-[--color-text-muted] mb-3 flex items-center gap-2">
+              <h4 className="text-sm font-medium text-(--color-text-muted) mb-3 flex items-center gap-2">
                 <Icon name={categoryLabels[category].icon} size={16} />
                 {categoryLabels[category].label}
               </h4>
@@ -816,9 +816,9 @@ function PowerCalculator({ locale = 'es' }: PowerCalculatorProps) {
         </div>
 
         {/* Add custom device */}
-        <div className="mt-6 pt-6 border-t border-[--color-border]">
-          <h4 className="text-sm font-medium text-[--color-text-muted] mb-3 flex items-center gap-2">
-            <Icon name="plus" size={16} className="text-[--color-accent-primary]" />
+        <div className="mt-6 pt-6 border-t border-(--color-border)">
+          <h4 className="text-sm font-medium text-(--color-text-muted) mb-3 flex items-center gap-2">
+            <Icon name="plus" size={16} className="text-(--color-accent-primary)" />
             {t.devices.addCustom}
           </h4>
           <div className="flex flex-wrap gap-3">
@@ -827,19 +827,19 @@ function PowerCalculator({ locale = 'es' }: PowerCalculatorProps) {
               placeholder={t.devices.deviceName}
               value={newDevice.name}
               onChange={(e) => setNewDevice(prev => ({ ...prev, name: e.target.value }))}
-              className="flex-1 min-w-[150px] px-4 py-3 bg-[--color-bg-tertiary] border border-[--color-border] rounded-xl text-[--color-text-primary] placeholder:text-[--color-text-muted] focus:outline-none focus:border-[--color-accent-primary] transition-colors"
+              className="flex-1 min-w-[150px] px-4 py-3 bg-(--color-bg-tertiary) border border-(--color-border) rounded-xl text-(--color-text-primary) placeholder:text-(--color-text-muted) focus:outline-none focus:border-(--color-accent-primary) transition-colors"
             />
             <input
               type="number"
               placeholder="mAh"
               value={newDevice.batteryMah}
               onChange={(e) => setNewDevice(prev => ({ ...prev, batteryMah: parseInt(e.target.value) || 0 }))}
-              className="w-28 px-4 py-3 bg-[--color-bg-tertiary] border border-[--color-border] rounded-xl text-[--color-text-primary] focus:outline-none focus:border-[--color-accent-primary] transition-colors"
+              className="w-28 px-4 py-3 bg-(--color-bg-tertiary) border border-(--color-border) rounded-xl text-(--color-text-primary) focus:outline-none focus:border-(--color-accent-primary) transition-colors"
             />
             <button
               onClick={addCustomDevice}
               disabled={!newDevice.name.trim()}
-              className="px-6 py-3 bg-[--color-accent-primary] text-[--color-bg-primary] rounded-xl hover:bg-[--color-accent-secondary] transition-all duration-200 active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed font-medium"
+              className="px-6 py-3 bg-(--color-accent-primary) text-(--color-bg-primary) rounded-xl hover:bg-(--color-accent-secondary) transition-all duration-200 active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed font-medium"
             >
               {t.devices.add}
             </button>
@@ -854,8 +854,8 @@ function PowerCalculator({ locale = 'es' }: PowerCalculatorProps) {
             <Icon name="shield" size={20} className="text-emerald-400" />
           </div>
           <div>
-            <h3 className="font-semibold text-[--color-text-primary]">{t.safety.title}</h3>
-            <p className="text-sm text-[--color-text-muted]">{t.safety.subtitle}</p>
+            <h3 className="font-semibold text-(--color-text-primary)">{t.safety.title}</h3>
+            <p className="text-sm text-(--color-text-muted)">{t.safety.subtitle}</p>
           </div>
         </div>
         <SafetySelector margin={safetyMargin} onChange={setSafetyMargin} options={safetyOptions} />
@@ -864,8 +864,8 @@ function PowerCalculator({ locale = 'es' }: PowerCalculatorProps) {
       {/* Results */}
       {isCalculating && (
         <div className="card p-12 flex flex-col items-center justify-center">
-          <div className="w-12 h-12 border-4 border-[--color-accent-primary]/30 border-t-[--color-accent-primary] rounded-full animate-spin mb-4" />
-          <p className="text-[--color-text-muted]">{t.calculating}</p>
+          <div className="w-12 h-12 border-4 border-(--color-accent-primary)/30 border-t-(--color-accent-primary) rounded-full animate-spin mb-4" />
+          <p className="text-(--color-text-muted)">{t.calculating}</p>
         </div>
       )}
 
@@ -877,64 +877,64 @@ function PowerCalculator({ locale = 'es' }: PowerCalculatorProps) {
           }}
         >
           {/* Decorative elements */}
-          <div className="absolute top-0 right-0 w-64 h-64 bg-[--color-accent-primary]/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
-          <div className="absolute bottom-0 left-0 w-48 h-48 bg-[--color-accent-secondary]/10 rounded-full blur-2xl translate-y-1/2 -translate-x-1/2" />
+          <div className="absolute top-0 right-0 w-64 h-64 bg-(--color-accent-primary)/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
+          <div className="absolute bottom-0 left-0 w-48 h-48 bg-(--color-accent-secondary)/10 rounded-full blur-2xl translate-y-1/2 -translate-x-1/2" />
 
           <div className="relative">
             {/* Header */}
             <div className="flex items-center gap-3 mb-6">
-              <div className="w-12 h-12 rounded-2xl bg-[--color-accent-primary] flex items-center justify-center shadow-lg shadow-[--color-accent-primary]/30">
-                <Icon name="zap" size={24} className="text-[--color-bg-primary]" />
+              <div className="w-12 h-12 rounded-2xl bg-(--color-accent-primary) flex items-center justify-center shadow-lg shadow-(--color-accent-primary)/30">
+                <Icon name="zap" size={24} className="text-(--color-bg-primary)" />
               </div>
               <div>
-                <h3 className="text-xl font-bold text-[--color-text-primary]">{t.result.title}</h3>
-                <p className="text-sm text-[--color-text-muted]">{days} {t.result.days} · {activeDeviceCount} {t.result.devices}</p>
+                <h3 className="text-xl font-bold text-(--color-text-primary)">{t.result.title}</h3>
+                <p className="text-sm text-(--color-text-muted)">{days} {t.result.days} · {activeDeviceCount} {t.result.devices}</p>
               </div>
             </div>
 
             {/* Main result */}
-            <div className="bg-[--color-bg-primary]/50 backdrop-blur rounded-xl p-6 mb-6">
+            <div className="bg-(--color-bg-primary)/50 backdrop-blur rounded-xl p-6 mb-6">
               <div className="text-center mb-4">
-                <p className="text-sm text-[--color-text-muted] mb-1">{t.result.totalCapacity}</p>
-                <div className="text-5xl sm:text-6xl font-bold text-[--color-accent-primary]">
+                <p className="text-sm text-(--color-text-muted) mb-1">{t.result.totalCapacity}</p>
+                <div className="text-5xl sm:text-6xl font-bold text-(--color-accent-primary)">
                   <AnimatedNumber value={calculations.totalWithMargin / 1000} suffix="K" />
-                  <span className="text-2xl font-normal text-[--color-text-muted] ml-2">mAh</span>
+                  <span className="text-2xl font-normal text-(--color-text-muted) ml-2">mAh</span>
                 </div>
               </div>
 
               {/* Breakdown badges */}
               <div className="flex flex-wrap justify-center gap-3">
-                <div className="px-3 py-1.5 rounded-lg bg-[--color-bg-tertiary] text-sm">
-                  <span className="text-[--color-text-muted]">{t.result.consumption}: </span>
-                  <span className="text-[--color-text-primary] font-medium">{(calculations.totalRawMah / 1000).toFixed(1)}K</span>
+                <div className="px-3 py-1.5 rounded-lg bg-(--color-bg-tertiary) text-sm">
+                  <span className="text-(--color-text-muted)">{t.result.consumption}: </span>
+                  <span className="text-(--color-text-primary) font-medium">{(calculations.totalRawMah / 1000).toFixed(1)}K</span>
                 </div>
-                <div className="px-3 py-1.5 rounded-lg bg-[--color-bg-tertiary] text-sm">
-                  <span className="text-[--color-text-muted]">{t.result.losses}: </span>
-                  <span className="text-[--color-text-primary] font-medium">{(calculations.totalNeededMah / 1000).toFixed(1)}K</span>
+                <div className="px-3 py-1.5 rounded-lg bg-(--color-bg-tertiary) text-sm">
+                  <span className="text-(--color-text-muted)">{t.result.losses}: </span>
+                  <span className="text-(--color-text-primary) font-medium">{(calculations.totalNeededMah / 1000).toFixed(1)}K</span>
                 </div>
-                <div className="px-3 py-1.5 rounded-lg bg-[--color-accent-primary]/20 text-sm">
-                  <span className="text-[--color-accent-primary]">+{Math.round((safetyMargin - 1) * 100)}% {t.result.margin}</span>
+                <div className="px-3 py-1.5 rounded-lg bg-(--color-accent-primary)/20 text-sm">
+                  <span className="text-(--color-accent-primary)">+{Math.round((safetyMargin - 1) * 100)}% {t.result.margin}</span>
                 </div>
               </div>
             </div>
 
             {/* Device breakdown */}
             <div className="mb-6">
-              <h4 className="text-sm font-medium text-[--color-text-muted] mb-3">{t.result.breakdown}</h4>
+              <h4 className="text-sm font-medium text-(--color-text-muted) mb-3">{t.result.breakdown}</h4>
               <div className="grid sm:grid-cols-2 gap-2">
                 {calculations.deviceBreakdown.map((device, i) => (
                   <div
                     key={i}
-                    className="flex items-center justify-between p-3 bg-[--color-bg-primary]/30 rounded-lg"
+                    className="flex items-center justify-between p-3 bg-(--color-bg-primary)/30 rounded-lg"
                     style={{
                       opacity: 0,
                       animation: `fadeSlideIn 0.3s ease-out ${i * 0.05}s forwards`
                     }}
                   >
-                    <span className="text-[--color-text-secondary] text-sm">
+                    <span className="text-(--color-text-secondary) text-sm">
                       {device.name} × {device.count}
                     </span>
-                    <span className="font-mono text-[--color-text-primary] text-sm font-medium">
+                    <span className="font-mono text-(--color-text-primary) text-sm font-medium">
                       {(device.totalMah / 1000).toFixed(1)}K mAh
                     </span>
                   </div>
@@ -944,7 +944,7 @@ function PowerCalculator({ locale = 'es' }: PowerCalculatorProps) {
 
             {/* Recommendations Summary */}
             <div className="space-y-3 mb-6">
-              <h4 className="text-sm font-medium text-[--color-text-muted]">{t.result.summary}</h4>
+              <h4 className="text-sm font-medium text-(--color-text-muted)">{t.result.summary}</h4>
               <PowerbankCard
                 name={calculations.simpleRecommendation.name}
                 count={calculations.simpleRecommendation.count}
@@ -965,10 +965,10 @@ function PowerCalculator({ locale = 'es' }: PowerCalculatorProps) {
             {/* Product Recommendations */}
             <div className="space-y-4">
               <div className="flex items-center gap-2">
-                <Icon name="shoppingCart" size={18} className="text-[--color-accent-primary]" />
-                <h4 className="font-medium text-[--color-text-primary]">{t.products.title}</h4>
+                <Icon name="shoppingCart" size={18} className="text-(--color-accent-primary)" />
+                <h4 className="font-medium text-(--color-text-primary)">{t.products.title}</h4>
               </div>
-              <p className="text-xs text-[--color-text-muted]">
+              <p className="text-xs text-(--color-text-muted)">
                 {t.products.subtitle}
               </p>
               <div className="grid sm:grid-cols-2 gap-3">
@@ -995,7 +995,7 @@ function PowerCalculator({ locale = 'es' }: PowerCalculatorProps) {
                 href={locale === 'nl' ? 'https://www.bol.com/nl/nl/s/?searchtext=powerbank+20000mah' : locale === 'de' ? 'https://www.amazon.de/s?k=power+bank+20000mah' : 'https://www.amazon.es/s?k=power+bank+20000mah'}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center justify-center gap-2 p-3 rounded-xl border border-[--color-border] text-sm text-[--color-text-secondary] hover:border-[--color-accent-primary] hover:text-[--color-accent-primary] transition-colors"
+                className="flex items-center justify-center gap-2 p-3 rounded-xl border border-(--color-border) text-sm text-(--color-text-secondary) hover:border-(--color-accent-primary) hover:text-(--color-accent-primary) transition-colors"
               >
                 <Icon name="externalLink" size={16} />
                 {t.products.viewMore}
@@ -1003,10 +1003,10 @@ function PowerCalculator({ locale = 'es' }: PowerCalculatorProps) {
             </div>
 
             {/* Tips */}
-            <div className="mt-6 p-4 bg-[--color-bg-primary]/30 rounded-xl">
+            <div className="mt-6 p-4 bg-(--color-bg-primary)/30 rounded-xl">
               <div className="flex items-start gap-3">
                 <Icon name="lightbulb" size={20} className="text-amber-400 flex-shrink-0 mt-0.5" />
-                <div className="text-sm text-[--color-text-secondary] space-y-1">
+                <div className="text-sm text-(--color-text-secondary) space-y-1">
                   <p>{t.tips.coldWeather}</p>
                   <p>{t.tips.solarPanel}</p>
                 </div>
@@ -1019,11 +1019,11 @@ function PowerCalculator({ locale = 'es' }: PowerCalculatorProps) {
       {/* Empty state */}
       {!showResults && calculations.totalRawMah === 0 && !isCalculating && (
         <div className="card p-8 text-center">
-          <div className="w-16 h-16 rounded-2xl bg-[--color-bg-tertiary] flex items-center justify-center mx-auto mb-4">
-            <Icon name="battery" size={32} className="text-[--color-text-muted]" />
+          <div className="w-16 h-16 rounded-2xl bg-(--color-bg-tertiary) flex items-center justify-center mx-auto mb-4">
+            <Icon name="battery" size={32} className="text-(--color-text-muted)" />
           </div>
-          <h3 className="text-lg font-semibold text-[--color-text-primary] mb-2">{t.empty.title}</h3>
-          <p className="text-[--color-text-muted]">
+          <h3 className="text-lg font-semibold text-(--color-text-primary) mb-2">{t.empty.title}</h3>
+          <p className="text-(--color-text-muted)">
             {t.empty.subtitle}
           </p>
         </div>

@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../../../layouts/BaseLayout.astro';
+import ShopBox from '../../../../components/growth/ShopBox.astro';
 import Breadcrumb from '../../../../components/layout/Breadcrumb.astro';
 import Icon from '../../../../components/ui/Icon.astro';
 import HeroImage from '../../../../components/content/HeroImage.astro';
@@ -28,6 +29,8 @@ import HeroImage from '../../../../components/content/HeroImage.astro';
         />
       </div>
 
+      <ShopBox locale="nl" category="powerbanks" />
+
       <div class="prose prose-lg">
         <p class="lead">
           Je smartphone is in noodsituaties essentieel: 112 bellen, NL-Alert ontvangen, contact
@@ -35,26 +38,26 @@ import HeroImage from '../../../../components/content/HeroImage.astro';
         </p>
 
         <!-- Capacity Guide -->
-        <div class="card p-6 my-8 bg-[--color-bg-tertiary] not-prose">
+        <div class="card p-6 my-8 bg-(--color-bg-tertiary) not-prose">
           <h3 class="text-lg font-semibold mb-4 flex items-center gap-2">
-            <Icon name="Battery" size={20} class="text-[--color-accent-primary]" />
+            <Icon name="Battery" size={20} class="text-(--color-accent-primary)" />
             Capaciteitsberekening
           </h3>
           <div class="space-y-3 text-sm">
-            <div class="flex justify-between items-center p-3 bg-[--color-bg-secondary] rounded">
+            <div class="flex justify-between items-center p-3 bg-(--color-bg-secondary) rounded">
               <span>Gemiddelde smartphone</span>
               <span class="font-semibold">~4.000 mAh</span>
             </div>
-            <div class="flex justify-between items-center p-3 bg-[--color-bg-secondary] rounded">
+            <div class="flex justify-between items-center p-3 bg-(--color-bg-secondary) rounded">
               <span>10.000 mAh powerbank</span>
               <span class="font-semibold">~2 volledige ladingen</span>
             </div>
-            <div class="flex justify-between items-center p-3 bg-[--color-bg-secondary] rounded">
+            <div class="flex justify-between items-center p-3 bg-(--color-bg-secondary) rounded">
               <span>20.000 mAh powerbank</span>
               <span class="font-semibold">~4-5 volledige ladingen</span>
             </div>
           </div>
-          <p class="text-xs text-[--color-text-muted] mt-3">
+          <p class="text-xs text-(--color-text-muted) mt-3">
             * Reken op ~30% verlies door warmte en conversie
           </p>
         </div>
@@ -88,9 +91,9 @@ import HeroImage from '../../../../components/content/HeroImage.astro';
           <li><strong>Minimaal 2 uitgangen:</strong> Meerdere apparaten tegelijk</li>
         </ul>
 
-        <div class="card p-6 my-8 bg-[--color-accent-subtle] not-prose">
+        <div class="card p-6 my-8 bg-(--color-accent-subtle) not-prose">
           <p class="font-medium mb-2">💡 Onderhoudstip</p>
-          <p class="text-sm text-[--color-text-secondary]">
+          <p class="text-sm text-(--color-text-secondary)">
             Bewaar powerbanks op <strong>50-80% lading</strong>.
             Laad ze elke 2-3 maanden bij om de accuconditie te behouden.
             Vermijd extreme hitte of koude.
@@ -142,16 +145,16 @@ import HeroImage from '../../../../components/content/HeroImage.astro';
       </div>
 
       <!-- Shop Link -->
-      <div class="mt-12 card p-6 bg-[--color-bg-tertiary]">
+      <div class="mt-12 card p-6 bg-(--color-bg-tertiary)">
         <h3 class="font-semibold mb-2">Powerbanks op Bol.com</h3>
-        <p class="text-sm text-[--color-text-secondary] mb-4">
+        <p class="text-sm text-(--color-text-secondary) mb-4">
           Aanbevolen powerbanks met 20.000+ mAh.
         </p>
         <a
           href="https://www.bol.com/nl/nl/s/?searchtext=powerbank+20000mah"
           target="_blank"
           rel="noopener noreferrer"
-          class="inline-flex items-center gap-2 px-4 py-2 bg-[--color-accent-primary] text-[--color-bg-primary] font-medium rounded hover:bg-[--color-accent-hover] transition-colors"
+          class="inline-flex items-center gap-2 px-4 py-2 bg-(--color-accent-primary) text-(--color-bg-primary) font-medium rounded hover:bg-(--color-accent-hover) transition-colors"
         >
           Bekijk op Bol.com
           <Icon name="ExternalLink" size={16} />

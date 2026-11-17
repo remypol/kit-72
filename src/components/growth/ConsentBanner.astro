@@ -1,0 +1,101 @@
+---
+/**
+ * Analytics consent. Google Analytics is only loaded after an explicit yes;
+ * the choice is remembered in localStorage (`kit72_consent`).
+ */
+import { consentCopy, type Locale } from '../../data/site';
+
+interface Props {
+  locale: Locale;
+  gaId: string;
+}
+const { locale, gaId } = Astro.props;
+const c = consentCopy[locale];
+---
+
+<div id="consent" class="consent" hidden role="region" aria-label="Cookies">
+  <p class="consent__text">{c.text} <a href={c.href}>{c.more}</a></p>
+  <div class="consent__actions">
+    <button type="button" class="btn btn-secondary btn-sm" data-consent="no">{c.decline}</button>
+    <button type="button" class="btn btn-secondary btn-sm consent__yes" data-consent="yes">{c.accept}</button>
+  </div>
+</div>
+
+<script is:inline define:vars={{ gaId }}>
+  (function () {
+    var KEY = 'kit72_consent';
+    var banner = document.getElementById('consent');
+    function loadAnalytics() {
+      if (window.__kit72ga) return;
+      window.__kit72ga = true;
+      window.dataLayer = window.dataLayer || [];
+      window.gtag = function () { window.dataLayer.push(arguments); };
+      window.gtag('js', new Date());
+      window.gtag('config', gaId, { anonymize_ip: true });
+      var s = document.createElement('script');
+      s.async = true;
+      s.src = 'https://www.googletagmanager.com/gtag/js?id=' + gaId;
+      document.head.appendChild(s);
+    }
+    var choice = null;
+    try { choice = localStorage.getItem(KEY); } catch (e) {}
+    if (choice === 'yes') loadAnalytics();
+    else if (choice !== 'no' && banner) banner.hidden = false;
+    if (!banner) return;
+    banner.addEventListener('click', function (e) {
+      var b = e.target.closest('[data-consent]');
+      if (!b) return;
+      var v = b.getAttribute('data-consent');
+      try { localStorage.setItem(KEY, v); } catch (err) {}
+      banner.hidden = true;
+      if (v === 'yes') loadAnalytics();
+    });
+  })();
+</script>
+
+<style>
+  .consent {
+    position: fixed;
+    left: var(--space-4);
+    right: var(--space-4);
+    bottom: calc(var(--space-4) + var(--safe-area-bottom));
+    z-index: var(--z-toast);
+    max-width: 40rem;
+    margin-inline: auto;
+    padding: var(--space-4) var(--space-5);
+    background: var(--color-bg-secondary);
+    border: 1.5px solid var(--color-text-primary);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-xl);
+    display: grid;
+    gap: var(--space-3);
+  }
+  .consent[hidden] {
+    display: none;
+  }
+  @media (max-width: 767px) {
+    .consent {
+      bottom: calc(var(--bottom-nav-height) + var(--space-3) + var(--safe-area-bottom));
+    }
+  }
+  .consent__text {
+    font-size: 0.92rem;
+    line-height: 1.45;
+    color: var(--color-text-primary);
+  }
+  .consent__text a {
+    text-decoration: underline;
+  }
+  /* equal visual weight for yes and no */
+  .consent__actions {
+    display: flex;
+    gap: var(--space-2);
+    justify-content: flex-end;
+    flex-wrap: wrap;
+  }
+  @media print {
+    .consent {
+      display: none;
+    }
+  }
+</style>

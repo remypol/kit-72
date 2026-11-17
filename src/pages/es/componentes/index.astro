@@ -82,9 +82,9 @@ const priorityOrder = [
 function getPriorityColor(priority: string) {
   switch (priority) {
     case 'critical': return 'bg-red-500 text-white';
-    case 'high': return 'bg-[--color-accent-primary] text-[--color-bg-primary]';
-    case 'medium': return 'bg-[--color-accent-secondary] text-[--color-bg-primary]';
-    default: return 'bg-[--color-bg-tertiary] text-[--color-text-primary]';
+    case 'high': return 'bg-(--color-accent-primary) text-(--color-bg-primary)';
+    case 'medium': return 'bg-(--color-accent-secondary) text-(--color-bg-primary)';
+    default: return 'bg-(--color-bg-tertiary) text-(--color-text-primary)';
   }
 }
 ---
@@ -99,26 +99,26 @@ function getPriorityColor(priority: string) {
       <div class="mb-12">
         <Breadcrumb items={[{ label: 'Componentes' }]} class="mb-4" />
         <h1 class="mb-4">Componentes del Kit</h1>
-        <p class="text-lg text-[--color-text-secondary] max-w-3xl">
+        <p class="text-lg text-(--color-text-secondary) max-w-3xl">
           Cada componente de tu kit de emergencia tiene características específicas que debes conocer.
           Estas guías te ayudan a elegir los productos correctos y entender qué necesitas realmente.
         </p>
       </div>
 
       <!-- Budget Overview -->
-      <div class="card p-6 mb-12 border-l-4 border-l-[--color-accent-primary]">
-        <h2 class="text-lg font-semibold mb-2 text-[--color-text-primary] flex items-center gap-2">
-          <Icon name="Wallet" size={20} class="text-[--color-accent-primary]" />
+      <div class="card p-6 mb-12 border-l-4 border-l-(--color-accent-primary)">
+        <h2 class="text-lg font-semibold mb-2 text-(--color-text-primary) flex items-center gap-2">
+          <Icon name="Wallet" size={20} class="text-(--color-accent-primary)" />
           Presupuesto total estimado
         </h2>
-        <p class="text-[--color-text-secondary] mb-4">
+        <p class="text-(--color-text-secondary) mb-4">
           Un kit 72 horas completo para <strong>1 persona</strong> cuesta aproximadamente:
         </p>
         <div class="flex items-baseline gap-2">
-          <span class="text-3xl font-bold text-[--color-accent-primary]">{totalBudget.min}-{totalBudget.max}€</span>
-          <span class="text-sm text-[--color-text-muted]">{totalBudget.note}</span>
+          <span class="text-3xl font-bold text-(--color-accent-primary)">{totalBudget.min}-{totalBudget.max}€</span>
+          <span class="text-sm text-(--color-text-muted)">{totalBudget.note}</span>
         </div>
-        <p class="text-sm text-[--color-text-muted] mt-2">
+        <p class="text-sm text-(--color-text-muted) mt-2">
           Puedes empezar con lo esencial (~200€) e ir completando gradualmente.
         </p>
       </div>
@@ -132,8 +132,8 @@ function getPriorityColor(priority: string) {
 
       <!-- Priority Guide -->
       <div class="card p-8 mb-12">
-        <h2 class="text-xl font-bold mb-6 text-center text-[--color-text-primary]">Orden de prioridad</h2>
-        <p class="text-center text-[--color-text-secondary] mb-6">
+        <h2 class="text-xl font-bold mb-6 text-center text-(--color-text-primary)">Orden de prioridad</h2>
+        <p class="text-center text-(--color-text-secondary) mb-6">
           Si tienes presupuesto limitado, sigue este orden:
         </p>
 
@@ -145,11 +145,11 @@ function getPriorityColor(priority: string) {
                   {item.step}
                 </div>
                 <div class="flex-1">
-                  <h3 class="font-semibold text-[--color-text-primary] flex items-center gap-2">
-                    <Icon name={item.icon as any} size={18} class="text-[--color-accent-primary]" />
+                  <h3 class="font-semibold text-(--color-text-primary) flex items-center gap-2">
+                    <Icon name={item.icon as any} size={18} class="text-(--color-accent-primary)" />
                     {item.title}
                   </h3>
-                  <p class="text-sm text-[--color-text-secondary]">{item.description}</p>
+                  <p class="text-sm text-(--color-text-secondary)">{item.description}</p>
                 </div>
               </div>
             ))}
@@ -158,9 +158,9 @@ function getPriorityColor(priority: string) {
       </div>
 
       <!-- Quick Links -->
-      <div class="card p-6 bg-[--color-bg-tertiary] mb-8">
-        <h3 class="font-semibold mb-4 text-center text-[--color-text-primary]">¿No sabes por dónde empezar?</h3>
-        <p class="text-center text-[--color-text-secondary] mb-4">
+      <div class="card p-6 bg-(--color-bg-tertiary) mb-8">
+        <h3 class="font-semibold mb-4 text-center text-(--color-text-primary)">¿No sabes por dónde empezar?</h3>
+        <p class="text-center text-(--color-text-secondary) mb-4">
           Usa nuestras herramientas para calcular exactamente lo que necesitas:
         </p>
         <div class="flex flex-wrap gap-4 justify-center">
@@ -185,7 +185,7 @@ function getPriorityColor(priority: string) {
       <div class="text-center">
         <a
           href="/es/kit-72-horas/"
-          class="inline-flex items-center gap-2 text-[--color-accent-primary] hover:underline"
+          class="inline-flex items-center gap-2 text-(--color-accent-primary) hover:underline"
         >
           <Icon name="ArrowLeft" size={16} />
           Volver a Kit 72 Horas Completo

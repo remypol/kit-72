@@ -82,9 +82,9 @@ const priorityOrder = [
 function getPriorityColor(priority: string) {
   switch (priority) {
     case 'critical': return 'bg-red-500 text-white';
-    case 'high': return 'bg-[--color-accent-primary] text-[--color-bg-primary]';
-    case 'medium': return 'bg-[--color-accent-secondary] text-[--color-bg-primary]';
-    default: return 'bg-[--color-bg-tertiary] text-[--color-text-primary]';
+    case 'high': return 'bg-(--color-accent-primary) text-(--color-bg-primary)';
+    case 'medium': return 'bg-(--color-accent-secondary) text-(--color-bg-primary)';
+    default: return 'bg-(--color-bg-tertiary) text-(--color-text-primary)';
   }
 }
 ---
@@ -100,7 +100,7 @@ function getPriorityColor(priority: string) {
       <div class="mb-12">
         <Breadcrumb items={[{ label: 'Produkte' }]} class="mb-4" locale="de" />
         <h1 class="text-4xl font-bold mb-4">Produkte für dein Notfallpaket</h1>
-        <p class="text-xl text-[--color-text-secondary] max-w-3xl">
+        <p class="text-xl text-(--color-text-secondary) max-w-3xl">
           Alles, was du brauchst, um 72 Stunden selbstständig zu überleben. Wir behandeln jeden
           Bestandteil: was er ist, warum du ihn brauchst und welche Optionen wir empfehlen.
         </p>
@@ -116,19 +116,19 @@ function getPriorityColor(priority: string) {
       </div>
 
       <!-- Budget Overview -->
-      <div class="card p-6 mb-12 border-l-4 border-l-[--color-accent-primary]">
-        <h2 class="text-lg font-semibold mb-2 text-[--color-text-primary] flex items-center gap-2">
-          <Icon name="Wallet" size={20} class="text-[--color-accent-primary]" />
+      <div class="card p-6 mb-12 border-l-4 border-l-(--color-accent-primary)">
+        <h2 class="text-lg font-semibold mb-2 text-(--color-text-primary) flex items-center gap-2">
+          <Icon name="Wallet" size={20} class="text-(--color-accent-primary)" />
           Geschätztes Gesamtbudget
         </h2>
-        <p class="text-[--color-text-secondary] mb-4">
+        <p class="text-(--color-text-secondary) mb-4">
           Ein komplettes 72-Stunden-Paket für <strong>1 Person</strong> kostet ungefähr:
         </p>
         <div class="flex items-baseline gap-2">
-          <span class="text-3xl font-bold text-[--color-accent-primary]">{totalBudget.min}-{totalBudget.max}€</span>
-          <span class="text-sm text-[--color-text-muted]">{totalBudget.note}</span>
+          <span class="text-3xl font-bold text-(--color-accent-primary)">{totalBudget.min}-{totalBudget.max}€</span>
+          <span class="text-sm text-(--color-text-muted)">{totalBudget.note}</span>
         </div>
-        <p class="text-sm text-[--color-text-muted] mt-2">
+        <p class="text-sm text-(--color-text-muted) mt-2">
           Du kannst mit dem Wesentlichen (~200€) beginnen und nach und nach ergänzen.
         </p>
       </div>
@@ -136,23 +136,23 @@ function getPriorityColor(priority: string) {
       <!-- Priority Order Section -->
       <div class="card p-8 mb-12">
         <h2 class="text-2xl font-semibold mb-6">In welcher Reihenfolge kaufen?</h2>
-        <p class="text-[--color-text-secondary] mb-6">
+        <p class="text-(--color-text-secondary) mb-6">
           Wenn dein Budget begrenzt ist, folge dieser Prioritätsreihenfolge.
           Beginne mit dem Kritischsten und baue von dort aus weiter.
         </p>
 
         <div class="space-y-4">
           {priorityOrder.map((item) => (
-            <div class="flex items-center gap-4 p-4 bg-[--color-bg-tertiary] rounded-lg">
+            <div class="flex items-center gap-4 p-4 bg-(--color-bg-tertiary) rounded-lg">
               <span class={`flex-shrink-0 w-8 h-8 flex items-center justify-center rounded-full font-bold text-sm ${getPriorityColor(item.priority)}`}>
                 {item.step}
               </span>
-              <div class="flex-shrink-0 w-10 h-10 flex items-center justify-center text-[--color-accent-primary]">
+              <div class="flex-shrink-0 w-10 h-10 flex items-center justify-center text-(--color-accent-primary)">
                 <Icon name={item.icon} size={24} />
               </div>
               <div class="flex-1 min-w-0">
-                <h3 class="font-semibold text-[--color-text-primary]">{item.title}</h3>
-                <p class="text-sm text-[--color-text-secondary] truncate">{item.description}</p>
+                <h3 class="font-semibold text-(--color-text-primary)">{item.title}</h3>
+                <p class="text-sm text-(--color-text-secondary) truncate">{item.description}</p>
               </div>
             </div>
           ))}
@@ -162,21 +162,21 @@ function getPriorityColor(priority: string) {
       <!-- Products Grid -->
       <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
         {products.map((product) => (
-          <a href={product.href} class="card p-6 hover:border-[--color-accent-primary] transition-colors group">
+          <a href={product.href} class="card p-6 hover:border-(--color-accent-primary) transition-colors group">
             <div class="flex items-center gap-3 mb-4">
-              <div class="w-12 h-12 flex items-center justify-center bg-[--color-bg-tertiary] rounded-lg text-[--color-accent-primary] group-hover:bg-[--color-accent-primary] group-hover:text-[--color-bg-primary] transition-colors">
+              <div class="w-12 h-12 flex items-center justify-center bg-(--color-bg-tertiary) rounded-lg text-(--color-accent-primary) group-hover:bg-(--color-accent-primary) group-hover:text-(--color-bg-primary) transition-colors">
                 <Icon name={product.icon} size={24} />
               </div>
               <div>
-                <h3 class="font-semibold text-[--color-text-primary]">{product.title}</h3>
-                <span class="text-sm text-[--color-accent-primary]">{product.priceRange}</span>
+                <h3 class="font-semibold text-(--color-text-primary)">{product.title}</h3>
+                <span class="text-sm text-(--color-accent-primary)">{product.priceRange}</span>
               </div>
             </div>
-            <p class="text-sm text-[--color-text-secondary] mb-4">{product.description}</p>
+            <p class="text-sm text-(--color-text-secondary) mb-4">{product.description}</p>
             <ul class="space-y-1">
               {product.features.map((feature) => (
-                <li class="flex items-center gap-2 text-xs text-[--color-text-muted]">
-                  <span class="w-1 h-1 bg-[--color-accent-primary] rounded-full"></span>
+                <li class="flex items-center gap-2 text-xs text-(--color-text-muted)">
+                  <span class="w-1 h-1 bg-(--color-accent-primary) rounded-full"></span>
                   {feature}
                 </li>
               ))}
@@ -186,15 +186,15 @@ function getPriorityColor(priority: string) {
       </div>
 
       <!-- CTA -->
-      <div class="card p-8 text-center bg-[--color-bg-tertiary]">
+      <div class="card p-8 text-center bg-(--color-bg-tertiary)">
         <h2 class="text-2xl font-semibold mb-4">Bereit anzufangen?</h2>
-        <p class="text-[--color-text-secondary] mb-6 max-w-2xl mx-auto">
+        <p class="text-(--color-text-secondary) mb-6 max-w-2xl mx-auto">
           Nutze unser interaktives Tool, um eine personalisierte Checkliste zu erstellen,
           basierend auf deiner Haushaltsgröße und speziellen Bedürfnissen.
         </p>
         <a
           href="/de/tools/notfallpaket-zusammenstellen/"
-          class="inline-flex items-center gap-2 px-6 py-3 bg-[--color-accent-primary] text-[--color-bg-primary] font-semibold rounded hover:bg-[--color-accent-hover] transition-colors"
+          class="inline-flex items-center gap-2 px-6 py-3 bg-(--color-accent-primary) text-(--color-bg-primary) font-semibold rounded hover:bg-(--color-accent-hover) transition-colors"
         >
           Mein Notfallpaket zusammenstellen
           <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -207,7 +207,7 @@ function getPriorityColor(priority: string) {
       <div class="text-center mt-8">
         <a
           href="/de/notfallpaket-72-stunden/"
-          class="inline-flex items-center gap-2 text-[--color-accent-primary] hover:underline"
+          class="inline-flex items-center gap-2 text-(--color-accent-primary) hover:underline"
         >
           <Icon name="ArrowLeft" size={16} />
           Zurück zum vollständigen 72-Stunden-Paket

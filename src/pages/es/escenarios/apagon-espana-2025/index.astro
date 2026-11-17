@@ -1,9 +1,9 @@
 ---
 /**
- * Apagón España 2024 - Event-Specific Page
+ * Apagón España 2025 - Event-Specific Page
  *
  * Topical content about the massive blackout that affected Spain and Portugal
- * on April 28, 2024. High search interest, provides context and lessons learned.
+ * on April 28, 2025. High search interest, provides context and lessons learned.
  */
 import BaseLayout from '../../../../layouts/BaseLayout.astro';
 import Breadcrumb from '../../../../components/layout/Breadcrumb.astro';
@@ -58,7 +58,7 @@ const lessons = [
 
 const faqs = [
   {
-    question: '¿Qué causó el apagón de abril 2024?',
+    question: '¿Qué causó el apagón de abril 2025?',
     answer: 'La causa exacta sigue bajo investigación. Se produjo una caída brusca de frecuencia en la red que provocó la desconexión automática de la interconexión con Francia, aislando la península ibérica y causando el colapso del sistema.'
   },
   {
@@ -81,14 +81,14 @@ const faqs = [
 ---
 
 <BaseLayout
-  title="Apagón España Abril 2024: Qué Pasó y Lecciones Aprendidas — Kit-72"
-  description="Análisis del apagón de España y Portugal en abril 2024. Qué ocurrió y lecciones para estar preparados."
+  title="Apagón España Abril 2025: Qué Pasó y Lecciones Aprendidas — Kit-72"
+  description="Análisis del apagón de España y Portugal en abril 2025. Qué ocurrió y lecciones para estar preparados."
   locale="es"
   dateModified="2025-12-16"
   schemaType="Article"
   schemaData={{
-    headline: 'Apagón España Abril 2024: Análisis y Lecciones',
-    datePublished: '2024-04-28',
+    headline: 'Apagón España Abril 2025: Análisis y Lecciones',
+    datePublished: '2025-04-28',
     dateModified: '2025-12-16',
   }}
   faqData={faqs}
@@ -98,24 +98,24 @@ const faqs = [
       <Breadcrumb
         items={[
           { label: 'Escenarios', href: '/es/escenarios/' },
-          { label: 'Apagón España 2024' }
+          { label: 'Apagón España 2025' }
         ]}
         class="mb-4"
         locale="es"
       />
 
       <header class="mb-8">
-        <div class="flex items-center gap-2 text-sm text-[--color-text-muted] mb-2">
+        <div class="flex items-center gap-2 text-sm text-(--color-text-muted) mb-2">
           <Icon name="Calendar" size={16} />
-          <span>28 de abril de 2024</span>
+          <span>28 de abril de 2025</span>
           <span class="mx-2">•</span>
           <span>12 min de lectura</span>
         </div>
         <h1 class="text-4xl font-bold mb-4">
-          Apagón España 2024: Qué Pasó y Cómo Prepararse
+          Apagón España 2025: Qué Pasó y Cómo Prepararse
         </h1>
-        <p class="text-xl text-[--color-text-secondary]">
-          El 28 de abril de 2024, España y Portugal sufrieron el mayor apagón de su historia.
+        <p class="text-xl text-(--color-text-secondary)">
+          El 28 de abril de 2025, España y Portugal sufrieron el mayor apagón de su historia.
           50 millones de personas sin luz. Este es el análisis de lo que ocurrió y las lecciones
           que debemos aprender.
         </p>
@@ -132,16 +132,16 @@ const faqs = [
         <!-- Key Stats -->
         <div class="not-prose grid sm:grid-cols-3 gap-4 my-8">
           <div class="card p-4 text-center">
-            <p class="text-3xl font-bold text-[--color-accent-primary]">50M</p>
-            <p class="text-sm text-[--color-text-secondary]">Personas afectadas</p>
+            <p class="text-3xl font-bold text-(--color-accent-primary)">50M</p>
+            <p class="text-sm text-(--color-text-secondary)">Personas afectadas</p>
           </div>
           <div class="card p-4 text-center">
-            <p class="text-3xl font-bold text-[--color-accent-primary]">5-6h</p>
-            <p class="text-sm text-[--color-text-secondary]">Duración media</p>
+            <p class="text-3xl font-bold text-(--color-accent-primary)">5-6h</p>
+            <p class="text-sm text-(--color-text-secondary)">Duración media</p>
           </div>
           <div class="card p-4 text-center">
-            <p class="text-3xl font-bold text-[--color-accent-primary]">2</p>
-            <p class="text-sm text-[--color-text-secondary]">Países afectados</p>
+            <p class="text-3xl font-bold text-(--color-accent-primary)">2</p>
+            <p class="text-sm text-(--color-text-secondary)">Países afectados</p>
           </div>
         </div>
 
@@ -161,7 +161,7 @@ const faqs = [
                 'border-l-green-500 bg-green-50 dark:bg-green-950/20'
               }`}>
                 <span class="font-mono font-bold text-lg min-w-[60px]">{item.time}</span>
-                <span class="text-[--color-text-primary]">{item.event}</span>
+                <span class="text-(--color-text-primary)">{item.event}</span>
               </div>
             ))}
           </div>
@@ -176,12 +176,12 @@ const faqs = [
           {impacts.map((impact) => (
             <div class="card p-4">
               <div class="flex items-center gap-3 mb-2">
-                <div class="w-10 h-10 rounded-full bg-[--color-accent-subtle] flex items-center justify-center">
-                  <Icon name={impact.icon} size={20} class="text-[--color-accent-primary]" />
+                <div class="w-10 h-10 rounded-full bg-(--color-accent-subtle) flex items-center justify-center">
+                  <Icon name={impact.icon} size={20} class="text-(--color-accent-primary)" />
                 </div>
                 <h3 class="font-semibold">{impact.sector}</h3>
               </div>
-              <p class="text-sm text-[--color-text-secondary]">{impact.description}</p>
+              <p class="text-sm text-(--color-text-secondary)">{impact.description}</p>
             </div>
           ))}
         </div>
@@ -196,13 +196,13 @@ const faqs = [
           {lessons.map((lesson, index) => (
             <div class="card p-6">
               <div class="flex items-start gap-4">
-                <span class="flex-shrink-0 w-8 h-8 rounded-full bg-[--color-accent-primary] text-[--color-bg-primary] flex items-center justify-center font-bold">
+                <span class="flex-shrink-0 w-8 h-8 rounded-full bg-(--color-accent-primary) text-(--color-bg-primary) flex items-center justify-center font-bold">
                   {index + 1}
                 </span>
                 <div>
                   <h3 class="font-semibold text-lg mb-2">{lesson.title}</h3>
-                  <p class="text-[--color-text-secondary] mb-3">{lesson.description}</p>
-                  <div class="flex items-center gap-2 text-sm font-medium text-[--color-accent-primary]">
+                  <p class="text-(--color-text-secondary) mb-3">{lesson.description}</p>
+                  <div class="flex items-center gap-2 text-sm font-medium text-(--color-accent-primary)">
                     <Icon name="ArrowRight" size={16} />
                     <span>{lesson.action}</span>
                   </div>
@@ -214,7 +214,7 @@ const faqs = [
 
         <h2>¿Estás Preparado para el Próximo?</h2>
         <p>
-          El apagón de 2024 duró solo unas horas. Pero la próxima vez podría ser
+          El apagón de 2025 duró solo unas horas. Pero la próxima vez podría ser
           más largo. Un ciberataque, un fenómeno meteorológico extremo o un fallo
           en cascada podrían causar cortes de días.
         </p>
@@ -224,20 +224,20 @@ const faqs = [
         </p>
 
         <!-- CTA Box -->
-        <div class="not-prose card p-6 my-8 bg-[--color-accent-subtle] border-2 border-[--color-accent-primary]">
+        <div class="not-prose card p-6 my-8 bg-(--color-accent-subtle) border-2 border-(--color-accent-primary)">
           <h3 class="font-semibold text-xl mb-3">Prepárate en 3 pasos</h3>
           <ol class="space-y-2 mb-4">
             <li class="flex items-center gap-2">
-              <span class="w-6 h-6 rounded-full bg-[--color-accent-primary] text-[--color-bg-primary] flex items-center justify-center text-sm font-bold">1</span>
-              <span>Lee nuestra <a href="/es/escenarios/prepararse-apagon/" class="text-[--color-accent-primary] hover:underline font-medium">guía completa de apagones</a></span>
+              <span class="w-6 h-6 rounded-full bg-(--color-accent-primary) text-(--color-bg-primary) flex items-center justify-center text-sm font-bold">1</span>
+              <span>Lee nuestra <a href="/es/escenarios/prepararse-apagon/" class="text-(--color-accent-primary) hover:underline font-medium">guía completa de apagones</a></span>
             </li>
             <li class="flex items-center gap-2">
-              <span class="w-6 h-6 rounded-full bg-[--color-accent-primary] text-[--color-bg-primary] flex items-center justify-center text-sm font-bold">2</span>
-              <span>Usa nuestro <a href="/es/herramientas/configurador-kit/" class="text-[--color-accent-primary] hover:underline font-medium">configurador de kit</a> personalizado</span>
+              <span class="w-6 h-6 rounded-full bg-(--color-accent-primary) text-(--color-bg-primary) flex items-center justify-center text-sm font-bold">2</span>
+              <span>Usa nuestro <a href="/es/herramientas/configurador-kit/" class="text-(--color-accent-primary) hover:underline font-medium">configurador de kit</a> personalizado</span>
             </li>
             <li class="flex items-center gap-2">
-              <span class="w-6 h-6 rounded-full bg-[--color-accent-primary] text-[--color-bg-primary] flex items-center justify-center text-sm font-bold">3</span>
-              <span>Revisa los <a href="/es/componentes/" class="text-[--color-accent-primary] hover:underline font-medium">componentes esenciales</a></span>
+              <span class="w-6 h-6 rounded-full bg-(--color-accent-primary) text-(--color-bg-primary) flex items-center justify-center text-sm font-bold">3</span>
+              <span>Revisa los <a href="/es/componentes/" class="text-(--color-accent-primary) hover:underline font-medium">componentes esenciales</a></span>
             </li>
           </ol>
         </div>
@@ -251,14 +251,14 @@ const faqs = [
                 {faq.question}
                 <Icon name="ChevronDown" size={20} class="transform group-open:rotate-180 transition-transform" />
               </summary>
-              <p class="mt-3 text-[--color-text-secondary]">{faq.answer}</p>
+              <p class="mt-3 text-(--color-text-secondary)">{faq.answer}</p>
             </details>
           ))}
         </div>
 
         <h2>Conclusión</h2>
         <p>
-          El apagón de abril de 2024 fue un recordatorio brutal de lo dependientes que somos
+          El apagón de abril de 2025 fue un recordatorio brutal de lo dependientes que somos
           de la electricidad. Pero también fue una oportunidad para aprender.
         </p>
         <p>
@@ -270,19 +270,19 @@ const faqs = [
 
       <!-- Related Links -->
       <div class="mt-12 grid sm:grid-cols-2 gap-4">
-        <a href="/es/escenarios/prepararse-apagon/" class="card p-6 hover:border-[--color-accent-primary] transition-colors group">
-          <h3 class="font-semibold mb-2 group-hover:text-[--color-accent-primary]">
+        <a href="/es/escenarios/prepararse-apagon/" class="card p-6 hover:border-(--color-accent-primary) transition-colors group">
+          <h3 class="font-semibold mb-2 group-hover:text-(--color-accent-primary)">
             Guía: Prepararse para un Apagón
           </h3>
-          <p class="text-sm text-[--color-text-secondary]">
+          <p class="text-sm text-(--color-text-secondary)">
             Pasos detallados antes, durante y después de un corte de luz.
           </p>
         </a>
-        <a href="/es/componentes/powerbanks/" class="card p-6 hover:border-[--color-accent-primary] transition-colors group">
-          <h3 class="font-semibold mb-2 group-hover:text-[--color-accent-primary]">
+        <a href="/es/componentes/powerbanks/" class="card p-6 hover:border-(--color-accent-primary) transition-colors group">
+          <h3 class="font-semibold mb-2 group-hover:text-(--color-accent-primary)">
             Powerbanks para Emergencias
           </h3>
-          <p class="text-sm text-[--color-text-secondary]">
+          <p class="text-sm text-(--color-text-secondary)">
             Cómo elegir la batería externa adecuada para tu kit.
           </p>
         </a>

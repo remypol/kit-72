@@ -13,28 +13,28 @@ const { type = 'info', title } = Astro.props;
 
 const styles = {
   info: {
-    bg: 'bg-[--color-status-info]/10',
-    border: 'border-l-[--color-status-info]',
+    bg: 'bg-(--color-status-info)/10',
+    border: 'border-l-(--color-status-info)',
     icon: 'ℹ️',
-    titleColor: 'text-[--color-status-info]',
+    titleColor: 'text-(--color-status-info)',
   },
   tip: {
-    bg: 'bg-[--color-accent-subtle]',
-    border: 'border-l-[--color-accent-primary]',
+    bg: 'bg-(--color-accent-subtle)',
+    border: 'border-l-(--color-accent-primary)',
     icon: '💡',
-    titleColor: 'text-[--color-accent-primary]',
+    titleColor: 'text-(--color-accent-primary)',
   },
   warning: {
-    bg: 'bg-[--color-status-warning]/10',
-    border: 'border-l-[--color-status-warning]',
+    bg: 'bg-(--color-status-warning)/10',
+    border: 'border-l-(--color-status-warning)',
     icon: '⚠️',
-    titleColor: 'text-[--color-status-warning]',
+    titleColor: 'text-(--color-status-warning)',
   },
   danger: {
-    bg: 'bg-[--color-status-critical]/10',
-    border: 'border-l-[--color-status-critical]',
+    bg: 'bg-(--color-status-critical)/10',
+    border: 'border-l-(--color-status-critical)',
     icon: '🚨',
-    titleColor: 'text-[--color-status-critical]',
+    titleColor: 'text-(--color-status-critical)',
   },
 };
 
@@ -48,7 +48,7 @@ const style = styles[type];
       {title}
     </h3>
   )}
-  <div class="text-[--color-text-secondary] text-sm [&>p]:m-0 [&>p:not(:last-child)]:mb-2 [&>ul]:m-0 [&>ul]:pl-4 [&>li]:text-sm">
+  <div class="text-(--color-text-secondary) text-sm [&>p]:m-0 [&>p:not(:last-child)]:mb-2 [&>ul]:m-0 [&>ul]:pl-4 [&>li]:text-sm">
     <slot />
   </div>
 </div>

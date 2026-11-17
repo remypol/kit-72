@@ -1,30 +1,32 @@
-/* Fonts loaded via HTML <link> tags for better performance - see BaseLayout.astro */
+@import "@fontsource-variable/archivo/wdth.css";
+@import "@fontsource-variable/public-sans/wght.css";
 @import "tailwindcss";
+@source not "../../docs";
+
+/* dark: utilities only apply under an explicit .dark class (the site is light-only) */
+@custom-variant dark (&:where(.dark, .dark *));
 
 /* ============================================
-   KIT-72 DESIGN SYSTEM v2.0
-   Theme: "Field Manual Meets Digital"
+   KIT-72 DESIGN SYSTEM v3 — "Safe condition"
 
-   CRITICAL: This is NOT a generic design.
-   - Typography: DM Serif Display, JetBrains Mono, Source Sans 3
-   - Colors: Dark slate with amber accent
-   - Aesthetic: Competent, prepared, calm — not prepper/survivalist
-   - Mobile-first with sticky bottom navigation
-   ============================================ */
+   Borrowed from European safety signage (ISO 7010): the green of
+   exit / first-aid signs is the brand colour, hi-vis yellow marks the
+   one action that matters on a page, red is reserved for "critical".
+   Light, calm, legible. Fonts are self-hosted (no Google Fonts requests).
 
-/* ============================================
-   CSS CUSTOM PROPERTIES (Design Tokens)
+   - Display: Archivo (wide, heavy — reads like a sign)
+   - Body:    Public Sans
    ============================================ */
 
 @theme {
   /* ===== Typography ===== */
-  --font-display: 'DM Serif Display', Georgia, serif;
-  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
-  --font-body: 'Source Sans 3', 'Segoe UI', sans-serif;
+  --font-display: 'Archivo Variable', 'Arial Narrow', Arial, sans-serif;
+  --font-body: 'Public Sans Variable', 'Segoe UI', system-ui, sans-serif;
+  /* numbers/data: same family as display, tabular figures (see .font-mono) */
+  --font-mono: 'Archivo Variable', Arial, sans-serif;
 
-  /* Type Scale (Perfect Fourth - 1.333) */
-  --text-xs: 0.75rem;
-  --text-sm: 0.875rem;
+  --text-xs: 0.78rem;
+  --text-sm: 0.9rem;
   --text-base: 1rem;
   --text-lg: 1.125rem;
   --text-xl: 1.333rem;
@@ -32,96 +34,122 @@
   --text-3xl: 2.369rem;
   --text-4xl: 3.157rem;
 
-  /* Line Heights */
-  --leading-tight: 1.2;
-  --leading-snug: 1.4;
+  --leading-tight: 1.15;
+  --leading-snug: 1.35;
   --leading-normal: 1.6;
-  --leading-relaxed: 1.8;
+  --leading-relaxed: 1.75;
 
-  /* Font Weights */
   --weight-normal: 400;
   --weight-medium: 500;
   --weight-semibold: 600;
   --weight-bold: 700;
 
-  /* Letter Spacing */
   --tracking-tight: -0.02em;
   --tracking-normal: 0;
-  --tracking-wide: 0.02em;
-  --tracking-wider: 0.05em;
+  --tracking-wide: 0;
+  --tracking-wider: 0.02em;
 
-  /* ===== Colors - Dark Mode (Default) ===== */
-
+  /* ===== Colour ===== */
   /* Backgrounds */
-  --color-bg-base: #0f1115;
-  --color-bg-primary: #1a1d23;
-  --color-bg-secondary: #252931;
-  --color-bg-tertiary: #2f343d;
-  --color-bg-elevated: #363b47;
-  --color-bg-surface: #1a1d23;
-  --color-bg-overlay: #2f343d;
+  --color-bg-base: #e9eee8;
+  --color-bg-primary: #f4f7f3;
+  --color-bg-secondary: #ffffff;
+  --color-bg-tertiary: #e8eee7;
+  --color-bg-elevated: #ffffff;
+  --color-bg-surface: #ffffff;
+  --color-bg-overlay: #ffffff;
+  --color-bg-card: #ffffff;
+  --color-bg: #f4f7f3;
 
-  /* Text Colors */
-  --color-text-primary: #f3f4f6;
-  --color-text-secondary: #9ca3af;
-  --color-text-tertiary: #6b7280;
-  --color-text-muted: #6b7280;
-  --color-text-accent: #f0b429;
-  --color-text-inverse: #0f1115;
+  /* Text */
+  --color-text: #10231b;
+  --color-text-primary: #10231b;
+  --color-text-secondary: #43544b;
+  --color-text-tertiary: #5f6e65;
+  --color-text-muted: #5f6e65;
+  --color-text-accent: #0a6b3b;
+  --color-text-inverse: #ffffff;
 
-  /* Accent - Emergency Amber */
-  --color-accent: #f59e0b;
-  --color-accent-primary: #f59e0b;
-  --color-accent-hover: #fbbf24;
-  --color-accent-active: #d97706;
-  --color-accent-muted: rgba(245, 158, 11, 0.15);
-  --color-accent-glow: rgba(245, 158, 11, 0.15);
-  --color-accent-subtle: rgba(245, 158, 11, 0.08);
+  /* Brand — safe-condition green */
+  --color-accent: #0a7a43;
+  --color-accent-primary: #0a7a43;
+  --color-accent-secondary: #0a4a2c;
+  --color-accent-hover: #086336;
+  --color-accent-active: #064d2a;
+  --color-accent-muted: rgba(10, 122, 67, 0.12);
+  --color-accent-glow: rgba(10, 122, 67, 0.12);
+  --color-accent-subtle: rgba(10, 122, 67, 0.07);
+  --color-deep: #0a3d26;
 
-  /* Semantic - Priority */
-  --color-critical: #ef4444;
-  --color-critical-bg: rgba(239, 68, 68, 0.12);
-  --color-important: #f59e0b;
-  --color-important-bg: rgba(245, 158, 11, 0.12);
-  --color-optional: #3b82f6;
-  --color-optional-bg: rgba(59, 130, 246, 0.12);
+  /* Signal — hi-vis yellow, primary actions only */
+  --color-signal: #ffd21f;
+  --color-signal-hover: #f2c200;
+  --color-signal-ink: #1a1a00;
 
-  /* Semantic - Feedback */
-  --color-success: #22c55e;
-  --color-success-bg: rgba(34, 197, 94, 0.12);
-  --color-warning: #f59e0b;
-  --color-warning-bg: rgba(245, 158, 11, 0.12);
-  --color-error: #ef4444;
-  --color-error-bg: rgba(239, 68, 68, 0.12);
-  --color-info: #3b82f6;
-  --color-info-bg: rgba(59, 130, 246, 0.12);
+  /* Semantic — priority */
+  --color-critical: #c2331f;
+  --color-critical-bg: #fbe9e6;
+  --color-important: #a85a00;
+  --color-important-bg: #fdf1dc;
+  --color-optional: #1d5fa8;
+  --color-optional-bg: #e6eff9;
 
-  /* Status Colors (legacy aliases) */
-  --color-status-critical: #ef4444;
-  --color-status-critical-bg: rgba(239, 68, 68, 0.1);
-  --color-status-warning: #f59e0b;
-  --color-status-warning-bg: rgba(245, 158, 11, 0.1);
-  --color-status-success: #22c55e;
-  --color-status-success-bg: rgba(34, 197, 94, 0.1);
-  --color-status-info: #3b82f6;
-  --color-status-info-bg: rgba(59, 130, 246, 0.1);
+  /* Semantic — feedback */
+  --color-success: #0a7a43;
+  --color-success-bg: #e3f2e9;
+  --color-warning: #a85a00;
+  --color-warning-bg: #fdf1dc;
+  --color-error: #c2331f;
+  --color-error-bg: #fbe9e6;
+  --color-info: #1d5fa8;
+  --color-info-bg: #e6eff9;
+
+  --color-status-critical: #c2331f;
+  --color-status-critical-bg: #fbe9e6;
+  --color-status-warning: #a85a00;
+  --color-status-warning-bg: #fdf1dc;
+  --color-status-success: #0a7a43;
+  --color-status-success-bg: #e3f2e9;
+  --color-status-info: #1d5fa8;
+  --color-status-info-bg: #e6eff9;
 
   /* Borders */
-  --color-border: #374151;
-  --color-border-subtle: #1f2937;
-  --color-border-accent: rgba(245, 158, 11, 0.4);
+  --color-border: #c9d3c9;
+  --color-border-primary: #c9d3c9;
+  --color-border-secondary: #dde4dc;
+  --color-border-subtle: #dde4dc;
+  --color-border-accent: rgba(10, 122, 67, 0.5);
+
+  /* Pages were written for a dark theme and use light "400" shades as text.
+     Remap those shades so they stay readable on a light surface. */
+  --color-emerald-400: #0a7a43;
+  --color-green-400: #0a7a43;
+  --color-green-500: #0a7a43;
+  --color-red-400: #c2331f;
+  --color-red-500: #c2331f;
+  --color-rose-400: #b4233c;
+  --color-blue-400: #1d5fa8;
+  --color-blue-500: #1d5fa8;
+  --color-amber-400: #b86b00;
+  --color-amber-500: #b86b00;
+  --color-orange-400: #c2500a;
+  --color-orange-500: #c2500a;
+  --color-purple-400: #6d3fb8;
+  --color-purple-500: #6d3fb8;
+  --color-cyan-400: #0e7490;
+  --color-yellow-400: #a16207;
 
   /* ===== Shadows ===== */
-  --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.2);
-  --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.2);
-  --shadow-md: 0 4px 8px rgba(0, 0, 0, 0.25);
-  --shadow-lg: 0 8px 16px rgba(0, 0, 0, 0.3);
-  --shadow-xl: 0 16px 32px rgba(0, 0, 0, 0.35);
-  --shadow-glow: 0 0 20px rgba(245, 158, 11, 0.15);
-  --shadow-glow-sm: 0 0 8px rgba(245, 158, 11, 0.2);
-  --shadow-glow-md: 0 0 16px rgba(245, 158, 11, 0.25);
-  --shadow-glow-lg: 0 0 24px rgba(245, 158, 11, 0.3);
-  --shadow-inner: inset 0 2px 4px rgba(0, 0, 0, 0.2);
+  --shadow-xs: 0 1px 0 rgba(16, 35, 27, 0.06);
+  --shadow-sm: 0 1px 2px rgba(16, 35, 27, 0.08);
+  --shadow-md: 0 2px 6px rgba(16, 35, 27, 0.08);
+  --shadow-lg: 0 6px 18px rgba(16, 35, 27, 0.1);
+  --shadow-xl: 0 14px 34px rgba(16, 35, 27, 0.14);
+  --shadow-glow: 0 2px 6px rgba(16, 35, 27, 0.08);
+  --shadow-glow-sm: 0 1px 2px rgba(16, 35, 27, 0.08);
+  --shadow-glow-md: 0 2px 6px rgba(16, 35, 27, 0.08);
+  --shadow-glow-lg: 0 6px 18px rgba(16, 35, 27, 0.1);
+  --shadow-inner: inset 0 1px 2px rgba(16, 35, 27, 0.08);
 
   /* ===== Spacing Scale (4px base) ===== */
   --space-0: 0;
@@ -138,20 +166,18 @@
   --space-20: 5rem;
   --space-24: 6rem;
 
-  /* ===== Border Radius ===== */
+  /* ===== Radius: signs have small, firm corners ===== */
   --radius-none: 0;
-  --radius-sm: 2px;
-  --radius-md: 4px;
+  --radius-sm: 3px;
+  --radius-md: 6px;
   --radius-lg: 8px;
   --radius-xl: 12px;
   --radius-full: 9999px;
 
-  /* ===== Transitions ===== */
   --transition-fast: 150ms ease;
   --transition-normal: 250ms ease;
   --transition-slow: 400ms ease;
 
-  /* ===== Z-Index Scale ===== */
   --z-base: 0;
   --z-dropdown: 100;
   --z-sticky: 200;
@@ -162,34 +188,27 @@
   --z-tooltip: 700;
   --z-toast: 800;
 
-  /* ===== Layout ===== */
   --bottom-nav-height: 56px;
   --header-height: 64px;
   --safe-area-bottom: env(safe-area-inset-bottom, 0px);
 }
 
+@layer base {
 /* ============================================
-   BASE STYLES
+   BASE
    ============================================ */
 
 html {
   scroll-behavior: smooth;
+  scroll-padding-top: calc(var(--header-height) + 16px);
 }
 
 body {
   font-family: var(--font-body);
-  font-size: 1rem;
+  font-size: 1.0625rem;
   line-height: 1.6;
   color: var(--color-text-primary);
   background: var(--color-bg-primary);
-
-  /* Atmospheric background - NOT solid color */
-  background-image:
-    radial-gradient(ellipse at 20% 0%, rgba(245, 158, 11, 0.03) 0%, transparent 50%),
-    radial-gradient(ellipse at 80% 100%, rgba(37, 41, 49, 0.8) 0%, transparent 50%),
-    linear-gradient(180deg, #1a1d23 0%, #1f2228 100%);
-  background-attachment: fixed;
-
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -200,45 +219,55 @@ body {
 
 h1, h2, h3 {
   font-family: var(--font-display);
-  font-weight: 400;
-  line-height: 1.2;
+  font-stretch: 112%;
+  font-weight: 750;
+  line-height: 1.1;
   color: var(--color-text-primary);
+  text-wrap: balance;
 }
 
 h1 {
-  font-size: clamp(2rem, 5vw, 3.5rem);
-  letter-spacing: -0.02em;
+  font-size: clamp(2.1rem, 5.2vw, 3.6rem);
+  letter-spacing: -0.025em;
 }
 
 h2 {
-  font-size: clamp(1.5rem, 3vw, 2.25rem);
-  letter-spacing: -0.01em;
+  font-size: clamp(1.5rem, 3vw, 2.1rem);
+  letter-spacing: -0.02em;
 }
 
 h3 {
-  font-size: clamp(1.25rem, 2vw, 1.5rem);
+  font-size: clamp(1.15rem, 2vw, 1.35rem);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  line-height: 1.2;
 }
 
 h4, h5, h6 {
   font-family: var(--font-body);
-  font-weight: 600;
+  font-weight: 650;
   line-height: 1.3;
 }
 
-/* Monospace for data/numbers */
-.font-mono,
-code,
-kbd,
-pre {
-  font-family: var(--font-mono);
+.font-display {
+  font-stretch: 112%;
 }
 
-/* Data readouts - technical feel */
+/* Figures: tabular, same family as headings */
+.font-mono,
 .data-value {
   font-family: var(--font-mono);
-  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+  font-stretch: 100%;
+}
+
+code, kbd, pre {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+
+.data-value {
+  font-weight: 700;
   color: var(--color-accent-primary);
-  letter-spacing: 0.02em;
 }
 
 /* ============================================
@@ -255,6 +284,9 @@ a:hover {
   color: var(--color-accent-hover);
 }
 
+}
+
+@layer components {
 /* ============================================
    SELECTION
    ============================================ */
@@ -1989,5 +2021,273 @@ input[type="checkbox"]:checked {
   /* Show print-only elements */
   [data-print-only] {
     display: block !important;
+  }
+}
+
+/* ============================================
+   v3 OVERRIDES
+   Replaces the dark-theme treatments above (glass cards, glows).
+   ============================================ */
+
+::selection {
+  background: var(--color-signal);
+  color: var(--color-signal-ink);
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-bg-tertiary);
+}
+
+.card {
+  background: var(--color-bg-secondary);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  backdrop-filter: none;
+  box-shadow: none;
+}
+
+.card:hover {
+  border-color: var(--color-border);
+  box-shadow: none;
+}
+
+a.card:hover,
+.card-interactive:hover {
+  border-color: var(--color-accent);
+  box-shadow: var(--shadow-md);
+  transform: none;
+}
+
+.bg-grid {
+  background-image: none;
+}
+
+.border-glow {
+  border-color: var(--color-accent);
+  box-shadow: none;
+}
+
+/* Buttons: yellow = the one primary action; green outline = everything else */
+.btn {
+  border-radius: var(--radius-md);
+  font-weight: 650;
+  letter-spacing: 0;
+  font-size: 1rem;
+}
+
+.btn-primary {
+  background: var(--color-signal);
+  color: var(--color-signal-ink);
+  box-shadow: inset 0 -2px 0 rgba(0, 0, 0, 0.18);
+}
+
+.btn-primary:hover:not(:disabled) {
+  background: var(--color-signal-hover);
+  color: var(--color-signal-ink);
+  box-shadow: inset 0 -2px 0 rgba(0, 0, 0, 0.22);
+}
+
+.btn-primary:active:not(:disabled) {
+  background: var(--color-signal-hover);
+  transform: translateY(1px);
+  box-shadow: none;
+}
+
+.btn-secondary {
+  background: var(--color-bg-secondary);
+  border: 1.5px solid var(--color-text-primary);
+  color: var(--color-text-primary);
+}
+
+.btn-secondary:hover:not(:disabled) {
+  border-color: var(--color-accent);
+  color: var(--color-accent-hover);
+}
+
+/* ---------- Article typography (replaces the missing typography plugin) ---------- */
+.prose {
+  color: var(--color-text-primary);
+  font-size: 1.0625rem;
+  line-height: 1.7;
+  max-width: 68ch;
+}
+
+.prose.max-w-none {
+  max-width: 72ch;
+}
+
+.prose > * + * {
+  margin-top: 1.1em;
+}
+
+.prose h2 {
+  margin-top: 2.4em;
+  margin-bottom: 0.6em;
+  padding-top: 0.9em;
+  border-top: 3px solid var(--color-text-primary);
+}
+
+.prose h3 {
+  margin-top: 1.8em;
+  margin-bottom: 0.4em;
+}
+
+.prose h4 {
+  margin-top: 1.4em;
+  font-size: 1.05rem;
+}
+
+.prose p {
+  margin-top: 0.9em;
+}
+
+.prose a:not(.btn):not(.not-prose a) {
+  text-decoration: underline;
+  text-decoration-thickness: 1.5px;
+  text-underline-offset: 3px;
+  font-weight: 550;
+}
+
+.prose strong {
+  font-weight: 700;
+}
+
+.prose ul,
+.prose ol {
+  margin-top: 0.8em;
+  padding-left: 1.3em;
+}
+
+.prose ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+.prose ul > li {
+  position: relative;
+  padding-left: 1.5em;
+}
+
+.prose ul > li::before {
+  content: '';
+  position: absolute;
+  left: 0.2em;
+  top: 0.62em;
+  width: 0.5em;
+  height: 0.5em;
+  background: var(--color-accent);
+  border-radius: 1px;
+}
+
+.prose ol {
+  list-style: decimal;
+}
+
+.prose ol > li::marker {
+  font-family: var(--font-display);
+  font-weight: 700;
+  color: var(--color-accent);
+}
+
+.prose li + li {
+  margin-top: 0.4em;
+}
+
+.prose blockquote {
+  border-left: 4px solid var(--color-accent);
+  background: var(--color-bg-secondary);
+}
+
+.prose table {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--color-bg-secondary);
+  font-size: 0.95rem;
+  display: block;
+  overflow-x: auto;
+}
+
+.prose th,
+.prose td {
+  padding: 0.65em 0.85em;
+  text-align: left;
+  border-bottom: 1px solid var(--color-border-subtle);
+  vertical-align: top;
+}
+
+.prose th {
+  background: var(--color-deep);
+  color: #fff;
+  font-weight: 650;
+}
+
+.prose tr:nth-child(even) {
+  background: var(--color-bg-primary);
+}
+
+.prose img {
+  border-radius: var(--radius-lg);
+}
+
+.prose .not-prose,
+.prose .not-prose * {
+  max-width: none;
+}
+
+.prose .not-prose li::before {
+  content: none;
+}
+
+.prose .not-prose li {
+  padding-left: 0;
+}
+
+/* Mobile bottom nav on a light surface */
+.bottom-nav {
+  background: var(--color-bg-secondary);
+  box-shadow: 0 -1px 0 var(--color-border);
+}
+
+.search-modal-backdrop,
+.bottom-sheet-backdrop {
+  background: rgba(16, 35, 27, 0.55);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+}
+
+@layer components {
+  /* Brand: a safety-sign tile with the number, next to the wordmark */
+  .brand-mark {
+    display: inline-grid;
+    place-items: center;
+    width: 2.1rem;
+    height: 2.1rem;
+    background: var(--color-accent);
+    color: #fff;
+    font-family: var(--font-display);
+    font-stretch: 100%;
+    font-weight: 800;
+    font-size: 1.05rem;
+    letter-spacing: -0.03em;
+    border-radius: 5px;
+    box-shadow: inset 0 0 0 2px #fff, 0 0 0 1.5px var(--color-accent);
+  }
+  .brand-word {
+    font-family: var(--font-display);
+    font-stretch: 112%;
+    font-weight: 800;
+    font-size: 1.2rem;
+    letter-spacing: -0.02em;
+    color: var(--color-text-primary);
   }
 }

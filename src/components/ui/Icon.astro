@@ -8,6 +8,8 @@
  */
 
 import * as icons from 'lucide-react';
+import { createElement } from 'react';
+import { renderToStaticMarkup } from 'react-dom/server';
 
 interface Props {
   name: keyof typeof icons;
@@ -153,7 +155,13 @@ const iconPaths: Record<string, string> = {
   ShoppingCart: '<circle cx="8" cy="21" r="1"/><circle cx="19" cy="21" r="1"/><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"/>',
 };
 
-const svgPath = iconPaths[name] || '';
+// Icons without a hand-copied path above are rendered from lucide-react at
+// build time, so a page can use any lucide icon without showing a "?".
+let svgPath = iconPaths[name] || '';
+if (!svgPath && IconComponent) {
+  const markup = renderToStaticMarkup(createElement(IconComponent as any, { size, strokeWidth }));
+  svgPath = markup.replace(/^<svg[^>]*>/, '').replace(/<\/svg>$/, '');
+}
 ---
 
 {svgPath ? (

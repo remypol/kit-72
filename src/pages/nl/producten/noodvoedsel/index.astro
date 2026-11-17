@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../../../layouts/BaseLayout.astro';
+import ShopBox from '../../../../components/growth/ShopBox.astro';
 import Breadcrumb from '../../../../components/layout/Breadcrumb.astro';
 import Icon from '../../../../components/ui/Icon.astro';
 import HeroImage from '../../../../components/content/HeroImage.astro';
@@ -28,6 +29,8 @@ import HeroImage from '../../../../components/content/HeroImage.astro';
         />
       </div>
 
+      <ShopBox locale="nl" category="noodvoedsel" />
+
       <div class="prose prose-lg">
         <p class="lead">
           Je overleeft weken zonder eten — maar voor 72 uur heb je energie nodig
@@ -36,19 +39,19 @@ import HeroImage from '../../../../components/content/HeroImage.astro';
         </p>
 
         <!-- Calorie Guide -->
-        <div class="card p-6 my-8 bg-[--color-bg-tertiary] not-prose">
+        <div class="card p-6 my-8 bg-(--color-bg-tertiary) not-prose">
           <h3 class="text-lg font-semibold mb-4 flex items-center gap-2">
-            <Icon name="UtensilsCrossed" size={20} class="text-[--color-accent-primary]" />
+            <Icon name="UtensilsCrossed" size={20} class="text-(--color-accent-primary)" />
             Caloriebehoefte
           </h3>
           <div class="grid sm:grid-cols-2 gap-4">
-            <div class="p-4 bg-[--color-bg-secondary] rounded-lg">
-              <p class="text-2xl font-bold text-[--color-accent-primary]">1.500-2.000</p>
-              <p class="text-sm text-[--color-text-secondary]">kcal per dag (minimum)</p>
+            <div class="p-4 bg-(--color-bg-secondary) rounded-lg">
+              <p class="text-2xl font-bold text-(--color-accent-primary)">1.500-2.000</p>
+              <p class="text-sm text-(--color-text-secondary)">kcal per dag (minimum)</p>
             </div>
-            <div class="p-4 bg-[--color-bg-secondary] rounded-lg">
-              <p class="text-2xl font-bold text-[--color-accent-primary]">4.500-6.000</p>
-              <p class="text-sm text-[--color-text-secondary]">kcal per persoon voor 72 uur</p>
+            <div class="p-4 bg-(--color-bg-secondary) rounded-lg">
+              <p class="text-2xl font-bold text-(--color-accent-primary)">4.500-6.000</p>
+              <p class="text-sm text-(--color-text-secondary)">kcal per persoon voor 72 uur</p>
             </div>
           </div>
         </div>
@@ -114,9 +117,9 @@ import HeroImage from '../../../../components/content/HeroImage.astro';
           <li><strong>Ongediertebestendig:</strong> Containers tegen motten en muizen</li>
         </ul>
 
-        <div class="card p-6 my-8 bg-[--color-accent-subtle] not-prose">
+        <div class="card p-6 my-8 bg-(--color-accent-subtle) not-prose">
           <p class="font-medium mb-2">💡 Camping brander als optie</p>
-          <p class="text-sm text-[--color-text-secondary]">
+          <p class="text-sm text-(--color-text-secondary)">
             Een klein gasstelletje maakt warme maaltijden mogelijk.
             <strong>Alleen buiten of bij zeer goede ventilatie gebruiken!</strong>
             Gasgeur = direct ventileren en niet gebruiken.
@@ -144,16 +147,16 @@ import HeroImage from '../../../../components/content/HeroImage.astro';
       </div>
 
       <!-- Shop Link -->
-      <div class="mt-12 card p-6 bg-[--color-bg-tertiary]">
+      <div class="mt-12 card p-6 bg-(--color-bg-tertiary)">
         <h3 class="font-semibold mb-2">Noodvoedsel op Bol.com</h3>
-        <p class="text-sm text-[--color-text-secondary] mb-4">
+        <p class="text-sm text-(--color-text-secondary) mb-4">
           Aanbevolen noodvoeding met lange houdbaarheid.
         </p>
         <a
           href="https://www.bol.com/nl/nl/s/?searchtext=noodvoedsel+lang+houdbaar"
           target="_blank"
           rel="noopener noreferrer"
-          class="inline-flex items-center gap-2 px-4 py-2 bg-[--color-accent-primary] text-[--color-bg-primary] font-medium rounded hover:bg-[--color-accent-hover] transition-colors"
+          class="inline-flex items-center gap-2 px-4 py-2 bg-(--color-accent-primary) text-(--color-bg-primary) font-medium rounded hover:bg-(--color-accent-hover) transition-colors"
         >
           Bekijk op Bol.com
           <Icon name="ExternalLink" size={16} />

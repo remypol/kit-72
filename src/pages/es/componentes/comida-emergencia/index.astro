@@ -210,31 +210,31 @@ const commonMistakes = [
       <!-- Header -->
       <div class="mb-12">
         <nav class="text-sm mb-4">
-          <ol class="flex items-center gap-2 text-[--color-text-muted]">
-            <li><a href="/es/" class="hover:text-[--color-accent-primary]">Inicio</a></li>
+          <ol class="flex items-center gap-2 text-(--color-text-muted)">
+            <li><a href="/es/" class="hover:text-(--color-accent-primary)">Inicio</a></li>
             <li>/</li>
-            <li><a href="/es/componentes/" class="hover:text-[--color-accent-primary]">Componentes</a></li>
+            <li><a href="/es/componentes/" class="hover:text-(--color-accent-primary)">Componentes</a></li>
             <li>/</li>
-            <li class="text-[--color-text-primary]">Comida de Emergencia</li>
+            <li class="text-(--color-text-primary)">Comida de Emergencia</li>
           </ol>
         </nav>
         <h1 class="mb-4 flex items-center gap-3">
-          <Icon name="UtensilsCrossed" size={32} class="text-[--color-accent-primary]" />
+          <Icon name="UtensilsCrossed" size={32} class="text-(--color-accent-primary)" />
           Comida de Emergencia
         </h1>
-        <p class="text-lg text-[--color-text-secondary]">
+        <p class="text-lg text-(--color-text-secondary)">
           En 72 horas sin comida no te mueres, pero sí pierdes energía, concentración y moral.
           Una reserva de alimentos bien planificada marca la diferencia en una emergencia.
         </p>
       </div>
 
       <!-- Quick Recommendation -->
-      <div class="card p-6 mb-8 border-l-4 border-l-[--color-accent-primary]">
-        <h3 class="font-semibold mb-2 text-[--color-text-primary] flex items-center gap-2">
-          <Icon name="UtensilsCrossed" size={20} class="text-[--color-accent-primary]" />
+      <div class="card p-6 mb-8 border-l-4 border-l-(--color-accent-primary)">
+        <h3 class="font-semibold mb-2 text-(--color-text-primary) flex items-center gap-2">
+          <Icon name="UtensilsCrossed" size={20} class="text-(--color-accent-primary)" />
           Recomendación rápida
         </h3>
-        <p class="text-[--color-text-secondary] m-0">
+        <p class="text-(--color-text-secondary) m-0">
           <strong>Mínimo:</strong> 2000 kcal/persona/día × 3 días = 6000 kcal por persona.
           <strong>Ideal:</strong> Variedad de conservas + carbohidratos + snacks.
           <strong>Presupuesto:</strong> 30-50€ por persona para 72h.
@@ -242,27 +242,27 @@ const commonMistakes = [
       </div>
 
       <!-- Calorie Calculator -->
-      <div class="card p-6 mb-8 bg-[--color-bg-tertiary]">
-        <h3 class="font-semibold mb-4 text-[--color-text-primary] flex items-center gap-2">
-          <Icon name="Calculator" size={20} class="text-[--color-accent-primary]" />
+      <div class="card p-6 mb-8 bg-(--color-bg-tertiary)">
+        <h3 class="font-semibold mb-4 text-(--color-text-primary) flex items-center gap-2">
+          <Icon name="Calculator" size={20} class="text-(--color-accent-primary)" />
           ¿Cuántas calorías necesito?
         </h3>
 
         <div class="overflow-x-auto mb-4">
           <table class="w-full text-sm">
             <thead>
-              <tr class="border-b border-[--color-border]">
+              <tr class="border-b border-(--color-border)">
                 <th class="text-left py-2">Grupo</th>
                 <th class="text-center py-2">kcal/día</th>
                 <th class="text-center py-2">72h (3 días)</th>
               </tr>
             </thead>
-            <tbody class="text-[--color-text-secondary]">
+            <tbody class="text-(--color-text-secondary)">
               {calorieNeeds.map((need) => (
-                <tr class="border-b border-[--color-border]">
+                <tr class="border-b border-(--color-border)">
                   <td class="py-2">{need.group}</td>
                   <td class="py-2 text-center">{need.kcal}</td>
-                  <td class="py-2 text-center font-bold text-[--color-accent-primary]">
+                  <td class="py-2 text-center font-bold text-(--color-accent-primary)">
                     {parseInt(need.kcal.split('-')[1] || need.kcal.split('-')[0]) * need.perDay} kcal
                   </td>
                 </tr>
@@ -271,7 +271,7 @@ const commonMistakes = [
           </table>
         </div>
 
-        <p class="text-xs text-[--color-text-muted]">
+        <p class="text-xs text-(--color-text-muted)">
           En emergencia con actividad reducida, 1500-1800 kcal/día es suficiente para adultos.
           Prioriza proteínas y carbohidratos complejos.
         </p>
@@ -279,23 +279,23 @@ const commonMistakes = [
 
       <!-- Food Categories -->
       <div class="mb-12">
-        <h2 class="text-2xl font-bold mb-6 text-[--color-text-primary]">Tipos de alimentos de emergencia</h2>
+        <h2 class="text-2xl font-bold mb-6 text-(--color-text-primary)">Tipos de alimentos de emergencia</h2>
 
         <div class="space-y-4">
           {foodCategories.map((cat) => (
             <div class="card p-6">
               <div class="flex items-start gap-4">
-                <div class="w-12 h-12 flex items-center justify-center bg-[--color-bg-tertiary] rounded-lg flex-shrink-0">
-                  <Icon name={cat.icon as any} size={28} class="text-[--color-accent-primary]" />
+                <div class="w-12 h-12 flex items-center justify-center bg-(--color-bg-tertiary) rounded-lg flex-shrink-0">
+                  <Icon name={cat.icon as any} size={28} class="text-(--color-accent-primary)" />
                 </div>
                 <div class="flex-1">
                   <div class="flex items-center gap-3 mb-2">
-                    <h3 class="font-semibold text-[--color-text-primary]">{cat.name}</h3>
-                    <span class="text-xs px-2 py-1 bg-[--color-bg-tertiary] text-[--color-text-muted] rounded">
+                    <h3 class="font-semibold text-(--color-text-primary)">{cat.name}</h3>
+                    <span class="text-xs px-2 py-1 bg-(--color-bg-tertiary) text-(--color-text-muted) rounded">
                       {cat.shelf}
                     </span>
                   </div>
-                  <p class="text-sm text-[--color-text-secondary] mb-3">{cat.description}</p>
+                  <p class="text-sm text-(--color-text-secondary) mb-3">{cat.description}</p>
 
                   <div class="grid sm:grid-cols-3 gap-4 text-sm">
                     <div>
@@ -303,7 +303,7 @@ const commonMistakes = [
                         <Icon name="CircleCheck" size={14} />
                         Pros
                       </span>
-                      <ul class="mt-1 space-y-1 text-[--color-text-muted]">
+                      <ul class="mt-1 space-y-1 text-(--color-text-muted)">
                         {cat.pros.map((pro) => <li>• {pro}</li>)}
                       </ul>
                     </div>
@@ -312,16 +312,16 @@ const commonMistakes = [
                         <Icon name="CircleX" size={14} />
                         Contras
                       </span>
-                      <ul class="mt-1 space-y-1 text-[--color-text-muted]">
+                      <ul class="mt-1 space-y-1 text-(--color-text-muted)">
                         {cat.cons.map((con) => <li>• {con}</li>)}
                       </ul>
                     </div>
                     <div>
-                      <span class="text-[--color-accent-primary] font-medium flex items-center gap-1">
+                      <span class="text-(--color-accent-primary) font-medium flex items-center gap-1">
                         <Icon name="Star" size={14} />
                         Ideal para
                       </span>
-                      <p class="mt-1 text-[--color-text-muted]">{cat.bestFor}</p>
+                      <p class="mt-1 text-(--color-text-muted)">{cat.bestFor}</p>
                     </div>
                   </div>
                 </div>
@@ -333,12 +333,12 @@ const commonMistakes = [
 
       <!-- Essential Items -->
       <div class="mb-12">
-        <h2 class="text-2xl font-bold mb-6 text-[--color-text-primary]">Alimentos esenciales</h2>
+        <h2 class="text-2xl font-bold mb-6 text-(--color-text-primary)">Alimentos esenciales</h2>
 
         <div class="card overflow-hidden">
           <div class="overflow-x-auto">
             <table class="w-full text-sm">
-              <thead class="bg-[--color-bg-tertiary]">
+              <thead class="bg-(--color-bg-tertiary)">
                 <tr>
                   <th class="text-left py-3 px-4">Alimento</th>
                   <th class="text-left py-3 px-4">Ejemplos</th>
@@ -346,14 +346,14 @@ const commonMistakes = [
                   <th class="text-center py-3 px-4">Prioridad</th>
                 </tr>
               </thead>
-              <tbody class="text-[--color-text-secondary]">
+              <tbody class="text-(--color-text-secondary)">
                 {essentialItems.map((item, i) => (
-                  <tr class={i % 2 === 0 ? 'bg-[--color-bg-secondary]' : ''}>
-                    <td class="py-3 px-4 font-medium text-[--color-text-primary]">{item.item}</td>
+                  <tr class={i % 2 === 0 ? 'bg-(--color-bg-secondary)' : ''}>
+                    <td class="py-3 px-4 font-medium text-(--color-text-primary)">{item.item}</td>
                     <td class="py-3 px-4 text-xs">{item.examples}</td>
                     <td class="py-3 px-4 text-center">{item.kcal}</td>
                     <td class="py-3 px-4 text-center">
-                      <span class={`text-xs px-2 py-1 rounded ${item.priority === 'essential' ? 'bg-red-500/20 text-red-400' : item.priority === 'recommended' ? 'bg-[--color-accent-primary]/20 text-[--color-accent-primary]' : 'bg-[--color-bg-tertiary] text-[--color-text-muted]'}`}>
+                      <span class={`text-xs px-2 py-1 rounded ${item.priority === 'essential' ? 'bg-red-500/20 text-red-400' : item.priority === 'recommended' ? 'bg-(--color-accent-primary)/20 text-(--color-accent-primary)' : 'bg-(--color-bg-tertiary) text-(--color-text-muted)'}`}>
                         {item.priority === 'essential' ? 'Esencial' : item.priority === 'recommended' ? 'Recomendado' : 'Opcional'}
                       </span>
                     </td>
@@ -367,23 +367,23 @@ const commonMistakes = [
 
       <!-- 3-Day Meal Plan -->
       <div class="mb-12">
-        <h2 class="text-2xl font-bold mb-6 text-[--color-text-primary]">Plan de comidas ejemplo (3 días)</h2>
+        <h2 class="text-2xl font-bold mb-6 text-(--color-text-primary)">Plan de comidas ejemplo (3 días)</h2>
 
         <div class="space-y-4">
           {mealPlan3Days.map((day) => (
             <div class="card p-6">
-              <h3 class="font-semibold text-[--color-accent-primary] mb-4">{day.day}</h3>
+              <h3 class="font-semibold text-(--color-accent-primary) mb-4">{day.day}</h3>
               <div class="space-y-2">
                 {day.meals.map((meal) => (
-                  <div class="flex items-center justify-between text-sm border-b border-[--color-border] pb-2">
+                  <div class="flex items-center justify-between text-sm border-b border-(--color-border) pb-2">
                     <div>
-                      <span class="font-medium text-[--color-text-primary]">{meal.meal}:</span>
-                      <span class="text-[--color-text-secondary] ml-2">{meal.items}</span>
+                      <span class="font-medium text-(--color-text-primary)">{meal.meal}:</span>
+                      <span class="text-(--color-text-secondary) ml-2">{meal.items}</span>
                     </div>
-                    <span class="text-xs text-[--color-text-muted]">{meal.kcal} kcal</span>
+                    <span class="text-xs text-(--color-text-muted)">{meal.kcal} kcal</span>
                   </div>
                 ))}
-                <div class="text-right text-sm font-bold text-[--color-accent-primary] pt-2">
+                <div class="text-right text-sm font-bold text-(--color-accent-primary) pt-2">
                   Total: {day.meals.reduce((sum, m) => sum + m.kcal, 0)} kcal
                 </div>
               </div>
@@ -394,13 +394,13 @@ const commonMistakes = [
 
       <!-- Storage Rules -->
       <div class="mb-12">
-        <h2 class="text-2xl font-bold mb-6 text-[--color-text-primary]">Reglas de almacenamiento</h2>
+        <h2 class="text-2xl font-bold mb-6 text-(--color-text-primary)">Reglas de almacenamiento</h2>
 
         <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
           {storageRules.map((rule) => (
             <div class="card p-4">
-              <h3 class="font-semibold text-[--color-text-primary] mb-2">{rule.rule}</h3>
-              <p class="text-sm text-[--color-text-secondary]">{rule.detail}</p>
+              <h3 class="font-semibold text-(--color-text-primary) mb-2">{rule.rule}</h3>
+              <p class="text-sm text-(--color-text-secondary)">{rule.detail}</p>
             </div>
           ))}
         </div>
@@ -408,14 +408,14 @@ const commonMistakes = [
 
       <!-- Special Diets -->
       <div class="mb-12">
-        <h2 class="text-2xl font-bold mb-6 text-[--color-text-primary]">Dietas especiales</h2>
+        <h2 class="text-2xl font-bold mb-6 text-(--color-text-primary)">Dietas especiales</h2>
 
         <div class="card p-6">
           <div class="space-y-4">
             {specialDiets.map((diet) => (
-              <div class="border-b border-[--color-border] pb-3 last:border-0">
-                <h4 class="font-semibold text-[--color-text-primary] mb-1">{diet.diet}</h4>
-                <p class="text-sm text-[--color-text-secondary]">{diet.items}</p>
+              <div class="border-b border-(--color-border) pb-3 last:border-0">
+                <h4 class="font-semibold text-(--color-text-primary) mb-1">{diet.diet}</h4>
+                <p class="text-sm text-(--color-text-secondary)">{diet.items}</p>
               </div>
             ))}
           </div>
@@ -424,37 +424,37 @@ const commonMistakes = [
 
       <!-- Suggested Kit -->
       <div class="mb-12">
-        <h2 class="text-2xl font-bold mb-6 text-[--color-text-primary]">Kit de comida sugerido</h2>
+        <h2 class="text-2xl font-bold mb-6 text-(--color-text-primary)">Kit de comida sugerido</h2>
 
         <div class="card p-6">
-          <p class="text-sm text-[--color-text-secondary] mb-4">
+          <p class="text-sm text-(--color-text-secondary) mb-4">
             Para 1 adulto durante 3 días (~6000 kcal):
           </p>
 
           <div class="overflow-x-auto">
             <table class="w-full text-sm">
               <thead>
-                <tr class="border-b border-[--color-border]">
+                <tr class="border-b border-(--color-border)">
                   <th class="text-left py-2">Artículo</th>
                   <th class="text-center py-2">Cantidad</th>
                   <th class="text-left py-2">Notas</th>
                 </tr>
               </thead>
-              <tbody class="text-[--color-text-secondary]">
+              <tbody class="text-(--color-text-secondary)">
                 {kitSuggestion.map((item) => (
-                  <tr class="border-b border-[--color-border]">
+                  <tr class="border-b border-(--color-border)">
                     <td class="py-2">{item.item}</td>
-                    <td class="py-2 text-center font-bold text-[--color-accent-primary]">{item.qty}</td>
-                    <td class="py-2 text-xs text-[--color-text-muted]">{item.notes}</td>
+                    <td class="py-2 text-center font-bold text-(--color-accent-primary)">{item.qty}</td>
+                    <td class="py-2 text-xs text-(--color-text-muted)">{item.notes}</td>
                   </tr>
                 ))}
               </tbody>
             </table>
           </div>
 
-          <div class="mt-4 pt-4 border-t border-[--color-border] text-center">
-            <p class="text-sm text-[--color-text-muted]">
-              Inversión aproximada: <strong class="text-[--color-accent-primary]">30-50€</strong> por persona
+          <div class="mt-4 pt-4 border-t border-(--color-border) text-center">
+            <p class="text-sm text-(--color-text-muted)">
+              Inversión aproximada: <strong class="text-(--color-accent-primary)">30-50€</strong> por persona
             </p>
           </div>
         </div>
@@ -462,8 +462,8 @@ const commonMistakes = [
 
       <!-- Product Recommendations -->
       <div class="mb-12">
-        <h2 class="text-2xl font-bold mb-6 text-[--color-text-primary] flex items-center gap-2">
-          <Icon name="ShoppingCart" size={24} class="text-[--color-accent-primary]" />
+        <h2 class="text-2xl font-bold mb-6 text-(--color-text-primary) flex items-center gap-2">
+          <Icon name="ShoppingCart" size={24} class="text-(--color-accent-primary)" />
           Productos recomendados
         </h2>
         <ProductGrid products={amazonProducts} title="Alimentos para tu kit de emergencia" />
@@ -471,11 +471,11 @@ const commonMistakes = [
 
       <!-- Common Mistakes -->
       <div class="card p-6 mb-8 border-l-4 border-l-red-500">
-        <h3 class="font-semibold mb-4 text-[--color-text-primary] flex items-center gap-2">
+        <h3 class="font-semibold mb-4 text-(--color-text-primary) flex items-center gap-2">
           <Icon name="CircleX" size={20} class="text-red-400" />
           Errores comunes a evitar
         </h3>
-        <ul class="grid sm:grid-cols-2 gap-2 text-sm text-[--color-text-secondary]">
+        <ul class="grid sm:grid-cols-2 gap-2 text-sm text-(--color-text-secondary)">
           {commonMistakes.map((mistake) => (
             <li>• {mistake}</li>
           ))}
@@ -483,10 +483,10 @@ const commonMistakes = [
       </div>
 
       <!-- Critical Reminder -->
-      <div class="p-4 bg-[--color-status-warning]/10 border border-[--color-status-warning]/30 rounded-lg mb-8">
-        <p class="text-sm text-[--color-text-secondary] m-0 flex items-start gap-2">
-          <Icon name="AlertTriangle" size={18} class="text-[--color-status-warning] flex-shrink-0 mt-0.5" />
-          <span><strong class="text-[--color-status-warning]">No olvides:</strong> Ten siempre
+      <div class="p-4 bg-(--color-status-warning)/10 border border-(--color-status-warning)/30 rounded-lg mb-8">
+        <p class="text-sm text-(--color-text-secondary) m-0 flex items-start gap-2">
+          <Icon name="AlertTriangle" size={18} class="text-(--color-status-warning) flex-shrink-0 mt-0.5" />
+          <span><strong class="text-(--color-status-warning)">No olvides:</strong> Ten siempre
           <strong>2 abrelatas manuales</strong> (los eléctricos no sirven sin luz),
           <strong>cubiertos</strong>, y considera cómo <strong>calentar</strong> la comida
           (hornillo camping, velas, etc.).</span>
@@ -497,13 +497,13 @@ const commonMistakes = [
       <div class="flex flex-wrap gap-4 justify-center">
         <a
           href="/es/guias/almacenamiento-comida/"
-          class="inline-flex items-center gap-2 px-4 py-2 border border-[--color-border] text-sm font-medium rounded hover:border-[--color-accent-primary] hover:text-[--color-accent-primary] transition-colors"
+          class="inline-flex items-center gap-2 px-4 py-2 border border-(--color-border) text-sm font-medium rounded hover:border-(--color-accent-primary) hover:text-(--color-accent-primary) transition-colors"
         >
           Guía completa: Almacenamiento de Comida
         </a>
         <a
           href="/es/herramientas/configurador-kit/"
-          class="inline-flex items-center gap-2 px-4 py-2 bg-[--color-accent-primary] text-[--color-bg-primary] text-sm font-medium rounded hover:bg-[--color-accent-secondary] transition-colors"
+          class="inline-flex items-center gap-2 px-4 py-2 bg-(--color-accent-primary) text-(--color-bg-primary) text-sm font-medium rounded hover:bg-(--color-accent-secondary) transition-colors"
         >
           Configurador de Kit →
         </a>

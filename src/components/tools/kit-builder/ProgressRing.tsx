@@ -29,9 +29,9 @@ export function ProgressRing({
 
   const getColor = () => {
     if (progress >= 100) return 'text-emerald-400';
-    if (progress >= 75) return 'text-[--color-accent-primary]';
+    if (progress >= 75) return 'text-(--color-accent-primary)';
     if (progress >= 50) return 'text-amber-400';
-    return 'text-[--color-text-muted]';
+    return 'text-(--color-text-muted)';
   };
 
   return (
@@ -53,7 +53,7 @@ export function ProgressRing({
           fill="none"
           stroke="currentColor"
           strokeWidth={strokeWidth}
-          className="text-[--color-bg-tertiary]"
+          className="text-(--color-bg-tertiary)"
         />
         {/* Progress circle */}
         <circle
@@ -74,7 +74,7 @@ export function ProgressRing({
         <span className={`text-4xl md:text-3xl font-bold ${getColor()}`}>
           {Math.round(animatedProgress)}%
         </span>
-        <span className="text-sm md:text-xs text-[--color-text-muted] font-medium">
+        <span className="text-sm md:text-xs text-(--color-text-muted) font-medium">
           {completedLabel}
         </span>
       </div>

@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../../../layouts/BaseLayout.astro';
+import ShopBox from '../../../../components/growth/ShopBox.astro';
 import Breadcrumb from '../../../../components/layout/Breadcrumb.astro';
 import Icon from '../../../../components/ui/Icon.astro';
 import HeroImage from '../../../../components/content/HeroImage.astro';
@@ -25,6 +26,8 @@ import HeroImage from '../../../../components/content/HeroImage.astro';
         />
       </div>
 
+      <ShopBox locale="de" category="notnahrung" />
+
       <div class="prose prose-lg">
         <p class="lead">
           Du überlebst Wochen ohne Essen — aber für 72 Stunden brauchst du Energie,
@@ -33,19 +36,19 @@ import HeroImage from '../../../../components/content/HeroImage.astro';
         </p>
 
         <!-- Calorie Guide -->
-        <div class="card p-6 my-8 bg-[--color-bg-tertiary] not-prose">
+        <div class="card p-6 my-8 bg-(--color-bg-tertiary) not-prose">
           <h3 class="text-lg font-semibold mb-4 flex items-center gap-2">
-            <Icon name="UtensilsCrossed" size={20} class="text-[--color-accent-primary]" />
+            <Icon name="UtensilsCrossed" size={20} class="text-(--color-accent-primary)" />
             Kalorienbedarf
           </h3>
           <div class="grid sm:grid-cols-2 gap-4">
-            <div class="p-4 bg-[--color-bg-secondary] rounded-lg">
-              <p class="text-2xl font-bold text-[--color-accent-primary]">1.500-2.000</p>
-              <p class="text-sm text-[--color-text-secondary]">kcal pro Tag (Minimum)</p>
+            <div class="p-4 bg-(--color-bg-secondary) rounded-lg">
+              <p class="text-2xl font-bold text-(--color-accent-primary)">1.500-2.000</p>
+              <p class="text-sm text-(--color-text-secondary)">kcal pro Tag (Minimum)</p>
             </div>
-            <div class="p-4 bg-[--color-bg-secondary] rounded-lg">
-              <p class="text-2xl font-bold text-[--color-accent-primary]">4.500-6.000</p>
-              <p class="text-sm text-[--color-text-secondary]">kcal pro Person für 72 Std.</p>
+            <div class="p-4 bg-(--color-bg-secondary) rounded-lg">
+              <p class="text-2xl font-bold text-(--color-accent-primary)">4.500-6.000</p>
+              <p class="text-sm text-(--color-text-secondary)">kcal pro Person für 72 Std.</p>
             </div>
           </div>
         </div>
@@ -111,9 +114,9 @@ import HeroImage from '../../../../components/content/HeroImage.astro';
           <li><strong>Schädlingssicher:</strong> Behälter gegen Motten und Mäuse</li>
         </ul>
 
-        <div class="card p-6 my-8 bg-[--color-accent-subtle] not-prose">
+        <div class="card p-6 my-8 bg-(--color-accent-subtle) not-prose">
           <p class="font-medium mb-2">💡 Campingkocher als Option</p>
-          <p class="text-sm text-[--color-text-secondary]">
+          <p class="text-sm text-(--color-text-secondary)">
             Ein kleiner Gaskocher ermöglicht warme Mahlzeiten.
             <strong>Nur im Freien oder bei sehr guter Belüftung verwenden!</strong>
             Gasgeruch = sofort lüften und nicht benutzen.
@@ -141,21 +144,21 @@ import HeroImage from '../../../../components/content/HeroImage.astro';
       </div>
 
       <!-- Amazon Link -->
-      <div class="mt-12 card p-6 bg-[--color-bg-tertiary]">
+      <div class="mt-12 card p-6 bg-(--color-bg-tertiary)">
         <h3 class="font-semibold mb-2">Notnahrung auf Amazon.de</h3>
-        <p class="text-sm text-[--color-text-secondary] mb-4">
+        <p class="text-sm text-(--color-text-secondary) mb-4">
           Empfohlene Notfallnahrung mit langer Haltbarkeit.
         </p>
         <a
           href="https://www.amazon.de/s?k=notfallnahrung+langzeit&tag=kit72de-21"
           target="_blank"
           rel="noopener noreferrer sponsored"
-          class="inline-flex items-center gap-2 px-4 py-2 bg-[--color-accent-primary] text-[--color-bg-primary] font-medium rounded hover:bg-[--color-accent-hover] transition-colors"
+          class="inline-flex items-center gap-2 px-4 py-2 bg-(--color-accent-primary) text-(--color-bg-primary) font-medium rounded hover:bg-(--color-accent-hover) transition-colors"
         >
           Auf Amazon ansehen
           <Icon name="ExternalLink" size={16} />
         </a>
-        <p class="text-xs text-[--color-text-muted] mt-3">
+        <p class="text-xs text-(--color-text-muted) mt-3">
           * Affiliate-Link — du zahlst nicht mehr, wir erhalten eine kleine Provision.
         </p>
       </div>

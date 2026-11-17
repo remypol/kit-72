@@ -199,31 +199,31 @@ const usageTips = [
       <!-- Header -->
       <div class="mb-12">
         <nav class="text-sm mb-4">
-          <ol class="flex items-center gap-2 text-[--color-text-muted]">
-            <li><a href="/es/" class="hover:text-[--color-accent-primary]">Inicio</a></li>
+          <ol class="flex items-center gap-2 text-(--color-text-muted)">
+            <li><a href="/es/" class="hover:text-(--color-accent-primary)">Inicio</a></li>
             <li>/</li>
-            <li><a href="/es/componentes/" class="hover:text-[--color-accent-primary]">Componentes</a></li>
+            <li><a href="/es/componentes/" class="hover:text-(--color-accent-primary)">Componentes</a></li>
             <li>/</li>
-            <li class="text-[--color-text-primary]">Radios de Emergencia</li>
+            <li class="text-(--color-text-primary)">Radios de Emergencia</li>
           </ol>
         </nav>
         <h1 class="mb-4 flex items-center gap-3">
-          <Icon name="Radio" size={32} class="text-[--color-accent-primary]" />
+          <Icon name="Radio" size={32} class="text-(--color-accent-primary)" />
           Radios de Emergencia
         </h1>
-        <p class="text-lg text-[--color-text-secondary]">
+        <p class="text-lg text-(--color-text-secondary)">
           Cuando caen las redes móviles y se va la luz, la radio es tu conexión con el mundo exterior.
           Información oficial, alertas y coordinación familiar: todo depende de tener una buena radio.
         </p>
       </div>
 
       <!-- Quick Recommendation -->
-      <div class="card p-6 mb-8 border-l-4 border-l-[--color-accent-primary]">
-        <h3 class="font-semibold mb-2 text-[--color-text-primary] flex items-center gap-2">
-          <Icon name="Radio" size={20} class="text-[--color-accent-primary]" />
+      <div class="card p-6 mb-8 border-l-4 border-l-(--color-accent-primary)">
+        <h3 class="font-semibold mb-2 text-(--color-text-primary) flex items-center gap-2">
+          <Icon name="Radio" size={20} class="text-(--color-accent-primary)" />
           Recomendación rápida
         </h3>
-        <p class="text-[--color-text-secondary] m-0">
+        <p class="text-(--color-text-secondary) m-0">
           <strong>Mínimo:</strong> Radio AM/FM con dinamo o pilas.
           <strong>Ideal:</strong> Radio dinamo/solar + par de walkies PMR446.
           <strong>Presupuesto:</strong> 40-80€ total.
@@ -231,33 +231,33 @@ const usageTips = [
       </div>
 
       <!-- Why Radio Matters -->
-      <div class="card p-6 mb-8 bg-[--color-bg-tertiary]">
-        <h3 class="font-semibold mb-4 text-[--color-text-primary]">¿Por qué necesito una radio?</h3>
-        <div class="grid sm:grid-cols-2 gap-4 text-sm text-[--color-text-secondary]">
+      <div class="card p-6 mb-8 bg-(--color-bg-tertiary)">
+        <h3 class="font-semibold mb-4 text-(--color-text-primary)">¿Por qué necesito una radio?</h3>
+        <div class="grid sm:grid-cols-2 gap-4 text-sm text-(--color-text-secondary)">
           <div>
-            <h4 class="font-medium text-[--color-text-primary] mb-2 flex items-center gap-2">
-              <Icon name="WifiOff" size={16} class="text-[--color-accent-primary]" />
+            <h4 class="font-medium text-(--color-text-primary) mb-2 flex items-center gap-2">
+              <Icon name="WifiOff" size={16} class="text-(--color-accent-primary)" />
               Sin internet ni móvil
             </h4>
             <p>En emergencias graves, las redes móviles se saturan o caen. La radio funciona siempre.</p>
           </div>
           <div>
-            <h4 class="font-medium text-[--color-text-primary] mb-2 flex items-center gap-2">
-              <Icon name="Megaphone" size={16} class="text-[--color-accent-primary]" />
+            <h4 class="font-medium text-(--color-text-primary) mb-2 flex items-center gap-2">
+              <Icon name="Megaphone" size={16} class="text-(--color-accent-primary)" />
               Información oficial
             </h4>
             <p>Protección Civil y autoridades usan la radio para dar instrucciones a la población.</p>
           </div>
           <div>
-            <h4 class="font-medium text-[--color-text-primary] mb-2 flex items-center gap-2">
-              <Icon name="Users" size={16} class="text-[--color-accent-primary]" />
+            <h4 class="font-medium text-(--color-text-primary) mb-2 flex items-center gap-2">
+              <Icon name="Users" size={16} class="text-(--color-accent-primary)" />
               Coordinación familiar
             </h4>
             <p>Los walkies permiten comunicarte con tu familia si os separáis.</p>
           </div>
           <div>
-            <h4 class="font-medium text-[--color-text-primary] mb-2 flex items-center gap-2">
-              <Icon name="Battery" size={16} class="text-[--color-accent-primary]" />
+            <h4 class="font-medium text-(--color-text-primary) mb-2 flex items-center gap-2">
+              <Icon name="Battery" size={16} class="text-(--color-accent-primary)" />
               Bajo consumo
             </h4>
             <p>Una radio con pilas dura días. Tu móvil, horas.</p>
@@ -267,23 +267,23 @@ const usageTips = [
 
       <!-- Types -->
       <div class="mb-12">
-        <h2 class="text-2xl font-bold mb-6 text-[--color-text-primary]">Tipos de radios</h2>
+        <h2 class="text-2xl font-bold mb-6 text-(--color-text-primary)">Tipos de radios</h2>
 
         <div class="space-y-4">
           {radioTypes.map((type) => (
             <div class="card p-6">
               <div class="flex items-start gap-4">
-                <div class="w-12 h-12 flex items-center justify-center bg-[--color-bg-tertiary] rounded-lg flex-shrink-0">
-                  <Icon name={type.icon as any} size={28} class="text-[--color-accent-primary]" />
+                <div class="w-12 h-12 flex items-center justify-center bg-(--color-bg-tertiary) rounded-lg flex-shrink-0">
+                  <Icon name={type.icon as any} size={28} class="text-(--color-accent-primary)" />
                 </div>
                 <div class="flex-1">
                   <div class="flex items-center gap-3 mb-2">
-                    <h3 class="font-semibold text-[--color-text-primary]">{type.name}</h3>
-                    <span class="text-xs px-2 py-1 bg-[--color-bg-tertiary] text-[--color-text-muted] rounded">
+                    <h3 class="font-semibold text-(--color-text-primary)">{type.name}</h3>
+                    <span class="text-xs px-2 py-1 bg-(--color-bg-tertiary) text-(--color-text-muted) rounded">
                       {type.frequency}
                     </span>
                   </div>
-                  <p class="text-sm text-[--color-text-secondary] mb-3">{type.description}</p>
+                  <p class="text-sm text-(--color-text-secondary) mb-3">{type.description}</p>
 
                   <div class="grid sm:grid-cols-3 gap-4 text-sm">
                     <div>
@@ -291,7 +291,7 @@ const usageTips = [
                         <Icon name="CircleCheck" size={14} />
                         Pros
                       </span>
-                      <ul class="mt-1 space-y-1 text-[--color-text-muted]">
+                      <ul class="mt-1 space-y-1 text-(--color-text-muted)">
                         {type.pros.map((pro) => <li>• {pro}</li>)}
                       </ul>
                     </div>
@@ -300,16 +300,16 @@ const usageTips = [
                         <Icon name="CircleX" size={14} />
                         Contras
                       </span>
-                      <ul class="mt-1 space-y-1 text-[--color-text-muted]">
+                      <ul class="mt-1 space-y-1 text-(--color-text-muted)">
                         {type.cons.map((con) => <li>• {con}</li>)}
                       </ul>
                     </div>
                     <div>
-                      <span class="text-[--color-accent-primary] font-medium flex items-center gap-1">
+                      <span class="text-(--color-accent-primary) font-medium flex items-center gap-1">
                         <Icon name="Star" size={14} />
                         Ideal para
                       </span>
-                      <p class="mt-1 text-[--color-text-muted]">{type.bestFor}</p>
+                      <p class="mt-1 text-(--color-text-muted)">{type.bestFor}</p>
                     </div>
                   </div>
                 </div>
@@ -321,18 +321,18 @@ const usageTips = [
 
       <!-- Key Features -->
       <div class="mb-12">
-        <h2 class="text-2xl font-bold mb-6 text-[--color-text-primary]">Características a buscar</h2>
+        <h2 class="text-2xl font-bold mb-6 text-(--color-text-primary)">Características a buscar</h2>
 
         <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
           {features.map((feature) => (
             <div class="card p-4">
               <div class="flex items-start gap-3">
-                <div class="w-10 h-10 flex items-center justify-center bg-[--color-bg-tertiary] rounded-lg flex-shrink-0">
-                  <Icon name={feature.icon as any} size={22} class="text-[--color-accent-primary]" />
+                <div class="w-10 h-10 flex items-center justify-center bg-(--color-bg-tertiary) rounded-lg flex-shrink-0">
+                  <Icon name={feature.icon as any} size={22} class="text-(--color-accent-primary)" />
                 </div>
                 <div>
-                  <h3 class="font-semibold text-[--color-text-primary]">{feature.name}</h3>
-                  <p class="text-sm text-[--color-text-secondary]">{feature.description}</p>
+                  <h3 class="font-semibold text-(--color-text-primary)">{feature.name}</h3>
+                  <p class="text-sm text-(--color-text-secondary)">{feature.description}</p>
                 </div>
               </div>
             </div>
@@ -342,12 +342,12 @@ const usageTips = [
 
       <!-- Frequency Guide -->
       <div class="mb-12">
-        <h2 class="text-2xl font-bold mb-6 text-[--color-text-primary]">Guía de frecuencias</h2>
+        <h2 class="text-2xl font-bold mb-6 text-(--color-text-primary)">Guía de frecuencias</h2>
 
         <div class="card overflow-hidden">
           <div class="overflow-x-auto">
             <table class="w-full text-sm">
-              <thead class="bg-[--color-bg-tertiary]">
+              <thead class="bg-(--color-bg-tertiary)">
                 <tr>
                   <th class="text-left py-3 px-4">Banda</th>
                   <th class="text-left py-3 px-4">Rango</th>
@@ -355,10 +355,10 @@ const usageTips = [
                   <th class="text-left py-3 px-4">En España</th>
                 </tr>
               </thead>
-              <tbody class="text-[--color-text-secondary]">
+              <tbody class="text-(--color-text-secondary)">
                 {frequencyGuide.map((band, i) => (
-                  <tr class={i % 2 === 0 ? 'bg-[--color-bg-secondary]' : ''}>
-                    <td class="py-3 px-4 font-medium text-[--color-text-primary]">{band.band}</td>
+                  <tr class={i % 2 === 0 ? 'bg-(--color-bg-secondary)' : ''}>
+                    <td class="py-3 px-4 font-medium text-(--color-text-primary)">{band.band}</td>
                     <td class="py-3 px-4 font-mono text-xs">{band.range}</td>
                     <td class="py-3 px-4">{band.use}</td>
                     <td class="py-3 px-4 text-xs">{band.spain}</td>
@@ -372,7 +372,7 @@ const usageTips = [
 
       <!-- Emergency Frequencies -->
       <div class="mb-12">
-        <h2 class="text-2xl font-bold mb-6 text-[--color-text-primary]">Frecuencias de emergencia</h2>
+        <h2 class="text-2xl font-bold mb-6 text-(--color-text-primary)">Frecuencias de emergencia</h2>
 
         <div class="card p-6 border-l-4 border-l-red-500">
           <div class="grid sm:grid-cols-2 gap-4">
@@ -380,9 +380,9 @@ const usageTips = [
               <div class="flex items-start gap-3">
                 <Icon name="Siren" size={20} class="text-red-400 flex-shrink-0 mt-0.5" />
                 <div>
-                  <h4 class="font-semibold text-[--color-text-primary]">{freq.name}</h4>
-                  <p class="text-xs font-mono text-[--color-text-muted]">{freq.freq}</p>
-                  <p class="text-sm text-[--color-text-secondary]">{freq.use}</p>
+                  <h4 class="font-semibold text-(--color-text-primary)">{freq.name}</h4>
+                  <p class="text-xs font-mono text-(--color-text-muted)">{freq.freq}</p>
+                  <p class="text-sm text-(--color-text-secondary)">{freq.use}</p>
                 </div>
               </div>
             ))}
@@ -392,32 +392,32 @@ const usageTips = [
 
       <!-- Recommendations -->
       <div class="mb-12">
-        <h2 class="text-2xl font-bold mb-6 text-[--color-text-primary]">Recomendaciones por uso</h2>
+        <h2 class="text-2xl font-bold mb-6 text-(--color-text-primary)">Recomendaciones por uso</h2>
 
         <div class="space-y-4">
           {recommendations.map((rec) => (
-            <div class={`card p-6 ${rec.priority === 'essential' ? 'border-l-4 border-l-red-500' : rec.priority === 'recommended' ? 'border-l-4 border-l-[--color-accent-primary]' : ''}`}>
+            <div class={`card p-6 ${rec.priority === 'essential' ? 'border-l-4 border-l-red-500' : rec.priority === 'recommended' ? 'border-l-4 border-l-(--color-accent-primary)' : ''}`}>
               <div class="flex items-start justify-between gap-4 mb-3">
                 <div>
-                  <span class={`text-xs px-2 py-1 rounded ${rec.priority === 'essential' ? 'bg-red-500/20 text-red-400' : rec.priority === 'recommended' ? 'bg-[--color-accent-primary]/20 text-[--color-accent-primary]' : 'bg-[--color-bg-tertiary] text-[--color-text-muted]'}`}>
+                  <span class={`text-xs px-2 py-1 rounded ${rec.priority === 'essential' ? 'bg-red-500/20 text-red-400' : rec.priority === 'recommended' ? 'bg-(--color-accent-primary)/20 text-(--color-accent-primary)' : 'bg-(--color-bg-tertiary) text-(--color-text-muted)'}`}>
                     {rec.priority === 'essential' ? 'Esencial' : rec.priority === 'recommended' ? 'Recomendado' : 'Opcional'}
                   </span>
-                  <span class="text-xs text-[--color-text-muted] ml-2">{rec.type}</span>
+                  <span class="text-xs text-(--color-text-muted) ml-2">{rec.type}</span>
                 </div>
-                <span class="font-bold text-[--color-accent-primary]">{rec.price}</span>
+                <span class="font-bold text-(--color-accent-primary)">{rec.price}</span>
               </div>
 
-              <h3 class="font-semibold text-[--color-text-primary] mb-2">{rec.name}</h3>
+              <h3 class="font-semibold text-(--color-text-primary) mb-2">{rec.name}</h3>
 
               <div class="flex flex-wrap gap-2 mb-3">
                 {rec.features.map((feature) => (
-                  <span class="text-xs px-2 py-1 bg-[--color-bg-tertiary] text-[--color-text-muted] rounded">
+                  <span class="text-xs px-2 py-1 bg-(--color-bg-tertiary) text-(--color-text-muted) rounded">
                     {feature}
                   </span>
                 ))}
               </div>
 
-              <p class="text-sm text-[--color-text-secondary] m-0">
+              <p class="text-sm text-(--color-text-secondary) m-0">
                 <strong>Veredicto:</strong> {rec.verdict}
               </p>
             </div>
@@ -427,37 +427,37 @@ const usageTips = [
 
       <!-- Suggested Kit -->
       <div class="mb-12">
-        <h2 class="text-2xl font-bold mb-6 text-[--color-text-primary]">Kit de comunicación sugerido</h2>
+        <h2 class="text-2xl font-bold mb-6 text-(--color-text-primary)">Kit de comunicación sugerido</h2>
 
         <div class="card p-6">
-          <p class="text-sm text-[--color-text-secondary] mb-4">
+          <p class="text-sm text-(--color-text-secondary) mb-4">
             Para una familia con posibilidad de separación:
           </p>
 
           <div class="overflow-x-auto">
             <table class="w-full text-sm">
               <thead>
-                <tr class="border-b border-[--color-border]">
+                <tr class="border-b border-(--color-border)">
                   <th class="text-left py-2">Artículo</th>
                   <th class="text-center py-2">Cantidad</th>
                   <th class="text-left py-2">Notas</th>
                 </tr>
               </thead>
-              <tbody class="text-[--color-text-secondary]">
+              <tbody class="text-(--color-text-secondary)">
                 {kitSuggestion.map((item) => (
-                  <tr class="border-b border-[--color-border]">
+                  <tr class="border-b border-(--color-border)">
                     <td class="py-2">{item.item}</td>
-                    <td class="py-2 text-center font-bold text-[--color-accent-primary]">{item.qty}</td>
-                    <td class="py-2 text-xs text-[--color-text-muted]">{item.notes}</td>
+                    <td class="py-2 text-center font-bold text-(--color-accent-primary)">{item.qty}</td>
+                    <td class="py-2 text-xs text-(--color-text-muted)">{item.notes}</td>
                   </tr>
                 ))}
               </tbody>
             </table>
           </div>
 
-          <div class="mt-4 pt-4 border-t border-[--color-border] text-center">
-            <p class="text-sm text-[--color-text-muted]">
-              Inversión aproximada: <strong class="text-[--color-accent-primary]">50-100€</strong>
+          <div class="mt-4 pt-4 border-t border-(--color-border) text-center">
+            <p class="text-sm text-(--color-text-muted)">
+              Inversión aproximada: <strong class="text-(--color-accent-primary)">50-100€</strong>
             </p>
           </div>
         </div>
@@ -465,8 +465,8 @@ const usageTips = [
 
       <!-- Product Recommendations -->
       <div class="mb-12">
-        <h2 class="text-2xl font-bold mb-6 text-[--color-text-primary] flex items-center gap-2">
-          <Icon name="ShoppingCart" size={24} class="text-[--color-accent-primary]" />
+        <h2 class="text-2xl font-bold mb-6 text-(--color-text-primary) flex items-center gap-2">
+          <Icon name="ShoppingCart" size={24} class="text-(--color-accent-primary)" />
           Productos recomendados
         </h2>
         <ProductGrid products={amazonProducts} title="Radios y walkies para emergencias" />
@@ -474,11 +474,11 @@ const usageTips = [
 
       <!-- Tips -->
       <div class="card p-6 mb-8">
-        <h3 class="font-semibold mb-4 text-[--color-text-primary] flex items-center gap-2">
-          <Icon name="Lightbulb" size={20} class="text-[--color-accent-primary]" />
+        <h3 class="font-semibold mb-4 text-(--color-text-primary) flex items-center gap-2">
+          <Icon name="Lightbulb" size={20} class="text-(--color-accent-primary)" />
           Consejos de uso
         </h3>
-        <ul class="grid sm:grid-cols-2 gap-2 text-sm text-[--color-text-secondary]">
+        <ul class="grid sm:grid-cols-2 gap-2 text-sm text-(--color-text-secondary)">
           {usageTips.map((tip) => (
             <li>• {tip}</li>
           ))}
@@ -486,12 +486,12 @@ const usageTips = [
       </div>
 
       <!-- PMR446 Info Box -->
-      <div class="card p-6 mb-8 bg-[--color-bg-tertiary]">
-        <h3 class="font-semibold mb-3 text-[--color-text-primary] flex items-center gap-2">
-          <Icon name="Radio" size={20} class="text-[--color-accent-primary]" />
+      <div class="card p-6 mb-8 bg-(--color-bg-tertiary)">
+        <h3 class="font-semibold mb-3 text-(--color-text-primary) flex items-center gap-2">
+          <Icon name="Radio" size={20} class="text-(--color-accent-primary)" />
           Sobre PMR446 (Walkies en Europa)
         </h3>
-        <div class="text-sm text-[--color-text-secondary] space-y-2">
+        <div class="text-sm text-(--color-text-secondary) space-y-2">
           <p><strong>PMR446</strong> es el estándar europeo de radio de uso libre sin licencia.</p>
           <p><strong>Alcance real:</strong> 500m-2km en ciudad, 3-5km en campo abierto, hasta 10km en montaña.</p>
           <p><strong>Canales:</strong> 8 principales (1-8) + 8 adicionales (9-16). El <strong>canal 9</strong> es el de emergencias.</p>
@@ -503,19 +503,19 @@ const usageTips = [
       <div class="flex flex-wrap gap-4 justify-center">
         <a
           href="/es/componentes/powerbanks/"
-          class="inline-flex items-center gap-2 px-4 py-2 border border-[--color-border] text-sm font-medium rounded hover:border-[--color-accent-primary] hover:text-[--color-accent-primary] transition-colors"
+          class="inline-flex items-center gap-2 px-4 py-2 border border-(--color-border) text-sm font-medium rounded hover:border-(--color-accent-primary) hover:text-(--color-accent-primary) transition-colors"
         >
           ← Ver Powerbanks
         </a>
         <a
           href="/es/guias/energia-comunicacion/"
-          class="inline-flex items-center gap-2 px-4 py-2 border border-[--color-border] text-sm font-medium rounded hover:border-[--color-accent-primary] hover:text-[--color-accent-primary] transition-colors"
+          class="inline-flex items-center gap-2 px-4 py-2 border border-(--color-border) text-sm font-medium rounded hover:border-(--color-accent-primary) hover:text-(--color-accent-primary) transition-colors"
         >
           Guía: Energía y Comunicación
         </a>
         <a
           href="/es/herramientas/configurador-kit/"
-          class="inline-flex items-center gap-2 px-4 py-2 bg-[--color-accent-primary] text-[--color-bg-primary] text-sm font-medium rounded hover:bg-[--color-accent-secondary] transition-colors"
+          class="inline-flex items-center gap-2 px-4 py-2 bg-(--color-accent-primary) text-(--color-bg-primary) text-sm font-medium rounded hover:bg-(--color-accent-secondary) transition-colors"
         >
           Configurar Mi Kit
         </a>

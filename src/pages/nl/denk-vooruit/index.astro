@@ -90,7 +90,7 @@ const officialLinks = [
         <h1 class="text-4xl font-bold mb-4">
           Denk Vooruit: Ben Jij Voorbereid?
         </h1>
-        <p class="text-xl text-[--color-text-secondary]">
+        <p class="text-xl text-(--color-text-secondary)">
           "Denk Vooruit" is de officiële campagne van de Nederlandse overheid om burgers
           voor te bereiden op noodsituaties. Van stroomuitval tot overstromingen —
           weet jij wat je moet doen?
@@ -111,7 +111,7 @@ const officialLinks = [
             <Icon name="Info" size={20} class="text-orange-500" />
             Wat is Denk Vooruit?
           </h2>
-          <p class="text-[--color-text-secondary]">
+          <p class="text-(--color-text-secondary)">
             Denk Vooruit is een initiatief van de Rijksoverheid om Nederlanders bewust te maken
             van mogelijke rampen en hoe je jezelf kunt voorbereiden. Het advies: wees in staat
             om <strong>minimaal 3 dagen zelfstandig te overleven</strong> als hulpdiensten
@@ -145,21 +145,21 @@ const officialLinks = [
           {governmentChecklist.map((category) => (
             <div class="card p-4">
               <div class="flex items-start gap-4">
-                <div class="flex-shrink-0 w-12 h-12 rounded-lg bg-[--color-accent-subtle] flex items-center justify-center">
-                  <Icon name={category.icon} size={24} class="text-[--color-accent-primary]" />
+                <div class="flex-shrink-0 w-12 h-12 rounded-lg bg-(--color-accent-subtle) flex items-center justify-center">
+                  <Icon name={category.icon} size={24} class="text-(--color-accent-primary)" />
                 </div>
                 <div class="flex-1">
                   <h3 class="font-semibold text-lg mb-2">{category.category}</h3>
                   <ul class="space-y-1">
                     {category.items.map((item) => (
-                      <li class="flex items-center gap-2 text-sm text-[--color-text-secondary]">
+                      <li class="flex items-center gap-2 text-sm text-(--color-text-secondary)">
                         <Icon name="Check" size={16} class="text-green-500 flex-shrink-0" />
                         {item}
                       </li>
                     ))}
                   </ul>
                   {category.kitLink && (
-                    <a href={category.kitLink} class="inline-flex items-center gap-1 mt-3 text-sm text-[--color-accent-primary] hover:underline">
+                    <a href={category.kitLink} class="inline-flex items-center gap-1 mt-3 text-sm text-(--color-accent-primary) hover:underline">
                       Bekijk onze gids
                       <Icon name="ArrowRight" size={14} />
                     </a>
@@ -178,14 +178,14 @@ const officialLinks = [
 
         <div class="not-prose grid sm:grid-cols-2 lg:grid-cols-3 gap-4 my-8">
           {scenarios.map((scenario) => (
-            <a href={scenario.link} class="card p-4 hover:border-[--color-accent-primary] transition-colors group">
+            <a href={scenario.link} class="card p-4 hover:border-(--color-accent-primary) transition-colors group">
               <div class="flex items-center gap-3 mb-2">
-                <div class="w-10 h-10 rounded-full bg-[--color-bg-tertiary] flex items-center justify-center group-hover:bg-[--color-accent-primary] group-hover:text-[--color-bg-primary] transition-colors">
+                <div class="w-10 h-10 rounded-full bg-(--color-bg-tertiary) flex items-center justify-center group-hover:bg-(--color-accent-primary) group-hover:text-(--color-bg-primary) transition-colors">
                   <Icon name={scenario.icon} size={20} />
                 </div>
                 <h3 class="font-semibold">{scenario.name}</h3>
               </div>
-              <p class="text-sm text-[--color-text-secondary]">{scenario.description}</p>
+              <p class="text-sm text-(--color-text-secondary)">{scenario.description}</p>
             </a>
           ))}
         </div>
@@ -207,22 +207,22 @@ const officialLinks = [
         </p>
 
         <!-- CTA Box -->
-        <div class="not-prose card p-6 my-8 bg-[--color-accent-subtle] border-2 border-[--color-accent-primary]">
+        <div class="not-prose card p-6 my-8 bg-(--color-accent-subtle) border-2 border-(--color-accent-primary)">
           <h3 class="font-semibold text-xl mb-3">Begin vandaag met voorbereiden</h3>
-          <p class="text-[--color-text-secondary] mb-4">
+          <p class="text-(--color-text-secondary) mb-4">
             Gebruik onze tools om je noodpakket samen te stellen volgens de officiële richtlijnen.
           </p>
           <div class="flex flex-wrap gap-3">
             <a
               href="/nl/tools/noodpakket-samenstellen/"
-              class="inline-flex items-center gap-2 px-4 py-2 bg-[--color-accent-primary] text-[--color-bg-primary] font-medium rounded hover:bg-[--color-accent-hover] transition-colors"
+              class="inline-flex items-center gap-2 px-4 py-2 bg-(--color-accent-primary) text-(--color-bg-primary) font-medium rounded hover:bg-(--color-accent-hover) transition-colors"
             >
               <Icon name="Package" size={18} />
               Noodpakket samenstellen
             </a>
             <a
               href="/nl/noodpakket-72-uur/"
-              class="inline-flex items-center gap-2 px-4 py-2 border border-[--color-accent-primary] text-[--color-accent-primary] font-medium rounded hover:bg-[--color-accent-subtle] transition-colors"
+              class="inline-flex items-center gap-2 px-4 py-2 border border-(--color-accent-primary) text-(--color-accent-primary) font-medium rounded hover:bg-(--color-accent-subtle) transition-colors"
             >
               Complete gids
             </a>
@@ -240,10 +240,10 @@ const officialLinks = [
               href={link.url}
               target="_blank"
               rel="noopener noreferrer"
-              class="card p-4 hover:border-[--color-accent-primary] transition-colors group flex items-center justify-between"
+              class="card p-4 hover:border-(--color-accent-primary) transition-colors group flex items-center justify-between"
             >
-              <span class="font-medium group-hover:text-[--color-accent-primary]">{link.title}</span>
-              <Icon name="ExternalLink" size={16} class="text-[--color-text-muted]" />
+              <span class="font-medium group-hover:text-(--color-accent-primary)">{link.title}</span>
+              <Icon name="ExternalLink" size={16} class="text-(--color-text-muted)" />
             </a>
           ))}
         </div>

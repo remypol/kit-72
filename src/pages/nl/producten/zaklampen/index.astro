@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../../../layouts/BaseLayout.astro';
+import ShopBox from '../../../../components/growth/ShopBox.astro';
 import Breadcrumb from '../../../../components/layout/Breadcrumb.astro';
 import Icon from '../../../../components/ui/Icon.astro';
 import HeroImage from '../../../../components/content/HeroImage.astro';
@@ -28,6 +29,8 @@ import HeroImage from '../../../../components/content/HeroImage.astro';
         />
       </div>
 
+      <ShopBox locale="nl" category="zaklampen" />
+
       <div class="prose prose-lg">
         <p class="lead">
           Een betrouwbare zaklamp is na water het <strong>op één na belangrijkste element</strong>
@@ -35,23 +38,23 @@ import HeroImage from '../../../../components/content/HeroImage.astro';
         </p>
 
         <!-- Quick Specs -->
-        <div class="card p-6 my-8 bg-[--color-bg-tertiary] not-prose">
+        <div class="card p-6 my-8 bg-(--color-bg-tertiary) not-prose">
           <h3 class="text-lg font-semibold mb-4 flex items-center gap-2">
-            <Icon name="Flashlight" size={20} class="text-[--color-accent-primary]" />
+            <Icon name="Flashlight" size={20} class="text-(--color-accent-primary)" />
             Aanbevolen Specificaties
           </h3>
           <div class="grid sm:grid-cols-3 gap-4 text-center">
-            <div class="p-3 bg-[--color-bg-secondary] rounded-lg">
-              <p class="text-2xl font-bold text-[--color-accent-primary]">200-500</p>
-              <p class="text-xs text-[--color-text-secondary]">Lumen (helderheid)</p>
+            <div class="p-3 bg-(--color-bg-secondary) rounded-lg">
+              <p class="text-2xl font-bold text-(--color-accent-primary)">200-500</p>
+              <p class="text-xs text-(--color-text-secondary)">Lumen (helderheid)</p>
             </div>
-            <div class="p-3 bg-[--color-bg-secondary] rounded-lg">
-              <p class="text-2xl font-bold text-[--color-accent-primary]">IPX4+</p>
-              <p class="text-xs text-[--color-text-secondary]">Waterbescherming</p>
+            <div class="p-3 bg-(--color-bg-secondary) rounded-lg">
+              <p class="text-2xl font-bold text-(--color-accent-primary)">IPX4+</p>
+              <p class="text-xs text-(--color-text-secondary)">Waterbescherming</p>
             </div>
-            <div class="p-3 bg-[--color-bg-secondary] rounded-lg">
-              <p class="text-2xl font-bold text-[--color-accent-primary]">10+ uur</p>
-              <p class="text-xs text-[--color-text-secondary]">Gebruiksduur</p>
+            <div class="p-3 bg-(--color-bg-secondary) rounded-lg">
+              <p class="text-2xl font-bold text-(--color-accent-primary)">10+ uur</p>
+              <p class="text-xs text-(--color-text-secondary)">Gebruiksduur</p>
             </div>
           </div>
         </div>
@@ -90,9 +93,9 @@ import HeroImage from '../../../../components/content/HeroImage.astro';
           <li>✗ Vereist toegang tot stroom om op te laden</li>
         </ul>
 
-        <div class="card p-6 my-8 bg-[--color-accent-subtle] not-prose">
+        <div class="card p-6 my-8 bg-(--color-accent-subtle) not-prose">
           <p class="font-medium mb-2">💡 Tip: Beide hebben</p>
-          <p class="text-sm text-[--color-text-secondary]">
+          <p class="text-sm text-(--color-text-secondary)">
             Ideaal: Een oplaadbare hoofdzaklamp + een batterij-backup lamp.
             Bewaar minimaal <strong>2 sets reservebatterijen</strong>.
           </p>
@@ -141,16 +144,16 @@ import HeroImage from '../../../../components/content/HeroImage.astro';
       </div>
 
       <!-- Amazon Link -->
-      <div class="mt-12 card p-6 bg-[--color-bg-tertiary]">
+      <div class="mt-12 card p-6 bg-(--color-bg-tertiary)">
         <h3 class="font-semibold mb-2">Zaklampen op Bol.com</h3>
-        <p class="text-sm text-[--color-text-secondary] mb-4">
+        <p class="text-sm text-(--color-text-secondary) mb-4">
           Aanbevolen LED-zaklampen voor noodsituaties.
         </p>
         <a
           href="https://www.bol.com/nl/nl/s/?searchtext=led+zaklamp+nood"
           target="_blank"
           rel="noopener noreferrer"
-          class="inline-flex items-center gap-2 px-4 py-2 bg-[--color-accent-primary] text-[--color-bg-primary] font-medium rounded hover:bg-[--color-accent-hover] transition-colors"
+          class="inline-flex items-center gap-2 px-4 py-2 bg-(--color-accent-primary) text-(--color-bg-primary) font-medium rounded hover:bg-(--color-accent-hover) transition-colors"
         >
           Bekijk op Bol.com
           <Icon name="ExternalLink" size={16} />

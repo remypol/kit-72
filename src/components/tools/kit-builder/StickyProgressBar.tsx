@@ -31,7 +31,7 @@ export function StickyProgressBar({
   if (!show) return null;
 
   return (
-    <div className="fixed top-0 left-0 right-0 z-40 md:hidden bg-[--color-bg-primary]/95 backdrop-blur-lg border-b border-[--color-border] safe-area-inset-top">
+    <div className="fixed top-0 left-0 right-0 z-40 md:hidden bg-(--color-bg-primary)/95 backdrop-blur-lg border-b border-(--color-border) safe-area-inset-top">
       <div className="px-4 py-3 flex items-center justify-between gap-4">
         <div className="flex items-center gap-3 flex-1 min-w-0">
           {/* Mini progress ring */}
@@ -61,7 +61,7 @@ export function StickyProgressBar({
             </span>
           </div>
           <div className="min-w-0">
-            <div className="text-sm font-semibold text-[--color-text-primary] truncate">
+            <div className="text-sm font-semibold text-(--color-text-primary) truncate">
               {checkedCount}/{totalItems} {kb.progress?.items || 'items'}
             </div>
             <div className={`text-xs ${criticalChecked === criticalTotal ? 'text-emerald-400' : 'text-rose-400'}`}>
@@ -73,14 +73,14 @@ export function StickyProgressBar({
         <div className="flex items-center gap-2 flex-shrink-0">
           <button
             onClick={onPrint}
-            className="w-10 h-10 flex items-center justify-center rounded-xl bg-[--color-accent-primary] text-[--color-bg-primary] active:scale-95 transition-transform touch-manipulation"
+            className="w-10 h-10 flex items-center justify-center rounded-xl bg-(--color-accent-primary) text-(--color-bg-primary) active:scale-95 transition-transform touch-manipulation"
             aria-label={kb.actions?.print || 'Print'}
           >
             <Icon name="printer" size={18} />
           </button>
           <button
             onClick={onShare}
-            className="w-10 h-10 flex items-center justify-center rounded-xl bg-[--color-bg-tertiary] text-[--color-text-primary] active:scale-95 transition-transform touch-manipulation"
+            className="w-10 h-10 flex items-center justify-center rounded-xl bg-(--color-bg-tertiary) text-(--color-text-primary) active:scale-95 transition-transform touch-manipulation"
             aria-label={kb.actions?.share || 'Share'}
           >
             <Icon name="share" size={18} />

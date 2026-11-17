@@ -213,14 +213,14 @@ const faqs = [
   breadcrumbs={breadcrumbs}
 >
   <!-- TOC Slot -->
-  <nav slot="toc" class="p-4 bg-[--color-bg-tertiary] rounded-lg">
-    <h2 class="text-sm font-semibold mb-3 text-[--color-text-primary]">En esta página</h2>
+  <nav slot="toc" class="p-4 bg-(--color-bg-tertiary) rounded-lg">
+    <h2 class="text-sm font-semibold mb-3 text-(--color-text-primary)">En esta página</h2>
     <ul class="space-y-2 text-sm">
       {tocItems.map((item) => (
         <li>
           <a
             href={`#${item.id}`}
-            class="text-[--color-text-secondary] hover:text-[--color-accent-primary] transition-colors"
+            class="text-(--color-text-secondary) hover:text-(--color-accent-primary) transition-colors"
           >
             {item.label}
           </a>
@@ -246,8 +246,8 @@ const faqs = [
       <div class="flex items-start gap-4">
         <span class="text-3xl">🎒</span>
         <div>
-          <h3 class="font-semibold mb-2 text-[--color-text-primary] text-base">El concepto en una frase</h3>
-          <p class="text-[--color-text-secondary] m-0">
+          <h3 class="font-semibold mb-2 text-(--color-text-primary) text-base">El concepto en una frase</h3>
+          <p class="text-(--color-text-secondary) m-0">
             Una mochila que puedes coger y salir en 5 minutos, sabiendo que tienes todo lo necesario
             para ti y tu familia durante los próximos 3 días.
           </p>
@@ -273,24 +273,24 @@ const faqs = [
     <div class="grid md:grid-cols-3 gap-4 my-6 not-prose">
       <div class="card p-4">
         <div class="text-2xl mb-2">⏱️</div>
-        <h3 class="font-semibold mb-1 text-[--color-text-primary] text-base">Tiempo de respuesta</h3>
-        <p class="text-sm text-[--color-text-secondary] m-0">
+        <h3 class="font-semibold mb-1 text-(--color-text-primary) text-base">Tiempo de respuesta</h3>
+        <p class="text-sm text-(--color-text-secondary) m-0">
           72 horas es el tiempo máximo típico para que los servicios de emergencia restablezcan
           suministros básicos en la mayoría de situaciones.
         </p>
       </div>
       <div class="card p-4">
         <div class="text-2xl mb-2">⚖️</div>
-        <h3 class="font-semibold mb-1 text-[--color-text-primary] text-base">Equilibrio práctico</h3>
-        <p class="text-sm text-[--color-text-secondary] m-0">
+        <h3 class="font-semibold mb-1 text-(--color-text-primary) text-base">Equilibrio práctico</h3>
+        <p class="text-sm text-(--color-text-secondary) m-0">
           Es suficiente para cubrir la mayoría de emergencias, pero el kit sigue siendo
           manejable en peso y tamaño.
         </p>
       </div>
       <div class="card p-4">
         <div class="text-2xl mb-2">📊</div>
-        <h3 class="font-semibold mb-1 text-[--color-text-primary] text-base">Dato estadístico</h3>
-        <p class="text-sm text-[--color-text-secondary] m-0">
+        <h3 class="font-semibold mb-1 text-(--color-text-primary) text-base">Dato estadístico</h3>
+        <p class="text-sm text-(--color-text-secondary) m-0">
           El 95% de las emergencias que afectan a civiles se resuelven o estabilizan
           en menos de 72 horas.
         </p>
@@ -307,15 +307,15 @@ const faqs = [
 
     <div class="flex flex-wrap gap-3 my-4 not-prose">
       <span class="inline-flex items-center gap-2 px-3 py-1 badge-critical text-xs font-medium rounded">
-        <span class="w-2 h-2 bg-[--color-status-critical] rounded-full"></span>
+        <span class="w-2 h-2 bg-(--color-status-critical) rounded-full"></span>
         Crítico — Imprescindible
       </span>
       <span class="inline-flex items-center gap-2 px-3 py-1 badge-warning text-xs font-medium rounded">
-        <span class="w-2 h-2 bg-[--color-status-warning] rounded-full"></span>
+        <span class="w-2 h-2 bg-(--color-status-warning) rounded-full"></span>
         Recomendado — Muy útil
       </span>
       <span class="inline-flex items-center gap-2 px-3 py-1 badge-info text-xs font-medium rounded">
-        <span class="w-2 h-2 bg-[--color-status-info] rounded-full"></span>
+        <span class="w-2 h-2 bg-(--color-status-info) rounded-full"></span>
         Opcional — Si hay espacio
       </span>
     </div>
@@ -323,24 +323,24 @@ const faqs = [
     <div class="space-y-8 my-8">
       {essentialCategories.map((category) => (
         <div class="card overflow-hidden">
-          <div class="px-6 py-4 bg-[--color-bg-tertiary] border-b border-[--color-border]">
+          <div class="px-6 py-4 bg-(--color-bg-tertiary) border-b border-(--color-border)">
             <h3 class="flex items-center gap-3 text-lg font-semibold m-0">
               <span class="text-2xl">{category.icon}</span>
               {category.name}
             </h3>
           </div>
-          <div class="divide-y divide-[--color-border]">
+          <div class="divide-y divide-(--color-border)">
             {category.items.map((item) => (
               <div class="px-6 py-3 flex items-center justify-between">
                 <div class="flex items-center gap-3">
                   <span class={`w-2 h-2 rounded-full ${
-                    item.priority === 'critical' ? 'bg-[--color-status-critical]' :
-                    item.priority === 'recommended' ? 'bg-[--color-status-warning]' :
-                    'bg-[--color-status-info]'
+                    item.priority === 'critical' ? 'bg-(--color-status-critical)' :
+                    item.priority === 'recommended' ? 'bg-(--color-status-warning)' :
+                    'bg-(--color-status-info)'
                   }`}></span>
-                  <span class="font-medium text-[--color-text-primary]">{item.name}</span>
+                  <span class="font-medium text-(--color-text-primary)">{item.name}</span>
                 </div>
-                <span class="text-sm text-[--color-text-secondary]">{item.quantity}</span>
+                <span class="text-sm text-(--color-text-secondary)">{item.quantity}</span>
               </div>
             ))}
           </div>
@@ -362,28 +362,28 @@ const faqs = [
     <div class="card p-6 my-6 not-prose">
       <div class="space-y-4">
         <div class="flex items-start gap-4">
-          <span class="flex-shrink-0 w-8 h-8 flex items-center justify-center bg-[--color-status-critical] text-white rounded-full font-bold text-sm">1</span>
+          <span class="flex-shrink-0 w-8 h-8 flex items-center justify-center bg-(--color-status-critical) text-white rounded-full font-bold text-sm">1</span>
           <div>
-            <h3 class="font-semibold text-[--color-text-primary] text-base">Bolsillos exteriores y laterales</h3>
-            <p class="text-sm text-[--color-text-secondary] m-0">
+            <h3 class="font-semibold text-(--color-text-primary) text-base">Bolsillos exteriores y laterales</h3>
+            <p class="text-sm text-(--color-text-secondary) m-0">
               Linterna, silbato, snacks, botella de agua, documentos. Lo que necesitas acceder sin abrir la mochila.
             </p>
           </div>
         </div>
         <div class="flex items-start gap-4">
-          <span class="flex-shrink-0 w-8 h-8 flex items-center justify-center bg-[--color-status-warning] text-white rounded-full font-bold text-sm">2</span>
+          <span class="flex-shrink-0 w-8 h-8 flex items-center justify-center bg-(--color-status-warning) text-white rounded-full font-bold text-sm">2</span>
           <div>
-            <h3 class="font-semibold text-[--color-text-primary] text-base">Parte superior del compartimento principal</h3>
-            <p class="text-sm text-[--color-text-secondary] m-0">
+            <h3 class="font-semibold text-(--color-text-primary) text-base">Parte superior del compartimento principal</h3>
+            <p class="text-sm text-(--color-text-secondary) m-0">
               Botiquín, powerbank, comida para el primer día, chubasquero. Acceso rápido pero protegido.
             </p>
           </div>
         </div>
         <div class="flex items-start gap-4">
-          <span class="flex-shrink-0 w-8 h-8 flex items-center justify-center bg-[--color-status-info] text-white rounded-full font-bold text-sm">3</span>
+          <span class="flex-shrink-0 w-8 h-8 flex items-center justify-center bg-(--color-status-info) text-white rounded-full font-bold text-sm">3</span>
           <div>
-            <h3 class="font-semibold text-[--color-text-primary] text-base">Fondo de la mochila</h3>
-            <p class="text-sm text-[--color-text-secondary] m-0">
+            <h3 class="font-semibold text-(--color-text-primary) text-base">Fondo de la mochila</h3>
+            <p class="text-sm text-(--color-text-secondary) m-0">
               Ropa de cambio, manta térmica, herramientas, comida para días 2-3. Lo que usarás menos frecuentemente.
             </p>
           </div>
@@ -412,9 +412,9 @@ const faqs = [
     </p>
 
     <div class="grid md:grid-cols-2 gap-6 my-6 not-prose">
-      <div class="card p-6 border-l-4 border-l-[--color-status-success]">
-        <h3 class="font-semibold mb-3 text-[--color-status-success] text-base">✓ Buenas ubicaciones</h3>
-        <ul class="space-y-2 text-sm text-[--color-text-secondary]">
+      <div class="card p-6 border-l-4 border-l-(--color-status-success)">
+        <h3 class="font-semibold mb-3 text-(--color-status-success) text-base">✓ Buenas ubicaciones</h3>
+        <ul class="space-y-2 text-sm text-(--color-text-secondary)">
           <li>Armario de la entrada (acceso rápido)</li>
           <li>Junto a la puerta del garaje</li>
           <li>En el maletero del coche (kit secundario)</li>
@@ -422,9 +422,9 @@ const faqs = [
           <li>En la zona de paso hacia la salida</li>
         </ul>
       </div>
-      <div class="card p-6 border-l-4 border-l-[--color-status-critical]">
-        <h3 class="font-semibold mb-3 text-[--color-status-critical] text-base">✗ Malas ubicaciones</h3>
-        <ul class="space-y-2 text-sm text-[--color-text-secondary]">
+      <div class="card p-6 border-l-4 border-l-(--color-status-critical)">
+        <h3 class="font-semibold mb-3 text-(--color-status-critical) text-base">✗ Malas ubicaciones</h3>
+        <ul class="space-y-2 text-sm text-(--color-text-secondary)">
           <li>Sótano sin salida alternativa</li>
           <li>Trastero alejado de la vivienda</li>
           <li>Armarios altos de difícil acceso</li>
@@ -434,8 +434,8 @@ const faqs = [
       </div>
     </div>
 
-    <div class="card p-6 my-6 not-prose bg-[--color-accent-subtle] border-[--color-border-accent]">
-      <p class="text-sm text-[--color-text-primary] m-0">
+    <div class="card p-6 my-6 not-prose bg-(--color-accent-subtle) border-(--color-border-accent)">
+      <p class="text-sm text-(--color-text-primary) m-0">
         <strong>💡 Consejo:</strong> Todos los miembros de la familia deben saber dónde está el kit.
         Haz un simulacro: ¿pueden los niños encontrarlo y sacarlo solos si fuera necesario?
       </p>
@@ -458,8 +458,8 @@ const faqs = [
           </h3>
           <ul class="space-y-2 text-sm">
             {group.items.map((item) => (
-              <li class="flex items-center gap-2 text-[--color-text-secondary]">
-                <span class="w-1.5 h-1.5 bg-[--color-accent-primary] rounded-full flex-shrink-0"></span>
+              <li class="flex items-center gap-2 text-(--color-text-secondary)">
+                <span class="w-1.5 h-1.5 bg-(--color-accent-primary) rounded-full flex-shrink-0"></span>
                 {item}
               </li>
             ))}
@@ -494,8 +494,8 @@ const faqs = [
       </table>
     </div>
 
-    <div class="card p-6 my-6 not-prose bg-[--color-accent-subtle] border-[--color-border-accent]">
-      <p class="text-sm text-[--color-text-primary] m-0">
+    <div class="card p-6 my-6 not-prose bg-(--color-accent-subtle) border-(--color-border-accent)">
+      <p class="text-sm text-(--color-text-primary) m-0">
         <strong>💡 Truco:</strong> Pon una alarma recurrente en el móvil (ej: primer domingo de cada trimestre)
         para revisar el kit. Hazlo coincidir con el cambio de hora para recordarlo mejor.
       </p>
@@ -511,11 +511,11 @@ const faqs = [
           <div class="flex items-start gap-4">
             <span class="text-2xl flex-shrink-0">⚠️</span>
             <div>
-              <h3 class="font-semibold text-[--color-text-primary] mb-1 text-base">{item.mistake}</h3>
-              <p class="text-sm text-[--color-text-secondary] mb-2">
+              <h3 class="font-semibold text-(--color-text-primary) mb-1 text-base">{item.mistake}</h3>
+              <p class="text-sm text-(--color-text-secondary) mb-2">
                 <strong>Por qué es problema:</strong> {item.why}
               </p>
-              <p class="text-sm text-[--color-accent-primary] m-0">
+              <p class="text-sm text-(--color-accent-primary) m-0">
                 <strong>Solución:</strong> {item.solution}
               </p>
             </div>
@@ -531,10 +531,10 @@ const faqs = [
     <div class="space-y-4 my-8">
       {faqs.map((faq, index) => (
         <details class="card group">
-          <summary class="px-6 py-4 cursor-pointer list-none flex items-center justify-between hover:bg-[--color-bg-tertiary] transition-colors">
-            <span class="font-medium text-[--color-text-primary] pr-4">{faq.question}</span>
+          <summary class="px-6 py-4 cursor-pointer list-none flex items-center justify-between hover:bg-(--color-bg-tertiary) transition-colors">
+            <span class="font-medium text-(--color-text-primary) pr-4">{faq.question}</span>
             <svg
-              class="w-5 h-5 text-[--color-text-muted] transform transition-transform group-open:rotate-180 flex-shrink-0"
+              class="w-5 h-5 text-(--color-text-muted) transform transition-transform group-open:rotate-180 flex-shrink-0"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
@@ -543,7 +543,7 @@ const faqs = [
             </svg>
           </summary>
           <div class="px-6 pb-4">
-            <p class="text-[--color-text-secondary] m-0">{faq.answer}</p>
+            <p class="text-(--color-text-secondary) m-0">{faq.answer}</p>
           </div>
         </details>
       ))}
@@ -578,16 +578,16 @@ const faqs = [
   </div>
 
   <!-- CTA Slot -->
-  <div slot="cta" class="card p-8 text-center bg-[--color-bg-tertiary]">
+  <div slot="cta" class="card p-8 text-center bg-(--color-bg-tertiary)">
     <h3 class="text-xl font-semibold mb-4">¿Quieres personalizar tu kit?</h3>
-    <p class="text-[--color-text-secondary] mb-6">
+    <p class="text-(--color-text-secondary) mb-6">
       Usa nuestro configurador interactivo para crear un checklist adaptado a tu familia,
       mascotas y situación específica.
     </p>
     <div class="flex flex-wrap gap-4 justify-center">
       <a
         href="/es/herramientas/configurador-kit/"
-        class="inline-flex items-center gap-2 px-6 py-3 bg-[--color-accent-primary] text-[--color-bg-primary] font-semibold rounded hover:bg-[--color-accent-hover] transition-colors"
+        class="inline-flex items-center gap-2 px-6 py-3 bg-(--color-accent-primary) text-(--color-bg-primary) font-semibold rounded hover:bg-(--color-accent-hover) transition-colors"
       >
         Crear mi kit personalizado
         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -596,7 +596,7 @@ const faqs = [
       </a>
       <a
         href="/es/kit-de-emergencia/"
-        class="inline-flex items-center gap-2 px-6 py-3 border border-[--color-border] text-[--color-text-primary] font-medium rounded hover:border-[--color-accent-primary] hover:text-[--color-accent-primary] transition-colors"
+        class="inline-flex items-center gap-2 px-6 py-3 border border-(--color-border) text-(--color-text-primary) font-medium rounded hover:border-(--color-accent-primary) hover:text-(--color-accent-primary) transition-colors"
       >
         Ver kit de emergencia completo
       </a>

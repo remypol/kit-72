@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../../../layouts/BaseLayout.astro';
+import ShopBox from '../../../../components/growth/ShopBox.astro';
 import Breadcrumb from '../../../../components/layout/Breadcrumb.astro';
 import Icon from '../../../../components/ui/Icon.astro';
 import HeroImage from '../../../../components/content/HeroImage.astro';
@@ -25,6 +26,8 @@ import HeroImage from '../../../../components/content/HeroImage.astro';
         />
       </div>
 
+      <ShopBox locale="de" category="notfallradio" />
+
       <div class="prose prose-lg">
         <p class="lead">
           Wenn Strom, Internet und Mobilfunk ausfallen, ist das Radio oft die
@@ -33,22 +36,22 @@ import HeroImage from '../../../../components/content/HeroImage.astro';
         </p>
 
         <!-- Key Info -->
-        <div class="card p-6 my-8 bg-[--color-bg-tertiary] not-prose">
+        <div class="card p-6 my-8 bg-(--color-bg-tertiary) not-prose">
           <h3 class="text-lg font-semibold mb-4 flex items-center gap-2">
-            <Icon name="Radio" size={20} class="text-[--color-accent-primary]" />
+            <Icon name="Radio" size={20} class="text-(--color-accent-primary)" />
             Wichtige Frequenzen
           </h3>
           <div class="space-y-2 text-sm">
-            <div class="flex justify-between items-center p-3 bg-[--color-bg-secondary] rounded">
+            <div class="flex justify-between items-center p-3 bg-(--color-bg-secondary) rounded">
               <span>Deutschlandfunk</span>
               <span class="font-semibold">91.3 MHz (UKW) / DAB+</span>
             </div>
-            <div class="flex justify-between items-center p-3 bg-[--color-bg-secondary] rounded">
+            <div class="flex justify-between items-center p-3 bg-(--color-bg-secondary) rounded">
               <span>Deutschlandfunk Kultur</span>
               <span class="font-semibold">97.7 MHz (UKW)</span>
             </div>
           </div>
-          <p class="text-xs text-[--color-text-muted] mt-3">
+          <p class="text-xs text-(--color-text-muted) mt-3">
             💡 Notiere die Frequenzen deiner lokalen Sender — sie informieren bei regionalen Ereignissen.
           </p>
         </div>
@@ -85,9 +88,9 @@ import HeroImage from '../../../../components/content/HeroImage.astro';
           Allerdings höherer Stromverbrauch — weniger ideal für Notfälle.
         </p>
 
-        <div class="card p-6 my-8 bg-[--color-accent-subtle] not-prose">
+        <div class="card p-6 my-8 bg-(--color-accent-subtle) not-prose">
           <p class="font-medium mb-2">💡 Empfehlung</p>
-          <p class="text-sm text-[--color-text-secondary]">
+          <p class="text-sm text-(--color-text-secondary)">
             Priorität: <strong>UKW + AM</strong>. DAB+ ist ein Nice-to-have,
             aber nicht essentiell für Notfälle.
           </p>
@@ -106,27 +109,27 @@ import HeroImage from '../../../../components/content/HeroImage.astro';
         <div class="overflow-x-auto not-prose my-6">
           <table class="w-full text-sm">
             <thead>
-              <tr class="border-b border-[--color-border-primary]">
+              <tr class="border-b border-(--color-border-primary)">
                 <th class="text-left py-2">Stromquelle</th>
                 <th class="text-left py-2">Betriebszeit</th>
                 <th class="text-left py-2">Hinweis</th>
               </tr>
             </thead>
             <tbody>
-              <tr class="border-b border-[--color-border-secondary]">
+              <tr class="border-b border-(--color-border-secondary)">
                 <td class="py-2">3x AAA Batterien</td>
                 <td class="py-2">8-12 Stunden</td>
-                <td class="py-2 text-[--color-text-muted]">Ersatz einplanen</td>
+                <td class="py-2 text-(--color-text-muted)">Ersatz einplanen</td>
               </tr>
-              <tr class="border-b border-[--color-border-secondary]">
+              <tr class="border-b border-(--color-border-secondary)">
                 <td class="py-2">1 Min. Kurbeln</td>
                 <td class="py-2">5-10 Min. Radio</td>
-                <td class="py-2 text-[--color-text-muted]">Anstrengend auf Dauer</td>
+                <td class="py-2 text-(--color-text-muted)">Anstrengend auf Dauer</td>
               </tr>
-              <tr class="border-b border-[--color-border-secondary]">
+              <tr class="border-b border-(--color-border-secondary)">
                 <td class="py-2">Solarpanel (volle Sonne)</td>
                 <td class="py-2">Lädt internen Akku</td>
-                <td class="py-2 text-[--color-text-muted]">Langsam, aber nachhaltig</td>
+                <td class="py-2 text-(--color-text-muted)">Langsam, aber nachhaltig</td>
               </tr>
             </tbody>
           </table>
@@ -153,21 +156,21 @@ import HeroImage from '../../../../components/content/HeroImage.astro';
       </div>
 
       <!-- Amazon Link -->
-      <div class="mt-12 card p-6 bg-[--color-bg-tertiary]">
+      <div class="mt-12 card p-6 bg-(--color-bg-tertiary)">
         <h3 class="font-semibold mb-2">Notfallradios auf Amazon.de</h3>
-        <p class="text-sm text-[--color-text-secondary] mb-4">
+        <p class="text-sm text-(--color-text-secondary) mb-4">
           Empfohlene Kurbelradios mit Solar und Taschenlampe.
         </p>
         <a
           href="https://www.amazon.de/s?k=notfallradio+kurbel+solar&tag=kit72de-21"
           target="_blank"
           rel="noopener noreferrer sponsored"
-          class="inline-flex items-center gap-2 px-4 py-2 bg-[--color-accent-primary] text-[--color-bg-primary] font-medium rounded hover:bg-[--color-accent-hover] transition-colors"
+          class="inline-flex items-center gap-2 px-4 py-2 bg-(--color-accent-primary) text-(--color-bg-primary) font-medium rounded hover:bg-(--color-accent-hover) transition-colors"
         >
           Auf Amazon ansehen
           <Icon name="ExternalLink" size={16} />
         </a>
-        <p class="text-xs text-[--color-text-muted] mt-3">
+        <p class="text-xs text-(--color-text-muted) mt-3">
           * Affiliate-Link — du zahlst nicht mehr, wir erhalten eine kleine Provision.
         </p>
       </div>
