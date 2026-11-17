@@ -36,13 +36,13 @@ const phases = {
       tip: 'Woon je in een risicogebied? Heb een evacuatieplan klaar'
     },
     {
-      title: 'Meld je aan voor NL-Alert',
-      detail: 'Zorg dat je telefoon NL-Alert berichten ontvangt. Dit is het officiele waarschuwingssysteem.',
-      tip: 'Test je NL-Alert op de landelijke controledag (eerste maandag van de maand)'
+      title: 'Controleer of je NL-Alert ontvangt',
+      detail: 'NL-Alert komt vanzelf op je telefoon; aanmelden hoeft niet. Het is het alarmmiddel van de overheid.',
+      tip: 'Op de eerste maandag van juni en december komt rond 12.00 uur een testbericht. Krijg je het niet, kijk dan op nl-alert.nl'
     },
     {
       title: 'Volg Rijkswaterstaat en waterschap',
-      detail: 'Zij geven officiele waarschuwingen bij hoogwater. Ken je waterschap.',
+      detail: 'Zij geven officiële waarschuwingen bij hoogwater. Ken je waterschap.',
       tip: 'Download de Rijkswaterstaat app voor actuele waterstanden'
     },
     {
@@ -68,14 +68,14 @@ const phases = {
   ],
   tijdens: [
     {
-      title: 'Volg NL-Alert en officiele kanalen',
+      title: 'Volg NL-Alert en officiële kanalen',
       detail: 'Luister naar instructies van de overheid. Geen geruchten volgen.',
       tip: null
     },
     {
-      title: 'Evacueer ALLEEN als opgedragen',
-      detail: 'Te vroeg of te laat evacueren is gevaarlijk. Volg exacte instructies.',
-      tip: 'Bij twijfel: neem contact op met je gemeente of 0800-8844'
+      title: 'Volg de aanwijzingen van de veiligheidsregio',
+      detail: 'Vertrek als dat wordt opgedragen en neem de aangegeven route. Kom je niet meer weg, ga dan naar de hoogste verdieping.',
+      tip: 'Actuele informatie staat op de website van je veiligheidsregio en komt via de rampenzender van je regio'
     },
     {
       title: 'Ga naar boven als water stijgt',
@@ -89,8 +89,8 @@ const phases = {
     },
     {
       title: 'Vermijd rijden door water',
-      detail: '30cm water kan een auto al meeslepen. Draai om als de weg onderloopt.',
-      tip: 'Turn around, don\'t drown - NOOIT door stromend water rijden'
+      detail: 'Bij 15 cm water kan een auto niet meer rijden. Enkelhoog stromend water kan je al omver trekken.',
+      tip: 'Rijd en loop nooit door stromend water; draai om als de weg onderloopt'
     },
     {
       title: 'Help alleen als het veilig is',
@@ -126,7 +126,7 @@ const phases = {
     },
     {
       title: 'Reinig en desinfecteer grondig',
-      detail: 'Overstromingswater bevat rioolwater, chemicalien en bacterien.',
+      detail: 'Overstromingswater bevat rioolwater, chemicaliën en bacteriën.',
       tip: 'Draag handschoenen en laarzen bij het opruimen'
     },
     {
@@ -235,7 +235,7 @@ const faqs = [
   },
   {
     question: 'Is overstromingswater gevaarlijk?',
-    answer: 'Ja, zeer. Het bevat rioolwater, chemicalien, bacterien en puin. Vermijd huidcontact, drink het nooit, en draag beschermende kleding bij opruimwerk.'
+    answer: 'Ja, zeer. Het bevat rioolwater, chemicaliën, bacteriën en puin. Vermijd huidcontact, drink het nooit, en draag beschermende kleding bij opruimwerk.'
   },
   {
     question: 'Wat als ik opgesloten zit door water?',
@@ -270,15 +270,15 @@ const specialSituations = [
 
 <BaseLayout
   title="Overstroming: Hoe voorbereiden en evacueren — Nood-Checklist"
-  description="Complete gids voor voor, tijdens en na een overstroming in Nederland. Evacuatieplan, waterdichte opslag en officiele waarschuwingskanalen."
+  description="Complete gids voor voor, tijdens en na een overstroming in Nederland. Evacuatieplan, waterdichte opslag en officiële waarschuwingskanalen."
   locale="nl"
   schemaType="HowTo"
-  dateModified="2025-12-15"
+  dateModified="2026-11-17"
   datePublished="2025-11-01"
   schemaData={{
     step: [
       { '@type': 'HowToStep', name: 'Ken je overstromingsrisico', text: 'Check op overstroomik.nl hoe hoog het water bij jou kan komen.' },
-      { '@type': 'HowToStep', name: 'Meld je aan voor NL-Alert', text: 'Zorg dat je telefoon NL-Alert berichten ontvangt.' },
+      { '@type': 'HowToStep', name: 'Controleer of je NL-Alert ontvangt', text: 'NL-Alert komt vanzelf op je telefoon; aanmelden hoeft niet. Twee keer per jaar komt er een testbericht.' },
       { '@type': 'HowToStep', name: 'Maak een gezinsevacuatieplan', text: 'Bepaal waar je naartoe gaat en waar je elkaar treft.' },
       { '@type': 'HowToStep', name: 'Bereid waterdichte opslag voor', text: 'Documenten en elektronica in waterdichte tassen.' },
       { '@type': 'HowToStep', name: 'Ken verticale evacuatie', text: 'Soms is naar boven gaan veiliger dan vluchten.' },
@@ -288,7 +288,7 @@ const specialSituations = [
   }}
   faqData={faqs}
 >
-  <main class="scenario-page">
+  <article class="scenario-page">
     <!-- Header -->
     <header class="scenario-header">
       <nav class="scenario-breadcrumb">
@@ -307,7 +307,7 @@ const specialSituations = [
           <div class="scenario-meta">
             <span class="meta-item">12 min</span>
             <span class="meta-divider">·</span>
-            <span class="meta-item">Bijgewerkt dec 2025</span>
+            <span class="meta-item">Bijgewerkt november 2026</span>
           </div>
         </div>
       </div>
@@ -405,7 +405,7 @@ const specialSituations = [
         <div class="warning-content">
           <strong>LEVENSGEVAARLIJKE SITUATIES</strong>
           <ul>
-            <li>Rijd NOOIT door stromend water - 30cm sleept een auto mee</li>
+            <li>Rijd nooit door water op de weg: bij 15 cm kan een auto niet meer rijden</li>
             <li>Loop NOOIT door water boven je knieen</li>
             <li>Raak NOOIT elektrische apparaten aan in overstromingswater</li>
             <li>Ga NOOIT terug voor bezittingen</li>
@@ -566,7 +566,7 @@ const specialSituations = [
         </a>
       </div>
     </section>
-  </main>
+  </article>
 
   <!-- Sticky Action Bar -->
   <StickyActionBar

@@ -5,6 +5,12 @@ import tailwindcss from '@tailwindcss/vite';
 import react from '@astrojs/react';
 import mdx from '@astrojs/mdx';
 import sitemap from '@astrojs/sitemap';
+import { readFileSync } from 'node:fs';
+
+// Dates the data behind the generated pages was last checked; used as <lastmod> in the sitemap.
+const checkedOn = (file) => JSON.parse(readFileSync(new URL(file, import.meta.url), 'utf8')).checked;
+const gemeentenChecked = checkedOn('./src/data/gemeenten-nl.json');
+const zendersChecked = checkedOn('./handbook/data/regions-nl.json');
 
 // https://astro.build/config
 export default defineConfig({
@@ -174,10 +180,18 @@ export default defineConfig({
           changefreq = 'monthly';
         }
 
+        // lastmod only where a real check date exists; an invented date teaches crawlers to ignore it
+        const lastmod = url.includes('/nl/rampenzender/')
+          ? zendersChecked
+          : /\/nl\/(noodplan|hoogte-nap|overstromingsrisico)\//.test(url)
+            ? gemeentenChecked
+            : undefined;
+
         return {
           ...item,
           priority,
           changefreq,
+          ...(lastmod && { lastmod: new Date(lastmod).toISOString() }),
         };
       },
       i18n: {

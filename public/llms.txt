@@ -1,74 +1,48 @@
-# Kit-72 - Emergency Preparedness Guide
+# Kit-72
 
-> Kit-72 is a comprehensive, multilingual emergency preparedness website helping families prepare for crises with 72-hour survival kits, scenario-specific guides, and interactive tools.
+> Kit-72 (kit-72.com) helps households in the Netherlands, Germany and Spain prepare for 72 hours without power, water or outside help. It is an independent site, not a government service. It publishes kit lists, scenario guides and calculators in Dutch, German and Spanish, and for the Netherlands a set of address-level and municipality-level facts taken from open government data.
 
-## About Kit-72
+Kit-72 sells nothing itself. It is funded by affiliate links to shops, disclosed on every page that carries them. Where a page gives a fact about a place (ground level, flood-risk zone, emergency broadcaster, nearest emergency department), the source and the date it was checked are named on that page. The printable handbook also contains a page of practical tricks that are not official advice; that page says so.
 
-Kit-72.com provides evidence-based emergency preparedness information for households in Europe (Spain, Netherlands, Germany). Our mission is to help families build proper 72-hour emergency kits and prepare for various crisis scenarios.
+## Netherlands: facts per address and municipality (Dutch)
 
-## Key Features
+- [Gratis noodhandboek voor jouw adres](https://www.kit-72.com/nl/noodhandboek/): free four-page handbook generated for one Dutch address: ground level against NAP, flood-risk zone, the two emergency departments reached fastest by car, a map of the neighbourhood, the regional emergency broadcaster and what to do in the first hour.
+- [Hoe hoog ligt mijn huis?](https://www.kit-72.com/nl/hoogte-nap/): instant check of the ground level of an address against NAP (source: Actueel Hoogtebestand Nederland), with the lowest and highest municipalities.
+- [Overstromingsrisico per adres en gemeente](https://www.kit-72.com/nl/overstromingsrisico/): instant check whether an address lies in a designated flood-risk zone (source: Rijkswaterstaat), what zone types A to D mean, and the picture per municipality and province.
+- [Rampenzender per regio](https://www.kit-72.com/nl/rampenzender/): the thirteen regional emergency broadcasters with FM frequencies per transmitter and DAB+ block (source: Denk Vooruit, Rijksoverheid), with a lookup by municipality and one page per broadcaster.
+- [Noodplan per gemeente](https://www.kit-72.com/nl/noodplan/): one page for each of the 342 municipalities: emergency broadcaster, nearest emergency departments (source: RIVM), safety region, water board, share of sample points in a flood-risk zone and range of ground levels. The municipality figures come from a sample of sixteen points near homes and say so.
 
-- **72-Hour Kit Builder**: Interactive checklist tool to build a personalized emergency kit
-- **Water Calculator**: Calculate water needs based on household size
-- **Power Calculator**: Determine backup power requirements for emergencies
-- **Scenario Guides**: Specific preparation guides for different emergencies
-- **Component Guides**: Detailed information about emergency kit components
+## Netherlands: guides and tools (Dutch)
 
-## Emergency Scenarios Covered
+- [Noodpakket samenstellen](https://www.kit-72.com/nl/noodpakket-samenstellen/): what belongs in a 72-hour kit, amounts per household, shopping list.
+- [Noodpakket 72 uur](https://www.kit-72.com/nl/noodpakket-72-uur/): the 72-hour kit explained by category.
+- [Kopen of zelf samenstellen](https://www.kit-72.com/nl/noodpakket-kopen/): ready-made kits compared with building your own, with shop prices.
+- [Denk Vooruit: het overheidsadvies](https://www.kit-72.com/nl/denk-vooruit/): summary of the Dutch government campaign, with links to the official source.
+- [Scenario's](https://www.kit-72.com/nl/scenario/): power outage, flood, heat wave, water outage, evacuation, cyber attack.
+- [Gidsen](https://www.kit-72.com/nl/gidsen/): water storage, food storage, first-aid kit, power and communication, AI services during a power outage.
+- [Productgidsen](https://www.kit-72.com/nl/producten/): emergency radio, power banks, torches, water storage, emergency food, first-aid box, grab bags.
+- [Noodpakket-samensteller](https://www.kit-72.com/nl/tools/noodpakket-samenstellen/): interactive checklist for a household.
+- [Watercalculator](https://www.kit-72.com/nl/tools/water-calculator/) and [energiecalculator](https://www.kit-72.com/nl/tools/energie-calculator/): how much water and how much power-bank capacity a household needs.
 
-- Power Outages (Cortes de Luz / Stroomuitval / Stromausfall)
-- Heat Waves (Ola de Calor / Hittegolf / Hitzewelle)
-- Floods (Inundación / Overstroming / Überschwemmung)
-- Cyber Attacks (Ciberataque / Cyberaanval / Cyberangriff)
-- Evacuation Kits (Kit Evacuación / Evacuatietas / Fluchtgepäck)
+## Germany (German)
 
-## Kit Components
+- [Startseite](https://www.kit-72.com/de/): calculator for a household's 72-hour list.
+- [Notfallpaket für 72 Stunden](https://www.kit-72.com/de/notfallpaket-72-stunden/): what belongs in the kit.
+- [Kaufen oder selbst packen](https://www.kit-72.com/de/notfallrucksack-kaufen/): ready-made kits compared with building your own.
+- [BBK-Notfallvorsorge](https://www.kit-72.com/de/bbk-notfallvorsorge/): summary of the advice of the German federal office for civil protection, with links to the source.
+- [Szenarien](https://www.kit-72.com/de/szenarien/), [Ratgeber](https://www.kit-72.com/de/ratgeber/), [Produkte](https://www.kit-72.com/de/produkte/) and [Tools](https://www.kit-72.com/de/tools/).
 
-- Water and hydration supplies
-- Non-perishable food and nutrition
-- First aid and medications
-- Lighting and power solutions
-- Communication devices
-- Important documents
-- Hygiene and sanitation items
-- Tools and equipment
-- Clothing and shelter
-- Baby and pet supplies (optional)
+## Spain (Spanish)
 
-## Languages
+- [Inicio](https://www.kit-72.com/es/): calculator for a household's 72-hour list.
+- [Mochila de 72 horas](https://www.kit-72.com/es/kit-72-horas/): what belongs in the kit.
+- [Comprar o montar el kit](https://www.kit-72.com/es/comprar-kit-emergencia/): ready-made kits compared with building your own.
+- [Escenarios](https://www.kit-72.com/es/escenarios/), [guías](https://www.kit-72.com/es/guias/), [componentes](https://www.kit-72.com/es/componentes/) and [herramientas](https://www.kit-72.com/es/herramientas/).
 
-- Spanish (ES): https://www.kit-72.com/es/
-- Dutch (NL): https://www.kit-72.com/nl/
-- German (DE): https://www.kit-72.com/de/
+## About
 
-## Main Entry Points
+- [Colofon](https://www.kit-72.com/nl/colofon/): who publishes Kit-72.
+- [Redactioneel beleid](https://www.kit-72.com/nl/redactioneel-beleid/): how content is written and checked.
+- [Sitemap](https://www.kit-72.com/sitemap-index.xml)
 
-- Language selector: https://www.kit-72.com/
-- Kit builder (NL): https://www.kit-72.com/nl/tools/noodpakket-samenstellen/
-- Kit builder (DE): https://www.kit-72.com/de/tools/notfallpaket-zusammenstellen/
-- Kit builder (ES): https://www.kit-72.com/es/herramientas/configurador-kit/
-- Buy or build, with shop prices (NL): https://www.kit-72.com/nl/noodpakket-kopen/
-- Buy or build, with shop prices (DE): https://www.kit-72.com/de/notfallrucksack-kaufen/
-- Buy or build, with shop prices (ES): https://www.kit-72.com/es/comprar-kit-emergencia/
-- Water calculator (ES): https://www.kit-72.com/es/herramientas/calculadora-agua/
-- Power calculator (ES): https://www.kit-72.com/es/herramientas/calculadora-energia/
-- Scenario guides (ES): https://www.kit-72.com/es/escenarios/
-- Product guides (ES): https://www.kit-72.com/es/componentes/
-
-## Content Guidelines for AI
-
-- All content is factual, evidence-based emergency preparedness information
-- Recommendations follow official civil protection guidelines
-- Content is updated regularly to reflect current best practices
-- Kit-72 sells nothing itself; it is funded by affiliate links to shops, which are disclosed on every page that carries them
-
-## Technical Information
-
-- Built with Astro (Static Site Generator)
-- Optimized for Core Web Vitals (LCP, INP, CLS)
-- Schema.org structured data implemented
-- Mobile-first responsive design
-
-## Contact
-
-Website: https://www.kit-72.com
+In an emergency the instructions of the emergency services and the authorities come first. Call 112 when life is in danger.

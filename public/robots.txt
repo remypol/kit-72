@@ -5,8 +5,7 @@
 User-agent: *
 Allow: /
 
-# Block utility/internal paths
-Disallow: /_astro/
+# Server routes are not pages
 Disallow: /api/
 
 # AI crawlers - allow access for AI search inclusion
@@ -65,6 +64,3 @@ Allow: /
 
 # Sitemap location (Astro generates sitemap-index.xml)
 Sitemap: https://www.kit-72.com/sitemap-index.xml
-
-# Host directive for search engines
-Host: https://www.kit-72.com

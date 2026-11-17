@@ -45,13 +45,13 @@ const phases = {
       tip: null
     },
     {
-      title: 'Houd OV-chipkaart met saldo',
-      detail: 'Bij uitval van betaalsystemen kun je nog met saldo op de kaart reizen.',
+      title: 'Zorg dat je zonder pinpas kunt reizen',
+      detail: 'Met saldo op een ov-kaart of contant geld voor een kaartje kom je nog thuis als pinnen niet werkt.',
       tip: 'Check regelmatig of er saldo op staat'
     },
     {
       title: 'Installeer radio-app en heb radio op batterijen',
-      detail: 'NPO Radio 1 en lokale omroep voor nieuws als internet uitvalt.',
+      detail: 'De rampenzender van je regio geeft nieuws en aanwijzingen als internet uitvalt.',
       tip: null
     },
   ],
@@ -73,8 +73,8 @@ const phases = {
     },
     {
       title: 'Bescherm je accounts',
-      detail: 'Verander geen wachtwoorden tijdens de aanval - kan onderschept worden.',
-      tip: 'Wacht tot systemen hersteld zijn'
+      detail: 'Log niet in via links in berichten over de storing; ga zelf naar de site of app van je bank of provider.',
+      tip: 'Criminelen gebruiken storingen voor nepberichten'
     },
     {
       title: 'Communiceer via alternatieven',
@@ -134,7 +134,7 @@ const checklistCategories = [
     icon: 'wallet',
     items: [
       { id: 'contant', name: 'Contant geld', quantity: '€70/volw, €30/kind', priority: 'critical' as const, notes: 'Kleine coupures (€5, €10, €20)' },
-      { id: 'ov-chip', name: 'OV-chipkaart met saldo', quantity: 'Min. €50 saldo', priority: 'critical' as const, notes: 'Reizen als PIN niet werkt' },
+      { id: 'ov-chip', name: 'Ov-kaart met saldo of contant geld voor een kaartje', quantity: '1 p.p.', priority: 'recommended' as const, notes: 'Reizen als pinnen niet werkt' },
       { id: 'kopie-pas', name: 'Kopie bankpas + rekeningnummer', quantity: '1 stuks', priority: 'recommended' as const, notes: 'Voor als je pas kwijt raakt' },
     ]
   },
@@ -193,7 +193,7 @@ const cascadeEffects = [
 const faqs = [
   {
     question: 'Hoe waarschijnlijk is een grote cyberaanval?',
-    answer: 'Het NCTV classificeert cyberaanvallen als top-3 dreiging voor Nederland. De CrowdStrike-storing in juli 2024 liet zien hoe snel systemen kunnen uitvallen, ook zonder aanval.'
+    answer: 'De overheid noemt uitval door cyberaanvallen als een van de risico’s waarop huishoudens zich moeten voorbereiden. De CrowdStrike-storing in juli 2024 liet zien hoe snel systemen kunnen uitvallen, ook zonder aanval.'
   },
   {
     question: 'Hoeveel contant geld moet ik hebben?',
@@ -223,7 +223,7 @@ const faqs = [
   description="Hoe bereid je je voor op een cyberaanval of digitale storing? Contant geld, offline backups, communicatie en checklist voor als PIN en internet uitvallen."
   locale="nl"
   schemaType="HowTo"
-  dateModified="2025-12-15"
+  dateModified="2026-11-17"
   alternates={{
     de: '/de/szenarien/cyberangriff/',
   }}
@@ -243,12 +243,12 @@ const faqs = [
       { '@type': 'HowToSupply', name: 'Geprinte contactenlijst' },
       { '@type': 'HowToSupply', name: 'Radio op batterijen' },
       { '@type': 'HowToSupply', name: 'Powerbank' },
-      { '@type': 'HowToSupply', name: 'OV-chipkaart met saldo' },
+      { '@type': 'HowToSupply', name: 'Ov-kaart met saldo of contant geld' },
     ],
   }}
   faqData={faqs}
 >
-  <main class="scenario-page">
+  <article class="scenario-page">
     <!-- Header -->
     <header class="scenario-header">
       <nav class="scenario-breadcrumb">
@@ -267,7 +267,7 @@ const faqs = [
           <div class="scenario-meta">
             <span class="meta-item">8 min</span>
             <span class="meta-divider">·</span>
-            <span class="meta-item">Bijgewerkt dec 2025</span>
+            <span class="meta-item">Bijgewerkt november 2026</span>
           </div>
         </div>
       </div>
@@ -444,6 +444,7 @@ const faqs = [
         Vink af wat je al hebt geregeld. Je voortgang wordt automatisch opgeslagen.
       </p>
       <InteractiveChecklist
+        locale="nl"
         client:idle
         storageKey={`${scenarioKey}_nl`}
         categories={checklistCategories}
@@ -506,7 +507,7 @@ const faqs = [
         </a>
       </div>
     </section>
-  </main>
+  </article>
 
   <!-- Sticky Action Bar -->
   <StickyActionBar

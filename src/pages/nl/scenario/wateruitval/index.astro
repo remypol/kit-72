@@ -81,7 +81,7 @@ const phases = {
     },
     {
       title: 'Rantsoeneer per prioriteit',
-      detail: 'Drinken (40%) > Koken (15%) > Hygiene (25%) > WC (15%) > Overig (5%).',
+      detail: 'Eerst drinken, dan koken, dan hygiëne. De wc spoel je door met water dat je niet kunt drinken.',
       tip: null
     },
   ],
@@ -202,7 +202,7 @@ const faqs = [
   description="Complete gids voor wateruitval in Nederland. Hoeveel water opslaan, leven zonder kraanwater en praktische checklist."
   locale="nl"
   schemaType="HowTo"
-  dateModified="2025-12-15"
+  dateModified="2026-11-17"
   alternates={{
     es: '/es/escenarios/prepararse-corte-agua/',
     de: '/de/szenarien/wasserausfall/',
@@ -228,7 +228,7 @@ const faqs = [
   }}
   faqData={faqs}
 >
-  <main class="scenario-page">
+  <article class="scenario-page">
     <!-- Header -->
     <header class="scenario-header">
       <nav class="scenario-breadcrumb">
@@ -247,7 +247,7 @@ const faqs = [
           <div class="scenario-meta">
             <span class="meta-item">6 min</span>
             <span class="meta-divider">·</span>
-            <span class="meta-item">Bijgewerkt dec 2025</span>
+            <span class="meta-item">Bijgewerkt november 2026</span>
           </div>
         </div>
       </div>
@@ -414,6 +414,7 @@ const faqs = [
         Vink af wat je al hebt. Je voortgang wordt automatisch opgeslagen.
       </p>
       <InteractiveChecklist
+        locale="nl"
         client:idle
         storageKey={`${scenarioKey}_nl`}
         categories={checklistCategories}
@@ -472,7 +473,7 @@ const faqs = [
         </a>
       </div>
     </section>
-  </main>
+  </article>
 
   <!-- Sticky Action Bar -->
   <StickyActionBar

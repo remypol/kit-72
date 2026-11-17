@@ -72,13 +72,13 @@ const phases = {
       tip: null
     },
     {
-      title: 'Laat EEN lamp aan',
-      detail: 'Zo weet je wanneer de stroom terug is zonder steeds te checken.',
+      title: 'Haal stekkers uit het stopcontact',
+      detail: 'Zo voorkom je schade aan apparaten op het moment dat de stroom terugkomt.',
       tip: null
     },
     {
       title: 'Open de koelkast niet',
-      detail: 'Gesloten blijft 4-6 uur koud. De vriezer houdt 24-48 uur vol als hij vol is.',
+      detail: 'Een gesloten koelkast blijft ongeveer 4 uur koud. Een volle vriezer houdt 48 uur vol, een halfvolle 24 uur.',
       tip: 'Verplaats kritieke voeding naar een koelbox met ijs bij langere uitval'
     },
     {
@@ -212,11 +212,11 @@ const checklistCategories = [
 const faqs = [
   {
     question: 'Hoe lang kan een stroomstoring duren?',
-    answer: 'De meeste storingen duren minuten tot enkele uren. Storingen door storm kunnen 6-24 uur duren. In extreme gevallen (orkaan, zware sneeuw) kunnen ze dagen duren. Bereid je voor op minimaal 72 uur.'
+    answer: 'De meeste storingen duren minuten tot enkele uren. Storingen door storm kunnen 6-24 uur duren. In extreme gevallen (zware storm, ijzel) kunnen ze dagen duren. Bereid je voor op minimaal 72 uur.'
   },
   {
     question: 'Mag ik een generator binnen gebruiken?',
-    answer: 'NOOIT. Generatoren produceren koolmonoxide, een reukloos en dodelijk gas. Gebruik ze buiten, minimaal 6 meter van deuren en ramen.'
+    answer: 'NOOIT. Generatoren produceren koolmonoxide, een reukloos en dodelijk gas. Gebruik ze alleen buiten, ver van deuren en ramen.'
   },
   {
     question: 'Werkt gas nog zonder stroom?',
@@ -224,7 +224,7 @@ const faqs = [
   },
   {
     question: 'Hoe lang blijft voedsel in de koelkast goed?',
-    answer: 'Gesloten koelkast: 4-6 uur. Volle vriezer: 48 uur. Halfvolle vriezer: 24 uur. Open de deur niet onnodig.'
+    answer: 'Gesloten koelkast: ongeveer 4 uur. Volle vriezer: 48 uur. Halfvolle vriezer: 24 uur. Open de deur niet onnodig. Dit zijn de richttijden van het Voedingscentrum.'
   },
   {
     question: 'Moet ik de storing melden?',
@@ -232,7 +232,7 @@ const faqs = [
   },
   {
     question: 'Wat als ik medische apparatuur gebruik?',
-    answer: 'Neem contact op met je zorgverlener voor backup-oplossingen. Meld je aan bij je netbeheerder als je afhankelijk bent van stroom voor medische apparaten.'
+    answer: 'Neem nu al contact op met je zorgverlener of de leverancier van het apparaat en vraag wat je bij een storing doet, bijvoorbeeld een accu of een vervangend apparaat.'
   },
 ];
 
@@ -241,7 +241,7 @@ const specialSituations = [
   {
     title: 'Medische apparatuur',
     icon: 'Heart',
-    content: 'Afhankelijk van CPAP, zuurstofconcentrator of andere apparaten? Neem contact op met je leverancier voor noodoplossingen. Meld je aan bij je netbeheerder.'
+    content: 'Afhankelijk van CPAP, zuurstofconcentrator of andere apparaten? Neem contact op met je leverancier voor een noodoplossing.'
   },
   {
     title: 'Thuiswerken',
@@ -266,7 +266,7 @@ const specialSituations = [
   description="Stap-voor-stap gids voor voor, tijdens en na een stroomuitval. Interactieve checklist en praktische tips."
   locale="nl"
   schemaType="HowTo"
-  dateModified="2025-12-15"
+  dateModified="2026-11-17"
   datePublished="2025-11-01"
   alternates={{
     es: '/es/escenarios/prepararse-apagon/',
@@ -285,7 +285,7 @@ const specialSituations = [
   }}
   faqData={faqs}
 >
-  <main class="scenario-page">
+  <article class="scenario-page">
     <!-- Header -->
     <header class="scenario-header">
       <nav class="scenario-breadcrumb">
@@ -304,7 +304,7 @@ const specialSituations = [
           <div class="scenario-meta">
             <span class="meta-item">10 min</span>
             <span class="meta-divider">·</span>
-            <span class="meta-item">Bijgewerkt dec 2025</span>
+            <span class="meta-item">Bijgewerkt november 2026</span>
           </div>
         </div>
       </div>
@@ -584,7 +584,7 @@ const specialSituations = [
         </a>
       </div>
     </section>
-  </main>
+  </article>
 
   <!-- Sticky Action Bar -->
   <StickyActionBar

@@ -25,7 +25,7 @@ const phases = {
   voor: [
     {
       title: 'Volg KNMI waarschuwingen',
-      detail: 'Activeer meldingen van de KNMI app. Code oranje/rood = hittegolf.',
+      detail: 'Zet meldingen aan in de KNMI-app; die waarschuwt bij extreme hitte.',
       tip: 'Stel pushmeldingen in voor jouw regio'
     },
     {
@@ -44,7 +44,7 @@ const phases = {
       tip: 'Vries flessen water in: dienen ook als koelelementen'
     },
     {
-      title: 'Koop ORS (Oral Rehydration Salts)',
+      title: 'Koop ORS (drinkoplossing tegen uitdroging)',
       detail: 'Bij de apotheek of drogist. Onmisbaar voor het aanvullen van zouten bij veel zweten.',
       tip: 'Ook sportdranken werken, maar bevatten meer suiker'
     },
@@ -176,7 +176,7 @@ const riskGroups = [
 const faqs = [
   {
     question: 'Wanneer is er officieel sprake van een hittegolf?',
-    answer: 'In Nederland: minimaal 5 dagen achtereen >25°C, waarvan 3 dagen >30°C. Het KNMI geeft dan code oranje of rood af.'
+    answer: 'Volgens het KNMI: minstens vijf dagen achter elkaar 25 °C of warmer in De Bilt, waarvan minstens drie dagen 30 °C of warmer. De weercodes die het KNMI bij hitte afgeeft staan daar los van.'
   },
   {
     question: 'Waarom zijn Nederlandse huizen zo warm?',
@@ -188,7 +188,7 @@ const faqs = [
   },
   {
     question: 'Hoeveel moet ik drinken?',
-    answer: 'Bij extreme hitte: 3-4 liter per dag voor volwassenen die niet actief zijn. Meer als je beweegt. Drink regelmatig kleine hoeveelheden.'
+    answer: 'Drink vaker dan normaal en voordat je dorst hebt; dat is het advies van de Rijksoverheid. Wie zich inspant of veel zweet heeft meer nodig. Drink regelmatig kleine hoeveelheden.'
   },
   {
     question: 'Wat als ik geen airco heb?',
@@ -202,7 +202,7 @@ const faqs = [
   description="Complete gids voor hittegolf voorbereiding in Nederland. Hydratatie, verkoeling, risicogroepen en checklist. KNMI en RIVM richtlijnen."
   locale="nl"
   schemaType="HowTo"
-  dateModified="2025-12-15"
+  dateModified="2026-11-17"
   alternates={{
     es: '/es/escenarios/prepararse-ola-calor/',
     de: '/de/szenarien/hitzewelle/',
@@ -229,7 +229,7 @@ const faqs = [
   }}
   faqData={faqs}
 >
-  <main class="scenario-page">
+  <article class="scenario-page">
     <!-- Header -->
     <header class="scenario-header">
       <nav class="scenario-breadcrumb">
@@ -248,7 +248,7 @@ const faqs = [
           <div class="scenario-meta">
             <span class="meta-item">8 min</span>
             <span class="meta-divider">·</span>
-            <span class="meta-item">Bijgewerkt dec 2025</span>
+            <span class="meta-item">Bijgewerkt november 2026</span>
           </div>
         </div>
       </div>
@@ -266,7 +266,7 @@ const faqs = [
     <!-- TL;DR -->
     <section class="scenario-section">
       <TLDRBlock
-        summary="Hittegolven worden in Nederland steeds vaker en intenser. De sleutel: drink continu (3-4 liter/dag), vermijd de middagzon, en herken de symptomen van hitteberoerte. Nederlandse huizen houden warmte vast - zoek koelcentra op."
+        summary="Hittegolven worden in Nederland steeds vaker en intenser. De sleutel: drink vaker dan normaal, ook als je geen dorst hebt, vermijd de middagzon, en herken de symptomen van hitteberoerte. Nederlandse huizen houden warmte vast - zoek koelcentra op."
         keyStat="3-4 liter/dag"
         keyStatLabel="Drink minimaal"
         locale="nl"
@@ -415,6 +415,7 @@ const faqs = [
         Vink af wat je al hebt. Je voortgang wordt automatisch opgeslagen.
       </p>
       <InteractiveChecklist
+        locale="nl"
         client:idle
         storageKey={`${scenarioKey}_nl`}
         categories={checklistCategories}
@@ -473,7 +474,7 @@ const faqs = [
         </a>
       </div>
     </section>
-  </main>
+  </article>
 
   <!-- Sticky Action Bar -->
   <StickyActionBar

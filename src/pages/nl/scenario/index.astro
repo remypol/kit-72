@@ -72,11 +72,6 @@ const scenarios = [
   },
 ];
 
-const comingSoon = [
-  { title: 'Extreme Kou', icon: 'Snowflake', description: 'Voorbereiden op strenge vorst en sneeuwstormen' },
-  { title: 'Zware Storm', icon: 'CloudLightning', description: 'Schuilen en bescherming bij harde wind' },
-  { title: 'Gaslek', icon: 'Flame', description: 'Veiligheid bij gaslekken en evacuatie' },
-];
 ---
 
 <BaseLayout
@@ -144,22 +139,6 @@ const comingSoon = [
         {scenarios.map((scenario) => (
           <ScenarioCard {...scenario} />
         ))}
-      </div>
-
-      <!-- Coming Soon -->
-      <div class="border-t border-(--color-border) pt-12">
-        <h2 class="text-xl font-semibold mb-6 text-(--color-text-secondary)">Binnenkort</h2>
-        <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-          {comingSoon.map((item) => (
-            <ScenarioCard
-              title={item.title}
-              description={item.description}
-              href="#"
-              icon={item.icon}
-              isComingSoon
-            />
-          ))}
-        </div>
       </div>
 
       <!-- CTA -->
