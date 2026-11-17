@@ -118,6 +118,11 @@ export default defineConfig({
           priority = 0.9;
           changefreq = 'weekly';
         }
+        // Emergency broadcasters: overview and one page each (NL)
+        else if (url.includes('/nl/rampenzender/')) {
+          priority = url.endsWith('/nl/rampenzender/') ? 0.9 : 0.7;
+          changefreq = 'monthly';
+        }
         // One page per municipality (NL)
         else if (url.includes('/nl/noodplan/')) {
           priority = 0.6;

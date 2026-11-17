@@ -77,3 +77,10 @@ Three things stand out.
 - The page a personal link opens on (`/nl/noodhandboek/mijn/`) is noindex and left out of the sitemap.
 - To watch in four to six weeks: how many of the 343 URLs are indexed, and which municipality queries get impressions.
 
+
+## Emergency broadcaster pages (17 November 2026)
+
+- New: `/nl/rampenzender/` and a page for each of the thirteen regional broadcasters. Target queries: "rampenzender", "rampenzender frequentie", "rampenzender <provincie>", "<zender> frequentie".
+- Every municipality page links to its broadcaster; each broadcaster page links to all its municipalities and to the twelve other broadcasters; footer, Denk Vooruit page, energy guide, radio product page and the municipality hub link to the overview.
+- Every Dutch content page now carries a band for the free handbook (the lead magnet), so existing traffic reaches it.
+- Sitemap: 452 URLs.

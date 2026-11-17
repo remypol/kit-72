@@ -170,3 +170,12 @@ What matters:
 - PR 7 merged after the owner's approval; production serves `/nl/noodhandboek/`, `/nl/noodplan/` and the 342 municipality pages. Sitemap: 438 URLs.
 - Live test of the whole flow: request for Coolsingel 40 with Resend's test inbox (`delivered@resend.dev`) returned 200 in 0.9 s, the email was delivered, and the link's token produced the four-page handbook in 7.2 s. No contact was created (the tips box was off).
 - Search Console (domain property): sitemap index resubmitted; indexing requested for `/nl/noodhandboek/`, `/nl/noodplan/` and the pages of Amsterdam, Rotterdam, Den Haag and Utrecht. The other municipality pages have to come in through the sitemap and internal links.
+
+## 19. Second round after going live (2026-11-17)
+
+- The owner's instruction: take the lead and deliver everything that does not need him.
+- Production test with the tips box ticked: contact created with source "handbook", first welcome email delivered; the test contact was removed afterwards.
+- `src/components/growth/HandbookBand.astro`: every Dutch content page now ends with an offer for the free handbook, above the newsletter band.
+- New pages: `/nl/rampenzender/` (lookup by municipality, all thirteen broadcasters) and one page per broadcaster (13) with FM frequencies per transmitter, DAB+ block, safety regions and every municipality. Facts re-read from Denk Vooruit on this date. Municipality pages link to their broadcaster's page.
+- Corrected on existing pages: the energy guide gave "NPO Radio 1: 91.8 MHz (landelijk)" and said AM has a longer range; the radio product page gave one FM frequency for the whole country. Both now point to the regional emergency broadcaster, as the government page does.
+- Sample images are WebP (about 40 % of the JPEG size); share image `public/images/og-noodhandboek.jpg` (1200 x 630) for the handbook, municipality and broadcaster pages. Both come from `handbook/scripts/samples.mjs`.
