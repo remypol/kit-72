@@ -1,0 +1,159 @@
+/* Shared layout for the data pages (NAP level, flood risk): header, text blocks, ranked lists. */
+.fx {
+  max-width: 68rem;
+  margin-inline: auto;
+  padding: var(--space-8) var(--space-4) var(--space-16);
+}
+.fx-head h1 {
+  font-size: clamp(2rem, 4.6vw, 3rem);
+  line-height: 1.06;
+  max-width: 20ch;
+}
+.fx-lead {
+  margin-top: var(--space-4);
+  font-size: 1.15rem;
+  color: var(--color-text-secondary);
+  max-width: 62ch;
+}
+.fx-check {
+  margin-block: var(--space-8) var(--space-12);
+  max-width: 58rem;
+  scroll-margin-top: calc(var(--header-height) + 16px);
+}
+.fx-text {
+  max-width: 44rem;
+  margin-bottom: var(--space-10);
+}
+.fx-text--wide {
+  max-width: none;
+}
+.fx h2 {
+  font-size: clamp(1.4rem, 2.8vw, 1.9rem);
+  margin-bottom: var(--space-4);
+}
+.fx-text p,
+.fx-text li {
+  font-size: 1.05rem;
+  color: var(--color-text-secondary);
+}
+.fx-text p {
+  max-width: 44rem;
+}
+.fx-text p + p {
+  margin-top: var(--space-4);
+}
+.fx-text strong {
+  color: var(--color-text-primary);
+}
+.fx-text ul,
+.fx-text ol {
+  padding-left: 1.3rem;
+  display: grid;
+  gap: var(--space-3);
+}
+.fx-text ul {
+  list-style: disc;
+}
+.fx-text ol {
+  list-style: decimal;
+}
+.fx-text li::marker {
+  font-weight: 800;
+  color: var(--color-accent);
+}
+.fx a:not(.btn) {
+  color: var(--color-accent);
+  font-weight: 650;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.fx-cols {
+  display: grid;
+  gap: var(--space-8);
+  margin-top: var(--space-6);
+}
+@media (min-width: 760px) {
+  .fx-cols {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--space-12);
+  }
+}
+.fx-rank {
+  border-top: 3px solid var(--color-text-primary);
+}
+.fx-rank h3 {
+  font-size: 1rem;
+  font-weight: 650;
+  color: var(--color-text-secondary);
+  padding-block: var(--space-3);
+}
+.fx-rank ol {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: block;
+}
+.fx-rank li {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: var(--space-4);
+  padding-block: var(--space-2);
+  border-top: 1px solid var(--color-border);
+  font-size: 1.02rem;
+}
+.fx-rank li span:last-child {
+  font-family: var(--font-display, inherit);
+  font-weight: 700;
+  color: var(--color-text-primary);
+  white-space: nowrap;
+}
+.fx-types {
+  display: grid;
+  gap: 0 var(--space-8);
+  grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+  margin-top: var(--space-6);
+}
+.fx-type {
+  border-top: 3px solid var(--color-text-primary);
+  padding-block: var(--space-4) var(--space-6);
+}
+.fx-type h3 {
+  font-family: var(--font-display, inherit);
+  font-size: 1.25rem;
+  margin-bottom: var(--space-2);
+}
+.fx-type p {
+  color: var(--color-text-secondary);
+}
+.fx-faq dt {
+  font-weight: 750;
+  font-size: 1.1rem;
+  margin-top: var(--space-6);
+}
+.fx-faq dt:first-child {
+  margin-top: 0;
+}
+.fx-faq dd {
+  margin: var(--space-2) 0 0;
+  color: var(--color-text-secondary);
+}
+.fx-src {
+  max-width: 44rem;
+  border-top: 1px solid var(--color-border);
+  padding-top: var(--space-4);
+  font-size: 0.9rem;
+  color: var(--color-text-secondary);
+}
+.fx-text .fx-list {
+  display: block;
+  list-style: none;
+  padding: 0;
+  margin: var(--space-5) 0 0;
+  columns: 14rem;
+  column-gap: var(--space-8);
+}
+.fx-text .fx-list li {
+  break-inside: avoid;
+  padding-block: 0.3rem;
+}

@@ -43,3 +43,6 @@ emails/out/preview/
 # Personal handbook: generated output and query cache contain addresses
 handbook/out/
 handbook/.cache/
+
+# Full-size generated photos (scripts/gen_images.py)
+.image-raw/

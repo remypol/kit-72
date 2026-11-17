@@ -1,0 +1,316 @@
+---
+/**
+ * Instant address check: ground level against NAP and flood-risk zone, with
+ * the emergency broadcaster. Posts to /api/address-check; nothing is stored.
+ * The address is kept in sessionStorage so the handbook form can be
+ * pre-filled on the next page.
+ */
+interface Props {
+  /** where the check sits, for analytics */
+  source: string;
+  title?: string;
+}
+const { source, title = 'Check je adres' } = Astro.props;
+const id = `ac-${source}`;
+---
+
+<section class="ac" data-address-check data-source={source} aria-labelledby={`${id}-title`}>
+  <h2 id={`${id}-title`} class="ac__title">{title}</h2>
+  <form class="ac__form" novalidate>
+    <label class="ac__field">
+      <span>Postcode</span>
+      <input name="postcode" type="text" autocomplete="postal-code" maxlength="7" placeholder="1234 AB" required />
+    </label>
+    <label class="ac__field ac__field--small">
+      <span>Huisnr.</span>
+      <input name="number" type="text" inputmode="numeric" maxlength="5" placeholder="12" required />
+    </label>
+    <label class="ac__field ac__field--small">
+      <span>Toevoeging</span>
+      <input name="suffix" type="text" maxlength="6" placeholder="A" autocomplete="off" />
+    </label>
+    <button class="btn btn-lg ac__button" type="submit" data-label="Check mijn adres" data-busy="Opzoeken…">Check mijn adres</button>
+  </form>
+  <p class="ac__status" role="status" aria-live="polite"></p>
+
+  <div class="ac__result" hidden>
+    <p class="ac__address"></p>
+    <dl class="ac__facts">
+      <div>
+        <dt>Hoogte van het maaiveld</dt>
+        <dd class="ac__big" data-level></dd>
+        <dd data-level-note></dd>
+      </div>
+      <div>
+        <dt>Overstromingsrisicogebied</dt>
+        <dd class="ac__big" data-flood></dd>
+        <dd data-flood-note></dd>
+      </div>
+      <div>
+        <dt>Rampenzender</dt>
+        <dd class="ac__big" data-radio></dd>
+        <dd data-radio-note></dd>
+      </div>
+    </dl>
+    <div class="ac__next">
+      <p>Dit zijn drie van de gegevens uit het gratis noodhandboek. Daarin staan ook de spoedeisende hulp die je het snelst bereikt, een kaart van je buurt en wat je het eerste uur doet.</p>
+      <a class="btn btn-lg ac__cta" href="/nl/noodhandboek/#aanvragen">Maak mijn noodhandboek</a>
+    </div>
+  </div>
+  <p class="ac__privacy">Je adres wordt alleen gebruikt voor deze opzoeking en niet bewaard.</p>
+</section>
+
+<style>
+  .ac {
+    background: var(--color-deep);
+    color: #fff;
+    border-radius: var(--radius-lg);
+    padding: var(--space-6);
+  }
+  @media (min-width: 640px) {
+    .ac {
+      padding: var(--space-8);
+    }
+  }
+  .ac__title {
+    color: #fff;
+    font-size: clamp(1.35rem, 2.4vw, 1.7rem);
+    margin-bottom: var(--space-4);
+  }
+  .ac__form {
+    display: grid;
+    grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr) minmax(0, 1fr);
+    gap: var(--space-3);
+    align-items: end;
+  }
+  @media (min-width: 760px) {
+    .ac__form {
+      grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr) minmax(0, 1fr) auto;
+    }
+  }
+  .ac__field {
+    display: grid;
+    gap: var(--space-1);
+    font-weight: 650;
+    font-size: 0.95rem;
+  }
+  .ac__field input {
+    width: 100%;
+    min-height: 48px;
+    padding: 0 var(--space-3);
+    font: inherit;
+    font-size: 16px;
+    font-weight: 400;
+    color: var(--color-text-primary);
+    background: #fff;
+    border: 2px solid #fff;
+    border-radius: var(--radius-md);
+  }
+  .ac__field input:focus-visible {
+    outline: 3px solid var(--color-signal);
+    outline-offset: 2px;
+  }
+  .ac__field input[aria-invalid='true'] {
+    border-color: #ffb4a8;
+  }
+  .ac__button,
+  .ac__cta {
+    background: var(--color-signal);
+    color: var(--color-signal-ink);
+    border-color: var(--color-signal);
+  }
+  .ac__button {
+    grid-column: 1 / -1;
+    justify-self: start;
+    min-height: 48px;
+  }
+  @media (min-width: 760px) {
+    .ac__button {
+      grid-column: auto;
+    }
+  }
+  .ac__button:hover,
+  .ac__cta:hover {
+    background: var(--color-signal-hover);
+    color: var(--color-signal-ink);
+  }
+  .ac__button:focus-visible,
+  .ac__cta:focus-visible {
+    outline: 3px solid #fff;
+    outline-offset: 2px;
+  }
+  .ac__status {
+    min-height: 1.5em;
+    margin-top: var(--space-3);
+    font-weight: 650;
+    color: #ffc9bf;
+  }
+  .ac__result {
+    margin-top: var(--space-2);
+    padding-top: var(--space-6);
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+  }
+  .ac__address {
+    color: #cfe3d7;
+    margin-bottom: var(--space-4);
+  }
+  .ac__facts {
+    display: grid;
+    gap: var(--space-6);
+    margin: 0;
+  }
+  @media (min-width: 760px) {
+    .ac__facts {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: var(--space-8);
+    }
+  }
+  .ac__facts dt {
+    font-size: 0.9rem;
+    color: #b9d2c4;
+  }
+  .ac__facts dd {
+    margin: 0;
+    color: #cfe3d7;
+    font-size: 0.95rem;
+  }
+  .ac__facts .ac__big {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    line-height: 1.12;
+    color: #fff;
+    margin-block: 2px var(--space-1);
+  }
+  .ac__facts :global(a) {
+    color: var(--color-signal);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+  .ac__next {
+    display: grid;
+    gap: var(--space-4);
+    margin-top: var(--space-8);
+    padding-top: var(--space-6);
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+  }
+  @media (min-width: 760px) {
+    .ac__next {
+      grid-template-columns: minmax(0, 1fr) auto;
+      align-items: center;
+      gap: var(--space-8);
+    }
+  }
+  .ac__next p {
+    color: #cfe3d7;
+    margin: 0;
+  }
+  .ac__cta {
+    justify-self: start;
+  }
+  .ac__privacy {
+    margin-top: var(--space-4);
+    font-size: 0.85rem;
+    color: #b9d2c4;
+  }
+  @media print {
+    .ac {
+      display: none;
+    }
+  }
+</style>
+
+<script>
+  const ERRORS: Record<string, string> = {
+    invalid_address: 'Vul een postcode in zoals 1234 AB en een huisnummer.',
+    address_not_found: 'Dit adres vinden we niet. Controleer postcode, huisnummer en toevoeging.',
+    lookup_failed: 'Het opzoeken lukt nu niet. Probeer het over een minuut opnieuw.',
+  };
+  // "Rijn type B - beschermd langs hoofdwatersysteem" -> what that means for the house
+  const TYPES: Record<string, string> = {
+    A: 'Buitendijks langs zee, meer of grote rivier: niet door een dijk beschermd.',
+    B: 'Beschermd door dijken langs zee, meer of grote rivier. Het loopt alleen onder als zo’n dijk bezwijkt.',
+    C: 'Beschermd door kades langs kleinere wateren, zoals boezems en kanalen.',
+    D: 'Langs kleinere wateren, niet door een kade beschermd.',
+  };
+  const nl = (n: number) => Math.abs(n).toLocaleString('nl-NL', { minimumFractionDigits: 1, maximumFractionDigits: 1 });
+  const slug = (s: string) => s.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+
+  document.querySelectorAll<HTMLElement>('[data-address-check]').forEach((root) => {
+    const form = root.querySelector('form')!;
+    const field = (name: string) => form.querySelector<HTMLInputElement>(`input[name=${name}]`)!;
+    const button = form.querySelector<HTMLButtonElement>('button')!;
+    const status = root.querySelector<HTMLElement>('.ac__status')!;
+    const result = root.querySelector<HTMLElement>('.ac__result')!;
+    const set = (key: string, text: string) => (result.querySelector<HTMLElement>(`[data-${key}]`)!.textContent = text);
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      form.querySelectorAll('[aria-invalid]').forEach((el) => el.removeAttribute('aria-invalid'));
+      const postcode = field('postcode').value.replace(/\s+/g, '').toUpperCase();
+      const number = field('number').value.trim();
+      const suffix = field('suffix').value.trim();
+      const bad = !/^\d{4}[A-Z]{2}$/.test(postcode) ? field('postcode') : !/^\d{1,5}$/.test(number) ? field('number') : null;
+      if (bad) {
+        bad.setAttribute('aria-invalid', 'true');
+        bad.focus();
+        status.textContent = ERRORS.invalid_address;
+        return;
+      }
+      button.disabled = true;
+      button.textContent = button.dataset.busy || '';
+      status.textContent = '';
+      try {
+        const res = await fetch('/api/address-check', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ postcode, number, suffix }) });
+        const d = await res.json().catch(() => ({}));
+        if (!res.ok) throw new Error(d.error || String(res.status));
+
+        root.querySelector<HTMLElement>('.ac__address')!.textContent = `${d.label}${d.municipality ? `, gemeente ${d.municipality}` : ''}`;
+        if (typeof d.elevation === 'number') {
+          set('level', `${nl(d.elevation)} m ${d.elevation < 0 ? 'onder' : 'boven'} NAP`);
+          set('level-note', d.elevation < 0 ? 'Het maaiveld rond je huis ligt lager dan het gemiddelde zeeniveau.' : 'Gemeten aan het maaiveld rond je huis (Actueel Hoogtebestand Nederland).');
+        } else {
+          set('level', 'Onbekend');
+          set('level-note', 'Voor dit punt is geen meting beschikbaar.');
+        }
+        if (!Array.isArray(d.flood)) {
+          set('flood', 'Onbekend');
+          set('flood-note', 'De kaart van Rijkswaterstaat gaf nu geen antwoord. Probeer het later opnieuw.');
+        } else if (d.flood.length === 0) {
+          set('flood', 'Nee');
+          set('flood-note', 'Dit adres ligt niet in een aangewezen overstromingsrisicogebied. Wateroverlast door hevige regen kan overal voorkomen.');
+        } else {
+          const letters = [...new Set(d.flood.map((t: string) => t.match(/type ([A-D])/)?.[1]).filter(Boolean))] as string[];
+          set('flood', 'Ja');
+          set('flood-note', letters.map((l) => TYPES[l]).join(' ') || d.flood.join('; '));
+        }
+        const radio = result.querySelector<HTMLElement>('[data-radio]')!;
+        radio.replaceChildren();
+        if (d.broadcaster) {
+          const a = document.createElement('a');
+          a.href = `/nl/rampenzender/${slug(d.broadcaster)}/`;
+          a.textContent = d.broadcaster;
+          radio.append(a);
+          set('radio-note', `Veiligheidsregio ${d.region}. Bekijk de frequenties en zet je radio erop af.`);
+        } else {
+          radio.textContent = 'Onbekend';
+          set('radio-note', '');
+        }
+        result.hidden = false;
+        try {
+          sessionStorage.setItem('kit72-address', JSON.stringify({ postcode, number, suffix }));
+        } catch {
+          /* private mode: the handbook form simply starts empty */
+        }
+        window.gtag?.('event', 'address_check', { source: root.dataset.source, locale: 'nl' });
+      } catch (err) {
+        const code = err instanceof Error ? err.message : '';
+        result.hidden = true;
+        status.textContent = ERRORS[code] || 'Er ging iets mis. Probeer het over een minuut opnieuw.';
+      } finally {
+        button.disabled = false;
+        button.textContent = button.dataset.label || '';
+      }
+    });
+  });
+</script>

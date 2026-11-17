@@ -183,6 +183,10 @@
     "api/handbook-request.js": {
       "includeFiles": "handbook/{data,lib}/**",
       "maxDuration": 30
+    },
+    "api/address-check.js": {
+      "includeFiles": "handbook/{data,lib}/**",
+      "maxDuration": 30
     }
   }
 }

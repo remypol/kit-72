@@ -118,6 +118,11 @@ export default defineConfig({
           priority = 0.9;
           changefreq = 'weekly';
         }
+        // Address check pages (NL)
+        else if (url.endsWith('/nl/hoogte-nap/') || url.endsWith('/nl/overstromingsrisico/')) {
+          priority = 0.9;
+          changefreq = 'monthly';
+        }
         // Emergency broadcasters: overview and one page each (NL)
         else if (url.includes('/nl/rampenzender/')) {
           priority = url.endsWith('/nl/rampenzender/') ? 0.9 : 0.7;
