@@ -1,0 +1,17 @@
+---
+/** Lets a visitor change their analytics choice: clears it and shows the banner again. */
+interface Props {
+  label: string;
+}
+const { label } = Astro.props;
+---
+
+<p class="not-prose"><button type="button" class="btn btn-secondary" data-consent-reset>{label}</button></p>
+
+<script is:inline>
+  document.addEventListener('click', function (e) {
+    if (!e.target.closest('[data-consent-reset]')) return;
+    try { localStorage.removeItem('kit72_consent'); } catch (err) {}
+    location.reload();
+  });
+</script>

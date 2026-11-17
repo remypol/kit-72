@@ -1,11 +1,12 @@
 ---
 import PolicyLayout from '../../../layouts/PolicyLayout.astro';
+import ConsentReset from '../../../components/growth/ConsentReset.astro';
 ---
 
 <PolicyLayout
   title="Política de Cookies"
   description="Información sobre las cookies que utiliza Kit-72 y cómo gestionarlas."
-  updatedDate="2025-12-13"
+  updatedDate="2026-11-17"
 >
   <h2>¿Qué son las cookies?</h2>
   <p>
@@ -19,8 +20,11 @@ import PolicyLayout from '../../../layouts/PolicyLayout.astro';
   <h3>Cookies de analítica (Google Analytics)</h3>
   <p>
     Utilizamos Google Analytics para entender cómo los visitantes usan nuestro sitio.
-    Estas cookies recopilan información de forma anónima y agregada.
+    Solo lo cargamos si aceptas en el aviso de cookies; si lo rechazas, no se carga y no se
+    instalan estas cookies.
   </p>
+  <p>Puedes cambiar tu elección en cualquier momento. El aviso volverá a aparecer.</p>
+  <ConsentReset label="Cambiar mi elección de cookies" />
 
   <div class="overflow-x-auto my-6">
     <table>

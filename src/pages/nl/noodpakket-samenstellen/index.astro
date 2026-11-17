@@ -1,52 +1,232 @@
 ---
+/**
+ * NL pillar: "noodpakket samenstellen". Rebuilt in November 2026; the old page
+ * was about 100 words and had no search impressions.
+ */
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 import Breadcrumb from '../../../components/layout/Breadcrumb.astro';
+import { routes } from '../../../data/site';
+
+const r = routes.nl;
+
+const short = [
+  ['Water', '3 liter per persoon per dag: 9 liter per persoon voor 72 uur'],
+  ['Eten', 'houdbaar en klaar om te eten, zonder koelkast of fornuis'],
+  ['Licht', 'een zaklamp per persoon, met reservebatterijen'],
+  ['Nieuws', 'een radio op batterijen of met slinger'],
+  ['Stroom', 'een opgeladen powerbank voor je telefoon'],
+  ['EHBO', 'een verbanddoos en je eigen medicijnen'],
+  ['Papieren en geld', 'kopieën van je identiteitsbewijs, noodnummers en contant geld'],
+  ['Warmte en hygiëne', 'een deken, lucifers en kaarsen, zeep en wc-papier'],
+];
+
+const amounts = [
+  { who: '1 persoon', water: '9 liter', meals: '9', lights: '2', cash: '€ 70' },
+  { who: '2 volwassenen', water: '18 liter', meals: '18', lights: '2', cash: '€ 140' },
+  { who: '2 volwassenen, 2 kinderen', water: '36 liter', meals: '36', lights: '4', cash: '€ 200' },
+];
+
+const faqs = [
+  {
+    question: 'Wat zit er in een noodpakket?',
+    answer: 'Water (3 liter per persoon per dag), houdbaar eten, een zaklamp, een radio op batterijen, een powerbank, een EHBO-doos met je eigen medicijnen, kopieën van belangrijke papieren, contant geld, een deken, lucifers en kaarsen, en hygiëneartikelen. Daarmee kan een huishouden 72 uur zonder hulp.',
+  },
+  {
+    question: 'Hoeveel water heb je nodig in een noodpakket?',
+    answer: 'Reken op 3 liter per persoon per dag. Voor 72 uur is dat 9 liter per persoon, dus 36 liter voor een gezin van vier. Tel per huisdier een liter extra.',
+  },
+  {
+    question: 'Wat kost het om zelf een noodpakket samen te stellen?',
+    answer: 'Dat hangt af van wat je al in huis hebt. Water, houdbaar eten, een zaklamp en pleisters hebben de meeste huishoudens al. Kant-en-klare pakketten beginnen rond € 100 en bevatten nooit genoeg water, je medicijnen of je papieren.',
+  },
+  {
+    question: 'Is er een officiële lijst van de overheid?',
+    answer: 'Ja. De Rijksoverheid adviseert via de campagne Denk Vooruit om 72 uur zelfredzaam te zijn en noemt wat je daarvoor in huis haalt. De lijst op deze pagina volgt dat advies en het advies van het Rode Kruis.',
+  },
+  {
+    question: 'Hoe vaak moet je een noodpakket controleren?',
+    answer: 'Twee keer per jaar. Kijk naar de houdbaarheidsdatum van water en eten, laad de powerbank op, vervang batterijen en controleer of medicijnen en papieren nog kloppen.',
+  },
+];
 ---
 
-<BaseLayout title="Noodpakket Samenstellen — Kit-72" description="Stap-voor-stap gids om je noodpakket samen te stellen. Water, voedsel, verlichting en EHBO voor 72 uur zelfvoorzienend." locale="nl">
-  <section class="py-16">
-    <div class="max-w-3xl mx-auto px-4 sm:px-6">
-      <Breadcrumb items={[{ label: 'Noodpakket Samenstellen' }]} class="mb-4" locale="nl" />
-      <h1 class="text-4xl font-bold mb-6">Noodpakket Samenstellen</h1>
-      
-      <div class="prose prose-lg">
-        <p>Een compleet noodpakket samenstellen hoeft niet ingewikkeld te zijn. Volg deze stappen.</p>
-        
-        <h2>Stap 1: Bepaal je behoeften</h2>
-        <ul>
-          <li>Hoeveel mensen in je huishouden?</li>
-          <li>Zijn er baby's, ouderen of huisdieren?</li>
-          <li>Medische behoeften?</li>
-        </ul>
+<BaseLayout
+  title="Noodpakket samenstellen: complete lijst voor 72 uur"
+  description="Zelf een noodpakket samenstellen: de complete lijst, hoeveel je per persoon nodig hebt en een boodschappenlijst. Volgens het advies van de overheid."
+  locale="nl"
+  schemaType="Article"
+  datePublished="2025-12-15"
+  dateModified="2026-11-17"
+  faqData={faqs}
+>
+  <article class="pillar">
+    <Breadcrumb items={[{ label: 'Noodpakket samenstellen' }]} class="mb-4" locale="nl" />
+    <h1>Noodpakket samenstellen: de complete lijst voor 72 uur</h1>
+    <p class="pillar__lead">
+      De overheid adviseert elk huishouden om 72 uur zonder hulp te kunnen. Daar heb je geen duur
+      pakket voor nodig: het meeste staat al in je keukenkast. Hieronder staat wat erin hoort,
+      hoeveel je nodig hebt en in welke volgorde je het regelt.
+    </p>
+    <p><a href={r.builder} class="btn btn-primary btn-lg">Maak mijn lijst en vink af wat ik al heb</a></p>
 
-        <h2>Stap 2: Begin met de basis</h2>
-        <ol>
-          <li><strong>Water</strong> — 3 liter per persoon per dag</li>
-          <li><strong>Voedsel</strong> — Houdbaar, geen bereiding nodig</li>
-          <li><strong>Verlichting</strong> — Zaklamp met batterijen</li>
-          <li><strong>EHBO</strong> — Basisset plus persoonlijke medicijnen</li>
-        </ol>
+    <div class="prose">
+      <h2 id="lijst">Wat zit er in een noodpakket?</h2>
+      <p>De lijst in het kort. Dit is wat de Rijksoverheid en het Rode Kruis aanraden om in huis te hebben:</p>
+      <ol>
+        {short.map(([name, what]) => <li><strong>{name}:</strong> {what}</li>)}
+      </ol>
+      <p>
+        Het Rode Kruis noemt daarnaast een fluitje om aandacht te trekken, eenvoudig gereedschap en
+        reservesleutels van je huis. Heb je een baby of een huisdier, dan komen daar voeding, luiers
+        en voer bij.
+      </p>
 
-        <h2>Stap 3: Voeg comfort toe</h2>
-        <ul>
-          <li>Powerbank voor je telefoon</li>
-          <li>Noodradio</li>
-          <li>Contant geld (€70 per volwassene, €30 per kind)</li>
-          <li>Kopieën van belangrijke documenten</li>
-        </ul>
-
-        <h2>Stap 4: Personaliseer</h2>
-        <p>Voeg items toe voor jouw specifieke situatie: babyspullen, medicijnen, huisdierbenodigdheden.</p>
-
-        <div class="not-prose mt-8">
-          <a href="/nl/noodpakket-72-uur/" class="inline-flex items-center gap-2 px-6 py-3 bg-(--color-accent-primary) text-(--color-bg-primary) font-semibold rounded hover:bg-(--color-accent-hover) transition-colors">
-            Bekijk de complete checklist
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
-            </svg>
-          </a>
-        </div>
+      <h2 id="hoeveel">Hoeveel heb je nodig?</h2>
+      <p>De hoeveelheden hangen af van het aantal mensen in huis. Voor 72 uur:</p>
+      <div class="not-prose pillar__table">
+        <table>
+          <thead>
+            <tr><th>Huishouden</th><th>Water</th><th>Maaltijden</th><th>Zaklampen</th><th>Contant</th></tr>
+          </thead>
+          <tbody>
+            {amounts.map((a) => (
+              <tr><td>{a.who}</td><td>{a.water}</td><td>{a.meals}</td><td>{a.lights}</td><td>{a.cash}</td></tr>
+            ))}
+          </tbody>
+        </table>
       </div>
+      <p>
+        Het advies voor contant geld is € 70 per volwassene en € 30 per kind: genoeg om een paar dagen
+        boodschappen te doen als pinnen niet werkt. Wil je het voor jouw huishouden uitrekenen, gebruik
+        dan de <a href={r.home}>rekenhulp op de homepage</a> of de <a href={r.water}>watercalculator</a>.
+      </p>
+
+      <h2 id="stappen">In vier stappen samenstellen</h2>
+      <ol>
+        <li>
+          <strong>Kijk wat je al hebt.</strong> Loop met de <a href={r.builder}>samensteller</a> door je
+          huis en vink af: flessen water, blikken, een zaklamp, pleisters. Wat overblijft is je lijst.
+        </li>
+        <li>
+          <strong>Regel water en eten.</strong> Dit is het zwaarste en het belangrijkste. Zet flessen of
+          een <a href="/nl/producten/wateropslag/">jerrycan</a> koel en donker weg, en kies
+          <a href="/nl/producten/noodvoedsel/">eten</a> dat je toch al lust, zodat je het kunt opeten en vervangen.
+        </li>
+        <li>
+          <strong>Zorg voor licht, nieuws en stroom.</strong> Een <a href="/nl/producten/zaklampen/">zaklamp</a>
+          per persoon, een <a href="/nl/producten/noodradio/">radio op batterijen</a> en een opgeladen
+          <a href="/nl/producten/powerbanks/">powerbank</a>.
+        </li>
+        <li>
+          <strong>Leg papieren, medicijnen en geld klaar.</strong> Kopieën van je identiteitsbewijs en
+          verzekering in een waterdichte hoes, medicijnen voor minstens een week, een lijst met
+          telefoonnummers op papier en contant geld in kleine biljetten.
+        </li>
+      </ol>
+
+      <h2 id="boodschappenlijst">Boodschappenlijst voor je noodpakket</h2>
+      <h3>In de supermarkt</h3>
+      <ul>
+        <li>Flessen water, 9 liter per persoon</li>
+        <li>Blikken soep, bonen, groente en vis</li>
+        <li>Crackers, beschuit of knäckebröd</li>
+        <li>Noten, gedroogd fruit en repen</li>
+        <li>Lucifers en kaarsen</li>
+        <li>Batterijen in de maat van je zaklamp en radio</li>
+        <li>Zeep, wc-papier, tandpasta en vuilniszakken</li>
+      </ul>
+      <h3>Bij de bouwmarkt, drogist of online</h3>
+      <ul>
+        <li><a href="/nl/producten/zaklampen/">Zaklamp</a>, liefst ook een hoofdlamp</li>
+        <li><a href="/nl/producten/noodradio/">Radio op batterijen of met slinger</a></li>
+        <li><a href="/nl/producten/powerbanks/">Powerbank</a> van minstens 10.000 mAh per persoon</li>
+        <li><a href="/nl/producten/wateropslag/">Jerrycan voor drinkwater</a></li>
+        <li><a href="/nl/producten/ehbo-doos/">EHBO-doos</a></li>
+        <li>Een handmatige blikopener en een fluitje</li>
+      </ul>
+
+      <h2 id="bewaren">Waar bewaar je het, en hoe houd je het bij?</h2>
+      <p>
+        Zet alles bij elkaar op een plek die iedereen in huis kent: een kast in de gang of de berging,
+        niet op zolder of in een vochtige kelder. Zet een <a href="/nl/producten/noodtassen/">tas</a>
+        klaar met het belangrijkste, voor als je snel weg moet.
+      </p>
+      <p>
+        Controleer het pakket twee keer per jaar. Eet op wat binnen een half jaar verloopt en vervang
+        het, ververs water in jerrycans, laad de powerbank op en kijk of medicijnen en papieren nog
+        kloppen.
+      </p>
+
+      <h2 id="kopen">Kopen of zelf samenstellen?</h2>
+      <p>
+        Kant-en-klare noodpakketten beginnen rond € 100. Ze zijn handig als je niets in huis hebt of
+        het cadeau doet, maar water, medicijnen en papieren moet je er altijd zelf bij doen. In de
+        <a href={r.compare}>vergelijking</a> staan de prijzen en wanneer kopen logisch is.
+      </p>
+
+      <h2 id="situaties">Aanvullen voor één situatie</h2>
+      <p>De basis is voor elke situatie gelijk. Per situatie komt er iets bij:</p>
+      <ul>
+        {r.scenarios.map((s) => <li><a href={s.href}>{s.label}</a></li>)}
+      </ul>
+      <p>
+        Wat de overheid precies adviseert en hoe het boekje van Denk Vooruit in elkaar zit, lees je
+        op <a href="/nl/denk-vooruit/">Denk Vooruit uitgelegd</a>. Alles over wat er in een tas voor
+        drie dagen hoort, staat in <a href="/nl/noodpakket-72-uur/">noodpakket 72 uur</a>.
+      </p>
+
+      <h2 id="vragen">Veelgestelde vragen</h2>
+      {faqs.map((f) => (<><h3>{f.question}</h3><p>{f.answer}</p></>))}
     </div>
-  </section>
+  </article>
 </BaseLayout>
+
+<style>
+  .pillar {
+    max-width: 48rem;
+    margin-inline: auto;
+    padding: var(--space-10) var(--space-4) var(--space-16);
+  }
+  @media (min-width: 640px) {
+    .pillar {
+      padding-inline: var(--space-6);
+    }
+  }
+  .pillar h1 {
+    font-size: clamp(2rem, 4.4vw, 3rem);
+  }
+  .pillar__lead {
+    margin-block: var(--space-4) var(--space-6);
+    font-size: 1.15rem;
+    color: var(--color-text-secondary);
+    max-width: 62ch;
+  }
+  .pillar .btn {
+    white-space: normal;
+    text-align: center;
+  }
+  .pillar__table {
+    margin-block: var(--space-5);
+    overflow-x: auto;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    background: var(--color-bg-secondary);
+  }
+  .pillar__table table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.98rem;
+  }
+  .pillar__table th {
+    text-align: left;
+    background: var(--color-deep);
+    color: #fff;
+    font-weight: 650;
+    padding: var(--space-3) var(--space-4);
+    white-space: nowrap;
+  }
+  .pillar__table td {
+    padding: var(--space-3) var(--space-4);
+    border-top: 1px solid var(--color-border-subtle);
+  }
+</style>

@@ -2,6 +2,7 @@
 import ArticleLayout from '../../../layouts/ArticleLayout.astro';
 
 const tocItems = [
+  { id: 'lista', label: 'La lista en corto' },
   { id: 'que-es', label: '¿Qué es un Kit 72 Horas?' },
   { id: 'por-que-72-horas', label: '¿Por qué 72 horas?' },
   { id: 'contenido-esencial', label: 'Contenido esencial' },
@@ -205,9 +206,9 @@ const faqs = [
 
 <ArticleLayout
   faqData={faqs}
-  title="Kit 72 Horas: Guía para tu Mochila de Emergencia"
-  description="Kit de supervivencia 72 horas: checklist completo, cantidades exactas y consejos prácticos para España y Latinoamérica."
-  updatedDate="2025-12-13"
+  title="Mochila de 72 horas: lista completa y qué llevar"
+  description="Qué lleva la mochila de 72 horas: lista completa con cantidades por persona, lo que recomiendan Cruz Roja y Protección Civil y cómo organizarla."
+  updatedDate="2026-11-17"
   author="Equipo Kit-72"
   readTime="14 min"
   breadcrumbs={breadcrumbs}
@@ -230,6 +231,37 @@ const faqs = [
   </nav>
 
   <!-- Main Content -->
+  <section id="lista" class="mb-12">
+    <h2>¿Qué lleva una mochila de 72 horas?</h2>
+    <p>
+      La mochila de 72 horas reúne lo que una persona necesita para aguantar tres días sin ayuda,
+      en casa o si hay que salir. La lista en corto:
+    </p>
+    <ol>
+      <li><strong>Agua:</strong> 3 litros por persona y día, 9 litros para 72 horas</li>
+      <li><strong>Comida:</strong> alimentos que no necesiten nevera ni cocina</li>
+      <li><strong>Luz:</strong> linterna y pilas de repuesto</li>
+      <li><strong>Información:</strong> radio a pilas o de dinamo</li>
+      <li><strong>Energía:</strong> una power bank cargada para el móvil</li>
+      <li><strong>Botiquín:</strong> material de primeros auxilios y tu medicación</li>
+      <li><strong>Documentos y efectivo:</strong> copias del DNI y de los seguros en una bolsa estanca</li>
+      <li><strong>Abrigo e higiene:</strong> manta, ropa de recambio y artículos de aseo</li>
+    </ol>
+    <h3>¿Qué recomienda la Cruz Roja?</h3>
+    <p>
+      No existe una única lista oficial: cada sociedad nacional de la Cruz Roja publica la suya.
+      Todas coinciden en lo esencial, que es lo que ves arriba: agua, comida, medicación, documentos,
+      botiquín, linterna y radio. También coinciden en dos consejos prácticos: que cada persona del
+      hogar tenga su propia mochila y que se revise el contenido con regularidad para retirar lo caducado.
+    </p>
+    <p>
+      Las cantidades por persona están más abajo. En el
+      <a href="/es/herramientas/configurador-kit/">configurador</a> marcas lo que ya tienes y ves lo que falta.
+      Si prefieres comprarla hecha, en la <a href="/es/comprar-kit-emergencia/">comparación de precios</a>
+      verás cuánto cuestan y qué no traen nunca.
+    </p>
+  </section>
+
   <section id="que-es" class="mb-12">
     <h2>¿Qué es un Kit 72 Horas?</h2>
     <p>

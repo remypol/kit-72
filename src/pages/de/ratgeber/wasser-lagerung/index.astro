@@ -34,25 +34,42 @@ const relatedItems = [
     icon: 'Calculator'
   }
 ];
+
+const faqs = [
+  {
+    question: 'Wie lange ist selbst abgefülltes Leitungswasser haltbar?',
+    answer: 'Selbst abgefülltes Leitungswasser solltest du etwa alle sechs Monate austauschen. Voraussetzung sind saubere, lebensmittelechte Kanister, die kühl und dunkel stehen.',
+  },
+  {
+    question: 'Wie viel Wasser sollte man pro Person lagern?',
+    answer: 'Das BBK empfiehlt 2 Liter Flüssigkeit pro Person und Tag. Für 72 Stunden sind das 6 Liter pro Person, für 10 Tage 20 Liter.',
+  },
+  {
+    question: 'Welche Behälter eignen sich zum Lagern von Trinkwasser?',
+    answer: 'Am einfachsten ist original verschlossenes Mineralwasser. Für Leitungswasser eignen sich lebensmittelechte Kanister aus HDPE. Nicht geeignet sind Behälter, in denen Milch, Saft oder Chemikalien waren.',
+  },
+];
 ---
 
 <BaseLayout
-  title="Wasser Lagern — Kit-72"
-  description="Trinkwasser sicher für Notfälle lagern: Behälter, Menge pro Person, Haltbarkeit und BBK-Empfehlungen für 72 Stunden."
+  title="Wasser lagern: Menge, Behälter und Haltbarkeit"
+  description="Trinkwasser für den Notfall lagern: wie viel pro Person, welche Behälter, wie lange abgefülltes Leitungswasser haltbar ist und wie du Wasser haltbar machst."
+  faqData={faqs}
+  dateModified="2026-11-17"
   locale="de"
   dateModified="2025-12-15"
   schemaType="Article"
 >
   <section class="py-16">
     <div class="max-w-3xl mx-auto px-4 sm:px-6">
-      <Breadcrumb items={[{ label: 'Ratgeber', href: '/de/ratgeber/' }, { label: 'Wasser Lagern' }]} class="mb-4" locale="de" />
-      <h1 class="text-4xl font-bold mb-6">Wasser Lagern</h1>
+      <Breadcrumb items={[{ label: 'Ratgeber', href: '/de/ratgeber/' }, { label: 'Wasser lagern' }]} class="mb-4" locale="de" />
+      <h1 class="text-4xl font-bold mb-6">Wasser lagern für den Notfall</h1>
 
       <div class="prose prose-lg">
         <p class="lead">
           Wasser ist der wichtigste Bestandteil deines Notfallpakets. Das BBK empfiehlt
-          <strong>2 Liter Trinkwasser pro Person pro Tag</strong> — das absolute Minimum.
-          Für Kochen und Hygiene rechne mit insgesamt 3 Litern.
+          <strong>2 Liter Flüssigkeit pro Person und Tag</strong>, davon etwa ein halber Liter
+          zum Kochen. Wasser zum Waschen kommt dazu.
         </p>
 
         <!-- Quick Reference Card -->
@@ -63,12 +80,12 @@ const relatedItems = [
           </h3>
           <div class="grid sm:grid-cols-2 gap-4">
             <div class="p-4 bg-(--color-bg-secondary) rounded-lg">
-              <p class="text-2xl font-bold text-(--color-accent-primary)">9 Liter</p>
+              <p class="text-2xl font-bold text-(--color-accent-primary)">6 Liter</p>
               <p class="text-sm text-(--color-text-secondary)">pro Person für 72 Stunden (3 Tage)</p>
             </div>
             <div class="p-4 bg-(--color-bg-secondary) rounded-lg">
-              <p class="text-2xl font-bold text-(--color-accent-primary)">21 Liter</p>
-              <p class="text-sm text-(--color-text-secondary)">pro Person für 1 Woche</p>
+              <p class="text-2xl font-bold text-(--color-accent-primary)">20 Liter</p>
+              <p class="text-sm text-(--color-text-secondary)">pro Person für 10 Tage (BBK-Empfehlung)</p>
             </div>
           </div>
           <p class="text-sm text-(--color-text-muted) mt-4">
@@ -99,9 +116,30 @@ const relatedItems = [
           <li><strong>Frostfrei</strong> — gefrorenes Wasser kann Behälter beschädigen</li>
         </ul>
 
-        <h2>Haltbarkeit</h2>
+        <h2>Wie viel Wasser für wie viele Personen?</h2>
         <p>
-          Ungeöffnetes Flaschenwasser ist praktisch unbegrenzt haltbar, aber für optimale Qualität:
+          Für 72 Stunden sind es 6 Liter pro Person, für die vom BBK empfohlenen 10 Tage 20 Liter.
+          Ein Haushalt mit vier Personen braucht also 24 Liter für drei Tage und 80 Liter für zehn.
+          Für jedes Haustier rechnest du etwa einen Liter für drei Tage dazu. Deinen genauen Bedarf
+          zeigt der <a href="/de/tools/wasser-rechner/">Wasser-Rechner</a>.
+        </p>
+
+        <h2>Wie lange ist abgefülltes Leitungswasser haltbar?</h2>
+        <p>
+          Leitungswasser, das du selbst in saubere, lebensmittelechte Kanister füllst, solltest du
+          etwa alle sechs Monate austauschen. Es verdirbt nicht schlagartig, aber Geschmack und
+          Keimzahl verändern sich mit der Zeit. So hält es am längsten:
+        </p>
+        <ul>
+          <li>Kanister vor dem Befüllen gründlich reinigen und randvoll füllen</li>
+          <li>Dicht verschließen und das Abfülldatum auf den Kanister schreiben</li>
+          <li>Kühl und dunkel lagern</li>
+          <li>Beim Austausch das alte Wasser zum Gießen oder Putzen verwenden</li>
+        </ul>
+
+        <h2>Haltbarkeit im Überblick</h2>
+        <p>
+          Ungeöffnetes Flaschenwasser hält am längsten:
         </p>
         <ul>
           <li><strong>Mineralwasser (ungeöffnet):</strong> 1-2 Jahre optimal, danach noch trinkbar</li>

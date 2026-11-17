@@ -101,8 +101,8 @@ export const compareCopy: Record<Locale, CompareCopy> = {
     ],
   },
   de: {
-    title: 'Notfallrucksack kaufen oder selbst packen? Preise im Vergleich',
-    description: 'Fertige Notvorrat-Pakete gibt es ab 119 €, ein gefüllter Notfallrucksack kostet bis 980 €. Was bekommst du dafür, was fehlt immer, und wann ist selbst packen günstiger?',
+    title: 'Notfallrucksack kaufen oder selbst packen? Preisvergleich',
+    description: 'Fertige Notvorrat-Pakete gibt es ab 119 €, ein gefüllter Notfallrucksack kostet bis 980 €. Was du dafür bekommst, was immer fehlt und wann selbst packen günstiger ist.',
     h1: 'Notfallrucksack kaufen oder selbst packen?',
     checkedLabel: 'Preise geprüft am',
     verdictTitle: 'Kurze Antwort',
@@ -159,7 +159,7 @@ export const compareCopy: Record<Locale, CompareCopy> = {
     ],
   },
   es: {
-    title: '¿Comprar un kit de emergencia o montarlo tú? Precios comparados',
+    title: '¿Comprar un kit de emergencia o montarlo tú? Precios',
     description: 'Los kits de emergencia de 72 horas ya montados cuestan entre 57 € y más de 550 €. Qué incluyen, qué falta siempre y cuándo sale más barato montarlo tú.',
     h1: '¿Comprar un kit de emergencia o montarlo tú?',
     checkedLabel: 'Precios comprobados el',

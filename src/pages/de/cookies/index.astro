@@ -1,32 +1,46 @@
 ---
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 import Breadcrumb from '../../../components/layout/Breadcrumb.astro';
+import ConsentReset from '../../../components/growth/ConsentReset.astro';
 ---
 
-<BaseLayout title="Cookie-Richtlinie — Kit-72" description="Informationen über Cookies auf Kit-72." locale="de">
+<BaseLayout title="Cookie-Richtlinie — Kit-72" description="Welche Cookies Kit-72 verwendet: Google Analytics nur nach deiner Einwilligung. So änderst du deine Auswahl und das speichern wir im Browser." hideSignup locale="de">
   <section class="py-16">
     <div class="max-w-3xl mx-auto px-4 sm:px-6">
       <Breadcrumb items={[{ label: 'Cookies' }]} class="mb-4" locale="de" />
       <h1 class="text-4xl font-bold mb-6">Cookie-Richtlinie</h1>
 
       <div class="prose prose-lg">
-        <p><em>Zuletzt aktualisiert: Dezember 2025</em></p>
+        <p><em>Zuletzt aktualisiert: November 2026</em></p>
 
         <h2>Was sind Cookies?</h2>
         <p>Cookies sind kleine Textdateien, die auf deinem Gerät gespeichert werden, wenn du eine Website besuchst.</p>
 
-        <h2>Welche Cookies verwenden wir?</h2>
-        <h3>Notwendige Cookies</h3>
-        <p>Diese sind für den Betrieb der Website unerlässlich, z.B. um deine Spracheinstellung zu speichern.</p>
+        <h2>Was wir ohne Einwilligung speichern</h2>
+        <p>
+          Kit-72 setzt ohne deine Einwilligung keine eigenen Cookies. Einige Angaben liegen im
+          Speicher deines Browsers und werden nicht an uns übertragen: deine Auswahl im
+          Cookie-Hinweis, was du im Konfigurator abgehakt hast und die Haushaltsgröße im Rechner.
+        </p>
 
-        <h3>Analyse-Cookies</h3>
-        <p>Wir verwenden datenschutzfreundliche Analysen, um zu verstehen, wie die Website genutzt wird, ohne personenbezogene Daten zu sammeln.</p>
+        <h2>Statistik: nur mit deiner Einwilligung</h2>
+        <p>
+          Stimmst du im Cookie-Hinweis zu, laden wir Google Analytics. Es setzt die Cookies
+          <code>_ga</code> und <code>_ga_*</code> (zwei Jahre gültig), um Besuche zu zählen und zu
+          sehen, welche Seiten gelesen und welche Händlerlinks angeklickt werden. Lehnst du ab,
+          laden wir Google Analytics nicht.
+        </p>
 
-        <h2>Cookies verwalten</h2>
-        <p>Du kannst Cookies über deine Browsereinstellungen verwalten. Beachte: Das Deaktivieren von Cookies kann die Funktionalität einschränken.</p>
+        <h2>Auswahl ändern</h2>
+        <p>Du kannst deine Auswahl jederzeit ändern. Der Cookie-Hinweis erscheint dann erneut.</p>
+        <ConsentReset label="Cookie-Auswahl ändern" />
 
-        <h2>Drittanbieter-Cookies</h2>
-        <p>Wir verwenden keine Tracking-Cookies von Drittanbietern wie Google Analytics oder Facebook Pixel.</p>
+        <h2>Links zu Händlern</h2>
+        <p>
+          Wenn du auf einen Link zu einem Händler klickst, bist du auf dessen Website. Der Händler
+          kann eigene Cookies setzen, auch um einen Kauf uns zuzuordnen. Dafür gelten die
+          Cookie-Hinweise des Händlers.
+        </p>
       </div>
     </div>
   </section>

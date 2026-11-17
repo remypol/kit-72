@@ -1,0 +1,119 @@
+---
+/**
+ * "How many phone charges does a power bank give?" Answers the searches the
+ * calculator pages already get impressions for (e.g. "20000 mah cuanto dura").
+ * Assumptions are stated on the page: about 65% of the rated capacity reaches
+ * the phone, and a phone battery of 4,500 mAh.
+ */
+interface Props {
+  locale: 'nl' | 'de' | 'es';
+}
+const { locale } = Astro.props;
+const USABLE = 0.65;
+const PHONE = 4500;
+const sizes = [5000, 10000, 20000, 30000];
+const fmt = (n: number) => n.toLocaleString(locale === 'es' ? 'es-ES' : locale === 'de' ? 'de-DE' : 'nl-NL');
+const charges = (mah: number) => ((mah * USABLE) / PHONE).toLocaleString(locale === 'es' ? 'es-ES' : locale === 'de' ? 'de-DE' : 'nl-NL', { maximumFractionDigits: 1 });
+
+const c = {
+  nl: {
+    title: 'Hoe vaak laadt een powerbank je telefoon op?',
+    lead: 'Minder vaak dan het getal op de verpakking doet vermoeden. Bij het opladen gaat ongeveer een derde van de energie verloren.',
+    capacity: 'Powerbank',
+    usable: 'Bruikbaar',
+    result: 'Telefoonladingen',
+    note: 'Uitgangspunt: 65% van de opgegeven capaciteit komt in je telefoon terecht, en een telefoonaccu van 4.500 mAh. Bij kou, een oude powerbank of snelladen valt het lager uit.',
+    rule: 'Voor 72 uur met zuinig gebruik is 10.000 mAh per persoon een goede ondergrens; met 20.000 mAh heb je marge voor een tweede apparaat.',
+  },
+  de: {
+    title: 'Wie oft lädt eine Powerbank das Handy?',
+    lead: 'Seltener, als die Zahl auf der Verpackung vermuten lässt. Beim Laden geht etwa ein Drittel der Energie verloren.',
+    capacity: 'Powerbank',
+    usable: 'Nutzbar',
+    result: 'Handyladungen',
+    note: 'Annahme: 65 % der angegebenen Kapazität kommen im Handy an, bei einem Handyakku mit 4.500 mAh. Bei Kälte, einer alten Powerbank oder Schnellladen ist es weniger.',
+    rule: 'Für 72 Stunden bei sparsamer Nutzung sind 10.000 mAh pro Person eine gute Untergrenze; mit 20.000 mAh bleibt Reserve für ein zweites Gerät.',
+  },
+  es: {
+    title: '¿Cuántas cargas da una power bank?',
+    lead: 'Menos de lo que sugiere la cifra de la caja. Al cargar se pierde aproximadamente un tercio de la energía.',
+    capacity: 'Power bank',
+    usable: 'Aprovechable',
+    result: 'Cargas de móvil',
+    note: 'Supuesto: el 65 % de la capacidad indicada llega al móvil, con una batería de móvil de 4.500 mAh. Con frío, una power bank vieja o carga rápida, el resultado es menor.',
+    rule: 'Para 72 horas con un uso moderado, 10.000 mAh por persona es un buen mínimo; con 20.000 mAh hay margen para un segundo dispositivo.',
+  },
+}[locale];
+---
+
+<section class="charges" aria-labelledby="charges-title">
+  <h2 id="charges-title">{c.title}</h2>
+  <p>{c.lead}</p>
+  <div class="charges__wrap">
+    <table>
+      <thead>
+        <tr><th>{c.capacity}</th><th class="num">{c.usable}</th><th class="num">{c.result}</th></tr>
+      </thead>
+      <tbody>
+        {sizes.map((s) => (
+          <tr>
+            <td>{fmt(s)} mAh</td>
+            <td class="num">{fmt(Math.round(s * USABLE))} mAh</td>
+            <td class="num strong">{charges(s)}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+  <p class="charges__note">{c.note}</p>
+  <p>{c.rule}</p>
+</section>
+
+<style>
+  .charges {
+    margin-top: var(--space-12);
+    max-width: 44rem;
+  }
+  .charges h2 {
+    font-size: clamp(1.4rem, 2.6vw, 1.8rem);
+    margin-bottom: var(--space-3);
+  }
+  .charges p {
+    margin-top: var(--space-3);
+    color: var(--color-text-secondary);
+  }
+  .charges__wrap {
+    margin-top: var(--space-5);
+    overflow-x: auto;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    background: var(--color-bg-secondary);
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  th {
+    text-align: left;
+    background: var(--color-deep);
+    color: #fff;
+    font-weight: 650;
+    padding: var(--space-3) var(--space-4);
+  }
+  td {
+    padding: var(--space-3) var(--space-4);
+    border-top: 1px solid var(--color-border-subtle);
+  }
+  .num {
+    text-align: right;
+    font-variant-numeric: tabular-nums;
+  }
+  .strong {
+    font-family: var(--font-display);
+    font-weight: 750;
+    font-size: 1.15rem;
+  }
+  .charges__note {
+    font-size: 0.9rem;
+  }
+</style>

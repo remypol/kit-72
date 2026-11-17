@@ -33,6 +33,7 @@ const footerContentPerLocale: Record<Locale, FooterContent> = {
         { href: '/es/kit-72-horas/', label: 'Kit 72 Horas' },
         { href: '/es/guias/almacenamiento-agua/', label: 'Almacenamiento de Agua' },
         { href: '/es/guias/energia-comunicacion/', label: 'Energía y Comunicación' },
+        { href: '/es/comprar-kit-emergencia/', label: 'Comprar o montarlo tú' },
       ],
     },
     tools: {
@@ -50,6 +51,7 @@ const footerContentPerLocale: Record<Locale, FooterContent> = {
         { href: '/es/afiliados/', label: 'Afiliados' },
         { href: '/es/privacidad/', label: 'Privacidad' },
         { href: '/es/cookies/', label: 'Cookies' },
+        { href: '/es/aviso-legal/', label: 'Aviso legal' },
       ],
     },
     tagline: 'Guías y herramientas para preparar tu kit de emergencia. Información práctica, sin alarmismo.',
@@ -61,16 +63,18 @@ const footerContentPerLocale: Record<Locale, FooterContent> = {
     guides: {
       title: 'Gidsen',
       links: [
-        { href: '/nl/noodpakket-samenstellen/', label: 'Noodpakket Samenstellen' },
-        { href: '/nl/noodpakket-72-uur/', label: 'Noodpakket 72 Uur' },
+        { href: '/nl/noodpakket-samenstellen/', label: 'Noodpakket samenstellen: de lijst' },
+        { href: '/nl/noodpakket-72-uur/', label: 'Noodpakket 72 uur' },
         { href: '/nl/gidsen/water-opslaan/', label: 'Water Opslaan' },
         { href: '/nl/gidsen/energie-communicatie/', label: 'Energie & Communicatie' },
+        { href: '/nl/noodpakket-kopen/', label: 'Kopen of zelf samenstellen' },
+        { href: '/nl/denk-vooruit/', label: 'Denk Vooruit: het overheidsadvies' },
       ],
     },
     tools: {
       title: 'Tools',
       links: [
-        { href: '/nl/tools/noodpakket-samenstellen/', label: 'Noodpakket Samenstellen' },
+        { href: '/nl/tools/noodpakket-samenstellen/', label: 'Samensteller' },
         { href: '/nl/tools/water-calculator/', label: 'Water Calculator' },
         { href: '/nl/tools/energie-calculator/', label: 'Energie Calculator' },
       ],
@@ -82,6 +86,7 @@ const footerContentPerLocale: Record<Locale, FooterContent> = {
         { href: '/nl/affiliate-disclaimer/', label: 'Affiliate Disclaimer' },
         { href: '/nl/privacy/', label: 'Privacy' },
         { href: '/nl/cookies/', label: 'Cookies' },
+        { href: '/nl/colofon/', label: 'Colofon' },
       ],
     },
     tagline: 'Gidsen en tools voor je noodpakket. Praktische informatie, zonder paniek.',
@@ -97,6 +102,8 @@ const footerContentPerLocale: Record<Locale, FooterContent> = {
         { href: '/de/notfallpaket-72-stunden/', label: 'Notfallpaket 72 Stunden' },
         { href: '/de/ratgeber/wasser-lagerung/', label: 'Wasser Lagerung' },
         { href: '/de/ratgeber/energie-kommunikation/', label: 'Energie & Kommunikation' },
+        { href: '/de/notfallrucksack-kaufen/', label: 'Kaufen oder selbst packen' },
+        { href: '/de/bbk-notfallvorsorge/', label: 'BBK: die offizielle Empfehlung' },
       ],
     },
     tools: {
@@ -114,6 +121,7 @@ const footerContentPerLocale: Record<Locale, FooterContent> = {
         { href: '/de/affiliate-hinweis/', label: 'Affiliate-Hinweis' },
         { href: '/de/datenschutz/', label: 'Datenschutz' },
         { href: '/de/cookies/', label: 'Cookies' },
+        { href: '/de/impressum/', label: 'Impressum' },
       ],
     },
     tagline: 'Ratgeber und Tools für dein Notfallpaket. Praktische Informationen, ohne Panikmache.',
@@ -129,6 +137,7 @@ const affiliateLinkPerLocale: Record<Locale, string> = {
   nl: '/nl/affiliate-disclaimer/',
   de: '/de/affiliate-hinweis/',
 };
+import Logo from '../ui/Logo.astro';
 ---
 
 <footer class="border-t border-(--color-border) bg-(--color-bg-secondary)">
@@ -138,7 +147,7 @@ const affiliateLinkPerLocale: Record<Locale, string> = {
       <!-- Brand Column -->
       <div class="col-span-2 md:col-span-1">
         <a href={`/${locale}/`} class="inline-flex items-center gap-2 mb-4">
-          <span class="brand-mark" aria-hidden="true">72</span>
+          <Logo size={36} />
           <span class="brand-word">Kit-72</span>
         </a>
         <p class="text-sm text-(--color-text-secondary) leading-relaxed">

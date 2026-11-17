@@ -2,11 +2,12 @@
 import BaseLayout from '../../../../layouts/BaseLayout.astro';
 import Breadcrumbs from '../../../../components/ui/Breadcrumbs.astro';
 import PowerCalculator from '../../../../components/tools/PowerCalculator';
+import PowerbankCharges from '../../../../components/growth/PowerbankCharges.astro';
 ---
 
 <BaseLayout
-  title="Energie-Rechner — Kit-72"
-  description="Berechne, welche Powerbank-Kapazität du für dein Notfallpaket brauchst. Interaktive Tool mit persönlicher Berechnung."
+  title="Powerbank-Rechner: Wie viel mAh brauche ich?"
+  description="Rechne aus, wie viel mAh deine Powerbank für 72 Stunden ohne Strom braucht, und wie oft 10.000 oder 20.000 mAh ein Handy wirklich laden."
   locale="de"
   dateModified="2025-12-15"
   schemaType="HowTo"
@@ -46,13 +47,15 @@ import PowerCalculator from '../../../../components/tools/PowerCalculator';
     <div class="max-w-4xl mx-auto px-4 sm:px-6">
       <div class="mb-8">
         <Breadcrumbs locale="de" />
-        <h1 class="text-4xl font-bold mb-4">Energie-Rechner</h1>
+        <h1 class="text-4xl font-bold mb-4">Powerbank-Rechner: Wie viel mAh brauche ich?</h1>
         <p class="text-xl text-(--color-text-secondary)">
           Berechne genau, welche Powerbank-Kapazität du für dein Notfallpaket brauchst. Füge deine Geräte hinzu und sieh sofort, wie viel mAh du benötigst.
         </p>
       </div>
 
       <PowerCalculator locale="de" client:load />
+
+      <PowerbankCharges locale="de" />
     </div>
   </section>
 </BaseLayout>

@@ -2,11 +2,12 @@
 import BaseLayout from '../../../../layouts/BaseLayout.astro';
 import Breadcrumbs from '../../../../components/ui/Breadcrumbs.astro';
 import PowerCalculator from '../../../../components/tools/PowerCalculator';
+import PowerbankCharges from '../../../../components/growth/PowerbankCharges.astro';
 ---
 
 <BaseLayout
-  title="Energie Calculator — Kit-72"
-  description="Bereken welke powerbank capaciteit je nodig hebt voor je noodpakket. Interactieve tool met persoonlijke berekening."
+  title="Powerbank calculator: hoeveel mAh heb je nodig?"
+  description="Reken uit hoeveel mAh je powerbank moet hebben voor 72 uur zonder stroom, en hoe vaak 10.000 of 20.000 mAh je telefoon echt oplaadt."
   locale="nl"
   dateModified="2025-12-15"
   schemaType="HowTo"
@@ -46,13 +47,15 @@ import PowerCalculator from '../../../../components/tools/PowerCalculator';
     <div class="max-w-4xl mx-auto px-4 sm:px-6">
       <div class="mb-8">
         <Breadcrumbs locale="nl" />
-        <h1 class="text-4xl font-bold mb-4">Energie Calculator</h1>
+        <h1 class="text-4xl font-bold mb-4">Powerbank calculator: hoeveel mAh heb je nodig?</h1>
         <p class="text-xl text-(--color-text-secondary)">
           Bereken precies welke powerbank capaciteit je nodig hebt voor je noodpakket. Voeg je apparaten toe en zie direct hoeveel mAh je nodig hebt.
         </p>
       </div>
 
       <PowerCalculator locale="nl" client:load />
+
+      <PowerbankCharges locale="nl" />
     </div>
   </section>
 </BaseLayout>

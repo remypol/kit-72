@@ -1,29 +1,47 @@
 ---
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 import Breadcrumb from '../../../components/layout/Breadcrumb.astro';
+import ConsentReset from '../../../components/growth/ConsentReset.astro';
 ---
 
-<BaseLayout title="Cookiebeleid — Kit-72" description="Informatie over cookies op Kit-72." locale="nl">
+<BaseLayout title="Cookiebeleid — Kit-72" description="Welke cookies Kit-72 gebruikt: Google Analytics alleen na jouw toestemming. Zo wijzig je je keuze en dit bewaren we in je browser." hideSignup locale="nl">
   <section class="py-16">
     <div class="max-w-3xl mx-auto px-4 sm:px-6">
       <Breadcrumb items={[{ label: 'Cookies' }]} class="mb-4" locale="nl" />
       <h1 class="text-4xl font-bold mb-6">Cookiebeleid</h1>
       
       <div class="prose prose-lg">
-        <p><em>Laatst bijgewerkt: december 2025</em></p>
-        
+        <p><em>Laatst bijgewerkt: november 2026</em></p>
+
         <h2>Wat zijn cookies?</h2>
         <p>Cookies zijn kleine tekstbestanden die op je apparaat worden opgeslagen wanneer je een website bezoekt.</p>
 
-        <h2>Welke cookies gebruiken we?</h2>
-        <h3>Noodzakelijke cookies</h3>
-        <p>Deze zijn essentieel voor de werking van de website, zoals het onthouden van je taalvoorkeur.</p>
+        <h2>Wat we zonder toestemming opslaan</h2>
+        <p>
+          Kit-72 plaatst zelf geen cookies zonder je toestemming. Wel bewaren we een paar dingen in
+          de opslag van je eigen browser, die niet naar ons worden verstuurd: je keuze in de
+          cookiemelding, wat je in de samensteller hebt afgevinkt en de grootte van je huishouden
+          in de rekenhulp.
+        </p>
 
-        <h3>Analytics cookies</h3>
-        <p>We gebruiken privacy-vriendelijke analytics om te begrijpen hoe de site wordt gebruikt, zonder persoonlijke gegevens te verzamelen.</p>
+        <h2>Statistieken: alleen met jouw toestemming</h2>
+        <p>
+          Kies je in de cookiemelding voor "ja", dan laden we Google Analytics. Dat plaatst de
+          cookies <code>_ga</code> en <code>_ga_*</code> (twee jaar geldig) om bezoeken te tellen en
+          te zien welke pagina's gelezen worden en op welke winkellinks geklikt wordt. Kies je
+          "nee", dan laden we Google Analytics niet.
+        </p>
 
-        <h2>Cookies beheren</h2>
-        <p>Je kunt cookies beheren via je browserinstellingen. Let op: het uitschakelen van cookies kan de functionaliteit beperken.</p>
+        <h2>Je keuze wijzigen</h2>
+        <p>Je kunt je keuze op elk moment aanpassen. De cookiemelding verschijnt dan opnieuw.</p>
+        <ConsentReset label="Cookiekeuze wijzigen" />
+
+        <h2>Links naar winkels</h2>
+        <p>
+          Klik je op een link naar een winkel, dan ben je op de site van die winkel. Die kan eigen
+          cookies plaatsen, ook om een aankoop aan ons toe te schrijven. Daarvoor geldt het
+          cookiebeleid van de winkel.
+        </p>
       </div>
     </div>
   </section>

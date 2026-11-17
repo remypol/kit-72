@@ -1,0 +1,119 @@
+---
+/**
+ * Who runs Kit-72: colofon (NL), Impressum (DE), aviso legal (ES).
+ * Company details come from data/site.ts.
+ */
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumb from '../layout/Breadcrumb.astro';
+import { company, routes, type Locale } from '../../data/site';
+
+interface Props {
+  locale: Locale;
+}
+const { locale } = Astro.props;
+const r = routes[locale];
+
+const copy = {
+  nl: {
+    title: 'Colofon',
+    description: 'Wie er achter Kit-72 zit: bedrijfsgegevens, contact en hoe de site wordt gefinancierd.',
+    crumb: 'Colofon',
+    lead: 'Kit-72 is een uitgave van CCC Impact B.V. Hier staat wie verantwoordelijk is voor de site en hoe je ons bereikt.',
+    provider: 'Uitgever',
+    country: 'Nederland',
+    represented: 'Vertegenwoordigd door',
+    contact: 'Contact',
+    email: 'E-mail',
+    emailNote: 'Dit adres delen we met een andere dienst van hetzelfde bedrijf. Zet "Kit-72" in het onderwerp.',
+    register: 'Inschrijving',
+    kvk: 'KvK-nummer',
+    vat: 'Btw-nummer',
+    funding: 'Hoe Kit-72 wordt gefinancierd',
+    fundingText: 'Kit-72 verkoopt niets zelf. Sommige links naar winkels zijn affiliate links: koop je daar iets, dan ontvangen wij soms een vergoeding. Dat verandert niets aan de prijs die jij betaalt.',
+    fundingLink: 'Lees hoe dat werkt',
+    content: 'Over de inhoud',
+    contentText: 'We baseren hoeveelheden en adviezen op officiële bronnen zoals de Rijksoverheid en het Rode Kruis. De informatie is algemeen van aard en vervangt geen aanwijzingen van hulpdiensten. Volg bij een noodsituatie altijd de instructies van de overheid en bel bij levensgevaar 112.',
+    editorialLink: 'Redactioneel beleid',
+  },
+  de: {
+    title: 'Impressum',
+    description: 'Anbieterkennzeichnung für kit-72.com: Anbieter, Kontakt, Registereintrag und Finanzierung.',
+    crumb: 'Impressum',
+    lead: 'Anbieterkennzeichnung für kit-72.com.',
+    provider: 'Anbieter',
+    country: 'Niederlande',
+    represented: 'Vertreten durch',
+    contact: 'Kontakt',
+    email: 'E-Mail',
+    emailNote: 'Diese Adresse teilen wir mit einem anderen Angebot desselben Unternehmens. Bitte "Kit-72" in den Betreff schreiben.',
+    register: 'Registereintrag und Steuernummer',
+    kvk: 'Handelsregister der niederländischen Handelskammer (Kamer van Koophandel), KvK-Nummer',
+    vat: 'Umsatzsteuer-Identifikationsnummer',
+    funding: 'Finanzierung',
+    fundingText: 'Kit-72 verkauft nichts selbst. Einige Links zu Händlern sind Affiliate-Links: Kaufst du dort etwas, erhalten wir manchmal eine Provision. Am Preis ändert sich für dich nichts.',
+    fundingLink: 'So funktioniert das',
+    content: 'Verantwortlich für den Inhalt',
+    contentText: 'CCC Impact B.V., Anschrift wie oben. Mengen und Empfehlungen stützen sich auf amtliche Quellen wie das BBK. Die Inhalte dienen der allgemeinen Information und ersetzen keine Anweisungen der Behörden. Folge im Ernstfall den Anweisungen der Einsatzkräfte und wähle bei Lebensgefahr den Notruf 112. Für Inhalte verlinkter externer Seiten sind deren Betreiber verantwortlich. Wir sind nicht verpflichtet und nicht bereit, an Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle teilzunehmen.',
+    editorialLink: 'Redaktionelle Richtlinien',
+  },
+  es: {
+    title: 'Aviso legal',
+    description: 'Quién está detrás de Kit-72: datos de la empresa, contacto y cómo se financia el sitio.',
+    crumb: 'Aviso legal',
+    lead: 'Kit-72 es un sitio de CCC Impact B.V. Aquí figura quién es responsable del sitio y cómo contactar.',
+    provider: 'Titular del sitio',
+    country: 'Países Bajos',
+    represented: 'Representada por',
+    contact: 'Contacto',
+    email: 'Correo electrónico',
+    emailNote: 'Compartimos esta dirección con otro servicio de la misma empresa. Indica "Kit-72" en el asunto.',
+    register: 'Registro y número fiscal',
+    kvk: 'Registro mercantil de los Países Bajos (Kamer van Koophandel), número',
+    vat: 'NIF-IVA',
+    funding: 'Cómo se financia Kit-72',
+    fundingText: 'Kit-72 no vende nada. Algunos enlaces a tiendas son enlaces de afiliado: si compras allí, a veces recibimos una comisión. El precio que pagas es el mismo.',
+    fundingLink: 'Cómo funciona',
+    content: 'Sobre el contenido',
+    contentText: 'Las cantidades y recomendaciones se basan en fuentes oficiales como Protección Civil y Cruz Roja. La información es de carácter general y no sustituye las indicaciones de los servicios de emergencia. En una emergencia sigue siempre las instrucciones de las autoridades y llama al 112 si hay peligro para la vida.',
+    editorialLink: 'Política editorial',
+  },
+}[locale];
+---
+
+<BaseLayout title={copy.title} description={copy.description} locale={locale} hideSignup dateModified="2026-11-17">
+  <section class="py-16">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6">
+      <Breadcrumb items={[{ label: copy.crumb }]} class="mb-4" locale={locale} />
+      <h1 class="mb-6">{copy.title}</h1>
+      <div class="prose">
+        <p>{copy.lead}</p>
+
+        <h2>{copy.provider}</h2>
+        <p>
+          {company.name}<br />
+          {company.street}<br />
+          {company.postalCode} {company.city}<br />
+          {copy.country}
+        </p>
+        <p>{copy.represented}: {company.representedBy}</p>
+
+        <h2>{copy.contact}</h2>
+        <p>{copy.email}: <a href={`mailto:${company.email}?subject=Kit-72`}>{company.email}</a></p>
+        <p>{copy.emailNote}</p>
+
+        <h2>{copy.register}</h2>
+        <p>
+          {copy.kvk}: {company.kvk}<br />
+          {copy.vat}: {company.vat}
+        </p>
+
+        <h2>{copy.funding}</h2>
+        <p>{copy.fundingText} <a href={r.affiliate}>{copy.fundingLink}</a>.</p>
+
+        <h2>{copy.content}</h2>
+        <p>{copy.contentText}</p>
+        <p><a href={r.editorial}>{copy.editorialLink}</a></p>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

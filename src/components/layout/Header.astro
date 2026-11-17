@@ -9,6 +9,7 @@
 
 import Icon from '../ui/Icon.astro';
 import LanguageSwitcher from '../ui/LanguageSwitcher.astro';
+import Logo from '../ui/Logo.astro';
 
 type Locale = 'es' | 'nl' | 'de';
 
@@ -46,6 +47,8 @@ const navItemsPerLocale: Record<Locale, NavItem[]> = {
         { href: '/es/guias/almacenamiento-comida/', label: 'Almacenamiento de Comida' },
         { href: '/es/guias/energia-comunicacion/', label: 'Energía y Comunicación' },
         { href: '/es/guias/botiquin-primeros-auxilios/', label: 'Botiquín de Primeros Auxilios' },
+        { divider: true, href: '', label: '' },
+        { href: '/es/comprar-kit-emergencia/', label: 'Comprar o montarlo tú', description: 'Precios comparados' },
       ],
     },
     {
@@ -55,6 +58,10 @@ const navItemsPerLocale: Record<Locale, NavItem[]> = {
         { href: '/es/escenarios/prepararse-ola-calor/', label: 'Ola de Calor' },
         { href: '/es/escenarios/prepararse-corte-agua/', label: 'Corte de Agua' },
         { href: '/es/escenarios/kit-evacuacion/', label: 'Kit de Evacuación' },
+        { href: '/es/escenarios/inundacion/', label: 'Inundación' },
+        { href: '/es/escenarios/ciberataque/', label: 'Ciberataque' },
+        { divider: true, href: '', label: '' },
+        { href: '/es/escenarios/apagon-espana-2025/', label: 'Apagón de 2025', description: 'Qué pasó y qué aprendimos' },
       ],
     },
     { href: '/es/componentes/', label: 'Componentes' },
@@ -72,6 +79,9 @@ const navItemsPerLocale: Record<Locale, NavItem[]> = {
         { href: '/nl/gidsen/voedsel-opslaan/', label: 'Voedsel Opslaan' },
         { href: '/nl/gidsen/energie-communicatie/', label: 'Energie & Communicatie' },
         { href: '/nl/gidsen/ehbo-kit/', label: 'EHBO Kit' },
+        { divider: true, href: '', label: '' },
+        { href: '/nl/noodpakket-kopen/', label: 'Kopen of zelf samenstellen', description: 'Prijzen vergeleken' },
+        { href: '/nl/denk-vooruit/', label: 'Denk Vooruit', description: 'Het advies van de overheid' },
       ],
     },
     {
@@ -100,6 +110,9 @@ const navItemsPerLocale: Record<Locale, NavItem[]> = {
         { href: '/de/ratgeber/lebensmittel-lagerung/', label: 'Lebensmittel Lagerung' },
         { href: '/de/ratgeber/energie-kommunikation/', label: 'Energie & Kommunikation' },
         { href: '/de/ratgeber/erste-hilfe-set/', label: 'Erste-Hilfe-Set' },
+        { divider: true, href: '', label: '' },
+        { href: '/de/notfallrucksack-kaufen/', label: 'Kaufen oder selbst packen', description: 'Preise im Vergleich' },
+        { href: '/de/bbk-notfallvorsorge/', label: 'BBK-Empfehlung', description: 'Was der Bund rät' },
       ],
     },
     {
@@ -156,7 +169,7 @@ function isActive(item: NavItem): boolean {
     <div class="flex items-center justify-between h-16">
       <!-- Logo -->
       <a href={`/${locale}/`} class="flex items-center gap-2 group">
-        <span class="brand-mark" aria-hidden="true">72</span>
+        <Logo size={36} />
         <span class="brand-word">Kit-72</span>
       </a>
 
