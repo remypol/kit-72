@@ -1,0 +1,358 @@
+---
+/**
+ * Overview of the thirteen regional emergency broadcasters: which one belongs
+ * to which municipality, with FM frequencies and DAB+ block. Facts come from
+ * Denk Vooruit (handbook/data/regions-nl.json).
+ */
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import HandbookForm from '../../../components/growth/HandbookForm.astro';
+import { gemeenten, zenders } from '../../../data/gemeenten';
+import regions from '../../../../handbook/data/regions-nl.json';
+
+const checkedDate = new Date(regions.checked).toLocaleDateString('nl-NL', { day: 'numeric', month: 'long', year: 'numeric' });
+const area = (a: string) => a.replace('Fryslân', 'Friesland');
+const fmText = (z: (typeof zenders)[number]) => z.fm.map((f) => `${f.mhz} (${f.place})`).join(', ');
+
+// what the lookup box needs: municipality name -> [page slug, index of the broadcaster]
+const lookup = gemeenten.map((g) => [g.name, g.slug, zenders.findIndex((z) => z.name === g.broadcaster)]);
+const zenderData = zenders.map((z) => ({ name: z.name, slug: z.slug, fm: fmText(z), dab: z.dab }));
+
+const faq = [
+  {
+    question: 'Wat is een rampenzender?',
+    answer:
+      'Een rampenzender is de regionale publieke omroep waarlangs de overheid bij een ramp of crisis informatie en aanwijzingen geeft. Elke regio heeft een eigen zender met eigen FM-frequenties en een DAB+-blok. Nederland heeft er dertien.',
+  },
+  {
+    question: 'Werkt de rampenzender als de stroom uitvalt?',
+    answer:
+      'Ja. Volgens de Rijksoverheid kan de regionale publieke omroep via de radio blijven uitzenden als de stroom uitvalt en er geen internet meer is. Je hebt dan wel een radio nodig die zonder stopcontact werkt: op batterijen, zonne-energie of met een dynamo.',
+  },
+  {
+    question: 'Welke radio heb ik nodig?',
+    answer:
+      'Een radio op batterijen, zonne-energie of met een dynamo die FM en/of DAB+ ontvangt. Dat is het advies van de Rijksoverheid voor het noodpakket. Een autoradio werkt ook zonder netstroom.',
+  },
+  {
+    question: 'Moet ik op DAB+ een frequentie instellen?',
+    answer: 'Nee. Een DAB+-radio zoekt zelf de zenders op en ontvangt de regionale omroep van de regio waar je bent. Op FM stem je af op de frequentie van de zendmast die het dichtst bij je staat.',
+  },
+  {
+    question: 'Is de rampenzender hetzelfde als NL-Alert?',
+    answer: 'Nee. NL-Alert is een bericht op je mobiele telefoon. De rampenzender is radio en blijft bruikbaar als het mobiele netwerk of je telefoon uitvalt. Gebruik ze naast elkaar.',
+  },
+];
+---
+
+<BaseLayout
+  title="Rampenzender: frequentie per regio (FM en DAB+)"
+  description="Welke rampenzender hoort bij jouw gemeente? Alle dertien regionale zenders met hun FM-frequenties en DAB+-blok, en hoe je je radio er nu op afstelt."
+  locale="nl"
+  hideSignup
+  faqData={faq}
+  dateModified={regions.checked}
+  ogImage="/images/og-noodhandboek.jpg"
+  breadcrumbs={[
+    { name: 'Home', url: '/nl/' },
+    { name: 'Rampenzender', url: '/nl/rampenzender/' },
+  ]}
+>
+  <article class="rz">
+    <header class="rz-head">
+      <h1>Rampenzender: welke zender en frequentie hoort bij jou?</h1>
+      <p class="rz-lead">
+        Bij een ramp geeft de overheid aanwijzingen via de regionale omroep. Nederland heeft dertien rampenzenders, elk met eigen FM-frequenties en een DAB+-blok. Zoek je gemeente op en zet je radio er vandaag nog op af.
+      </p>
+      <div class="rz-find" data-rz-find>
+        <label for="rz-q">Zoek je gemeente</label>
+        <input id="rz-q" type="search" list="rz-gemeenten" placeholder="Bijvoorbeeld Zwolle" autocomplete="off" />
+        <datalist id="rz-gemeenten">
+          {gemeenten.map((g) => <option value={g.name} />)}
+        </datalist>
+        <div class="rz-answer" role="status" aria-live="polite" hidden></div>
+      </div>
+    </header>
+
+    <section class="rz-table" aria-labelledby="rz-all">
+      <h2 id="rz-all">Alle dertien rampenzenders</h2>
+      <div class="rz-rows" role="table" aria-label="Rampenzenders met FM-frequenties en DAB+-blok">
+        <div class="rz-row rz-row--head" role="row">
+          <span role="columnheader">Zender</span>
+          <span role="columnheader">Gebied</span>
+          <span role="columnheader">FM in MHz (zendmast)</span>
+          <span role="columnheader">DAB+</span>
+        </div>
+        {zenders.map((z) => (
+          <div class="rz-row" role="row">
+            <span role="cell" class="rz-name"><a href={`/nl/rampenzender/${z.slug}/`}>{z.name}</a></span>
+            <span role="cell" data-label="Gebied">{area(z.area)}</span>
+            <span role="cell" data-label="FM">{fmText(z)}</span>
+            <span role="cell" data-label="DAB+">blok {z.dab}</span>
+          </div>
+        ))}
+      </div>
+      <p class="rz-note">Bron: Denk Vooruit (Rijksoverheid), nagekeken op {checkedDate}.</p>
+    </section>
+
+    <section class="rz-text">
+      <h2>Zo stel je je radio in</h2>
+      <ol>
+        <li><strong>Zorg voor een radio die zonder stopcontact werkt.</strong> Op batterijen, zonne-energie of met een dynamo, met FM en/of DAB+. Leg er reservebatterijen bij.</li>
+        <li><strong>Zoek op FM de zendmast die het dichtst bij je staat.</strong> Is de ontvangst slecht, probeer dan de volgende frequentie van dezelfde zender.</li>
+        <li><strong>Sla de zender op als voorkeuzezender</strong> en schrijf de frequentie op een sticker op de radio. Wie de radio pakt, hoeft dan niet te zoeken.</li>
+        <li><strong>Gebruik je DAB+?</strong> Laat de radio één keer zenders zoeken. Hij vindt de regionale omroep zelf; het blok in de tabel hoef je niet in te toetsen.</li>
+        <li><strong>Test het elk halfjaar.</strong> Zet de radio aan, luister een minuut en vervang lege batterijen.</li>
+      </ol>
+    </section>
+
+    <section class="rz-text">
+      <h2>Wanneer zet je de rampenzender aan?</h2>
+      <p>
+        Bij een NL-Alert, als de sirene gaat, of als stroom en internet tegelijk wegvallen en je niet weet wat er aan de hand is. De veiligheidsregio vertelt via de zender wat er speelt en wat je moet doen, bijvoorbeeld ramen en deuren sluiten of juist vertrekken.
+      </p>
+      <p>
+        De zender en frequenties van jouw regio staan ook in het <a href="/nl/noodhandboek/">gratis noodhandboek voor jouw adres</a>, samen met de spoedeisende hulp die je het snelst bereikt en de hoogte van je perceel. Op de pagina van <a href="/nl/noodplan/">jouw gemeente</a> vind je dezelfde gegevens voor de gemeente als geheel.
+      </p>
+    </section>
+
+    <section class="rz-cta" id="aanvragen">
+      <HandbookForm
+        source="rampenzender"
+        title="Zet de zender in je eigen noodhandboek"
+        body="Vier pagina's voor jouw adres: de rampenzender met frequenties, de spoedeisende hulp die je het snelst bereikt, de hoogte van je perceel en wat je het eerste uur doet. Gratis."
+      />
+    </section>
+
+    <section class="rz-text rz-faq">
+      <h2>Veelgestelde vragen</h2>
+      <dl>
+        {faq.map((f) => (
+          <>
+            <dt>{f.question}</dt>
+            <dd>{f.answer}</dd>
+          </>
+        ))}
+      </dl>
+    </section>
+
+    <footer class="rz-src">
+      <p>
+        Bron voor zenders, FM-frequenties en DAB+-blokken: <a href={regions.source} rel="noopener">Denk Vooruit, televisie en radio</a> (Rijksoverheid), nagekeken op {checkedDate}. Welke zender bij welke gemeente hoort, volgt uit de veiligheidsregio volgens het CBS. Kit-72 is geen overheidssite; bij een ramp gelden de aanwijzingen van de hulpdiensten.
+      </p>
+    </footer>
+  </article>
+
+  <script type="application/json" id="rz-data" set:html={JSON.stringify({ lookup, zenders: zenderData })} />
+</BaseLayout>
+
+<style>
+  .rz {
+    max-width: 68rem;
+    margin-inline: auto;
+    padding: var(--space-8) var(--space-4) var(--space-16);
+  }
+  .rz-head h1 {
+    font-size: clamp(2rem, 4.6vw, 3rem);
+    line-height: 1.06;
+    max-width: 20ch;
+  }
+  .rz-lead {
+    margin-top: var(--space-4);
+    font-size: 1.15rem;
+    color: var(--color-text-secondary);
+    max-width: 62ch;
+  }
+  .rz-find {
+    margin-top: var(--space-8);
+    max-width: 34rem;
+    display: grid;
+    gap: var(--space-2);
+  }
+  .rz-find label {
+    font-weight: 700;
+  }
+  .rz-find input {
+    min-height: 52px;
+    padding: 0 var(--space-4);
+    font: inherit;
+    font-size: 16px;
+    border: 2px solid var(--color-text-primary);
+    border-radius: var(--radius-md);
+    background: #fff;
+  }
+  .rz-find input:focus-visible {
+    outline: 3px solid var(--color-signal);
+    outline-offset: 2px;
+  }
+  .rz-answer {
+    margin-top: var(--space-2);
+    padding: var(--space-4) var(--space-5);
+    background: var(--color-deep);
+    color: #fff;
+    border-radius: var(--radius-md);
+  }
+  .rz-answer :global(strong) {
+    display: block;
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    line-height: 1.15;
+    margin-bottom: var(--space-1);
+  }
+  .rz-answer :global(a) {
+    color: var(--color-signal);
+    font-weight: 650;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+  .rz-table {
+    margin-block: var(--space-12);
+  }
+  .rz-table h2,
+  .rz-text h2 {
+    font-size: clamp(1.4rem, 2.8vw, 1.9rem);
+    margin-bottom: var(--space-4);
+  }
+  .rz-rows {
+    border-top: 3px solid var(--color-text-primary);
+  }
+  .rz-row {
+    display: grid;
+    gap: var(--space-1);
+    padding-block: var(--space-4);
+    border-bottom: 1px solid var(--color-border);
+  }
+  .rz-row--head {
+    display: none;
+  }
+  .rz-row [data-label]::before {
+    content: attr(data-label) ': ';
+    color: var(--color-text-secondary);
+  }
+  .rz-name a {
+    font-family: var(--font-display);
+    font-weight: 750;
+    font-size: 1.2rem;
+    color: var(--color-text-primary);
+    text-decoration: underline;
+    text-decoration-color: var(--color-accent);
+    text-underline-offset: 4px;
+  }
+  @media (min-width: 820px) {
+    .rz-row {
+      grid-template-columns: 11rem minmax(0, 1.1fr) minmax(0, 1.6fr) 5rem;
+      gap: var(--space-6);
+      align-items: baseline;
+      padding-block: var(--space-3);
+    }
+    .rz-row--head {
+      display: grid;
+      font-size: 0.9rem;
+      font-weight: 650;
+      color: var(--color-text-secondary);
+    }
+    .rz-row [data-label]::before {
+      content: none;
+    }
+    .rz-name a {
+      font-size: 1.05rem;
+    }
+  }
+  .rz-note,
+  .rz-src {
+    margin-top: var(--space-4);
+    font-size: 0.9rem;
+    color: var(--color-text-secondary);
+  }
+  .rz-text {
+    max-width: 44rem;
+    margin-bottom: var(--space-10);
+  }
+  .rz-text p {
+    font-size: 1.05rem;
+    color: var(--color-text-secondary);
+  }
+  .rz-text p + p {
+    margin-top: var(--space-4);
+  }
+  .rz-text ol {
+    list-style: decimal;
+    padding-left: 1.4rem;
+    display: grid;
+    gap: var(--space-3);
+    color: var(--color-text-secondary);
+    font-size: 1.05rem;
+  }
+  .rz-text ol strong {
+    color: var(--color-text-primary);
+  }
+  .rz-text li::marker {
+    font-weight: 800;
+    color: var(--color-accent);
+  }
+  .rz-text a,
+  .rz-src a {
+    color: var(--color-accent);
+    font-weight: 650;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+  .rz-cta {
+    max-width: 44rem;
+    margin-block: var(--space-4) var(--space-12);
+    scroll-margin-top: calc(var(--header-height) + 16px);
+  }
+  .rz-faq dt {
+    font-weight: 750;
+    font-size: 1.1rem;
+    margin-top: var(--space-6);
+  }
+  .rz-faq dt:first-child {
+    margin-top: 0;
+  }
+  .rz-faq dd {
+    margin: var(--space-2) 0 0;
+    color: var(--color-text-secondary);
+  }
+  .rz-src {
+    max-width: 44rem;
+    border-top: 1px solid var(--color-border);
+    padding-top: var(--space-4);
+  }
+</style>
+
+<script>
+  const root = document.querySelector<HTMLElement>('[data-rz-find]');
+  const raw = document.getElementById('rz-data')?.textContent;
+  if (root && raw) {
+    const { lookup, zenders } = JSON.parse(raw) as { lookup: [string, string, number][]; zenders: { name: string; slug: string; fm: string; dab: string }[] };
+    const input = root.querySelector<HTMLInputElement>('input')!;
+    const answer = root.querySelector<HTMLElement>('.rz-answer')!;
+    const norm = (s: string) => s.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase().replace(/[^a-z0-9]/g, '');
+    const index = new Map(lookup.map((row) => [norm(row[0]), row]));
+    const show = () => {
+      const q = norm(input.value);
+      // exact name first, otherwise the only municipality that starts with what was typed
+      const starts = q.length >= 3 ? lookup.filter((row) => norm(row[0]).startsWith(q)) : [];
+      const hit = index.get(q) ?? (starts.length === 1 ? starts[0] : undefined);
+      if (!hit) {
+        answer.hidden = true;
+        return;
+      }
+      const z = zenders[hit[2]];
+      answer.replaceChildren();
+      const strong = document.createElement('strong');
+      strong.textContent = `${hit[0]}: ${z.name}`;
+      const p = document.createElement('p');
+      p.textContent = `FM ${z.fm}. DAB+: blok ${z.dab}. `;
+      const more = document.createElement('a');
+      more.href = `/nl/noodplan/${hit[1]}/`;
+      more.textContent = `Alles voor ${hit[0]}`;
+      p.append(more);
+      answer.append(strong, p);
+      answer.hidden = false;
+      window.gtag?.('event', 'search', { search_term: hit[0], source: 'rampenzender' });
+    };
+    input.addEventListener('input', show);
+    input.addEventListener('change', show);
+  }
+</script>

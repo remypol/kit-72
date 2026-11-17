@@ -6,7 +6,7 @@
  */
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 import HandbookForm from '../../../components/growth/HandbookForm.astro';
-import { gemeenten, bySlug, broadcasters, checked, nl, nap, floodSentence, floodShort, floodType, type Gemeente } from '../../../data/gemeenten';
+import { gemeenten, bySlug, broadcasters, checked, nl, nap, floodSentence, floodShort, floodType, slugify, type Gemeente } from '../../../data/gemeenten';
 
 export function getStaticPaths() {
   return gemeenten.map((g) => ({ params: { gemeente: g.slug }, props: { g } }));
@@ -54,6 +54,7 @@ const faq = [
   hideSignup
   faqData={faq}
   dateModified={checked}
+  ogImage="/images/og-noodhandboek.jpg"
   breadcrumbs={[
     { name: 'Home', url: '/nl/' },
     { name: 'Noodplan per gemeente', url: '/nl/noodplan/' },
@@ -72,7 +73,7 @@ const faq = [
     <section class="gm-facts" aria-label={`Feiten over ${g.name}`}>
       <div class="gm-fact">
         <h2>Rampenzender</h2>
-        <p class="gm-big">{g.broadcaster ?? 'Onbekend'}</p>
+        <p class="gm-big">{g.broadcaster ? <a href={`/nl/rampenzender/${slugify(g.broadcaster)}/`}>{g.broadcaster}</a> : 'Onbekend'}</p>
         {radio && <p>FM {fm}. DAB+: blok {radio.dab}.</p>}
         <p class="gm-note">Zet je radio er nu op af. Op batterijen werkt hij ook als de stroom uitvalt.</p>
       </div>
@@ -120,7 +121,7 @@ const faq = [
       />
       <figure class="gm-peek">
         <a href="/nl/noodhandboek/#voorbeeld">
-          <img src="/images/handboek/voorbeeld-pagina-1.jpg" alt="Voorbeeld van pagina 1 van het noodhandboek, gemaakt voor het stadhuis van Rotterdam" width="778" height="1100" loading="lazy" decoding="async" />
+          <img src="/images/handboek/voorbeeld-pagina-1.webp" alt="Voorbeeld van pagina 1 van het noodhandboek, gemaakt voor het stadhuis van Rotterdam" width="778" height="1100" loading="lazy" decoding="async" />
         </a>
         <figcaption>
           Zo ziet pagina 1 eruit, hier voor het stadhuis van Rotterdam. In het jouwe staan je eigen straat, hoogte en buurt.
@@ -215,6 +216,11 @@ const faq = [
     color: var(--color-text-secondary);
     letter-spacing: 0;
     margin-bottom: var(--space-1);
+  }
+  .gm-fact .gm-big a {
+    color: inherit;
+    text-decoration-color: var(--color-accent);
+    font-weight: inherit;
   }
   .gm-big {
     font-family: var(--font-display, inherit);

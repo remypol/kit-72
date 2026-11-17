@@ -1,0 +1,93 @@
+---
+/**
+ * Band at the end of every Dutch content page that points to the free
+ * personal handbook. Pages with their own handbook form leave it out
+ * (hideSignup in BaseLayout).
+ */
+interface Props {
+  /** where the band sits, for analytics */
+  source: string;
+}
+const { source } = Astro.props;
+---
+
+<aside class="hband" aria-labelledby="hband-title">
+  <div class="hband__inner">
+    <a class="hband__paper" href="/nl/noodhandboek/#voorbeeld" tabindex="-1" aria-hidden="true">
+      <img src="/images/handboek/voorbeeld-pagina-1.webp" alt="" width="778" height="1100" loading="lazy" decoding="async" />
+    </a>
+    <div class="hband__text">
+      <h2 id="hband-title">Gratis: een noodhandboek voor jouw adres</h2>
+      <p>
+        Vul je postcode en huisnummer in en je krijgt vier pagina's die alleen voor jouw huis kloppen: hoe hoog het ligt, of het in overstromingsrisicogebied staat, welke spoedeisende hulp je het snelst bereikt en welke zender je aanzet.
+      </p>
+      <a class="btn btn-primary btn-lg" href="/nl/noodhandboek/" data-handbook-band={source}>Maak mijn handboek</a>
+    </div>
+  </div>
+</aside>
+
+<style>
+  .hband {
+    background: var(--color-bg-tertiary, #e8eee7);
+    border-top: 1px solid var(--color-border);
+    overflow: hidden;
+  }
+  .hband__inner {
+    max-width: 60rem;
+    margin-inline: auto;
+    padding: var(--space-10) var(--space-4);
+    display: grid;
+    gap: var(--space-6);
+    align-items: center;
+  }
+  @media (min-width: 640px) {
+    .hband__inner {
+      grid-template-columns: 11rem minmax(0, 1fr);
+      gap: var(--space-10);
+      padding-inline: var(--space-6);
+    }
+  }
+  .hband__paper {
+    display: block;
+    width: 9rem;
+    justify-self: center;
+  }
+  @media (min-width: 640px) {
+    .hband__paper {
+      width: 100%;
+    }
+  }
+  .hband__paper img {
+    display: block;
+    width: 100%;
+    height: auto;
+    background: #fff;
+    border: 1px solid var(--color-border);
+    border-radius: 3px;
+    box-shadow: 0 16px 28px -16px rgba(16, 35, 27, 0.5);
+    transform: rotate(-2.5deg);
+  }
+  .hband h2 {
+    font-size: clamp(1.4rem, 2.8vw, 1.9rem);
+    line-height: 1.12;
+    margin-bottom: var(--space-3);
+  }
+  .hband p {
+    color: var(--color-text-secondary);
+    max-width: 56ch;
+    margin-bottom: var(--space-5);
+  }
+  @media print {
+    .hband {
+      display: none;
+    }
+  }
+</style>
+
+<script>
+  document.querySelectorAll<HTMLAnchorElement>('[data-handbook-band]').forEach((link) => {
+    link.addEventListener('click', () => {
+      window.gtag?.('event', 'select_promotion', { promotion_name: 'handbook', creative_slot: link.dataset.handbookBand });
+    });
+  });
+</script>

@@ -1,0 +1,364 @@
+---
+/**
+ * One page per regional emergency broadcaster: FM frequencies, DAB+ block,
+ * the safety regions it serves and every municipality it covers.
+ */
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import HandbookForm from '../../../components/growth/HandbookForm.astro';
+import { zenders, andList, type Zender } from '../../../data/gemeenten';
+import regions from '../../../../handbook/data/regions-nl.json';
+
+export function getStaticPaths() {
+  return zenders.map((z) => ({ params: { zender: z.slug }, props: { z } }));
+}
+
+const { z } = Astro.props as { z: Zender };
+const area = z.area.replace('Fryslân', 'Friesland');
+const checkedDate = new Date(regions.checked).toLocaleDateString('nl-NL', { day: 'numeric', month: 'long', year: 'numeric' });
+const fmList = z.fm.map((f) => `${f.mhz} MHz (${f.place})`);
+const others = zenders.filter((o) => o !== z);
+const regionNames = z.regions.map((r) => `Veiligheidsregio ${r.name}`);
+const examples = [...z.gemeenten].slice(0, 400).map((g) => g.name);
+const big = ['Amsterdam', 'Rotterdam', "'s-Gravenhage", 'Utrecht', 'Eindhoven', 'Groningen', 'Tilburg', 'Almere', 'Breda', 'Nijmegen', 'Apeldoorn', 'Arnhem', 'Haarlem', 'Enschede', 'Zwolle', 'Leiden', 'Maastricht', 'Leeuwarden', 'Emmen', 'Middelburg', 'Assen', 'Lelystad', 'Dordrecht', "'s-Hertogenbosch", 'Venlo', 'Deventer', 'Amersfoort', 'Zaanstad', 'Delft', 'Vlissingen'];
+const known = big.filter((n) => examples.includes(n)).slice(0, 3).map((n) => n.replace("'s-Gravenhage", 'Den Haag').replace("'s-Hertogenbosch", 'Den Bosch'));
+
+// The longest title that still fits in a search result (60 characters).
+const title = [`Rampenzender ${area}: ${z.name}, FM en DAB+`, `Rampenzender ${area}: ${z.name}`, `${z.name}: rampenzender, FM-frequentie en DAB+`, `Rampenzender ${z.name}`].find((t) => t.length <= 60)!;
+const description = [
+  `${z.name} is de rampenzender van ${area}. FM: ${fmList.join(', ')}. DAB+: blok ${z.dab}. Met alle ${z.gemeenten.length} gemeenten.`,
+  `${z.name} is de rampenzender van ${area}. FM-frequenties per zendmast, DAB+ blok ${z.dab} en alle ${z.gemeenten.length} gemeenten.`,
+  `${z.name} is de rampenzender van ${area}: FM-frequenties, DAB+ blok ${z.dab} en alle gemeenten.`,
+].find((t) => t.length <= 160)!;
+
+const faq = [
+  {
+    question: `Op welke frequentie zit ${z.name}?`,
+    answer: `Op FM: ${andList(fmList)}. Kies de zendmast die het dichtst bij je staat. Op DAB+ zit ${z.name} in blok ${z.dab}; een DAB+-radio vindt de zender zelf.`,
+  },
+  {
+    question: `Voor welk gebied is ${z.name} de rampenzender?`,
+    answer: `Voor ${andList(regionNames)}: ${z.gemeenten.length} gemeenten${known.length ? `, waaronder ${andList(known)}` : ''}.`,
+  },
+  {
+    question: `Werkt ${z.name} als de stroom uitvalt?`,
+    answer: 'Volgens de Rijksoverheid kan de regionale publieke omroep via de radio blijven uitzenden als de stroom uitvalt en er geen internet meer is. Je hebt dan een radio nodig op batterijen, zonne-energie of met een dynamo.',
+  },
+  {
+    question: 'Wanneer zet ik de rampenzender aan?',
+    answer: 'Bij een NL-Alert, als de sirene gaat, of als stroom en internet tegelijk wegvallen en je niet weet wat er aan de hand is. De veiligheidsregio vertelt via de zender wat er speelt en wat je moet doen.',
+  },
+];
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  locale="nl"
+  hideSignup
+  faqData={faq}
+  dateModified={regions.checked}
+  ogImage="/images/og-noodhandboek.jpg"
+  breadcrumbs={[
+    { name: 'Home', url: '/nl/' },
+    { name: 'Rampenzender', url: '/nl/rampenzender/' },
+    { name: z.name, url: `/nl/rampenzender/${z.slug}/` },
+  ]}
+>
+  <article class="rz">
+    <header class="rz-head">
+      <p class="rz-crumb"><a href="/nl/rampenzender/">Rampenzender</a> / {area}</p>
+      <h1>{z.name}: de rampenzender van {area}</h1>
+      <p class="rz-lead">
+        Bij een ramp in {area} geeft de veiligheidsregio aanwijzingen via {z.name}. Hieronder staan de FM-frequenties per zendmast, het DAB+-blok en alle {z.gemeenten.length} gemeenten waarvoor deze zender geldt.
+      </p>
+    </header>
+
+    <section class="rz-facts" aria-label={`Frequenties van ${z.name}`}>
+      <div class="rz-fact rz-fact--wide">
+        <h2>FM-frequenties</h2>
+        <ul class="rz-fm">
+          {z.fm.map((f) => (
+            <li>
+              <span class="rz-mhz">{f.mhz}</span>
+              <span>MHz, zendmast {f.place}</span>
+            </li>
+          ))}
+        </ul>
+        <p>Kies de zendmast die het dichtst bij je staat. Is de ontvangst slecht, probeer dan de volgende.</p>
+      </div>
+      <div class="rz-fact">
+        <h2>DAB+</h2>
+        <p class="rz-big">Blok {z.dab}</p>
+        <p>Een DAB+-radio vindt de zender zelf als je hem zenders laat zoeken.</p>
+      </div>
+      <div class="rz-fact">
+        <h2>{z.regions.length > 1 ? "Veiligheidsregio's" : 'Veiligheidsregio'}</h2>
+        <ul class="rz-regions">
+          {z.regions.map((r) => (
+            <li>
+              <strong>{r.name}</strong>
+              <a href={`https://${r.website}`} rel="noopener">{r.website.replace(/^www\./, '')}</a>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
+
+    <section class="rz-text">
+      <h2>Zet je radio nu op {z.name}</h2>
+      <ol>
+        <li><strong>Pak een radio die zonder stopcontact werkt:</strong> op batterijen, zonne-energie of met een dynamo. Een autoradio kan ook.</li>
+        <li><strong>Stem af op {z.fm[0].mhz} MHz</strong>{z.fm.length > 1 ? ` of op een van de andere frequenties hierboven, als die zendmast dichterbij staat` : ''}. Op DAB+ laat je de radio zenders zoeken en kies je {z.name}.</li>
+        <li><strong>Sla de zender op als voorkeuzezender</strong> en schrijf de frequentie op een sticker op de radio.</li>
+        <li><strong>Test het elk halfjaar</strong> en leg reservebatterijen bij de radio.</li>
+      </ol>
+    </section>
+
+    <section class="rz-cta" id="aanvragen">
+      <HandbookForm
+        source="rampenzender"
+        title={`Woon je in ${area}? Maak je eigen noodhandboek`}
+        body={`Vier pagina's voor jouw adres: ${z.name} met de frequenties, de spoedeisende hulp die je het snelst bereikt, de hoogte van je perceel en wat je het eerste uur doet. Gratis.`}
+      />
+      <figure class="rz-peek">
+        <a href="/nl/noodhandboek/#voorbeeld">
+          <img src="/images/handboek/voorbeeld-pagina-1.webp" alt="Voorbeeld van pagina 1 van het noodhandboek, gemaakt voor het stadhuis van Rotterdam" width="778" height="1100" loading="lazy" decoding="async" />
+        </a>
+        <figcaption>
+          Zo ziet pagina 1 eruit, hier voor het stadhuis van Rotterdam.
+          <a href="/nl/noodhandboek/#voorbeeld">Vergelijk drie adressen</a>
+        </figcaption>
+      </figure>
+    </section>
+
+    <section class="rz-text rz-text--wide">
+      <h2>Gemeenten met {z.name} als rampenzender</h2>
+      <p>Kies je gemeente voor de dichtstbijzijnde spoedeisende hulp, het overstromingsrisico en de hoogte van het maaiveld.</p>
+      <ul class="rz-gemeenten">
+        {z.gemeenten.map((g) => (
+          <li><a href={`/nl/noodplan/${g.slug}/`}>{g.name}</a></li>
+        ))}
+      </ul>
+    </section>
+
+    <section class="rz-text rz-faq">
+      <h2>Veelgestelde vragen over {z.name}</h2>
+      <dl>
+        {faq.map((f) => (
+          <>
+            <dt>{f.question}</dt>
+            <dd>{f.answer}</dd>
+          </>
+        ))}
+      </dl>
+    </section>
+
+    <section class="rz-text rz-text--wide">
+      <h2>De andere rampenzenders</h2>
+      <ul class="rz-gemeenten">
+        {others.map((o) => (
+          <li><a href={`/nl/rampenzender/${o.slug}/`}>{o.name}</a> <span>{o.area.replace('Fryslân', 'Friesland')}</span></li>
+        ))}
+      </ul>
+    </section>
+
+    <footer class="rz-src">
+      <p>
+        Bron voor de FM-frequenties en het DAB+-blok: <a href={regions.source} rel="noopener">Denk Vooruit, televisie en radio</a> (Rijksoverheid), nagekeken op {checkedDate}. Welke gemeenten bij welke veiligheidsregio horen, volgt uit de indeling van het CBS. Kit-72 is geen overheidssite; bij een ramp gelden de aanwijzingen van de hulpdiensten.
+      </p>
+    </footer>
+  </article>
+</BaseLayout>
+
+<style>
+  .rz {
+    max-width: 68rem;
+    margin-inline: auto;
+    padding: var(--space-8) var(--space-4) var(--space-16);
+  }
+  .rz-crumb {
+    font-size: 0.9rem;
+    color: var(--color-text-secondary);
+    margin-bottom: var(--space-3);
+  }
+  .rz-crumb a {
+    color: var(--color-accent);
+    font-weight: 650;
+  }
+  .rz-head h1 {
+    font-size: clamp(2rem, 4.6vw, 3rem);
+    line-height: 1.06;
+    max-width: 22ch;
+  }
+  .rz-lead {
+    margin-top: var(--space-4);
+    font-size: 1.15rem;
+    color: var(--color-text-secondary);
+    max-width: 62ch;
+  }
+  .rz-facts {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
+    gap: 0 var(--space-8);
+    margin-block: var(--space-10);
+  }
+  .rz-fact {
+    border-top: 3px solid var(--color-text-primary);
+    padding-block: var(--space-4) var(--space-8);
+  }
+  .rz-fact h2 {
+    font-size: 0.95rem;
+    font-weight: 650;
+    color: var(--color-text-secondary);
+    letter-spacing: 0;
+    margin-bottom: var(--space-2);
+  }
+  .rz-fact p {
+    color: var(--color-text-secondary);
+  }
+  .rz-big,
+  .rz-mhz {
+    font-family: var(--font-display, inherit);
+    font-weight: 750;
+    font-size: clamp(1.5rem, 2.8vw, 2rem);
+    line-height: 1.1;
+    color: var(--color-text-primary);
+  }
+  .rz-fact .rz-big {
+    color: var(--color-text-primary);
+    margin-bottom: var(--space-2);
+  }
+  .rz-fm {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 var(--space-3);
+    display: grid;
+    gap: var(--space-1);
+  }
+  .rz-fm li {
+    display: flex;
+    align-items: baseline;
+    gap: var(--space-3);
+    color: var(--color-text-secondary);
+  }
+  .rz-mhz {
+    min-width: 4.2rem;
+  }
+  .rz-regions {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    gap: var(--space-3);
+  }
+  .rz-regions li {
+    display: grid;
+  }
+  .rz-regions strong {
+    font-family: var(--font-display, inherit);
+    font-size: 1.15rem;
+    line-height: 1.2;
+  }
+  .rz-text {
+    max-width: 44rem;
+    margin-bottom: var(--space-10);
+  }
+  .rz-text--wide {
+    max-width: none;
+  }
+  .rz-text h2 {
+    font-size: clamp(1.4rem, 2.8vw, 1.9rem);
+    margin-bottom: var(--space-4);
+  }
+  .rz-text p {
+    font-size: 1.05rem;
+    color: var(--color-text-secondary);
+    max-width: 44rem;
+  }
+  .rz-text ol {
+    list-style: decimal;
+    padding-left: 1.4rem;
+    display: grid;
+    gap: var(--space-3);
+    color: var(--color-text-secondary);
+    font-size: 1.05rem;
+  }
+  .rz-text ol strong {
+    color: var(--color-text-primary);
+  }
+  .rz-text li::marker {
+    font-weight: 800;
+    color: var(--color-accent);
+  }
+  .rz a {
+    color: var(--color-accent);
+    font-weight: 650;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+  .rz-gemeenten {
+    list-style: none;
+    padding: 0;
+    margin: var(--space-5) 0 0;
+    columns: 14rem;
+    column-gap: var(--space-8);
+  }
+  .rz-gemeenten li {
+    break-inside: avoid;
+    padding-block: 0.3rem;
+  }
+  .rz-gemeenten span {
+    color: var(--color-text-secondary);
+    font-size: 0.9rem;
+  }
+  .rz-cta {
+    display: grid;
+    gap: var(--space-8);
+    margin-block: var(--space-4) var(--space-12);
+    scroll-margin-top: calc(var(--header-height) + 16px);
+  }
+  @media (min-width: 960px) {
+    .rz-cta {
+      grid-template-columns: minmax(0, 44rem) minmax(0, 1fr);
+      align-items: start;
+    }
+  }
+  .rz-peek {
+    margin: 0;
+    max-width: 20rem;
+    justify-self: center;
+  }
+  .rz-peek img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border: 1px solid var(--color-border);
+    border-radius: 3px;
+    box-shadow: 0 18px 30px -16px rgba(16, 35, 27, 0.45);
+    transform: rotate(1.5deg);
+  }
+  .rz-peek figcaption {
+    margin-top: var(--space-4);
+    font-size: 0.9rem;
+    color: var(--color-text-secondary);
+  }
+  .rz-faq dt {
+    font-weight: 750;
+    font-size: 1.1rem;
+    margin-top: var(--space-6);
+  }
+  .rz-faq dt:first-child {
+    margin-top: 0;
+  }
+  .rz-faq dd {
+    margin: var(--space-2) 0 0;
+    color: var(--color-text-secondary);
+  }
+  .rz-src {
+    max-width: 44rem;
+    border-top: 1px solid var(--color-border);
+    padding-top: var(--space-4);
+    font-size: 0.9rem;
+    color: var(--color-text-secondary);
+  }
+</style>

@@ -4,6 +4,7 @@ import Header from '../components/layout/Header.astro';
 import Footer from '../components/layout/Footer.astro';
 import BottomNav from '../components/layout/BottomNav';
 import ListSignup from '../components/growth/ListSignup.astro';
+import HandbookBand from '../components/growth/HandbookBand.astro';
 import ConsentBanner from '../components/growth/ConsentBanner.astro';
 import { getAlternatesForPath, type Locale } from '../data/hreflang-map';
 import { routes, company } from '../data/site';
@@ -516,6 +517,7 @@ for (const [altLocale, altPath] of Object.entries(alternates)) {
     <slot />
   </main>
 
+  {showSignup && locale === 'nl' && <HandbookBand source="page-end" />}
   {showSignup && <ListSignup locale={locale} source="page-end" variant="band" />}
 
   <Footer locale={locale} />

@@ -68,3 +68,52 @@ const TYPE_TEXT: Record<string, string> = {
 };
 /** "B: beschermd langs hoofdwatersysteem" -> readable phrase; unknown types pass through. */
 export const floodType = (t: string) => TYPE_TEXT[t.split(':')[0]?.trim()] ?? t.replace(/^\w: /, '');
+
+/** "Omrop Fryslân" -> "omrop-fryslan" */
+export const slugify = (s: string) =>
+  s
+    .normalize('NFD')
+    .replace(/[̀-ͯ]/g, '')
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-|-$/g, '');
+
+const AND = (list: string[]) => (list.length <= 1 ? list.join('') : `${list.slice(0, -1).join(', ')} en ${list.at(-1)}`);
+export const andList = AND;
+
+export interface Zender {
+  name: string;
+  slug: string;
+  fm: { place: string; mhz: string }[];
+  dab: string;
+  /** safety regions this broadcaster serves, with their website */
+  regions: { name: string; website: string }[];
+  provinces: string[];
+  /** "Gelderland", or the regions when the province is shared with another broadcaster */
+  area: string;
+  gemeenten: Gemeente[];
+}
+
+const regionTable = regions.regions as Record<string, { broadcaster: string; website: string }>;
+
+/** The thirteen regional emergency broadcasters with everything the pages under /nl/rampenzender/ show. */
+export const zenders: Zender[] = Object.entries(broadcasters).map(([name, b]) => {
+  const own = gemeenten.filter((g) => g.broadcaster === name).sort((a, z) => a.name.localeCompare(z.name, 'nl'));
+  const provinces = [...new Set(own.map((g) => g.province).filter(Boolean) as string[])];
+  const served = Object.entries(regionTable)
+    .filter(([, r]) => r.broadcaster === name)
+    .map(([region, r]) => ({ name: region, website: r.website }));
+  // a province is "shared" when another broadcaster also has municipalities in it
+  const shared = provinces.some((p) => gemeenten.some((g) => g.province === p && g.broadcaster !== name));
+  return {
+    name,
+    slug: slugify(name),
+    fm: b.fm.map(([place, mhz]) => ({ place: place.trim(), mhz: mhz.replace('.', ',') })),
+    dab: b.dab,
+    regions: served,
+    provinces,
+    area: shared ? AND(served.map((r) => r.name)) : AND(provinces),
+    gemeenten: own,
+  };
+});
+export const zenderByName = new Map(zenders.map((z) => [z.name, z]));
