@@ -3,30 +3,68 @@ import BaseLayout from '../../../layouts/BaseLayout.astro';
 import Breadcrumb from '../../../components/layout/Breadcrumb.astro';
 ---
 
-<BaseLayout title="Datenschutzerklärung — Kit-72" description="Wie wir mit deinen Daten umgehen." locale="de">
+<BaseLayout title="Datenschutzerklärung — Kit-72" description="Wie wir mit deinen Daten umgehen." locale="de" hideSignup>
   <section class="py-16">
     <div class="max-w-3xl mx-auto px-4 sm:px-6">
       <Breadcrumb items={[{ label: 'Datenschutz' }]} class="mb-4" locale="de" />
       <h1 class="text-4xl font-bold mb-6">Datenschutzerklärung</h1>
 
       <div class="prose prose-lg">
-        <p><em>Zuletzt aktualisiert: Dezember 2025</em></p>
+        <p><em>Zuletzt aktualisiert: November 2026</em></p>
 
         <h2>Welche Daten erheben wir?</h2>
-        <p>Kit-72.com erhebt nur minimale Daten:</p>
         <ul>
-          <li>Anonyme Analysedaten (Seitenaufrufe, keine personenbezogenen Daten)</li>
-          <li>Lokale Speicherung im Browser für den Notfallpaket-Konfigurator</li>
+          <li><strong>Deine E-Mail-Adresse</strong>, nur wenn du deine Liste selbst anforderst (siehe unten)</li>
+          <li><strong>Besuchsstatistiken</strong>, nur wenn du eingewilligt hast</li>
+          <li><strong>Deine Angaben in den Tools</strong> (abgehakte Dinge, Haushaltsgröße): Sie bleiben in deinem Browser und werden nicht an uns übertragen</li>
         </ul>
 
-        <h2>Cookies</h2>
-        <p>Wir verwenden nur funktionale Cookies für den Betrieb der Website. Keine Tracking-Cookies von Drittanbietern.</p>
+        <h2>E-Mail: deine Liste und die Erinnerung</h2>
+        <p>
+          Wenn du deine Notfallliste per E-Mail anforderst, senden wir dir zuerst eine Bestätigungsmail
+          (Double-Opt-in). Erst wenn du auf den Link darin klickst, speichern wir deine Adresse.
+          Ohne Bestätigung speichern wir nichts.
+        </p>
+        <p>Was wir dann speichern:</p>
+        <ul>
+          <li>deine E-Mail-Adresse</li>
+          <li>die Sprache der Website</li>
+          <li>die Zahl der Personen in deinem Haushalt und ob Kinder oder Haustiere dazugehören, falls du das angegeben hast</li>
+          <li>auf welcher Seite du dich angemeldet hast</li>
+        </ul>
+        <p>
+          Wir nutzen diese Daten, um dir deine Liste zu senden und dich zweimal im Jahr an die Prüfung
+          der Haltbarkeitsdaten zu erinnern. Rechtsgrundlage ist deine Einwilligung (Art. 6 Abs. 1
+          lit. a DSGVO). Du kannst dich in jeder E-Mail abmelden; danach erhältst du nichts mehr.
+        </p>
+        <p>
+          Versand und Speicherung erfolgen über Resend (Resend, Inc., USA), das die Daten in unserem
+          Auftrag verarbeitet. Wir verkaufen deine Adresse nicht und geben sie nicht an Dritte weiter.
+        </p>
+
+        <h2>Statistik und Cookies</h2>
+        <p>
+          Wir nutzen Google Analytics, um zu sehen, welche Seiten gelesen und welche Händlerlinks
+          angeklickt werden. Google Analytics wird erst geladen, nachdem du im Cookie-Hinweis
+          zugestimmt hast, und setzt dann Cookies. Lehnst du ab, laden wir es nicht. Deine Auswahl
+          speichern wir in deinem Browser. Mehr dazu in unseren <a href="/de/cookies/">Cookie-Hinweisen</a>.
+        </p>
 
         <h2>Affiliate-Links</h2>
-        <p>Einige Links zu Produkten sind Affiliate-Links. Wenn du über diese Links kaufst, erhalten wir eine kleine Provision ohne zusätzliche Kosten für dich.</p>
+        <p>
+          Einige Links zu Händlern sind Affiliate-Links. Wenn du über einen solchen Link kaufst,
+          erhalten wir manchmal eine kleine Provision, ohne zusätzliche Kosten für dich. Nach dem
+          Klick bist du auf der Website des Händlers; dort gilt dessen Datenschutzerklärung, und der
+          Händler kann Cookies setzen, um den Kauf uns zuzuordnen. Siehe auch unseren
+          <a href="/de/affiliate-hinweis/">Affiliate-Hinweis</a>.
+        </p>
 
         <h2>Deine Rechte</h2>
-        <p>Gemäß DSGVO hast du das Recht auf Auskunft, Berichtigung und Löschung deiner Daten. Da wir keine personenbezogenen Daten speichern, gibt es in der Regel keine zu löschenden Daten.</p>
+        <p>
+          Nach der DSGVO hast du das Recht auf Auskunft, Berichtigung und Löschung deiner Daten sowie
+          das Recht, deine Einwilligung zu widerrufen. Abmelden kannst du dich über den Link in jeder
+          E-Mail. Außerdem kannst du dich bei einer Datenschutzaufsichtsbehörde beschweren.
+        </p>
 
         <h2>Kontakt</h2>
         <p>Fragen zum Datenschutz? Kontaktiere uns über unsere Website.</p>
