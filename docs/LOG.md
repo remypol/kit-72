@@ -127,3 +127,9 @@ What matters:
 - Things that broke on the way: all Overpass servers were down, so the code now uses the OSM map API plus Photon and Nominatim; AHN has no terrain value under buildings, so elevation is the median of a ring of points around the house; LIWO flood depth still unreachable.
 - Details and the check table are at the end of docs/HANDBOEK-PLAN.md.
 
+## 13. Handbook page 2: "Het eerste uur" (2026-11-17)
+
+- The owner asked for concrete first steps and tricks ("fill your bath right away") with good infographics. Added a second page: power outage (dark panel with a bath drawing and the household's bottles of drinking water, fridge and freezer bars), no tap water, a flood card or a "close windows and doors" card depending on the address, and a tick list for leaving.
+- A sub-agent checked 20 candidate claims against official Dutch sources (128 fetches). Sources per step are in `handbook/data/first-hour-sources.json`. Dropped for lack of a source: leave one lamp on, text instead of calling, drinking from the boiler or cistern. "Fill the bath" is not official advice for outages; it is kept with the reason that is official (pressure can drop, booster pumps in flats stop). The US 15/30/60 cm flood figures contradict the Dutch ones, so only the Dutch ones are printed.
+- `.page` now uses min-height so an over-full page spills onto a third sheet and the build warns; a fixed height hid overflow before.
+

@@ -155,3 +155,28 @@ De tien feiten op de pagina zijn nu automatisch op te halen en kloppen voor de d
 2. De tabel met rampenzenders aanvullen van 2 naar 25 veiligheidsregio's.
 
 De lijst van het RIVM verschijnt jaarlijks; de tabel krijgt dus een jaarlijkse verversing, en tussentijdse sluitingen moeten apart gevolgd worden.
+
+## Pagina 2: het eerste uur (17 november 2026)
+
+Op verzoek toegevoegd: concrete eerste stappen, met infographics. De pagina staat in `handbook/pages/first-hour.mjs`; de cijfers en de bron per stap staan in `handbook/data/first-hour-sources.json`.
+
+| Blok | Wat erop staat | Persoonlijk |
+|---|---|---|
+| De stroom valt uit | acht stappen, tekening van een bad met de flessen drinkwater ernaast, balkjes voor koelkast en vriezer | aantal flessen en liters, naam van de rampenzender |
+| Er komt geen water uit de kraan | vier stappen, 6 liter per spoelbeurt, 3 minuten koken | liters per dag en voor 72 uur |
+| Het water komt | zes stappen, tekening van hoe weinig water al gevaarlijk is | alleen voor adressen in overstromingsrisicogebied, met de eigen maaiveldhoogte |
+| NL-Alert: ramen en deuren dicht | vijf stappen, tekening van een dicht huis | voor alle andere adressen |
+| Je moet weg | afvinklijst voor de tas | bedrag aan contant geld, regels voor kinderen en huisdieren |
+
+### Wat de bronnen wel en niet dekken
+
+Alle adviezen zijn nagelopen bij officiële bronnen (Denk Vooruit, Rijksoverheid, overstroomik.nl, Voedingscentrum, Rode Kruis, brandweer.nl, waterbedrijven, netbeheerders, Drinkwaterbesluit). Wat daaruit kwam:
+
+- **"Vul direct je bad" staat nergens als advies bij stroomuitval.** Wel officieel: de waterdruk kan wegvallen (Denk Vooruit), boven de derde verdieping valt de pomp in een flat uit (Vitens, NIPV), en het bad vullen wordt geadviseerd bij een dreigende overstroming (Rijksoverheid) en een aangekondigde wateronderbreking (Dunea). De stap staat er daarom in, met die reden erbij. Waterbedrijven moeten zelf tien dagen zonder stroom kunnen leveren; de stap is dus vooral van belang in hoogbouw.
+- **Geschrapt omdat geen officiële bron het zegt:** één lamp aan laten, sms'en in plaats van bellen, water uit de boiler of de stortbak drinken, kaarsen afraden (ze staan juist op de officiële lijsten; de brandweer geeft wel regels).
+- **Waterdiepte:** de bekende cijfers 15, 30 en 60 cm komen van de Amerikaanse weerdienst en kloppen niet met de Nederlandse bronnen. Op de pagina staan alleen de Nederlandse: enkelhoog stromend water kan je omver trekken (Rode Kruis), bij 15 cm kan een auto niet meer rijden (overstroomik.nl).
+- **Koelkast 4 uur, vriezer 24 tot 48 uur** zijn schattingen van het Voedingscentrum; dat staat erbij.
+- **Noodwater:** drie liter per persoon per dag staat in het Drinkwaterbesluit; de 24 uur komt van Denk Vooruit en de Rijksoverheid.
+
+De opmaak wordt bij het bouwen gecontroleerd: het pdf moet precies twee vellen zijn, anders geeft de opdracht een waarschuwing.
+

@@ -1,10 +1,11 @@
 /**
- * Turns the collected facts into one A4 page of HTML (printed to PDF by
- * headless Chrome). The map is drawn here as SVG from OpenStreetMap ways, so
+ * Turns the collected facts into HTML, one A4 sheet per page (printed to PDF
+ * by headless Chrome). Page 1 is built here; page 2 is pages/first-hour.mjs. The map is drawn here as SVG from OpenStreetMap ways, so
  * no map tiles or tile licences are involved.
  */
 import { createRequire } from 'node:module';
 import { pathToFileURL } from 'node:url';
+import { firstHourCss, firstHourPage } from './pages/first-hour.mjs';
 
 const require = createRequire(import.meta.url);
 const font = (pkg, file) => pathToFileURL(require.resolve(`${pkg}/files/${file}`)).href;
@@ -132,7 +133,11 @@ export function renderHtml(d) {
 @page{size:A4;margin:0}
 *{box-sizing:border-box;margin:0;padding:0}
 html{-webkit-print-color-adjust:exact;print-color-adjust:exact}
-body{font-family:'Public Sans Variable',Arial,sans-serif;color:#10231b;font-size:9.4pt;line-height:1.4;width:210mm;height:297mm;padding:10mm 12mm 8mm;display:flex;flex-direction:column;gap:4.2mm;background:#fff}
+body{font-family:'Public Sans Variable',Arial,sans-serif;color:#10231b;font-size:9.4pt;line-height:1.4;background:#fff}
+/* min-height, not height: a page that is too full spills onto an extra sheet, which the build reports */
+.page{width:210mm;min-height:296.6mm;padding:9mm 12mm 7mm;display:flex;flex-direction:column;gap:3.8mm;break-after:page}
+.page:last-child{break-after:auto}
+.page>footer{margin-top:auto}
 h1,h2,.big{font-family:'Archivo Variable',Arial,sans-serif;font-stretch:112%;font-weight:750;letter-spacing:-.02em}
 header{display:flex;justify-content:space-between;align-items:flex-start;gap:8mm;border-bottom:1.2mm solid #0a7a43;padding-bottom:3.5mm}
 .brand{display:flex;align-items:center;gap:2.2mm;font-family:'Archivo Variable';font-stretch:112%;font-weight:800;font-size:12pt}
@@ -160,20 +165,21 @@ h1{font-size:21pt;line-height:1.05}
 h2{font-size:11pt;margin-bottom:1.5mm}
 table{width:100%;border-collapse:collapse}
 tr.none strong{color:#5f6e65;font-weight:600}
-td{padding:1.35mm 0;border-bottom:.2mm solid #c9d3c9;vertical-align:top}
+td{padding:1.05mm 0;border-bottom:.2mm solid #c9d3c9;vertical-align:top}
 tr:first-child td{border-top:.6mm solid #10231b}
 .pin{display:inline-grid;place-items:center;width:4.6mm;height:4.6mm;border-radius:50%;color:#fff;font-weight:700;font-size:7pt;margin-right:1.6mm}
 .d{text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums;font-weight:650}
 .sub{color:#43544b;font-size:7.8pt}
-.hosp{margin-bottom:3mm}
+.hosp{margin-bottom:2.4mm}
 .warn{font-size:7pt;background:#ffd21f;color:#1a1a00;font-weight:700;padding:.3mm 1.3mm;border-radius:1mm;vertical-align:.3mm;margin-left:1mm;white-space:nowrap}
 .bottom{display:grid;grid-template-columns:1fr 1fr 1fr;gap:6mm;margin-top:auto}
 .box h2{border-bottom:.6mm solid #10231b;padding-bottom:1.2mm}
-.box li{list-style:none;padding:1.4mm 0;border-bottom:.2mm solid #c9d3c9;display:flex;justify-content:space-between;gap:3mm}
+.box li{list-style:none;padding:1.2mm 0;border-bottom:.2mm solid #c9d3c9;display:flex;justify-content:space-between;gap:3mm}
 .box li b{font-weight:700;white-space:nowrap}
 footer{font-size:6.8pt;color:#5f6e65;line-height:1.35;border-top:.2mm solid #c9d3c9;padding-top:2mm}
 .proof{background:#ffd21f;color:#1a1a00;font-weight:700;padding:.6mm 2mm;border-radius:1mm;font-size:7pt}
-</style></head><body>
+${firstHourCss}</style></head><body>
+<section class="page">
 <header>
   <div>
     <div class="brand">${LOGO}<span>Kit-72</span></div>
@@ -242,5 +248,7 @@ footer{font-size:6.8pt;color:#5f6e65;line-height:1.35;border-top:.2mm solid #c9d
   De verwachte waterdiepte bij een overstroming ontbreekt nog.
   Dit handboek vervangt geen aanwijzingen van hulpdiensten. kit-72.com
 </footer>
+</section>
+${firstHourPage(d, needs)}
 </body></html>`;
 }

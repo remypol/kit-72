@@ -1,0 +1,179 @@
+{
+  "_note": "Figures and sources behind handbook/pages/first-hour.mjs. Every step on that page maps to at least one source here. Checked by opening each page; most are undated.",
+  "checked": "2026-11-17",
+  "figures": {
+    "bathLitres": 140,
+    "cold": [
+      {
+        "label": "Koelkast",
+        "hours": 4
+      },
+      {
+        "label": "Vriezer, halfvol",
+        "hours": 24
+      },
+      {
+        "label": "Vriezer, vol",
+        "hours": 48
+      }
+    ],
+    "flushLitres": 6,
+    "boilMinutes": 3,
+    "emergencyWaterLitres": 3,
+    "emergencyWaterAfterHours": 24,
+    "floodDepths": [
+      {
+        "cm": 15,
+        "head": "15 cm",
+        "label": "een auto kan niet meer rijden"
+      },
+      {
+        "cm": 9,
+        "head": "Enkelhoog",
+        "label": "stromend water kan je omver trekken"
+      }
+    ]
+  },
+  "footer": "Bronnen: Denk Vooruit, Rijksoverheid, overstroomik.nl (Rijkswaterstaat), Voedingscentrum, Rode Kruis, brandweer.nl, Drinkwaterbesluit, Vitens, Dunea, Liander en Milieu Centraal; geraadpleegd op 17 november 2026. Volg altijd de aanwijzingen van hulpdiensten. kit-72.com",
+  "claims": {
+    "power.check": [
+      "liander-oorzaak",
+      "vggm-stroom",
+      "rijks-storing",
+      "denkvooruit-stroom"
+    ],
+    "power.bath": [
+      "denkvooruit-stroom",
+      "denkvooruit-water",
+      "vitens-noodpakket",
+      "nipv-stroomuitval",
+      "rijks-overstroming",
+      "dunea-faq"
+    ],
+    "power.cold": [
+      "voedingscentrum-noodpakket",
+      "voedingscentrum-storing"
+    ],
+    "power.plugs": [
+      "denkvooruit-stroom",
+      "liander-tips"
+    ],
+    "power.lightCooking": [
+      "brandweer-bbq",
+      "denkvooruit-noodpakket-faq",
+      "brandweer-brandveilig-wonen",
+      "vggm-stroom"
+    ],
+    "power.radioPhone": [
+      "rijks-rampenzender",
+      "denkvooruit-radio",
+      "denkvooruit-stroom",
+      "nctv-boekje"
+    ],
+    "power.warm": [
+      "denkvooruit-stroom",
+      "liander-tips"
+    ],
+    "power.neighbours": [
+      "rodekruis-stroom",
+      "denkvooruit-zorg"
+    ],
+    "water.supply": [
+      "denkvooruit-water"
+    ],
+    "water.flush": [
+      "denkvooruit-voorbereiden",
+      "vitens-wc",
+      "dunea-faq"
+    ],
+    "water.boil": [
+      "denkvooruit-water",
+      "vitens-kookadvies",
+      "waternet-kookadvies"
+    ],
+    "water.emergency": [
+      "drinkwaterbesluit",
+      "denkvooruit-water"
+    ],
+    "flood.high": [
+      "rijks-overstroming"
+    ],
+    "flood.gas": [
+      "overstroomik-kaart",
+      "rijks-overstroming"
+    ],
+    "flood.drains": [
+      "overstroomik-kaart"
+    ],
+    "flood.take": [
+      "overstroomik-kaart"
+    ],
+    "flood.sheet": [
+      "overstroomik-kaart"
+    ],
+    "flood.water": [
+      "rodekruis-overstroming",
+      "overstroomik-vragen"
+    ],
+    "shut.all": [
+      "rijks-sirene",
+      "brandweer-rook",
+      "zeelandveilig-afsluiten",
+      "nctv-boekje"
+    ],
+    "leave.pack": [
+      "overstroomik-kaart",
+      "denkvooruit-noodpakket"
+    ],
+    "leave.before": [
+      "rijks-overstroming",
+      "vnog-overstroming"
+    ],
+    "bath.volume": [
+      "milieucentraal-bad"
+    ]
+  },
+  "notFound": [
+    "Leave one lamp on to see the power return: no official source, left out.",
+    "Text instead of calling: no official source; the page says keep one phone on for NL-Alert instead.",
+    "Drinking from the boiler or toilet cistern: no Dutch source and US sources conflict, left out.",
+    "Fill the bath at the start of a power outage: no Dutch source says this for outages. Backed indirectly: pressure can drop (Denk Vooruit, Vitens, NIPV) and filling the bath is advised for floods (Rijksoverheid) and announced water interruptions (Dunea).",
+    "US National Weather Service depth figures (15/30/61 cm) differ from the Dutch ones; only the Dutch figures are on the page."
+  ],
+  "sources": {
+    "denkvooruit-stroom": "https://www.denkvooruit.nl/risicos/risicos-in-nederland/geen-stroom",
+    "denkvooruit-water": "https://www.denkvooruit.nl/risicos/risicos-in-nederland/drinkwater",
+    "denkvooruit-voorbereiden": "https://www.denkvooruit.nl/veelgestelde-vragen/voorbereiden",
+    "denkvooruit-noodpakket-faq": "https://www.denkvooruit.nl/veelgestelde-vragen/noodpakket",
+    "denkvooruit-noodpakket": "https://www.denkvooruit.nl/bereid-je-voor/stel-je-noodpakket-samen",
+    "denkvooruit-radio": "https://www.denkvooruit.nl/bereid-je-voor/zo-krijg-je-een-waarschuwing/radio",
+    "denkvooruit-zorg": "https://www.denkvooruit.nl/veelgestelde-vragen/zorg",
+    "nctv-boekje": "https://zoek.officielebekendmakingen.nl/blg-1223957.pdf",
+    "rijks-overstroming": "https://www.rijksoverheid.nl/onderwerpen/water/vraag-en-antwoord/wat-moet-ik-doen-bij-een-dreigende-overstroming",
+    "rijks-sirene": "https://www.rijksoverheid.nl/onderwerpen/veiligheidsregios-en-crisisbeheersing/vraag-en-antwoord/wat-moet-ik-doen-als-de-sirene-gaat",
+    "rijks-rampenzender": "https://www.rijksoverheid.nl/documenten/vraag-en-antwoord/veiligheidsregios-en-crisisbeheersing/wat-is-de-rampenzender-in-mijn-omgeving",
+    "rijks-storing": "https://www.rijksoverheid.nl/onderwerpen/energie-thuis/vraag-en-antwoord/vragen-over-gas-of-stroomstoringen",
+    "overstroomik-kaart": "https://overstroomik.nl/media/meterkastkaartv2.pdf",
+    "overstroomik-vragen": "https://www.overstroomik.nl/vragen-of-opmerkingen",
+    "voedingscentrum-noodpakket": "https://www.voedingscentrum.nl/nl/service/vraag-en-antwoord/boodschappen-doen/moet-ik-een-noodpakket-met-eten-en-drinken-in-huis-hebben.aspx",
+    "voedingscentrum-storing": "https://www.voedingscentrum.nl/nl/service/vraag-en-antwoord/veilig-eten/wat-moet-ik-doen-met-mijn-eten-in-de-koelkast-of-vriezer-bij-een-stroomstoring.aspx",
+    "rodekruis-stroom": "https://www.rodekruis.nl/wat-doen-wij/hulp-in-nederland/goed-voorbereid/wat-te-doen-bij-stroomuitval/",
+    "rodekruis-overstroming": "https://www.rodekruis.nl/wat-doen-wij/hulp-in-nederland/goed-voorbereid/wat-moet-je-doen-bij-een-overstroming/",
+    "brandweer-bbq": "https://www.brandweer.nl/onderwerpen/barbecueen/",
+    "brandweer-rook": "https://www.brandweer.nl/onderwerpen/blijf-uit-de-rook/",
+    "brandweer-brandveilig-wonen": "https://www.brandweer.nl/wp-content/uploads/2021/06/brandveilig-wonen-2020-los.pdf",
+    "drinkwaterbesluit": "https://wetten.overheid.nl/BWBR0030111/2026-08-15",
+    "vitens-noodpakket": "https://www.vitens.nl/over-water/drinkwater-in-uw-noodpakket",
+    "vitens-wc": "https://www.vitens.nl/over-water/water-besparen/wc",
+    "vitens-kookadvies": "https://www.vitens.nl/Storing-en-onderhoud/Kookadvies-drinkwater",
+    "waternet-kookadvies": "https://www.waternet.nl/service-en-contact/problemen-met-water/kookadvies/",
+    "dunea-faq": "https://www.dunea.nl/klantenservice/veelgestelde-vragen-storing-en-onderhoud",
+    "liander-tips": "https://www.liander.nl/storingen-en-onderhoud/tips-bij-storingen-en-werkzaamheden/tips-bij-storingen",
+    "liander-oorzaak": "https://www.liander.nl/storingen-onderhoud/oorzaak-storing-achterhalen",
+    "vggm-stroom": "https://vggm.nl/bereid-je-voor/uitval-voorzieningen/stroomuitval",
+    "nipv-stroomuitval": "https://nipv.nl/wp-content/uploads/2026/05/20260512-NIPV-Stroomuitval-verwachtingen-en-voorbereidingen-in-Nederland.pdf",
+    "zeelandveilig-afsluiten": "https://www.zeelandveilig.nl/wat-kan-ik-doen/maak-je-huis-veilig/afsluiten-gas-water-elektra",
+    "vnog-overstroming": "https://www.vnog.nl/risicos/overstroming/woning",
+    "milieucentraal-bad": "https://www.milieucentraal.nl/energie-besparen/duurzaam-warm-water/besparen-onder-de-douche/"
+  }
+}
