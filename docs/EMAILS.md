@@ -1,90 +1,57 @@
 # Email lifecycle
 
-The site sends two emails itself (`api/_emails.js`): the confirmation and the welcome with the household's numbers. Everything below is a Resend automation triggered by the event `kit72.subscribed`, which `/api/confirm` fires once the address is confirmed.
+Status 2026-11-17: signup is live. The sequence below exists in Resend; see "Switching on" for what is enabled.
 
-## Setup in Resend
+## What is sent, and by what
 
-Status 2026-11-17: **live.** `kit-72.com` is added to the existing Resend account (region eu-west-1) and sending works; the signup form is on (`PUBLIC_SIGNUP_ENABLED=true`). Tested on production with Resend's test address: confirmation email, confirm link, contact stored in the "Kit-72" segment with `kit72_` properties, welcome email, redirect.
-
-DNS at Squarespace Domains now holds: DKIM on `resend._domainkey`, MX and SPF on `send`, CNAME `rsend`, plus the restored root SPF (`v=spf1 -all`) and DMARC (`v=DMARC1; p=reject; sp=reject; adkim=s; aspf=s`). Adding the MX record had made Squarespace remove its "Email Security" preset; SPF and DMARC were put back as custom records with the same values. The empty wildcard DKIM record from that preset was not re-added.
-
-Still open:
-
-- DMARC alignment is expected to pass (Resend signs with `d=kit-72.com`), but it has only been tested against Resend's sink address, not a real mailbox. Sign up once with a real address to confirm the mail arrives.
-- The account is shared with other projects. Contacts and unsubscribe status are account-wide, and the `kit-72-site` key has full access because the endpoints need to create contacts. A separate Resend account would isolate this.
-- The three automations below are not created; only the two emails the site sends itself are live.
-- One test contact (`delivered@resend.dev`) is in the segment and can be deleted.
-
-1. Verify the sending domain and create an API key.
-2. Create contact properties (all text): `kit72_locale`, `kit72_household_size`, `kit72_has_children`, `kit72_has_pets`, `kit72_signup_source`. They are prefixed because properties are account-wide. Without them the endpoint still saves the contact, just without the properties.
-3. Optional: create a segment and set `RESEND_SEGMENT_ID`.
-4. Set `PUBLIC_SIGNUP_ENABLED=true` in Vercel and redeploy; the form is hidden until then.
-5. Create one automation per language, trigger `kit72.subscribed`, condition `payload.locale`, with the steps below.
-
-Event payload: `locale`, `household_size`, `water_litres`, `source`.
-
-## Sequence
-
-| Step | When | Purpose | Main link |
+| # | Email | When | Sent by |
 |---|---|---|---|
-| 0 | at signup | Confirm address (sent by the site) | confirm link |
-| 1 | on confirm | The list and the three numbers (sent by the site) | kit builder |
-| 2 | day 3 | Water: the one thing nearly everyone is short of | water storage page |
-| 3 | day 8 | Light and power: what a blackout takes away first | flashlight and power bank pages |
-| 4 | day 15 | Buy or build, with prices | buy-or-build page |
-| 5 | month 6, then every 6 months | Check dates on water, food, batteries | kit builder |
-| on event | within hours of a large outage, flood warning or official alert | What to do today | scenario page |
+| 0 | Confirm your address | at signup | the site (`api/subscribe.js`, copy in `api/_emails.js`) |
+| 1 | Welcome: your household's numbers | on confirmation | Resend automation "welcome + reminders" |
+| 2 | Tip: water | day 3 | Resend automation "tips" |
+| 3 | Tip: light and power | day 8 | Resend automation "tips" |
+| 4 | Tip: buy or build, with prices | day 15 | Resend automation "tips" |
+| 5 | Reminder: check dates | day 180, 360, 540, 720 | Resend automation "welcome + reminders" |
 
-Rules: one subject per email, one link that matters, no email without a practical instruction. Affiliate links only on the site, not in the email, so every email stays useful if nobody buys.
+`/api/confirm` creates the contact and fires the event `kit72.subscribed`. Everything after the confirmation email is triggered by that event, so every email a subscriber gets after confirming carries Resend's unsubscribe link.
 
-## Drafts (Dutch; translate for DE and ES before enabling those automations)
+Rules: one subject per email, one button, no email without a practical instruction. Shop links are on the site, not in the emails.
 
-### Step 2, day 3
-**Onderwerp:** Water: waar de meeste noodpakketten op stranden
+## Where things live
 
-Voor jouw huishouden is dat {{water_litres}} liter. Dat klinkt veel, maar het zijn een paar kratten flessen of twee jerrycans.
+- `api/_shell.js`: the shared design (table layout, inline styles, site colours).
+- `emails/content.mjs`: the copy for emails 1 to 5, in NL, DE and ES.
+- `emails/build.mjs`: builds `emails/out/<locale>-<key>.html` and `manifest.json`. Add `--preview` to also write `emails/out/preview/` with sample values; the `kit72-emails` launch config serves it on port 3032.
+- `emails/upload.mjs`: creates or updates the 15 templates in Resend by alias (`kit72-<locale>-<key>`) and publishes them.
+- `emails/automations.mjs`: generates the six workflows into `emails/out/automations.json`.
 
-Drie dingen om te weten:
+To change an email: edit `content.mjs`, run `node emails/build.mjs`, then `RESEND_API_KEY=... node emails/upload.mjs`. The automations reference templates by ID, so they pick up the new version.
 
-1. Ongeopend flessenwater blijft goed tot de datum op de fles. Kraanwater in een schone jerrycan ververs je elk half jaar.
-2. Zet het koel en donker neer, niet in de schuur naast de benzine.
-3. Reken per huisdier een liter extra.
+## In Resend
 
-Op de site staat welke jerrycans geschikt zijn voor drinkwater en welke niet.
+- Domain `kit-72.com` (eu-west-1), verified. Sender `Kit-72 <hallo@kit-72.com>`.
+- Segment "Kit-72". Contact properties `kit72_locale`, `kit72_household_size`, `kit72_has_children`, `kit72_has_pets`, `kit72_signup_source`.
+- 15 templates named "Kit-72 <LOCALE> <key>".
+- Six automations, two per language, all triggered by `kit72.subscribed` and filtered on `event.locale`:
+  - "Kit-72 <LOCALE> welcome + reminders": welcome at once, then a reminder every 180 days, four times. Delays are capped at 30 days, so six are chained per reminder. Workflows cannot loop, so reminders stop after two years; extend the workflow or send a broadcast to the segment after that.
+  - "Kit-72 <LOCALE> tips": day 3, 8 and 15.
+  - Every send after the welcome first checks `contact.unsubscribed`.
+- Event payload: `locale`, `household` ("3 personen"), `household_size`, `water_litres`, `meals`, `lights`, `cash_eur`, `source`.
 
-[Lees: water opslaan]
+## Switching on
 
-### Step 3, day 8
-**Onderwerp:** Als het licht uitvalt
+The automations were created **disabled**. Enable all six once this change is deployed: the previous version of `/api/confirm` sent its own welcome email, so enabling earlier would send two.
 
-Bij een stroomstoring mis je eerst licht, daarna je telefoon. Twee dingen lossen dat op: een zaklamp per persoon en een powerbank die je vol houdt.
+If the automations are disabled or deleted, a confirmed subscriber gets no welcome email and no error is shown. Check Resend → Automations → Runs after any change.
 
-Leg de zaklamp op een vaste plek die iedereen kent. Laad de powerbank elke drie maanden bij; een lege powerbank is de meest voorkomende verrassing.
+## Things to know
 
-[Lees: welke zaklamp en welke powerbank]
+- **Shared account.** Contacts and unsubscribe status are account-wide, and the `kit-72-site` key has full access because the endpoints create contacts. A separate Resend account would isolate this.
+- **Re-subscribing.** Someone who unsubscribed and signs up again gets the welcome email but no tips or reminders, because their contact stays unsubscribed. Flipping it back would also re-subscribe them to other projects in the shared account.
+- **DNS** at Squarespace Domains: DKIM on `resend._domainkey`, MX and SPF on `send`, CNAME `rsend`, root SPF `v=spf1 -all`, DMARC `v=DMARC1; p=reject; sp=reject; adkim=s; aspf=s`. Adding an MX record makes Squarespace remove its "Email Security" preset; SPF and DMARC were re-added as custom records.
+- **Not yet checked with a real mailbox.** Everything was tested against Resend's sink address, which does not evaluate DMARC.
+- **Leftovers from testing:** contact `delivered@resend.dev` in the segment (one run of the NL welcome automation is waiting on it), and a disabled automation "Kit-72 probe (test, can be deleted)".
 
-### Step 4, day 15
-**Onderwerp:** Kopen of zelf samenstellen: de prijzen
+## On event
 
-Kant-en-klare noodpakketten beginnen rond € 100. Wat er nooit in zit: genoeg water, je medicijnen en je papieren.
-
-We hebben de prijzen naast elkaar gezet en opgeschreven wanneer kopen logisch is en wanneer niet.
-
-[Bekijk de vergelijking]
-
-### Step 5, every 6 months
-**Onderwerp:** Vijf minuten: controleer je noodpakket
-
-Het is een half jaar geleden. Loop deze vier na:
-
-1. Water: datum op de flessen, jerrycans verversen
-2. Eten: wat binnen een half jaar verloopt, eet je op en vervang je
-3. Batterijen en powerbank: opladen of vervangen
-4. Medicijnen en documenten: klopt het nog met je huishouden?
-
-[Open mijn lijst]
-
-### On event
-**Onderwerp:** [Wat er aan de hand is], en wat je vandaag doet
-
-Twee zinnen over wat er speelt, met de officiële bron. Dan drie stappen voor vandaag. Dan de link naar de bijbehorende scenario-pagina. Geen verkoop.
+For a large outage, flood warning or official alert, send a broadcast to the "Kit-72" segment within hours: two sentences on what is happening with the official source, three steps for today, one link to the matching scenario page. No selling.

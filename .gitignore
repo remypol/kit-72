@@ -36,3 +36,6 @@ pnpm-debug.log*
 # package-lock.json
 # pnpm-lock.yaml
 .vercel
+
+# Email design previews (node emails/build.mjs --preview)
+emails/out/preview/

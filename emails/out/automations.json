@@ -1,0 +1,1466 @@
+[
+  {
+    "name": "Kit-72 NL welcome + reminders",
+    "workflow": {
+      "steps": [
+        {
+          "key": "trigger",
+          "type": "trigger",
+          "config": {
+            "eventName": "kit72.subscribed"
+          },
+          "next": "is_locale"
+        },
+        {
+          "key": "is_locale",
+          "type": "condition",
+          "config": {
+            "type": "rule",
+            "field": "event.locale",
+            "operator": "eq",
+            "value": "nl"
+          },
+          "branches": {
+            "condition_met": "send_welcome",
+            "condition_not_met": null
+          }
+        },
+        {
+          "key": "send_welcome",
+          "type": "send_email",
+          "config": {
+            "template": {
+              "id": "eb394e53-9e0c-4c51-9435-f27ea2929c1f",
+              "variables": {
+                "HOUSEHOLD": {
+                  "var": "event.household"
+                },
+                "WATER_LITRES": {
+                  "var": "event.water_litres"
+                },
+                "MEALS": {
+                  "var": "event.meals"
+                },
+                "LIGHTS": {
+                  "var": "event.lights"
+                },
+                "CASH_EUR": {
+                  "var": "event.cash_eur"
+                }
+              }
+            },
+            "from": "Kit-72 <hallo@kit-72.com>",
+            "subject": "Je noodpakketlijst voor 72 uur"
+          },
+          "next": "wait_1_1"
+        },
+        {
+          "key": "wait_1_1",
+          "type": "delay",
+          "config": {
+            "duration": "30 days"
+          },
+          "next": "wait_1_2"
+        },
+        {
+          "key": "wait_1_2",
+          "type": "delay",
+          "config": {
+            "duration": "30 days"
+          },
+          "next": "wait_1_3"
+        },
+        {
+          "key": "wait_1_3",
+          "type": "delay",
+          "config": {
+            "duration": "30 days"
+          },
+          "next": "wait_1_4"
+        },
+        {
+          "key": "wait_1_4",
+          "type": "delay",
+          "config": {
+            "duration": "30 days"
+          },
+          "next": "wait_1_5"
+        },
+        {
+          "key": "wait_1_5",
+          "type": "delay",
+          "config": {
+            "duration": "30 days"
+          },
+          "next": "wait_1_6"
+        },
+        {
+          "key": "wait_1_6",
+          "type": "delay",
+          "config": {
+            "duration": "30 days"
+          },
+          "next": "subscribed_1"
+        },
+        {
+          "key": "subscribed_1",
+          "type": "condition",
+          "config": {
+            "type": "rule",
+            "field": "contact.unsubscribed",
+            "operator": "eq",
+            "value": false
+          },
+          "branches": {
+            "condition_met": "send_reminder_1",
+            "condition_not_met": null
+          }
+        },
+        {
+          "key": "send_reminder_1",
+          "type": "send_email",
+          "config": {
+            "template": {
+              "id": "a2aa5325-62e9-4e40-af43-b70ef1734be3"
+            },
+            "from": "Kit-72 <hallo@kit-72.com>",
+            "subject": "Vijf minuten: controleer je noodpakket"
+          },
+          "next": "wait_2_1"
+        },
+        {
+          "key": "wait_2_1",
+          "type": "delay",
+          "config": {
+            "duration": "30 days"
+          },
+          "next": "wait_2_2"
+        },
+        {
+          "key": "wait_2_2",
+          "type": "delay",
+          "config": {
+            "duration": "30 days"
+          },
+          "next": "wait_2_3"
+        },
+        {
+          "key": "wait_2_3",
+          "type": "delay",
+          "config": {
+            "duration": "30 days"
+          },
+          "next": "wait_2_4"
+        },
+        {
+          "key": "wait_2_4",
+          "type": "delay",
+          "config": {
+            "duration": "30 days"
+          },
+          "next": "wait_2_5"
+        },
+        {
+          "key": "wait_2_5",
+          "type": "delay",
+          "config": {
+            "duration": "30 days"
+          },
+          "next": "wait_2_6"
+        },
+        {
+          "key": "wait_2_6",
+          "type": "delay",
+          "config": {
+            "duration": "30 days"
+          },
+          "next": "subscribed_2"
+        },
+        {
+          "key": "subscribed_2",
+          "type": "condition",
+          "config": {
+            "type": "rule",
+            "field": "contact.unsubscribed",
+            "operator": "eq",
+            "value": false
+          },
+          "branches": {
+            "condition_met": "send_reminder_2",
+            "condition_not_met": null
+          }
+        },
+        {
+          "key": "send_reminder_2",
+          "type": "send_email",
+          "config": {
+            "template": {
+              "id": "a2aa5325-62e9-4e40-af43-b70ef1734be3"
+            },
+            "from": "Kit-72 <hallo@kit-72.com>",
+            "subject": "Vijf minuten: controleer je noodpakket"
+          },
+          "next": "wait_3_1"
+        },
+        {
+          "key": "wait_3_1",
+          "type": "delay",
+          "config": {
+            "duration": "30 days"
+          },
+          "next": "wait_3_2"
+        },
+        {
+          "key": "wait_3_2",
+          "type": "delay",
+          "config": {
+            "duration": "30 days"
+          },
+          "next": "wait_3_3"
+        },
+        {
+          "key": "wait_3_3",
+          "type": "delay",
+          "config": {
+            "duration": "30 days"
+          },
+          "next": "wait_3_4"
+        },
+        {
+          "key": "wait_3_4",
+          "type": "delay",
+          "config": {
+            "duration": "30 days"
+          },
+          "next": "wait_3_5"
+        },
+        {
+          "key": "wait_3_5",
+          "type": "delay",
+          "config": {
+            "duration": "30 days"
+          },
+          "next": "wait_3_6"
+        },
+        {
+          "key": "wait_3_6",
+          "type": "delay",
+          "config": {
+            "duration": "30 days"
+          },
+          "next": "subscribed_3"
+        },
+        {
+          "key": "subscribed_3",
+          "type": "condition",
+          "config": {
+            "type": "rule",
+            "field": "contact.unsubscribed",
+            "operator": "eq",
+            "value": false
+          },
+          "branches": {
+            "condition_met": "send_reminder_3",
+            "condition_not_met": null
+          }
+        },
+        {
+          "key": "send_reminder_3",
+          "type": "send_email",
+          "config": {
+            "template": {
+              "id": "a2aa5325-62e9-4e40-af43-b70ef1734be3"
+            },
+            "from": "Kit-72 <hallo@kit-72.com>",
+            "subject": "Vijf minuten: controleer je noodpakket"
+          },
+          "next": "wait_4_1"
+        },
+        {
+          "key": "wait_4_1",
+          "type": "delay",
+          "config": {
+            "duration": "30 days"
+          },
+          "next": "wait_4_2"
+        },
+        {
+          "key": "wait_4_2",
+          "type": "delay",
+          "config": {
+            "duration": "30 days"
+          },
+          "next": "wait_4_3"
+        },
+        {
+          "key": "wait_4_3",
+          "type": "delay",
+          "config": {
+            "duration": "30 days"
+          },
+          "next": "wait_4_4"
+        },
+        {
+          "key": "wait_4_4",
+          "type": "delay",
+          "config": {
+            "duration": "30 days"
+          },
+          "next": "wait_4_5"
+        },
+        {
+          "key": "wait_4_5",
+          "type": "delay",
+          "config": {
+            "duration": "30 days"
+          },
+          "next": "wait_4_6"
+        },
+        {
+          "key": "wait_4_6",
+          "type": "delay",
+          "config": {
+            "duration": "30 days"
+          },
+          "next": "subscribed_4"
+        },
+        {
+          "key": "subscribed_4",
+          "type": "condition",
+          "config": {
+            "type": "rule",
+            "field": "contact.unsubscribed",
+            "operator": "eq",
+            "value": false
+          },
+          "branches": {
+            "condition_met": "send_reminder_4",
+            "condition_not_met": null
+          }
+        },
+        {
+          "key": "send_reminder_4",
+          "type": "send_email",
+          "config": {
+            "template": {
+              "id": "a2aa5325-62e9-4e40-af43-b70ef1734be3"
+            },
+            "from": "Kit-72 <hallo@kit-72.com>",
+            "subject": "Vijf minuten: controleer je noodpakket"
+          },
+          "next": null
+        }
+      ]
+    }
+  },
+  {
+    "name": "Kit-72 NL tips",
+    "workflow": {
+      "steps": [
+        {
+          "key": "trigger",
+          "type": "trigger",
+          "config": {
+            "eventName": "kit72.subscribed"
+          },
+          "next": "is_locale"
+        },
+        {
+          "key": "is_locale",
+          "type": "condition",
+          "config": {
+            "type": "rule",
+            "field": "event.locale",
+            "operator": "eq",
+            "value": "nl"
+          },
+          "branches": {
+            "condition_met": "wait_water",
+            "condition_not_met": null
+          }
+        },
+        {
+          "key": "wait_water",
+          "type": "delay",
+          "config": {
+            "duration": "3 days"
+          },
+          "next": "subscribed_water"
+        },
+        {
+          "key": "subscribed_water",
+          "type": "condition",
+          "config": {
+            "type": "rule",
+            "field": "contact.unsubscribed",
+            "operator": "eq",
+            "value": false
+          },
+          "branches": {
+            "condition_met": "send_water",
+            "condition_not_met": null
+          }
+        },
+        {
+          "key": "send_water",
+          "type": "send_email",
+          "config": {
+            "template": {
+              "id": "24c24f43-6106-46df-9cda-0f58c623cea4",
+              "variables": {
+                "WATER_LITRES": {
+                  "var": "event.water_litres"
+                }
+              }
+            },
+            "from": "Kit-72 <hallo@kit-72.com>",
+            "subject": "Water: waar de meeste noodpakketten op stranden"
+          },
+          "next": "wait_light"
+        },
+        {
+          "key": "wait_light",
+          "type": "delay",
+          "config": {
+            "duration": "5 days"
+          },
+          "next": "subscribed_light"
+        },
+        {
+          "key": "subscribed_light",
+          "type": "condition",
+          "config": {
+            "type": "rule",
+            "field": "contact.unsubscribed",
+            "operator": "eq",
+            "value": false
+          },
+          "branches": {
+            "condition_met": "send_light",
+            "condition_not_met": null
+          }
+        },
+        {
+          "key": "send_light",
+          "type": "send_email",
+          "config": {
+            "template": {
+              "id": "b0961bf1-6837-438b-8ffc-cc8a7d299580"
+            },
+            "from": "Kit-72 <hallo@kit-72.com>",
+            "subject": "Als het licht uitvalt"
+          },
+          "next": "wait_buy"
+        },
+        {
+          "key": "wait_buy",
+          "type": "delay",
+          "config": {
+            "duration": "7 days"
+          },
+          "next": "subscribed_buy"
+        },
+        {
+          "key": "subscribed_buy",
+          "type": "condition",
+          "config": {
+            "type": "rule",
+            "field": "contact.unsubscribed",
+            "operator": "eq",
+            "value": false
+          },
+          "branches": {
+            "condition_met": "send_buy",
+            "condition_not_met": null
+          }
+        },
+        {
+          "key": "send_buy",
+          "type": "send_email",
+          "config": {
+            "template": {
+              "id": "59e2605d-d194-4920-a192-3da9b1b9c94f"
+            },
+            "from": "Kit-72 <hallo@kit-72.com>",
+            "subject": "Kopen of zelf samenstellen: de prijzen"
+          },
+          "next": null
+        }
+      ]
+    }
+  },
+  {
+    "name": "Kit-72 DE welcome + reminders",
+    "workflow": {
+      "steps": [
+        {
+          "key": "trigger",
+          "type": "trigger",
+          "config": {
+            "eventName": "kit72.subscribed"
+          },
+          "next": "is_locale"
+        },
+        {
+          "key": "is_locale",
+          "type": "condition",
+          "config": {
+            "type": "rule",
+            "field": "event.locale",
+            "operator": "eq",
+            "value": "de"
+          },
+          "branches": {
+            "condition_met": "send_welcome",
+            "condition_not_met": null
+          }
+        },
+        {
+          "key": "send_welcome",
+          "type": "send_email",
+          "config": {
+            "template": {
+              "id": "c27c69f6-4898-4212-9540-a897d8cf7d14",
+              "variables": {
+                "HOUSEHOLD": {
+                  "var": "event.household"
+                },
+                "WATER_LITRES": {
+                  "var": "event.water_litres"
+                },
+                "MEALS": {
+                  "var": "event.meals"
+                },
+                "LIGHTS": {
+                  "var": "event.lights"
+                }
+              }
+            },
+            "from": "Kit-72 <hallo@kit-72.com>",
+            "subject": "Deine Notfallliste für 72 Stunden"
+          },
+          "next": "wait_1_1"
+        },
+        {
+          "key": "wait_1_1",
+          "type": "delay",
+          "config": {
+            "duration": "30 days"
+          },
+          "next": "wait_1_2"
+        },
+        {
+          "key": "wait_1_2",
+          "type": "delay",
+          "config": {
+            "duration": "30 days"
+          },
+          "next": "wait_1_3"
+        },
+        {
+          "key": "wait_1_3",
+          "type": "delay",
+          "config": {
+            "duration": "30 days"
+          },
+          "next": "wait_1_4"
+        },
+        {
+          "key": "wait_1_4",
+          "type": "delay",
+          "config": {
+            "duration": "30 days"
+          },
+          "next": "wait_1_5"
+        },
+        {
+          "key": "wait_1_5",
+          "type": "delay",
+          "config": {
+            "duration": "30 days"
+          },
+          "next": "wait_1_6"
+        },
+        {
+          "key": "wait_1_6",
+          "type": "delay",
+          "config": {
+            "duration": "30 days"
+          },
+          "next": "subscribed_1"
+        },
+        {
+          "key": "subscribed_1",
+          "type": "condition",
+          "config": {
+            "type": "rule",
+            "field": "contact.unsubscribed",
+            "operator": "eq",
+            "value": false
+          },
+          "branches": {
+            "condition_met": "send_reminder_1",
+            "condition_not_met": null
+          }
+        },
+        {
+          "key": "send_reminder_1",
+          "type": "send_email",
+          "config": {
+            "template": {
+              "id": "8600a3bf-3570-40d8-b661-cd577470d25e"
+            },
+            "from": "Kit-72 <hallo@kit-72.com>",
+            "subject": "Fünf Minuten: prüfe deinen Notvorrat"
+          },
+          "next": "wait_2_1"
+        },
+        {
+          "key": "wait_2_1",
+          "type": "delay",
+          "config": {
+            "duration": "30 days"
+          },
+          "next": "wait_2_2"
+        },
+        {
+          "key": "wait_2_2",
+          "type": "delay",
+          "config": {
+            "duration": "30 days"
+          },
+          "next": "wait_2_3"
+        },
+        {
+          "key": "wait_2_3",
+          "type": "delay",
+          "config": {
+            "duration": "30 days"
+          },
+          "next": "wait_2_4"
+        },
+        {
+          "key": "wait_2_4",
+          "type": "delay",
+          "config": {
+            "duration": "30 days"
+          },
+          "next": "wait_2_5"
+        },
+        {
+          "key": "wait_2_5",
+          "type": "delay",
+          "config": {
+            "duration": "30 days"
+          },
+          "next": "wait_2_6"
+        },
+        {
+          "key": "wait_2_6",
+          "type": "delay",
+          "config": {
+            "duration": "30 days"
+          },
+          "next": "subscribed_2"
+        },
+        {
+          "key": "subscribed_2",
+          "type": "condition",
+          "config": {
+            "type": "rule",
+            "field": "contact.unsubscribed",
+            "operator": "eq",
+            "value": false
+          },
+          "branches": {
+            "condition_met": "send_reminder_2",
+            "condition_not_met": null
+          }
+        },
+        {
+          "key": "send_reminder_2",
+          "type": "send_email",
+          "config": {
+            "template": {
+              "id": "8600a3bf-3570-40d8-b661-cd577470d25e"
+            },
+            "from": "Kit-72 <hallo@kit-72.com>",
+            "subject": "Fünf Minuten: prüfe deinen Notvorrat"
+          },
+          "next": "wait_3_1"
+        },
+        {
+          "key": "wait_3_1",
+          "type": "delay",
+          "config": {
+            "duration": "30 days"
+          },
+          "next": "wait_3_2"
+        },
+        {
+          "key": "wait_3_2",
+          "type": "delay",
+          "config": {
+            "duration": "30 days"
+          },
+          "next": "wait_3_3"
+        },
+        {
+          "key": "wait_3_3",
+          "type": "delay",
+          "config": {
+            "duration": "30 days"
+          },
+          "next": "wait_3_4"
+        },
+        {
+          "key": "wait_3_4",
+          "type": "delay",
+          "config": {
+            "duration": "30 days"
+          },
+          "next": "wait_3_5"
+        },
+        {
+          "key": "wait_3_5",
+          "type": "delay",
+          "config": {
+            "duration": "30 days"
+          },
+          "next": "wait_3_6"
+        },
+        {
+          "key": "wait_3_6",
+          "type": "delay",
+          "config": {
+            "duration": "30 days"
+          },
+          "next": "subscribed_3"
+        },
+        {
+          "key": "subscribed_3",
+          "type": "condition",
+          "config": {
+            "type": "rule",
+            "field": "contact.unsubscribed",
+            "operator": "eq",
+            "value": false
+          },
+          "branches": {
+            "condition_met": "send_reminder_3",
+            "condition_not_met": null
+          }
+        },
+        {
+          "key": "send_reminder_3",
+          "type": "send_email",
+          "config": {
+            "template": {
+              "id": "8600a3bf-3570-40d8-b661-cd577470d25e"
+            },
+            "from": "Kit-72 <hallo@kit-72.com>",
+            "subject": "Fünf Minuten: prüfe deinen Notvorrat"
+          },
+          "next": "wait_4_1"
+        },
+        {
+          "key": "wait_4_1",
+          "type": "delay",
+          "config": {
+            "duration": "30 days"
+          },
+          "next": "wait_4_2"
+        },
+        {
+          "key": "wait_4_2",
+          "type": "delay",
+          "config": {
+            "duration": "30 days"
+          },
+          "next": "wait_4_3"
+        },
+        {
+          "key": "wait_4_3",
+          "type": "delay",
+          "config": {
+            "duration": "30 days"
+          },
+          "next": "wait_4_4"
+        },
+        {
+          "key": "wait_4_4",
+          "type": "delay",
+          "config": {
+            "duration": "30 days"
+          },
+          "next": "wait_4_5"
+        },
+        {
+          "key": "wait_4_5",
+          "type": "delay",
+          "config": {
+            "duration": "30 days"
+          },
+          "next": "wait_4_6"
+        },
+        {
+          "key": "wait_4_6",
+          "type": "delay",
+          "config": {
+            "duration": "30 days"
+          },
+          "next": "subscribed_4"
+        },
+        {
+          "key": "subscribed_4",
+          "type": "condition",
+          "config": {
+            "type": "rule",
+            "field": "contact.unsubscribed",
+            "operator": "eq",
+            "value": false
+          },
+          "branches": {
+            "condition_met": "send_reminder_4",
+            "condition_not_met": null
+          }
+        },
+        {
+          "key": "send_reminder_4",
+          "type": "send_email",
+          "config": {
+            "template": {
+              "id": "8600a3bf-3570-40d8-b661-cd577470d25e"
+            },
+            "from": "Kit-72 <hallo@kit-72.com>",
+            "subject": "Fünf Minuten: prüfe deinen Notvorrat"
+          },
+          "next": null
+        }
+      ]
+    }
+  },
+  {
+    "name": "Kit-72 DE tips",
+    "workflow": {
+      "steps": [
+        {
+          "key": "trigger",
+          "type": "trigger",
+          "config": {
+            "eventName": "kit72.subscribed"
+          },
+          "next": "is_locale"
+        },
+        {
+          "key": "is_locale",
+          "type": "condition",
+          "config": {
+            "type": "rule",
+            "field": "event.locale",
+            "operator": "eq",
+            "value": "de"
+          },
+          "branches": {
+            "condition_met": "wait_water",
+            "condition_not_met": null
+          }
+        },
+        {
+          "key": "wait_water",
+          "type": "delay",
+          "config": {
+            "duration": "3 days"
+          },
+          "next": "subscribed_water"
+        },
+        {
+          "key": "subscribed_water",
+          "type": "condition",
+          "config": {
+            "type": "rule",
+            "field": "contact.unsubscribed",
+            "operator": "eq",
+            "value": false
+          },
+          "branches": {
+            "condition_met": "send_water",
+            "condition_not_met": null
+          }
+        },
+        {
+          "key": "send_water",
+          "type": "send_email",
+          "config": {
+            "template": {
+              "id": "4b3e67dd-3256-4e6b-82f6-b5e6fcfe0675",
+              "variables": {
+                "WATER_LITRES": {
+                  "var": "event.water_litres"
+                }
+              }
+            },
+            "from": "Kit-72 <hallo@kit-72.com>",
+            "subject": "Wasser: daran scheitern die meisten Notvorräte"
+          },
+          "next": "wait_light"
+        },
+        {
+          "key": "wait_light",
+          "type": "delay",
+          "config": {
+            "duration": "5 days"
+          },
+          "next": "subscribed_light"
+        },
+        {
+          "key": "subscribed_light",
+          "type": "condition",
+          "config": {
+            "type": "rule",
+            "field": "contact.unsubscribed",
+            "operator": "eq",
+            "value": false
+          },
+          "branches": {
+            "condition_met": "send_light",
+            "condition_not_met": null
+          }
+        },
+        {
+          "key": "send_light",
+          "type": "send_email",
+          "config": {
+            "template": {
+              "id": "05b98957-4e9f-4289-9fc5-dd47aadb3bfe"
+            },
+            "from": "Kit-72 <hallo@kit-72.com>",
+            "subject": "Wenn das Licht ausgeht"
+          },
+          "next": "wait_buy"
+        },
+        {
+          "key": "wait_buy",
+          "type": "delay",
+          "config": {
+            "duration": "7 days"
+          },
+          "next": "subscribed_buy"
+        },
+        {
+          "key": "subscribed_buy",
+          "type": "condition",
+          "config": {
+            "type": "rule",
+            "field": "contact.unsubscribed",
+            "operator": "eq",
+            "value": false
+          },
+          "branches": {
+            "condition_met": "send_buy",
+            "condition_not_met": null
+          }
+        },
+        {
+          "key": "send_buy",
+          "type": "send_email",
+          "config": {
+            "template": {
+              "id": "4cdbb4c0-d94e-4340-808b-d2ed3ad59b52"
+            },
+            "from": "Kit-72 <hallo@kit-72.com>",
+            "subject": "Kaufen oder selbst packen: die Preise"
+          },
+          "next": null
+        }
+      ]
+    }
+  },
+  {
+    "name": "Kit-72 ES welcome + reminders",
+    "workflow": {
+      "steps": [
+        {
+          "key": "trigger",
+          "type": "trigger",
+          "config": {
+            "eventName": "kit72.subscribed"
+          },
+          "next": "is_locale"
+        },
+        {
+          "key": "is_locale",
+          "type": "condition",
+          "config": {
+            "type": "rule",
+            "field": "event.locale",
+            "operator": "eq",
+            "value": "es"
+          },
+          "branches": {
+            "condition_met": "send_welcome",
+            "condition_not_met": null
+          }
+        },
+        {
+          "key": "send_welcome",
+          "type": "send_email",
+          "config": {
+            "template": {
+              "id": "320d6e67-fee2-4df1-ac39-b54825fe0f5d",
+              "variables": {
+                "HOUSEHOLD": {
+                  "var": "event.household"
+                },
+                "WATER_LITRES": {
+                  "var": "event.water_litres"
+                },
+                "MEALS": {
+                  "var": "event.meals"
+                },
+                "LIGHTS": {
+                  "var": "event.lights"
+                }
+              }
+            },
+            "from": "Kit-72 <hallo@kit-72.com>",
+            "subject": "Tu lista de emergencia para 72 horas"
+          },
+          "next": "wait_1_1"
+        },
+        {
+          "key": "wait_1_1",
+          "type": "delay",
+          "config": {
+            "duration": "30 days"
+          },
+          "next": "wait_1_2"
+        },
+        {
+          "key": "wait_1_2",
+          "type": "delay",
+          "config": {
+            "duration": "30 days"
+          },
+          "next": "wait_1_3"
+        },
+        {
+          "key": "wait_1_3",
+          "type": "delay",
+          "config": {
+            "duration": "30 days"
+          },
+          "next": "wait_1_4"
+        },
+        {
+          "key": "wait_1_4",
+          "type": "delay",
+          "config": {
+            "duration": "30 days"
+          },
+          "next": "wait_1_5"
+        },
+        {
+          "key": "wait_1_5",
+          "type": "delay",
+          "config": {
+            "duration": "30 days"
+          },
+          "next": "wait_1_6"
+        },
+        {
+          "key": "wait_1_6",
+          "type": "delay",
+          "config": {
+            "duration": "30 days"
+          },
+          "next": "subscribed_1"
+        },
+        {
+          "key": "subscribed_1",
+          "type": "condition",
+          "config": {
+            "type": "rule",
+            "field": "contact.unsubscribed",
+            "operator": "eq",
+            "value": false
+          },
+          "branches": {
+            "condition_met": "send_reminder_1",
+            "condition_not_met": null
+          }
+        },
+        {
+          "key": "send_reminder_1",
+          "type": "send_email",
+          "config": {
+            "template": {
+              "id": "eeaab3bf-cd67-469d-8986-76b3cb43077d"
+            },
+            "from": "Kit-72 <hallo@kit-72.com>",
+            "subject": "Cinco minutos: revisa tu kit de emergencia"
+          },
+          "next": "wait_2_1"
+        },
+        {
+          "key": "wait_2_1",
+          "type": "delay",
+          "config": {
+            "duration": "30 days"
+          },
+          "next": "wait_2_2"
+        },
+        {
+          "key": "wait_2_2",
+          "type": "delay",
+          "config": {
+            "duration": "30 days"
+          },
+          "next": "wait_2_3"
+        },
+        {
+          "key": "wait_2_3",
+          "type": "delay",
+          "config": {
+            "duration": "30 days"
+          },
+          "next": "wait_2_4"
+        },
+        {
+          "key": "wait_2_4",
+          "type": "delay",
+          "config": {
+            "duration": "30 days"
+          },
+          "next": "wait_2_5"
+        },
+        {
+          "key": "wait_2_5",
+          "type": "delay",
+          "config": {
+            "duration": "30 days"
+          },
+          "next": "wait_2_6"
+        },
+        {
+          "key": "wait_2_6",
+          "type": "delay",
+          "config": {
+            "duration": "30 days"
+          },
+          "next": "subscribed_2"
+        },
+        {
+          "key": "subscribed_2",
+          "type": "condition",
+          "config": {
+            "type": "rule",
+            "field": "contact.unsubscribed",
+            "operator": "eq",
+            "value": false
+          },
+          "branches": {
+            "condition_met": "send_reminder_2",
+            "condition_not_met": null
+          }
+        },
+        {
+          "key": "send_reminder_2",
+          "type": "send_email",
+          "config": {
+            "template": {
+              "id": "eeaab3bf-cd67-469d-8986-76b3cb43077d"
+            },
+            "from": "Kit-72 <hallo@kit-72.com>",
+            "subject": "Cinco minutos: revisa tu kit de emergencia"
+          },
+          "next": "wait_3_1"
+        },
+        {
+          "key": "wait_3_1",
+          "type": "delay",
+          "config": {
+            "duration": "30 days"
+          },
+          "next": "wait_3_2"
+        },
+        {
+          "key": "wait_3_2",
+          "type": "delay",
+          "config": {
+            "duration": "30 days"
+          },
+          "next": "wait_3_3"
+        },
+        {
+          "key": "wait_3_3",
+          "type": "delay",
+          "config": {
+            "duration": "30 days"
+          },
+          "next": "wait_3_4"
+        },
+        {
+          "key": "wait_3_4",
+          "type": "delay",
+          "config": {
+            "duration": "30 days"
+          },
+          "next": "wait_3_5"
+        },
+        {
+          "key": "wait_3_5",
+          "type": "delay",
+          "config": {
+            "duration": "30 days"
+          },
+          "next": "wait_3_6"
+        },
+        {
+          "key": "wait_3_6",
+          "type": "delay",
+          "config": {
+            "duration": "30 days"
+          },
+          "next": "subscribed_3"
+        },
+        {
+          "key": "subscribed_3",
+          "type": "condition",
+          "config": {
+            "type": "rule",
+            "field": "contact.unsubscribed",
+            "operator": "eq",
+            "value": false
+          },
+          "branches": {
+            "condition_met": "send_reminder_3",
+            "condition_not_met": null
+          }
+        },
+        {
+          "key": "send_reminder_3",
+          "type": "send_email",
+          "config": {
+            "template": {
+              "id": "eeaab3bf-cd67-469d-8986-76b3cb43077d"
+            },
+            "from": "Kit-72 <hallo@kit-72.com>",
+            "subject": "Cinco minutos: revisa tu kit de emergencia"
+          },
+          "next": "wait_4_1"
+        },
+        {
+          "key": "wait_4_1",
+          "type": "delay",
+          "config": {
+            "duration": "30 days"
+          },
+          "next": "wait_4_2"
+        },
+        {
+          "key": "wait_4_2",
+          "type": "delay",
+          "config": {
+            "duration": "30 days"
+          },
+          "next": "wait_4_3"
+        },
+        {
+          "key": "wait_4_3",
+          "type": "delay",
+          "config": {
+            "duration": "30 days"
+          },
+          "next": "wait_4_4"
+        },
+        {
+          "key": "wait_4_4",
+          "type": "delay",
+          "config": {
+            "duration": "30 days"
+          },
+          "next": "wait_4_5"
+        },
+        {
+          "key": "wait_4_5",
+          "type": "delay",
+          "config": {
+            "duration": "30 days"
+          },
+          "next": "wait_4_6"
+        },
+        {
+          "key": "wait_4_6",
+          "type": "delay",
+          "config": {
+            "duration": "30 days"
+          },
+          "next": "subscribed_4"
+        },
+        {
+          "key": "subscribed_4",
+          "type": "condition",
+          "config": {
+            "type": "rule",
+            "field": "contact.unsubscribed",
+            "operator": "eq",
+            "value": false
+          },
+          "branches": {
+            "condition_met": "send_reminder_4",
+            "condition_not_met": null
+          }
+        },
+        {
+          "key": "send_reminder_4",
+          "type": "send_email",
+          "config": {
+            "template": {
+              "id": "eeaab3bf-cd67-469d-8986-76b3cb43077d"
+            },
+            "from": "Kit-72 <hallo@kit-72.com>",
+            "subject": "Cinco minutos: revisa tu kit de emergencia"
+          },
+          "next": null
+        }
+      ]
+    }
+  },
+  {
+    "name": "Kit-72 ES tips",
+    "workflow": {
+      "steps": [
+        {
+          "key": "trigger",
+          "type": "trigger",
+          "config": {
+            "eventName": "kit72.subscribed"
+          },
+          "next": "is_locale"
+        },
+        {
+          "key": "is_locale",
+          "type": "condition",
+          "config": {
+            "type": "rule",
+            "field": "event.locale",
+            "operator": "eq",
+            "value": "es"
+          },
+          "branches": {
+            "condition_met": "wait_water",
+            "condition_not_met": null
+          }
+        },
+        {
+          "key": "wait_water",
+          "type": "delay",
+          "config": {
+            "duration": "3 days"
+          },
+          "next": "subscribed_water"
+        },
+        {
+          "key": "subscribed_water",
+          "type": "condition",
+          "config": {
+            "type": "rule",
+            "field": "contact.unsubscribed",
+            "operator": "eq",
+            "value": false
+          },
+          "branches": {
+            "condition_met": "send_water",
+            "condition_not_met": null
+          }
+        },
+        {
+          "key": "send_water",
+          "type": "send_email",
+          "config": {
+            "template": {
+              "id": "fe404be9-b4f6-41ce-8e6a-e9e1095e1793",
+              "variables": {
+                "WATER_LITRES": {
+                  "var": "event.water_litres"
+                }
+              }
+            },
+            "from": "Kit-72 <hallo@kit-72.com>",
+            "subject": "Agua: donde fallan casi todos los kits"
+          },
+          "next": "wait_light"
+        },
+        {
+          "key": "wait_light",
+          "type": "delay",
+          "config": {
+            "duration": "5 days"
+          },
+          "next": "subscribed_light"
+        },
+        {
+          "key": "subscribed_light",
+          "type": "condition",
+          "config": {
+            "type": "rule",
+            "field": "contact.unsubscribed",
+            "operator": "eq",
+            "value": false
+          },
+          "branches": {
+            "condition_met": "send_light",
+            "condition_not_met": null
+          }
+        },
+        {
+          "key": "send_light",
+          "type": "send_email",
+          "config": {
+            "template": {
+              "id": "6f66dd71-a3fb-44d6-bda9-f9dc85312ca5"
+            },
+            "from": "Kit-72 <hallo@kit-72.com>",
+            "subject": "Cuando se va la luz"
+          },
+          "next": "wait_buy"
+        },
+        {
+          "key": "wait_buy",
+          "type": "delay",
+          "config": {
+            "duration": "7 days"
+          },
+          "next": "subscribed_buy"
+        },
+        {
+          "key": "subscribed_buy",
+          "type": "condition",
+          "config": {
+            "type": "rule",
+            "field": "contact.unsubscribed",
+            "operator": "eq",
+            "value": false
+          },
+          "branches": {
+            "condition_met": "send_buy",
+            "condition_not_met": null
+          }
+        },
+        {
+          "key": "send_buy",
+          "type": "send_email",
+          "config": {
+            "template": {
+              "id": "9cb6c168-130a-4211-86a8-5ab128ca5c90"
+            },
+            "from": "Kit-72 <hallo@kit-72.com>",
+            "subject": "Comprar o montarlo tú: los precios"
+          },
+          "next": null
+        }
+      ]
+    }
+  }
+]

@@ -1,6 +1,26 @@
 {
   "version": "0.0.1",
   "configurations": [
-    { "name": "kit72-dev", "runtimeExecutable": "npm", "runtimeArgs": ["run", "dev"], "port": 3031 }
+    {
+      "name": "kit72-dev",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": [
+        "run",
+        "dev"
+      ],
+      "port": 3031
+    },
+    {
+      "name": "kit72-emails",
+      "runtimeExecutable": "python3",
+      "runtimeArgs": [
+        "-m",
+        "http.server",
+        "3032",
+        "--directory",
+        "emails/out/preview"
+      ],
+      "port": 3032
+    }
   ]
 }

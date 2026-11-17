@@ -4,8 +4,9 @@
  *
  * Flow (double opt-in, no database):
  *   POST /api/subscribe  -> signs the request into a token, emails a confirm link
- *   GET  /api/confirm?t= -> verifies the token, creates the Resend contact,
- *                           sends the welcome email, fires `kit72.subscribed`
+ *   GET  /api/confirm?t= -> verifies the token, creates the Resend contact and
+ *                           fires `kit72.subscribed`; Resend automations then
+ *                           send the welcome email, tips and reminders
  *
  * Required env: RESEND_API_KEY, SUBSCRIBE_SECRET, EMAIL_FROM
  * Optional env: RESEND_SEGMENT_ID, SITE_URL
@@ -110,12 +111,16 @@ const WATER_PER_DAY = { nl: 3, es: 3, de: 2 };
 export function needs({ adults, children, pets, locale }) {
   const people = adults + children;
   const perDay = WATER_PER_DAY[locale] ?? 3;
-  return { people, waterLitres: people * perDay * 3 + pets, meals: people * 9, cashEur: adults * 70 + children * 30 };
+  return {
+    people,
+    waterLitres: people * perDay * 3 + pets,
+    meals: people * 9,
+    lights: Math.max(2, people),
+    cashEur: adults * 70 + children * 30,
+  };
 }
 
-export function builderLink(sub) {
-  const u = new URL(siteUrl() + PATHS[sub.locale].builder);
-  u.searchParams.set('utm_source', 'email');
-  u.searchParams.set('utm_medium', 'lifecycle');
-  return u.toString();
-}
+const PEOPLE = { nl: ['persoon', 'personen'], de: ['Person', 'Personen'], es: ['persona', 'personas'] };
+
+/** "3 personen" / "1 Person": used in the welcome email. */
+export const householdLabel = (people, locale) => `${people} ${(PEOPLE[locale] ?? PEOPLE.nl)[people === 1 ? 0 : 1]}`;

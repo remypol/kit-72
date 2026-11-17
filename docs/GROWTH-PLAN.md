@@ -61,7 +61,7 @@ In rough order of value. Each ID goes into Vercel → Project → Environment Va
 1. **bol.com Partnerprogramma**: sign up, set `PUBLIC_BOL_PARTNER_ID`. Activates 39+ Dutch links.
 2. **Awin**: join as publisher, apply to ration1 (advertiser 23193), set `PUBLIC_AWIN_PUBLISHER_ID`.
 3. **Amazon.nl Associates**: set `PUBLIC_AMAZON_TAG_NL`. Confirm `kit72es-21` and `kit72de-21` are live accounts (both are now set in Vercel).
-4. **Resend**: done; email signup is live. Open items are in EMAILS.md: confirm delivery to a real mailbox and create the three automations.
+4. **Resend**: done; email signup is live. The sequence (welcome, three tips, half-yearly reminders) is built in Resend; EMAILS.md says how to switch it on and what is still open.
 5. **SicherSatt**: apply to their in-house programme; send me the link format and I will add it (it is recognised for tracking already).
 6. **Vercel domains**: change the `kit-72.com` → `www` redirect from 307 to 308.
 7. **Search Console**: submit the three new URLs and check that the 2024 → 2025 redirect is picked up.

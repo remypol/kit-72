@@ -84,3 +84,12 @@ What matters:
 - Privacy pages (NL, DE, ES) rewritten to describe the email signup, Resend as processor and consent-gated analytics; they previously said no personal data was stored. The NL and DE privacy pages no longer show the signup form.
 - Gaps found, not fixed: the privacy pages give no contact address, and the German site has no Impressum.
 - After the owner logged in to Squarespace again: `rsend` CNAME saved; root SPF and DMARC re-added as custom records with their previous values. Checked at the authoritative nameserver.
+
+## 8. Email sequence (2026-11-17, evening)
+
+- Found a conflict before building: the form promised "nothing else" besides the list and two reminders a year, while the planned sequence adds three tips. Changed the form, consent line, confirmation pages and privacy pages to say so, and kept the automations off until that text is live.
+- One email design for everything (`api/_shell.js`), checked in a browser at desktop and phone width. Copy for five emails in NL, DE and ES in `emails/content.mjs`.
+- Created 15 templates and six automations in Resend (two per language). Confirmed with a probe automation that a condition can read `contact.unsubscribed`; every send after the welcome checks it.
+- The welcome email moved from the site to the automation, so it carries an unsubscribe link. `/api/confirm` now only creates the contact and fires the event, and shows the error page if the event is rejected.
+- Tested the NL welcome automation with Resend's sink address: delivered, all variables filled, unsubscribe link present. Then disabled it again until this change is deployed.
+- Resend's REST format for automations differs from the workflow format used here, so the automations were created through the MCP tool from `emails/out/automations.json`.
