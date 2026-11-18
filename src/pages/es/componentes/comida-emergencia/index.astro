@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../../../layouts/BaseLayout.astro';
+import HeroImage from '../../../../components/content/HeroImage.astro';
 import ProductGrid from '../../../../components/content/ProductGrid.astro';
 import Icon from '../../../../components/ui/Icon.astro';
 
@@ -226,6 +227,13 @@ const commonMistakes = [
           En 72 horas sin comida no te mueres, pero sí pierdes energía, concentración y moral.
           Una reserva de alimentos bien planificada marca la diferencia en una emergencia.
         </p>
+        <div class="mt-8">
+          <HeroImage
+            src="/images/shared/emergency-food.webp"
+            alt="Comida de larga duración para tres días: latas, tarros de arroz, pasta y lentejas, pan crujiente, chocolate y un hornillo de gas con sartén"
+            priority={true}
+          />
+        </div>
       </div>
 
       <!-- Quick Recommendation -->

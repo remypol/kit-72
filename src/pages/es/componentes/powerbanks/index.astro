@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../../../layouts/BaseLayout.astro';
+import HeroImage from '../../../../components/content/HeroImage.astro';
 import ProductGrid from '../../../../components/content/ProductGrid.astro';
 import Icon from '../../../../components/ui/Icon.astro';
 import QuickRecommendation from '../../../../components/content/QuickRecommendation.astro';
@@ -238,6 +239,13 @@ const chargingTips = [
           En emergencias, tu teléfono es linterna, radio, mapa y comunicación con el mundo.
           Sin batería, te quedas incomunicado. Los powerbanks son esenciales.
         </p>
+        <div class="mt-8">
+          <HeroImage
+            src="/images/shared/powerbanks.webp"
+            alt="Tres powerbanks con un móvil conectado por cable y un panel solar plegable"
+            priority={true}
+          />
+        </div>
       </div>
 
       <!-- Quick Recommendation -->
