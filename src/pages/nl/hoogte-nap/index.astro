@@ -1,0 +1,132 @@
+---
+/**
+ * "Hoe hoog ligt mijn huis?": instant address check against NAP, with the
+ * lowest and highest municipalities from the site's own sample.
+ */
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import AddressCheck from '../../../components/growth/AddressCheck.astro';
+import { gemeenten, checked, nap, nl } from '../../../data/gemeenten';
+import '../../../styles/facts.css';
+
+const withLevel = gemeenten.filter((g) => g.level);
+const sorted = [...withLevel].sort((a, b) => a.level!.median - b.level!.median);
+const lowest = sorted.slice(0, 10);
+const highest = sorted.slice(-10).reverse();
+const below = withLevel.filter((g) => g.level!.median < 0);
+const checkedDate = new Date(checked).toLocaleDateString('nl-NL', { day: 'numeric', month: 'long', year: 'numeric' });
+
+const faq = [
+  {
+    question: 'Hoe hoog ligt mijn huis ten opzichte van NAP?',
+    answer:
+      'Vul hierboven je postcode en huisnummer in. Je krijgt de hoogte van het maaiveld rond je huis in meters boven of onder NAP, gemeten in het Actueel Hoogtebestand Nederland. Het gaat om de grond buiten, niet om je vloer.',
+  },
+  {
+    question: 'Wat is NAP?',
+    answer:
+      'NAP staat voor Normaal Amsterdams Peil. Het is het nulpunt waartegen in Nederland hoogtes en waterstanden worden gemeten en ligt ongeveer op het gemiddelde zeeniveau. Een huis op 2 meter onder NAP staat dus ruwweg twee meter lager dan de zee gemiddeld staat.',
+  },
+  {
+    question: 'Loopt mijn huis onder als het onder NAP ligt?',
+    answer:
+      'Niet vanzelf. Laaggelegen gebieden worden beschermd door dijken, duinen en gemalen. De hoogte zegt wel hoe diep het water kan komen als een dijk bezwijkt. Of je adres in een aangewezen overstromingsrisicogebied ligt, zie je in dezelfde check.',
+  },
+  {
+    question: 'Hoe nauwkeurig is de hoogte?',
+    answer:
+      'De meting komt uit het Actueel Hoogtebestand Nederland, een hoogtekaart van heel Nederland gemaakt met laser vanuit vliegtuigen. Wij nemen de middelste waarde van dertien punten binnen dertig meter van je adres, zodat een struik of een oprit het getal niet vertekent.',
+  },
+];
+---
+
+<BaseLayout
+  title="Hoe hoog ligt mijn huis? Hoogte t.o.v. NAP per adres"
+  description="Vul je postcode en huisnummer in en zie direct hoe hoog je huis ligt ten opzichte van NAP, en of het in overstromingsrisicogebied staat. Gratis, zonder account."
+  locale="nl"
+  faqData={faq}
+  dateModified={checked}
+  ogImage="/images/og-noodhandboek.jpg"
+  breadcrumbs={[
+    { name: 'Home', url: '/nl/' },
+    { name: 'Hoogte t.o.v. NAP', url: '/nl/hoogte-nap/' },
+  ]}
+>
+  <article class="fx">
+    <header class="fx-head">
+      <h1>Hoe hoog ligt mijn huis?</h1>
+      <p class="fx-lead">
+        Vul je postcode en huisnummer in en je ziet direct hoeveel meter je huis boven of onder NAP ligt, of het in een overstromingsrisicogebied staat en welke rampenzender erbij hoort. Gratis en zonder account.
+      </p>
+    </header>
+
+    <div class="fx-check" id="check">
+      <AddressCheck source="hoogte-nap" title="Check de hoogte van je adres" />
+    </div>
+
+    <section class="fx-text">
+      <h2>Wat zegt de hoogte ten opzichte van NAP?</h2>
+      <p>
+        NAP, het Normaal Amsterdams Peil, is het nulpunt voor hoogtes in Nederland en ligt ongeveer op het gemiddelde zeeniveau. Een getal onder nul betekent dat de grond rond je huis lager ligt dan de zee gemiddeld staat. Dat is in grote delen van het westen en in de polders gewoon: volgens het Planbureau voor de Leefomgeving ligt 26 procent van Nederland onder zeeniveau.
+      </p>
+      <p>
+        Laag liggen is niet hetzelfde als risico lopen. Dijken, duinen en gemalen houden het land droog. De hoogte wordt pas belangrijk als er iets misgaat: hoe lager het maaiveld, hoe dieper het water kan komen en hoe langer het blijft staan. Daarom staat de hoogte van je perceel ook op de eerste pagina van het <a href="/nl/noodhandboek/">gratis noodhandboek</a>.
+      </p>
+    </section>
+
+    <section class="fx-text">
+      <h2>Wat doe je met het getal?</h2>
+      <ul>
+        <li><strong>Onder NAP en in overstromingsrisicogebied:</strong> weet wat de hoogste plek in huis is en of je er via een dakraam uit kunt. Bewaar je noodpakket niet in de kelder of op de begane grond.</li>
+        <li><strong>Boven NAP maar bij een rivier:</strong> kijk of je binnendijks of buitendijks woont. Buitendijks loopt het bij hoogwater het eerst onder.</li>
+        <li><strong>Hoog en droog:</strong> je grootste risico is uitval van stroom en water, niet hoogwater. Zorg voor drinkwater en een radio op batterijen.</li>
+      </ul>
+      <p>
+        Wat je bij hoogwater doet, staat stap voor stap in het <a href="/nl/scenario/overstroming/">draaiboek voor een overstroming</a>. Hoe het overstromingsrisico per gemeente verdeeld is, lees je op de pagina over <a href="/nl/overstromingsrisico/">overstromingsrisico</a>.
+      </p>
+    </section>
+
+    <section class="fx-text fx-text--wide">
+      <h2>De laagste en hoogste gemeenten</h2>
+      <p>
+        Van de {withLevel.length} gemeenten liggen er {below.length} met hun middelste meetpunt onder NAP. De getallen komen uit een steekproef van zestien punten bij woningen per gemeente; ze geven een beeld van de gemeente en zeggen niets over één adres.
+      </p>
+      <div class="fx-cols">
+        <div class="fx-rank">
+          <h3>Laagst gelegen</h3>
+          <ol>
+            {lowest.map((g) => (
+              <li><span><a href={`/nl/noodplan/${g.slug}/`}>{g.name}</a></span><span>{nap(g.level!.median)}</span></li>
+            ))}
+          </ol>
+        </div>
+        <div class="fx-rank">
+          <h3>Hoogst gelegen</h3>
+          <ol>
+            {highest.map((g) => (
+              <li><span><a href={`/nl/noodplan/${g.slug}/`}>{g.name}</a></span><span>{nl(g.level!.median)} m boven NAP</span></li>
+            ))}
+          </ol>
+        </div>
+      </div>
+      <p style="margin-top: var(--space-6)">Je eigen gemeente staat op <a href="/nl/noodplan/">Noodplan per gemeente</a>, met het laagste en hoogste meetpunt.</p>
+    </section>
+
+    <section class="fx-text fx-faq">
+      <h2>Veelgestelde vragen</h2>
+      <dl>
+        {faq.map((f) => (
+          <>
+            <dt>{f.question}</dt>
+            <dd>{f.answer}</dd>
+          </>
+        ))}
+      </dl>
+    </section>
+
+    <footer class="fx-src">
+      <p>
+        Bronnen: hoogte uit het Actueel Hoogtebestand Nederland (AHN, via PDOK); adressen uit het adressenbestand van de overheid (PDOK Locatieserver); overstromingsrisicogebieden van Rijkswaterstaat; aandeel onder zeeniveau volgens het Planbureau voor de Leefomgeving. Gemeentecijfers: steekproef van zestien punten per gemeente, gecontroleerd op {checkedDate}. Kit-72 is geen overheidssite.
+      </p>
+    </footer>
+  </article>
+</BaseLayout>

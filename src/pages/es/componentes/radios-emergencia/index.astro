@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../../../layouts/BaseLayout.astro';
+import HeroImage from '../../../../components/content/HeroImage.astro';
 import ProductGrid from '../../../../components/content/ProductGrid.astro';
 import Icon from '../../../../components/ui/Icon.astro';
 
@@ -215,6 +216,13 @@ const usageTips = [
           Cuando caen las redes móviles y se va la luz, la radio es tu conexión con el mundo exterior.
           Información oficial, alertas y coordinación familiar: todo depende de tener una buena radio.
         </p>
+        <div class="mt-8">
+          <HeroImage
+            src="/images/shared/emergency-radio.webp"
+            alt="Radio de emergencia con manivela, panel solar y antena junto a varias pilas"
+            priority={true}
+          />
+        </div>
       </div>
 
       <!-- Quick Recommendation -->

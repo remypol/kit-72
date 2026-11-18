@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../../../layouts/BaseLayout.astro';
+import HeroImage from '../../../../components/content/HeroImage.astro';
 import ProductGrid from '../../../../components/content/ProductGrid.astro';
 import Icon from '../../../../components/ui/Icon.astro';
 import QuickRecommendation from '../../../../components/content/QuickRecommendation.astro';
@@ -286,6 +287,13 @@ const commonMistakes = [
           El agua es lo más crítico en emergencias. Sin ella solo sobrevives 3 días.
           Elegir los recipientes correctos y almacenar bien es fundamental.
         </p>
+        <div class="mt-8">
+          <HeroImage
+            src="/images/shared/water-storage.webp"
+            alt="Dos bidones de agua apilados, botellas, un filtro de agua con bomba y pastillas potabilizadoras"
+            priority={true}
+          />
+        </div>
       </div>
 
       <!-- Quick Recommendation -->

@@ -89,6 +89,7 @@ const faq = [
         <p class="gm-big">{floodShort(g)}</p>
         <p>{floodSentence(g)}</p>
         {types.length > 0 && <p>Soort gebied: {types.join('; ')}.</p>}
+        <p class="gm-note"><a href="/nl/overstromingsrisico/#check">Check je eigen adres</a></p>
       </div>
       <div class="gm-fact">
         <h2>Hoogte van het maaiveld</h2>
@@ -96,6 +97,7 @@ const faq = [
           <>
             <p class="gm-big">{nl(g.level.min)} tot {nl(g.level.max)} m</p>
             <p>Ten opzichte van NAP, gemeten op {g.level.n} punten bij woningen. De middelste waarde ligt op {nap(g.level.median)}.</p>
+            <p class="gm-note"><a href="/nl/hoogte-nap/#check">Hoe hoog ligt jouw huis?</a></p>
           </>
         ) : (
           <p class="gm-big">Onbekend</p>

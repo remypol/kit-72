@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../../../layouts/BaseLayout.astro';
+import HeroImage from '../../../../components/content/HeroImage.astro';
 import ProductGrid from '../../../../components/content/ProductGrid.astro';
 import Icon from '../../../../components/ui/Icon.astro';
 
@@ -250,6 +251,13 @@ const commonMistakes = [
           La mochila es el contenedor de todo tu kit de supervivencia. Elegir la correcta
           y saber cargarla bien puede marcar la diferencia entre evacuación cómoda o agotadora.
         </p>
+        <div class="mt-8">
+          <HeroImage
+            src="/images/shared/evacuation-bag.webp"
+            alt="Mochila amarilla preparada con esterilla, botas de montaña, botella de agua, frontal y portadocumentos"
+            priority={true}
+          />
+        </div>
       </div>
 
       <!-- Quick Recommendation -->

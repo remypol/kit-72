@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../../../layouts/BaseLayout.astro';
+import HeroImage from '../../../../components/content/HeroImage.astro';
 import Breadcrumb from '../../../../components/layout/Breadcrumb.astro';
 import Icon from '../../../../components/ui/Icon.astro';
 import RelatedContent from '../../../../components/content/RelatedContent.astro';
@@ -63,6 +64,14 @@ const faqs = [
     <div class="max-w-3xl mx-auto px-4 sm:px-6">
       <Breadcrumb items={[{ label: 'Gidsen', href: '/nl/gidsen/' }, { label: 'Water opslaan' }]} class="mb-4" locale="nl" />
       <h1 class="text-4xl font-bold mb-6">Water opslaan voor noodsituaties</h1>
+
+      <div class="mb-8">
+        <HeroImage
+          src="/images/shared/water-storage.webp"
+          alt="Twee gestapelde jerrycans met water, flessen, een waterfilter met pomp en zuiveringstabletten"
+          priority={true}
+        />
+      </div>
 
       <div class="prose prose-lg">
         <p class="lead">

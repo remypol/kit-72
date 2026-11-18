@@ -20,7 +20,7 @@ const {
   src,
   alt,
   width = 1200,
-  height = 630,
+  height = 800,
   priority = false,
   class: className = '',
   caption
@@ -50,6 +50,8 @@ const seoAlt = alt.includes('Kit-72') ? alt : `${alt} | Kit-72`;
   .hero-image {
     margin: 0 0 1.5rem 0;
     width: 100%;
+    /* the picture is 3:2; on a full-width container it would outgrow the screen */
+    max-width: 56rem;
     border-radius: 1rem;
     overflow: hidden;
   }
@@ -59,7 +61,7 @@ const seoAlt = alt.includes('Kit-72') ? alt : `${alt} | Kit-72`;
     height: auto;
     display: block;
     object-fit: cover;
-    aspect-ratio: 1200 / 630;
+    aspect-ratio: 3 / 2;
     background-color: var(--color-bg-secondary);
   }
 
@@ -83,9 +85,9 @@ const seoAlt = alt.includes('Kit-72') ? alt : `${alt} | Kit-72`;
 
   @media (max-width: 640px) {
     .hero-image {
+      /* stays inside the text column: bleeding out by a fixed 1rem overflowed
+         on pages whose column padding is narrower */
       border-radius: 0.75rem;
-      margin: 0 -1rem 1.5rem -1rem;
-      width: calc(100% + 2rem);
     }
   }
 </style>

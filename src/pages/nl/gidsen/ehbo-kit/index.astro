@@ -1,11 +1,12 @@
 ---
 import BaseLayout from '../../../../layouts/BaseLayout.astro';
+import HeroImage from '../../../../components/content/HeroImage.astro';
 import Breadcrumb from '../../../../components/layout/Breadcrumb.astro';
 import Icon from '../../../../components/ui/Icon.astro';
 ---
 
 <BaseLayout
-  title="EHBO-kit — Kit-72"
+  title="EHBO-kit samenstellen: wat hoort erin?"
   description="Samenstellen en onderhouden van je EHBO-kit voor noodsituaties. Wat erin hoort en hoe je hem onderhoudt."
   locale="nl"
   dateModified="2025-12-15"
@@ -15,6 +16,14 @@ import Icon from '../../../../components/ui/Icon.astro';
     <div class="max-w-3xl mx-auto px-4 sm:px-6">
       <Breadcrumb items={[{ label: 'Gidsen', href: '/nl/gidsen/' }, { label: 'EHBO-kit' }]} class="mb-4" locale="nl" />
       <h1 class="text-4xl font-bold mb-6">EHBO-kit</h1>
+
+      <div class="mb-8">
+        <HeroImage
+          src="/images/shared/first-aid-kit.webp"
+          alt="Open EHBO-etui met verband, gaasjes, pleisters, schaar, pincet, handschoenen en een reddingsdeken"
+          priority={true}
+        />
+      </div>
 
       <div class="prose prose-lg">
         <p class="lead">

@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../../../layouts/BaseLayout.astro';
+import HeroImage from '../../../../components/content/HeroImage.astro';
 import ProductGrid from '../../../../components/content/ProductGrid.astro';
 import Icon from '../../../../components/ui/Icon.astro';
 
@@ -232,6 +233,13 @@ const commonMistakes = [
           En emergencias, los servicios médicos pueden tardar. Un botiquín bien equipado
           te permite tratar heridas menores y estabilizar situaciones hasta que llegue ayuda.
         </p>
+        <div class="mt-8">
+          <HeroImage
+            src="/images/shared/first-aid-kit.webp"
+            alt="Botiquín abierto con vendas, gasas, tiritas, tijeras, pinzas, guantes y una manta térmica"
+            priority={true}
+          />
+        </div>
       </div>
 
       <!-- Quick Recommendation -->

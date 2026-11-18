@@ -1,20 +1,29 @@
 ---
 import BaseLayout from '../../../../layouts/BaseLayout.astro';
+import HeroImage from '../../../../components/content/HeroImage.astro';
 import Breadcrumb from '../../../../components/layout/Breadcrumb.astro';
 import Icon from '../../../../components/ui/Icon.astro';
 ---
 
 <BaseLayout
-  title="Energie & Communicatie — Kit-72"
+  title="Stroomuitval: licht, laden en nieuws zonder stroom"
   description="Blijf verbonden en geïnformeerd bij stroomuitval. Powerbanks, noodradio's en verlichting voor noodsituaties."
   locale="nl"
-  dateModified="2025-12-15"
+  dateModified="2026-11-17"
   schemaType="Article"
 >
   <section class="py-16">
     <div class="max-w-3xl mx-auto px-4 sm:px-6">
       <Breadcrumb items={[{ label: 'Gidsen', href: '/nl/gidsen/' }, { label: 'Energie & Communicatie' }]} class="mb-4" locale="nl" />
       <h1 class="text-4xl font-bold mb-6">Energie & Communicatie</h1>
+
+      <div class="mb-8">
+        <HeroImage
+          src="/images/shared/powerbanks.webp"
+          alt="Drie powerbanks met een telefoon aan de kabel en een opvouwbaar zonnepaneel"
+          priority={true}
+        />
+      </div>
 
       <div class="prose prose-lg">
         <p class="lead">
@@ -43,7 +52,7 @@ import Icon from '../../../../components/ui/Icon.astro';
               <span class="text-red-500">✗</span> Vaste telefoon (meestal)
             </div>
             <div class="flex items-center gap-2 text-(--color-text-secondary)">
-              <span class="text-green-500">✓</span> FM/AM-radio (met batterijen)
+              <span class="text-green-500">✓</span> FM- of DAB+-radio (met batterijen)
             </div>
             <div class="flex items-center gap-2 text-(--color-text-secondary)">
               <span class="text-green-500">✓</span> Zaklampen (met batterijen)

@@ -472,13 +472,13 @@
       "quantity": "1 per huishouden",
       "priority": "critical",
       "scenarios": ["general", "stroomstoring", "overstroming", "cyberaanval"],
-      "notes": "Met batterijen of opwindbaar. NPO Radio 1 zendt noodinformatie uit",
+      "notes": "Met batterijen of opwindbaar. De rampenzender van je regio geeft aanwijzingen",
       "affiliateUrl": "https://www.bol.com/nl/nl/s/?searchtext=noodradio+opwindbaar",
       "affiliateSource": "bol"
     },
     {
       "id": "communicatie-2",
-      "name": "OV-chipkaart met saldo",
+      "name": "Ov-kaart met saldo",
       "category": "communicatie",
       "quantity": "1 per gezinslid",
       "priority": "recommended",

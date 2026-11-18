@@ -94,7 +94,7 @@ const faqs = [
   }}
   faqData={faqs}
 >
-  <main class="scenario-page">
+  <article class="scenario-page">
     <header class="scenario-header">
       <div class="scenario-title-row">
         <div class="scenario-icon scenario-icon--blue">
@@ -114,8 +114,8 @@ const faqs = [
     <!-- Hero Image -->
     <section class="scenario-section">
       <HeroImage
-        src="/images/shared/flood-street.webp"
-        alt="Überflutete Straße - Hochwasser Vorbereitung"
+        src="/images/shared/flood.webp"
+        alt="Gelbe Gummistiefel in flachem Wasser neben zwei Sandsäcken, einer wasserdichten Hülle und einer Taschenlampe"
         priority={true}
       />
     </section>
@@ -184,7 +184,8 @@ const faqs = [
         <Icon name="CheckSquare" size={24} />
         Hochwasser-Checkliste
       </h2>
-      <InteractiveChecklist client:idle scenarioKey={scenarioKey} categories={checklistCategories} />
+      <InteractiveChecklist
+        locale="de" client:idle scenarioKey={scenarioKey} categories={checklistCategories} />
     </section>
 
     <!-- FAQs -->
@@ -270,7 +271,7 @@ const faqs = [
 
     <!-- Sticky Action Bar -->
     <StickyActionBar client:idle scenarioKey={scenarioKey} />
-  </main>
+  </article>
 </BaseLayout>
 
 <style>

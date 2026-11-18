@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../../../layouts/BaseLayout.astro';
+import HeroImage from '../../../../components/content/HeroImage.astro';
 import ProductGrid from '../../../../components/content/ProductGrid.astro';
 import Icon from '../../../../components/ui/Icon.astro';
 import AddToKitButton from '../../../../components/tools/AddToKitButton';
@@ -187,6 +188,13 @@ const kitSuggestion = [
           La iluminación es crítica en emergencias. Sin luz, todo se complica: encontrar cosas,
           moverse con seguridad, pedir ayuda. Esta guía te ayuda a elegir las linternas correctas.
         </p>
+        <div class="mt-8">
+          <HeroImage
+            src="/images/shared/flashlights.webp"
+            alt="Cuatro linternas de menor a mayor junto a un frontal y un farol de camping"
+            priority={true}
+          />
+        </div>
       </div>
 
       <!-- Quick Recommendation -->

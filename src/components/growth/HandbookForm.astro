@@ -31,7 +31,7 @@ const id = `hb-${source}`;
         <input name="postcode" type="text" autocomplete="postal-code" inputmode="text" maxlength="7" placeholder="1234 AB" required />
       </label>
       <label class="hb__field hb__field--small">
-        <span>Huisnummer</span>
+        <span>Huisnr.</span>
         <input name="number" type="text" inputmode="numeric" maxlength="5" placeholder="12" required />
       </label>
       <label class="hb__field hb__field--small">
@@ -213,6 +213,18 @@ const id = `hb-${source}`;
       input.focus();
       say('error', text);
     };
+
+    // an address just looked up with the address check is filled in already
+    try {
+      const saved = JSON.parse(sessionStorage.getItem('kit72-address') || 'null');
+      if (saved && !field('postcode').value) {
+        field('postcode').value = saved.postcode || '';
+        field('number').value = saved.number || '';
+        field('suffix').value = saved.suffix || '';
+      }
+    } catch {
+      /* no stored address */
+    }
 
     form.addEventListener('submit', async (e) => {
       e.preventDefault();

@@ -1,0 +1,171 @@
+---
+/**
+ * Flood risk: instant address check, what the four zone types mean, and how
+ * the municipalities divide over them (from the site's own sample).
+ */
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import AddressCheck from '../../../components/growth/AddressCheck.astro';
+import { gemeenten, checked } from '../../../data/gemeenten';
+import '../../../styles/facts.css';
+
+const known = gemeenten.filter((g) => g.flood.sampled > 0);
+const all = known.filter((g) => g.flood.inZone === g.flood.sampled);
+const none = known.filter((g) => g.flood.inZone === 0);
+const part = known.length - all.length - none.length;
+const byName = (a: (typeof gemeenten)[number], b: (typeof gemeenten)[number]) => a.name.localeCompare(b.name, 'nl');
+const checkedDate = new Date(checked).toLocaleDateString('nl-NL', { day: 'numeric', month: 'long', year: 'numeric' });
+
+// per province: how many municipalities lie fully, partly or not in a zone
+const provinces = [...new Set(known.map((g) => g.province).filter(Boolean) as string[])].sort((a, b) => a.localeCompare(b, 'nl'));
+const perProvince = provinces.map((p) => {
+  const items = known.filter((g) => g.province === p);
+  return { name: p, total: items.length, all: items.filter((g) => g.flood.inZone === g.flood.sampled).length, none: items.filter((g) => g.flood.inZone === 0).length };
+});
+
+const types = [
+  { letter: 'A', title: 'Buitendijks langs groot water', text: 'Langs zee, de grote rivieren of de grote meren, aan de waterkant van de dijk. Geen dijk ertussen: bij hoogwater loopt dit gebied het eerst onder. Uiterwaarden en sommige havengebieden vallen hieronder.' },
+  { letter: 'B', title: 'Achter de grote dijken', text: 'Beschermd door de dijken, duinen en dammen langs zee, rivieren en meren. Het loopt alleen onder als zo’n kering bezwijkt. De kans is klein, de gevolgen zijn groot: het water kan meters hoog komen.' },
+  { letter: 'C', title: 'Achter kades langs kleiner water', text: 'Beschermd door kades langs boezems, kanalen en kleinere rivieren. Een doorbraak geeft meestal minder diep water dan bij type B, maar kan snel gaan.' },
+  { letter: 'D', title: 'Onbeschermd langs kleiner water', text: 'Langs beken en kleinere rivieren zonder kade, zoals in beekdalen. Hier komt het water bij langdurige of hevige regen.' },
+];
+
+const faq = [
+  {
+    question: 'Ligt mijn huis in overstromingsrisicogebied?',
+    answer:
+      'Vul hierboven je postcode en huisnummer in. Je ziet direct of het adres in een door Rijkswaterstaat aangewezen overstromingsrisicogebied ligt en van welk type, plus de hoogte van het maaiveld ten opzichte van NAP.',
+  },
+  {
+    question: 'Wat betekent overstromingsrisicogebied?',
+    answer:
+      'Het is een gebied dat kan overstromen vanuit zee, de grote rivieren en meren of vanuit kleinere wateren. Er zijn vier typen: A (buitendijks langs groot water), B (beschermd door de grote dijken), C (beschermd door kades langs kleiner water) en D (onbeschermd langs kleiner water). De aanwijzing zegt dat het kan, niet hoe groot de kans is.',
+  },
+  {
+    question: 'Hoe hoog komt het water bij mijn huis?',
+    answer:
+      'Dat hangt af van waar een dijk doorbreekt en van de hoogte van je perceel. De overheid toont de grootste waterdiepte per postcode op overstroomik.nl. Deze site geeft de hoogte van je perceel en of je in risicogebied ligt, niet de verwachte waterdiepte.',
+  },
+  {
+    question: 'Ben ik verzekerd tegen een overstroming?',
+    answer:
+      'Schade door een doorbraak van de grote dijken langs zee en rivieren is bij de meeste woonverzekeringen niet gedekt. Schade door hevige regen is dat meestal wel, en veel verzekeraars dekken ook het bezwijken van kleinere kades. Lees je polis of vraag het je verzekeraar; de voorwaarden verschillen.',
+  },
+  {
+    question: 'Wat doe ik als ik in risicogebied woon?',
+    answer:
+      'Weet wat de hoogste plek in huis is, bewaar je noodpakket en belangrijke papieren boven de begane grond, zet je radio af op de rampenzender van je regio en spreek af waar je heen gaat als je moet vertrekken. Volg bij dreiging de aanwijzingen van de veiligheidsregio.',
+  },
+];
+---
+
+<BaseLayout
+  title="Overstromingsrisico: check je adres en gemeente"
+  description="Ligt je huis in overstromingsrisicogebied? Check het direct met postcode en huisnummer, zie wat de typen A tot en met D betekenen en hoe het per gemeente zit."
+  locale="nl"
+  faqData={faq}
+  dateModified={checked}
+  ogImage="/images/og-noodhandboek.jpg"
+  breadcrumbs={[
+    { name: 'Home', url: '/nl/' },
+    { name: 'Overstromingsrisico', url: '/nl/overstromingsrisico/' },
+  ]}
+>
+  <article class="fx">
+    <header class="fx-head">
+      <h1>Ligt mijn huis in overstromingsgebied?</h1>
+      <p class="fx-lead">
+        Vul je postcode en huisnummer in en je ziet direct of je adres in een aangewezen overstromingsrisicogebied ligt, van welk type, en hoe hoog je perceel ligt. De gegevens komen van Rijkswaterstaat en het Actueel Hoogtebestand Nederland.
+      </p>
+    </header>
+
+    <div class="fx-check" id="check">
+      <AddressCheck source="overstromingsrisico" title="Check het overstromingsrisico van je adres" />
+    </div>
+
+    <section class="fx-text fx-text--wide">
+      <h2>De vier typen risicogebied</h2>
+      <p>Rijkswaterstaat deelt de gebieden die kunnen overstromen in naar waar het water vandaan komt en of er een kering tussen zit.</p>
+      <div class="fx-types">
+        {types.map((t) => (
+          <div class="fx-type">
+            <h3>Type {t.letter}: {t.title}</h3>
+            <p>{t.text}</p>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <section class="fx-text">
+      <h2>Wat de aanwijzing wel en niet zegt</h2>
+      <p>
+        De kaart zegt dat een gebied kan overstromen, niet hoe vaak dat gebeurt. Achter de grote dijken is de kans per jaar zeer klein. Buiten de aangewezen gebieden kan een straat of kelder nog steeds onderlopen bij een wolkbreuk. Dat is wateroverlast, geen overstroming, en het staat niet op deze kaart.
+      </p>
+      <p>
+        Voor de verwachte waterdiepte per postcode verwijst de overheid naar <a href="https://overstroomik.nl" rel="noopener">overstroomik.nl</a>. Wat je doet als het water komt, staat in het <a href="/nl/scenario/overstroming/">draaiboek voor een overstroming</a>. Hoe hoog je perceel ligt, lees je ook op <a href="/nl/hoogte-nap/">Hoe hoog ligt mijn huis?</a>
+      </p>
+    </section>
+
+    <section class="fx-text fx-text--wide">
+      <h2>Overstromingsrisico per gemeente</h2>
+      <p>
+        Per gemeente hebben we zestien punten bij woningen getoetst aan de kaart. In {all.length} van de {known.length} gemeenten liggen alle punten in risicogebied, in {part} een deel en in {none.length} geen enkel punt. Het is een steekproef: voor je eigen adres geeft de check hierboven het antwoord.
+      </p>
+      <div class="fx-cols">
+        <div class="fx-rank">
+          <h3>Per provincie: gemeenten die geheel in risicogebied liggen</h3>
+          <ol>
+            {perProvince.map((p) => (
+              <li><span>{p.name}</span><span>{p.all} van {p.total}</span></li>
+            ))}
+          </ol>
+        </div>
+        <div class="fx-rank">
+          <h3>Per provincie: gemeenten zonder punt in risicogebied</h3>
+          <ol>
+            {perProvince.map((p) => (
+              <li><span>{p.name}</span><span>{p.none} van {p.total}</span></li>
+            ))}
+          </ol>
+        </div>
+      </div>
+    </section>
+
+    <section class="fx-text fx-text--wide">
+      <h2>Gemeenten die geheel in risicogebied liggen</h2>
+      <p>Kies je gemeente voor het type gebied, de hoogte van het maaiveld en de dichtstbijzijnde spoedeisende hulp.</p>
+      <ul class="fx-list">
+        {[...all].sort(byName).map((g) => (
+          <li><a href={`/nl/noodplan/${g.slug}/`}>{g.name}</a></li>
+        ))}
+      </ul>
+    </section>
+
+    <section class="fx-text fx-text--wide">
+      <h2>Gemeenten zonder meetpunt in risicogebied</h2>
+      <ul class="fx-list">
+        {[...none].sort(byName).map((g) => (
+          <li><a href={`/nl/noodplan/${g.slug}/`}>{g.name}</a></li>
+        ))}
+      </ul>
+      <p style="margin-top: var(--space-6)">Staat je gemeente in geen van beide lijsten, dan ligt een deel in risicogebied. Zoek haar op bij <a href="/nl/noodplan/">Noodplan per gemeente</a>.</p>
+    </section>
+
+    <section class="fx-text fx-faq">
+      <h2>Veelgestelde vragen</h2>
+      <dl>
+        {faq.map((f) => (
+          <>
+            <dt>{f.question}</dt>
+            <dd>{f.answer}</dd>
+          </>
+        ))}
+      </dl>
+    </section>
+
+    <footer class="fx-src">
+      <p>
+        Bronnen: overstromingsrisicogebieden van Rijkswaterstaat (Richtlijn Overstromingsrisico's, via PDOK); hoogte uit het Actueel Hoogtebestand Nederland; adressen uit het adressenbestand van de overheid. Gemeentecijfers: steekproef van zestien punten bij woningen per gemeente, gecontroleerd op {checkedDate}. Kit-72 is geen overheidssite; bij dreigend hoogwater gelden de aanwijzingen van de veiligheidsregio en het waterschap.
+      </p>
+    </footer>
+  </article>
+</BaseLayout>

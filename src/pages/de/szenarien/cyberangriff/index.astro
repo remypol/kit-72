@@ -252,7 +252,7 @@ const faqs = [
   }}
   faqData={faqs}
 >
-  <main class="scenario-page">
+  <article class="scenario-page">
     <!-- Header -->
     <header class="scenario-header">
       <nav class="scenario-breadcrumb">
@@ -280,8 +280,8 @@ const faqs = [
     <!-- Hero Image -->
     <section class="scenario-section">
       <HeroImage
-        src="/images/shared/power-outage-candles.webp"
-        alt="Vorbereitung auf Cyberangriff und digitale Störung"
+        src="/images/shared/cyber-attack.webp"
+        alt="Smartphone mit schwarzem Bildschirm neben Bargeld, einem Notizbuch mit Bleistift, einer Bankkarte und einem Batterieradio"
         priority={true}
       />
     </section>
@@ -467,6 +467,7 @@ const faqs = [
         Haken Sie ab, was Sie bereits erledigt haben. Ihr Fortschritt wird automatisch gespeichert.
       </p>
       <InteractiveChecklist
+        locale="de"
         client:idle
         storageKey={`${scenarioKey}_de`}
         categories={checklistCategories}
@@ -548,7 +549,7 @@ const faqs = [
         </a>
       </div>
     </section>
-  </main>
+  </article>
 
   <!-- Sticky Action Bar -->
   <StickyActionBar

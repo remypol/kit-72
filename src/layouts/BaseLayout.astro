@@ -243,10 +243,8 @@ const autoBreadcrumbs: BreadcrumbItem[] = breadcrumbs.length > 0 ? breadcrumbs :
     pathSoFar += `/${segment}`;
     const name = sectionNames[segment] || segment.charAt(0).toUpperCase() + segment.slice(1).replace(/-/g, ' ');
 
-    // Only add if it's a meaningful section (not the current page or if it's the last segment)
-    if (i < segments.length - 1 || segments.length <= 2) {
-      crumbs.push({ name, url: `/${locale}${pathSoFar}/` });
-    }
+    // every level, the current page included, so the trail in search results is complete
+    crumbs.push({ name, url: `/${locale}${pathSoFar}/` });
   }
 
   return crumbs;
@@ -263,33 +261,30 @@ const baseSchema = {
   inLanguage: currentLocaleConfig.htmlLang,
   ...(dateModified && { dateModified }),
   ...(datePublished && { datePublished }),
+  image: absoluteOgImage,
+  // author and publisher are the organisation described once, by @id, in organizationSchema below
   ...(finalAuthor && {
     author: {
       '@type': 'Organization',
-      name: finalAuthor,
+      '@id': 'https://www.kit-72.com/#organization',
+      name: 'Kit-72',
       url: 'https://www.kit-72.com',
     }
   }),
   isPartOf: {
     '@type': 'WebSite',
+    '@id': 'https://www.kit-72.com/#website',
     name: 'Kit-72',
     url: 'https://www.kit-72.com',
-    potentialAction: {
-      '@type': 'SearchAction',
-      target: {
-        '@type': 'EntryPoint',
-        urlTemplate: `https://www.kit-72.com/${locale}/?q={search_term_string}`
-      },
-      'query-input': 'required name=search_term_string'
-    }
   },
   publisher: {
     '@type': 'Organization',
+    '@id': 'https://www.kit-72.com/#organization',
     name: 'Kit-72',
     url: 'https://www.kit-72.com',
     logo: {
       '@type': 'ImageObject',
-      url: 'https://www.kit-72.com/favicon.svg',
+      url: 'https://www.kit-72.com/icons/icon-512.png',
       width: 512,
       height: 512,
     },
@@ -349,7 +344,6 @@ const organizationSchema = {
     name: orgDescriptions[locale].areaServed,
   },
   knowsAbout: orgDescriptions[locale].knowsAbout,
-  sameAs: [],
 };
 
 // WebSite schema for search box
@@ -392,19 +386,6 @@ const faqSchema = faqData.length > 0 ? {
   })),
 } : null;
 
-// Speakable schema for voice search (Google Assistant, Alexa, etc.)
-// Applied to Article and WebPage types with meaningful content
-const speakableSchema = (schemaType === 'Article' || schemaType === 'WebPage') ? {
-  '@context': 'https://schema.org',
-  '@type': 'WebPage',
-  '@id': `${canonicalUrl}#speakable`,
-  speakable: {
-    '@type': 'SpeakableSpecification',
-    cssSelector: ['h1', '.intro', '.summary', '.key-points', 'article > p:first-of-type'],
-  },
-  url: canonicalUrl,
-} : null;
-
 // Skip link text per locale
 const skipLinkText: Record<Locale, string> = {
   es: 'Saltar al contenido principal',
@@ -415,8 +396,8 @@ const skipLinkText: Record<Locale, string> = {
 // Build hreflang links array
 const hreflangLinks: { hreflang: string; href: string }[] = [];
 
-// Always add x-default pointing to language hub
-hreflangLinks.push({ hreflang: 'x-default', href: 'https://www.kit-72.com/' });
+// x-default is the language chooser at the root; only the three homepages are versions of it
+if (currentPath === `/${locale}/`) hreflangLinks.push({ hreflang: 'x-default', href: 'https://www.kit-72.com/' });
 
 // Add current locale
 hreflangLinks.push({
@@ -459,7 +440,8 @@ for (const [altLocale, altPath] of Object.entries(alternates)) {
   ))}
 
   <!-- Open Graph -->
-  <meta property="og:type" content="website">
+  <meta property="og:type" content={schemaType === 'Article' ? 'article' : 'website'}>
+  {schemaType === 'Article' && dateModified && <meta property="article:modified_time" content={dateModified}>}
   <meta property="og:url" content={canonicalUrl}>
   <meta property="og:title" content={fullTitle}>
   <meta property="og:description" content={finalDescription}>
@@ -492,15 +474,9 @@ for (const [altLocale, altPath] of Object.entries(alternates)) {
   {faqSchema && (
     <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
   )}
-  {currentPath === `/${locale}/` && (
-    <script type="application/ld+json" set:html={JSON.stringify(organizationSchema)} />
-  )}
-  {currentPath === `/${locale}/` && (
-    <script type="application/ld+json" set:html={JSON.stringify(websiteSchema)} />
-  )}
-  {speakableSchema && (
-    <script type="application/ld+json" set:html={JSON.stringify(speakableSchema)} />
-  )}
+  <script type="application/ld+json" set:html={JSON.stringify(organizationSchema)} />
+  <script type="application/ld+json" set:html={JSON.stringify(websiteSchema)} />
+
 
   <!-- Slot for page-specific head content -->
   <slot name="head" />

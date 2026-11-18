@@ -37,6 +37,8 @@ interface InteractiveChecklistProps {
   categories: ChecklistCategory[];
   /** Title shown above checklist */
   title?: string;
+  /** Language of the fixed labels (priority names, "3 of 26") */
+  locale?: 'es' | 'nl' | 'de';
 }
 
 // Map category IDs to shared Icon names
@@ -51,22 +53,24 @@ const categoryIcons: Record<string, string> = {
 const priorityConfig = {
   critical: {
     color: 'var(--color-status-critical)',
-    label: 'Crítico',
+    label: { es: 'Crítico', nl: 'Onmisbaar', de: 'Unverzichtbar' },
   },
   recommended: {
     color: 'var(--color-status-warning)',
-    label: 'Recomendado',
+    label: { es: 'Recomendado', nl: 'Aanbevolen', de: 'Empfohlen' },
   },
   optional: {
     color: 'var(--color-status-info)',
-    label: 'Opcional',
+    label: { es: 'Opcional', nl: 'Extra', de: 'Optional' },
   },
 };
+const OF = { es: 'de', nl: 'van', de: 'von' };
 
 function InteractiveChecklist({
   storageKey,
   categories,
   title = 'Checklist',
+  locale = 'es',
 }: InteractiveChecklistProps) {
   const [checkedItems, setCheckedItems] = useState<Set<string>>(new Set());
   const [expandedCategories, setExpandedCategories] = useState<Set<string>>(new Set());
@@ -144,7 +148,7 @@ function InteractiveChecklist({
             />
           </div>
           <span className="progress-text">
-            {completedItems} de {totalItems}
+            {completedItems} {OF[locale]} {totalItems}
           </span>
         </div>
       </div>
@@ -157,7 +161,7 @@ function InteractiveChecklist({
               className="legend-dot"
               style={{ backgroundColor: config.color }}
             />
-            {config.label}
+            {config.label[locale]}
           </span>
         ))}
       </div>
@@ -213,7 +217,7 @@ function InteractiveChecklist({
                         <span
                           className="item-priority"
                           style={{ backgroundColor: priority.color }}
-                          title={priority.label}
+                          title={priority.label[locale]}
                         />
                         <div className="item-content">
                           <div className="item-main">

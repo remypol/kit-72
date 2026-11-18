@@ -123,8 +123,8 @@ const evacuationTriggers = [
   { trigger: 'Dreigende dijkdoorbraak', action: 'Evacueren naar hoger gelegen gebied', severity: 'critical' },
   { trigger: 'Brand in de buurt (rook zichtbaar)', action: 'Voorbereiden/Evacueren als het dichterbij komt', severity: 'warning' },
   { trigger: 'Overstroming dreigt', action: 'Verticaal evacueren of weg', severity: 'critical' },
-  { trigger: 'Lekkage gevaarlijke stoffen', action: 'Evacueren tegen de wind in', severity: 'critical' },
-  { trigger: 'Je gevoel zegt: gevaar', action: 'Vertrouw je instinct, evacueer', severity: 'warning' },
+  { trigger: 'Lekkage gevaarlijke stoffen', action: 'Meestal juist naar binnen: ramen en deuren dicht. Vertrek alleen als het NL-Alert of de hulpdiensten dat zeggen', severity: 'critical' },
+  { trigger: 'Direct gevaar in huis, zoals brand of gaslucht', action: 'Ga naar buiten en bel 112', severity: 'warning' },
 ];
 
 // Checklist categories - NL products with Bol.com links
@@ -138,7 +138,7 @@ const checklistCategories = [
       { id: 'zorgpas', name: 'Zorgpas / Europese zorgkaart', priority: 'critical' as const },
       { id: 'kopien-waterdicht', name: 'Kopieën documenten in waterdichte hoes', priority: 'critical' as const, affiliateUrl: 'https://www.bol.com/nl/nl/s/?searchtext=waterdichte+documenten+hoes' },
       { id: 'contant', name: 'Contant geld (€70 volw. / €30 kind)', priority: 'critical' as const, notes: 'Per Rijksoverheid advies' },
-      { id: 'ov-chipkaart', name: 'OV-chipkaart met saldo', priority: 'critical' as const, notes: 'Voor evacuatie met OV' },
+      { id: 'ov-chipkaart', name: 'Betaalpas of ov-kaart', priority: 'recommended' as const, notes: 'Voor vertrek met het openbaar vervoer' },
       { id: 'contactlijst', name: 'Geprinte contactenlijst', priority: 'critical' as const },
     ]
   },
@@ -248,7 +248,7 @@ const faqs = [
   description="Complete evacuatiegids voor Nederland. Wat in je noodtas, gezinsplan, ontmoetingspunten en checklist. Rijksoverheid richtlijnen."
   locale="nl"
   schemaType="HowTo"
-  dateModified="2025-12-15"
+  dateModified="2026-11-17"
   alternates={{
     es: '/es/escenarios/kit-evacuacion/',
     de: '/de/szenarien/evakuierung/',
@@ -276,7 +276,7 @@ const faqs = [
   }}
   faqData={faqs}
 >
-  <main class="scenario-page">
+  <article class="scenario-page">
     <!-- Header -->
     <header class="scenario-header">
       <nav class="scenario-breadcrumb">
@@ -295,7 +295,7 @@ const faqs = [
           <div class="scenario-meta">
             <span class="meta-item">10 min</span>
             <span class="meta-divider">·</span>
-            <span class="meta-item">Bijgewerkt dec 2025</span>
+            <span class="meta-item">Bijgewerkt november 2026</span>
           </div>
         </div>
       </div>
@@ -304,8 +304,8 @@ const faqs = [
     <!-- Hero Image -->
     <section class="scenario-section">
       <HeroImage
-        src="/images/shared/family-evacuation.webp"
-        alt="Gezin met noodtassen tijdens evacuatie"
+        src="/images/shared/evacuation.webp"
+        alt="Open gele weekendtas met kleding, met ervoor huissleutels, een oplader, een waterfles en een medicijndoosje"
         priority={true}
       />
     </section>
@@ -313,7 +313,7 @@ const faqs = [
     <!-- TL;DR -->
     <section class="scenario-section">
       <TLDRBlock
-        summary="Twijfel je of je moet evacueren? Evacueer. Liever een nacht weg voor niets dan in gevaar blijven. Je noodtas moet klaar staan om in 5 minuten te vertrekken. Maximaal 10-15kg."
+        summary="Vertrek als de overheid of de hulpdiensten dat zeggen, en direct bij acuut gevaar zoals brand. Bij gevaarlijke stoffen is binnen blijven vaak veiliger dan weggaan. Zet een noodtas klaar waarmee je binnen een paar minuten weg kunt."
         keyStat="5 minuten"
         keyStatLabel="Vertrek binnen"
         locale="nl"
@@ -493,6 +493,7 @@ const faqs = [
         Vink af wat je al in je noodtas hebt. Je voortgang wordt automatisch opgeslagen.
       </p>
       <InteractiveChecklist
+        locale="nl"
         client:idle
         storageKey={`${scenarioKey}_nl`}
         categories={checklistCategories}
@@ -551,7 +552,7 @@ const faqs = [
         </a>
       </div>
     </section>
-  </main>
+  </article>
 
   <!-- Sticky Action Bar -->
   <StickyActionBar
