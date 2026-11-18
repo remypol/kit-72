@@ -24,7 +24,7 @@ const phases = {
   vor: [
     {
       title: 'Verfolge DWD-Warnungen',
-      detail: 'Aktiviere Benachrichtigungen der DWD WarnWetter App. Hitzewarnung ab 32°C.',
+      detail: 'Aktiviere Benachrichtigungen der DWD WarnWetter App. Der DWD warnt ab einer gefühlten Temperatur von etwa 32 °C.',
       tip: 'Stelle Pushmeldungen für deine Region ein'
     },
     {
@@ -39,7 +39,7 @@ const phases = {
     },
     {
       title: 'Lege extra Wasser an',
-      detail: 'Mindestens 5-6 Liter pro Person pro Tag, mehr als normal.',
+      detail: 'Rechne mit zwei bis drei Litern zum Trinken pro Person und Tag.',
       tip: 'Friere Wasserflaschen ein: dienen auch als Kühlelemente'
     },
     {
@@ -55,19 +55,19 @@ const phases = {
   ],
   waehrend: [
     {
-      title: 'Vermeide Aktivitäten im Freien 11:00-18:00',
+      title: 'Bleib zwischen etwa 11 und 17 Uhr möglichst drinnen',
       detail: 'Die heißesten Stunden des Tages. Plane Einkäufe und Aktivitäten früh oder spät.',
       tip: null
     },
     {
       title: 'Trinke regelmäßig, auch ohne Durst',
       detail: 'Wenn du Durst spürst, bist du bereits leicht dehydriert. Stelle Erinnerungen ein.',
-      tip: 'Trinke alle halbe Stunde ein Glas Wasser'
+      tip: 'Trink am besten stündlich ein Glas, auch ohne Durst'
     },
     {
       title: 'Halte dein Zuhause kühl',
       detail: 'Schließe Vorhänge und Rollläden tagsüber. Öffne Fenster nur wenn es draußen kühler ist.',
-      tip: 'Hänge nasse Handtücher vor offene Fenster für zusätzliche Kühlung'
+      tip: 'Feuchte Tücher im Raum kühlen nur bei trockener Luft; bei schwüler Luft lässt du sie weg'
     },
     {
       title: 'Reduziere körperliche Anstrengung',
@@ -122,7 +122,7 @@ const checklistCategories = [
     name: 'Hydratation',
     icon: 'droplet',
     items: [
-      { id: 'wasser-extra', name: 'Extra Flaschenwasser', quantity: '5-6L/Person/Tag', priority: 'critical' as const, notes: 'Mehr als normal wegen Hitze' },
+      { id: 'wasser-extra', name: 'Extra Flaschenwasser', quantity: '2-3L/Person/Tag', priority: 'critical' as const, notes: 'Zum Trinken, über den Tag verteilt' },
       { id: 'elektrolyte', name: 'Elektrolytlösung', quantity: '10+ Beutel', priority: 'critical' as const, notes: 'Gleicht verlorene Salze aus', affiliateUrl: 'https://www.amazon.de/s?k=elektrolyte+pulver' },
       { id: 'isotonisch', name: 'Isotonische Getränke', quantity: '6-12 Stück', priority: 'recommended' as const, notes: 'Alternative zu Elektrolyten' },
       { id: 'trinkflasche', name: 'Wiederverwendbare Trinkflasche', quantity: '1 pro Person', priority: 'recommended' as const, notes: 'Um immer Wasser dabei zu haben' },
@@ -168,14 +168,14 @@ const riskGroups = [
   { group: 'Ältere (65+)', icon: 'Users', tip: 'Täglich anrufen/besuchen, beim Trinken helfen' },
   { group: 'Babys und Kleinkinder', icon: 'Baby', tip: 'NIEMALS allein im Auto, extra Flüssigkeit geben' },
   { group: 'Chronisch Kranke', icon: 'Heart', tip: 'Medikation prüfen, Aktionsplan mit Arzt besprechen' },
-  { group: 'Arbeiter im Freien', icon: 'HardHat', tip: 'Pausen im Schatten, 11-18 Uhr vermeiden' },
+  { group: 'Arbeiter im Freien', icon: 'HardHat', tip: 'Pausen im Schatten, die heißeste Zeit von etwa 11 bis 17 Uhr meiden' },
 ];
 
 // FAQs - German context
 const faqs = [
   {
     question: 'Wann ist offiziell von einer Hitzewelle die Rede?',
-    answer: 'In Deutschland: Mehrere aufeinanderfolgende Tage mit Höchsttemperaturen über 30°C. Der DWD gibt dann Hitzewarnungen heraus.'
+    answer: 'Eine einheitliche Definition gibt es nicht. Der DWD warnt vor Hitze, wenn die gefühlte Temperatur am frühen Nachmittag über etwa 32 °C liegt und es nachts kaum abkühlt. Ab 38 °C gefühlter Temperatur warnt er vor extremer Wärmebelastung.'
   },
   {
     question: 'Warum sind deutsche Häuser bei Hitze so warm?',
@@ -183,15 +183,15 @@ const faqs = [
   },
   {
     question: 'Hilft ein Ventilator über 35°C noch?',
-    answer: 'Ein Ventilator allein bewegt nur warme Luft. Aber kombiniere ihn mit feuchter Haut oder nassen Tüchern, dann beschleunigt er die Verdunstung und kühlt.'
+    answer: 'Ein Ventilator hilft bis etwa 35 °C. Darüber kann er die Überhitzung sogar fördern.'
   },
   {
     question: 'Wie viel muss ich trinken?',
-    answer: 'Bei extremer Hitze: 3-4 Liter pro Tag für nicht aktive Erwachsene. Mehr bei Bewegung. Trinke regelmäßig kleine Mengen.'
+    answer: 'Trink über den Tag verteilt etwa zwei bis drei Liter, am besten stündlich ein Glas. Bei Herz- oder Nierenerkrankungen besprichst du die Menge mit deiner Ärztin oder deinem Arzt.'
   },
   {
     question: 'Was wenn ich keine Klimaanlage habe?',
-    answer: 'Suche kühle öffentliche Orte (Bibliothek, Einkaufszentrum). Zuhause: Rollläden zu, nasse Handtücher, Ventilator + Wasser vernebeln, kühl duschen.'
+    answer: 'Suche kühle öffentliche Orte (Bibliothek, Einkaufszentrum). Zuhause: Rollläden zu, lüften wenn es draußen kühler ist, lauwarm duschen. Kalte Duschen erschweren dem Körper die Wärmeabgabe.'
   },
 ];
 ---
@@ -201,7 +201,7 @@ const faqs = [
   description="Vollständiger Ratgeber zur Vorbereitung auf Hitzewellen in Deutschland. Hydratation, Kühlung, Risikogruppen und Checkliste. DWD und BBK Richtlinien."
   locale="de"
   schemaType="Article"
-  dateModified="2025-12-15"
+  dateModified="2026-11-18"
   datePublished="2025-12-15"
   alternates={{
     es: '/es/escenarios/prepararse-ola-calor/',
@@ -228,7 +228,7 @@ const faqs = [
           <div class="scenario-meta">
             <span class="meta-item">8 min</span>
             <span class="meta-divider">·</span>
-            <span class="meta-item">Aktualisiert Dez 2025</span>
+            <span class="meta-item">Aktualisiert Nov. 2026</span>
           </div>
         </div>
       </div>
@@ -246,9 +246,9 @@ const faqs = [
     <!-- TL;DR -->
     <section class="scenario-section">
       <TLDRBlock
-        summary="Hitzewellen werden in Deutschland immer häufiger und intensiver. Der Schlüssel: Trinke kontinuierlich (3-4 Liter/Tag), meide die Mittagssonne und erkenne die Symptome eines Hitzschlags. Deutsche Häuser speichern Wärme - suche kühle öffentliche Orte auf."
-        keyStat="3-4 Liter/Tag"
-        keyStatLabel="Trinke mindestens"
+        summary="Hitzewellen werden in Deutschland immer häufiger und intensiver. Der Schlüssel: Trink über den Tag verteilt etwa zwei bis drei Liter, meide die Mittagssonne und erkenne die Symptome eines Hitzschlags. Deutsche Häuser speichern Wärme - suche kühle öffentliche Orte auf."
+        keyStat="2-3 Liter/Tag"
+        keyStatLabel="Trinken, über den Tag verteilt"
         locale="de"
       />
     </section>
@@ -444,10 +444,10 @@ const faqs = [
         </summary>
         <div class="sources-content">
           <ul>
-            <li><a href="https://www.dwd.de/" target="_blank" rel="noopener">DWD - Deutscher Wetterdienst</a></li>
-            <li><a href="https://www.bbk.bund.de/DE/Warnung-Vorsorge/Tipps-Notsituationen/Hitze/hitze_node.html" target="_blank" rel="noopener">BBK - Hitze</a></li>
-            <li><a href="https://www.rki.de/" target="_blank" rel="noopener">RKI - Robert Koch-Institut</a></li>
-            <li><a href="https://www.drk.de/" target="_blank" rel="noopener">Deutsches Rotes Kreuz - Hitzschlag</a></li>
+            <li><a href="https://www.dwd.de/DE/leistungen/hitzewarnung/hitzewarnung.html" target="_blank" rel="noopener">DWD - Hitzewarnung</a></li>
+            <li><a href="https://www.bbk.bund.de/DE/Warnung-Vorsorge/Vorsorge/Mit-Naturgefahren-umgehen/Hitze-Duerre/hitze-duerre_node.html" target="_blank" rel="noopener">BBK - Hitze</a></li>
+            <li><a href="https://www.klima-mensch-gesundheit.de/hitzeschutz/empfehlungen-bei-hitze/" target="_blank" rel="noopener">Bundesinstitut für Öffentliche Gesundheit - Empfehlungen bei Hitze</a></li>
+            <li><a href="https://www.drk.de/hilfe-in-deutschland/erste-hilfe/hitzschlag/" target="_blank" rel="noopener">Deutsches Rotes Kreuz - Hitzschlag</a></li>
           </ul>
         </div>
       </details>

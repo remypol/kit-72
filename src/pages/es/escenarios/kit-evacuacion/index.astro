@@ -25,7 +25,7 @@ const phases = {
   preparar: [
     {
       title: 'Prepara tu mochila de evacuación',
-      detail: 'Go bag lista y accesible. No más de 10-15kg. Debe estar siempre preparada.',
+      detail: 'Mochila lista y accesible, fácil de llevar y de un peso razonable. Revísala de vez en cuando.',
       tip: 'Revisarla cada 6 meses: medicinas caducadas, ropa que ya no vale...'
     },
     {
@@ -115,8 +115,7 @@ const evacuationTriggers = [
   { trigger: 'Orden oficial de evacuación', action: 'EVACUAR INMEDIATAMENTE', severity: 'critical' },
   { trigger: 'Incendio cercano (humo visible)', action: 'Prepararse/Evacuar si se acerca', severity: 'warning' },
   { trigger: 'Inundación inminente', action: 'Evacuar a zona alta ANTES del agua', severity: 'critical' },
-  { trigger: 'Fuga de sustancias peligrosas', action: 'Evacuar dirección contraria al viento', severity: 'critical' },
-  { trigger: 'Tu instinto dice peligro', action: 'Confía en tu instinto, evacúa', severity: 'warning' },
+  { trigger: 'Fuga de sustancias peligrosas', action: 'Quédate dentro: cierra puertas, ventanas y persianas, apaga la ventilación y la calefacción. Sal solo cuando lo indiquen las autoridades', severity: 'critical' },
 ];
 
 // Checklist categories
@@ -129,7 +128,7 @@ const checklistCategories = [
       { id: 'dni', name: 'DNI/Pasaporte originales', priority: 'critical' as const },
       { id: 'tarjeta-sanitaria', name: 'Tarjeta sanitaria', priority: 'critical' as const },
       { id: 'copias-estancas', name: 'Copias de documentos en bolsa estanca', priority: 'critical' as const },
-      { id: 'dinero', name: 'Dinero en efectivo (100-200€)', priority: 'critical' as const, notes: 'Billetes pequeños' },
+      { id: 'dinero', name: 'Dinero en efectivo', priority: 'critical' as const, notes: 'Billetes pequeños y monedas; como referencia, 70-100 € por persona' },
       { id: 'lista-contactos', name: 'Lista de contactos impresa', priority: 'critical' as const },
     ]
   },
@@ -199,7 +198,7 @@ const specialNeeds = [
 
 // Common mistakes
 const mistakes = [
-  { error: 'Esperar demasiado', fix: 'Si hay orden o duda seria, evacúa ANTES' },
+  { error: 'Esperar demasiado', fix: 'Evacúa en cuanto lo indiquen las autoridades y usa solo las rutas que señalen' },
   { error: 'Intentar salvar muchas cosas', fix: 'La mochila ya está lista. Cógela y sal' },
   { error: 'No tener punto de encuentro', fix: 'Establecer 2 puntos antes de la emergencia' },
   { error: 'Dejar mascotas atrás', fix: 'Van EN el plan. Transportín preparado' },
@@ -209,7 +208,7 @@ const mistakes = [
 const faqs = [
   {
     question: '¿Cuánto tiempo tengo para evacuar?',
-    answer: 'Depende: un incendio puede darte minutos, una orden oficial generalmente más. Actúa como si tuvieras 15 minutos.'
+    answer: 'Depende: un incendio puede darte minutos, una orden oficial generalmente más. Por eso la mochila tiene que estar lista de antemano.'
   },
   {
     question: '¿Debo cerrar gas y electricidad?',
@@ -225,7 +224,7 @@ const faqs = [
   },
   {
     question: '¿Y si tengo que evacuar a pie?',
-    answer: 'Por eso la mochila debe pesar máx 10-15kg. Conoce rutas peatonales de salida.'
+    answer: 'Por eso la mochila debe ser fácil de llevar y de un peso razonable. Conoce rutas peatonales de salida.'
   },
 ];
 ---
@@ -234,7 +233,7 @@ const faqs = [
   title="Evacuación: ¿Qué llevar? Mochila lista en 10 minutos"
   description="Guía completa para preparar tu mochila de evacuación. Qué llevar, plan familiar y checklist interactivo."
   schemaType="Article"
-  dateModified="2025-12-15"
+  dateModified="2026-11-18"
   faqData={faqs}
 >
   <article class="scenario-page">
@@ -256,7 +255,7 @@ const faqs = [
           <div class="scenario-meta">
             <span class="meta-item">10 min</span>
             <span class="meta-divider">·</span>
-            <span class="meta-item">Actualizado dic 2025</span>
+            <span class="meta-item">Actualizado nov. 2026</span>
           </div>
         </div>
       </div>
@@ -274,7 +273,7 @@ const faqs = [
     <!-- TL;DR -->
     <section class="scenario-section">
       <TLDRBlock
-        summary="Si dudas si evacuar, evacúa. Es mejor una noche fuera innecesaria que quedarse en peligro. Tu mochila debe estar preparada para salir en 5 minutos. No más de 10-15kg."
+        summary="Evacúa en cuanto lo indiquen las autoridades y usa solo las rutas que señalen. En un accidente químico lo indicado suele ser quedarse dentro, así que no salgas por tu cuenta. Ten la mochila preparada: fácil de llevar y de un peso razonable."
         keyStat="5 minutos"
         keyStatLabel="Sal en menos de"
       />
@@ -484,8 +483,8 @@ const faqs = [
         </summary>
         <div class="sources-content">
           <ul>
-            <li><a href="https://www.proteccioncivil.es/" target="_blank" rel="noopener">Protección Civil</a></li>
-            <li><a href="https://www.cruzroja.es/" target="_blank" rel="noopener">Cruz Roja Española</a></li>
+            <li><a href="https://www.proteccioncivil.es/coordinacion/gestion-de-riesgos/tecnologicos/quimicos" target="_blank" rel="noopener">Protección Civil - Riesgo químico: confinamiento y evacuación</a></li>
+            <li><a href="https://www2.cruzroja.es/web/ahora/-/todo-lo-que-debes-saber-si-las-autoridades-ordenan-evacuar-tu-casa" target="_blank" rel="noopener">Cruz Roja Española - Si las autoridades ordenan evacuar tu casa</a></li>
             <li><a href="https://www.ready.gov/evacuation" target="_blank" rel="noopener">Ready.gov - Evacuation</a></li>
           </ul>
         </div>

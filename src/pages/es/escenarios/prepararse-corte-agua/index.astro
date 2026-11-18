@@ -18,7 +18,7 @@ const phases = {
   antes: [
     {
       title: 'Almacena agua potable',
-      detail: 'Mínimo 3L por persona y día para beber. Ideal 5-6L para mayor confort.',
+      detail: 'En Kit-72 calculamos con 3 litros por persona y día para beber y cocinar. No hay una cifra oficial estatal.',
       tip: 'Una familia de 4 necesita ~36L mínimo para 3 días'
     },
     {
@@ -75,7 +75,7 @@ const phases = {
     },
     {
       title: 'Ración el agua por prioridades',
-      detail: 'Beber (40%) > Cocinar (15%) > Higiene (25%) > WC (15%) > Otros (5%).',
+      detail: 'Primero beber y cocinar, después la higiene y por último el WC.',
       tip: null
     },
   ],
@@ -87,7 +87,7 @@ const phases = {
     },
     {
       title: 'Comprueba el sabor y olor',
-      detail: 'Si huele a cloro fuerte es normal. Si huele raro o sabe mal, no bebas.',
+      detail: 'Tras un corte o un aviso de contaminación, usa agua embotellada para beber, cocinar y lavarte los dientes hasta que tu ayuntamiento confirme que puedes usar la del grifo.',
       tip: 'En caso de duda, usa agua embotellada un día más'
     },
     {
@@ -161,21 +161,19 @@ const checklistCategories = [
 
 // Water needs table
 const waterNeeds = [
-  { use: 'Beber', amount: '2L', notes: 'Mínimo vital' },
-  { use: 'Cocinar', amount: '0.5-1L', notes: 'Si cocinas' },
-  { use: 'Higiene', amount: '2-4L', notes: 'Cara, manos' },
-  { use: 'WC', amount: '3-6L', notes: 'Por descarga' },
+  { use: 'Beber', amount: '2L', notes: 'Por persona y día' },
+  { use: 'Cocinar', amount: '1L', notes: 'Por persona y día' },
 ];
 
 // FAQs
 const faqs = [
   {
     question: '¿Cuánta agua debo almacenar?',
-    answer: 'Mínimo 3 litros por persona y día. Una familia de 4 necesita 36L mínimo para 3 días. Idealmente 5-6L para mayor confort.'
+    answer: 'No hay una cifra estatal única. Protección Civil de Cataluña pide como mínimo 1,5 litros de agua potable por persona y día, solo para beber. En Kit-72 calculamos con 3 litros para incluir también la cocina: 36 litros para una familia de 4 durante 3 días.'
   },
   {
     question: '¿Cuánto dura el agua almacenada?',
-    answer: 'Agua embotellada: 1-2 años sellada. Agua del grifo en bidones: rotar cada 6 meses. Si huele o sabe mal, trátala.'
+    answer: 'El agua embotellada, hasta la fecha del envase. Para el agua del grifo que envases tú, ninguna autoridad española da un plazo; renuévala con frecuencia.'
   },
   {
     question: '¿Puedo beber agua de la bañera?',
@@ -183,7 +181,7 @@ const faqs = [
   },
   {
     question: '¿Cómo sé si el agua es potable?',
-    answer: 'En caso de duda, hiérvela 3+ minutos o usa pastillas potabilizadoras. Agua turbia, con color u olor = no bebas sin tratar.'
+    answer: 'Si tienes que tratar el agua, hiérvela al menos un minuto: según el Ministerio de Sanidad es el método más eficaz. Si está turbia, déjala reposar o fíltrala antes. No la bebas sin tratar.'
   },
   {
     question: '¿Y si el corte dura más de 3 días?',
@@ -196,7 +194,7 @@ const faqs = [
   title="Corte de Agua: ¿Qué hacer sin agua? Guía de Emergencia"
   description="Guía paso a paso para cortes de agua. Cuánta almacenar, cómo vivir sin agua corriente y checklist interactivo."
   schemaType="Article"
-  dateModified="2025-12-15"
+  dateModified="2026-11-18"
   faqData={faqs}
 >
   <article class="scenario-page">
@@ -218,7 +216,7 @@ const faqs = [
           <div class="scenario-meta">
             <span class="meta-item">6 min</span>
             <span class="meta-divider">·</span>
-            <span class="meta-item">Actualizado dic 2025</span>
+            <span class="meta-item">Actualizado nov. 2026</span>
           </div>
         </div>
       </div>
@@ -236,7 +234,7 @@ const faqs = [
     <!-- TL;DR -->
     <section class="scenario-section">
       <TLDRBlock
-        summary="Un adulto necesita mínimo 3 litros diarios para beber e higiene básica. Con aviso previo, llena bañeras y recipientes. Sin aviso, dependerás de tu reserva. Prioriza siempre el agua de bebida sobre cualquier otro uso."
+        summary="En Kit-72 calculamos con 3 litros de agua por persona y día para beber y cocinar; no hay una cifra oficial estatal. Con aviso previo, llena bañeras y recipientes. Sin aviso, dependerás de tu reserva. Prioriza siempre el agua de bebida sobre cualquier otro uso."
         keyStat="3L/día/persona"
         keyStatLabel="Mínimo para"
       />
@@ -256,7 +254,7 @@ const faqs = [
           ))}
         </div>
         <p class="water-needs-total">
-          <strong>Total mínimo:</strong> 8-15L/persona/día (reducible a 3-5L en emergencia)
+          <strong>Cálculo de Kit-72: 3 litros por persona y día.</strong> El agua para la higiene y el WC va aparte; para eso no hace falta agua potable.
         </p>
       </div>
     </section>
@@ -415,8 +413,8 @@ const faqs = [
         </summary>
         <div class="sources-content">
           <ul>
-            <li><a href="https://www.who.int/water_sanitation_health/dwq/en/" target="_blank" rel="noopener">OMS - Calidad del agua</a></li>
-            <li><a href="https://www.mscbs.gob.es/" target="_blank" rel="noopener">Ministerio de Sanidad</a></li>
+            <li><a href="https://www.sanidad.gob.es/areas/sanidadExterior/laSaludTambienViaja/consejosSanitarios/consejosViajero.htm" target="_blank" rel="noopener">Ministerio de Sanidad - Cómo tratar el agua</a></li>
+            <li><a href="https://interior.gencat.cat/es/arees_dactuacio/proteccio_civil/consells_autoproteccio_emergencia/preparat_per_les_emergencies/equip_emergencies/" target="_blank" rel="noopener">Protección Civil de Cataluña - Equipo de emergencias</a></li>
             <li><a href="https://www.ready.gov/water" target="_blank" rel="noopener">Ready.gov - Water</a></li>
           </ul>
         </div>

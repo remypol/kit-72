@@ -5,10 +5,10 @@ const title = 'Notfallausrüstung: kompletter Ratgeber mit Checkliste';
 const description = 'Alles, was du für eine vollständige Notfallausrüstung wissen musst. Detaillierte Checkliste, empfohlene Mengen und praktische Tipps zum Schutz deiner Familie.';
 
 const essentialItems = [
-  { category: 'Wasser', items: ['2-3 Liter pro Person/Tag', 'Kanister oder Flaschen', 'Wasserentkeimungstabletten'], priority: 'critical' },
+  { category: 'Wasser', items: ['2 Liter pro Person/Tag', 'Gekauftes Wasser in Flaschen', 'Wasserentkeimungstabletten'], priority: 'critical' },
   { category: 'Ernährung', items: ['Haltbare Lebensmittel (3 Tage)', 'Manueller Dosenöffner', 'Einwegbesteck und -geschirr'], priority: 'critical' },
   { category: 'Beleuchtung', items: ['Taschenlampe (idealerweise Dynamo)', 'Notkerzen', 'Feuerzeug oder Streichhölzer'], priority: 'critical' },
-  { category: 'Kommunikation', items: ['Radio AM/FM (idealerweise Dynamo)', 'Ersatzbatterien', 'Notfallpfeife'], priority: 'critical' },
+  { category: 'Kommunikation', items: ['UKW-Radio mit Batterien, Kurbel oder Solar', 'Ersatzbatterien', 'Notfallpfeife'], priority: 'critical' },
   { category: 'Energie', items: ['Geladene Powerbank', 'Solarlader (optional)', 'Batterien für alle Geräte'], priority: 'warning' },
   { category: 'Erste Hilfe', items: ['Basis-Verbandkasten', 'Persönliche Medikamente', 'Rettungsdecke'], priority: 'warning' },
   { category: 'Dokumente', items: ['Kopien von Ausweis/Pass', 'Versicherungspolicen', 'Notfallkontakte'], priority: 'warning' },
@@ -18,11 +18,11 @@ const essentialItems = [
 const faqs = [
   {
     question: 'Wie lange sollte eine Notfallausrüstung reichen?',
-    answer: 'Der internationale Standard ist 72 Stunden (3 Tage). Dieser Zeitraum deckt die meisten städtischen Notfälle wie Stromausfälle, Wasserunterbrechungen oder vorübergehende Evakuierungen ab. Für ländliche Gebiete oder Zonen mit höherem Risiko wird empfohlen, auf 7-10 Tage zu erweitern.'
+    answer: 'Das BBK rät, sich möglichst zehn Tage selbst versorgen zu können. Auch ein Vorrat für zumindest drei Tage hilft schon sehr; darauf kannst du schrittweise aufbauen.'
   },
   {
     question: 'Wie viel Wasser sollte ich pro Person lagern?',
-    answer: 'Das BBK empfiehlt mindestens 2 Liter Trinkwasser pro Person und Tag. Bei warmem Wetter oder für Personen mit besonderen Bedürfnissen erhöhe auf 3-4 Liter. Für 72 Stunden brauchst du mindestens 6-9 Liter pro Person.'
+    answer: 'Das BBK rät zu 2 Litern pro Person und Tag, davon ein halber Liter zum Kochen. Für drei Tage sind das 6 Liter pro Person, für zehn Tage 20 Liter. Wasser für die Hygiene kommt dazu.'
   },
   {
     question: 'Wo sollte ich die Notfallausrüstung aufbewahren?',
@@ -54,7 +54,7 @@ const scenarios = [
   faqData={faqs}
   title={title}
   description={description}
-  updatedDate="2025-12-15"
+  updatedDate="2026-11-18"
   breadcrumbs={[{ label: 'Notfallausrüstung', href: '/de/notfallausruestung/' }]}
   locale="de"
 >
@@ -83,9 +83,8 @@ const scenarios = [
     </p>
 
     <p>
-      Die allgemeine Regel ist, sich auf <strong>72 Stunden Autonomie</strong> vorzubereiten.
-      Dieser Zeitraum deckt die meisten städtischen Notfälle ab und gibt den Rettungsdiensten
-      genug Zeit zu handeln oder dir zu ermöglichen, einen sicheren Ort zu erreichen.
+      Ein guter Einstieg sind <strong>72 Stunden Autonomie</strong>.
+      Das BBK nennt drei Tage als Minimum und rät, sich möglichst zehn Tage selbst versorgen zu können.
     </p>
 
     <div class="card p-6 my-8">
@@ -98,9 +97,9 @@ const scenarios = [
         <div>
           <h3 class="font-semibold mb-2 text-base">Warum 72 Stunden?</h3>
           <p class="text-sm text-(--color-text-secondary) m-0">
-            Dies ist der vom Bundesamt für Bevölkerungsschutz und Katastrophenhilfe (BBK) und
-            internationalen Organisationen empfohlene Standard. Er deckt die meisten städtischen
-            Versorgungsunterbrechungen ab und ermöglicht den Rettungsdiensten, die Situation zu stabilisieren.
+            Drei Tage nennt das Bundesamt für Bevölkerungsschutz und Katastrophenhilfe (BBK) als Minimum.
+            Die Europäische Kommission nennt 72 Stunden als Mindestmaß an Selbstversorgung.
+            Darauf baust du schrittweise auf.
           </p>
         </div>
       </div>
@@ -276,8 +275,8 @@ const scenarios = [
         </thead>
         <tbody>
           <tr>
-            <td>Abgefülltes Wasser</td>
-            <td>Alle 6 Monate</td>
+            <td>Flaschenwasser</td>
+            <td>Nach dem Mindesthaltbarkeitsdatum</td>
             <td>Verfallsdatum, Zustand der Verpackung</td>
           </tr>
           <tr>
@@ -356,23 +355,23 @@ const scenarios = [
     </p>
     <ul class="text-sm text-(--color-text-secondary) space-y-2">
       <li>
-        <a href="https://www.bbk.bund.de" target="_blank" rel="noopener" class="text-(--color-accent-primary) hover:underline">
+        <a href="https://www.bbk.bund.de/DE/Warnung-Vorsorge/Vorsorge/Ratgeber-Checkliste/ratgeber-checkliste_node.html" target="_blank" rel="noopener" class="text-(--color-accent-primary) hover:underline">
           Bundesamt für Bevölkerungsschutz und Katastrophenhilfe (BBK)
-        </a> — Ratgeber für Notfallvorsorge
+        </a> — Ratgeber „Vorsorgen für Krisen und Katastrophen“ mit Checkliste
       </li>
       <li>
-        <a href="https://www.drk.de" target="_blank" rel="noopener" class="text-(--color-accent-primary) hover:underline">
+        <a href="https://www.drk.de/hilfe-in-deutschland/kurse-im-ueberblick/rotkreuzkurs-erste-hilfe/" target="_blank" rel="noopener" class="text-(--color-accent-primary) hover:underline">
           Deutsches Rotes Kreuz
-        </a> — Empfehlungen zur Ersten Hilfe
+        </a> — Rotkreuzkurs Erste Hilfe
       </li>
       <li>
-        <a href="https://www.thw.de" target="_blank" rel="noopener" class="text-(--color-accent-primary) hover:underline">
-          Technisches Hilfswerk (THW)
-        </a> — Katastrophenschutz-Standards
+        <a href="https://www.ernaehrungsvorsorge.de/private-vorsorge/notvorrat" target="_blank" rel="noopener" class="text-(--color-accent-primary) hover:underline">
+          Ernährungsvorsorge (BLE)
+        </a> — Notvorrat an Lebensmitteln und Getränken
       </li>
     </ul>
     <p class="text-xs text-(--color-text-muted) mt-4">
-      Letzte Aktualisierung: Dezember 2025
+      Letzte Aktualisierung: November 2026
     </p>
   </aside>
 

@@ -24,7 +24,7 @@ const phases = {
   vor: [
     {
       title: 'Bargeld bereithalten',
-      detail: '50-100€ pro Erwachsenem, 20-30€ pro Kind. In kleinen Scheinen (5€, 10€, 20€).',
+      detail: 'In kleiner Stückelung. Einen festen Betrag nennen BBK und Verbraucherzentrale nicht.',
       tip: 'An verschiedenen Orten im Haus aufbewahren'
     },
     {
@@ -71,12 +71,12 @@ const phases = {
     },
     {
       title: 'Konten schützen',
-      detail: 'Passwörter während des Angriffs NICHT ändern - könnten abgefangen werden.',
+      detail: 'Gibt es einen Hinweis, dass ein Passwort in fremde Hände gelangt ist, ändere es. Ist dein Gerät mit Schadsoftware befallen, bereinige es zuerst.',
       tip: 'Warten bis Systeme wiederhergestellt sind'
     },
     {
       title: 'Alternative Kommunikation nutzen',
-      detail: 'SMS funktioniert oft noch wenn Internet ausfällt. Radio für Nachrichten.',
+      detail: 'Nutze das Radio für Nachrichten. Auch Mobilfunk kann ausfallen.',
       tip: null
     },
     {
@@ -103,7 +103,7 @@ const phases = {
     },
     {
       title: 'Bargeld auffüllen',
-      detail: 'Zurück auf 50-100€ pro Person für das nächste Mal.',
+      detail: 'Fülle deinen Bargeldvorrat für das nächste Mal wieder auf.',
       tip: null
     },
     {
@@ -131,7 +131,7 @@ const checklistCategories = [
     name: 'Geld und Bezahlen',
     icon: 'wallet',
     items: [
-      { id: 'bargeld', name: 'Bargeld', quantity: '50-100€/Erw., 20-30€/Kind', priority: 'critical' as const, notes: 'Kleine Scheine (5€, 10€, 20€)' },
+      { id: 'bargeld', name: 'Bargeld', quantity: 'In kleiner Stückelung', priority: 'critical' as const, notes: 'Kleine Scheine und Münzen' },
       { id: 'fahrkarte', name: 'Aufgeladene Fahrkarte/Ticket', quantity: 'Guthaben prüfen', priority: 'recommended' as const, notes: 'Falls EC nicht funktioniert' },
       { id: 'kontoauszug', name: 'Aktueller Kontoauszug (Papier)', quantity: '1 Stück', priority: 'recommended' as const, notes: 'Nachweis bei Bankproblemen' },
     ]
@@ -174,7 +174,7 @@ const checklistCategories = [
     items: [
       { id: 'wasser', name: 'Trinkwasser', quantity: '2L/Person/Tag × 10 Tage', priority: 'critical' as const },
       { id: 'essen', name: 'Haltbare Lebensmittel', quantity: '10 Tage', priority: 'critical' as const },
-      { id: 'medikamente', name: 'Medikamente (7+ Tage extra)', quantity: 'Laut Rezept', priority: 'critical' as const, notes: 'Apotheke kann offline sein' },
+      { id: 'medikamente', name: 'Medikamente (mind. 10 Tage Vorrat)', quantity: 'Laut Rezept', priority: 'critical' as const, notes: 'Apotheke kann offline sein' },
       { id: 'taschenlampe', name: 'Taschenlampe + Batterien', quantity: '1-2 Stück', priority: 'critical' as const, affiliateUrl: 'https://www.amazon.de/s?k=led+taschenlampe' },
     ]
   },
@@ -189,7 +189,7 @@ const cascadeEffects = [
 
 // Recent examples
 const realExamples = [
-  { date: 'Juli 2021', event: 'Ransomware-Angriff Landkreis Anhalt-Bitterfeld', impact: 'Verwaltung 6 Monate lahmgelegt, Katastrophenfall ausgerufen' },
+  { date: 'Juli 2021', event: 'Ransomware-Angriff Landkreis Anhalt-Bitterfeld', impact: 'Katastrophenfall vom 9. Juli 2021 bis zum 2. Februar 2022' },
   { date: 'Mai 2021', event: 'Colonial Pipeline (USA)', impact: 'Größte Treibstoff-Pipeline 6 Tage offline, Panik an Tankstellen' },
   { date: 'Juli 2024', event: 'CrowdStrike-Ausfall (weltweit)', impact: 'Flughäfen, Krankenhäuser, Banken stundenlang gestört' },
 ];
@@ -198,27 +198,27 @@ const realExamples = [
 const faqs = [
   {
     question: 'Wie wahrscheinlich ist ein großer Cyberangriff?',
-    answer: 'Das BSI stuft die Bedrohungslage als "so hoch wie nie" ein. Ransomware-Angriffe auf Kommunen, Krankenhäuser und Unternehmen nehmen zu. Vorbereitung ist keine Panikmache, sondern Vernunft.'
+    answer: 'Das BSI beschreibt die IT-Sicherheitslage als weiterhin angespannt. Ransomware-Angriffe auf Kommunen, Krankenhäuser und Unternehmen nehmen zu. Vorbereitung ist keine Panikmache, sondern Vernunft.'
   },
   {
     question: 'Wie viel Bargeld sollte ich zu Hause haben?',
-    answer: 'Das BBK empfiehlt 50-100€ pro Erwachsenem in kleinen Scheinen (5€, 10€, 20€). Bei längeren Ausfällen können Geschäfte kein Wechselgeld geben.'
+    answer: 'Einen festen Betrag nennen BBK und Verbraucherzentrale nicht. Beide raten, Bargeld bereitzuhalten, die Verbraucherzentrale in kleiner Stückelung. Überlege, was dein Haushalt in einigen Tagen für das Nötigste ausgibt.'
   },
   {
     question: 'Funktioniert 112 noch bei einem Cyberangriff?',
-    answer: '112 hat Priorität und ist besonders geschützt. Aber Mobilfunknetze können überlastet sein - weiter versuchen oder Festnetz nutzen falls vorhanden.'
+    answer: 'Auch der Notruf kann ausfallen. Funktionieren 110 und 112 nicht, geh im Notfall wenn möglich zur nächsten Polizeiwache oder ins Krankenhaus.'
   },
   {
     question: 'Soll ich meine Passwörter während eines Angriffs ändern?',
-    answer: 'Nein, warten Sie bis die Systeme wiederhergestellt sind. Während eines Angriffs könnten neue Passwörter abgefangen werden.'
+    answer: 'Gibt es einen Hinweis, dass ein Passwort in fremde Hände gelangt ist, ändere es. Ist dein Gerät mit Schadsoftware befallen, bereinige es zuerst und ändere die Passwörter danach. So rät es das BSI.'
   },
   {
     question: 'Wie lange kann so eine Störung dauern?',
-    answer: 'Stunden bis Wochen, je nach Ursache. Der Landkreis Anhalt-Bitterfeld war 6 Monate beeinträchtigt. Planen Sie für mindestens 72 Stunden autark zu sein.'
+    answer: 'Stunden bis Wochen, je nach Ursache. Im Landkreis Anhalt-Bitterfeld galt der Katastrophenfall fast sieben Monate. Das BBK rät, sich möglichst zehn Tage selbst versorgen zu können; auch drei Tage helfen schon.'
   },
   {
     question: 'Ist mein Geld bei einem Cyberangriff auf Banken sicher?',
-    answer: 'Ja, Ihr Geld verschwindet nicht. Die Einlagensicherung schützt bis 100.000€. Sie haben nur vorübergehend keinen Zugang.'
+    answer: 'Ein Ausfall der Systeme ändert nichts an deinem Guthaben; du kommst nur vorübergehend nicht daran. Die Einlagensicherung ist etwas anderes: Sie schützt bis 100.000 € pro Kunde und Bank, wenn eine Bank zahlungsunfähig wird.'
   },
 ];
 ---
@@ -228,7 +228,7 @@ const faqs = [
   description="Vorbereitung auf Cyberangriffe: Bargeld, Offline-Backups und Checkliste für wenn EC-Karten und Internet ausfallen."
   locale="de"
   schemaType="Article"
-  dateModified="2025-12-16"
+  dateModified="2026-11-18"
   alternates={{
     nl: '/nl/scenario/cyberaanval/',
   }}
@@ -253,7 +253,7 @@ const faqs = [
           <div class="scenario-meta">
             <span class="meta-item">8 Min. Lesezeit</span>
             <span class="meta-divider">·</span>
-            <span class="meta-item">Aktualisiert Dez. 2025</span>
+            <span class="meta-item">Aktualisiert Nov. 2026</span>
           </div>
         </div>
       </div>
@@ -271,9 +271,9 @@ const faqs = [
     <!-- TL;DR -->
     <section class="scenario-section">
       <TLDRBlock
-        summary="Ein Cyberangriff oder große digitale Störung kann EC-Karten, Internet und Mobilfunk lahmlegen. Die Lösung ist einfach: Bargeld (50-100€), Offline-Backups und wichtige Nummern auf Papier. Wir sind zu abhängig von Systemen geworden, die ausfallen können."
-        keyStat="50-100€"
-        keyStatLabel="Bargeld pro Person"
+        summary="Ein Cyberangriff oder große digitale Störung kann EC-Karten, Internet und Mobilfunk lahmlegen. Die Lösung ist einfach: Bargeld in kleiner Stückelung, Offline-Backups und wichtige Nummern auf Papier. Wir sind zu abhängig von Systemen geworden, die ausfallen können."
+        keyStat="Bargeld"
+        keyStatLabel="in kleiner Stückelung bereithalten"
         locale="de"
       />
     </section>
@@ -485,9 +485,9 @@ const faqs = [
         </summary>
         <div class="sources-content">
           <ul>
-            <li><a href="https://www.bsi.bund.de/" target="_blank" rel="noopener">BSI - Bundesamt für Sicherheit in der Informationstechnik</a></li>
-            <li><a href="https://www.bbk.bund.de/" target="_blank" rel="noopener">BBK - Bundesamt für Bevölkerungsschutz</a></li>
-            <li><a href="https://www.tagesschau.de/" target="_blank" rel="noopener">Tagesschau - Aktuelle Nachrichten</a></li>
+            <li><a href="https://www.bsi.bund.de/DE/Themen/Verbraucherinnen-und-Verbraucher/Informationen-und-Empfehlungen/Cyber-Sicherheitsempfehlungen/Accountschutz/Sichere-Passwoerter-erstellen/Umgang-mit-Passwoertern/umgang-mit-passwoertern_node.html" target="_blank" rel="noopener">BSI - Umgang mit Passwörtern</a></li>
+            <li><a href="https://www.bsi.bund.de/DE/Service-Navi/Publikationen/Lagebericht/lagebericht_node.html" target="_blank" rel="noopener">BSI - Lagebericht zur IT-Sicherheit</a></li>
+            <li><a href="https://www.bbk.bund.de/DE/Warnung-Vorsorge/Vorsorge/Ratgeber-Checkliste/ratgeber-checkliste_node.html" target="_blank" rel="noopener">BBK - Ratgeber „Vorsorgen für Krisen und Katastrophen“</a></li>
             <li><a href="https://www.verbraucherzentrale.de/wissen/digitale-welt/datenschutz" target="_blank" rel="noopener">Verbraucherzentrale - Digitaler Schutz</a></li>
           </ul>
         </div>

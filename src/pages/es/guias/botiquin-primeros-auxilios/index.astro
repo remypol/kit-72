@@ -107,14 +107,14 @@ const medications = [
   },
   {
     type: 'Pomada para quemaduras',
-    examples: 'Biafine, Silvederma',
+    examples: 'Pregunta en la farmacia',
     uses: 'Quemaduras leves (1er grado)',
-    notes: 'No usar en quemaduras abiertas o graves.',
+    notes: 'Primero enfría la zona con agua. No usar en quemaduras abiertas o graves.',
     prescription: false,
   },
   {
     type: 'Crema corticoide suave',
-    examples: 'Hidrocortisona 0.5-1%',
+    examples: 'Hidrocortisona al 0,5 %',
     uses: 'Picaduras, irritaciones, dermatitis',
     notes: 'No usar más de 1 semana sin consultar.',
     prescription: false,
@@ -155,7 +155,7 @@ const specialSituations = [
     situation: 'Alergias graves',
     icon: '⚠️',
     additions: [
-      'Adrenalina autoinyectable (EpiPen) - CON RECETA',
+      'Adrenalina autoinyectable (en España: Altellus, Jext o Anapen) - CON RECETA',
       'Antihistamínicos de acción rápida',
       'Tarjeta de alerta médica',
       'Plan de acción escrito',
@@ -231,7 +231,7 @@ const storageLocations = [
 const faqs = [
   {
     question: '¿Puedo usar medicamentos caducados?',
-    answer: 'Depende. Muchos medicamentos (pastillas, cápsulas) mantienen eficacia meses después de caducar, pero con potencia reducida. Colirios, insulina y medicamentos líquidos NO deben usarse caducados. En emergencia real donde no hay alternativa, un paracetamol caducado hace meses probablemente funcione. Pero renueva tu botiquín regularmente para no estar en esa situación.'
+    answer: 'No. Los prospectos indican que no uses un medicamento después de la fecha de caducidad del envase. Revisa el botiquín con regularidad y lleva los caducados al Punto SIGRE de la farmacia.'
   },
   {
     question: '¿Necesito formación en primeros auxilios?',
@@ -239,7 +239,7 @@ const faqs = [
   },
   {
     question: '¿Qué hago si alguien tiene una reacción alérgica grave?',
-    answer: 'Llama al 112 INMEDIATAMENTE. Si tiene adrenalina autoinyectable (EpiPen) y sabe usarla, adminístrala según instrucciones. Acuéstale con piernas elevadas (salvo si tiene dificultad respiratoria). No des nada por boca si está inconsciente. Esto es una emergencia médica que requiere atención profesional urgente.'
+    answer: 'Llama al 112 INMEDIATAMENTE. Si tiene adrenalina autoinyectable y sabe usarla, adminístrala según instrucciones. Acuéstale con piernas elevadas (salvo si tiene dificultad respiratoria). No des nada por boca si está inconsciente. Esto es una emergencia médica que requiere atención profesional urgente.'
   },
   {
     question: '¿Debo tener un desfibrilador?',
@@ -281,7 +281,7 @@ const faqSchema = {
   faqData={faqs}
   title="Botiquín de Primeros Auxilios: Guía Completa"
   description="Qué incluir en tu botiquín de emergencia, cómo organizarlo, mantenerlo actualizado y adaptarlo a necesidades especiales."
-  updatedDate="2025-12-15"
+  updatedDate="2026-11-18"
   author="Equipo Kit-72"
   readTime="11 min"
   breadcrumbs={breadcrumbs}
@@ -524,8 +524,8 @@ const faqSchema = {
     <h2 id="fuentes">Fuentes y referencias</h2>
     <ul class="text-sm space-y-2">
       <li>
-        <a href="https://www.cruzroja.es/" target="_blank" rel="noopener">
-          Cruz Roja Española — Primeros Auxilios
+        <a href="https://www2.cruzroja.es/web/ahora/-/todo-lo-que-debe-tener-botiquin-primeros-auxilios-casa" target="_blank" rel="noopener">
+          Cruz Roja Española — Qué debe tener el botiquín de casa
         </a>
       </li>
       <li>
@@ -534,8 +534,8 @@ const faqSchema = {
         </a>
       </li>
       <li>
-        <a href="https://www.nhs.uk/conditions/first-aid/" target="_blank" rel="noopener">
-          NHS — First Aid Guide
+        <a href="https://www.cruzroja.es/prevencion/hogar_010.html" target="_blank" rel="noopener">
+          Cruz Roja Española — El botiquín en el hogar
         </a>
       </li>
     </ul>

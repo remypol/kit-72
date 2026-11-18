@@ -58,7 +58,7 @@ const radioTypes = [
     pros: ['No necesita pilas', 'Linterna incluida', 'Carga USB a veces', 'Siempre funciona'],
     cons: ['Carga lenta', 'Calidad de audio media', 'Manivela requiere esfuerzo'],
     bestFor: 'Kit de emergencia, independencia energética',
-    frequency: 'AM/FM/WB',
+    frequency: 'FM',
     icon: 'RotateCw'
   },
   {
@@ -67,13 +67,13 @@ const radioTypes = [
     pros: ['Alertas automáticas', 'Información oficial', 'SAME selectivo por zona'],
     cons: ['WB no disponible en España', 'Más cara', 'Funciones innecesarias para Europa'],
     bestFor: 'Residentes en USA, zonas de huracanes',
-    frequency: 'AM/FM/WB',
+    frequency: 'FM',
     icon: 'CloudLightning'
   },
   {
     name: 'Walkie-talkie PMR446',
     description: 'Comunicación bidireccional sin licencia en Europa',
-    pros: ['Comunicación entre personas', 'Sin licencia', 'Hasta 5km alcance', '8 canales'],
+    pros: ['Comunicación entre personas', 'Sin licencia', 'Hasta 5km alcance', '16 canales'],
     cons: ['Solo entre usuarios PMR', 'Requiere otro walkie', 'Interferencias posibles'],
     bestFor: 'Familias separadas, grupos, excursiones',
     frequency: 'PMR446',
@@ -100,7 +100,7 @@ const radioTypes = [
 ];
 
 const features = [
-  { name: 'Bandas', description: 'AM/FM mínimo. WB útil en USA. DAB+ en Europa urbana', icon: 'BarChart3' },
+  { name: 'Bandas', description: 'FM como mínimo. DAB+ en ciudades', icon: 'BarChart3' },
   { name: 'Alimentación', description: 'Pilas + dinamo + solar = máxima flexibilidad', icon: 'Battery' },
   { name: 'Linterna', description: 'Bonus muy útil en radios de emergencia', icon: 'Flashlight' },
   { name: 'Carga USB', description: 'Algunas radios pueden cargar tu móvil (lento)', icon: 'Smartphone' },
@@ -129,7 +129,7 @@ const recommendations = [
     type: 'Comunicación familiar',
     name: 'Par de walkies PMR446',
     price: '30-60€',
-    features: ['8 canales', 'Hasta 5km', 'Recargables', 'VOX manos libres'],
+    features: ['16 canales', 'Hasta 5km', 'Recargables', 'VOX manos libres'],
     verdict: 'Imprescindible si la familia puede separarse.',
     priority: 'recommended'
   },
@@ -137,7 +137,7 @@ const recommendations = [
     type: 'Premium multifunción',
     name: 'Radio emergencia premium',
     price: '50-100€',
-    features: ['AM/FM/WB', 'Dinamo+solar+USB', 'Linterna potente', 'Alarma SOS'],
+    features: ['FM', 'Dinamo+solar+USB', 'Linterna potente', 'Alarma SOS'],
     verdict: 'Lo mejor si quieres un único dispositivo completo.',
     priority: 'recommended'
   },
@@ -152,19 +152,16 @@ const recommendations = [
 ];
 
 const frequencyGuide = [
-  { band: 'AM (MW)', range: '530-1700 kHz', use: 'Noticias, alcance largo (noche)', spain: 'RNE, COPE, SER' },
   { band: 'FM', range: '87.5-108 MHz', use: 'Música, noticias locales, mejor audio', spain: 'Todas las emisoras' },
   { band: 'DAB+', range: 'Banda III', use: 'Radio digital, sin interferencias', spain: 'Cobertura limitada' },
-  { band: 'PMR446', range: '446 MHz', use: 'Walkies sin licencia', spain: 'Legal, 8 canales' },
+  { band: 'PMR446', range: '446 MHz', use: 'Walkies sin licencia', spain: 'Legal, 16 canales, sin licencia' },
   { band: 'CB 27 MHz', range: '26.965-27.405 MHz', use: 'Banda ciudadana', spain: 'Legal sin licencia' },
-  { band: 'WB (NOAA)', range: '162 MHz', use: 'Alertas meteorológicas', spain: 'No disponible (solo USA)' }
 ];
 
 const emergencyFrequencies = [
-  { name: 'Canal 9 PMR446', freq: '446.10625 MHz', use: 'Canal de emergencia PMR en Europa' },
   { name: 'Canal 9 CB', freq: '27.065 MHz', use: 'Emergencias en banda ciudadana' },
   { name: 'Canal 16 VHF Marítimo', freq: '156.8 MHz', use: 'Emergencias marítimas' },
-  { name: '112', freq: 'GSM/móvil', use: 'Emergencias Europa (funciona sin SIM)' }
+  { name: '112', freq: 'Móvil', use: 'Gratuito; funciona sin PIN y sin cobertura de tu operadora, si hay cobertura de alguna compañía' }
 ];
 
 const kitSuggestion = [
@@ -177,12 +174,11 @@ const kitSuggestion = [
 
 const usageTips = [
   'Programa las emisoras locales de noticias ANTES de la emergencia',
-  'Conoce las frecuencias de Protección Civil de tu zona',
+  'Apunta en papel las frecuencias de FM de las emisoras de noticias de tu zona',
   'Practica usando los walkies con tu familia (alcance, canales)',
   'Guarda la radio con pilas fuera para evitar corrosión',
   'Ten auriculares para poder escuchar sin gastar pilas en altavoz',
-  'En emergencias, AM tiene mejor alcance que FM',
-  'El Canal 9 de PMR446 es el de emergencias en Europa',
+  'En PMR446 ningún canal está reservado para emergencias: para pedir ayuda, llama al 112',
   'Mantén el volumen bajo y usa auricular para ahorrar batería'
 ];
 
@@ -192,7 +188,7 @@ const usageTips = [
   title="Radio de emergencia: ¿Solar o dinamo? Guía y comparativa"
   description="Guía completa de radios para emergencias: tipos, frecuencias, walkies PMR446, y qué radio elegir para tu kit 72 horas en España."
   locale="es"
-  dateModified="2025-12-15"
+  dateModified="2026-11-18"
   schemaType="Article"
 >
   <section class="py-16">
@@ -232,7 +228,7 @@ const usageTips = [
           Recomendación rápida
         </h3>
         <p class="text-(--color-text-secondary) m-0">
-          <strong>Mínimo:</strong> Radio AM/FM con dinamo o pilas.
+          <strong>Mínimo:</strong> Radio FM con dinamo o pilas.
           <strong>Ideal:</strong> Radio dinamo/solar + par de walkies PMR446.
           <strong>Presupuesto:</strong> 40-80€ total.
         </p>
@@ -247,7 +243,7 @@ const usageTips = [
               <Icon name="WifiOff" size={16} class="text-(--color-accent-primary)" />
               Sin internet ni móvil
             </h4>
-            <p>En emergencias graves, las redes móviles se saturan o caen. La radio funciona siempre.</p>
+            <p>En emergencias graves, las redes móviles se saturan o caen. Una radio a pilas o de manivela sigue funcionando en un apagón.</p>
           </div>
           <div>
             <h4 class="font-medium text-(--color-text-primary) mb-2 flex items-center gap-2">
@@ -502,7 +498,7 @@ const usageTips = [
         <div class="text-sm text-(--color-text-secondary) space-y-2">
           <p><strong>PMR446</strong> es el estándar europeo de radio de uso libre sin licencia.</p>
           <p><strong>Alcance real:</strong> 500m-2km en ciudad, 3-5km en campo abierto, hasta 10km en montaña.</p>
-          <p><strong>Canales:</strong> 8 principales (1-8) + 8 adicionales (9-16). El <strong>canal 9</strong> es el de emergencias.</p>
+          <p><strong>Canales:</strong> 16, sin licencia. Ninguno está reservado para emergencias y nadie tiene obligación de escucharlos: para pedir ayuda, llama al 112.</p>
           <p><strong>Consejo:</strong> Acordad un canal y hora de contacto con tu familia antes de separarse.</p>
         </div>
       </div>

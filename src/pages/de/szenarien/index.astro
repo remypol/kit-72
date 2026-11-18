@@ -46,6 +46,24 @@ const scenarios = [
     readTime: '12 min',
     priority: 'hoch'
   },
+  {
+    title: 'Hochwasser',
+    description: 'Was du bei Hochwasser und Starkregen tust und wie du dein Haus vorbereitest.',
+    href: '/de/szenarien/hochwasser/',
+    icon: 'Waves',
+    color: 'blue',
+    readTime: '10 min',
+    priority: 'hoch'
+  },
+  {
+    title: 'Cyberangriff',
+    description: 'Wenn Kartenzahlung, Internet und Mobilfunk ausfallen: Bargeld, Papier und Radio.',
+    href: '/de/szenarien/cyberangriff/',
+    icon: 'Shield',
+    color: 'emerald',
+    readTime: '8 min',
+    priority: 'mittel'
+  },
 ];
 
 const colorMap = {
@@ -60,7 +78,7 @@ const colorMap = {
   title="Notfall-Szenarien: Stromausfall, Hochwasser & mehr"
   description="Vorbereitung auf verschiedene Notfallszenarien: Stromausfall, Hitzewelle, Wasserausfall und Evakuierung. Schritt-für-Schritt Anleitungen."
   locale="de"
-  dateModified="2025-12-15"
+  dateModified="2026-11-18"
   schemaType="WebPage"
   schemaData={{
     "@type": "CollectionPage",
@@ -96,7 +114,7 @@ const colorMap = {
         <Icon name="Shield" size={20} class="text-blue-500 flex-shrink-0 mt-0.5" />
         <p class="text-sm text-(--color-text-secondary) m-0">
           <strong class="text-(--color-text-primary)">BBK-Empfehlung:</strong> Das Bundesamt für Bevölkerungsschutz
-          empfiehlt, für mindestens 72 Stunden bis 10 Tage selbstversorgt sein zu können.
+          rät, sich möglichst zehn Tage selbst versorgen zu können. Auch ein Vorrat für drei Tage hilft schon sehr.
         </p>
       </div>
 
@@ -136,18 +154,6 @@ const colorMap = {
         })}
       </div>
 
-      <!-- Coming Soon -->
-      <div class="mt-8 p-6 bg-(--color-bg-secondary) border border-(--color-border) rounded-xl">
-        <h3 class="font-semibold mb-2">Weitere Szenarien in Planung</h3>
-        <p class="text-sm text-(--color-text-secondary) mb-3">
-          Wir arbeiten an zusätzlichen Szenarien basierend auf aktuellen Risikoanalysen:
-        </p>
-        <ul class="text-sm text-(--color-text-muted) space-y-1">
-          <li>• Überschwemmung (Hochwasser)</li>
-          <li>• Cyberangriff (kritische Infrastruktur)</li>
-          <li>• Wintersturm</li>
-        </ul>
-      </div>
     </div>
   </section>
 </BaseLayout>

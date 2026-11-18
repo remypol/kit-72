@@ -28,7 +28,7 @@ const phases = {
     },
     {
       title: 'Almacena agua extra',
-      detail: 'Al menos 5-6L por persona/día, más de lo normal.',
+      detail: 'Ten agua de sobra para beber con frecuencia. La OMS habla de al menos 2 o 3 litros al día.',
       tip: 'Congela botellas: sirven como acumuladores de frío'
     },
     {
@@ -37,9 +37,9 @@ const phases = {
       tip: null
     },
     {
-      title: 'Compra sales de rehidratación',
-      detail: 'Imprescindibles para reponer electrolitos perdidos por sudor.',
-      tip: 'También sirven bebidas isotónicas'
+      title: 'Planifica comidas ligeras',
+      detail: 'Ensaladas, frutas, verduras y zumos ayudan a reponer las sales perdidas por el sudor.',
+      tip: 'Evita las bebidas con cafeína, alcohol o muy azucaradas'
     },
     {
       title: 'Contacta con personas vulnerables',
@@ -49,7 +49,7 @@ const phases = {
   ],
   durante: [
     {
-      title: 'Evita salir de 12:00 a 18:00',
+      title: 'Evita salir en las horas centrales del día',
       detail: 'Las horas centrales son las más peligrosas.',
       tip: null
     },
@@ -116,8 +116,8 @@ const checklistCategories = [
     name: 'Hidratación',
     icon: 'droplet',
     items: [
-      { id: 'agua-extra', name: 'Agua embotellada extra', quantity: '5-6L/persona/día', priority: 'critical' as const, notes: 'Más de lo normal por el calor' },
-      { id: 'sales-rehidratacion', name: 'Sales de rehidratación oral', quantity: '10+ sobres', priority: 'critical' as const, notes: 'Reponen electrolitos perdidos' },
+      { id: 'agua-extra', name: 'Agua embotellada extra', quantity: '2-3L/persona/día', priority: 'critical' as const, notes: 'Para beber; referencia de la OMS' },
+      { id: 'sales-rehidratacion', name: 'Sales de rehidratación oral', quantity: 'Unos sobres', priority: 'recommended' as const, notes: 'Pregunta en la farmacia si te convienen' },
       { id: 'bebidas-isotonicas', name: 'Bebidas isotónicas', quantity: '6-12 unidades', priority: 'recommended' as const, notes: 'Alternativa a las sales' },
       { id: 'botellas-reutilizables', name: 'Botellas reutilizables', quantity: '1 por persona', priority: 'recommended' as const, notes: 'Para llevar agua siempre' },
     ]
@@ -162,14 +162,14 @@ const riskGroups = [
   { group: 'Mayores (+65)', icon: 'Users', tip: 'Llamar/visitar a diario, insistir en que beban' },
   { group: 'Bebés y niños', icon: 'Baby', tip: 'NUNCA en coche aparcado, hidratación frecuente' },
   { group: 'Enfermos crónicos', icon: 'Heart', tip: 'Revisar medicación, plan de emergencia' },
-  { group: 'Trabajadores exterior', icon: 'HardHat', tip: 'Pausas cada 20 min, evitar 12-18h' },
+  { group: 'Trabajadores exterior', icon: 'HardHat', tip: 'Pausas a la sombra; evita las horas centrales del día' },
 ];
 
 // FAQs
 const faqs = [
   {
     question: '¿A partir de qué temperatura se considera ola de calor?',
-    answer: 'En España, AEMET activa avisos cuando se superan los umbrales de cada zona durante 3+ días. Generalmente, máximas >38-40°C con mínimas >20-22°C.'
+    answer: 'AEMET emite avisos por temperaturas máximas cuando se prevé superar el umbral de cada zona, y ese umbral cambia de una zona a otra. Una ola de calor es otra cosa: un episodio de al menos tres días seguidos de temperaturas muy altas.'
   },
   {
     question: '¿Por qué es peligroso el calor nocturno?',
@@ -177,11 +177,11 @@ const faqs = [
   },
   {
     question: '¿El ventilador puede ser peligroso con mucho calor?',
-    answer: 'A partir de 35°C, un ventilador solo mueve aire caliente. Pero si mojas la piel o usas toallas húmedas, sí ayuda acelerando la evaporación.'
+    answer: 'Según la OMS, el ventilador sirve por debajo de 40 °C. Por encima de esa temperatura calienta el cuerpo en lugar de refrescarlo.'
   },
   {
     question: '¿Cuánta agua debo beber?',
-    answer: 'En calor extremo: 3-4 litros diarios para adultos sedentarios, más si haces actividad física. Bebe pequeñas cantidades frecuentemente.'
+    answer: 'Bebe agua con frecuencia aunque no tengas sed. Sanidad no fija una cantidad; la OMS habla de un vaso por hora y al menos 2 o 3 litros al día.'
   },
   {
     question: '¿Qué hago si no tengo aire acondicionado?',
@@ -194,7 +194,7 @@ const faqs = [
   title="Ola de Calor: Cómo sobrevivir al calor extremo — Checklist"
   description="Guía paso a paso para sobrevivir olas de calor extremo. Hidratación, refrigeración, grupos de riesgo y checklist interactivo."
   schemaType="Article"
-  dateModified="2025-12-15"
+  dateModified="2026-11-18"
   faqData={faqs}
 >
   <article class="scenario-page">
@@ -216,7 +216,7 @@ const faqs = [
           <div class="scenario-meta">
             <span class="meta-item">7 min</span>
             <span class="meta-divider">·</span>
-            <span class="meta-item">Actualizado dic 2025</span>
+            <span class="meta-item">Actualizado nov. 2026</span>
           </div>
         </div>
       </div>
@@ -235,8 +235,8 @@ const faqs = [
     <section class="scenario-section">
       <TLDRBlock
         summary="Las olas de calor causan más muertes que cualquier otro fenómeno meteorológico en España. La clave es hidratación constante, evitar el sol en horas centrales, y reconocer los síntomas de golpe de calor."
-        keyStat="3-4 litros/día"
-        keyStatLabel="Bebe mínimo"
+        keyStat="Sin esperar a la sed"
+        keyStatLabel="Bebe agua con frecuencia"
       />
     </section>
 
@@ -413,8 +413,8 @@ const faqs = [
         </summary>
         <div class="sources-content">
           <ul>
-            <li><a href="https://www.aemet.es/" target="_blank" rel="noopener">AEMET</a></li>
-            <li><a href="https://www.mscbs.gob.es/" target="_blank" rel="noopener">Ministerio de Sanidad</a></li>
+            <li><a href="https://www.aemet.es/es/eltiempo/prediccion/avisos" target="_blank" rel="noopener">AEMET - Avisos</a></li>
+            <li><a href="https://www.sanidad.gob.es/areas/sanidadAmbiental/riesgosAmbientales/calorExtremo/home.htm" target="_blank" rel="noopener">Ministerio de Sanidad - Calor extremo</a></li>
             <li><a href="https://www.who.int/news-room/fact-sheets/detail/climate-change-heat-and-health" target="_blank" rel="noopener">OMS - Heat and Health</a></li>
           </ul>
         </div>

@@ -215,7 +215,7 @@
       "id": "luz-3",
       "name": "Velas y mechero",
       "category": "Iluminacion",
-      "quantity": "10-20 velas",
+      "quantity": "Unas pocas",
       "priority": "recommended",
       "scenarios": ["apagon"],
       "affiliateUrl": "https://www.amazon.es/s?k=velas+emergencia+larga+duracion",
@@ -392,7 +392,7 @@
       "id": "docs-4",
       "name": "Efectivo",
       "category": "Documentacion",
-      "quantity": "100-200 EUR",
+      "quantity": "70-100 EUR por persona",
       "priority": "critical",
       "scenarios": ["general", "apagon", "evacuacion"]
     },
@@ -518,7 +518,7 @@
     },
     {
       "id": "bebe-1",
-      "name": "Panales",
+      "name": "Pañales",
       "category": "Bebes",
       "quantity": "3+ dias",
       "priority": "critical",

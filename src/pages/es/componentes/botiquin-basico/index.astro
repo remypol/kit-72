@@ -37,7 +37,7 @@ const amazonProducts = [
     amazonUrl: 'https://www.amazon.es/s?k=torniquete+tactico+cat',
     price: '~20€',
     rating: 4.6,
-    features: ['Profesional', 'Fácil uso', 'Salva vidas'],
+    features: ['Profesional', 'Requiere formación'],
     badge: 'premium' as const
   }
 ];
@@ -89,7 +89,7 @@ const essentialContents = {
     { item: 'Venda de gasa', qty: '2', notes: 'Para sujetar apósitos', priority: 'essential' },
     { item: 'Esparadrapo', qty: '1-2', notes: 'Hipoalergénico', priority: 'essential' },
     { item: 'Apósitos adhesivos grandes', qty: '5', notes: 'Para heridas mayores', priority: 'recommended' },
-    { item: 'Venda triangular', qty: '1-2', notes: 'Cabestrillo, torniquete', priority: 'recommended' }
+    { item: 'Pañuelo triangular', qty: '1-2', notes: 'Para improvisar un cabestrillo o cubrir una herida', priority: 'recommended' }
   ],
   antisepticos: [
     { item: 'Suero fisiológico', qty: '3-5', notes: 'Monodosis 10ml', priority: 'essential' },
@@ -118,13 +118,12 @@ const essentialContents = {
 
 const medications = [
   { name: 'Paracetamol 500-1000mg', use: 'Dolor, fiebre', qty: '20 comprimidos', notes: 'No con alcohol' },
-  { name: 'Ibuprofeno 400-600mg', use: 'Dolor, inflamación, fiebre', qty: '20 comprimidos', notes: 'Tomar con comida' },
+  { name: 'Ibuprofeno 400 mg', use: 'Dolor, inflamación, fiebre', qty: '20 comprimidos', notes: 'Tomar con comida' },
   { name: 'Antihistamínico (Cetirizina)', use: 'Alergias, picaduras', qty: '10 comprimidos', notes: 'Puede dar sueño' },
   { name: 'Antidiarreico (Loperamida)', use: 'Diarrea aguda', qty: '10 comprimidos', notes: 'No en infecciones' },
   { name: 'Sales rehidratación oral', use: 'Deshidratación', qty: '6 sobres', notes: 'Diarrea, vómitos, calor' },
   { name: 'Antiácido', use: 'Acidez, indigestión', qty: '10 comprimidos', notes: 'Masticables o sobres' },
-  { name: 'Pomada antibiótica', use: 'Heridas pequeñas', qty: '1 tubo', notes: 'Solo heridas limpias' },
-  { name: 'Crema hidrocortisona 1%', use: 'Picaduras, irritación', qty: '1 tubo', notes: 'Uso corto' },
+  { name: 'Crema de hidrocortisona al 0,5 % (sin receta)', use: 'Picaduras, irritación', qty: '1 tubo', notes: 'Uso corto' },
   { name: 'Colirio lágrimas artificiales', use: 'Ojos secos/irritados', qty: '1 bote', notes: 'O monodosis' },
   { name: 'Protector labial SPF', use: 'Labios agrietados', qty: '1', notes: 'Con protección solar' }
 ];
@@ -140,7 +139,7 @@ const specialAdditions = [
   },
   {
     group: 'Alergias severas',
-    items: ['Autoinyector adrenalina (EpiPen)', 'Antihistamínico inyectable', 'Corticoides orales', 'Tarjeta de alergia visible', 'Pulsera médica']
+    items: ['Adrenalina autoinyectable con receta (en España: Altellus, Jext o Anapen)', 'Solo la medicación que te haya recetado tu médico', 'Tarjeta de alergia visible', 'Pulsera médica']
   },
   {
     group: 'Diabéticos',
@@ -209,7 +208,7 @@ const commonMistakes = [
   title="Botiquín de emergencia: ¿Qué incluir? Contenido esencial"
   description="Guía completa para armar tu botiquín de emergencia: contenidos esenciales, medicamentos, mantenimiento y adaptaciones especiales."
   locale="es"
-  dateModified="2025-12-15"
+  dateModified="2026-11-18"
   schemaType="Article"
 >
   <section class="py-16">
@@ -516,6 +515,7 @@ const commonMistakes = [
             <p class="text-xs text-(--color-text-muted)">Bomberos</p>
           </div>
         </div>
+        <p class="text-xs text-(--color-text-muted) mt-4 text-center">El 112 funciona en toda España. El 061 y el 080 no existen en todas las comunidades y municipios: si dudas, llama al 112.</p>
       </div>
 
       <!-- Related Links -->

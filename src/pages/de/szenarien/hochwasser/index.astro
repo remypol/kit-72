@@ -27,8 +27,8 @@ const checklistCategories = [
       { id: 'taschenlampe', name: 'Taschenlampe + Batterien', quantity: '1 Stück', priority: 'critical' as const },
       { id: 'powerbank', name: 'Powerbank (geladen)', quantity: '1 Stück', priority: 'critical' as const },
       { id: 'radio', name: 'Batteriebetriebenes Radio', quantity: '1 Stück', priority: 'critical' as const },
-      { id: 'medikamente', name: 'Persönliche Medikamente', quantity: '7 Tage', priority: 'critical' as const },
-      { id: 'bargeld', name: 'Bargeld', quantity: '100-200€', priority: 'critical' as const, notes: 'Kleine Scheine' },
+      { id: 'medikamente', name: 'Persönliche Medikamente', quantity: 'mind. 10 Tage', priority: 'critical' as const },
+      { id: 'bargeld', name: 'Bargeld', quantity: 'in kleiner Stückelung', priority: 'critical' as const },
       { id: 'kleidung', name: 'Wechselkleidung', quantity: '1 Set', priority: 'recommended' as const },
       { id: 'gummistiefel', name: 'Gummistiefel', quantity: '1 Paar', priority: 'recommended' as const },
     ]
@@ -47,10 +47,10 @@ const checklistCategories = [
 ];
 
 const warningLevels = [
-  { level: 1, name: 'Meldepegel', description: 'Erhöhte Wasserstände, Aufmerksamkeit geboten', color: 'yellow' },
-  { level: 2, name: 'Warnpegel', description: 'Überflutungen in Uferbereichen möglich', color: 'orange' },
-  { level: 3, name: 'Alarmpegel', description: 'Überflutungen in bebauten Gebieten, Evakuierung möglich', color: 'red' },
-  { level: 4, name: 'Katastrophenfall', description: 'Großflächige Überflutungen, Lebensgefahr', color: 'purple' },
+  { level: 1, name: 'Kleines Hochwasser', description: 'Erste Klasse im Hochwasserportal der Länder', color: 'yellow' },
+  { level: 2, name: 'Mittleres Hochwasser', description: 'Zweite Klasse', color: 'orange' },
+  { level: 3, name: 'Großes Hochwasser', description: 'Dritte Klasse', color: 'red' },
+  { level: 4, name: 'Sehr großes Hochwasser', description: 'Höchste Klasse', color: 'purple' },
 ];
 
 const faqs = [
@@ -64,7 +64,7 @@ const faqs = [
   },
   {
     question: 'Soll ich bei Hochwasserwarnung evakuieren?',
-    answer: 'Nur wenn die Behörden dazu auffordern! Zu frühe oder eigenmächtige Evakuierung kann gefährlicher sein. Folge den offiziellen Anweisungen über NINA-App und Durchsagen.'
+    answer: 'Folge den Anweisungen der Behörden und Einsatzkräfte. Bring Kinder und Menschen, die Hilfe brauchen, rechtzeitig aus dem gefährdeten Gebiet, bevor das Wasser kommt.'
   },
   {
     question: 'Kann ich Hochwasser im Keller abpumpen?',
@@ -77,7 +77,7 @@ const faqs = [
   title="Hochwasser: Richtig reagieren — Evakuierung & Checkliste"
   description="Wie bereitest du dich auf Hochwasser vor? Verhalten vor, während und nach einer Überschwemmung. Mit Checkliste und Evakuierungstipps."
   locale="de"
-  dateModified="2025-12-16"
+  dateModified="2026-11-18"
   schemaType="Article"
   alternates={{
     nl: '/nl/scenario/overstroming/',
@@ -95,7 +95,7 @@ const faqs = [
           <div class="scenario-meta">
             <span class="meta-item">10 min</span>
             <span class="meta-divider">·</span>
-            <span class="meta-item">Aktualisiert Dez 2025</span>
+            <span class="meta-item">Aktualisiert Nov. 2026</span>
           </div>
         </div>
       </div>
@@ -113,9 +113,9 @@ const faqs = [
     <!-- TL;DR -->
     <section class="scenario-section">
       <TLDRBlock
-        summary="Bei Hochwasserwarnung: Verfolge NINA-App und befolge Behördenanweisungen. Evakuiere NUR wenn angeordnet. Wenn Wasser steigt und Flucht nicht mehr möglich: nach oben gehen (vertikale Evakuierung). NIEMALS durch fließendes Wasser fahren - 30cm reichen, um ein Auto wegzureißen."
-        keyStat="30 cm"
-        keyStatLabel="Wasser reißt Auto weg"
+        summary="Bei Hochwasserwarnung: Verfolge die Warn-App NINA und folge den Anweisungen der Behörden und Einsatzkräfte. Bring Kinder und Menschen, die Hilfe brauchen, rechtzeitig in Sicherheit. Steigt das Wasser und kommst du nicht mehr weg, geh nach oben. Geh nie in den Keller und fahr nicht durch überflutete Straßen, auch wenn das Wasser flach aussieht."
+        keyStat="Nie"
+        keyStatLabel="durch überflutete Straßen fahren"
       />
     </section>
 
@@ -127,13 +127,13 @@ const faqs = [
           Lehren aus der Ahrtal-Katastrophe 2021
         </h2>
         <p class="text-(--color-text-secondary) mb-3">
-          Im Juli 2021 starben über 180 Menschen bei der Flutkatastrophe im Ahrtal.
+          Im Juli 2021 starben bei der Flut in Rheinland-Pfalz und Nordrhein-Westfalen über 180 Menschen, 135 davon im Ahrtal.
           Die wichtigsten Lehren:
         </p>
         <ul class="space-y-1 text-sm">
           <li class="flex items-start gap-2">
             <Icon name="AlertCircle" size={16} class="text-red-500 mt-1 flex-shrink-0" />
-            <span><strong>Warnungen ernst nehmen:</strong> Viele ignorierten frühe Warnungen</span>
+            <span><strong>Warnungen ernst nehmen:</strong> Achte auf Warnungen und folge den Anweisungen</span>
           </li>
           <li class="flex items-start gap-2">
             <Icon name="AlertCircle" size={16} class="text-red-500 mt-1 flex-shrink-0" />
@@ -149,7 +149,8 @@ const faqs = [
 
     <!-- Warning Levels -->
     <section class="scenario-section">
-      <h2 class="section-title">Hochwasser-Warnstufen</h2>
+      <h2 class="section-title">Hochwasser-Klassen</h2>
+      <p class="text-(--color-text-secondary) mb-4">Eine bundesweit einheitliche Warnskala gibt es nicht. Das Hochwasserportal der Länder zeigt vier Klassen; die Schwellen und Meldestufen legt jedes Bundesland selbst fest.</p>
       <div class="grid gap-3">
         {warningLevels.map((level) => (
           <div class={`p-4 rounded-lg border-l-4 ${
@@ -159,7 +160,7 @@ const faqs = [
             'border-l-purple-500 bg-purple-50 dark:bg-purple-950/20'
           }`}>
             <div class="flex items-center gap-2 mb-1">
-              <span class="font-bold">Stufe {level.level}:</span>
+              <span class="font-bold">Klasse {level.level}:</span>
               <span class="font-semibold">{level.name}</span>
             </div>
             <p class="text-sm text-(--color-text-secondary)">{level.description}</p>
@@ -206,11 +207,11 @@ const faqs = [
           <h3 class="font-semibold group-hover:text-(--color-accent-primary)">NINA Warn-App</h3>
           <p class="text-sm text-(--color-text-secondary)">Offizielle Warn-App des Bundes</p>
         </a>
-        <a href="https://www.dwd.de/DE/wetter/warnungen/warnungen_node.html" target="_blank" rel="noopener noreferrer" class="card p-4 hover:border-(--color-accent-primary) transition-colors group">
+        <a href="https://www.dwd.de/DE/wetter/warnungen_gemeinden/warnWetter_node.html" target="_blank" rel="noopener noreferrer" class="card p-4 hover:border-(--color-accent-primary) transition-colors group">
           <h3 class="font-semibold group-hover:text-(--color-accent-primary)">DWD Warnungen</h3>
           <p class="text-sm text-(--color-text-secondary)">Wetterwarnungen inkl. Starkregen</p>
         </a>
-        <a href="https://www.elementar-versichern.de/" target="_blank" rel="noopener noreferrer" class="card p-4 hover:border-(--color-accent-primary) transition-colors group">
+        <a href="https://www.verbraucherzentrale.de/wissen/geld-versicherungen/weitere-versicherungen/versicherungsschutz-gegen-elementarschaeden-11440" target="_blank" rel="noopener noreferrer" class="card p-4 hover:border-(--color-accent-primary) transition-colors group">
           <h3 class="font-semibold group-hover:text-(--color-accent-primary)">Elementar-Versicherung</h3>
           <p class="text-sm text-(--color-text-secondary)">Informationen zur Absicherung</p>
         </a>

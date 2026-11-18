@@ -28,7 +28,7 @@ const phases = {
     },
     {
       title: 'Kaufe Wasserkanister',
-      detail: 'Lebensmittelechte Kanister von 10-20 Litern. Wechsle das Wasser alle 6 Monate.',
+      detail: 'Für Trinkwasser nimmst du am besten gekauftes Wasser in Flaschen. Selbst abgefülltes Leitungswasser eignet sich eher als Brauchwasser, etwa für die Toilette.',
       tip: 'An einem kühlen, dunklen Ort lagern'
     },
     {
@@ -80,7 +80,7 @@ const phases = {
     },
     {
       title: 'Rationiere nach Priorität',
-      detail: 'Trinken (40%) > Kochen (15%) > Hygiene (25%) > WC (15%) > Sonstiges (5%).',
+      detail: 'Erst Trinken und Kochen, dann Hygiene, zuletzt die Toilette. Für die Spülung nimmst du Brauchwasser.',
       tip: null
     },
   ],
@@ -165,21 +165,19 @@ const checklistCategories = [
 
 // Water needs table - German
 const waterNeeds = [
-  { use: 'Trinken', amount: '2L', notes: 'Mindestens lebensnotwendig' },
-  { use: 'Kochen', amount: '0,5-1L', notes: 'Falls du kochst' },
-  { use: 'Hygiene', amount: '2-4L', notes: 'Gesicht, Hände' },
-  { use: 'WC', amount: '3-6L', notes: 'Pro Spülung' },
+  { use: 'Trinken', amount: '1,5L', notes: 'Pro Person und Tag' },
+  { use: 'Kochen', amount: '0,5L', notes: 'Pro Person und Tag' },
 ];
 
 // FAQs - German context
 const faqs = [
   {
     question: 'Wie viel Wasser soll ich lagern?',
-    answer: 'Das BBK empfiehlt mindestens 2 Liter pro Person pro Tag. Eine 4-köpfige Familie braucht 24 Liter für 3 Tage. Ideal sind eher 2,5-3 Liter für mehr Komfort.'
+    answer: 'Das BBK rät zu 2 Litern pro Person und Tag, davon ein halber Liter zum Kochen. Eine vierköpfige Familie braucht 24 Liter für 3 Tage und 80 Liter für 10 Tage. Wasser für die Hygiene kommt dazu.'
   },
   {
     question: 'Wie lange bleibt gelagertes Wasser gut?',
-    answer: 'Flaschenwasser: 1-2 Jahre ungeöffnet. Leitungswasser in Kanistern: alle 6 Monate wechseln. Riecht oder schmeckt es seltsam? Erst aufbereiten.'
+    answer: 'Gekauftes Wasser tauschst du nach dem Mindesthaltbarkeitsdatum aus. Für selbst abgefülltes Leitungswasser gibt es laut Bundesanstalt für Landwirtschaft und Ernährung keine verlässliche Haltbarkeit; es eignet sich eher als Brauchwasser.'
   },
   {
     question: 'Kann ich Badewannenwasser trinken?',
@@ -187,7 +185,7 @@ const faqs = [
   },
   {
     question: 'Woran erkenne ich ob Wasser sicher ist?',
-    answer: 'Bei Zweifel: mindestens 3 Minuten abkochen oder Entkeimungstabletten nutzen. Trübes Wasser, Verfärbung oder seltsamer Geruch = ohne Behandlung nicht trinken.'
+    answer: 'Gilt ein Abkochgebot, lass das Wasser einmal sprudelnd aufkochen und dann mindestens 10 Minuten langsam abkühlen; ein Wasserkocher reicht dafür. So empfiehlt es das Umweltbundesamt. Trübes oder verfärbtes Wasser trinkst du nicht.'
   },
   {
     question: 'Was wenn die Störung länger als 3 Tage dauert?',
@@ -201,7 +199,7 @@ const faqs = [
   description="Vollständiger Ratgeber für Wasserausfall in Deutschland. Wie viel Wasser lagern, Leben ohne Leitungswasser und praktische Checkliste."
   locale="de"
   schemaType="Article"
-  dateModified="2025-12-15"
+  dateModified="2026-11-18"
   datePublished="2025-12-15"
   alternates={{
     es: '/es/escenarios/prepararse-corte-agua/',
@@ -228,7 +226,7 @@ const faqs = [
           <div class="scenario-meta">
             <span class="meta-item">6 min</span>
             <span class="meta-divider">·</span>
-            <span class="meta-item">Aktualisiert Dez 2025</span>
+            <span class="meta-item">Aktualisiert Nov. 2026</span>
           </div>
         </div>
       </div>
@@ -246,7 +244,7 @@ const faqs = [
     <!-- TL;DR -->
     <section class="scenario-section">
       <TLDRBlock
-        summary="Ein Erwachsener braucht mindestens 2 Liter pro Tag für Trinken und Basishygiene. Bei Vorankündigung: Badewanne und alle Behälter füllen. Ohne Warnung bist du auf deinen Vorrat angewiesen. Priorisiere immer Trinkwasser vor jedem anderen Gebrauch."
+        summary="Das BBK rät zu 2 Litern Wasser pro Person und Tag, davon ein halber Liter zum Kochen. Wasser für die Hygiene kommt dazu. Bei Vorankündigung: Badewanne und alle Behälter füllen. Ohne Warnung bist du auf deinen Vorrat angewiesen. Priorisiere immer Trinkwasser vor jedem anderen Gebrauch."
         keyStat="2L/Tag/Person"
         keyStatLabel="Mindestens"
         locale="de"
@@ -261,7 +259,7 @@ const faqs = [
         </div>
         <div class="gov-notice-content">
           <strong>BBK-Empfehlung:</strong> Lege einen Vorrat von mindestens 2 Litern Trinkwasser pro Person und Tag an.
-          Mehr Infos auf <a href="https://www.bbk.bund.de/DE/Warnung-Vorsorge/Vorsorge/Vorrat/vorrat_node.html" target="_blank" rel="noopener">bbk.bund.de</a>
+          Mehr Infos auf <a href="https://www.bbk.bund.de/DE/Warnung-Vorsorge/Vorsorge/So-koennen-Sie-sich-vorbereiten/Bevorraten/bevorraten_node.html" target="_blank" rel="noopener">bbk.bund.de</a>
         </div>
       </div>
     </section>
@@ -280,7 +278,7 @@ const faqs = [
           ))}
         </div>
         <p class="water-needs-total">
-          <strong>Gesamt mindestens:</strong> 8-15L/Person/Tag (im Notfall auf 2-5L reduzierbar)
+          <strong>Zusammen 2 Liter pro Person und Tag</strong>, so rechnet das BBK. Wasser für Hygiene und Toilette kommt dazu; dafür reicht Brauchwasser.
         </p>
       </div>
     </section>
@@ -444,9 +442,9 @@ const faqs = [
         </summary>
         <div class="sources-content">
           <ul>
-            <li><a href="https://www.bbk.bund.de/DE/Warnung-Vorsorge/Vorsorge/Vorrat/vorrat_node.html" target="_blank" rel="noopener">BBK - Bevorraten</a></li>
-            <li><a href="https://www.umweltbundesamt.de/themen/wasser/trinkwasser" target="_blank" rel="noopener">Umweltbundesamt - Trinkwasser</a></li>
-            <li><a href="https://www.who.int/water_sanitation_health/dwq/en/" target="_blank" rel="noopener">WHO - Wasserqualität</a></li>
+            <li><a href="https://www.bbk.bund.de/DE/Warnung-Vorsorge/Vorsorge/So-koennen-Sie-sich-vorbereiten/Bevorraten/bevorraten_node.html" target="_blank" rel="noopener">BBK - Bevorraten</a></li>
+            <li><a href="https://www.umweltbundesamt.de/system/files/document/260417_UBA_Empfehlungen_%C2%A7%C2%A762-68_nach_Freigabe_final_clean.pdf" target="_blank" rel="noopener">Umweltbundesamt - Empfehlungen zum Abkochgebot (PDF)</a></li>
+            <li><a href="https://www.ernaehrungsvorsorge.de/staatliche-vorsorge/haeufig-gestellte-fragen-faq" target="_blank" rel="noopener">Ernährungsvorsorge (BLE) - Fragen und Antworten zum Notvorrat</a></li>
           </ul>
         </div>
       </details>

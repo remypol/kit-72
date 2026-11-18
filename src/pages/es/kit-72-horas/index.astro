@@ -58,7 +58,7 @@ const essentialCategories = [
       { name: 'Copias de DNI/pasaporte', quantity: 'Todos los miembros', priority: 'critical' },
       { name: 'Tarjeta sanitaria', quantity: 'Copias', priority: 'critical' },
       { name: 'Números de emergencia', quantity: 'Lista impresa', priority: 'critical' },
-      { name: 'Efectivo', quantity: '100-200€ en billetes pequeños', priority: 'critical' },
+      { name: 'Efectivo', quantity: '70-100 € por persona, en billetes pequeños y monedas', priority: 'critical' },
       { name: 'Contactos familiares', quantity: 'Lista impresa', priority: 'recommended' },
     ]
   },
@@ -147,7 +147,7 @@ const commonMistakes = [
   {
     mistake: 'Kit demasiado pesado',
     why: 'Si no puedes cargarlo, no te servirá en una evacuación',
-    solution: 'Limita el peso a 10-15kg. Prioriza lo esencial.',
+    solution: 'Usa una mochila fácil de llevar y de un peso razonable. Prioriza lo esencial.',
   },
   {
     mistake: 'Olvidar el agua',
@@ -167,7 +167,7 @@ const commonMistakes = [
   {
     mistake: 'No incluir efectivo',
     why: 'Los cajeros y tarjetas pueden no funcionar',
-    solution: 'Incluye 100-200€ en billetes pequeños.',
+    solution: 'Incluye algo de efectivo en billetes pequeños y monedas; como referencia, 70-100 € por persona.',
   },
   {
     mistake: 'Olvidar la documentación',
@@ -179,7 +179,7 @@ const commonMistakes = [
 const faqs = [
   {
     question: '¿Por qué exactamente 72 horas?',
-    answer: 'Es el tiempo estimado que pueden tardar los servicios de emergencia en restablecer servicios básicos o llegar a zonas afectadas. Este estándar lo utilizan Protección Civil, Cruz Roja y organizaciones de emergencias en todo el mundo. No significa que todas las emergencias duren 72 horas, sino que es un período de autonomía razonable para la mayoría de situaciones.'
+    answer: 'La Comisión Europea propone que cada hogar pueda cubrir sus necesidades esenciales durante al menos 72 horas, y Cruz Roja Española recomienda tener agua para 3 días. Es un mínimo, no el plazo en que llegará la ayuda. No significa que todas las emergencias duren 72 horas, sino que es un período de autonomía razonable para la mayoría de situaciones.'
   },
   {
     question: '¿Qué diferencia hay entre el Kit 72 Horas y el Kit de Emergencia general?',
@@ -187,7 +187,7 @@ const faqs = [
   },
   {
     question: '¿Cuánto debería pesar mi kit?',
-    answer: 'Idealmente entre 10-15 kg para un adulto. Si pesa más, probablemente no podrás cargarlo durante mucho tiempo en una evacuación. Prioriza agua, comida, documentación y botiquín. El resto es secundario si el peso es un problema.'
+    answer: 'No hay una cifra oficial. Cruz Roja habla de una mochila fácil de llevar y de un peso razonable. Cárgala y camina media hora con ella: si no puedes, quita peso. Prioriza agua, comida, documentación y botiquín. El resto es secundario si el peso es un problema.'
   },
   {
     question: '¿Necesito un kit por persona?',
@@ -207,7 +207,7 @@ const faqs = [
 <ArticleLayout
   faqData={faqs}
   title="Mochila de 72 horas: lista completa y qué llevar"
-  description="Qué lleva la mochila de 72 horas: lista completa con cantidades por persona, lo que recomiendan Cruz Roja y Protección Civil y cómo organizarla."
+  description="Qué lleva la mochila de 72 horas: lista completa con cantidades por persona, lo que recomienda Cruz Roja Española y cómo organizarla."
   updatedDate="2026-11-17"
   author="Equipo Kit-72"
   readTime="14 min"
@@ -238,7 +238,7 @@ const faqs = [
       en casa o si hay que salir. La lista en corto:
     </p>
     <ol>
-      <li><strong>Agua:</strong> 3 litros por persona y día, 9 litros para 72 horas</li>
+      <li><strong>Agua:</strong> en Kit-72 calculamos 3 litros por persona y día, 9 litros para 72 horas; Cruz Roja dice «agua para 3 días», sin cifra</li>
       <li><strong>Comida:</strong> alimentos que no necesiten nevera ni cocina</li>
       <li><strong>Luz:</strong> linterna y pilas de repuesto</li>
       <li><strong>Información:</strong> radio a pilas o de dinamo</li>
@@ -249,10 +249,10 @@ const faqs = [
     </ol>
     <h3>¿Qué recomienda la Cruz Roja?</h3>
     <p>
-      No existe una única lista oficial: cada sociedad nacional de la Cruz Roja publica la suya.
-      Todas coinciden en lo esencial, que es lo que ves arriba: agua, comida, medicación, documentos,
-      botiquín, linterna y radio. También coinciden en dos consejos prácticos: que cada persona del
-      hogar tenga su propia mochila y que se revise el contenido con regularidad para retirar lo caducado.
+      No existe una única lista oficial. Cruz Roja Española publica la suya: agua para 3 días, alimentos
+      no perecederos, linterna con pilas de repuesto, radio de pilas o de carga manual, silbato, botiquín y
+      medicación, copias de documentos, efectivo en billetes pequeños, higiene, ropa extra y manta térmica.
+      Aconseja una mochila fácil de llevar, guardada en un lugar accesible, y revisarla periódicamente.
     </p>
     <p>
       Las cantidades por persona están más abajo. En el
@@ -291,40 +291,37 @@ const faqs = [
   <section id="por-que-72-horas" class="mb-12">
     <h2>¿Por qué 72 horas?</h2>
     <p>
-      El período de 72 horas (3 días) no es arbitrario. Es el estándar internacional recomendado por:
+      El período de 72 horas (3 días) viene de la Comisión Europea, que lo propone como nivel mínimo
+      de autosuficiencia para cada hogar. Otros organismos dicen algo parecido:
     </p>
     <ul>
-      <li><strong>Protección Civil</strong> (España y Latinoamérica)</li>
-      <li><strong>Cruz Roja</strong> internacional</li>
-      <li><strong>FEMA</strong> (Estados Unidos)</li>
-      <li><strong>Organismos de gestión de emergencias</strong> de todo el mundo</li>
+      <li><strong>Comisión Europea:</strong> al menos 72 horas; algunos países piden una semana o más</li>
+      <li><strong>Cruz Roja Española:</strong> agua para 3 días</li>
+      <li><strong>Ready.gov</strong> (Estados Unidos): «varios días»</li>
     </ul>
 
     <p>¿Por qué este tiempo específico?</p>
 
     <div class="grid md:grid-cols-3 gap-4 my-6 not-prose">
       <div class="card p-4">
-        <div class="text-2xl mb-2">⏱️</div>
-        <h3 class="font-semibold mb-1 text-(--color-text-primary) text-base">Tiempo de respuesta</h3>
+        <h3 class="font-semibold mb-1 text-(--color-text-primary) text-base">Un mínimo</h3>
         <p class="text-sm text-(--color-text-secondary) m-0">
-          72 horas es el tiempo máximo típico para que los servicios de emergencia restablezcan
-          suministros básicos en la mayoría de situaciones.
+          72 horas es el mínimo que propone la Comisión Europea, no el plazo en que
+          llegará la ayuda. En el apagón de 2025 el suministro tardó más de 18 horas en volver.
         </p>
       </div>
       <div class="card p-4">
-        <div class="text-2xl mb-2">⚖️</div>
-        <h3 class="font-semibold mb-1 text-(--color-text-primary) text-base">Equilibrio práctico</h3>
+                <h3 class="font-semibold mb-1 text-(--color-text-primary) text-base">Equilibrio práctico</h3>
         <p class="text-sm text-(--color-text-secondary) m-0">
           Es suficiente para cubrir la mayoría de emergencias, pero el kit sigue siendo
           manejable en peso y tamaño.
         </p>
       </div>
       <div class="card p-4">
-        <div class="text-2xl mb-2">📊</div>
-        <h3 class="font-semibold mb-1 text-(--color-text-primary) text-base">Dato estadístico</h3>
+        <h3 class="font-semibold mb-1 text-(--color-text-primary) text-base">Paso a paso</h3>
         <p class="text-sm text-(--color-text-secondary) m-0">
-          El 95% de las emergencias que afectan a civiles se resuelven o estabilizan
-          en menos de 72 horas.
+          Empieza por tres días y amplía poco a poco. Casi todo lo que hace falta
+          ya lo compras: basta con tener un poco más en casa.
         </p>
       </div>
     </div>
@@ -587,23 +584,23 @@ const faqs = [
     <h2 id="fuentes">Fuentes y referencias</h2>
     <ul class="text-sm space-y-2">
       <li>
-        <a href="https://www.proteccioncivil.es/" target="_blank" rel="noopener">
-          Dirección General de Protección Civil y Emergencias — España
+        <a href="https://www.proteccioncivil.es/gestion-riesgos/recomendaciones" target="_blank" rel="noopener">
+          Dirección General de Protección Civil y Emergencias — Recomendaciones por riesgo
         </a>
       </li>
       <li>
-        <a href="https://www.cruzroja.es/" target="_blank" rel="noopener">
-          Cruz Roja Española — Guías de preparación ante emergencias
+        <a href="https://www2.cruzroja.es/preparacionantedesastres" target="_blank" rel="noopener">
+          Cruz Roja Española — Preparación ante desastres
         </a>
       </li>
       <li>
-        <a href="https://www.ready.gov/" target="_blank" rel="noopener">
+        <a href="https://www.ready.gov/kit" target="_blank" rel="noopener">
           Ready.gov (FEMA) — Build a Kit
         </a>
       </li>
       <li>
-        <a href="https://www.ifrc.org/" target="_blank" rel="noopener">
-          Federación Internacional de la Cruz Roja
+        <a href="https://civil-protection-knowledge-network.europa.eu/system/files/2026-11/sufficiency-of-at-least-72-hours-under-the-eu-preparedness-union-strategy.pdf" target="_blank" rel="noopener">
+          Comisión Europea — Autosuficiencia de al menos 72 horas (PDF, en inglés)
         </a>
       </li>
     </ul>

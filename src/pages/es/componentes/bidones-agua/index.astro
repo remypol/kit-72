@@ -221,10 +221,9 @@ const storageLocations = [
 ];
 
 const waterTreatment = [
-  { method: 'Sin tratamiento (agua grifo)', duration: '6 meses', notes: 'El cloro residual protege. Rotar regularmente.' },
-  { method: 'Pastillas potabilizadoras', duration: '5 años', notes: 'Sigue instrucciones. Sabor a cloro.' },
-  { method: 'Lejía (hipoclorito sodio 5%)', duration: '1 año', notes: '2 gotas/litro. Solo lejía sin perfume ni aditivos.' },
-  { method: 'Conservante comercial', duration: '5 años', notes: 'Productos específicos como Aqua Clean.' },
+  { method: 'Sin tratamiento (agua grifo)', duration: 'Sin plazo oficial', notes: 'Ninguna autoridad española da un plazo. Renuévala con frecuencia.' },
+  { method: 'Pastillas potabilizadoras', duration: 'Según envase', notes: 'Sigue las instrucciones. Solo sirven en agua transparente.' },
+  { method: 'Lejía apta para desinfectar agua', duration: 'Sin plazo oficial', notes: '2 gotas por litro y esperar 30 minutos. Solo lejía sin perfume ni aditivos.' },
   { method: 'Agua destilada', duration: '2+ años', notes: 'Para uso médico/baterías. No ideal para beber largo plazo.' }
 ];
 
@@ -263,7 +262,7 @@ const commonMistakes = [
   title="Bidones para agua: Material y tamaño — Guía de compra"
   description="Guía completa de recipientes para almacenar agua de emergencia: tipos de bidones, materiales seguros, tratamiento y conservación."
   locale="es"
-  dateModified="2025-12-15"
+  dateModified="2026-11-18"
   schemaType="Article"
 >
   <section class="py-16">
@@ -284,7 +283,7 @@ const commonMistakes = [
           Bidones y Almacenamiento de Agua
         </h1>
         <p class="text-lg text-(--color-text-secondary)">
-          El agua es lo más crítico en emergencias. Sin ella solo sobrevives 3 días.
+          El agua es lo primero que hay que asegurar en una emergencia.
           Elegir los recipientes correctos y almacenar bien es fundamental.
         </p>
         <div class="mt-8">
@@ -303,7 +302,7 @@ const commonMistakes = [
           Recomendación rápida
         </h3>
         <p class="text-(--color-text-secondary) m-0">
-          <strong>Mínimo:</strong> 9 litros por persona para 3 días (3L/día).
+          <strong>Cálculo de Kit-72:</strong> 9 litros por persona para 3 días (3 L/día). No hay una cifra oficial estatal.
           <strong>Ideal:</strong> 20-30 litros por persona combinando botellas y bidones.
           <strong>Presupuesto:</strong> 20-50€ en contenedores reutilizables.
         </p>
@@ -423,7 +422,7 @@ const commonMistakes = [
             </table>
           </div>
           <div class="p-4 bg-(--color-bg-tertiary) text-xs text-(--color-text-muted)">
-            Busca el símbolo de reciclaje con el número en el fondo del recipiente. HDPE (#2) es el mejor.
+            Usa solo recipientes marcados «para contacto con alimentos» o con el símbolo de la copa y el tenedor. El número del triángulo indica el tipo de plástico, no que sea apto para alimentos.
           </div>
         </div>
       </div>
@@ -458,8 +457,8 @@ const commonMistakes = [
         <div class="mt-4 p-4 bg-(--color-status-info)/10 border border-(--color-status-info)/30 rounded-lg">
           <p class="text-sm text-(--color-text-secondary) m-0 flex items-start gap-2">
             <Icon name="Lightbulb" size={18} class="text-(--color-status-info) flex-shrink-0 mt-0.5" />
-            <span><strong class="text-(--color-status-info)">Consejo:</strong> El agua del grifo en España ya
-            viene tratada y dura 6 meses sin problemas si se almacena correctamente (oscuro, fresco, cerrado).</span>
+            <span><strong class="text-(--color-status-info)">Consejo:</strong> Para beber, guarda agua envasada y respeta
+            la fecha de la etiqueta. Si llenas bidones con agua del grifo, renuévala con frecuencia: ninguna autoridad española da un plazo.</span>
           </p>
         </div>
       </div>
@@ -597,16 +596,16 @@ const commonMistakes = [
         </h3>
         <div class="space-y-3 text-sm text-(--color-text-secondary)">
           <div class="flex items-center gap-3">
-            <span class="font-mono bg-(--color-bg-tertiary) px-2 py-1 rounded">Cada 6 meses</span>
-            <span>Rotar agua del grifo almacenada en bidones</span>
+            <span class="font-mono bg-(--color-bg-tertiary) px-2 py-1 rounded">Con frecuencia</span>
+            <span>Renovar el agua del grifo almacenada en bidones (no hay plazo oficial)</span>
           </div>
           <div class="flex items-center gap-3">
-            <span class="font-mono bg-(--color-bg-tertiary) px-2 py-1 rounded">Cada 2 años</span>
-            <span>Revisar agua embotellada comercial (caducidad)</span>
+            <span class="font-mono bg-(--color-bg-tertiary) px-2 py-1 rounded">Según etiqueta</span>
+            <span>Agua embotellada comercial: respeta la fecha del envase</span>
           </div>
           <div class="flex items-center gap-3">
-            <span class="font-mono bg-(--color-bg-tertiary) px-2 py-1 rounded">Cada 5 años</span>
-            <span>Renovar pastillas potabilizadoras</span>
+            <span class="font-mono bg-(--color-bg-tertiary) px-2 py-1 rounded">Según envase</span>
+            <span>Pastillas potabilizadoras: mira la fecha de caducidad</span>
           </div>
           <p class="text-xs text-(--color-text-muted) mt-2">
             Consejo: Usa el sistema FIFO (primero en entrar, primero en salir). Pon fecha en cada bidón.

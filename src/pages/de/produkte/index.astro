@@ -23,11 +23,11 @@ const products = [
   },
   {
     title: 'Notfallradio',
-    description: 'AM/FM-Radios und wie du ohne Internet informiert bleibst.',
+    description: 'UKW- und DAB+-Radios und wie du ohne Internet informiert bleibst.',
     href: '/de/produkte/notfallradio/',
     icon: 'Radio',
     priceRange: '40-100€',
-    features: ['AM/FM', 'Solar-/Kurbelaufladung', 'Eingebaute Taschenlampe']
+    features: ['UKW und DAB+', 'Solar-/Kurbelaufladung', 'Eingebaute Taschenlampe']
   },
   {
     title: 'Wasserspeicher',
@@ -70,10 +70,10 @@ const totalBudget = {
 };
 
 const priorityOrder = [
-  { step: 1, icon: 'Droplet', title: 'Wasser + Behälter', description: 'Ohne Wasser überlebst du nur 3 Tage. Das Kritischste.', priority: 'critical' },
+  { step: 1, icon: 'Droplet', title: 'Wasser + Behälter', description: 'Ohne Flüssigkeit kommt ein Mensch laut BBK nur etwa vier Tage aus. Rechne mit 2 Litern pro Person und Tag.', priority: 'critical' },
   { step: 2, icon: 'Flashlight', title: 'Beleuchtung (Taschenlampen)', description: 'Ohne Licht kannst du nachts nichts tun. Günstig und essentiell.', priority: 'critical' },
   { step: 3, icon: 'Heart', title: 'Erste-Hilfe-Kasten', description: 'Kleine Verletzungen behandeln verhindert größere Probleme.', priority: 'high' },
-  { step: 4, icon: 'UtensilsCrossed', title: 'Notnahrung', description: 'Du kannst Wochen ohne Essen überleben, aber Energie ist wichtig.', priority: 'high' },
+  { step: 4, icon: 'UtensilsCrossed', title: 'Notnahrung', description: 'Haltbare Lebensmittel, die du ohne Kochen essen kannst.', priority: 'high' },
   { step: 5, icon: 'Battery', title: 'Energie (Powerbanks)', description: 'Halte dein Handy geladen für Kommunikation.', priority: 'medium' },
   { step: 6, icon: 'Radio', title: 'Notfallradio', description: 'Offizielle Informationen, wenn es kein Internet gibt.', priority: 'medium' },
   { step: 7, icon: 'Backpack', title: 'Evakuierungsrucksack', description: 'Um alles mitzunehmen, wenn du evakuieren musst.', priority: 'low' },

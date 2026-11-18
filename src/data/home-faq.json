@@ -24,11 +24,11 @@
   "de": [
     {
       "q": "Was gehört in ein Notfallpaket?",
-      "a": "Ein Notfallpaket enthält: Trinkwasser (2-3 Liter pro Person pro Tag), haltbare Lebensmittel für 10 Tage, Taschenlampe mit Batterien, batteriebetriebenes Radio, Erste-Hilfe-Kasten, wichtige Medikamente, persönliche Dokumente in Kopie, Bargeld, Powerbank und warme Kleidung. Das BBK empfiehlt, für mindestens 72 Stunden bis 10 Tage selbstversorgt sein zu können."
+      "a": "Ein Notfallpaket enthält: Trinkwasser (2 Liter pro Person und Tag), haltbare Lebensmittel, Taschenlampe mit Batterien, batteriebetriebenes Radio, Erste-Hilfe-Kasten, wichtige Medikamente, persönliche Dokumente in Kopie, Bargeld, Powerbank und warme Kleidung. Das BBK rät, sich möglichst zehn Tage selbst versorgen zu können; auch ein Vorrat für drei Tage hilft schon sehr."
     },
     {
       "q": "Wie viel Wasser sollte ich für den Notfall lagern?",
-      "a": "Das Bundesamt für Bevölkerungsschutz (BBK) empfiehlt 2 Liter Trinkwasser pro Person pro Tag. Für 72 Stunden benötigst du also mindestens 6 Liter pro Person. Für eine 4-köpfige Familie sind das 24 Liter für 3 Tage. Zusätzlich wird Wasser für Kochen und Hygiene benötigt. Haustiere brauchen etwa 50-100ml pro kg Körpergewicht täglich."
+      "a": "Das Bundesamt für Bevölkerungsschutz (BBK) empfiehlt 2 Liter Trinkwasser pro Person pro Tag. Für 72 Stunden benötigst du also mindestens 6 Liter pro Person. Für eine 4-köpfige Familie sind das 24 Liter für 3 Tage. Darin ist ein halber Liter pro Tag zum Kochen enthalten; Wasser für die Hygiene kommt dazu. Haustiere brauchen etwa 50-100ml pro kg Körpergewicht täglich."
     },
     {
       "q": "Wie bereite ich mich auf einen Stromausfall vor?",
@@ -36,7 +36,7 @@
     },
     {
       "q": "Warum ist Notfallvorsorge in Deutschland wichtig?",
-      "a": "Deutschland ist verschiedenen Notfallszenarien ausgesetzt: Stromausfälle (auch großflächig möglich), Hochwasser und Überschwemmungen (wie im Ahrtal 2021), Hitzewellen, Winterstürme und Cyberangriffe auf kritische Infrastruktur. Das BBK betont, dass Bürger in den ersten 72 Stunden bis 10 Tagen auf sich selbst gestellt sein können, bis Hilfe organisiert wird."
+      "a": "Deutschland ist verschiedenen Notfallszenarien ausgesetzt: Stromausfälle (auch großflächig möglich), Hochwasser und Überschwemmungen (wie im Ahrtal 2021), Hitzewellen, Winterstürme und Cyberangriffe auf kritische Infrastruktur. Das BBK rät deshalb, sich möglichst zehn Tage selbst versorgen zu können; auch ein Vorrat für drei Tage hilft schon sehr."
     },
     {
       "q": "Was kostet ein Notfallpaket?",
@@ -50,7 +50,7 @@
     },
     {
       "q": "¿Cuánta agua necesito almacenar para una emergencia?",
-      "a": "Se recomienda almacenar un mínimo de 3 litros de agua por persona por día. Para una familia de 4 personas durante 72 horas, necesitarías aproximadamente 36 litros. En climas cálidos o para personas con necesidades especiales, considera aumentar esta cantidad."
+      "a": "Protección Civil y Cruz Roja Española recomiendan tener una reserva de agua, pero no dan una cifra en litros. En Kit-72 calculamos con 3 litros por persona y día. Para una familia de 4 personas durante 72 horas, necesitarías aproximadamente 36 litros. En climas cálidos o para personas con necesidades especiales, considera aumentar esta cantidad."
     },
     {
       "q": "¿Cuáles son los 15 elementos esenciales de un kit de emergencia?",

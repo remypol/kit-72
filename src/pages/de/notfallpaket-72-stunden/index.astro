@@ -133,7 +133,7 @@ const adaptations = [
 
 const maintenanceSchedule = [
   { task: 'Verfallsdaten kontrollieren', frequency: 'Alle 3 Monate' },
-  { task: 'Flaschenwasser austauschen', frequency: 'Alle 6 Monate' },
+  { task: 'Flaschenwasser austauschen', frequency: 'Nach dem Mindesthaltbarkeitsdatum' },
   { task: 'Batterien und Powerbanks prüfen', frequency: 'Alle 3 Monate' },
   { task: 'Dokumente aktualisieren', frequency: 'Bei Änderungen' },
   { task: 'Kleidung kontrollieren (Kindergrößen)', frequency: 'Alle 6 Monate' },
@@ -146,7 +146,7 @@ const commonMistakes = [
   {
     mistake: 'Zu schweres Paket',
     why: 'Wenn du es nicht tragen kannst, ist es bei Evakuierung nutzlos',
-    solution: 'Begrenze Gewicht auf 10-15 kg. Priorisiere das Essentielle.',
+    solution: 'Nimm pro Person nicht mehr mit, als in einen Rucksack passt. Priorisiere das Essentielle.',
   },
   {
     mistake: 'Wasser vergessen',
@@ -178,7 +178,7 @@ const commonMistakes = [
 const faqs = [
   {
     question: 'Warum genau 72 Stunden?',
-    answer: 'Das ist die Zeit die Hilfsdienste durchschnittlich brauchen um Basisdienste wiederherzustellen oder betroffene Gebiete zu erreichen. Das BBK und internationale Organisationen wie das Rote Kreuz verwenden diesen Standard. Es bedeutet nicht dass alle Notsituationen 72 Stunden dauern, aber es ist eine vernünftige Zeit der Selbstversorgung für die meisten Situationen.'
+    answer: 'Drei Tage sind der Einstieg: Das BBK rät, sich möglichst zehn Tage selbst versorgen zu können, und sagt, dass auch ein Vorrat für zumindest drei Tage schon sehr hilft. Es bedeutet nicht dass alle Notsituationen 72 Stunden dauern, aber es ist eine vernünftige Zeit der Selbstversorgung für die meisten Situationen.'
   },
   {
     question: 'Was ist der Unterschied zwischen Notfallpaket und Notfalltasche?',
@@ -186,7 +186,7 @@ const faqs = [
   },
   {
     question: 'Wie viel soll mein Notfallpaket wiegen?',
-    answer: 'Ideal zwischen 10-15 kg für einen Erwachsenen. Wenn es schwerer ist, kannst du es wahrscheinlich nicht lange bei einer Evakuierung tragen. Priorisiere Wasser, Nahrung, Dokumente und Erste Hilfe. Der Rest ist sekundär wenn Gewicht ein Problem ist.'
+    answer: 'Eine feste Kilozahl nennt das BBK nicht. Es rät, pro Person nicht mehr mitzunehmen, als in einen Rucksack passt. Setz ihn auf und geh eine halbe Stunde damit: Geht das nicht, nimm Gewicht heraus. Priorisiere Wasser, Nahrung, Dokumente und Erste Hilfe. Der Rest ist sekundär wenn Gewicht ein Problem ist.'
   },
   {
     question: 'Brauche ich pro Person ein Paket?',
@@ -198,7 +198,7 @@ const faqs = [
   },
   {
     question: 'Wo finde ich die offizielle BBK-Checkliste?',
-    answer: 'Das Bundesamt für Bevölkerungsschutz und Katastrophenhilfe hat eine offizielle Notfallpaketliste auf bbk.bund.de. Suche nach "Ratgeber Notfallvorsorge" oder "Checkliste" auf der Website. Unsere Checkliste basiert auf diesen offiziellen Richtlinien, ergänzt mit praktischen Tipps.'
+    answer: 'Das Bundesamt für Bevölkerungsschutz und Katastrophenhilfe veröffentlicht den Ratgeber „Vorsorgen für Krisen und Katastrophen“ mit Checkliste auf bbk.bund.de. Unsere Checkliste orientiert sich daran und ergänzt praktische Tipps.'
   },
 ];
 ---
@@ -238,8 +238,8 @@ const faqs = [
   <section id="ueberlebenspaket-inhalt" class="mb-12">
     <h2>Was gehört in ein Überlebenspaket für 72 Stunden?</h2>
     <p>
-      Ein Überlebenspaket, vom BBK Notgepäck genannt, enthält alles, womit eine Person
-      drei Tage ohne Hilfe auskommt. Die Kurzfassung:
+      Das BBK unterscheidet den Vorrat zu Hause und das Notgepäck: einen Rucksack pro Person für die
+      ersten Tage außer Haus, mit Verpflegung für zwei Tage und einer Trinkflasche. Die Kurzfassung für drei Tage:
     </p>
     <ol>
       <li><strong>Wasser:</strong> 2 Liter pro Person und Tag, also 6 Liter für 72 Stunden</li>
@@ -296,25 +296,19 @@ const faqs = [
   <section id="warum-72-stunden" class="mb-12">
     <h2>Warum 72 Stunden?</h2>
     <p>
-      Die Zeitspanne von 72 Stunden (3 Tagen) ist keine willkürliche Wahl. Es ist der internationale Standard
-      empfohlen von:
+      Drei Tage sind der Einstieg, den das BBK als Minimum nennt; empfohlen sind möglichst zehn Tage.
+      Die Europäische Kommission nennt 72 Stunden als Mindestmaß an Selbstversorgung für jeden Haushalt.
     </p>
-    <ul>
-      <li><strong>BBK</strong> (Bundesamt für Bevölkerungsschutz)</li>
-      <li><strong>Rotes Kreuz</strong> international</li>
-      <li><strong>THW</strong> (Technisches Hilfswerk)</li>
-      <li><strong>FEMA</strong> (USA)</li>
-    </ul>
 
     <p>Warum genau diese Zeitspanne?</p>
 
     <div class="grid md:grid-cols-3 gap-4 my-6 not-prose">
       <div class="card p-4">
         <div class="text-2xl mb-2">⏱️</div>
-        <h3 class="font-semibold mb-1 text-(--color-text-primary) text-base">Reaktionszeit</h3>
+        <h3 class="font-semibold mb-1 text-(--color-text-primary) text-base">Ein Minimum</h3>
         <p class="text-sm text-(--color-text-secondary) m-0">
-          72 Stunden ist die typische maximale Zeit für Hilfsdienste um Basisdienste
-          in den meisten Situationen wiederherzustellen.
+          72 Stunden sind ein Mindestmaß, nicht die Frist, in der Hilfe sicher da ist.
+          Das BBK rät zu möglichst zehn Tagen.
         </p>
       </div>
       <div class="card p-4">
@@ -327,10 +321,10 @@ const faqs = [
       </div>
       <div class="card p-4">
         <div class="text-2xl mb-2">📊</div>
-        <h3 class="font-semibold mb-1 text-(--color-text-primary) text-base">Statistischer Fakt</h3>
+        <h3 class="font-semibold mb-1 text-(--color-text-primary) text-base">Schritt für Schritt</h3>
         <p class="text-sm text-(--color-text-secondary) m-0">
-          95% der Notsituationen die Bürger betreffen werden innerhalb von
-          72 Stunden gelöst oder stabilisiert.
+          Fang mit drei Tagen an und bau den Vorrat nach und nach aus.
+          Was du ohnehin isst und trinkst, kaufst du einfach etwas früher nach.
         </p>
       </div>
     </div>
@@ -571,18 +565,18 @@ const faqs = [
         </a>
       </li>
       <li>
-        <a href="https://www.drk.de/" target="_blank" rel="noopener">
-          Deutsches Rotes Kreuz — Katastrophenschutz
+        <a href="https://www.bbk.bund.de/DE/Warnung-Vorsorge/Vorsorge/So-koennen-Sie-sich-vorbereiten/Notgepaeck/notgepaeck_node.html" target="_blank" rel="noopener">
+          BBK — Notgepäck
         </a>
       </li>
       <li>
-        <a href="https://www.thw.de/" target="_blank" rel="noopener">
-          THW — Technisches Hilfswerk
+        <a href="https://www.ernaehrungsvorsorge.de/private-vorsorge/notvorrat" target="_blank" rel="noopener">
+          Ernährungsvorsorge (BLE) — Notvorrat
         </a>
       </li>
       <li>
-        <a href="https://www.ready.gov/" target="_blank" rel="noopener">
-          Ready.gov (FEMA) — Build a Kit
+        <a href="https://www.bbk.bund.de/DE/Warnung-Vorsorge/Vorsorge/So-koennen-Sie-sich-vorbereiten/Bevorraten/bevorraten_node.html" target="_blank" rel="noopener">
+          BBK — Bevorraten
         </a>
       </li>
     </ul>

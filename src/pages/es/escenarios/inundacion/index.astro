@@ -22,9 +22,9 @@ const scenarioKey = 'inundacion';
 // Warning levels
 const warningLevels = [
   { level: 'Verde', description: 'Sin riesgo significativo', action: 'Situación normal', color: '#22c55e' },
-  { level: 'Amarillo', description: 'Posibles lluvias fuertes', action: 'Mantente informado, prepara kit', color: '#eab308' },
-  { level: 'Naranja', description: 'Lluvias muy fuertes, posibles inundaciones', action: 'Evita desplazamientos, prepara evacuación', color: '#f97316' },
-  { level: 'Rojo', description: 'Riesgo extremo, peligro para la vida', action: 'Sigue instrucciones de emergencias, evacúa si te lo indican', color: '#ef4444' },
+  { level: 'Amarillo', description: 'Peligro bajo, con algunos impactos posibles', action: 'Sigue la predicción', color: '#eab308' },
+  { level: 'Naranja', description: 'Peligro importante, con posibles impactos graves', action: 'Limita las actividades no esenciales', color: '#f97316' },
+  { level: 'Rojo', description: 'Peligro extraordinario, con posibles impactos muy graves o catastróficos', action: 'Infórmate en tiempo real, sigue a las autoridades y evita desplazamientos no urgentes', color: '#ef4444' },
 ];
 
 // Phase content
@@ -32,7 +32,7 @@ const phases = {
   antes: [
     {
       title: 'Conoce el riesgo de tu zona',
-      detail: 'Comprueba si vives en zona inundable. Consulta el mapa de riesgos de Protección Civil o tu ayuntamiento.',
+      detail: 'Comprueba si vives en zona inundable. Consulta el Sistema Nacional de Cartografía de Zonas Inundables del MITECO o pregunta en tu ayuntamiento.',
       tip: 'Las zonas cerca de ríos, barrancos o zonas bajas tienen mayor riesgo'
     },
     {
@@ -64,12 +64,12 @@ const phases = {
   durante: [
     {
       title: 'Sigue las alertas oficiales',
-      detail: 'AEMET, Protección Civil, 112. Activa las alertas en tu móvil.',
+      detail: 'AEMET, Protección Civil, 112. No tienes que instalar ni activar nada: ES-Alert llega a todos los móviles con cobertura en la zona, aunque estén en silencio.',
       tip: 'No te fíes solo de apps meteorológicas comerciales'
     },
     {
       title: 'Evita zonas inundables',
-      detail: 'No camines ni conduzcas por agua. 15 cm de agua en movimiento pueden derribarte. 30 cm arrastran un coche.',
+      detail: 'No cruces zonas inundadas ni en coche ni a pie.',
       tip: null
     },
     {
@@ -80,12 +80,12 @@ const phases = {
     {
       title: 'Si estás en el coche',
       detail: 'Da la vuelta si ves agua en la carretera. Si el agua te atrapa, sal del coche inmediatamente.',
-      tip: 'El coche puede flotar con solo 60 cm de agua'
+      tip: 'Sal del coche si se atasca, si el agua supera los ejes de las ruedas o te llega a la rodilla, o si el nivel empieza a subir'
     },
     {
       title: 'Si te atrapan las aguas',
       detail: 'Sube al punto más alto posible. Señala tu posición. Llama al 112.',
-      tip: 'No nades contra la corriente - busca algo flotante'
+      tip: 'Aléjate de ríos, arroyos y zonas bajas y ve a un punto elevado'
     },
     {
       title: 'Evacúa si te lo ordenan',
@@ -112,7 +112,7 @@ const phases = {
     {
       title: 'Desecha alimentos en contacto con agua',
       detail: 'Cualquier comida que haya tocado el agua de inundación no es segura.',
-      tip: 'Esto incluye conservas si el agua ha tocado la tapa'
+      tip: 'Las latas y tarros herméticos y sin daños se pueden aprovechar: lávalos con agua y jabón, sumérgelos dos minutos en agua hirviendo y déjalos secar antes de abrirlos'
     },
     {
       title: 'Limpia y desinfecta',
@@ -139,7 +139,7 @@ const checklistCategories = [
       { id: 'comida', name: 'Comida no perecedera', quantity: '24h/persona', priority: 'critical' as const, notes: 'Barritas, frutos secos' },
       { id: 'documentos', name: 'Copias de documentos', quantity: 'En bolsa impermeable', priority: 'critical' as const },
       { id: 'medicinas', name: 'Medicamentos esenciales', quantity: '1 semana', priority: 'critical' as const },
-      { id: 'dinero', name: 'Efectivo', quantity: '100-200€', priority: 'critical' as const, notes: 'Billetes pequeños' },
+      { id: 'dinero', name: 'Efectivo', quantity: '70-100 €/persona', priority: 'critical' as const, notes: 'Billetes pequeños y monedas; referencia del Banco de España' },
     ]
   },
   {
@@ -192,21 +192,19 @@ const checklistCategories = [
 
 // Recent flood events in Spain
 const recentFloods = [
-  { date: 'Oct 2024', event: 'DANA Valencia', impact: 'Devastación histórica, múltiples víctimas, pueblos aislados' },
-  { date: 'Sep 2023', event: 'DANA Comunidad Valenciana', impact: 'Carreteras cortadas, evacuaciones' },
-  { date: 'Sep 2022', event: 'DANA Murcia y Almería', impact: 'Inundaciones graves, daños agrícolas' },
-  { date: 'Sep 2019', event: 'DANA Alicante y Murcia', impact: '6 fallecidos, miles de desplazados' },
+  { date: 'Oct 2024', event: 'DANA en Valencia', impact: 'Inundaciones catastróficas en la provincia de Valencia' },
+  { date: 'Sep 2019', event: 'DANA en Alicante y Murcia', impact: '7 fallecidos entre el 11 y el 15 de septiembre, según AEMET' },
 ];
 
 // FAQs
 const faqs = [
   {
     question: '¿Qué es una DANA?',
-    answer: 'DANA (Depresión Aislada en Niveles Altos) es una masa de aire frío que se separa de la corriente polar y puede provocar lluvias torrenciales, especialmente en el Mediterráneo. Antes se llamaba "gota fría".'
+    answer: 'Una DANA (Depresión Aislada en Niveles Altos) es una baja con aire frío en altura que se separa de la corriente en chorro. Puede provocar lluvias torrenciales, sobre todo en el Mediterráneo. «Gota fría» es el nombre popular.'
   },
   {
     question: '¿Cuánta agua puede arrastrar un coche?',
-    answer: 'Solo 30 cm de agua en movimiento pueden arrastrar un coche. Con 60 cm el vehículo flota y pierde todo el control. NUNCA intentes cruzar una carretera inundada.'
+    answer: 'Protección Civil no da una cifra: pide no cruzar zonas inundadas ni en coche ni a pie. Sal del coche si se atasca, si el agua supera los ejes de las ruedas o te llega a la rodilla, o si el nivel empieza a subir. Si no puedes abrir las puertas, sal por las ventanillas.'
   },
   {
     question: '¿Debo bajar al garaje a por mi coche?',
@@ -214,7 +212,7 @@ const faqs = [
   },
   {
     question: '¿Cuándo debo evacuar?',
-    answer: 'Evacúa inmediatamente si: te lo ordenan las autoridades, el agua empieza a entrar en tu casa, o estás en zona baja junto a río/barranco y hay alerta roja. No esperes a que sea demasiado tarde.'
+    answer: 'Evacúa cuando lo indiquen las autoridades. Si el agua entra en casa, sal de sótanos y plantas bajas lo antes posible, corta la electricidad y usa una linterna. En la calle, aléjate de ríos, arroyos y zonas bajas y ve a un punto elevado.'
   },
   {
     question: '¿Cómo sé si mi zona es inundable?',
@@ -232,7 +230,7 @@ const faqs = [
   description="Cómo prepararse antes, durante y después de una inundación o DANA. Checklist de evacuación, consejos de seguridad y qué hacer si el agua te atrapa."
   locale="es"
   schemaType="Article"
-  dateModified="2025-12-16"
+  dateModified="2026-11-18"
   alternates={{
     de: '/de/szenarien/hochwasser/',
     nl: '/nl/scenario/overstroming/',
@@ -258,7 +256,7 @@ const faqs = [
           <div class="scenario-meta">
             <span class="meta-item">10 min</span>
             <span class="meta-divider">·</span>
-            <span class="meta-item">Actualizado dic 2025</span>
+            <span class="meta-item">Actualizado nov. 2026</span>
           </div>
         </div>
       </div>
@@ -276,9 +274,9 @@ const faqs = [
     <!-- TL;DR -->
     <section class="scenario-section">
       <TLDRBlock
-        summary="Las inundaciones por DANA matan cada año en España. La preparación salva vidas: conoce si vives en zona de riesgo, ten un kit de evacuación listo, y NUNCA intentes cruzar agua en movimiento. 30 cm de agua arrastran un coche."
-        keyStat="30 cm"
-        keyStatLabel="de agua arrastran un coche"
+        summary="Las inundaciones por DANA matan cada año en España. La preparación salva vidas: conoce si vives en zona de riesgo, ten un kit de evacuación listo, y no cruces zonas inundadas ni en coche ni a pie. Si el coche se atasca o el agua supera los ejes de las ruedas, sal de él."
+        keyStat="Nunca"
+        keyStatLabel="cruces una zona inundada"
         locale="es"
       />
     </section>
@@ -306,7 +304,7 @@ const faqs = [
     <section class="scenario-section">
       <h2 class="section-title">
         <Icon name="AlertTriangle" size={24} />
-        Niveles de alerta
+        Niveles de aviso de AEMET
       </h2>
       <div class="warning-levels">
         {warningLevels.map((level) => (
@@ -330,9 +328,9 @@ const faqs = [
         <div class="critical-warning-content">
           <h3>Regla de oro: NUNCA cruces agua en movimiento</h3>
           <ul>
-            <li><strong>15 cm</strong> de agua te pueden derribar</li>
-            <li><strong>30 cm</strong> arrastran un coche</li>
-            <li><strong>60 cm</strong> hacen flotar cualquier vehículo</li>
+            <li>No cruces zonas inundadas, ni en coche ni a pie</li>
+            <li>Sal del coche si se atasca o si el agua supera los <strong>ejes de las ruedas</strong></li>
+            <li>Si no puedes abrir las puertas, sal por las <strong>ventanillas</strong></li>
           </ul>
           <p>Si el agua sube, sube tú. NUNCA bajes a sótanos o garajes.</p>
         </div>
@@ -497,10 +495,11 @@ const faqs = [
         </summary>
         <div class="sources-content">
           <ul>
-            <li><a href="https://www.aemet.es/" target="_blank" rel="noopener">AEMET - Agencia Estatal de Meteorología</a></li>
-            <li><a href="https://www.proteccioncivil.es/" target="_blank" rel="noopener">Protección Civil</a></li>
+            <li><a href="https://www.aemet.es/es/eltiempo/prediccion/avisos/ayuda" target="_blank" rel="noopener">AEMET - Qué significan los avisos</a></li>
+            <li><a href="https://www.proteccioncivil.es/coordinacion/gestion-de-riesgos/hidrologicos/inundaciones" target="_blank" rel="noopener">Protección Civil - Inundaciones: consejos de autoprotección</a></li>
+            <li><a href="https://www.proteccioncivil.es/coordinacion/redes/ran/public-warning-system" target="_blank" rel="noopener">Protección Civil - ES-Alert</a></li>
             <li><a href="https://www.miteco.gob.es/es/agua/temas/gestion-de-los-riesgos-de-inundacion/" target="_blank" rel="noopener">MITECO - Gestión de Riesgos de Inundación</a></li>
-            <li><a href="https://sig.mapama.gob.es/snczi/" target="_blank" rel="noopener">SNCZI - Sistema Nacional de Cartografía de Zonas Inundables</a></li>
+            <li><a href="https://www.miteco.gob.es/es/agua/temas/gestion-de-los-riesgos-de-inundacion/snczi.html" target="_blank" rel="noopener">SNCZI - Sistema Nacional de Cartografía de Zonas Inundables</a></li>
           </ul>
         </div>
       </details>

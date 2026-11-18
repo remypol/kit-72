@@ -8,7 +8,7 @@ const essentialItems = [
   { category: 'Agua', items: ['3 litros por persona/día', 'Bidones o garrafas', 'Pastillas potabilizadoras'], priority: 'critical' },
   { category: 'Alimentación', items: ['Comida no perecedera (3 días)', 'Abridor de latas manual', 'Cubiertos y platos desechables'], priority: 'critical' },
   { category: 'Iluminación', items: ['Linterna (preferible dinamo)', 'Velas de emergencia', 'Mechero o cerillas'], priority: 'critical' },
-  { category: 'Comunicación', items: ['Radio AM/FM (preferible dinamo)', 'Pilas de repuesto', 'Silbato de emergencia'], priority: 'critical' },
+  { category: 'Comunicación', items: ['Radio de pilas o de manivela', 'Pilas de repuesto', 'Silbato de emergencia'], priority: 'critical' },
   { category: 'Energía', items: ['Powerbank cargado', 'Cargador solar (opcional)', 'Pilas para todos los dispositivos'], priority: 'warning' },
   { category: 'Primeros auxilios', items: ['Botiquín básico', 'Medicamentos personales', 'Manta térmica'], priority: 'warning' },
   { category: 'Documentos', items: ['Copias de DNI/pasaporte', 'Pólizas de seguros', 'Contactos de emergencia'], priority: 'warning' },
@@ -18,11 +18,11 @@ const essentialItems = [
 const faqs = [
   {
     question: '¿Cuánto tiempo debe cubrir un kit de emergencia?',
-    answer: 'El estándar internacional es 72 horas (3 días). Este período cubre la mayoría de emergencias urbanas como apagones, cortes de agua o evacuaciones temporales. Para zonas rurales o con mayor riesgo, se recomienda ampliar a 7 días.'
+    answer: 'La Comisión Europea propone que cada hogar pueda cubrir sus necesidades esenciales durante al menos 72 horas (3 días), y Cruz Roja Española recomienda tener agua para 3 días. Es un mínimo: algunos países piden una semana o más.'
   },
   {
     question: '¿Cuánta agua necesito almacenar por persona?',
-    answer: 'El mínimo recomendado es 3 litros por persona al día para beber e higiene básica. En climas cálidos o para personas con necesidades especiales, aumenta a 4-5 litros. Para 72 horas, necesitas al menos 9 litros por persona.'
+    answer: 'Protección Civil y Cruz Roja Española recomiendan tener una reserva de agua, pero no dan una cifra en litros. En Kit-72 calculamos con 3 litros por persona y día, 9 litros para 72 horas. Protección Civil de Cataluña pide como mínimo 1,5 litros al día solo para beber.'
   },
   {
     question: '¿Dónde debo guardar el kit de emergencia?',
@@ -53,7 +53,7 @@ const scenarios = [
 <ArticleLayout
   title={title}
   description={description}
-  updatedDate="2025-12-13"
+  updatedDate="2026-11-18"
   breadcrumbs={[{ label: 'Kit de Emergencia', href: '/es/kit-de-emergencia/' }]}
   faqData={faqs}
 >
@@ -97,7 +97,7 @@ const scenarios = [
         <div>
           <h3 class="font-semibold mb-2 text-base">¿Por qué 72 horas?</h3>
           <p class="text-sm text-(--color-text-secondary) m-0">
-            Es el estándar recomendado por Protección Civil y organismos internacionales como FEMA.
+            Es el mínimo que propone la Comisión Europea para cada hogar.
             Cubre la mayoría de cortes de suministro urbanos y permite a los servicios de emergencia
             estabilizar la situación.
           </p>
@@ -352,23 +352,23 @@ const scenarios = [
     </p>
     <ul class="text-sm text-(--color-text-secondary) space-y-2">
       <li>
-        <a href="https://www.proteccioncivil.es" target="_blank" rel="noopener" class="text-(--color-accent-primary) hover:underline">
+        <a href="https://www.proteccioncivil.es/gestion-riesgos/recomendaciones" target="_blank" rel="noopener" class="text-(--color-accent-primary) hover:underline">
           Protección Civil España
-        </a> — Guías de autoprotección ciudadana
+        </a> — Recomendaciones de autoprotección por riesgo
       </li>
       <li>
-        <a href="https://www.cruzroja.es" target="_blank" rel="noopener" class="text-(--color-accent-primary) hover:underline">
+        <a href="https://www2.cruzroja.es/preparacionantedesastres" target="_blank" rel="noopener" class="text-(--color-accent-primary) hover:underline">
           Cruz Roja Española
-        </a> — Recomendaciones de primeros auxilios
+        </a> — Preparación ante desastres y lista del kit
       </li>
       <li>
-        <a href="https://www.ready.gov" target="_blank" rel="noopener" class="text-(--color-accent-primary) hover:underline">
+        <a href="https://www.ready.gov/kit" target="_blank" rel="noopener" class="text-(--color-accent-primary) hover:underline">
           Ready.gov (FEMA)
         </a> — Estándares internacionales de preparación
       </li>
     </ul>
     <p class="text-xs text-(--color-text-muted) mt-4">
-      Última actualización: diciembre de 2025
+      Última actualización: noviembre de 2026
     </p>
   </aside>
 
