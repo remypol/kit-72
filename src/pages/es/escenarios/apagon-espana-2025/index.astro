@@ -10,29 +10,31 @@ import Breadcrumb from '../../../../components/layout/Breadcrumb.astro';
 import Icon from '../../../../components/ui/Icon.astro';
 import HeroImage from '../../../../components/content/HeroImage.astro';
 
+// Times from the Government's Comité de Análisis report (17 June 2025), read on 2026-11-18.
 const timeline = [
-  { time: '12:33', event: 'Caída de frecuencia detectada en la red eléctrica', severity: 'warning' },
-  { time: '12:35', event: 'Desconexión automática de la interconexión Francia-España', severity: 'critical' },
-  { time: '12:36', event: 'Apagón masivo en España peninsular y Portugal', severity: 'critical' },
-  { time: '12:40', event: 'Colapso del transporte: metros, trenes, semáforos', severity: 'high' },
-  { time: '13:00', event: 'Hospitales operando con generadores de emergencia', severity: 'high' },
-  { time: '14:30', event: 'Primeras zonas comienzan a recuperar suministro', severity: 'info' },
-  { time: '18:00', event: 'Mayoría del suministro restaurado', severity: 'info' },
+  { time: '12:03', event: 'Primera oscilación relevante en el sistema eléctrico', severity: 'warning' },
+  { time: '12:19', event: 'Segunda oscilación', severity: 'warning' },
+  { time: '12:32', event: 'La tensión sube y empiezan a desconectarse centrales de generación', severity: 'critical' },
+  { time: '12:33:30', event: 'Cero de tensión en la península', severity: 'critical' },
+  { time: '12:44', event: 'Llega tensión desde Francia a la subestación de Hernani', severity: 'info' },
+  { time: '13:07', event: 'Se alimenta la primera carga del sistema español', severity: 'info' },
+  { time: '22:30', event: 'Cerca del 50 % de la demanda ha recuperado el suministro', severity: 'info' },
+  { time: '07:00', event: '29 de abril: el 99,95 % del suministro está restablecido', severity: 'info' },
 ];
 
 const impacts = [
-  { sector: 'Transporte', description: 'Metro, Cercanías y AVE paralizados. Semáforos apagados causaron caos vial.', icon: 'Train' },
-  { sector: 'Comunicaciones', description: 'Redes móviles saturadas. Muchas antenas sin backup de batería.', icon: 'Wifi' },
-  { sector: 'Comercio', description: 'TPVs sin funcionar. Solo efectivo. Supermercados cerrados.', icon: 'ShoppingCart' },
-  { sector: 'Sanidad', description: 'Hospitales en generadores. Algunas consultas y centros de salud cerrados.', icon: 'Heart' },
-  { sector: 'Hogares', description: 'Ascensores atrapados. Frigoríficos sin frío. Calefacción/AC apagados.', icon: 'Home' },
+  { sector: 'Transporte', description: 'Sin electricidad se paran metros y trenes y se apagan los semáforos.', icon: 'Train' },
+  { sector: 'Comunicaciones', description: 'Las redes móviles se saturan y la batería del móvil dura menos buscando señal.', icon: 'Wifi' },
+  { sector: 'Pagos', description: 'Los pagos electrónicos dejaron de funcionar y hubo cajeros sin billetes o fuera de servicio, según el Banco de España.', icon: 'ShoppingCart' },
+  { sector: 'Sanidad', description: 'Los hospitales cuentan con generadores de emergencia; consultas y centros de salud pueden cerrar.', icon: 'Heart' },
+  { sector: 'Hogares', description: 'Ascensores parados, frigoríficos sin frío y calefacción o aire acondicionado apagados.', icon: 'Home' },
 ];
 
 const lessons = [
   {
     title: 'El efectivo sigue siendo rey',
     description: 'Sin electricidad, no hay datáfonos, cajeros ni Bizum. Quienes tenían efectivo pudieron comprar.',
-    action: 'Guarda 50-100€ en casa en billetes pequeños'
+    action: 'Ten algo de efectivo en casa en billetes pequeños; como referencia, 70-100 € por persona'
   },
   {
     title: 'Las baterías de los móviles no duran',
@@ -45,51 +47,51 @@ const lessons = [
     action: 'Ten una radio con pilas o dinamo en casa'
   },
   {
-    title: 'Los supermercados cierran inmediatamente',
-    description: 'Sin TPVs ni sistemas de inventario, las tiendas cierran. No puedes "ir a comprar".',
+    title: 'Comprar se complica',
+    description: 'Sin datáfonos, muchas tiendas solo pueden cobrar en efectivo.',
     action: 'Mantén siempre comida para 72h en casa'
   },
   {
     title: 'El agua puede fallar también',
-    description: 'Las bombas de agua necesitan electricidad. Algunos edificios perdieron presión.',
-    action: 'Almacena 9 litros de agua por persona'
+    description: 'Las bombas de agua necesitan electricidad. En edificios altos puede faltar presión.',
+    action: 'Guarda agua: en Kit-72 calculamos 9 litros por persona para 3 días'
   },
 ];
 
 const faqs = [
   {
-    question: '¿Qué causó el apagón de abril 2025?',
-    answer: 'La causa exacta sigue bajo investigación. Se produjo una caída brusca de frecuencia en la red que provocó la desconexión automática de la interconexión con Francia, aislando la península ibérica y causando el colapso del sistema.'
+    question: '¿Qué causó el apagón de abril de 2025?',
+    answer: 'El Comité de Análisis del Gobierno concluyó en junio de 2025 que el apagón tuvo un origen multifactorial: una sobretensión provocó desconexiones de generación en cadena, en un sistema con poca capacidad para controlar la tensión. No halló indicios de ciberataque. El informe final del panel europeo de ENTSO-E se publicó en marzo de 2026.'
   },
   {
-    question: '¿Cuántas personas se vieron afectadas?',
-    answer: 'Aproximadamente 50 millones de personas en España y Portugal se quedaron sin electricidad durante varias horas.'
+    question: '¿A quién afectó?',
+    answer: 'España peninsular y Portugal se quedaron sin suministro eléctrico.'
   },
   {
     question: '¿Puede volver a pasar?',
-    answer: 'Sí. La red eléctrica es compleja y eventos similares pueden ocurrir por fallos técnicos, ciberataques, fenómenos meteorológicos extremos o problemas en la generación. La preparación es esencial.'
+    answer: 'Sí. La red eléctrica es compleja y un fallo técnico, un fenómeno meteorológico extremo o un problema de generación pueden causar otro corte. Por eso conviene estar preparado.'
   },
   {
     question: '¿Cuánto duró el apagón?',
-    answer: 'El apagón total duró aproximadamente 5-6 horas en la mayoría de zonas, aunque algunas áreas tardaron más en recuperar el suministro. Los servicios de transporte tardaron más en normalizarse.'
+    answer: 'El apagón empezó a las 12:33. A las 22:30 había recuperado el suministro cerca de la mitad de la demanda y a las 7:00 del 29 de abril, el 99,95 %. Fueron más de 18 horas.'
   },
   {
-    question: '¿Qué hizo bien España en la respuesta?',
-    answer: 'Los hospitales mantuvieron operaciones con generadores, los servicios de emergencia coordinaron bien, y la restauración progresiva evitó una segunda caída. REE actuó según protocolos establecidos.'
+    question: '¿Quién fue responsable?',
+    answer: 'Los informes no coinciden en el reparto de responsabilidades. El Comité del Gobierno señala que había menos centrales con control de tensión de las programadas. Red Eléctrica sostiene que el informe europeo no le atribuye la causa.'
   },
 ];
 ---
 
 <BaseLayout
-  title="Apagón España Abril 2025: Qué Pasó y Lecciones Aprendidas — Kit-72"
-  description="Análisis del apagón de España y Portugal en abril 2025. Qué ocurrió y lecciones para estar preparados."
+  title="Apagón de España del 28 de abril de 2025: qué pasó"
+  description="El apagón empezó a las 12:33 y el 99,95 % del suministro no volvió hasta las 7:00 del día siguiente. Cronología, causas según el informe oficial y lecciones."
   locale="es"
-  dateModified="2025-12-16"
+  dateModified="2026-11-18"
   schemaType="Article"
   schemaData={{
     headline: 'Apagón España Abril 2025: Análisis y Lecciones',
     datePublished: '2025-04-28',
-    dateModified: '2025-12-16',
+    dateModified: '2026-11-18',
   }}
   faqData={faqs}
 >
@@ -116,8 +118,7 @@ const faqs = [
         </h1>
         <p class="text-xl text-(--color-text-secondary)">
           El 28 de abril de 2025, España y Portugal sufrieron el mayor apagón de su historia.
-          50 millones de personas sin luz. Este es el análisis de lo que ocurrió y las lecciones
-          que debemos aprender.
+          Esto es lo que ocurrió, según el informe del Gobierno, y lo que conviene aprender.
         </p>
       </header>
 
@@ -132,12 +133,12 @@ const faqs = [
         <!-- Key Stats -->
         <div class="not-prose grid sm:grid-cols-3 gap-4 my-8">
           <div class="card p-4 text-center">
-            <p class="text-3xl font-bold text-(--color-accent-primary)">50M</p>
-            <p class="text-sm text-(--color-text-secondary)">Personas afectadas</p>
+            <p class="text-3xl font-bold text-(--color-accent-primary)">12:33</p>
+            <p class="text-sm text-(--color-text-secondary)">Hora del cero de tensión</p>
           </div>
           <div class="card p-4 text-center">
-            <p class="text-3xl font-bold text-(--color-accent-primary)">5-6h</p>
-            <p class="text-sm text-(--color-text-secondary)">Duración media</p>
+            <p class="text-3xl font-bold text-(--color-accent-primary)">+18 h</p>
+            <p class="text-sm text-(--color-text-secondary)">Hasta recuperar el 99,95 %</p>
           </div>
           <div class="card p-4 text-center">
             <p class="text-3xl font-bold text-(--color-accent-primary)">2</p>
@@ -147,8 +148,8 @@ const faqs = [
 
         <h2>Cronología del Apagón</h2>
         <p>
-          Todo comenzó poco después del mediodía. En cuestión de minutos, la península
-          ibérica quedó a oscuras.
+          Tras dos oscilaciones a mediodía, el sistema colapsó en poco más de un minuto: a las 12:33:30 la península
+          quedó a cero de tensión. Las horas son las del informe del Comité de Análisis del Gobierno.
         </p>
 
         <div class="not-prose my-8">
@@ -212,9 +213,16 @@ const faqs = [
           ))}
         </div>
 
+        <p class="text-sm">
+          Fuentes: <a href="https://www.lamoncloa.gob.es/consejodeministros/resumenes/Documents/2025/Informe-no-confidencial-Comite-de-analisis-28A.pdf" target="_blank" rel="noopener">informe del Comité de Análisis del Gobierno</a> (17 de junio de 2025),
+          <a href="https://www.lamoncloa.gob.es/consejodeministros/resumenes/paginas/2025/170625-rueda-de-prensa-ministros.aspx" target="_blank" rel="noopener">La Moncloa</a>,
+          <a href="https://www.entsoe.eu/publications/blackout/28-april-2025-iberian-blackout/" target="_blank" rel="noopener">panel de expertos de ENTSO-E</a> y
+          <a href="https://www.bde.es/wbe/es/noticias-eventos/blog/como-pagamos-cuando-todo-se-apaga-la-experiencia-del-apagon-en-espana.html" target="_blank" rel="noopener">Banco de España</a>. Consultadas el 18 de noviembre de 2026.
+        </p>
+
         <h2>¿Estás Preparado para el Próximo?</h2>
         <p>
-          El apagón de 2025 duró solo unas horas. Pero la próxima vez podría ser
+          En 2025, la mayor parte del suministro tardó entre diez y dieciocho horas en volver. La próxima vez podría ser
           más largo. Un ciberataque, un fenómeno meteorológico extremo o un fallo
           en cascada podrían causar cortes de días.
         </p>

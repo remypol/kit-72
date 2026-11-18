@@ -24,7 +24,7 @@ const phases = {
   antes: [
     {
       title: 'Guarda efectivo en casa',
-      detail: '50-100€ por adulto, 20-30€ por niño. En billetes pequeños (5€, 10€, 20€).',
+      detail: 'En billetes pequeños y monedas. Como referencia, el Banco de España recoge la sugerencia de entre 70 y 100 euros por cada miembro de la familia.',
       tip: 'Repartido en varios lugares de la casa'
     },
     {
@@ -71,12 +71,12 @@ const phases = {
     },
     {
       title: 'Protege tus cuentas',
-      detail: 'NO cambies contraseñas durante el ataque - podrían ser interceptadas.',
-      tip: 'Espera a que los sistemas se recuperen'
+      detail: 'Si crees que una cuenta está comprometida, cambia la contraseña en ese servicio y en cualquier otro donde uses la misma, y activa el doble factor.',
+      tip: 'Si tienes dudas, llama al 017, la línea gratuita de INCIBE'
     },
     {
       title: 'Usa comunicación alternativa',
-      detail: 'Los SMS suelen funcionar cuando cae internet. Radio para noticias.',
+      detail: 'Usa la radio para seguir las noticias.',
       tip: null
     },
     {
@@ -103,7 +103,7 @@ const phases = {
     },
     {
       title: 'Repón el efectivo',
-      detail: 'Vuelve a tener 50-100€ por persona para la próxima vez.',
+      detail: 'Repón el efectivo para la próxima vez.',
       tip: null
     },
     {
@@ -131,7 +131,7 @@ const checklistCategories = [
     name: 'Dinero y pagos',
     icon: 'wallet',
     items: [
-      { id: 'efectivo', name: 'Efectivo en casa', quantity: '50-100€/adulto, 20-30€/niño', priority: 'critical' as const, notes: 'Billetes pequeños (5€, 10€, 20€)' },
+      { id: 'efectivo', name: 'Efectivo en casa', quantity: '70-100 €/persona', priority: 'critical' as const, notes: 'Billetes pequeños y monedas; referencia del Banco de España' },
       { id: 'tarjeta-transporte', name: 'Tarjeta transporte con saldo', quantity: 'Saldo cargado', priority: 'recommended' as const, notes: 'Por si fallan los TPV' },
       { id: 'extracto', name: 'Extracto bancario reciente (papel)', quantity: '1 copia', priority: 'recommended' as const, notes: 'Prueba si hay problemas con el banco' },
     ]
@@ -189,7 +189,7 @@ const cascadeEffects = [
 
 // Recent examples
 const realExamples = [
-  { date: 'Abril 2024', event: 'Apagón masivo España-Portugal', impact: '50 millones sin luz, TPV y cajeros fuera de servicio' },
+  { date: 'Abril 2025', event: 'Apagón en España peninsular y Portugal', impact: 'No fue un ciberataque, pero dejó fuera de servicio TPV y cajeros' },
   { date: 'Julio 2024', event: 'Fallo CrowdStrike (mundial)', impact: 'Aeropuertos, hospitales y bancos afectados durante horas' },
   { date: '2020-2024', event: 'Ransomware a hospitales españoles', impact: 'Varios hospitales con sistemas paralizados días' },
 ];
@@ -198,27 +198,27 @@ const realExamples = [
 const faqs = [
   {
     question: '¿Qué probabilidad hay de un ciberataque grande?',
-    answer: 'El CCN-CERT reporta un aumento constante de ataques a infraestructuras críticas españolas. El apagón de abril 2024, aunque no fue un ciberataque, demostró nuestra vulnerabilidad digital. La preparación es sentido común, no alarmismo.'
+    answer: 'El apagón del 28 de abril de 2025, aunque no fue un ciberataque, demostró nuestra vulnerabilidad digital. La preparación es sentido común, no alarmismo.'
   },
   {
     question: '¿Cuánto efectivo debo tener en casa?',
-    answer: 'Recomendamos 50-100€ por adulto en billetes pequeños (5€, 10€, 20€). En cortes largos, los comercios pueden no tener cambio para billetes grandes.'
+    answer: 'Ten algo de efectivo en casa, en billetes pequeños y monedas. Como referencia, el Banco de España recoge la sugerencia de entre 70 y 100 euros por cada miembro de la familia, o lo suficiente para las compras esenciales de 72 horas.'
   },
   {
     question: '¿Funciona el 112 durante un ciberataque?',
-    answer: 'El 112 tiene protección especial y debería funcionar. Pero las redes móviles pueden saturarse - sigue intentando o usa teléfono fijo si tienes.'
+    answer: 'En una emergencia, llama al 112. Las redes móviles pueden saturarse: si no consigues línea, sigue intentándolo.'
   },
   {
     question: '¿Debo cambiar mis contraseñas durante un ataque?',
-    answer: 'No, espera a que los sistemas se recuperen. Durante un ataque, las nuevas contraseñas podrían ser interceptadas.'
+    answer: 'Si crees que una cuenta está comprometida, cambia la contraseña en ese servicio y en cualquier otro donde uses la misma, y activa el doble factor de autenticación. Si tienes dudas, llama al 017, la línea gratuita de INCIBE.'
   },
   {
     question: '¿Cuánto puede durar una interrupción así?',
-    answer: 'Horas a días, dependiendo de la causa. El apagón de 2025 duró unas horas, pero ataques de ransomware a hospitales han paralizado sistemas durante semanas. Prepárate para al menos 72 horas.'
+    answer: 'Horas a días, dependiendo de la causa. En el apagón del 28 de abril de 2025, el 99,95 % del suministro no se recuperó hasta las 7:00 del día siguiente. Prepárate para al menos 72 horas.'
   },
   {
     question: '¿Está mi dinero seguro si atacan a mi banco?',
-    answer: 'Sí, tu dinero no desaparece. El Fondo de Garantía de Depósitos protege hasta 100.000€. Solo tendrás acceso limitado temporalmente.'
+    answer: 'Una caída de los sistemas no cambia tu saldo; solo no puedes acceder a él durante un tiempo. El Fondo de Garantía de Depósitos es otra cosa: cubre hasta 100.000 € por titular y entidad cuando un banco no puede devolver el dinero. No es un seguro contra fraudes ni ciberataques.'
   },
 ];
 ---
@@ -228,7 +228,7 @@ const faqs = [
   description="Cómo prepararse para ciberataques y fallos digitales. Efectivo, copias de seguridad offline, comunicación y checklist para cuando fallen los sistemas."
   locale="es"
   schemaType="Article"
-  dateModified="2025-12-16"
+  dateModified="2026-11-18"
   alternates={{
     de: '/de/szenarien/cyberangriff/',
     nl: '/nl/scenario/cyberaanval/',
@@ -254,7 +254,7 @@ const faqs = [
           <div class="scenario-meta">
             <span class="meta-item">8 min</span>
             <span class="meta-divider">·</span>
-            <span class="meta-item">Actualizado dic 2025</span>
+            <span class="meta-item">Actualizado nov. 2026</span>
           </div>
         </div>
       </div>
@@ -272,9 +272,9 @@ const faqs = [
     <!-- TL;DR -->
     <section class="scenario-section">
       <TLDRBlock
-        summary="Un ciberataque o fallo digital masivo puede dejar sin servicio TPVs, internet y redes móviles. La solución es simple: efectivo (50-100€), copias de seguridad offline y números importantes en papel. Somos demasiado dependientes de sistemas que pueden fallar."
-        keyStat="50-100€"
-        keyStatLabel="Efectivo por persona"
+        summary="Un ciberataque o fallo digital masivo puede dejar sin servicio TPVs, internet y redes móviles. La solución es simple: algo de efectivo en billetes pequeños, copias de seguridad offline y números importantes en papel. Somos demasiado dependientes de sistemas que pueden fallar."
+        keyStat="017"
+        keyStatLabel="Línea gratuita de INCIBE"
         locale="es"
       />
     </section>
@@ -485,10 +485,9 @@ const faqs = [
         </summary>
         <div class="sources-content">
           <ul>
-            <li><a href="https://www.ccn-cert.cni.es/" target="_blank" rel="noopener">CCN-CERT - Centro Criptológico Nacional</a></li>
-            <li><a href="https://www.incibe.es/" target="_blank" rel="noopener">INCIBE - Instituto Nacional de Ciberseguridad</a></li>
-            <li><a href="https://www.proteccioncivil.es/" target="_blank" rel="noopener">Protección Civil</a></li>
-            <li><a href="https://www.osi.es/" target="_blank" rel="noopener">OSI - Oficina de Seguridad del Internauta</a></li>
+            <li><a href="https://www.incibe.es/ciudadania/atencion-telefonica" target="_blank" rel="noopener">INCIBE - Línea de ayuda 017</a></li>
+            <li><a href="https://www.bde.es/wbe/es/noticias-eventos/blog/como-pagamos-cuando-todo-se-apaga-la-experiencia-del-apagon-en-espana.html" target="_blank" rel="noopener">Banco de España - Cómo pagamos cuando todo se apaga</a></li>
+            <li><a href="https://www.fgd.es/" target="_blank" rel="noopener">Fondo de Garantía de Depósitos</a></li>
           </ul>
         </div>
       </details>

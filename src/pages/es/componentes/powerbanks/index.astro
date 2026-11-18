@@ -102,7 +102,7 @@ const powerbankTypes = [
     name: 'Alta capacidad (20.000-30.000 mAh)',
     description: 'Para familias o múltiples dispositivos',
     pros: ['Muchas cargas', 'Múltiples puertos', 'Carga laptops (algunos)'],
-    cons: ['Pesado (400-600g)', 'Caro', 'Restricciones en aviones'],
+    cons: ['Pesado (400-600g)', 'Caro', 'Por encima de 100 Wh (unos 27.000 mAh) no suele poder ir en avión'],
     bestFor: 'Familias, estancias prolongadas',
     charges: '6-10 móviles',
     icon: 'Zap'
@@ -215,7 +215,7 @@ const chargingTips = [
   title="Powerbank para emergencias: ¿Qué capacidad? Guía de compra"
   description="Guía completa de powerbanks para emergencias: capacidades, tipos, recomendaciones y cuánta energía necesitas para 72 horas."
   locale="es"
-  dateModified="2025-12-15"
+  dateModified="2026-11-18"
   schemaType="Article"
 >
   <section class="py-16">
@@ -265,11 +265,11 @@ const chargingTips = [
           ¿Cuánta capacidad necesito?
         </h3>
         <div class="space-y-3 text-sm text-(--color-text-secondary)">
-          <p><strong>Regla simple:</strong> Multiplica la batería de tu móvil × 3 × días × personas</p>
-          <p><strong>Ejemplo:</strong> 2 personas, 3 días, móviles de 4.000 mAh cada uno:</p>
-          <p class="font-mono bg-(--color-bg-primary) p-2 rounded">4.000 × 3 × 3 × 2 = 72.000 mAh teóricos</p>
-          <p>Con pérdidas por conversión (~30%), necesitas: <strong class="text-(--color-accent-primary)">~50.000 mAh reales</strong></p>
-          <p class="text-xs text-(--color-text-muted)">Esto equivale a 2x powerbanks de 26.000 mAh o 3x de 20.000 mAh</p>
+          <p><strong>Regla simple:</strong> suma la batería de cada móvil por las cargas que quieras y divide entre 0,7 para contar las pérdidas</p>
+          <p><strong>Ejemplo:</strong> 2 móviles de 4.000 mAh, una carga al día durante 3 días:</p>
+          <p class="font-mono bg-(--color-bg-primary) p-2 rounded">4.000 × 2 × 3 = 24.000 mAh</p>
+          <p>Con pérdidas por conversión (~30%), necesitas: <strong class="text-(--color-accent-primary)">24.000 ÷ 0,7 ≈ 34.000 mAh</strong></p>
+          <p class="text-xs text-(--color-text-muted)">Esto equivale a 2 powerbanks de 20.000 mAh</p>
         </div>
       </div>
 
@@ -490,7 +490,7 @@ const chargingTips = [
           <Icon name="AlertTriangle" size={18} class="text-(--color-status-warning) flex-shrink-0 mt-0.5" />
           <span><strong class="text-(--color-status-warning)">Aviso de seguridad:</strong> No compres
           powerbanks de marcas desconocidas muy baratos. Las baterías de mala calidad pueden
-          sobrecalentarse o incluso incendiarse. Marcas fiables: Anker, Xiaomi, Samsung, RAVPower.</span>
+          sobrecalentarse o incluso incendiarse. Compra uno con marcado CE y la capacidad indicada en Wh.</span>
         </p>
       </div>
 

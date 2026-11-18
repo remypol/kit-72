@@ -31,7 +31,7 @@ const phases = {
   vorbereiten: [
     {
       title: 'Packe eine Notfalltasche',
-      detail: 'Eine Tasche die immer bereitsteht. Maximal 10-15kg. Kontrolliere alle 6 Monate.',
+      detail: 'Ein Rucksack pro Person, der immer bereitsteht. Nimm nicht mehr mit, als hineinpasst, und kontrolliere ihn regelmäßig.',
       tip: 'Prüfe Verfallsdaten von Medikamenten, ob Kleidung noch passt...'
     },
     {
@@ -122,8 +122,7 @@ const evacuationTriggers = [
   { trigger: 'Drohender Deichbruch', action: 'Zu höher gelegenem Gebiet evakuieren', severity: 'critical' },
   { trigger: 'Brand in der Nähe (Rauch sichtbar)', action: 'Vorbereiten/Evakuieren wenn er näher kommt', severity: 'warning' },
   { trigger: 'Hochwasser droht', action: 'Vertikal evakuieren oder weg', severity: 'critical' },
-  { trigger: 'Austritt gefährlicher Stoffe', action: 'Gegen den Wind evakuieren', severity: 'critical' },
-  { trigger: 'Dein Gefühl sagt: Gefahr', action: 'Vertraue deinem Instinkt, evakuiere', severity: 'warning' },
+  { trigger: 'Austritt gefährlicher Stoffe', action: 'Ins Gebäude gehen, Fenster und Türen schließen, Lüftung aus. Im Freien: quer zur Windrichtung zum nächsten Gebäude', severity: 'critical' },
 ];
 
 // Checklist categories - DE products with Amazon.de links
@@ -145,7 +144,7 @@ const checklistCategories = [
     name: 'Grundversorgung',
     icon: 'backpack',
     items: [
-      { id: 'wasser', name: 'Wasser (1,5L min/Person)', priority: 'critical' as const, affiliateUrl: 'https://www.amazon.de/s?k=trinkflasche+1+liter' },
+      { id: 'wasser', name: 'Trinkflasche mit Wasser', priority: 'critical' as const, affiliateUrl: 'https://www.amazon.de/s?k=trinkflasche+1+liter' },
       { id: 'essen', name: 'Nicht verderbliche Nahrung', priority: 'critical' as const, notes: 'Riegel, Nüsse, Crackers' },
       { id: 'taschenlampe', name: 'Taschenlampe + Ersatzbatterien', priority: 'critical' as const, affiliateUrl: 'https://www.amazon.de/s?k=led+taschenlampe' },
       { id: 'rettungsdecke', name: 'Rettungsdecke', priority: 'critical' as const, affiliateUrl: 'https://www.amazon.de/s?k=rettungsdecke' },
@@ -169,7 +168,7 @@ const checklistCategories = [
     name: 'Gesundheit',
     icon: 'heart',
     items: [
-      { id: 'medikamente', name: 'Persönliche Medikation (7+ Tage)', priority: 'critical' as const },
+      { id: 'medikamente', name: 'Persönliche Medikamente', priority: 'critical' as const },
       { id: 'erste-hilfe', name: 'Erste-Hilfe-Set', priority: 'critical' as const, affiliateUrl: 'https://www.amazon.de/s?k=erste+hilfe+set+kompakt' },
       { id: 'brille', name: 'Ersatzbrille/Kontaktlinsen', priority: 'recommended' as const },
     ]
@@ -206,7 +205,7 @@ const specialNeeds = [
 
 // Common mistakes
 const mistakes = [
-  { error: 'Zu lange warten', fix: 'Bei Befehl oder ernstem Zweifel: evakuiere BEVOR es schief geht' },
+  { error: 'Zu lange warten', fix: 'Ordnen die Behörden die Evakuierung an, geh sofort. Achte auf Warnungen und folge den Anweisungen' },
   { error: 'Zu viel mitnehmen wollen', fix: 'Die Notfalltasche ist bereits fertig. Nimm sie und geh' },
   { error: 'Keinen Treffpunkt vereinbart', fix: 'Bestimme 2 Punkte vorher, übe mit der Familie' },
   { error: 'Haustiere zurücklassen', fix: 'Sie gehören IN den Plan. Transportbox bereit' },
@@ -232,11 +231,11 @@ const faqs = [
   },
   {
     question: 'Was wenn ich zu Fuß evakuieren muss?',
-    answer: 'Deshalb wiegt die Notfalltasche max 10-15kg. Kenne auch Fußwege aus deiner Gegend.'
+    answer: 'Deshalb passt das Notgepäck in einen Rucksack. Kenne auch Fußwege aus deiner Gegend.'
   },
   {
     question: 'Wie erhalte ich NINA-Warnungen?',
-    answer: 'Lade die NINA-App des BBK herunter. Warnungen kommen automatisch bei Notsituationen in deiner Nähe.'
+    answer: 'Lade die Warn-App NINA und abonniere deinen Wohnort und deinen Arbeitsort. Ohne abonnierte Orte oder aktivierte Standort-Warnung bekommst du keine Meldung.'
   },
 ];
 ---
@@ -246,7 +245,7 @@ const faqs = [
   description="Vollständiger Evakuierungsratgeber für Deutschland. Was in die Notfalltasche, Familienplan, Treffpunkte und Checkliste. BBK-Richtlinien."
   locale="de"
   schemaType="Article"
-  dateModified="2025-12-15"
+  dateModified="2026-11-18"
   datePublished="2025-12-15"
   alternates={{
     es: '/es/escenarios/kit-evacuacion/',
@@ -273,7 +272,7 @@ const faqs = [
           <div class="scenario-meta">
             <span class="meta-item">10 min</span>
             <span class="meta-divider">·</span>
-            <span class="meta-item">Aktualisiert Dez 2025</span>
+            <span class="meta-item">Aktualisiert Nov. 2026</span>
           </div>
         </div>
       </div>
@@ -291,7 +290,7 @@ const faqs = [
     <!-- TL;DR -->
     <section class="scenario-section">
       <TLDRBlock
-        summary="Im Zweifel ob du evakuieren sollst? Evakuiere. Lieber eine Nacht umsonst weg als in Gefahr bleiben. Deine Notfalltasche muss bereitstehen um in 5 Minuten zu gehen. Maximal 10-15kg."
+        summary="Achte auf Warnungen und folge den Anweisungen der Behörden. Je nach Lage ist es sicherer, im Gebäude zu bleiben, als es zu verlassen. Ordnen die Behörden die Evakuierung an, geh sofort: Dein Notgepäck steht bereit, ein Rucksack pro Person."
         keyStat="5 Minuten"
         keyStatLabel="Verlasse das Haus in"
         locale="de"
@@ -305,8 +304,8 @@ const faqs = [
           <Icon name="Shield" size={20} />
         </div>
         <div class="gov-notice-content">
-          <strong>BBK-Empfehlung:</strong> Halte eine Notfalltasche bereit und kenne zwei Fluchtrouten aus deiner Wohnung.
-          Mehr Infos auf <a href="https://www.bbk.bund.de/DE/Warnung-Vorsorge/Vorsorge/Notgepaeck/notgepaeck_node.html" target="_blank" rel="noopener">bbk.bund.de</a>
+          <strong>BBK-Empfehlung:</strong> Halte dein Notgepäck griffbereit, pro Person nicht mehr, als in einen Rucksack passt, und informiere dich über die Fluchtwege zu Hause und am Arbeitsplatz.
+          Mehr Infos auf <a href="https://www.bbk.bund.de/DE/Warnung-Vorsorge/Vorsorge/So-koennen-Sie-sich-vorbereiten/Notgepaeck/notgepaeck_node.html" target="_blank" rel="noopener">bbk.bund.de</a>
         </div>
       </div>
     </section>
@@ -521,10 +520,10 @@ const faqs = [
         </summary>
         <div class="sources-content">
           <ul>
-            <li><a href="https://www.bbk.bund.de/DE/Warnung-Vorsorge/Vorsorge/Notgepaeck/notgepaeck_node.html" target="_blank" rel="noopener">BBK - Notgepäck</a></li>
+            <li><a href="https://www.bbk.bund.de/DE/Warnung-Vorsorge/Vorsorge/So-koennen-Sie-sich-vorbereiten/Notgepaeck/notgepaeck_node.html" target="_blank" rel="noopener">BBK - Notgepäck</a></li>
             <li><a href="https://www.bbk.bund.de/DE/Warnung-Vorsorge/Warn-App-NINA/warn-app-nina_node.html" target="_blank" rel="noopener">BBK - Warn-App NINA</a></li>
-            <li><a href="https://www.thw.de/" target="_blank" rel="noopener">THW - Technisches Hilfswerk</a></li>
-            <li><a href="https://www.drk.de/" target="_blank" rel="noopener">Deutsches Rotes Kreuz</a></li>
+            <li><a href="https://www.bbk.bund.de/DE/Warnung-Vorsorge/Vorsorge/Schutz-suchen/Gefahrstoff-Freisetzung/_documents/gefahrstoff-im-haus_dossier2.html?nn=20588" target="_blank" rel="noopener">BBK - Verhalten bei Gefahrstoff-Freisetzung</a></li>
+            <li><a href="https://www.bbk.bund.de/DE/Warnung-Vorsorge/Vorsorge/Ratgeber-Checkliste/ratgeber-checkliste_node.html" target="_blank" rel="noopener">BBK - Ratgeber „Vorsorgen für Krisen und Katastrophen“</a></li>
           </ul>
         </div>
       </details>

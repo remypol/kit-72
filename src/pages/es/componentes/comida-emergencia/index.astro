@@ -29,7 +29,7 @@ const amazonProducts = [
     amazonUrl: 'https://www.amazon.es/s?k=comida+liofilizada+travellunch',
     price: '~8€/ración',
     rating: 4.3,
-    features: ['Ligera', '10+ años duración', 'Solo agua'],
+    features: ['Ligera', 'Larga duración', 'Solo agua'],
     badge: 'premium' as const
   },
   {
@@ -117,16 +117,15 @@ const essentialItems = [
 ];
 
 const calorieNeeds = [
-  { group: 'Adulto hombre (actividad baja)', kcal: '1800-2000', perDay: 3 },
-  { group: 'Adulto mujer (actividad baja)', kcal: '1500-1800', perDay: 3 },
-  { group: 'Niño 4-8 años', kcal: '1200-1400', perDay: 3 },
-  { group: 'Niño 9-13 años', kcal: '1600-2000', perDay: 3 },
-  { group: 'Adolescente', kcal: '1800-2400', perDay: 3 },
-  { group: 'Persona mayor', kcal: '1400-1800', perDay: 3 }
+  { group: 'Hombre adulto sedentario (18-59 años)', kcal: '2200-2300', perDay: 3 },
+  { group: 'Mujer adulta sedentaria (18-59 años)', kcal: '1800-1900', perDay: 3 },
+  { group: 'Adolescente (14-17 años)', kcal: '2200-2900', perDay: 3 },
+  { group: 'Hombre de 60 a 79 años', kcal: 'unas 2000', perDay: 3 },
+  { group: 'Mujer de 60 a 79 años', kcal: 'unas 1600', perDay: 3 }
 ];
 
 const storageRules = [
-  { rule: 'Lugar fresco', detail: '10-20°C ideal. Cada 10°C de más reduce vida útil a la mitad.' },
+  { rule: 'Lugar fresco', detail: 'Guarda la comida en un lugar fresco y seco y sigue las instrucciones de la etiqueta.' },
   { rule: 'Oscuridad', detail: 'La luz degrada vitaminas y acelera oxidación.' },
   { rule: 'Seco', detail: 'La humedad provoca moho y oxidación en latas.' },
   { rule: 'Alejado del suelo', detail: 'Estanterías o palés. Evita humedad y plagas.' },
@@ -203,7 +202,7 @@ const commonMistakes = [
   title="Comida de emergencia: ¿Qué comprar? Calorías y duración"
   description="Guía completa de alimentos para tu kit de emergencia: tipos, calorías, almacenamiento, y lista de compra para 72 horas."
   locale="es"
-  dateModified="2025-12-15"
+  dateModified="2026-11-18"
   schemaType="Article"
 >
   <section class="py-16">
@@ -224,7 +223,7 @@ const commonMistakes = [
           Comida de Emergencia
         </h1>
         <p class="text-lg text-(--color-text-secondary)">
-          En 72 horas sin comida no te mueres, pero sí pierdes energía, concentración y moral.
+          Sin comida pierdes energía, concentración y ánimo justo cuando más los necesitas.
           Una reserva de alimentos bien planificada marca la diferencia en una emergencia.
         </p>
         <div class="mt-8">
@@ -280,7 +279,7 @@ const commonMistakes = [
         </div>
 
         <p class="text-xs text-(--color-text-muted)">
-          En emergencia con actividad reducida, 1500-1800 kcal/día es suficiente para adultos.
+          Las cifras son valores de referencia de la EFSA, la autoridad europea de seguridad alimentaria, para personas con poca actividad física.
           Prioriza proteínas y carbohidratos complejos.
         </p>
       </div>

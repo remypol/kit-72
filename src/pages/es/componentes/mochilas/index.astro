@@ -178,25 +178,23 @@ const packingOrder = [
 ];
 
 const kitContents72h = [
-  { category: 'Agua', items: ['Botellas agua 3L', 'Pastillas potabilizadoras', 'Filtro portátil (opcional)'], weight: '3.5 kg' },
+  { category: 'Agua', items: ['Agua: 3 L para el camino; el resto de la reserva se queda en casa', 'Pastillas potabilizadoras', 'Filtro portátil (opcional)'], weight: '3.5 kg' },
   { category: 'Comida', items: ['Barritas energéticas x6', 'Frutos secos 200g', 'Conservas pequeñas x2'], weight: '1 kg' },
   { category: 'Refugio', items: ['Manta térmica x2', 'Poncho lluvia', 'Cuerda 5m'], weight: '0.3 kg' },
-  { category: 'Iluminación', items: ['Linterna frontal', 'Pilas repuesto', 'Velas cortas x2'], weight: '0.3 kg' },
+  { category: 'Iluminación', items: ['Linterna frontal', 'Pilas repuesto', 'Mechero o cerillas'], weight: '0.3 kg' },
   { category: 'Comunicación', items: ['Radio AM/FM', 'Silbato', 'Copia documentos'], weight: '0.3 kg' },
   { category: 'Energía', items: ['Powerbank 10000mAh', 'Cables', 'Cargador'], weight: '0.3 kg' },
   { category: 'Botiquín', items: ['Kit básico', 'Medicamentos personales'], weight: '0.5 kg' },
   { category: 'Herramientas', items: ['Navaja multiuso', 'Cinta americana', 'Mechero x2'], weight: '0.3 kg' },
   { category: 'Higiene', items: ['Papel higiénico', 'Toallitas', 'Jabón pequeño'], weight: '0.2 kg' },
   { category: 'Ropa', items: ['Muda interior', 'Calcetines x2', 'Camiseta'], weight: '0.5 kg' },
-  { category: 'Dinero/docs', items: ['Efectivo 100-200€', 'Copias DNI', 'Contactos escritos'], weight: '0.1 kg' }
+  { category: 'Dinero/docs', items: ['Efectivo en billetes pequeños y monedas (70-100 € por persona)', 'Copias DNI', 'Contactos escritos'], weight: '0.1 kg' }
 ];
 
 const weightGuidelines = [
-  { group: 'Adulto en forma', max: '15-20% peso corporal', example: '70kg → 10-14kg' },
-  { group: 'Adulto promedio', max: '10-15% peso corporal', example: '70kg → 7-10kg' },
-  { group: 'Persona mayor', max: '5-10% peso corporal', example: '65kg → 3-6kg' },
-  { group: 'Niño 8-12 años', max: '10% peso corporal', example: '30kg → 3kg' },
-  { group: 'Niño 12+ años', max: '10-15% peso corporal', example: '45kg → 4-6kg' }
+  { group: 'Adultos', max: 'Un peso razonable', example: 'Carga la mochila y camina media hora' },
+  { group: 'Personas mayores', max: 'Lo imprescindible', example: 'Reparte el resto entre otros miembros' },
+  { group: 'Niños', max: 'Una mochila pequeña', example: 'Agua, algo de comida y un objeto querido' }
 ];
 
 const maintenanceTips = [
@@ -227,7 +225,7 @@ const commonMistakes = [
   title="Mochila de emergencia: ¿Qué tamaño? Guía y contenido"
   description="Guía completa de mochilas para tu kit 72 horas: tipos, capacidades, cómo cargar correctamente y qué incluir."
   locale="es"
-  dateModified="2025-12-15"
+  dateModified="2026-11-18"
   schemaType="Article"
 >
   <section class="py-16">
@@ -277,8 +275,8 @@ const commonMistakes = [
       <div class="p-4 bg-(--color-status-warning)/10 border border-(--color-status-warning)/30 rounded-lg mb-8">
         <p class="text-sm text-(--color-text-secondary) m-0 flex items-start gap-2">
           <Icon name="AlertTriangle" size={18} class="text-(--color-status-warning) flex-shrink-0 mt-0.5" />
-          <span><strong class="text-(--color-status-warning)">Regla del peso:</strong> No cargues más del
-          <strong>15% de tu peso corporal</strong> si no estás en forma, o 20% máximo si lo estás.
+          <span><strong class="text-(--color-status-warning)">Regla del peso:</strong> No hay una cifra oficial.
+          Cruz Roja habla de una mochila <strong>fácil de llevar y de un peso razonable</strong>. Cárgala y camina media hora: si no puedes, quita peso.
           Una mochila demasiado pesada te agotará rápidamente.</span>
         </p>
       </div>
@@ -467,8 +465,8 @@ const commonMistakes = [
               <thead class="bg-(--color-bg-tertiary)">
                 <tr>
                   <th class="text-left py-3 px-4">Grupo</th>
-                  <th class="text-center py-3 px-4">Máximo recomendado</th>
-                  <th class="text-left py-3 px-4">Ejemplo</th>
+                  <th class="text-center py-3 px-4">Cuánto</th>
+                  <th class="text-left py-3 px-4">Consejo</th>
                 </tr>
               </thead>
               <tbody class="text-(--color-text-secondary)">

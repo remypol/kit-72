@@ -35,7 +35,7 @@ const phases = {
       tip: 'Erstelle eine Liste und berechne den Verbrauch mit unserem Rechner'
     },
     {
-      title: 'Halte den Autotank mindestens halb voll',
+      title: 'Halte den Autotank gut gefüllt',
       detail: 'Tankstellen funktionieren ohne Strom nicht.',
       tip: null
     },
@@ -52,7 +52,7 @@ const phases = {
     {
       title: 'Bewahre Bargeld zu Hause auf',
       detail: 'Geldautomaten und Kartenzahlung funktionieren ohne Strom nicht.',
-      tip: 'BBK empfiehlt: ausreichend Bargeld in kleinen Scheinen'
+      tip: 'Halte Bargeld in kleiner Stückelung bereit'
     },
     {
       title: 'Lade alle Geräte auf',
@@ -61,7 +61,7 @@ const phases = {
     },
     {
       title: 'Halte ein Notfallradio bereit',
-      detail: 'Bei großen Störungen kann auch Mobilfunk ausfallen. UKW/MW bleibt funktionsfähig.',
+      detail: 'Bei einem längeren Stromausfall fallen nach kurzer Zeit auch Festnetz und Mobilfunk aus. Ein Radio mit Batterien, Kurbel oder Solar bleibt nutzbar.',
       tip: 'Wähle ein Radio mit Kurbel oder Solarpanel'
     },
   ],
@@ -78,7 +78,7 @@ const phases = {
     },
     {
       title: 'Öffne den Kühlschrank nicht',
-      detail: 'Geschlossen bleibt er 4-6 Stunden kalt. Die Tiefkühltruhe hält 24-48 Stunden wenn voll.',
+      detail: 'Halte Kühl- und Gefrierschrank geschlossen. Ein gut gefülltes Gefriergerät hält die Ware viele Stunden kalt, wenn es in den ersten Stunden zu bleibt.',
       tip: 'Verlagere kritische Lebensmittel bei längerem Ausfall in eine Kühlbox mit Eis'
     },
     {
@@ -110,12 +110,12 @@ const phases = {
     },
     {
       title: 'Kontrolliere den Kühlschrank',
-      detail: 'War er länger als 4 Stunden ohne Kühlung, wirf verderbliche Waren weg.',
+      detail: 'Prüfe Lebensmittel vor dem Essen auf Verderb und wirf weg, was verdorben sein könnte.',
       tip: 'Im Zweifel: wegwerfen'
     },
     {
       title: 'Prüfe die Tiefkühltruhe',
-      detail: 'Wenn noch Eiskristalle auf den Lebensmitteln sind, ist es noch gut.',
+      detail: 'Aufgetautes rohes Fleisch und rohen Fisch erhitzt du vollständig, bevor du sie isst oder wieder einfrierst. Aufgetautes Speiseeis wirfst du weg.',
       tip: null
     },
     {
@@ -168,7 +168,7 @@ const checklistCategories = [
     name: 'Kommunikation',
     icon: 'radio',
     items: [
-      { id: 'notfallradio', name: 'Notfallradio mit Kurbel', quantity: '1 Stück', priority: 'critical' as const, notes: 'UKW/MW für lokale Nachrichten', affiliateUrl: 'https://www.amazon.de/s?k=kurbelradio+solar' },
+      { id: 'notfallradio', name: 'Notfallradio mit Kurbel', quantity: '1 Stück', priority: 'critical' as const, notes: 'UKW für deine Regionalsender', affiliateUrl: 'https://www.amazon.de/s?k=kurbelradio+solar' },
       { id: 'kontaktliste', name: 'Ausgedruckte Kontaktliste', quantity: '1 Kopie', priority: 'critical' as const, notes: 'Ohne Telefon kein Zugang zu Nummern' },
       { id: 'solar-ladegeraet', name: 'Solar USB Ladegerät', quantity: '1 Stück', priority: 'optional' as const, notes: 'Backup für dein Telefon', affiliateUrl: 'https://www.amazon.de/s?k=solar+ladegeraet+handy' },
     ]
@@ -178,9 +178,9 @@ const checklistCategories = [
     name: 'Ernährung',
     icon: 'utensils',
     items: [
-      { id: 'campingkocher', name: 'Campingkocher (Gas)', quantity: '1 + 2 Gaskartuschen', priority: 'recommended' as const, notes: 'NUR draußen oder sehr gut belüftet verwenden', affiliateUrl: 'https://www.amazon.de/s?k=camping+gaskocher' },
+      { id: 'campingkocher', name: 'Campingkocher (Gas)', quantity: '1 + 2 Gaskartuschen', priority: 'recommended' as const, notes: 'Nur im Freien verwenden', affiliateUrl: 'https://www.amazon.de/s?k=camping+gaskocher' },
       { id: 'fertignahrung', name: 'Essen ohne Kochen', quantity: '3 Tage/Person', priority: 'critical' as const, notes: 'Konserven, Energieriegel, Nüsse', affiliateUrl: 'https://www.amazon.de/s?k=notration+lebensmittel' },
-      { id: 'wasser', name: 'Trinkwasser', quantity: '2-3L/Person/Tag', priority: 'critical' as const, notes: 'Auch zum Kochen bei Bedarf', affiliateUrl: 'https://www.amazon.de/s?k=wasser+kanister+trinkwasser' },
+      { id: 'wasser', name: 'Trinkwasser', quantity: '2L/Person/Tag', priority: 'critical' as const, notes: 'Davon 0,5 Liter zum Kochen', affiliateUrl: 'https://www.amazon.de/s?k=wasser+kanister+trinkwasser' },
       { id: 'kuehlbox', name: 'Kühlbox + Kühlelemente', quantity: '1 Box', priority: 'recommended' as const, notes: 'Um Lebensmittel aus dem Kühlschrank zu retten', affiliateUrl: 'https://www.amazon.de/s?k=kuehlbox+gross' },
     ]
   },
@@ -200,7 +200,7 @@ const checklistCategories = [
     name: 'Dokumente & Geld',
     icon: 'file',
     items: [
-      { id: 'bargeld', name: 'Bargeld', quantity: 'Ausreichend in kleinen Scheinen', priority: 'critical' as const, notes: 'Kleine Scheine (10€, 20€) - BBK Empfehlung' },
+      { id: 'bargeld', name: 'Bargeld', quantity: 'In kleiner Stückelung', priority: 'critical' as const, notes: 'Einen festen Betrag nennt das BBK nicht' },
       { id: 'id-kopie', name: 'Kopie Personalausweis/Pass', quantity: 'Alle Haushaltsmitglieder', priority: 'critical' as const },
       { id: 'versicherungspapiere', name: 'Versicherungsunterlagen', quantity: 'Kopie', priority: 'recommended' as const, notes: 'Für eventuelle Schadensmeldungen' },
       { id: 'netzbetreiber', name: 'Nummer Netzbetreiber', quantity: 'Notiert', priority: 'critical' as const, notes: 'Störungshotline deines lokalen Netzbetreibers' },
@@ -216,7 +216,7 @@ const faqs = [
   },
   {
     question: 'Darf ich einen Generator drinnen benutzen?',
-    answer: 'NIEMALS. Generatoren produzieren Kohlenmonoxid, ein geruchloses und tödliches Gas. Benutze sie draußen, mindestens 6 Meter von Türen und Fenstern entfernt.'
+    answer: 'Nein. Stromerzeuger dürfen nicht in Innenräumen laufen, wegen der Abgase besteht Erstickungsgefahr. Stell das Gerät an einen gut belüfteten, trockenen Platz im Freien.'
   },
   {
     question: 'Funktioniert Gas noch ohne Strom?',
@@ -224,7 +224,7 @@ const faqs = [
   },
   {
     question: 'Wie lange bleiben Lebensmittel im Kühlschrank gut?',
-    answer: 'Geschlossener Kühlschrank: 4-6 Stunden. Volle Tiefkühltruhe: 48 Stunden. Halbvolle Tiefkühltruhe: 24 Stunden. Öffne die Tür nicht unnötig.'
+    answer: 'Feste Stundenangaben nennen die deutschen Behörden nicht. Halte Kühl- und Gefrierschrank geschlossen: Ein gut gefülltes Gefriergerät hält die Ware laut Bundesinstitut für Risikobewertung viele Stunden ausreichend kalt, wenn es in den ersten Stunden nicht geöffnet wird. Prüfe Lebensmittel vor dem Essen und wirf weg, was verdorben sein könnte.'
   },
   {
     question: 'Muss ich den Ausfall melden?',
@@ -232,7 +232,7 @@ const faqs = [
   },
   {
     question: 'Was wenn ich medizinische Geräte nutze?',
-    answer: 'Kontaktiere deinen Arzt für Backup-Lösungen. Melde dich bei deinem Netzbetreiber an, wenn du von Strom für medizinische Geräte abhängig bist.'
+    answer: 'Kläre vorab mit Arzt, Hersteller oder Pflegedienst, welche Notfalllösung es für dein Gerät gibt, und halte Ersatzakkus bereit.'
   },
 ];
 
@@ -241,7 +241,7 @@ const specialSituations = [
   {
     title: 'Medizinische Geräte',
     icon: 'Heart',
-    content: 'Abhängig von CPAP, Sauerstoffkonzentrator oder anderen Geräten? Kontaktiere deinen Lieferanten für Notlösungen. Melde dich beim Netzbetreiber an.'
+    content: 'Abhängig von CPAP, Sauerstoffkonzentrator oder anderen Geräten? Kläre vorab mit Arzt, Hersteller oder Pflegedienst, welche Notfalllösung es gibt, und halte Ersatzakkus bereit.'
   },
   {
     title: 'Homeoffice',
@@ -266,7 +266,7 @@ const specialSituations = [
   description="Schritt-für-Schritt Anleitung für vor, während und nach einem Stromausfall. Interaktive Checkliste und praktische Tipps."
   locale="de"
   schemaType="Article"
-  dateModified="2025-12-15"
+  dateModified="2026-11-18"
   datePublished="2025-12-15"
   alternates={{
     es: '/es/escenarios/prepararse-apagon/',
@@ -293,7 +293,7 @@ const specialSituations = [
           <div class="scenario-meta">
             <span class="meta-item">10 min</span>
             <span class="meta-divider">·</span>
-            <span class="meta-item">Aktualisiert Dez 2025</span>
+            <span class="meta-item">Aktualisiert Nov. 2026</span>
           </div>
         </div>
       </div>
@@ -325,8 +325,8 @@ const specialSituations = [
           <Icon name="Shield" size={20} />
         </div>
         <div class="gov-notice-content">
-          <strong>BBK-Empfehlung:</strong> Sorge dafür, dass dein Haushalt 72 Stunden bis 10 Tage selbstversorgt sein kann.
-          Mehr Infos auf <a href="https://www.bbk.bund.de/DE/Warnung-Vorsorge/Tipps-Notsituationen/Stromausfall/stromausfall_node.html" target="_blank" rel="noopener">bbk.bund.de</a>
+          <strong>BBK-Empfehlung:</strong> Sorge dafür, dass sich dein Haushalt möglichst zehn Tage selbst versorgen kann. Auch ein Vorrat für drei Tage hilft schon sehr.
+          Mehr Infos auf <a href="https://www.bbk.bund.de/DE/Warnung-Vorsorge/Vorsorge/Stromausfall/stromausfall_node.html" target="_blank" rel="noopener">bbk.bund.de</a>
         </div>
       </div>
     </section>
@@ -504,7 +504,7 @@ const specialSituations = [
         <div class="sources-content">
           <ul>
             <li>
-              <a href="https://www.bbk.bund.de/DE/Warnung-Vorsorge/Tipps-Notsituationen/Stromausfall/stromausfall_node.html" target="_blank" rel="noopener">
+              <a href="https://www.bbk.bund.de/DE/Warnung-Vorsorge/Vorsorge/Stromausfall/stromausfall_node.html" target="_blank" rel="noopener">
                 BBK — Stromausfall
               </a>
             </li>
@@ -514,8 +514,8 @@ const specialSituations = [
               </a>
             </li>
             <li>
-              <a href="https://www.drk.de/" target="_blank" rel="noopener">
-                Deutsches Rotes Kreuz
+              <a href="https://www.verbraucherzentrale.de/energie/was-tun-bei-stromausfall-gut-vorbereitet-und-richtig-handeln-116320" target="_blank" rel="noopener">
+                Verbraucherzentrale - Was tun bei Stromausfall
               </a>
             </li>
           </ul>

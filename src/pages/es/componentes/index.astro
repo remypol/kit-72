@@ -23,11 +23,11 @@ const components = [
   },
   {
     title: 'Radios de Emergencia',
-    description: 'Radios AM/FM, walkies PMR446 y cómo mantenerte informado sin internet.',
+    description: 'Radios FM, walkies PMR446 y cómo mantenerte informado sin internet.',
     href: '/es/componentes/radios-emergencia/',
     icon: 'Radio',
     priceRange: '40-100€',
-    features: ['AM/FM/WB', 'Carga solar/manivela', 'Linterna integrada']
+    features: ['FM', 'Carga solar/manivela', 'Linterna integrada']
   },
   {
     title: 'Bidones de Agua',
@@ -70,10 +70,10 @@ const totalBudget = {
 };
 
 const priorityOrder = [
-  { step: 1, icon: 'Droplet', title: 'Agua + Bidones', description: 'Sin agua solo sobrevives 3 días. Es lo más crítico.', priority: 'critical' },
+  { step: 1, icon: 'Droplet', title: 'Agua + Bidones', description: 'El agua es lo primero que hay que asegurar.', priority: 'critical' },
   { step: 2, icon: 'Flashlight', title: 'Iluminación (Linternas)', description: 'Sin luz no puedes hacer nada de noche. Económico y esencial.', priority: 'critical' },
   { step: 3, icon: 'Heart', title: 'Botiquín básico', description: 'Tratar heridas menores puede evitar problemas mayores.', priority: 'high' },
-  { step: 4, icon: 'UtensilsCrossed', title: 'Comida de emergencia', description: 'Puedes sobrevivir semanas sin comer, pero la energía importa.', priority: 'high' },
+  { step: 4, icon: 'UtensilsCrossed', title: 'Comida de emergencia', description: 'Alimentos no perecederos que puedas comer sin cocinar.', priority: 'high' },
   { step: 5, icon: 'Battery', title: 'Energía (Powerbanks)', description: 'Mantén tu móvil con batería para comunicarte.', priority: 'medium' },
   { step: 6, icon: 'Radio', title: 'Radio de emergencia', description: 'Información oficial cuando no hay internet.', priority: 'medium' },
   { step: 7, icon: 'Backpack', title: 'Mochila de evacuación', description: 'Para llevarte todo si tienes que evacuar.', priority: 'low' },

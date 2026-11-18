@@ -123,11 +123,11 @@ const communicationMethods = [
     tips: 'Modo avión cuando no uses, brillo bajo, apps en background cerradas',
   },
   {
-    method: 'Radio AM/FM',
+    method: 'Radio FM',
     pros: 'No depende de internet, funciona con pilas, larga duración',
     cons: 'Solo recepción (no puedes comunicar)',
     when: 'Cuando no hay cobertura móvil o quieres ahorrar batería',
-    tips: 'AM tiene más alcance que FM. Busca emisoras de emergencias locales.',
+    tips: 'Apunta en papel las frecuencias de FM de Radio Nacional y de las emisoras de noticias de tu zona.',
   },
   {
     method: 'SMS',
@@ -138,10 +138,10 @@ const communicationMethods = [
   },
   {
     method: 'Teléfono fijo',
-    pros: 'No depende de batería ni cobertura móvil',
-    cons: 'Requiere línea activa, no es portátil',
-    when: 'Si tienes línea fija y los móviles fallan',
-    tips: 'Ten un teléfono simple con cable (sin baterías ni bases inalámbricas).',
+    pros: 'No depende de la cobertura móvil',
+    cons: 'Funciona a través del router de fibra, que necesita corriente',
+    when: 'Si tienes línea fija, hay luz y los móviles fallan',
+    tips: 'La red de cobre se cerró en España en mayo de 2025. Pregunta a tu operador si tu línea sigue funcionando en un apagón.',
   },
   {
     method: 'Walkie-talkies (PMR446)',
@@ -240,7 +240,7 @@ const faqs = [
   },
   {
     question: '¿Puedo usar un generador de gasolina en interior?',
-    answer: 'NUNCA. Los generadores de combustión emiten monóxido de carbono (CO), un gas inodoro y mortal. Deben usarse SIEMPRE en exterior, a mínimo 6 metros de puertas y ventanas. Cada año hay muertes por este error. No hay excepciones.'
+    answer: 'Nunca. Un generador de combustión emite monóxido de carbono, un gas que no se ve ni se huele. Úsalo solo al aire libre y lejos de puertas y ventanas.'
   },
   {
     question: '¿Merece la pena un panel solar?',
@@ -277,7 +277,7 @@ const faqSchema = {
   faqData={faqs}
   title="Energía y Comunicación en Emergencias: Guía Completa"
   description="Cómo mantener tus dispositivos cargados y comunicarte durante un apagón o emergencia. Powerbanks, generadores, radios y más."
-  updatedDate="2025-12-15"
+  updatedDate="2026-11-18"
   author="Equipo Kit-72"
   readTime="13 min"
   breadcrumbs={breadcrumbs}
@@ -420,7 +420,7 @@ const faqSchema = {
         <li>• <strong>Total: ~350 Wh</strong></li>
       </ul>
       <p class="text-sm text-(--color-text-primary)">
-        Solución: 2 powerbanks de 20.000 mAh (≈150 Wh cada uno) + pilas para linternas
+        Un powerbank de 20.000 mAh almacena unos 74 Wh: para 350 Wh harían falta unos cinco, más las pilas de las linternas
         <br/>O una estación portátil de 500 Wh
       </p>
     </div>

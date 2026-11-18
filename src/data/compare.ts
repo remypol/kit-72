@@ -208,7 +208,7 @@ export const compareCopy: Record<Locale, CompareCopy> = {
     searchLead: 'Fíjate en lo que incluye de verdad y en la caducidad de la comida. Podemos recibir una comisión por estos enlaces.',
     searches: [{ label: 'Kits de emergencia en Amazon.es', url: 'https://www.amazon.es/s?k=kit+emergencia+72+horas' }],
     faq: [
-      { q: '¿Es obligatorio tener un kit de emergencia?', a: 'No. La Unión Europea y Protección Civil recomiendan que cada hogar pueda aguantar 72 horas sin ayuda, pero no es una obligación.' },
+      { q: '¿Es obligatorio tener un kit de emergencia?', a: 'No. La Comisión Europea recomienda que cada hogar pueda valerse por sí mismo al menos 72 horas, pero no es una obligación.' },
       { q: '¿Cuánto dura un kit?', a: 'Depende del agua y de la comida. El agua embotellada y las conservas suelen durar de uno a varios años; las raciones de emergencia, más. Revisa fechas y pilas dos veces al año.' },
       { q: '¿Por dónde empiezo?', a: 'Agua, comida que no necesite nevera ni cocina, una linterna, una radio a pilas y tu medicación. Con eso tienes cubierto lo más importante de los primeros días.' },
     ],

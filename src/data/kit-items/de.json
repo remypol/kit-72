@@ -3,7 +3,7 @@
     "locale": "de",
     "currency": "EUR",
     "lastUpdated": "2025-12-26",
-    "source": "Kit-72 translated from Spanish",
+    "source": "Kit-72; Mengen nach dem BBK-Ratgeber, wo dieser Mengen nennt",
     "affiliateProgram": "Amazon Associates DE"
   },
   "scenarios": {
@@ -109,7 +109,7 @@
       "id": "wasser-1",
       "name": "Trinkwasser in Flaschen",
       "category": "Wasser",
-      "quantity": "3L x Person x Tag",
+      "quantity": "2L x Person x Tag",
       "priority": "critical",
       "scenarios": ["general", "stromausfall", "hitzewelle", "wasserausfall", "evakuierung"],
       "affiliateUrl": "https://www.amazon.de/s?k=wasserkanister+5+liter+trinkwasser",
@@ -314,7 +314,7 @@
       "id": "erstehilfe-5",
       "name": "Persoenliche Medikamente",
       "category": "Erste-Hilfe",
-      "quantity": "7+ Tage Vorrat",
+      "quantity": "mind. 10 Tage Vorrat",
       "priority": "critical",
       "scenarios": ["general", "stromausfall", "hitzewelle", "wasserausfall", "evakuierung"]
     },
@@ -392,7 +392,7 @@
       "id": "doks-4",
       "name": "Bargeld",
       "category": "Dokumente",
-      "quantity": "100-200 EUR",
+      "quantity": "in kleiner Stückelung",
       "priority": "critical",
       "scenarios": ["general", "stromausfall", "evakuierung"]
     },

@@ -61,7 +61,6 @@ const foodCategories = [
     items: [
       { name: 'Aceite de oliva', duration: '1-2 años', notes: 'Sin abrir, lugar oscuro' },
       { name: 'Aceite de coco', duration: '2+ años', notes: 'Muy estable' },
-      { name: 'Mantequilla clarificada (ghee)', duration: '1+ años', notes: 'No requiere refrigeración' },
     ],
     priority: 'recommended',
   },
@@ -85,7 +84,7 @@ const foodCategories = [
       { name: 'Frutos secos mixtos', duration: '6-12 meses', notes: 'Snack nutritivo inmediato' },
       { name: 'Chocolate negro', duration: '1-2 años', notes: 'Energía + moral' },
       { name: 'Galletas saladas', duration: '6-12 meses', notes: 'Base para otros alimentos' },
-      { name: 'Cecina/jamón curado', duration: '3-6 meses', notes: 'Proteína sin refrigerar' },
+      { name: 'Embutido curado envasado', duration: 'Según etiqueta', notes: 'Guárdalo como indique el envase' },
     ],
     priority: 'critical',
   },
@@ -102,7 +101,7 @@ const storageTips = [
   },
   {
     tip: 'Lugar fresco y oscuro',
-    description: 'Ideal <20°C. Cada 10°C de más reduce la vida útil a la mitad. Evita luz directa.',
+    description: 'Guarda la comida en un lugar fresco, seco y oscuro, y sigue las instrucciones de conservación de la etiqueta.',
   },
   {
     tip: 'Separar de químicos',
@@ -159,13 +158,13 @@ const specialNeeds = [
   {
     group: 'Vegetarianos/Veganos',
     icon: '🥬',
-    needs: ['Legumbres (proteína principal)', 'Frutos secos y semillas', 'Tofu envasado al vacío', 'Leches vegetales UHT'],
+    needs: ['Legumbres (proteína principal)', 'Frutos secos y semillas', 'Leches vegetales UHT'],
     tips: 'Asegurar suficiente proteína combinando legumbres y cereales.',
   },
   {
     group: 'Alergias alimentarias',
     icon: '⚠️',
-    needs: ['Alternativas seguras a alérgenos', 'Leer TODAS las etiquetas', 'Epipen/medicación de emergencia', 'Comunicar alergias en refugios'],
+    needs: ['Alternativas seguras a alérgenos', 'Leer TODAS las etiquetas', 'La medicación que te haya recetado tu médico', 'Comunicar alergias en refugios'],
     tips: 'Ten lista de ingredientes a evitar para verificar rápido.',
   },
   {
@@ -216,23 +215,23 @@ const faqs = [
   },
   {
     question: '¿Las latas realmente duran tanto?',
-    answer: 'Las latas de metal bien almacenadas pueden durar 2-5 años, a veces más. La fecha de "consumir preferentemente antes de" indica calidad óptima, no seguridad. Latas abombadas, oxidadas o con mal olor deben descartarse siempre.'
+    answer: 'Manda la fecha del envase. Las conservas llevan fecha de consumo preferente: pasada esa fecha, el alimento sigue siendo seguro si lo has conservado bien y el envase está intacto, aunque puede perder sabor o textura. Las latas abombadas, oxidadas o dañadas se tiran siempre.'
   },
   {
     question: '¿Puedo comer comida caducada?',
-    answer: 'Depende. "Consumir preferentemente antes de" es indicativo de calidad. "Fecha de caducidad" en productos frescos es más estricta. Conservas pueden estar bien meses después de la fecha si están intactas. Usa el sentido común: olor, aspecto, sabor.'
+    answer: 'Si ha pasado la fecha de caducidad, no lo comas. Si ha pasado la fecha de consumo preferente, el alimento sigue siendo seguro siempre que lo hayas conservado bien y el envase esté intacto, aunque puede haber perdido sabor o textura. No pruebes un alimento para saber si es seguro. Son las indicaciones de AESAN.'
   },
   {
     question: '¿Qué pasa con la comida del congelador en un apagón?',
-    answer: 'Congelador lleno y cerrado: 48 horas. Medio lleno: 24 horas. No abras la puerta. Después, la comida que aún tenga cristales de hielo se puede volver a congelar. La que esté descongelada pero fría (<5°C): cocinar y consumir inmediatamente.'
+    answer: 'Sin abrir las puertas, el frigorífico mantiene los alimentos por debajo de 5 ºC unas 4 horas y el congelador aguanta al menos entre 24 y 48 horas, según AESAN. Con más de 4 horas sin luz, tira la carne, el pescado, los huevos, la leche, el queso fresco y las sobras de la nevera. Lo que conserve cristales de hielo se puede volver a congelar. Si no sabes cuánto tiempo lleva descongelado, tíralo.'
   },
   {
     question: '¿Necesito comida especial de supervivencia?',
-    answer: 'No necesariamente. Los alimentos del supermercado (conservas, pasta, arroz) son perfectamente válidos y más baratos. La comida liofilizada de "supervivencia" dura más (25+ años) pero es cara. Empieza con lo normal, expande si quieres.'
+    answer: 'No necesariamente. Los alimentos del supermercado (conservas, pasta, arroz) son perfectamente válidos y más baratos. La comida liofilizada de "supervivencia" dura más, pero es cara. Empieza con lo normal, expande si quieres.'
   },
   {
     question: '¿Cómo evito los insectos en los granos?',
-    answer: 'Congela los granos 48h al comprar para matar huevos de insectos. Luego guárdalos en recipientes herméticos (cristal o plástico grueso). Las hojas de laurel en el recipiente ayudan a repeler. Inspecciona periódicamente.'
+    answer: 'Guarda granos, harina y pasta en recipientes herméticos de cristal o plástico grueso, en un lugar fresco y seco, y revísalos de vez en cuando.'
   },
 ];
 
@@ -265,7 +264,7 @@ const faqSchema = {
   faqData={faqs}
   title="Almacenamiento de Comida para Emergencias: Guía Completa"
   description="Qué alimentos almacenar para emergencias, cuánto duran, cómo organizarlos y qué comer sin cocinar. Guía práctica con ejemplos."
-  updatedDate="2025-12-15"
+  updatedDate="2026-11-18"
   author="Equipo Kit-72"
   readTime="11 min"
   breadcrumbs={breadcrumbs}
@@ -518,8 +517,8 @@ const faqSchema = {
     <h2 id="fuentes">Fuentes y referencias</h2>
     <ul class="text-sm space-y-2">
       <li>
-        <a href="https://www.foodsafety.gov/" target="_blank" rel="noopener">
-          FoodSafety.gov — Food Storage Guidelines
+        <a href="https://www.aesan.gob.es/actualidad/actualidad-noticias/alimentos_refrigerados" target="_blank" rel="noopener">
+          AESAN — Alimentos refrigerados y congelados tras un apagón
         </a>
       </li>
       <li>
@@ -528,8 +527,8 @@ const faqSchema = {
         </a>
       </li>
       <li>
-        <a href="https://www.fda.gov/food" target="_blank" rel="noopener">
-          FDA — Food Storage and Safety
+        <a href="https://www.aesan.gob.es/actualidad/actualidad-noticias/fechas" target="_blank" rel="noopener">
+          AESAN — Fecha de caducidad y de consumo preferente
         </a>
       </li>
     </ul>
