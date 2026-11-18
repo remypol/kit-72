@@ -19,6 +19,7 @@ export const noodpakketBaby: Page = {
     description: 'Flesvoeding, het juiste flessenwater, luiers en medicijnen: wat het Voedingscentrum en de overheid adviseren voor 72 uur met een baby.',
     h1: 'Noodpakket met een baby of peuter',
     crumb: 'Noodpakket met baby',
+    image: { src: '/images/shared/baby-kit.webp', alt: 'Babyfles met melk, een blik flesvoeding met maatschepje, een fles water, een thermosfles, luiers, hydrofiele doeken en een geel mutsje' },
     short: [
       'Met een baby komt er bij het gewone noodpakket vooral voeding bij. Geef je flesvoeding, zorg dan voor genoeg pakken zuigelingenvoeding of opvolgmelk en genoeg flessen water.{vc} Kies bij voorkeur mineraalwater waarop staat dat het geschikt is voor het maken van flesvoeding.{vc}',
       'Daarnaast noemt de overheid luiers en medicijnen als dingen die je zelf aan het pakket toevoegt.{dv} Hoeveel luiers of hoeveel voeding je moet neerleggen, zegt geen officiële bron; reken zelf uit wat je kind in drie dagen gebruikt.',

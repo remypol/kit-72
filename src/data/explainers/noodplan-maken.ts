@@ -19,6 +19,7 @@ export const noodplanMaken: Page = {
     description: 'Een noodplan is één A4 met afspraken: waar je elkaar treft, wie de kinderen haalt en wie je belt. Zo vul je het in, met de formulieren van de overheid.',
     h1: 'Noodplan maken voor je huishouden',
     crumb: 'Noodplan maken',
+    image: { src: '/images/shared/emergency-plan.webp', alt: 'Klembord met een leeg invulformulier en een potlood, met huissleutels, een opgevouwen kaart, een fluitje en een zaklamp' },
     short: [
       'Een noodplan is een vel papier met afspraken voor als telefoon, internet of stroom uitvallen: waar je elkaar ontmoet, wie de kinderen ophaalt, wie je belt en waar het noodpakket en de belangrijke papieren liggen.{dv}{plan}',
       'De overheid heeft er een invulformulier van twee pagina’s voor, en een korte noodkaart op A5.{plan}{kaart} Vul het in met je huisgenoten, print het en geef een kopie aan je noodcontacten.{dv}{faq}',
