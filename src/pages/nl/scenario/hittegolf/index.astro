@@ -10,6 +10,7 @@
  * - Higher humidity makes heat feel worse
  */
 import BaseLayout from '../../../../layouts/BaseLayout.astro';
+import RelatedLinks from '../../../../components/content/RelatedLinks.astro';
 import TLDRBlock from '../../../../components/hub/TLDRBlock.astro';
 import CollapsibleSection from '../../../../components/hub/CollapsibleSection.astro';
 import PhaseTabs from '../../../../components/hub/PhaseTabs.tsx';
@@ -201,31 +202,11 @@ const faqs = [
   title="Hittegolf: wat te doen bij extreme hitte? Checklist & tips"
   description="Complete gids voor hittegolf voorbereiding in Nederland. Hydratatie, verkoeling, risicogroepen en checklist. KNMI en RIVM richtlijnen."
   locale="nl"
-  schemaType="HowTo"
+  schemaType="Article"
   dateModified="2026-11-17"
   alternates={{
     es: '/es/escenarios/prepararse-ola-calor/',
     de: '/de/szenarien/hitzewelle/',
-  }}
-  schemaData={{
-    step: [
-      { '@type': 'HowToStep', name: 'Volg KNMI waarschuwingen', text: 'Activeer meldingen van de KNMI app. Code oranje/rood = hittegolf. Stel pushmeldingen in voor jouw regio.' },
-      { '@type': 'HowToStep', name: 'Identificeer koele plekken', text: 'Bibliotheken, winkelcentra, gemeentehuizen. Check bij je gemeente voor koelcentra.' },
-      { '@type': 'HowToStep', name: 'Sla extra water in', text: 'Minimaal 5-6 liter per persoon per dag. Vries flessen water in: dienen ook als koelelementen.' },
-      { '@type': 'HowToStep', name: 'Koop ORS bij de apotheek', text: 'Oral Rehydration Salts zijn onmisbaar voor het aanvullen van zouten bij veel zweten.' },
-      { '@type': 'HowToStep', name: 'Vermijd buitenactiviteiten 12:00-18:00', text: 'De heetste uren van de dag. Plan activiteiten vroeg of laat.' },
-      { '@type': 'HowToStep', name: 'Drink regelmatig, ook zonder dorst', text: 'Als je dorst voelt, ben je al licht gedehydrateerd. Drink elk halfuur een glas water.' },
-      { '@type': 'HowToStep', name: 'Herken alarmsignalen', text: 'Verwardheid, niet meer zweten, hoge temperatuur = bel 112.' },
-    ],
-    totalTime: 'P3D',
-    supply: [
-      { '@type': 'HowToSupply', name: 'Extra flessenwater (5-6L/persoon/dag)' },
-      { '@type': 'HowToSupply', name: 'ORS zakjes' },
-      { '@type': 'HowToSupply', name: 'USB/batterij ventilator' },
-      { '@type': 'HowToSupply', name: 'Microvezeldoeken' },
-      { '@type': 'HowToSupply', name: 'Zonnebrand SPF50+' },
-      { '@type': 'HowToSupply', name: 'Lichaamsthermometer' },
-    ],
   }}
   faqData={faqs}
 >
@@ -244,7 +225,7 @@ const faqs = [
           <Icon name="Sun" size={28} />
         </div>
         <div class="scenario-title-content">
-          <h1 class="scenario-title">Voorbereiden op een Hittegolf</h1>
+          <h1 class="scenario-title">Hittegolf: wat doe je bij extreme hitte?</h1>
           <div class="scenario-meta">
             <span class="meta-item">8 min</span>
             <span class="meta-divider">·</span>
@@ -443,6 +424,15 @@ const faqs = [
 
     <!-- Sources -->
     <section class="scenario-section">
+      <RelatedLinks
+        links={[
+          { href: '/nl/noodpakket-baby/', label: 'Noodpakket met een baby', note: 'Wat de GGD adviseert voor kleine kinderen bij hitte.' },
+          { href: '/nl/tools/water-calculator/', label: 'Watercalculator', note: 'Hoeveel water je huishouden nodig heeft.' },
+          { href: '/nl/nl-alert/', label: 'NL-Alert', note: 'Hoe de overheid je waarschuwt en hoe je je telefoon controleert.' },
+          { href: '/nl/noodhandboek/', label: 'Gratis noodhandboek voor jouw adres', note: 'Hoogte, overstromingsrisico, spoedeisende hulp en rampenzender voor jouw huis, op vier pagina’s.' },
+        ]}
+      />
+
       <details class="sources-block">
         <summary class="sources-header">
           <Icon name="BookOpen" size={18} />
@@ -453,7 +443,7 @@ const faqs = [
           <ul>
             <li><a href="https://www.knmi.nl/" target="_blank" rel="noopener">KNMI - Koninklijk Nederlands Meteorologisch Instituut</a></li>
             <li><a href="https://www.rivm.nl/hitte" target="_blank" rel="noopener">RIVM - Hitte en gezondheid</a></li>
-            <li><a href="https://www.rijksoverheid.nl/onderwerpen/weer/vraag-en-antwoord/wat-moet-ik-doen-bij-een-hittegolf" target="_blank" rel="noopener">Rijksoverheid - Hittegolf</a></li>
+            <li><a href="https://www.denkvooruit.nl/risicos/risicos-in-nederland/hitte" target="_blank" rel="noopener">Denk Vooruit - Hitte</a></li>
             <li><a href="https://www.rodekruis.nl/ehbo/hitteberoerte/" target="_blank" rel="noopener">Rode Kruis - Hitteberoerte</a></li>
           </ul>
         </div>

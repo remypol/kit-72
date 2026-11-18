@@ -5,35 +5,67 @@ import Icon from '../../../components/ui/Icon.astro';
 
 const guides = [
   {
-    title: 'Water Opslaan',
-    description: 'Hoe je veilig drinkwater opslaat voor noodsituaties.',
+    title: 'Water opslaan',
+    description: 'De overheid gaat uit van 3 liter per persoon per dag. Hoe je kraanwater veilig bewaart, in welke flessen of jerrycans, en hoe lang het goed blijft.',
     href: '/nl/gidsen/water-opslaan/',
     icon: 'Droplet',
   },
   {
-    title: 'Voedsel Opslaan',
-    description: 'Langdurig houdbaar voedsel en juiste opslag.',
+    title: 'Voedsel opslaan',
+    description: 'Welk eten lang houdbaar is zonder koelkast, hoe je een voorraad voor drie dagen opbouwt uit wat je toch al eet en hoe je hem ververst.',
     href: '/nl/gidsen/voedsel-opslaan/',
     icon: 'UtensilsCrossed',
   },
   {
+    title: 'Koken zonder stroom',
+    description: 'Een gasbrander of barbecue gebruik je bij stroomuitval alleen buiten. Wat je eet zonder te koken en hoe lang koelkast en vriezer koud blijven.',
+    href: '/nl/gidsen/koken-zonder-stroom/',
+    icon: 'Flame',
+  },
+  {
+    title: 'Contant geld in huis',
+    description: 'Het advies is € 70 per volwassene en € 30 per kind. Waar dat bedrag vandaan komt, in welke biljetten en munten, en wat je doet als pinnen niet werkt.',
+    href: '/nl/gidsen/contant-geld/',
+    icon: 'Wallet',
+  },
+  {
+    title: 'Wc en hygiëne zonder water',
+    description: 'Doorspoelen met een emmer regen- of slootwater, wat je doet als het riool niet werkt en hoe je je handen schoon houdt.',
+    href: '/nl/gidsen/noodtoilet/',
+    icon: 'Sparkles',
+  },
+  {
     title: 'EHBO-kit',
-    description: 'Samenstellen en onderhouden van je EHBO-voorraad.',
+    description: 'Wat er in een EHBO-kit hoort, wat je erbij legt voor je eigen huishouden en hoe je hem bijhoudt.',
     href: '/nl/gidsen/ehbo-kit/',
     icon: 'Heart',
   },
   {
-    title: 'Energie & Communicatie',
-    description: 'Blijf verbonden en geïnformeerd zonder stroom.',
+    title: 'Energie en communicatie',
+    description: 'Hoe je zonder stopcontact je telefoon oplaadt, het nieuws volgt via de rampenzender en licht hebt.',
     href: '/nl/gidsen/energie-communicatie/',
     icon: 'Radio',
   },
   {
+    title: 'Zonnepanelen en thuisbatterij bij stroomuitval',
+    description: 'Gewone zonnepanelen vallen uit bij een storing en een thuisbatterij helpt alleen met een noodstroomfunctie. Wat netbeheerders en Milieu Centraal zeggen.',
+    href: '/nl/gidsen/zonnepanelen-thuisbatterij-stroomuitval/',
+    icon: 'Sun',
+  },
+  {
     title: 'AI en stroomuitval',
-    description: 'Kan AI een stroomstoring veroorzaken? Wat er bekend is, met bronnen.',
+    description: 'Kan AI een stroomstoring veroorzaken? Wat er bekend is over datacenters, cyberaanvallen en het stroomnet, met bronnen.',
     href: '/nl/gidsen/ai-stroomuitval/',
     icon: 'Zap',
   },
+];
+
+const basics = [
+  { title: 'Checklist noodpakket', description: 'De twaalf onderdelen van de overheid, met wat erbij komt kijken.', href: '/nl/noodpakket-checklist/' },
+  { title: 'Noodplan maken', description: 'Wat je afspreekt met je huishouden en zet op één A4.', href: '/nl/noodplan-maken/' },
+  { title: 'NL-Alert', description: 'Wanneer het testbericht komt en hoe je je telefoon controleert.', href: '/nl/nl-alert/' },
+  { title: 'Als de sirene gaat', description: 'Naar binnen, ramen en deuren dicht, radio aan.', href: '/nl/sirene/' },
+  { title: 'Noodpakket met een baby', description: 'Flesvoeding, het juiste water en luiers voor drie dagen.', href: '/nl/noodpakket-baby/' },
 ];
 ---
 
@@ -41,6 +73,15 @@ const guides = [
   title="Gidsen: water, eten, EHBO en stroom voor noodgevallen"
   description="Uitgebreide gidsen voor het samenstellen van je noodpakket: water, voedsel, EHBO en communicatie."
   locale="nl"
+  dateModified="2026-11-18"
+  schemaData={{
+    '@type': 'CollectionPage',
+    mainEntity: {
+      '@type': 'ItemList',
+      numberOfItems: guides.length + basics.length,
+      itemListElement: [...guides, ...basics].map((g, i) => ({ '@type': 'ListItem', position: i + 1, name: g.title, description: g.description, url: `https://www.kit-72.com${g.href}` })),
+    },
+  }}
 >
   <section class="py-16">
     <div class="max-w-4xl mx-auto px-4 sm:px-6">
@@ -48,7 +89,7 @@ const guides = [
         <Breadcrumb items={[{ label: 'Gidsen' }]} class="mb-4" locale="nl" />
         <h1 class="text-4xl font-bold mb-4">Gidsen</h1>
         <p class="text-xl text-(--color-text-secondary)">
-          Uitgebreide informatie over elk onderdeel van je noodvoorbereiding.
+          Per onderwerp wat de overheid en andere officiële instanties adviseren, en hoe je dat thuis regelt. Bij de nieuwere gidsen staat onderaan een bronnenlijst met de datum waarop we de bronnen hebben nagelezen.
         </p>
       </div>
 
@@ -67,6 +108,16 @@ const guides = [
           </a>
         ))}
       </div>
+
+      <h2 class="text-2xl font-semibold mt-16 mb-6">Eerst de basis</h2>
+      <ul class="grid md:grid-cols-2 gap-x-8 gap-y-5">
+        {basics.map((b) => (
+          <li>
+            <a href={b.href} class="font-semibold text-(--color-accent-primary) underline underline-offset-4">{b.title}</a>
+            <p class="text-sm text-(--color-text-secondary) mt-1">{b.description}</p>
+          </li>
+        ))}
+      </ul>
     </div>
   </section>
 </BaseLayout>

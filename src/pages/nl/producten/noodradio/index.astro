@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../../../layouts/BaseLayout.astro';
+import Byline from '../../../../components/content/Byline.astro';
 import ShopBox from '../../../../components/growth/ShopBox.astro';
 import Breadcrumb from '../../../../components/layout/Breadcrumb.astro';
 import Icon from '../../../../components/ui/Icon.astro';
@@ -10,7 +11,7 @@ import HeroImage from '../../../../components/content/HeroImage.astro';
   title="Noodradio kopen: FM, DAB+, dynamo en waar je op let"
   description="Welke noodradio heb je nodig? FM en liefst DAB+ voor de rampenzender, en stroom uit batterijen, dynamo of zon. Waar je op let bij het kopen."
   locale="nl"
-  dateModified="2026-11-17"
+  dateModified="2026-11-18"
   schemaType="Article"
   alternates={{
     de: '/de/produkte/notfallradio/',
@@ -20,6 +21,7 @@ import HeroImage from '../../../../components/content/HeroImage.astro';
     <div class="max-w-3xl mx-auto px-4 sm:px-6">
       <Breadcrumb items={[{ label: 'Producten', href: '/nl/producten/' }, { label: 'Noodradio' }]} class="mb-4" locale="nl" />
       <h1 class="text-4xl font-bold mb-6">Noodradio</h1>
+      <Byline date="2026-11-18" />
 
       <div class="mb-8">
         <HeroImage
@@ -28,15 +30,19 @@ import HeroImage from '../../../../components/content/HeroImage.astro';
           priority={true}
         />
       </div>
-
-      <ShopBox locale="nl" category="noodradio" />
-
       <div class="prose prose-lg">
         <p class="lead">
           Als stroom, internet en mobiele netwerken uitvallen, is de radio vaak de
           <strong>enige informatiebron</strong>. Bij een ramp geeft de overheid aanwijzingen via de
           regionale omroep: de rampenzender van je regio.
         </p>
+
+
+        <div class="not-prose my-8">
+
+          <ShopBox locale="nl" category="noodradio" />
+
+        </div>
 
         <!-- Key Info -->
         <div class="card p-6 my-8 bg-(--color-bg-tertiary) not-prose">
@@ -55,7 +61,7 @@ import HeroImage from '../../../../components/content/HeroImage.astro';
             </div>
           </div>
           <p class="text-xs text-(--color-text-muted) mt-3">
-            💡 Nederland heeft dertien rampenzenders. Schrijf de frequentie van de jouwe op een sticker op de radio.
+            Nederland heeft dertien rampenzenders. Schrijf de frequentie van de jouwe op een sticker op de radio.
           </p>
         </div>
 
@@ -90,7 +96,7 @@ import HeroImage from '../../../../components/content/HeroImage.astro';
         </p>
 
         <div class="card p-6 my-8 bg-(--color-accent-subtle) not-prose">
-          <p class="font-medium mb-2">💡 Aanbeveling</p>
+          <p class="font-medium mb-2">Aanbeveling</p>
           <p class="text-sm text-(--color-text-secondary)">
             Kies een radio met <strong>FM</strong>, liefst ook <strong>DAB+</strong>. Dat is ook het advies van de Rijksoverheid: FM en/of DAB.
           </p>
@@ -145,19 +151,19 @@ import HeroImage from '../../../../components/content/HeroImage.astro';
 
         <h2>Checklist</h2>
         <ul>
-          <li>☐ FM-ontvangst, liefst ook DAB+</li>
-          <li>☐ Dynamo aanwezig</li>
-          <li>☐ Zonnepaneel of batterijen als backup</li>
-          <li>☐ Zaklamp ingebouwd</li>
-          <li>☐ USB-uitgang voor smartphone</li>
-          <li>☐ Lokale zenderfrequenties genoteerd</li>
-          <li>☐ Functietest elke 6 maanden</li>
+          <li>FM-ontvangst, liefst ook DAB+</li>
+          <li>Dynamo aanwezig</li>
+          <li>Zonnepaneel of batterijen als backup</li>
+          <li>Zaklamp ingebouwd</li>
+          <li>USB-uitgang voor smartphone</li>
+          <li>Lokale zenderfrequenties genoteerd</li>
+          <li>Functietest elke 6 maanden</li>
         </ul>
       </div>
 
       <!-- Shop Link -->
       <div class="mt-12 card p-6 bg-(--color-bg-tertiary)">
-        <h3 class="font-semibold mb-2">Noodradio's op Bol.com</h3>
+        <h3 class="font-semibold mb-2">Noodradio's op bol</h3>
         <p class="text-sm text-(--color-text-secondary) mb-4">
           Aanbevolen dynamo-radio's met zonnepaneel en zaklamp.
         </p>

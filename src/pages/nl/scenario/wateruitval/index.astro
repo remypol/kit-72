@@ -5,10 +5,10 @@
  * NL-specific context:
  * - Dutch tap water is excellent quality (no chlorine taste)
  * - Vitens, Evides, PWN, etc. are regional water companies
- * - storingskaart.drinkwater.nl for outage info
  * - Drinkwaterbesluit regulations
  */
 import BaseLayout from '../../../../layouts/BaseLayout.astro';
+import RelatedLinks from '../../../../components/content/RelatedLinks.astro';
 import TLDRBlock from '../../../../components/hub/TLDRBlock.astro';
 import CollapsibleSection from '../../../../components/hub/CollapsibleSection.astro';
 import PhaseTabs from '../../../../components/hub/PhaseTabs.tsx';
@@ -38,7 +38,7 @@ const phases = {
       tip: null
     },
     {
-      title: 'Bereid hygiene zonder water voor',
+      title: 'Bereid hygiëne zonder water voor',
       detail: 'Vochtige doekjes, handgel, droogshampoo. 2-3 pakken doekjes per persoon.',
       tip: null
     },
@@ -49,7 +49,7 @@ const phases = {
     },
     {
       title: 'Ken je waterleverancier',
-      detail: 'Check storingskaart.drinkwater.nl. Ken het nummer van je waterbedrijf.',
+      detail: 'Kijk op de website van je waterbedrijf en schrijf het storingsnummer op papier.',
       tip: 'Bij gepland onderhoud krijg je meestal vooraf bericht'
     },
   ],
@@ -70,7 +70,7 @@ const phases = {
       tip: 'Hergebruik waswater voor de wc'
     },
     {
-      title: 'Persoonlijke hygiene met doekjes',
+      title: 'Persoonlijke hygiëne met doekjes',
       detail: 'Lichaam met vochtige doekjes. Handen met handgel.',
       tip: null
     },
@@ -128,12 +128,12 @@ const checklistCategories = [
     icon: 'beaker',
     items: [
       { id: 'zuiveringstabletten', name: 'Waterzuiveringstabletten', quantity: '2 verpakkingen', priority: 'critical' as const, notes: 'Voor noodgevallen', affiliateUrl: 'https://www.bol.com/nl/nl/s/?searchtext=waterzuiveringstabletten' },
-      { id: 'waterfilter', name: 'Draagbaar waterfilter', quantity: '1 stuk', priority: 'recommended' as const, notes: 'Verwijdert bacterien', affiliateUrl: 'https://www.bol.com/nl/nl/s/?searchtext=waterfilter+outdoor' },
+      { id: 'waterfilter', name: 'Draagbaar waterfilter', quantity: '1 stuk', priority: 'recommended' as const, notes: 'Verwijdert bacteriën', affiliateUrl: 'https://www.bol.com/nl/nl/s/?searchtext=waterfilter+outdoor' },
     ]
   },
   {
     id: 'hygiene',
-    name: 'Hygiene zonder water',
+    name: 'Hygiëne zonder water',
     icon: 'sparkles',
     items: [
       { id: 'vochtige-doekjes', name: 'Vochtige doekjes', quantity: '3-4 grote pakken', priority: 'critical' as const, notes: 'Voor lichaamsverzorging', affiliateUrl: 'https://www.bol.com/nl/nl/s/?searchtext=vochtige+doekjes+lichaam' },
@@ -168,7 +168,7 @@ const checklistCategories = [
 const waterNeeds = [
   { use: 'Drinken', amount: '2L', notes: 'Minimaal vitaal' },
   { use: 'Koken', amount: '0.5-1L', notes: 'Als je kookt' },
-  { use: 'Hygiene', amount: '2-4L', notes: 'Gezicht, handen' },
+  { use: 'Hygiëne', amount: '2-4L', notes: 'Gezicht, handen' },
   { use: 'WC', amount: '3-6L', notes: 'Per spoeling' },
 ];
 
@@ -201,30 +201,11 @@ const faqs = [
   title="Wateruitval: Zonder drinkwater? Noodplan & Checklist"
   description="Complete gids voor wateruitval in Nederland. Hoeveel water opslaan, leven zonder kraanwater en praktische checklist."
   locale="nl"
-  schemaType="HowTo"
+  schemaType="Article"
   dateModified="2026-11-17"
   alternates={{
     es: '/es/escenarios/prepararse-corte-agua/',
     de: '/de/szenarien/wasserausfall/',
-  }}
-  schemaData={{
-    step: [
-      { '@type': 'HowToStep', name: 'Sla drinkwater op', text: 'Minimaal 3 liter per persoon per dag. Een gezin van 4 heeft minimaal 36 liter nodig voor 3 dagen.' },
-      { '@type': 'HowToStep', name: 'Koop jerrycans voor water', text: 'Voedselveilige jerrycans van 10-20 liter. Roteer water elke 6 maanden. Bewaar op koele, donkere plek.' },
-      { '@type': 'HowToStep', name: 'Heb waterzuiveringstabletten', text: 'Voor noodgevallen als je water van onbekende bronnen moet gebruiken.' },
-      { '@type': 'HowToStep', name: 'Bereid hygiene zonder water voor', text: 'Vochtige doekjes, handgel, droogshampoo. 2-3 pakken doekjes per persoon.' },
-      { '@type': 'HowToStep', name: 'Prioriteer drinkwater', text: 'Gebruik nooit je drinkwatervoorraad voor andere doeleinden. Dit is prioriteit #1.' },
-      { '@type': 'HowToStep', name: 'Gebruik handmatige wc-spoeling', text: 'Giet 6-8 liter water direct in de toiletpot. Hergebruik waswater voor de wc.' },
-    ],
-    totalTime: 'P3D',
-    supply: [
-      { '@type': 'HowToSupply', name: 'Flessenwater (3L/persoon/dag × 3 dagen)' },
-      { '@type': 'HowToSupply', name: 'Voedselveilige jerrycan 10-20L' },
-      { '@type': 'HowToSupply', name: 'Waterzuiveringstabletten' },
-      { '@type': 'HowToSupply', name: 'Vochtige doekjes (3-4 pakken)' },
-      { '@type': 'HowToSupply', name: 'Desinfecterende handgel' },
-      { '@type': 'HowToSupply', name: 'Emmers voor water (8-10L)' },
-    ],
   }}
   faqData={faqs}
 >
@@ -243,7 +224,7 @@ const faqs = [
           <Icon name="Droplet" size={28} />
         </div>
         <div class="scenario-title-content">
-          <h1 class="scenario-title">Voorbereiden op Wateruitval</h1>
+          <h1 class="scenario-title">Wateruitval: wat doe je als er geen water uit de kraan komt?</h1>
           <div class="scenario-meta">
             <span class="meta-item">6 min</span>
             <span class="meta-divider">·</span>
@@ -348,7 +329,7 @@ const faqs = [
           <div class="priority-list">
             <span class="priority-item priority-1">1. Drinken</span>
             <span class="priority-item priority-2">2. Koken</span>
-            <span class="priority-item priority-3">3. Hygiene</span>
+            <span class="priority-item priority-3">3. Hygiëne</span>
             <span class="priority-item priority-4">4. WC</span>
           </div>
         </div>
@@ -442,6 +423,16 @@ const faqs = [
 
     <!-- Sources -->
     <section class="scenario-section">
+      <RelatedLinks
+        links={[
+          { href: '/nl/gidsen/noodtoilet/', label: 'Wc en hygiëne zonder water', note: 'Doorspoelen met een emmer en wat je doet als het riool niet werkt.' },
+          { href: '/nl/gidsen/water-opslaan/', label: 'Water opslaan', note: 'Hoe je kraanwater veilig bewaart en hoe lang het goed blijft.' },
+          { href: '/nl/tools/water-calculator/', label: 'Watercalculator', note: 'Hoeveel liter je huishouden nodig heeft.' },
+          { href: '/nl/noodpakket-baby/', label: 'Noodpakket met een baby', note: 'Welk flessenwater geschikt is voor flesvoeding.' },
+          { href: '/nl/noodhandboek/', label: 'Gratis noodhandboek voor jouw adres', note: 'Hoogte, overstromingsrisico, spoedeisende hulp en rampenzender voor jouw huis, op vier pagina’s.' },
+        ]}
+      />
+
       <details class="sources-block">
         <summary class="sources-header">
           <Icon name="BookOpen" size={18} />
@@ -450,10 +441,9 @@ const faqs = [
         </summary>
         <div class="sources-content">
           <ul>
-            <li><a href="https://storingskaart.drinkwater.nl/" target="_blank" rel="noopener">Storingskaart Drinkwater Nederland</a></li>
+            <li><a href="https://www.denkvooruit.nl/risicos/risicos-in-nederland/drinkwater" target="_blank" rel="noopener">Denk Vooruit - Drinkwater</a></li>
             <li><a href="https://www.rivm.nl/drinkwater" target="_blank" rel="noopener">RIVM - Drinkwater</a></li>
             <li><a href="https://www.rijksoverheid.nl/onderwerpen/drinkwater" target="_blank" rel="noopener">Rijksoverheid - Drinkwater</a></li>
-            <li><a href="https://www.who.int/water_sanitation_health/dwq/en/" target="_blank" rel="noopener">WHO - Waterkwaliteit</a></li>
           </ul>
         </div>
       </details>

@@ -1,5 +1,7 @@
 ---
 import BaseLayout from '../../../../layouts/BaseLayout.astro';
+import RelatedLinks from '../../../../components/content/RelatedLinks.astro';
+import Byline from '../../../../components/content/Byline.astro';
 import HeroImage from '../../../../components/content/HeroImage.astro';
 import Breadcrumb from '../../../../components/layout/Breadcrumb.astro';
 import Icon from '../../../../components/ui/Icon.astro';
@@ -9,13 +11,14 @@ import Icon from '../../../../components/ui/Icon.astro';
   title="EHBO-kit samenstellen: wat hoort erin?"
   description="Samenstellen en onderhouden van je EHBO-kit voor noodsituaties. Wat erin hoort en hoe je hem onderhoudt."
   locale="nl"
-  dateModified="2025-12-15"
+  dateModified="2026-11-18"
   schemaType="Article"
 >
   <section class="py-16">
     <div class="max-w-3xl mx-auto px-4 sm:px-6">
       <Breadcrumb items={[{ label: 'Gidsen', href: '/nl/gidsen/' }, { label: 'EHBO-kit' }]} class="mb-4" locale="nl" />
       <h1 class="text-4xl font-bold mb-6">EHBO-kit</h1>
+      <Byline date="2026-11-18" />
 
       <div class="mb-8">
         <HeroImage
@@ -68,7 +71,7 @@ import Icon from '../../../../components/ui/Icon.astro';
           <li><strong>Coldpack</strong> — instant koelkompres</li>
         </ul>
 
-        <h3>Medicijnen & Desinfectie</h3>
+        <h3>Medicijnen en desinfectie</h3>
         <ul>
           <li><strong>Wondontsmettingsmiddel</strong> — Betadine, chloorhexidine o.i.d.</li>
           <li><strong>Pijnstillers</strong> — paracetamol, ibuprofen</li>
@@ -80,12 +83,12 @@ import Icon from '../../../../components/ui/Icon.astro';
 
         <div class="card p-4 my-6 border-l-4 border-l-red-500 bg-red-50 dark:bg-red-950/30 not-prose">
           <p class="text-sm">
-            <strong>⚠️ Medicijnen:</strong> Let op intoleranties en interacties.
+            <strong>Medicijnen:</strong> Let op intoleranties en interacties.
             Lees de bijsluiter en vraag bij twijfel je arts of apotheker.
           </p>
         </div>
 
-        <h2>Persoonlijke Medicijnen</h2>
+        <h2>Persoonlijke medicijnen</h2>
         <p>
           <strong>Uiterst belangrijk:</strong> Als jij of gezinsleden regelmatig medicijnen
           gebruiken, houd altijd een voorraad voor minimaal <strong>7-14 dagen</strong> achter de hand.
@@ -100,14 +103,14 @@ import Icon from '../../../../components/ui/Icon.astro';
         </ul>
 
         <div class="card p-6 my-8 bg-(--color-accent-subtle) not-prose">
-          <p class="font-medium mb-2">💡 Medicatielijst</p>
+          <p class="font-medium mb-2">Medicatielijst</p>
           <p class="text-sm text-(--color-text-secondary)">
             Maak een actuele lijst van alle medicijnen met dosering en innamemomenten.
             Bewaar deze in de EHBO-kit — ook belangrijk voor hulpverleners.
           </p>
         </div>
 
-        <h2>Onderhoud Elke 3 Maanden</h2>
+        <h2>Onderhoud elke drie maanden</h2>
         <ol>
           <li><strong>Houdbaarheidsdatums controleren</strong> — verlopen producten direct vervangen</li>
           <li><strong>Volledigheid checken</strong> — gebruikte artikelen bijkopen</li>
@@ -123,7 +126,7 @@ import Icon from '../../../../components/ui/Icon.astro';
           <li><strong>Draagbaar</strong> — bij evacuatie snel mee te nemen</li>
         </ul>
 
-        <h2>Uitgebreide Uitrusting</h2>
+        <h2>Uitgebreide uitrusting</h2>
         <p>Voor gezinnen of bij extra voorbereiding:</p>
         <ul>
           <li><strong>SAM-spalk</strong> — vormbare spalk voor botbreuken</li>
@@ -135,12 +138,12 @@ import Icon from '../../../../components/ui/Icon.astro';
 
         <h2>Checklist EHBO-kit</h2>
         <ul>
-          <li>☐ Basisuitrusting compleet</li>
-          <li>☐ Persoonlijke medicijnen voor 7+ dagen</li>
-          <li>☐ Actuele medicatielijst bijgevoegd</li>
-          <li>☐ Alle houdbaarheidsdatums gecontroleerd</li>
-          <li>☐ Opbergplek bij iedereen bekend</li>
-          <li>☐ Volgende controle ingepland</li>
+          <li>Basisuitrusting compleet</li>
+          <li>Persoonlijke medicijnen voor 7+ dagen</li>
+          <li>Actuele medicatielijst bijgevoegd</li>
+          <li>Alle houdbaarheidsdatums gecontroleerd</li>
+          <li>Opbergplek bij iedereen bekend</li>
+          <li>Volgende controle ingepland</li>
         </ul>
       </div>
 
@@ -164,7 +167,7 @@ import Icon from '../../../../components/ui/Icon.astro';
             Het Rode Kruis biedt landelijk cursussen aan.
           </p>
           <a
-            href="https://www.rodekruis.nl/cursussen/ehbo/"
+            href="https://www.rodekruis.nl/ehbo/"
             target="_blank"
             rel="noopener noreferrer"
             class="inline-flex items-center gap-2 text-(--color-accent-primary) hover:underline"
@@ -173,6 +176,14 @@ import Icon from '../../../../components/ui/Icon.astro';
           </a>
         </div>
       </div>
+      <RelatedLinks
+        links={[
+          { href: '/nl/noodplan/', label: 'Noodplan per gemeente', note: 'De spoedeisende hulp die je vanuit jouw gemeente het snelst bereikt.' },
+          { href: '/nl/noodplan-maken/', label: 'Noodplan maken', note: 'Zet huisarts, huisartsenpost en medicijnen op papier.' },
+          { href: '/nl/noodpakket-checklist/', label: 'Checklist noodpakket', note: 'Waar de EHBO-doos er één van de twaalf is.' },
+          { href: '/nl/noodhandboek/', label: 'Gratis noodhandboek voor jouw adres', note: 'Hoogte, overstromingsrisico, spoedeisende hulp en rampenzender voor jouw huis, op vier pagina’s.' },
+        ]}
+      />
     </div>
   </section>
 </BaseLayout>

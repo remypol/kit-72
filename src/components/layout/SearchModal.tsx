@@ -80,11 +80,11 @@ const contentPerLocale: Record<string, SearchContent> = {
     select: 'selecteren',
     close: 'sluiten',
     fallbackPages: [
-      { title: 'Noodpakket Samenstellen', path: '/nl/noodpakket-samenstellen/' },
+      { title: 'Noodpakket samenstellen', path: '/nl/noodpakket-samenstellen/' },
       { title: 'Stroomstoring', path: '/nl/scenario/stroomstoring/' },
       { title: 'Water Opslaan', path: '/nl/gidsen/water-opslaan/' },
-      { title: 'Energie Calculator', path: '/nl/tools/energie-calculator/' },
-      { title: 'Noodpakket Samenstellen', path: '/nl/tools/noodpakket-samenstellen/' },
+      { title: 'Energiecalculator', path: '/nl/tools/energie-calculator/' },
+      { title: 'Noodpakket samenstellen', path: '/nl/tools/noodpakket-samenstellen/' },
     ],
   },
   de: {

@@ -6,45 +6,43 @@ import Icon from '../../../components/ui/Icon.astro';
 const tools = [
   {
     title: 'Hoe hoog ligt mijn huis?',
-    description: 'Vul je postcode en huisnummer in en zie direct de hoogte ten opzichte van NAP.',
+    description: 'Vul je postcode en huisnummer in en je ziet hoeveel meter het maaiveld rond je huis boven of onder NAP ligt. De meting komt uit het Actueel Hoogtebestand Nederland.',
     href: '/nl/hoogte-nap/',
     icon: 'Ruler',
-    badge: 'Nieuw'
   },
   {
     title: 'Overstromingsrisico per adres',
-    description: 'Check of je adres in een aangewezen overstromingsrisicogebied ligt, en van welk type.',
+    description: 'Check of je adres in een door Rijkswaterstaat aangewezen overstromingsrisicogebied ligt, en van welk type: buitendijks, achter de grote dijken of langs kleiner water.',
     href: '/nl/overstromingsrisico/',
     icon: 'Waves',
   },
   {
     title: 'Rampenzender per gemeente',
-    description: 'Zoek de zender en FM-frequentie waarop de overheid bij een ramp aanwijzingen geeft.',
+    description: 'Elke regio heeft een eigen rampenzender. Zoek op gemeente welke zender dat is, met de FM-frequentie per zendmast en het DAB+-blok.',
     href: '/nl/rampenzender/',
     icon: 'Radio',
   },
   {
     title: 'Gratis noodhandboek voor jouw adres',
-    description: "Vier pagina's die alleen voor jouw huis kloppen, klaar om te printen.",
+    description: "Vier pagina's die alleen voor jouw huis kloppen: hoogte, overstromingsrisico, de spoedeisende hulp die je het snelst bereikt, een kaart van je buurt en wat je het eerste uur doet. Klaar om te printen.",
     href: '/nl/noodhandboek/',
     icon: 'BookOpen',
   },
   {
-    title: 'Noodpakket Samenstellen',
-    description: 'Interactieve tool om een gepersonaliseerde checklist te maken voor jouw gezin.',
+    title: 'Noodpakket samenstellen',
+    description: 'Geef aan met hoeveel mensen en huisdieren je bent en je krijgt een checklist met hoeveelheden voor 72 uur, die je kunt afvinken en printen.',
     href: '/nl/tools/noodpakket-samenstellen/',
     icon: 'ListChecks',
-    badge: 'Populair'
   },
   {
-    title: 'Water Calculator',
-    description: 'Bereken hoeveel water je nodig hebt op basis van gezinsgrootte en situatie.',
+    title: 'Watercalculator',
+    description: 'Reken uit hoeveel liter water je huishouden nodig heeft. De overheid gaat uit van 3 liter per persoon per dag; voor drie dagen is dat 9 liter per persoon.',
     href: '/nl/tools/water-calculator/',
     icon: 'Droplet',
   },
   {
-    title: 'Energie Calculator',
-    description: 'Bereken je energiebehoefte en welke powerbank capaciteit je nodig hebt.',
+    title: 'Energiecalculator',
+    description: 'Kies welke apparaten je wilt blijven opladen en je ziet hoeveel powerbankcapaciteit daarvoor nodig is.',
     href: '/nl/tools/energie-calculator/',
     icon: 'Battery',
   },
@@ -55,14 +53,22 @@ const tools = [
   title="Tools: adrescheck, rampenzender en calculators"
   description="Check de hoogte en het overstromingsrisico van je adres, zoek je rampenzender en reken uit hoeveel water en stroom je huishouden nodig heeft."
   locale="nl"
+  schemaData={{
+    '@type': 'CollectionPage',
+    mainEntity: {
+      '@type': 'ItemList',
+      numberOfItems: tools.length,
+      itemListElement: tools.map((t, i) => ({ '@type': 'ListItem', position: i + 1, name: t.title, description: t.description, url: `https://www.kit-72.com${t.href}` })),
+    },
+  }}
 >
   <section class="py-16">
     <div class="max-w-4xl mx-auto px-4 sm:px-6">
       <div class="mb-12">
         <Breadcrumb items={[{ label: 'Tools' }]} class="mb-4" locale="nl" />
-        <h1 class="text-4xl font-bold mb-4">Handige Tools</h1>
+        <h1 class="text-4xl font-bold mb-4">Tools</h1>
         <p class="text-xl text-(--color-text-secondary)">
-          Interactieve hulpmiddelen om je noodpakket perfect af te stemmen op jouw situatie.
+          Zeven hulpmiddelen die een antwoord geven voor jouw adres of jouw huishouden. De eerste vier gebruiken open gegevens van de overheid, de laatste drie rekenen met de hoeveelheden uit het advies van Denk Vooruit. Alles is gratis en werkt zonder account.
         </p>
       </div>
 
@@ -75,11 +81,6 @@ const tools = [
             <div class="flex-1">
               <div class="flex items-center gap-2 mb-1">
                 <h2 class="text-xl font-semibold text-(--color-text-primary)">{tool.title}</h2>
-                {tool.badge && (
-                  <span class="px-2 py-0.5 text-xs font-medium bg-(--color-accent-primary) text-(--color-bg-primary) rounded">
-                    {tool.badge}
-                  </span>
-                )}
               </div>
               <p class="text-(--color-text-secondary)">{tool.description}</p>
             </div>

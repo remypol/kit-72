@@ -1,0 +1,35 @@
+---
+/**
+ * The visible "who and when" line under a page title: date of the last
+ * change and a link to how the editors work. The date is the same one the
+ * page passes to the layout as dateModified.
+ */
+interface Props {
+  date: string;
+  locale?: 'nl' | 'de' | 'es';
+}
+const { date, locale = 'nl' } = Astro.props;
+const text = {
+  nl: { updated: 'Bijgewerkt op', by: 'Redactie Kit-72', how: 'Hoe wij werken', href: '/nl/redactioneel-beleid/', fmt: 'nl-NL' },
+  de: { updated: 'Aktualisiert am', by: 'Redaktion Kit-72', how: 'So arbeiten wir', href: '/de/redaktionelle-richtlinien/', fmt: 'de-DE' },
+  es: { updated: 'Actualizado el', by: 'Redacción de Kit-72', how: 'Cómo trabajamos', href: '/es/politica-editorial/', fmt: 'es-ES' },
+}[locale];
+const shown = new Intl.DateTimeFormat(text.fmt, { day: 'numeric', month: 'long', year: 'numeric' }).format(new Date(date + 'T12:00:00Z'));
+---
+
+<p class="byline">
+  {text.updated} <time datetime={date}>{shown}</time> · {text.by} · <a href={text.href}>{text.how}</a>
+</p>
+
+<style>
+  .byline {
+    margin: calc(var(--space-4) * -1) 0 var(--space-6);
+    font-size: 0.95rem;
+    color: var(--color-text-tertiary);
+  }
+  .byline a {
+    color: inherit;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+</style>

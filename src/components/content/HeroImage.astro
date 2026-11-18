@@ -26,14 +26,12 @@ const {
   caption
 } = Astro.props;
 
-// Ensure alt text ends with brand for SEO
-const seoAlt = alt.includes('Kit-72') ? alt : `${alt} | Kit-72`;
 ---
 
 <figure class:list={['hero-image', className]}>
   <img
     src={src}
-    alt={seoAlt}
+    alt={alt}
     width={width}
     height={height}
     loading={priority ? 'eager' : 'lazy'}

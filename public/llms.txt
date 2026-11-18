@@ -12,6 +12,21 @@ Kit-72 sells nothing itself. It is funded by affiliate links to shops, disclosed
 - [Rampenzender per regio](https://www.kit-72.com/nl/rampenzender/): the thirteen regional emergency broadcasters with FM frequencies per transmitter and DAB+ block (source: Denk Vooruit, Rijksoverheid), with a lookup by municipality and one page per broadcaster.
 - [Noodplan per gemeente](https://www.kit-72.com/nl/noodplan/): one page for each of the 342 municipalities: emergency broadcaster, nearest emergency departments (source: RIVM), safety region, water board, share of sample points in a flood-risk zone and range of ground levels. The municipality figures come from a sample of sixteen points near homes and say so.
 
+## Netherlands: sourced explainers (Dutch)
+
+Each of these pages gives the short answer first and ends with a numbered list of the official pages it was checked against, with the date.
+
+- [NL-Alert](https://www.kit-72.com/nl/nl-alert/): when the national test message is sent (first Monday of June and December), how to check a phone, why an alert can be missed.
+- [Wat doe je als de sirene gaat?](https://www.kit-72.com/nl/sirene/): the monthly test, the official instruction when the siren sounds outside the test, and the government's decisions on the siren network.
+- [Noodplan maken](https://www.kit-72.com/nl/noodplan-maken/): the eight parts of the government's household emergency plan and the Red Cross additions.
+- [Noodpakket checklist](https://www.kit-72.com/nl/noodpakket-checklist/): the twelve items of the government's emergency kit list, what is deliberately not on it, and the grab bag.
+- [Noodpakket met een baby](https://www.kit-72.com/nl/noodpakket-baby/): formula, suitable bottled water, storing milk without a fridge; says where no official advice exists.
+- [Contant geld in huis](https://www.kit-72.com/nl/gidsen/contant-geld/): the advice of 70 euro per adult and 30 per child, who calculated it, denominations, and alternatives when card payments fail.
+- [Koken zonder stroom](https://www.kit-72.com/nl/gidsen/koken-zonder-stroom/): why burners and barbecues are for outdoors only, carbon monoxide, how long fridge and freezer stay cold, food that needs no cooking.
+- [Wc en hygiëne zonder water](https://www.kit-72.com/nl/gidsen/noodtoilet/): flushing with a bucket, what to do when sewers fail, hand hygiene without running water.
+- [Zonnepanelen en thuisbatterij bij stroomuitval](https://www.kit-72.com/nl/gidsen/zonnepanelen-thuisbatterij-stroomuitval/): why solar panels switch off in an outage and what a home battery needs to supply backup power.
+- [Extreme kou](https://www.kit-72.com/nl/scenario/extreme-kou/): keeping warm when heating fails, KNMI warning thresholds, hypothermia first aid, frozen pipes.
+
 ## Netherlands: guides and tools (Dutch)
 
 - [Noodpakket samenstellen](https://www.kit-72.com/nl/noodpakket-samenstellen/): what belongs in a 72-hour kit, amounts per household, shopping list.

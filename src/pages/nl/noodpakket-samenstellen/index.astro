@@ -4,6 +4,7 @@
  * was about 100 words and had no search impressions.
  */
 import BaseLayout from '../../../layouts/BaseLayout.astro';
+import RelatedLinks from '../../../components/content/RelatedLinks.astro';
 import Breadcrumb from '../../../components/layout/Breadcrumb.astro';
 import { routes } from '../../../data/site';
 
@@ -178,6 +179,16 @@ const faqs = [
       <h2 id="vragen">Veelgestelde vragen</h2>
       {faqs.map((f) => (<><h3>{f.question}</h3><p>{f.answer}</p></>))}
     </div>
+    <RelatedLinks
+      links={[
+        { href: '/nl/noodpakket-checklist/', label: 'Checklist noodpakket', note: 'De twaalf onderdelen van de overheid, om af te vinken.' },
+        { href: '/nl/noodplan-maken/', label: 'Noodplan maken', note: 'De afspraken die bij het pakket horen.' },
+        { href: '/nl/gidsen/contant-geld/', label: 'Contant geld in huis', note: '€ 70 per volwassene en € 30 per kind.' },
+        { href: '/nl/noodpakket-baby/', label: 'Noodpakket met een baby', note: 'Flesvoeding, water en luiers voor drie dagen.' },
+        { href: '/nl/noodplan/', label: 'Noodplan per gemeente', note: 'Rampenzender en spoedeisende hulp voor jouw gemeente.' },
+        { href: '/nl/noodhandboek/', label: 'Gratis noodhandboek voor jouw adres', note: 'Hoogte, overstromingsrisico, spoedeisende hulp en rampenzender voor jouw huis, op vier pagina’s.' },
+      ]}
+    />
   </article>
 </BaseLayout>
 

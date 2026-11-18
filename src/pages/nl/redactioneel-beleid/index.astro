@@ -1,37 +1,87 @@
 ---
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 import Breadcrumb from '../../../components/layout/Breadcrumb.astro';
+import Byline from '../../../components/content/Byline.astro';
+
+const updated = '2026-11-18';
 ---
 
-<BaseLayout title="Redactioneel Beleid — Kit-72" description="Onze redactionele richtlijnen en bronnen." locale="nl">
+<BaseLayout
+  title="Redactioneel beleid: hoe Kit-72 feiten controleert"
+  description="Wie Kit-72 maakt, welke bronnen we gebruiken, hoe we elk cijfer nalezen bij de bron, hoe we fouten herstellen en hoe we omgaan met AI en affiliate links."
+  locale="nl"
+  dateModified={updated}
+>
   <section class="py-16">
     <div class="max-w-3xl mx-auto px-4 sm:px-6">
-      <Breadcrumb items={[{ label: 'Redactioneel Beleid' }]} class="mb-4" locale="nl" />
-      <h1 class="text-4xl font-bold mb-6">Redactioneel Beleid</h1>
-      
-      <div class="prose prose-lg">
-        <p><em>Laatst bijgewerkt: november 2026</em></p>
-        
-        <h2>Onze missie</h2>
-        <p>Kit-72 biedt praktische, betrouwbare informatie over noodvoorbereiding voor Nederlandse huishoudens.</p>
+      <Breadcrumb items={[{ label: 'Redactioneel beleid' }]} class="mb-4" locale="nl" />
+      <h1 class="text-4xl font-bold mb-6">Redactioneel beleid</h1>
+      <Byline date={updated} />
 
-        <h2>Bronnen</h2>
-        <p>Onze informatie is gebaseerd op:</p>
+      <div class="prose prose-lg">
+        <p class="lead">
+          Kit-72 geeft advies over wat je doet als stroom, water of hulp een paar dagen wegvallen. Een fout op zo'n pagina kan iemand op het verkeerde been zetten. Daarom staat hier hoe we werken en wat je van ons mag verwachten.
+        </p>
+
+        <h2>Wie Kit-72 maakt</h2>
+        <p>
+          Kit-72 is een uitgave van CCC Impact B.V., een Nederlands bedrijf. De gegevens staan in het <a href="/nl/colofon/">colofon</a>. Kit-72 is geen overheidssite en heeft geen band met de overheid, een hulpdienst of een fabrikant. Bij een noodsituatie gaan de aanwijzingen van de overheid en de hulpdiensten altijd voor.
+        </p>
+
+        <h2>Welke bronnen we gebruiken</h2>
+        <p>Voor adviezen en hoeveelheden gebruiken we de instantie die erover gaat:</p>
         <ul>
-          <li>Rijksoverheid.nl - Officiële Nederlandse overheidsrichtlijnen</li>
-          <li>Rode Kruis Nederland</li>
-          <li>KNMI en RIVM</li>
-          <li>Internationale noodorganisaties (FEMA, IFRC)</li>
+          <li><strong>Voorbereiding en noodpakket:</strong> Denk Vooruit, de campagne van de Rijksoverheid.</li>
+          <li><strong>Waarschuwen:</strong> de Rijksoverheid en de veiligheidsregio's (NL-Alert, sirene, rampenzender).</li>
+          <li><strong>Weer:</strong> het KNMI.</li>
+          <li><strong>Gezondheid en voedsel:</strong> het RIVM, het Voedingscentrum en het Rode Kruis.</li>
+          <li><strong>Brand en koolmonoxide:</strong> Brandweer Nederland.</li>
+          <li><strong>Geld en betalen:</strong> De Nederlandsche Bank.</li>
+          <li><strong>Gegevens per adres en gemeente:</strong> open data van de overheid, zoals het Actueel Hoogtebestand Nederland, de overstromingsrisicokaart van Rijkswaterstaat, de adressen van PDOK, de indeling van het CBS en de lijst van spoedeisende hulpen van het RIVM.</li>
+        </ul>
+        <p>
+          Winkels, fabrikanten en blogs gebruiken we niet als bron voor veiligheidsadvies. Waar een officiële bron iets niet zegt, schrijven we dat op en vullen we het niet zelf in.
+        </p>
+
+        <h2>Hoe we feiten controleren</h2>
+        <ul>
+          <li>Een cijfer of een aanwijzing komt er pas op als we het op de pagina van de bron hebben gelezen. We linken naar die pagina, niet naar de homepage.</li>
+          <li>Onder de titel staat wanneer de pagina voor het laatst is bijgewerkt. Bij pagina's met een bronnenlijst staat wanneer de bronnen zijn nagelezen.</li>
+          <li>Cijfers per gemeente komen uit een steekproef en dat staat erbij. Voor je eigen adres geeft de adrescheck of het noodhandboek het antwoord.</li>
+          <li>Bij onze eigen vuistregels, zoals de capaciteit van een powerbank, staat het uitgangspunt van de berekening.</li>
+          <li>Het noodhandboek bevat één pagina met praktische trucs die geen officieel advies zijn. Dat staat op die pagina.</li>
         </ul>
 
-        <h2>Onafhankelijkheid</h2>
-        <p>Kit-72 is geen officiële overheidswebsite. Wij bieden voorlichting, geen officieel overheidsadvies. Raadpleeg altijd rijksoverheid.nl voor de meest actuele officiële informatie.</p>
+        <h2>Wat we niet doen</h2>
+        <ul>
+          <li>Geen angst als verkoopargument en geen doemscenario's.</li>
+          <li>Geen statistieken zonder bron.</li>
+          <li>Geen medisch advies. Voor eerste hulp verwijzen we naar een cursus en bij twijfel naar je huisarts of 112.</li>
+          <li>Geen beelden die op nieuwsfoto's van een ramp lijken.</li>
+        </ul>
 
-        <h2>Productaanbevelingen</h2>
-        <p>Onze productaanbevelingen zijn gebaseerd op functionaliteit en prijs-kwaliteitsverhouding. We ontvangen mogelijk affiliate-commissie, maar dit beïnvloedt onze aanbevelingen niet.</p>
+        <h2>Fouten en correcties</h2>
+        <p>
+          Zie je iets dat niet klopt of verouderd is? Mail ons via het adres in het <a href="/nl/colofon/">colofon</a>, met de pagina en zo mogelijk de bron. We lezen het na, herstellen het en passen de datum op de pagina aan.
+        </p>
+        <p>
+          In november 2026 hebben we alle Nederlandse pagina's nagelopen. Daarbij hebben we beweringen verwijderd of verbeterd die niet bij de bron te vinden waren, waaronder een percentage zonder bron, een telefoonnummer dat niet bestond en een onjuiste uitleg van het testbericht van NL-Alert.
+        </p>
+
+        <h2>AI</h2>
+        <p>
+          We gebruiken AI-hulpmiddelen bij het schrijven, bij het nalopen van pagina's en bij het maken van illustraties. Een AI-model is voor ons geen bron: feiten nemen we over van de pagina van de instantie zelf, zoals hierboven beschreven.
+        </p>
 
         <h2>Afbeeldingen</h2>
-        <p>De foto’s bij onze gidsen, scenario’s en productpagina’s zijn illustraties die met AI zijn gemaakt. Ze tonen het soort spullen waar een pagina over gaat, geen bestaande producten, merken of gebeurtenissen. De pagina’s uit het noodhandboek en de kaarten daarin zijn echte uitvoer, gemaakt voor een openbaar adres.</p>
+        <p>
+          De foto's bij onze gidsen, scenario's en productpagina's zijn illustraties die met AI zijn gemaakt. Ze tonen het soort spullen waar een pagina over gaat, geen bestaande producten, merken of gebeurtenissen. De pagina's uit het noodhandboek en de kaarten daarin zijn echte uitvoer, gemaakt voor een openbaar adres.
+        </p>
+
+        <h2>Winkels en affiliate links</h2>
+        <p>
+          Kit-72 verkoopt niets zelf. Sommige links naar winkels zijn affiliate links: koop je daar iets, dan krijgen wij soms een vergoeding, zonder dat jij meer betaalt. Welke soorten producten we noemen, hangt af van wat de overheid adviseert en niet van de vergoeding. Meer daarover staat in de <a href="/nl/affiliate-disclaimer/">uitleg over affiliate links</a>.
+        </p>
       </div>
     </div>
   </section>

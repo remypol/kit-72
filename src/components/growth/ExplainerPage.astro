@@ -6,6 +6,7 @@
  */
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Breadcrumb from '../layout/Breadcrumb.astro';
+import HeroImage from '../content/HeroImage.astro';
 import type { Locale } from '../../data/site';
 
 export interface Source {
@@ -22,21 +23,31 @@ export interface Section {
   /** paragraphs may contain <a>, <strong> and source references like <sup>[iea]</sup> written as {iea} */
   paragraphs: string[];
   bullets?: string[];
+  /** numbered steps, for things done in order */
+  steps?: string[];
+  table?: { head: string[]; rows: string[][] };
+  /** paragraphs after the list or table */
+  after?: string[];
 }
 export interface Explainer {
   title: string;
   description: string;
   h1: string;
-  crumbParent: { label: string; href: string };
+  /** leave out for a page directly under the language root */
+  crumbParent?: { label: string; href: string };
+  image?: { src: string; alt: string };
+  /** line under the date, linking to the editorial policy */
+  policy?: { label: string; href: string };
   crumb: string;
   checkedLabel: string;
   shortTitle: string;
   short: string[];
   sections: Section[];
-  doTitle: string;
-  doLead: string;
-  doSteps: { text: string; href?: string; link?: string }[];
-  cta: { label: string; href: string };
+  doTitle?: string;
+  doLead?: string;
+  doSteps?: { text: string; href?: string; link?: string }[];
+  cta?: { label: string; href: string };
+  related?: { title: string; links: { label: string; href: string }[] };
   sourcesTitle: string;
   sourcesNote: string;
   faqTitle: string;
@@ -66,22 +77,35 @@ const refs = (html: string) =>
   });
 // resolve references in reading order before rendering
 const short = c.short.map(refs);
-const sections = c.sections.map((s) => ({ ...s, paragraphs: s.paragraphs.map(refs), bullets: s.bullets?.map(refs) }));
-const doSteps = c.doSteps;
+const sections = c.sections.map((s) => ({
+  ...s,
+  paragraphs: s.paragraphs.map(refs),
+  bullets: s.bullets?.map(refs),
+  steps: s.steps?.map(refs),
+  table: s.table && { head: s.table.head, rows: s.table.rows.map((r) => r.map(refs)) },
+  after: s.after?.map(refs),
+}));
+const doLead = c.doLead && refs(c.doLead);
+const doSteps = c.doSteps ?? [];
 const ordered = used.map((id) => sources.find((s) => s.id === id)!);
 const faqData = c.faq.map((f) => ({ question: f.q, answer: f.a }));
 ---
 
-<BaseLayout title={c.title} description={c.description} locale={locale} schemaType="Article" datePublished={published} dateModified={checked} faqData={faqData}>
+<BaseLayout title={c.title} description={c.description} locale={locale} schemaType="Article" datePublished={published} dateModified={checked} faqData={faqData} ogImage={c.image?.src}>
   <article class="xp">
-    <Breadcrumb items={[c.crumbParent, { label: c.crumb }]} class="mb-4" locale={locale} />
+    <Breadcrumb items={c.crumbParent ? [c.crumbParent, { label: c.crumb }] : [{ label: c.crumb }]} class="mb-4" locale={locale} />
     <h1>{c.h1}</h1>
-    <p class="xp__checked">{c.checkedLabel} <time datetime={checked}>{fmt(checked)}</time></p>
+    <p class="xp__checked">
+      {c.checkedLabel} <time datetime={checked}>{fmt(checked)}</time>
+      {c.policy && <> · <a href={c.policy.href}>{c.policy.label}</a></>}
+    </p>
 
     <section class="xp__short" aria-labelledby="xp-short">
       <h2 id="xp-short">{c.shortTitle}</h2>
       {short.map((p) => <p set:html={p} />)}
     </section>
+
+    {c.image && <HeroImage src={c.image.src} alt={c.image.alt} priority={true} />}
 
     <div class="prose">
       {sections.map((s) => (
@@ -89,27 +113,46 @@ const faqData = c.faq.map((f) => ({ question: f.q, answer: f.a }));
           <h2>{s.heading}</h2>
           {s.paragraphs.map((p) => <p set:html={p} />)}
           {s.bullets && <ul>{s.bullets.map((b) => <li set:html={b} />)}</ul>}
+          {s.steps && <ol>{s.steps.map((b) => <li set:html={b} />)}</ol>}
+          {s.table && (
+            <div class="xp__table">
+              <table>
+                <thead><tr>{s.table.head.map((h) => <th scope="col">{h}</th>)}</tr></thead>
+                <tbody>{s.table.rows.map((r) => <tr>{r.map((cell, i) => (i === 0 ? <th scope="row" set:html={cell} /> : <td set:html={cell} />))}</tr>)}</tbody>
+              </table>
+            </div>
+          )}
+          {s.after?.map((p) => <p set:html={p} />)}
         </section>
       ))}
 
-      <section id="do">
-        <h2>{c.doTitle}</h2>
-        <p>{c.doLead}</p>
-        <ol>
-          {doSteps.map((d) => (
-            <li>
-              {d.text}
-              {d.href && <> <a href={d.href}>{d.link}</a></>}
-            </li>
-          ))}
-        </ol>
-        <p class="not-prose"><a href={c.cta.href} class="btn btn-primary btn-lg">{c.cta.label}</a></p>
-      </section>
+      {c.doTitle && (
+        <section id="do">
+          <h2>{c.doTitle}</h2>
+          {doLead && <p set:html={doLead} />}
+          <ol>
+            {doSteps.map((d) => (
+              <li>
+                {d.text}
+                {d.href && <> <a href={d.href}>{d.link}</a></>}
+              </li>
+            ))}
+          </ol>
+          {c.cta && <p class="not-prose"><a href={c.cta.href} class="btn btn-primary btn-lg">{c.cta.label}</a></p>}
+        </section>
+      )}
 
       <section id="faq">
         <h2>{c.faqTitle}</h2>
         {c.faq.map((f) => (<><h3>{f.q}</h3><p>{f.a}</p></>))}
       </section>
+
+      {c.related && (
+        <section id="related">
+          <h2>{c.related.title}</h2>
+          <ul>{c.related.links.map((l) => <li><a href={l.href}>{l.label}</a></li>)}</ul>
+        </section>
+      )}
 
       <section id="sources" class="xp__sources">
         <h2>{c.sourcesTitle}</h2>
@@ -169,6 +212,38 @@ const faqData = c.faq.map((f) => ({ question: f.q, answer: f.a }));
     text-decoration: none !important;
     font-weight: 700;
     padding: 0 2px;
+  }
+  .xp__checked a {
+    color: inherit;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+  .xp :global(.hero-image) {
+    margin-bottom: var(--space-8);
+  }
+  .xp__table {
+    overflow-x: auto;
+    margin-block: var(--space-4);
+  }
+  .xp__table table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.98rem;
+  }
+  .xp__table th,
+  .xp__table td {
+    text-align: left;
+    vertical-align: top;
+    padding: var(--space-3) var(--space-4) var(--space-3) 0;
+    border-top: 1px solid var(--color-border);
+  }
+  .xp__table thead th {
+    border-top: 3px solid var(--color-text-primary);
+    font-weight: 650;
+    color: var(--color-text-secondary);
+  }
+  .xp__table tbody th {
+    font-weight: 700;
   }
   .xp__sources ol {
     font-size: 0.95rem;

@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../../../layouts/BaseLayout.astro';
+import Byline from '../../../../components/content/Byline.astro';
 import ShopBox from '../../../../components/growth/ShopBox.astro';
 import Breadcrumb from '../../../../components/layout/Breadcrumb.astro';
 import Icon from '../../../../components/ui/Icon.astro';
@@ -10,7 +11,7 @@ import HeroImage from '../../../../components/content/HeroImage.astro';
   title="Watercontainers: Materiaal & Formaat — Koopgids"
   description="De juiste containers voor je drinkwatervoorraad. Materialen, formaten, opslag."
   locale="nl"
-  dateModified="2025-12-16"
+  dateModified="2026-11-18"
   schemaType="Article"
   alternates={{
     de: '/de/produkte/wasserspeicher/',
@@ -20,6 +21,7 @@ import HeroImage from '../../../../components/content/HeroImage.astro';
     <div class="max-w-3xl mx-auto px-4 sm:px-6">
       <Breadcrumb items={[{ label: 'Producten', href: '/nl/producten/' }, { label: 'Wateropslag' }]} class="mb-4" locale="nl" />
       <h1 class="text-4xl font-bold mb-6">Wateropslag</h1>
+      <Byline date="2026-11-18" />
 
       <div class="mb-8">
         <HeroImage
@@ -28,14 +30,18 @@ import HeroImage from '../../../../components/content/HeroImage.astro';
           priority={true}
         />
       </div>
-
-      <ShopBox locale="nl" category="wateropslag" />
-
       <div class="prose prose-lg">
         <p class="lead">
           <strong>Water is het belangrijkste.</strong> Je overleeft slechts 3 dagen zonder water.
           De juiste containers houden je water maandenlang vers en veilig.
         </p>
+
+
+        <div class="not-prose my-8">
+
+          <ShopBox locale="nl" category="wateropslag" />
+
+        </div>
 
         <!-- Quick Reference -->
         <div class="card p-6 my-8 bg-(--color-bg-tertiary) not-prose">
@@ -129,7 +135,7 @@ import HeroImage from '../../../../components/content/HeroImage.astro';
         </ol>
 
         <div class="card p-6 my-8 bg-(--color-accent-subtle) not-prose">
-          <p class="font-medium mb-2">💡 Backup: Waterzuivering</p>
+          <p class="font-medium mb-2">Backup: Waterzuivering</p>
           <p class="text-sm text-(--color-text-secondary)">
             Houd <strong>waterzuiveringstabletten</strong> (bijv. Micropur) bij de hand.
             In noodgevallen kunnen ze ook twijfelachtig water drinkbaar maken.
@@ -139,24 +145,23 @@ import HeroImage from '../../../../components/content/HeroImage.astro';
         <h2>Aanbevolen producten</h2>
         <ul>
           <li><strong>Hünersdorff jerrycans:</strong> Duitse kwaliteit, stapelbaar, met kraan</li>
-          <li><strong>Reliance Aqua-Tainer:</strong> Robuust, 7-20 liter, met uitgietmond</li>
           <li><strong>Opvouwbare waterzakken:</strong> Compact, voor onderweg</li>
         </ul>
 
         <h2>Checklist</h2>
         <ul>
-          <li>☐ Minimaal 9 liter per persoon (72 uur)</li>
-          <li>☐ Voedselveilige containers (HDPE)</li>
-          <li>☐ Koel en donker opgeslagen</li>
-          <li>☐ Datum gemarkeerd</li>
-          <li>☐ Reserve waterzuiveringstabletten</li>
-          <li>☐ Rotatieplan: elke 6-12 maanden verversen</li>
+          <li>Minimaal 9 liter per persoon (72 uur)</li>
+          <li>Voedselveilige containers (HDPE)</li>
+          <li>Koel en donker opgeslagen</li>
+          <li>Datum gemarkeerd</li>
+          <li>Reserve waterzuiveringstabletten</li>
+          <li>Rotatieplan: elke 6-12 maanden verversen</li>
         </ul>
       </div>
 
       <!-- Shop Link -->
       <div class="mt-12 card p-6 bg-(--color-bg-tertiary)">
-        <h3 class="font-semibold mb-2">Jerrycans op Bol.com</h3>
+        <h3 class="font-semibold mb-2">Jerrycans op bol</h3>
         <p class="text-sm text-(--color-text-secondary) mb-4">
           Aanbevolen voedselveilige jerrycans met kraan.
         </p>
