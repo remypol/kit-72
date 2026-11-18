@@ -25,6 +25,7 @@ export const nlAlert: Page = {
     description: 'Wanneer komt het testbericht van NL-Alert, hoe controleer je je telefoon en waarom krijg je soms niets? Wat de overheid erover zegt, met bronnen.',
     h1: 'NL-Alert: wanneer het komt en wat je doet',
     crumb: 'NL-Alert',
+    image: { src: '/images/shared/nl-alert.webp', alt: 'Telefoon met een geel oplichtend scherm aan een powerbank, naast een radio op batterijen en een zaklamp' },
     short: [
       'NL-Alert is het alarmmiddel van de overheid. Bij een noodsituatie in je buurt krijg je een tekstbericht op je mobiele telefoon waarin staat wat er aan de hand is en wat je moet doen.{werkt}',
       'Je hoeft je niet aan te melden en je nummer blijft onbekend.{werkt} Het testbericht komt twee keer per jaar: op de eerste maandag van juni en van december, rond 12.00 uur.{test}{mobiel} Het volgende testbericht is op maandag 7 december 2026.{test}',

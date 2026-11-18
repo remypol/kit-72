@@ -20,6 +20,7 @@ export const sirene: Page = {
     description: 'De sirene wordt elke eerste maandag van de maand om 12.00 uur getest. Gaat ze op een ander moment: ga naar binnen, sluit ramen en deuren en zet de radio aan.',
     h1: 'Wat doe je als de sirene gaat?',
     crumb: 'Sirene',
+    image: { src: '/images/shared/siren.webp', alt: 'Schaalmodel van een waarschuwingssirene op een paal, naast een radio op batterijen en een huissleutel' },
     short: [
       'Hoor je de sirene op een ander moment dan de maandelijkse test, of vaker achter elkaar? Dan is er iets aan de hand.{test} Ga zo snel mogelijk naar binnen, doe ramen, deuren en andere openingen dicht en volg het nieuws op radio, televisie of internet.{dv}',
       'De test is elke eerste maandag van de maand om 12.00 uur. Het signaal duurt dan onafgebroken 1 minuut en 26 seconden.{test}',
