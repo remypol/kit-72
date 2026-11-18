@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../../../layouts/BaseLayout.astro';
+import Byline from '../../../../components/content/Byline.astro';
 import ShopBox from '../../../../components/growth/ShopBox.astro';
 import Breadcrumb from '../../../../components/layout/Breadcrumb.astro';
 import Icon from '../../../../components/ui/Icon.astro';
@@ -10,7 +11,7 @@ import HeroImage from '../../../../components/content/HeroImage.astro';
   title="EHBO-doos: Wat moet erin? Inhoud & Koopgids"
   description="De juiste EHBO-doos voor je noodpakket. Inhoud, kwaliteit en onderhoud."
   locale="nl"
-  dateModified="2025-12-16"
+  dateModified="2026-11-18"
   schemaType="Article"
   alternates={{
     de: '/de/produkte/erste-hilfe-kasten/',
@@ -20,6 +21,7 @@ import HeroImage from '../../../../components/content/HeroImage.astro';
     <div class="max-w-3xl mx-auto px-4 sm:px-6">
       <Breadcrumb items={[{ label: 'Producten', href: '/nl/producten/' }, { label: 'EHBO-doos' }]} class="mb-4" locale="nl" />
       <h1 class="text-4xl font-bold mb-6">EHBO-doos</h1>
+      <Byline date="2026-11-18" />
 
       <div class="mb-8">
         <HeroImage
@@ -28,15 +30,19 @@ import HeroImage from '../../../../components/content/HeroImage.astro';
           priority={true}
         />
       </div>
-
-      <ShopBox locale="nl" category="ehbo-doos" />
-
       <div class="prose prose-lg">
         <p class="lead">
           Een goede EHBO-doos behandelt kleine verwondingen en overbrugt
           de tijd tot professionele hulp komt. In een crisissituatie kan
           dit <strong>doorslaggevend</strong> zijn.
         </p>
+
+
+        <div class="not-prose my-8">
+
+          <ShopBox locale="nl" category="ehbo-doos" />
+
+        </div>
 
         <!-- Key Message -->
         <div class="card p-6 my-8 bg-(--color-bg-tertiary) not-prose">
@@ -71,7 +77,7 @@ import HeroImage from '../../../../components/content/HeroImage.astro';
         </ul>
 
         <div class="card p-6 my-8 bg-(--color-accent-subtle) not-prose">
-          <p class="font-medium mb-2">💡 Beste oplossing</p>
+          <p class="font-medium mb-2">Beste oplossing</p>
           <p class="text-sm text-(--color-text-secondary)">
             Koop een <strong>standaard kant-en-klare EHBO-doos</strong> en vul deze aan
             met persoonlijke medicijnen en extra materiaal.
@@ -112,7 +118,7 @@ import HeroImage from '../../../../components/content/HeroImage.astro';
         <h2>Medicijnen toevoegen</h2>
         <div class="card p-4 my-6 border-l-4 border-l-amber-500 bg-amber-50 dark:bg-amber-950/30 not-prose">
           <p class="text-sm">
-            <strong>⚠️ Belangrijk:</strong> Medicijnen zijn in kant-en-klare dozen meestal niet inbegrepen.
+            <strong>Belangrijk:</strong> Medicijnen zijn in kant-en-klare dozen meestal niet inbegrepen.
             Voeg ze zelf toe en let op onverdraagzaamheden en wisselwerkingen.
           </p>
         </div>
@@ -156,20 +162,20 @@ import HeroImage from '../../../../components/content/HeroImage.astro';
 
         <h2>Checklist</h2>
         <ul>
-          <li>☐ Standaard EHBO-doos</li>
-          <li>☐ Persoonlijke medicijnen voor 7+ dagen</li>
-          <li>☐ Actuele medicijnenlijst bijgevoegd</li>
-          <li>☐ Alle houdbaarheidsdatums gecontroleerd</li>
-          <li>☐ Opslaglocatie bij iedereen bekend</li>
-          <li>☐ EHBO-cursus gevolgd</li>
-          <li>☐ Volgende onderhoudsdatum genoteerd</li>
+          <li>Standaard EHBO-doos</li>
+          <li>Persoonlijke medicijnen voor 7+ dagen</li>
+          <li>Actuele medicijnenlijst bijgevoegd</li>
+          <li>Alle houdbaarheidsdatums gecontroleerd</li>
+          <li>Opslaglocatie bij iedereen bekend</li>
+          <li>EHBO-cursus gevolgd</li>
+          <li>Volgende onderhoudsdatum genoteerd</li>
         </ul>
       </div>
 
       <!-- Links -->
       <div class="mt-12 grid sm:grid-cols-2 gap-4">
         <div class="card p-6 bg-(--color-bg-tertiary)">
-          <h3 class="font-semibold mb-2">EHBO-dozen op Bol.com</h3>
+          <h3 class="font-semibold mb-2">EHBO-dozen op bol</h3>
           <p class="text-sm text-(--color-text-secondary) mb-4">
             Complete EHBO-sets voor huishouden en gezin.
           </p>
@@ -188,7 +194,7 @@ import HeroImage from '../../../../components/content/HeroImage.astro';
             Het Rode Kruis biedt landelijk cursussen aan.
           </p>
           <a
-            href="https://www.rodekruis.nl/ehbo-cursus/"
+            href="https://www.rodekruis.nl/ehbo/"
             target="_blank"
             rel="noopener noreferrer"
             class="inline-flex items-center gap-2 text-(--color-accent-primary) hover:underline"

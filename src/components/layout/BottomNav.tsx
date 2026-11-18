@@ -192,7 +192,7 @@ const contentPerLocale: Record<string, NavContent> = {
     moreItems: [
       {
         icon: 'Package',
-        label: 'Noodpakket Samenstellen',
+        label: 'Noodpakket samenstellen',
         description: 'Complete gids',
         href: '/nl/noodpakket-samenstellen/',
       },

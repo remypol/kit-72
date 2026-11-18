@@ -9,37 +9,12 @@ import WaterCalculator from '../../../../components/tools/WaterCalculator';
   description="Berechne, wie viel Wasser du für dein Notfallpaket brauchst. Interaktive Tool mit persönlicher Berechnung für deine Familie."
   locale="de"
   dateModified="2025-12-15"
-  schemaType="HowTo"
+  schemaType="SoftwareApplication"
   schemaData={{
-    name: 'Wie viel Wasser brauchst du für einen Notfall',
-    description: 'Berechne die Wassermenge in Litern, die deine Familie für 72 Stunden Selbstversorgung benötigt. Inklusive Haustiere und verschiedene Verwendungszwecke.',
-    totalTime: 'PT2M',
-    step: [
-      {
-        '@type': 'HowToStep',
-        position: 1,
-        name: 'Gib die Personenanzahl ein',
-        text: 'Wähle, wie viele Erwachsene, Kinder (4-12 Jahre) und Babys (0-3 Jahre) in deinem Haushalt leben. Erwachsene brauchen mehr Wasser als Kinder.',
-      },
-      {
-        '@type': 'HowToStep',
-        position: 2,
-        name: 'Füge Haustiere hinzu',
-        text: 'Gib an, ob du Hunde oder Katzen hast. Haustiere brauchen etwa 50-100ml Wasser pro kg Körpergewicht pro Tag.',
-      },
-      {
-        '@type': 'HowToStep',
-        position: 3,
-        name: 'Wähle die Dauer',
-        text: 'Wähle, für wie viele Tage du vorbereitet sein möchtest. Die Mindestempfehlung des BBK beträgt 72 Stunden (3 Tage).',
-      },
-      {
-        '@type': 'HowToStep',
-        position: 4,
-        name: 'Passe die Bedingungen an',
-        text: 'Wähle, ob du warmes Wetter erwartest (erhöht den Bedarf) und dein gewünschtes Komfortniveau (minimal, standard oder komfortabel).',
-      },
-    ],
+    '@type': 'WebApplication',
+    applicationCategory: 'UtilitiesApplication',
+    operatingSystem: 'Any',
+    offers: { '@type': 'Offer', price: '0', priceCurrency: 'EUR' },
   }}
 >
   <section class="py-12 md:py-16">

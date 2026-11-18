@@ -10,37 +10,12 @@ import PowerbankCharges from '../../../../components/growth/PowerbankCharges.ast
   description="Rechne aus, wie viel mAh deine Powerbank für 72 Stunden ohne Strom braucht, und wie oft 10.000 oder 20.000 mAh ein Handy wirklich laden."
   locale="de"
   dateModified="2025-12-15"
-  schemaType="HowTo"
+  schemaType="SoftwareApplication"
   schemaData={{
-    name: 'Wie viel Powerbank-Kapazität brauchst du',
-    description: 'Berechne die mAh Powerbank-Kapazität, die du benötigst, um deine Geräte 72 Stunden betriebsbereit zu halten. Inklusive Sicherheitsmarge.',
-    totalTime: 'PT3M',
-    step: [
-      {
-        '@type': 'HowToStep',
-        position: 1,
-        name: 'Wähle die Dauer',
-        text: 'Wähle, für wie viele Tage du vorbereitet sein möchtest: 24 Stunden, 72 Stunden (empfohlen), 1 Woche oder 2 Wochen.',
-      },
-      {
-        '@type': 'HowToStep',
-        position: 2,
-        name: 'Füge deine Geräte hinzu',
-        text: 'Wähle die Geräte, die du aufladen musst: Smartphones, Tablets, Smartwatches, Taschenlampen, Notfallradios oder medizinische Geräte wie CPAP.',
-      },
-      {
-        '@type': 'HowToStep',
-        position: 3,
-        name: 'Stelle die Ladehäufigkeit ein',
-        text: 'Gib an, wie oft du jedes Gerät auflädst. Zum Beispiel: Smartphone 1x pro Tag, Taschenlampe alle 3 Tage.',
-      },
-      {
-        '@type': 'HowToStep',
-        position: 4,
-        name: 'Wähle die Sicherheitsmarge',
-        text: 'Wähle die Sicherheitsmarge (20-50%). Batterien verlieren bei Kälte und Nutzung an Effizienz. Eine Marge von 30% wird empfohlen.',
-      },
-    ],
+    '@type': 'WebApplication',
+    applicationCategory: 'UtilitiesApplication',
+    operatingSystem: 'Any',
+    offers: { '@type': 'Offer', price: '0', priceCurrency: 'EUR' },
   }}
 >
   <section class="py-12 md:py-16">

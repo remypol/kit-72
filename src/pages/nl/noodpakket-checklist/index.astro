@@ -1,0 +1,6 @@
+---
+import ExplainerPage from '../../../components/growth/ExplainerPage.astro';
+import { noodpakketChecklist as page } from '../../../data/explainers/noodpakket-checklist';
+---
+
+<ExplainerPage locale="nl" content={page.content} sources={page.sources} checked={page.checked} published={page.published} />

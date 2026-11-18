@@ -1,5 +1,7 @@
 ---
 import ArticleLayout from '../../../layouts/ArticleLayout.astro';
+import RelatedLinks from '../../../components/content/RelatedLinks.astro';
+import Icon from '../../../components/ui/Icon.astro';
 
 const tocItems = [
   { id: 'wat-is', label: 'Wat is een noodpakket?' },
@@ -21,7 +23,7 @@ const breadcrumbs = [
 const essentialCategories = [
   {
     name: 'Water',
-    icon: '💧',
+    icon: 'Droplet',
     items: [
       { name: 'Flessenwater', quantity: '3L per persoon/dag = 9L totaal', priority: 'critical' },
       { name: 'Waterzuiveringstabletten', quantity: '1 verpakking', priority: 'recommended' },
@@ -30,7 +32,7 @@ const essentialCategories = [
   },
   {
     name: 'Voeding',
-    icon: '🍫',
+    icon: 'UtensilsCrossed',
     items: [
       { name: 'Energierepen', quantity: '6-9 per persoon', priority: 'critical' },
       { name: 'Noten en gedroogd fruit', quantity: '200g per persoon', priority: 'critical' },
@@ -41,7 +43,7 @@ const essentialCategories = [
   },
   {
     name: 'Verlichting en energie',
-    icon: '🔦',
+    icon: 'Flashlight',
     items: [
       { name: 'LED-zaklamp', quantity: '1-2 stuks', priority: 'critical' },
       { name: 'Reserve batterijen', quantity: '2 sets', priority: 'critical' },
@@ -52,7 +54,7 @@ const essentialCategories = [
   },
   {
     name: 'Documenten',
-    icon: '📄',
+    icon: 'FileText',
     items: [
       { name: 'Kopieën identiteitsbewijs', quantity: 'Alle gezinsleden', priority: 'critical' },
       { name: 'Zorgpas/verzekeringsbewijs', quantity: 'Kopieën', priority: 'critical' },
@@ -63,7 +65,7 @@ const essentialCategories = [
   },
   {
     name: 'EHBO-kit',
-    icon: '🩹',
+    icon: 'Heart',
     items: [
       { name: 'Pleisters (diverse maten)', quantity: '20+ stuks', priority: 'critical' },
       { name: 'Steriele gaasjes', quantity: '1 verpakking', priority: 'critical' },
@@ -75,7 +77,7 @@ const essentialCategories = [
   },
   {
     name: 'Hygiëne',
-    icon: '🧴',
+    icon: 'Sparkles',
     items: [
       { name: 'Toiletpapier (compact)', quantity: '1-2 rollen', priority: 'critical' },
       { name: 'Vochtige doekjes', quantity: '2 verpakkingen', priority: 'critical' },
@@ -86,7 +88,7 @@ const essentialCategories = [
   },
   {
     name: 'Gereedschap',
-    icon: '🔧',
+    icon: 'Wrench',
     items: [
       { name: 'Zakmes/multitool', quantity: '1 stuks', priority: 'critical' },
       { name: 'Ducttape', quantity: '1 kleine rol', priority: 'recommended' },
@@ -97,7 +99,7 @@ const essentialCategories = [
   },
   {
     name: 'Bescherming',
-    icon: '🧥',
+    icon: 'Package',
     items: [
       { name: 'Reddingsdeken', quantity: '1 per persoon', priority: 'critical' },
       { name: 'Regenponcho', quantity: '1 per persoon', priority: 'recommended' },
@@ -110,22 +112,22 @@ const essentialCategories = [
 const adaptations = [
   {
     group: "Baby's en jonge kinderen",
-    icon: '👶',
+    icon: 'Baby',
     items: ['Luiers voor 3+ dagen', 'Flesvoeding / potjes', 'Flesjes', 'Reserve speen', 'Speciaal dekentje', 'Klein knuffeldier']
   },
   {
     group: 'Ouderen',
-    icon: '👴',
+    icon: 'User',
     items: ['Extra medicatie (minimaal 7 dagen)', 'Reserve bril', 'Gehoorapparaat en batterijen', 'Actuele medicatielijst', 'Contactgegevens huisarts']
   },
   {
     group: 'Huisdieren',
-    icon: '🐕',
+    icon: 'Dog',
     items: ['Voer voor 3+ dagen', 'Extra water', 'Riem en transportbox', 'Dierenartsdocumenten', 'Eventuele medicatie', 'Poepzakjes']
   },
   {
     group: 'Medische aandoeningen',
-    icon: '💊',
+    icon: 'Pill',
     items: ['Insuline en koeltas', 'Inhalatoren', 'EpiPens', 'Glucosemeter', 'Draagbare bloeddrukmeter', 'Draagbare zuurstof indien nodig']
   },
 ];
@@ -181,7 +183,7 @@ const faqs = [
   },
   {
     question: 'Wat is het verschil tussen een noodpakket en een evacuatietas?',
-    answer: 'Een noodpakket is bedoeld om 72 uur thuis te kunnen overleven zonder basisdiensten. Een evacuatietas (ook wel noodtas of grab-and-go bag) is specifiek om mee te nemen als je snel moet vertrekken. Ideaal is om beide te hebben: een uitgebreider thuispakket en een compacte tas om mee te nemen.'
+    answer: 'Een noodpakket is bedoeld om 72 uur thuis te kunnen overleven zonder basisdiensten. Een evacuatietas (ook wel vluchttas) is specifiek om mee te nemen als je snel moet vertrekken. Ideaal is om beide te hebben: een uitgebreider thuispakket en een compacte tas om mee te nemen.'
   },
   {
     question: 'Hoeveel moet mijn noodpakket wegen?',
@@ -233,7 +235,7 @@ const faqs = [
   <section id="wat-is" class="mb-12">
     <h2>Wat is een noodpakket 72 uur?</h2>
     <p>
-      Een <strong>noodpakket</strong> (ook wel noodtas, evacuatietas of grab-and-go bag genoemd)
+      Een <strong>noodpakket</strong> (ook wel noodtas of vluchttas genoemd)
       is een verzameling essentiële benodigdheden waarmee je 3 dagen zelfstandig kunt overleven
       zonder toegang tot basisdiensten zoals stromend water, elektriciteit of winkels.
     </p>
@@ -329,7 +331,7 @@ const faqs = [
         <div class="card overflow-hidden">
           <div class="px-6 py-4 bg-(--color-bg-tertiary) border-b border-(--color-border)">
             <h3 class="flex items-center gap-3 text-lg font-semibold m-0">
-              <span class="text-2xl">{category.icon}</span>
+              <Icon name={category.icon} size={24} class="text-(--color-accent-primary)" />
               {category.name}
             </h3>
           </div>
@@ -404,7 +406,7 @@ const faqs = [
 
     <div class="grid md:grid-cols-2 gap-6 my-6 not-prose">
       <div class="card p-6 border-l-4 border-l-(--color-status-success)">
-        <h3 class="font-semibold mb-3 text-(--color-status-success) text-base">✓ Goede locaties</h3>
+        <h3 class="font-semibold mb-3 text-(--color-status-success) text-base">Goede locaties</h3>
         <ul class="space-y-2 text-sm text-(--color-text-secondary)">
           <li>Gangkast (snelle toegang)</li>
           <li>Bij de garagedeur</li>
@@ -414,7 +416,7 @@ const faqs = [
         </ul>
       </div>
       <div class="card p-6 border-l-4 border-l-(--color-status-critical)">
-        <h3 class="font-semibold mb-3 text-(--color-status-critical) text-base">✗ Slechte locaties</h3>
+        <h3 class="font-semibold mb-3 text-(--color-status-critical) text-base">Slechte locaties</h3>
         <ul class="space-y-2 text-sm text-(--color-text-secondary)">
           <li>Kelder zonder alternatieve uitgang</li>
           <li>Berging ver van de woning</li>
@@ -437,7 +439,7 @@ const faqs = [
       {adaptations.map((group) => (
         <div class="card p-6">
           <h3 class="flex items-center gap-3 text-lg font-semibold mb-4">
-            <span class="text-2xl">{group.icon}</span>
+            <Icon name={group.icon} size={24} class="text-(--color-accent-primary)" />
             {group.group}
           </h3>
           <ul class="space-y-2 text-sm">
@@ -486,7 +488,7 @@ const faqs = [
       {commonMistakes.map((item) => (
         <div class="card p-6">
           <div class="flex items-start gap-4">
-            <span class="text-2xl flex-shrink-0">⚠️</span>
+            <span class="text-2xl flex-shrink-0"></span>
             <div>
               <h3 class="font-semibold text-(--color-text-primary) mb-1 text-base">{item.mistake}</h3>
               <p class="text-sm text-(--color-text-secondary) mb-2">
@@ -542,8 +544,8 @@ const faqs = [
         </a>
       </li>
       <li>
-        <a href="https://crisis.nl/" target="_blank" rel="noopener">
-          Crisis.nl — Officiële crisisinformatie
+        <a href="https://www.nederlandveilig.nl/" target="_blank" rel="noopener">
+          Nederland Veilig (voorheen crisis.nl) — crisisinformatie van de overheid
         </a>
       </li>
       <li>
@@ -579,4 +581,14 @@ const faqs = [
       </a>
     </div>
   </div>
+  <RelatedLinks
+    links={[
+      { href: '/nl/noodpakket-checklist/', label: 'Checklist noodpakket', note: 'De twaalf onderdelen van de overheid, om af te vinken.' },
+      { href: '/nl/noodplan-maken/', label: 'Noodplan maken', note: 'Waar je elkaar treft en wie je belt.' },
+      { href: '/nl/gidsen/koken-zonder-stroom/', label: 'Koken zonder stroom', note: 'Wat veilig kan en wat je eet zonder te koken.' },
+      { href: '/nl/gidsen/noodtoilet/', label: 'Wc en hygiëne zonder water', note: 'Doorspoelen met een emmer.' },
+      { href: '/nl/rampenzender/', label: 'Rampenzender per gemeente', note: 'Waar je de radio op afstemt.' },
+      { href: '/nl/noodhandboek/', label: 'Gratis noodhandboek voor jouw adres', note: 'Hoogte, overstromingsrisico, spoedeisende hulp en rampenzender voor jouw huis, op vier pagina’s.' },
+    ]}
+  />
 </ArticleLayout>

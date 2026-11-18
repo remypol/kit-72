@@ -13,9 +13,10 @@
  * - References to Netbeheer Nederland, Rijksoverheid
  * - Dutch context (weather events, grid info)
  * - Bol.com product links
- * - Cash recommendation per Rijksoverheid (EUR70/EUR30)
+ * - Cash recommendation per Rijksoverheid (€ 70/€ 30)
  */
 import BaseLayout from '../../../../layouts/BaseLayout.astro';
+import RelatedLinks from '../../../../components/content/RelatedLinks.astro';
 import TLDRBlock from '../../../../components/hub/TLDRBlock.astro';
 import CollapsibleSection from '../../../../components/hub/CollapsibleSection.astro';
 import PhaseTabs from '../../../../components/hub/PhaseTabs.tsx';
@@ -52,7 +53,7 @@ const phases = {
     {
       title: 'Bewaar contant geld thuis',
       detail: 'Pinautomaten en betaalterminals werken niet zonder stroom.',
-      tip: 'Rijksoverheid adviseert: EUR70 per volwassene, EUR30 per kind in kleine biljetten'
+      tip: 'Rijksoverheid adviseert: € 70 per volwassene, € 30 per kind in kleine biljetten'
     },
     {
       title: 'Laad alle apparaten op',
@@ -200,7 +201,7 @@ const checklistCategories = [
     name: 'Documenten & Geld',
     icon: 'file',
     items: [
-      { id: 'contant', name: 'Contant geld', quantity: 'EUR70/volwassene, EUR30/kind', priority: 'critical' as const, notes: 'Kleine biljetten (EUR10, EUR20) - Rijksoverheid advies' },
+      { id: 'contant', name: 'Contant geld', quantity: '€ 70/volwassene, € 30/kind', priority: 'critical' as const, notes: 'Kleine biljetten (€ 10, € 20) - Rijksoverheid advies' },
       { id: 'id-kopie', name: 'Kopie ID/paspoort', quantity: 'Alle gezinsleden', priority: 'critical' as const },
       { id: 'verzekeringspapieren', name: 'Verzekeringspapieren', quantity: 'Kopie', priority: 'recommended' as const, notes: 'Voor eventuele schademeldingen' },
       { id: 'netbeheerder', name: 'Nummer netbeheerder', quantity: 'Genoteerd', priority: 'critical' as const, notes: 'Liander: 0800-9009, Stedin: 0800-9009, Enexis: 0800-9009' },
@@ -265,23 +266,12 @@ const specialSituations = [
   title="Stroomstoring: wat te doen bij een blackout? Checklist"
   description="Stap-voor-stap gids voor voor, tijdens en na een stroomuitval. Interactieve checklist en praktische tips."
   locale="nl"
-  schemaType="HowTo"
+  schemaType="Article"
   dateModified="2026-11-17"
   datePublished="2025-11-01"
   alternates={{
     es: '/es/escenarios/prepararse-apagon/',
     de: '/de/szenarien/stromausfall/',
-  }}
-  schemaData={{
-    step: [
-      { '@type': 'HowToStep', name: 'Identificeer kritieke apparaten', text: 'Koelkast, medische apparatuur, telefoon. Bepaal wat stroom nodig heeft.' },
-      { '@type': 'HowToStep', name: 'Houd de tank van je auto half vol', text: 'Tankstations werken niet zonder stroom.' },
-      { '@type': 'HowToStep', name: 'Vries flessen water in', text: 'Ze werken als koelelementen bij stroomuitval.' },
-      { '@type': 'HowToStep', name: 'Bewaar contant geld thuis', text: 'Pinautomaten en betaalterminals werken niet zonder stroom.' },
-      { '@type': 'HowToStep', name: 'Laad alle apparaten op', text: 'Laad telefoons, tablets en powerbanks van tevoren.' },
-    ],
-    totalTime: 'PT30M',
-    estimatedCost: { '@type': 'MonetaryAmount', currency: 'EUR', value: '50-200' },
   }}
   faqData={faqs}
 >
@@ -300,7 +290,7 @@ const specialSituations = [
           <Icon name="Zap" size={28} />
         </div>
         <div class="scenario-title-content">
-          <h1 class="scenario-title">Voorbereiden op een Stroomstoring</h1>
+          <h1 class="scenario-title">Stroomstoring: wat doe je en hoe bereid je je voor?</h1>
           <div class="scenario-meta">
             <span class="meta-item">10 min</span>
             <span class="meta-divider">·</span>
@@ -506,6 +496,17 @@ const specialSituations = [
 
     <!-- Sources (collapsed) -->
     <section class="scenario-section">
+      <RelatedLinks
+        links={[
+          { href: '/nl/rampenzender/', label: 'Rampenzender per gemeente', note: 'De zender en frequentie waarop de overheid bij een ramp aanwijzingen geeft.' },
+          { href: '/nl/gidsen/koken-zonder-stroom/', label: 'Koken zonder stroom', note: 'Wat veilig kan, en hoe lang koelkast en vriezer koud blijven.' },
+          { href: '/nl/gidsen/contant-geld/', label: 'Contant geld in huis', note: '€ 70 per volwassene en € 30 per kind: waar dat bedrag vandaan komt.' },
+          { href: '/nl/gidsen/zonnepanelen-thuisbatterij-stroomuitval/', label: 'Zonnepanelen en thuisbatterij', note: 'Waarom ze bij een storing uitvallen en wat er nodig is voor noodstroom.' },
+          { href: '/nl/scenario/extreme-kou/', label: 'Extreme kou', note: 'Warm blijven als de verwarming uitvalt.' },
+          { href: '/nl/noodhandboek/', label: 'Gratis noodhandboek voor jouw adres', note: 'Hoogte, overstromingsrisico, spoedeisende hulp en rampenzender voor jouw huis, op vier pagina’s.' },
+        ]}
+      />
+
       <details class="sources-block">
         <summary class="sources-header">
           <Icon name="BookOpen" size={18} />
@@ -530,8 +531,8 @@ const specialSituations = [
               </a>
             </li>
             <li>
-              <a href="https://crisis.nl/" target="_blank" rel="noopener">
-                Crisis.nl — Landelijk Crisisportaal
+              <a href="https://www.denkvooruit.nl/risicos/risicos-in-nederland/geen-stroom" target="_blank" rel="noopener">
+                Denk Vooruit — Geen stroom
               </a>
             </li>
           </ul>

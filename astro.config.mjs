@@ -11,6 +11,20 @@ import { readFileSync } from 'node:fs';
 const checkedOn = (file) => JSON.parse(readFileSync(new URL(file, import.meta.url), 'utf8')).checked;
 const gemeentenChecked = checkedOn('./src/data/gemeenten-nl.json');
 const zendersChecked = checkedOn('./handbook/data/regions-nl.json');
+// The sourced explainers: their check date is the CHECKED constant in src/data/explainers/_shared.ts.
+const explainersChecked = readFileSync(new URL('./src/data/explainers/_shared.ts', import.meta.url), 'utf8').match(/CHECKED = '(\d{4}-\d{2}-\d{2})'/)[1];
+const explainerPaths = [
+  '/nl/nl-alert/',
+  '/nl/sirene/',
+  '/nl/noodplan-maken/',
+  '/nl/noodpakket-checklist/',
+  '/nl/noodpakket-baby/',
+  '/nl/gidsen/contant-geld/',
+  '/nl/gidsen/koken-zonder-stroom/',
+  '/nl/gidsen/noodtoilet/',
+  '/nl/gidsen/zonnepanelen-thuisbatterij-stroomuitval/',
+  '/nl/scenario/extreme-kou/',
+];
 
 // https://astro.build/config
 export default defineConfig({
@@ -129,6 +143,11 @@ export default defineConfig({
           priority = 0.9;
           changefreq = 'monthly';
         }
+        // Sourced explainers (NL); the list and the check date live in src/data/explainers
+        else if (explainerPaths.some((path) => url.endsWith(path))) {
+          priority = 0.8;
+          changefreq = 'monthly';
+        }
         // Emergency broadcasters: overview and one page each (NL)
         else if (url.includes('/nl/rampenzender/')) {
           priority = url.endsWith('/nl/rampenzender/') ? 0.9 : 0.7;
@@ -185,7 +204,9 @@ export default defineConfig({
           ? zendersChecked
           : /\/nl\/(noodplan|hoogte-nap|overstromingsrisico)\//.test(url)
             ? gemeentenChecked
-            : undefined;
+            : explainerPaths.some((path) => url.endsWith(path))
+              ? explainersChecked
+              : undefined;
 
         return {
           ...item,

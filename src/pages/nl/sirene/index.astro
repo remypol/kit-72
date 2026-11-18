@@ -1,0 +1,6 @@
+---
+import ExplainerPage from '../../../components/growth/ExplainerPage.astro';
+import { sirene as page } from '../../../data/explainers/sirene';
+---
+
+<ExplainerPage locale="nl" content={page.content} sources={page.sources} checked={page.checked} published={page.published} />

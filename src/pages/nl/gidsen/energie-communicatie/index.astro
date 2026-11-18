@@ -1,5 +1,7 @@
 ---
 import BaseLayout from '../../../../layouts/BaseLayout.astro';
+import RelatedLinks from '../../../../components/content/RelatedLinks.astro';
+import Byline from '../../../../components/content/Byline.astro';
 import HeroImage from '../../../../components/content/HeroImage.astro';
 import Breadcrumb from '../../../../components/layout/Breadcrumb.astro';
 import Icon from '../../../../components/ui/Icon.astro';
@@ -9,13 +11,14 @@ import Icon from '../../../../components/ui/Icon.astro';
   title="Stroomuitval: licht, laden en nieuws zonder stroom"
   description="Blijf verbonden en geïnformeerd bij stroomuitval. Powerbanks, noodradio's en verlichting voor noodsituaties."
   locale="nl"
-  dateModified="2026-11-17"
+  dateModified="2026-11-18"
   schemaType="Article"
 >
   <section class="py-16">
     <div class="max-w-3xl mx-auto px-4 sm:px-6">
       <Breadcrumb items={[{ label: 'Gidsen', href: '/nl/gidsen/' }, { label: 'Energie & Communicatie' }]} class="mb-4" locale="nl" />
-      <h1 class="text-4xl font-bold mb-6">Energie & Communicatie</h1>
+      <h1 class="text-4xl font-bold mb-6">Energie en communicatie</h1>
+      <Byline date="2026-11-18" />
 
       <div class="mb-8">
         <HeroImage
@@ -46,7 +49,7 @@ import Icon from '../../../../components/ui/Icon.astro';
               <span class="text-red-500">✗</span> WiFi en smart home
             </div>
             <div class="flex items-center gap-2 text-(--color-text-secondary)">
-              <span class="text-amber-500">~</span> Mobiel netwerk (noodstroom ~2-8u)
+              <span class="text-amber-500">~</span> Mobiel netwerk (kan ook uitvallen)
             </div>
             <div class="flex items-center gap-2 text-(--color-text-secondary)">
               <span class="text-red-500">✗</span> Vaste telefoon (meestal)
@@ -60,7 +63,7 @@ import Icon from '../../../../components/ui/Icon.astro';
           </div>
         </div>
 
-        <h2>Powerbank — Houd je Smartphone Werkend</h2>
+        <h2>Powerbank: houd je telefoon aan de praat</h2>
         <p>
           Je smartphone is essentieel in noodsituaties: 112 bellen, NL-Alert, contact met familie.
         </p>
@@ -73,7 +76,7 @@ import Icon from '../../../../components/ui/Icon.astro';
         </ul>
 
         <div class="card p-6 my-8 bg-(--color-accent-subtle) not-prose">
-          <p class="font-medium mb-2">💡 Energie besparen in noodgevallen</p>
+          <p class="font-medium mb-2">Energie besparen in noodgevallen</p>
           <ul class="text-sm text-(--color-text-secondary) space-y-1">
             <li>• <strong>Vliegtuigmodus</strong> aanzetten als er geen bereik is</li>
             <li>• <strong>Helderheid</strong> op minimum zetten</li>
@@ -83,15 +86,15 @@ import Icon from '../../../../components/ui/Icon.astro';
           </ul>
         </div>
 
-        <h3>Tips voor Powerbanks</h3>
+        <h3>Tips voor powerbanks</h3>
         <ul>
           <li><strong>Regelmatig opladen</strong> — elke 2-3 maanden naar 50-80%</li>
           <li><strong>Koel bewaren</strong> — hitte beschadigt de accu</li>
-          <li><strong>Kwaliteit kopen</strong> — merken als Anker, RAVPower, Belkin</li>
+          <li><strong>Kwaliteit kopen</strong> — kies een merk met een CE-markering en een opgegeven capaciteit in Wh</li>
           <li><strong>Juiste kabels</strong> — USB-C, Lightning klaarleggen</li>
         </ul>
 
-        <h2>Noodradio — Informatie Zonder Stroom</h2>
+        <h2>Noodradio: informatie zonder stroom</h2>
         <p>
           Als stroom en internet uitvallen, kan de regionale omroep via de radio blijven uitzenden.
           Dat is de <strong>rampenzender</strong> van je regio: daarlangs geeft de overheid aanwijzingen.
@@ -108,13 +111,13 @@ import Icon from '../../../../components/ui/Icon.astro';
 
         <div class="card p-4 my-6 border-l-4 border-l-blue-500 bg-blue-50 dark:bg-blue-950/30 not-prose">
           <p class="text-sm">
-            <strong>📻 De frequentie verschilt per regio.</strong><br>
+            <strong>De frequentie verschilt per regio.</strong><br>
             Nederland heeft dertien rampenzenders, elk met eigen FM-frequenties.<br>
             <a href="/nl/rampenzender/" class="underline font-semibold">Zoek de rampenzender van jouw gemeente</a> en schrijf de frequentie op je radio.
           </p>
         </div>
 
-        <h2>Verlichting — Zien Zonder Stroom</h2>
+        <h2>Verlichting: zien zonder stroom</h2>
 
         <h3>LED-zaklampen</h3>
         <ul>
@@ -130,7 +133,7 @@ import Icon from '../../../../components/ui/Icon.astro';
           reparaties, EHBO. Ideaal voor elk gezinslid.
         </p>
 
-        <h3>Kaarsen als Backup</h3>
+        <h3>Kaarsen als reserve</h3>
         <ul>
           <li>Alleen met stabiele kaarsenhouders gebruiken</li>
           <li>Nooit onbewaakt laten branden</li>
@@ -140,12 +143,12 @@ import Icon from '../../../../components/ui/Icon.astro';
 
         <div class="card p-4 my-6 border-l-4 border-l-amber-500 bg-amber-50 dark:bg-amber-950/30 not-prose">
           <p class="text-sm">
-            <strong>⚠️ Brandgevaar:</strong> Bij noodsituaties zijn er bovengemiddeld veel
-            branden door kaarsen. LED-verlichting is veiliger!
+            <strong>Brandgevaar:</strong> een kaars is open vuur. Een zaklamp of lantaarn op batterijen is veiliger,
+            zeker met kinderen of huisdieren in huis.
           </p>
         </div>
 
-        <h2>Offline Contactenlijst</h2>
+        <h2>Contactenlijst op papier</h2>
         <p>
           Als je telefoon leeg is of het netwerk uitvalt, heb je de belangrijkste
           nummers <strong>op papier</strong> nodig.
@@ -159,16 +162,16 @@ import Icon from '../../../../components/ui/Icon.astro';
           <li>Hulpdiensten: 112 (spoed), 0900-8844 (politie niet-spoed)</li>
         </ul>
 
-        <h2>Checklist Energie & Communicatie</h2>
+        <h2>Checklist energie en communicatie</h2>
         <ul>
-          <li>☐ Powerbank 20.000+ mAh, opgeladen</li>
-          <li>☐ Oplaadkabels voor alle apparaten</li>
-          <li>☐ Batterij- of zwengelradio</li>
-          <li>☐ LED-zaklamp per kamer</li>
-          <li>☐ Reservebatterijen (AA, AAA)</li>
-          <li>☐ Hoofdlamp voor iedereen</li>
-          <li>☐ Offline contactenlijst uitgeprint</li>
-          <li>☐ NL-Alert staat aan op telefoon</li>
+          <li>Powerbank 20.000+ mAh, opgeladen</li>
+          <li>Oplaadkabels voor alle apparaten</li>
+          <li>Batterij- of zwengelradio</li>
+          <li>LED-zaklamp per kamer</li>
+          <li>Reservebatterijen (AA, AAA)</li>
+          <li>Hoofdlamp voor iedereen</li>
+          <li>Offline contactenlijst uitgeprint</li>
+          <li>NL-Alert staat aan op telefoon</li>
         </ul>
       </div>
 
@@ -199,6 +202,14 @@ import Icon from '../../../../components/ui/Icon.astro';
           </a>
         </div>
       </div>
+      <RelatedLinks
+        links={[
+          { href: '/nl/rampenzender/', label: 'Rampenzender per gemeente', note: 'De zender en frequentie voor jouw regio.' },
+          { href: '/nl/nl-alert/', label: 'NL-Alert', note: 'Wanneer het testbericht komt en hoe je je telefoon controleert.' },
+          { href: '/nl/gidsen/zonnepanelen-thuisbatterij-stroomuitval/', label: 'Zonnepanelen en thuisbatterij', note: 'Waarom ze bij een storing uitvallen.' },
+          { href: '/nl/tools/energie-calculator/', label: 'Energiecalculator', note: 'Hoeveel powerbankcapaciteit je nodig hebt.' },
+        ]}
+      />
     </div>
   </section>
 </BaseLayout>

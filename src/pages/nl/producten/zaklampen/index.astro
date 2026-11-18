@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../../../layouts/BaseLayout.astro';
+import Byline from '../../../../components/content/Byline.astro';
 import ShopBox from '../../../../components/growth/ShopBox.astro';
 import Breadcrumb from '../../../../components/layout/Breadcrumb.astro';
 import Icon from '../../../../components/ui/Icon.astro';
@@ -10,7 +11,7 @@ import HeroImage from '../../../../components/content/HeroImage.astro';
   title="Beste zaklamp voor noodsituaties: Waar op letten? Koopgids"
   description="De beste zaklamp voor je noodpakket. Lumen, batterijen, waterdicht — waar je op moet letten."
   locale="nl"
-  dateModified="2025-12-16"
+  dateModified="2026-11-18"
   schemaType="Article"
   alternates={{
     de: '/de/produkte/taschenlampen/',
@@ -20,6 +21,7 @@ import HeroImage from '../../../../components/content/HeroImage.astro';
     <div class="max-w-3xl mx-auto px-4 sm:px-6">
       <Breadcrumb items={[{ label: 'Producten', href: '/nl/producten/' }, { label: 'Zaklampen' }]} class="mb-4" locale="nl" />
       <h1 class="text-4xl font-bold mb-6">Zaklampen</h1>
+      <Byline date="2026-11-18" />
 
       <div class="mb-8">
         <HeroImage
@@ -28,14 +30,18 @@ import HeroImage from '../../../../components/content/HeroImage.astro';
           priority={true}
         />
       </div>
-
-      <ShopBox locale="nl" category="zaklampen" />
-
       <div class="prose prose-lg">
         <p class="lead">
           Een betrouwbare zaklamp is na water het <strong>op één na belangrijkste element</strong>
           van je noodpakket. Zonder licht ben je 's nachts volledig hulpeloos.
         </p>
+
+
+        <div class="not-prose my-8">
+
+          <ShopBox locale="nl" category="zaklampen" />
+
+        </div>
 
         <!-- Quick Specs -->
         <div class="card p-6 my-8 bg-(--color-bg-tertiary) not-prose">
@@ -94,7 +100,7 @@ import HeroImage from '../../../../components/content/HeroImage.astro';
         </ul>
 
         <div class="card p-6 my-8 bg-(--color-accent-subtle) not-prose">
-          <p class="font-medium mb-2">💡 Tip: Beide hebben</p>
+          <p class="font-medium mb-2">Tip: Beide hebben</p>
           <p class="text-sm text-(--color-text-secondary)">
             Ideaal: Een oplaadbare hoofdzaklamp + een batterij-backup lamp.
             Bewaar minimaal <strong>2 sets reservebatterijen</strong>.
@@ -133,19 +139,19 @@ import HeroImage from '../../../../components/content/HeroImage.astro';
 
         <h2>Checklist</h2>
         <ul>
-          <li>☐ Minimaal 2 zaklampen</li>
-          <li>☐ LED-technologie</li>
-          <li>☐ 200+ lumen</li>
-          <li>☐ Waterdicht (IPX4+)</li>
-          <li>☐ Reservebatterijen (2 sets)</li>
-          <li>☐ 1 hoofdlamp per persoon</li>
-          <li>☐ Functietest elke 6 maanden</li>
+          <li>Minimaal 2 zaklampen</li>
+          <li>LED-technologie</li>
+          <li>200+ lumen</li>
+          <li>Waterdicht (IPX4+)</li>
+          <li>Reservebatterijen (2 sets)</li>
+          <li>1 hoofdlamp per persoon</li>
+          <li>Functietest elke 6 maanden</li>
         </ul>
       </div>
 
       <!-- Amazon Link -->
       <div class="mt-12 card p-6 bg-(--color-bg-tertiary)">
-        <h3 class="font-semibold mb-2">Zaklampen op Bol.com</h3>
+        <h3 class="font-semibold mb-2">Zaklampen op bol</h3>
         <p class="text-sm text-(--color-text-secondary) mb-4">
           Aanbevolen LED-zaklampen voor noodsituaties.
         </p>

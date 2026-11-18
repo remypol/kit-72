@@ -1,5 +1,7 @@
 ---
 import BaseLayout from '../../../../layouts/BaseLayout.astro';
+import RelatedLinks from '../../../../components/content/RelatedLinks.astro';
+import Byline from '../../../../components/content/Byline.astro';
 import HeroImage from '../../../../components/content/HeroImage.astro';
 import Breadcrumb from '../../../../components/layout/Breadcrumb.astro';
 import Icon from '../../../../components/ui/Icon.astro';
@@ -57,13 +59,14 @@ const faqs = [
   description="Drinkwater opslaan voor noodsituaties: hoeveel liter per persoon, in welke flessen of jerrycans, hoe lang kraanwater houdbaar is en waar je het bewaart."
   locale="nl"
   faqData={faqs}
-  dateModified="2026-11-17"
+  dateModified="2026-11-18"
   schemaType="Article"
 >
   <section class="py-16">
     <div class="max-w-3xl mx-auto px-4 sm:px-6">
       <Breadcrumb items={[{ label: 'Gidsen', href: '/nl/gidsen/' }, { label: 'Water opslaan' }]} class="mb-4" locale="nl" />
       <h1 class="text-4xl font-bold mb-6">Water opslaan voor noodsituaties</h1>
+      <Byline date="2026-11-18" />
 
       <div class="mb-8">
         <HeroImage
@@ -100,7 +103,7 @@ const faqs = [
           </p>
         </div>
 
-        <h2>Geschikte Opslagmiddelen</h2>
+        <h2>Geschikte opslagmiddelen</h2>
         <ul>
           <li><strong>Origineel verpakt flessenwater</strong> — veiligste optie, langste houdbaarheid</li>
           <li><strong>Levensmiddelgeschikte jerrycans</strong> — HDPE (recyclagecode 2), BPA-vrij</li>
@@ -110,12 +113,12 @@ const faqs = [
 
         <div class="card p-4 my-6 border-l-4 border-l-amber-500 bg-amber-50 dark:bg-amber-950/30 not-prose">
           <p class="text-sm">
-            <strong>⚠️ Niet gebruiken:</strong> Melkflessen, voormalige chemicaliënhouders,
+            <strong>Niet gebruiken:</strong> Melkflessen, voormalige chemicaliënhouders,
             of doorzichtige plastic flessen voor langdurige opslag (licht bevordert alggroei).
           </p>
         </div>
 
-        <h2>Waar Bewaren?</h2>
+        <h2>Waar bewaren?</h2>
         <ul>
           <li><strong>Koel</strong> — idealiter onder 20°C (kelder, bijkeuken)</li>
           <li><strong>Donker</strong> — beschermd tegen direct zonlicht</li>
@@ -156,7 +159,7 @@ const faqs = [
 
         <h2>Backup-oplossingen</h2>
         <div class="card p-6 my-8 bg-(--color-accent-subtle) not-prose">
-          <p class="font-medium mb-2">💡 Noodopties</p>
+          <p class="font-medium mb-2">Noodopties</p>
           <p class="text-sm text-(--color-text-secondary) mb-4">
             Naast opgeslagen water moet je deze opties paraat hebben:
           </p>
@@ -176,14 +179,14 @@ const faqs = [
           </ul>
         </div>
 
-        <h2>Checklist Wateropslag</h2>
+        <h2>Checklist wateropslag</h2>
         <ul>
-          <li>☐ Minimaal 9 liter per persoon (72 uur)</li>
-          <li>☐ Levensmiddelgeschikte containers gebruikt</li>
-          <li>☐ Koel, donker en vorstvrij opgeslagen</li>
-          <li>☐ Datum van opslag genoteerd</li>
-          <li>☐ Waterbehoefte huisdieren ingepland</li>
-          <li>☐ Backup: zuiveringstabletten aanwezig</li>
+          <li>Minimaal 9 liter per persoon (72 uur)</li>
+          <li>Levensmiddelgeschikte containers gebruikt</li>
+          <li>Koel, donker en vorstvrij opgeslagen</li>
+          <li>Datum van opslag genoteerd</li>
+          <li>Waterbehoefte huisdieren ingepland</li>
+          <li>Backup: zuiveringstabletten aanwezig</li>
         </ul>
       </div>
 
@@ -204,6 +207,14 @@ const faqs = [
 
       <!-- Related Content -->
       <RelatedContent items={relatedItems} locale="nl" />
+      <RelatedLinks
+        links={[
+          { href: '/nl/gidsen/noodtoilet/', label: 'Wc en hygiëne zonder water', note: 'Waarvoor je je drinkwater niet hoeft te gebruiken.' },
+          { href: '/nl/tools/water-calculator/', label: 'Watercalculator', note: 'Hoeveel liter je huishouden nodig heeft.' },
+          { href: '/nl/noodpakket-baby/', label: 'Noodpakket met een baby', note: 'Welk flessenwater geschikt is voor flesvoeding.' },
+          { href: '/nl/scenario/wateruitval/', label: 'Wateruitval', note: 'Wat je doet als er geen water uit de kraan komt.' },
+        ]}
+      />
     </div>
   </section>
 </BaseLayout>

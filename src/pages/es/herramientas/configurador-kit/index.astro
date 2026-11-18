@@ -8,46 +8,12 @@ import KitBuilder from '../../../../components/tools/KitBuilder';
   title="Configurador de Kit de Emergencia — Kit-72"
   description="Crea tu checklist personalizado de kit de emergencia. Selecciona escenario, añade bebés y mascotas, y obtén una lista imprimible."
   dateModified="2025-12-15"
-  schemaType="HowTo"
+  schemaType="SoftwareApplication"
   schemaData={{
-    name: 'Cómo crear tu kit de emergencia personalizado',
-    description: 'Guía paso a paso para configurar un kit de emergencia de 72 horas adaptado a tu familia, mascotas y escenario específico.',
-    totalTime: 'PT10M',
-    estimatedCost: {
-      '@type': 'MonetaryAmount',
-      currency: 'EUR',
-      value: '150-300',
-    },
-    tool: [
-      { '@type': 'HowToTool', name: 'Esta herramienta online' },
-      { '@type': 'HowToTool', name: 'Impresora (opcional)' },
-    ],
-    step: [
-      {
-        '@type': 'HowToStep',
-        position: 1,
-        name: 'Selecciona tu escenario',
-        text: 'Elige el escenario principal para el que quieres prepararte: apagón, ola de calor, corte de agua o evacuación. Cada escenario añade items específicos a tu checklist.',
-      },
-      {
-        '@type': 'HowToStep',
-        position: 2,
-        name: 'Indica tu familia',
-        text: 'Selecciona si tienes bebés o niños pequeños (se añadirán pañales, biberones, etc.) y si tienes mascotas (se añadirá comida, transportín, etc.).',
-      },
-      {
-        '@type': 'HowToStep',
-        position: 3,
-        name: 'Marca los items que ya tienes',
-        text: 'Revisa la lista y marca los items que ya tienes en casa. Verás tu progreso en porcentaje y podrás identificar qué te falta.',
-      },
-      {
-        '@type': 'HowToStep',
-        position: 4,
-        name: 'Guarda o imprime tu checklist',
-        text: 'Exporta tu checklist personalizado a PDF para imprimirlo, o guárdalo online para acceder desde cualquier dispositivo. Tu progreso se guarda automáticamente.',
-      },
-    ],
+    '@type': 'WebApplication',
+    applicationCategory: 'UtilitiesApplication',
+    operatingSystem: 'Any',
+    offers: { '@type': 'Offer', price: '0', priceCurrency: 'EUR' },
   }}
 >
   <section class="py-16">

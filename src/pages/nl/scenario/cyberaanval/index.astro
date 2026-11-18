@@ -11,6 +11,7 @@
  * - Government emphasis on digital resilience
  */
 import BaseLayout from '../../../../layouts/BaseLayout.astro';
+import RelatedLinks from '../../../../components/content/RelatedLinks.astro';
 import TLDRBlock from '../../../../components/hub/TLDRBlock.astro';
 import CollapsibleSection from '../../../../components/hub/CollapsibleSection.astro';
 import PhaseTabs from '../../../../components/hub/PhaseTabs.tsx';
@@ -82,7 +83,7 @@ const phases = {
       tip: null
     },
     {
-      title: 'Volg officiele kanalen',
+      title: 'Volg officiële kanalen',
       detail: 'Rijksoverheid.nl, NOS, lokale omroep. Wees kritisch op sociale media.',
       tip: null
     },
@@ -222,29 +223,10 @@ const faqs = [
   title="Cyberaanval: Geen internet of pinnen? Overlevingsgids"
   description="Hoe bereid je je voor op een cyberaanval of digitale storing? Contant geld, offline backups, communicatie en checklist voor als PIN en internet uitvallen."
   locale="nl"
-  schemaType="HowTo"
+  schemaType="Article"
   dateModified="2026-11-17"
   alternates={{
     de: '/de/szenarien/cyberangriff/',
-  }}
-  schemaData={{
-    step: [
-      { '@type': 'HowToStep', name: 'Houd contant geld achter de hand', text: '€70 per volwassene, €30 per kind. In kleine coupures. Verspreid over meerdere plekken in huis.' },
-      { '@type': 'HowToStep', name: 'Maak offline backups', text: 'Belangrijke bestanden op USB-stick of externe harde schijf. Niet alleen in de cloud.' },
-      { '@type': 'HowToStep', name: 'Print belangrijke contacten', text: 'Telefoonnummers van familie, vrienden, huisarts, verzekering. Op papier.' },
-      { '@type': 'HowToStep', name: 'Ken belangrijke nummers uit je hoofd', text: 'Minimaal: 1 familielid, 112. We vertrouwen te veel op telefoongeheugen.' },
-      { '@type': 'HowToStep', name: 'Betaal contant tijdens storing', text: 'PIN en iDEAL kunnen uitvallen. Contant geld werkt altijd.' },
-      { '@type': 'HowToStep', name: 'Update wachtwoorden NA herstel', text: 'Verander geen wachtwoorden tijdens de aanval - kan onderschept worden.' },
-    ],
-    totalTime: 'P3D',
-    supply: [
-      { '@type': 'HowToSupply', name: 'Contant geld (€70/volw, €30/kind)' },
-      { '@type': 'HowToSupply', name: 'USB-stick met backup' },
-      { '@type': 'HowToSupply', name: 'Geprinte contactenlijst' },
-      { '@type': 'HowToSupply', name: 'Radio op batterijen' },
-      { '@type': 'HowToSupply', name: 'Powerbank' },
-      { '@type': 'HowToSupply', name: 'Ov-kaart met saldo of contant geld' },
-    ],
   }}
   faqData={faqs}
 >
@@ -263,7 +245,7 @@ const faqs = [
           <Icon name="Shield" size={28} />
         </div>
         <div class="scenario-title-content">
-          <h1 class="scenario-title">Voorbereiden op Cyberaanval</h1>
+          <h1 class="scenario-title">Cyberaanval: wat doe je als pinnen en internet uitvallen?</h1>
           <div class="scenario-meta">
             <span class="meta-item">8 min</span>
             <span class="meta-divider">·</span>
@@ -472,6 +454,16 @@ const faqs = [
 
     <!-- Sources -->
     <section class="scenario-section">
+      <RelatedLinks
+        links={[
+          { href: '/nl/gidsen/contant-geld/', label: 'Contant geld in huis', note: '€ 70 per volwassene en € 30 per kind, en wat je doet als pinnen niet werkt.' },
+          { href: '/nl/noodplan-maken/', label: 'Noodplan maken', note: 'Telefoonnummers en afspraken op papier.' },
+          { href: '/nl/rampenzender/', label: 'Rampenzender per gemeente', note: 'De zender en frequentie waarop de overheid bij een ramp aanwijzingen geeft.' },
+          { href: '/nl/gidsen/ai-stroomuitval/', label: 'Kan AI een stroomstoring veroorzaken?', note: 'Wat er bekend is, met bronnen.' },
+          { href: '/nl/noodhandboek/', label: 'Gratis noodhandboek voor jouw adres', note: 'Hoogte, overstromingsrisico, spoedeisende hulp en rampenzender voor jouw huis, op vier pagina’s.' },
+        ]}
+      />
+
       <details class="sources-block">
         <summary class="sources-header">
           <Icon name="BookOpen" size={18} />
@@ -481,7 +473,7 @@ const faqs = [
         <div class="sources-content">
           <ul>
             <li><a href="https://www.nctv.nl/" target="_blank" rel="noopener">NCTV - Nationaal Coordinator Terrorismebestrijding en Veiligheid</a></li>
-            <li><a href="https://www.rijksoverheid.nl/onderwerpen/cybercrime" target="_blank" rel="noopener">Rijksoverheid - Cybercrime</a></li>
+            <li><a href="https://www.denkvooruit.nl/risicos/risicos-in-nederland/cybercriminaliteit" target="_blank" rel="noopener">Denk Vooruit - Cybercriminaliteit</a></li>
             <li><a href="https://www.ncsc.nl/" target="_blank" rel="noopener">NCSC - Nationaal Cyber Security Centrum</a></li>
             <li><a href="https://www.betaalvereniging.nl/" target="_blank" rel="noopener">Betaalvereniging Nederland</a></li>
           </ul>

@@ -17,6 +17,7 @@
  * - Vertical evacuation concept
  */
 import BaseLayout from '../../../../layouts/BaseLayout.astro';
+import RelatedLinks from '../../../../components/content/RelatedLinks.astro';
 import TLDRBlock from '../../../../components/hub/TLDRBlock.astro';
 import CollapsibleSection from '../../../../components/hub/CollapsibleSection.astro';
 import PhaseTabs from '../../../../components/hub/PhaseTabs.tsx';
@@ -151,7 +152,7 @@ const checklistCategories = [
     items: [
       { id: 'rugzak', name: 'Waterdichte rugzak', quantity: '1 per persoon', priority: 'critical' as const, notes: 'Of drybag voor documenten', affiliateUrl: 'https://www.bol.com/nl/nl/s/?searchtext=waterdichte+rugzak' },
       { id: 'id-docs', name: 'ID en documenten (kopie)', quantity: 'Alle gezinsleden', priority: 'critical' as const, notes: 'In waterdichte hoes' },
-      { id: 'contant', name: 'Contant geld', quantity: 'EUR70/volwassene', priority: 'critical' as const, notes: 'Pinautomaten werken mogelijk niet' },
+      { id: 'contant', name: 'Contant geld', quantity: '€ 70/volwassene', priority: 'critical' as const, notes: 'Pinautomaten werken mogelijk niet' },
       { id: 'medicijnen', name: 'Medicijnen voor 7 dagen', quantity: 'Naar behoefte', priority: 'critical' as const },
       { id: 'powerbank', name: 'Powerbank (opgeladen)', quantity: '1-2 stuks', priority: 'critical' as const, affiliateUrl: 'https://www.bol.com/nl/nl/s/?searchtext=powerbank+waterdicht' },
       { id: 'drinkwater', name: 'Drinkwater', quantity: '1.5L per persoon', priority: 'critical' as const, notes: 'Voor onderweg' },
@@ -263,7 +264,7 @@ const specialSituations = [
   {
     title: 'Boerderijen en landelijk gebied',
     icon: 'Tractor',
-    content: 'Vee kan vaak niet snel geevacueerd worden. Heb een plan voor noodstalling op hoger gelegen locaties.'
+    content: 'Vee kan vaak niet snel geëvacueerd worden. Heb een plan voor noodstalling op hoger gelegen locaties.'
   },
 ];
 ---
@@ -272,20 +273,9 @@ const specialSituations = [
   title="Overstroming: Hoe voorbereiden en evacueren — Nood-Checklist"
   description="Complete gids voor voor, tijdens en na een overstroming in Nederland. Evacuatieplan, waterdichte opslag en officiële waarschuwingskanalen."
   locale="nl"
-  schemaType="HowTo"
+  schemaType="Article"
   dateModified="2026-11-17"
   datePublished="2025-11-01"
-  schemaData={{
-    step: [
-      { '@type': 'HowToStep', name: 'Ken je overstromingsrisico', text: 'Check op overstroomik.nl hoe hoog het water bij jou kan komen.' },
-      { '@type': 'HowToStep', name: 'Controleer of je NL-Alert ontvangt', text: 'NL-Alert komt vanzelf op je telefoon; aanmelden hoeft niet. Twee keer per jaar komt er een testbericht.' },
-      { '@type': 'HowToStep', name: 'Maak een gezinsevacuatieplan', text: 'Bepaal waar je naartoe gaat en waar je elkaar treft.' },
-      { '@type': 'HowToStep', name: 'Bereid waterdichte opslag voor', text: 'Documenten en elektronica in waterdichte tassen.' },
-      { '@type': 'HowToStep', name: 'Ken verticale evacuatie', text: 'Soms is naar boven gaan veiliger dan vluchten.' },
-    ],
-    totalTime: 'PT45M',
-    estimatedCost: { '@type': 'MonetaryAmount', currency: 'EUR', value: '100-300' },
-  }}
   faqData={faqs}
 >
   <article class="scenario-page">
@@ -303,7 +293,7 @@ const specialSituations = [
           <Icon name="Waves" size={28} />
         </div>
         <div class="scenario-title-content">
-          <h1 class="scenario-title">Voorbereiden op een Overstroming</h1>
+          <h1 class="scenario-title">Overstroming: wat doe je en hoe bereid je je voor?</h1>
           <div class="scenario-meta">
             <span class="meta-item">12 min</span>
             <span class="meta-divider">·</span>
@@ -406,7 +396,7 @@ const specialSituations = [
           <strong>LEVENSGEVAARLIJKE SITUATIES</strong>
           <ul>
             <li>Rijd nooit door water op de weg: bij 15 cm kan een auto niet meer rijden</li>
-            <li>Loop NOOIT door water boven je knieen</li>
+            <li>Loop NOOIT door water boven je knieën</li>
             <li>Raak NOOIT elektrische apparaten aan in overstromingswater</li>
             <li>Ga NOOIT terug voor bezittingen</li>
           </ul>
@@ -519,6 +509,17 @@ const specialSituations = [
 
     <!-- Sources -->
     <section class="scenario-section">
+      <RelatedLinks
+        links={[
+          { href: '/nl/overstromingsrisico/', label: 'Overstromingsrisico per adres', note: 'Check of je adres in een aangewezen risicogebied ligt, en van welk type.' },
+          { href: '/nl/hoogte-nap/', label: 'Hoe hoog ligt mijn huis?', note: 'De hoogte van je perceel ten opzichte van NAP.' },
+          { href: '/nl/noodplan/', label: 'Noodplan per gemeente', note: 'Rampenzender, spoedeisende hulp en waterschap voor jouw gemeente.' },
+          { href: '/nl/sirene/', label: 'Wat doe je als de sirene gaat?', note: 'Naar binnen, ramen en deuren dicht, radio aan.' },
+          { href: '/nl/noodplan-maken/', label: 'Noodplan maken', note: 'Waar je elkaar treft en wie je belt.' },
+          { href: '/nl/noodhandboek/', label: 'Gratis noodhandboek voor jouw adres', note: 'Hoogte, overstromingsrisico, spoedeisende hulp en rampenzender voor jouw huis, op vier pagina’s.' },
+        ]}
+      />
+
       <details class="sources-block">
         <summary class="sources-header">
           <Icon name="BookOpen" size={18} />
@@ -538,8 +539,8 @@ const specialSituations = [
               </a>
             </li>
             <li>
-              <a href="https://www.rijksoverheid.nl/onderwerpen/waterveiligheid" target="_blank" rel="noopener">
-                Rijksoverheid — Waterveiligheid
+              <a href="https://www.denkvooruit.nl/risicos/risicos-in-nederland/overstroming" target="_blank" rel="noopener">
+                Denk Vooruit — Overstroming
               </a>
             </li>
             <li>

@@ -10,6 +10,7 @@
  * - €70/€30 cash recommendation per Rijksoverheid
  */
 import BaseLayout from '../../../../layouts/BaseLayout.astro';
+import RelatedLinks from '../../../../components/content/RelatedLinks.astro';
 import TLDRBlock from '../../../../components/hub/TLDRBlock.astro';
 import CollapsibleSection from '../../../../components/hub/CollapsibleSection.astro';
 import PhaseTabs from '../../../../components/hub/PhaseTabs.tsx';
@@ -78,7 +79,7 @@ const phases = {
       tip: null
     },
     {
-      title: 'Volg de officiele routes',
+      title: 'Volg de officiële routes',
       detail: 'Autoriteiten weten welke gebieden veilig zijn. Neem geen sluiproutes.',
       tip: null
     },
@@ -178,7 +179,7 @@ const checklistCategories = [
   },
   {
     id: 'hygiene',
-    name: 'Hygiene',
+    name: 'Hygiëne',
     icon: 'sparkles',
     items: [
       { id: 'doekjes', name: 'Vochtige doekjes', priority: 'critical' as const, affiliateUrl: 'https://www.bol.com/nl/nl/s/?searchtext=vochtige+doekjes' },
@@ -247,32 +248,11 @@ const faqs = [
   title="Evacuatie: Wat meenemen? Noodtas pakken in 10 minuten"
   description="Complete evacuatiegids voor Nederland. Wat in je noodtas, gezinsplan, ontmoetingspunten en checklist. Rijksoverheid richtlijnen."
   locale="nl"
-  schemaType="HowTo"
+  schemaType="Article"
   dateModified="2026-11-17"
   alternates={{
     es: '/es/escenarios/kit-evacuacion/',
     de: '/de/szenarien/evakuierung/',
-  }}
-  schemaData={{
-    step: [
-      { '@type': 'HowToStep', name: 'Maak een noodtas klaar', text: 'Een tas die altijd klaar staat. Maximaal 10-15kg. Controleer elk half jaar.' },
-      { '@type': 'HowToStep', name: 'Bepaal twee ontmoetingspunten', text: 'Eén dichtbij huis, één buiten de wijk. Iedereen in het gezin kent beide.' },
-      { '@type': 'HowToStep', name: 'Kies een contactpersoon buiten de regio', text: 'Familie of vriend die iedereen belt. Bellen naar buiten de regio lukt vaak wel.' },
-      { '@type': 'HowToStep', name: 'Ken twee vluchtroutes', text: 'De hoofdroute kan geblokkeerd zijn. Oefen beide met de auto én te voet.' },
-      { '@type': 'HowToStep', name: 'Bij officieel bevel: GA', text: 'Wacht niet. Autoriteiten geven dit bevel niet lichtvaardig.' },
-      { '@type': 'HowToStep', name: 'Pak de noodtas en vertrek', text: 'Verspil geen tijd. Spullen zijn vervangbaar, mensen niet.' },
-      { '@type': 'HowToStep', name: 'Volg officiele routes', text: 'Autoriteiten weten welke gebieden veilig zijn. Neem geen sluiproutes.' },
-    ],
-    totalTime: 'PT30M',
-    supply: [
-      { '@type': 'HowToSupply', name: 'ID-kaart/Paspoort' },
-      { '@type': 'HowToSupply', name: 'Water (1.5L min/persoon)' },
-      { '@type': 'HowToSupply', name: 'Niet-bederfelijk voedsel' },
-      { '@type': 'HowToSupply', name: 'Zaklamp + batterijen' },
-      { '@type': 'HowToSupply', name: 'Powerbank (10.000mAh+)' },
-      { '@type': 'HowToSupply', name: 'Persoonlijke medicatie (7+ dagen)' },
-      { '@type': 'HowToSupply', name: 'Reddingsdeken' },
-    ],
   }}
   faqData={faqs}
 >
@@ -521,6 +501,17 @@ const faqs = [
 
     <!-- Sources -->
     <section class="scenario-section">
+      <RelatedLinks
+        links={[
+          { href: '/nl/noodplan-maken/', label: 'Noodplan maken', note: 'Waar je elkaar treft, wie de kinderen haalt en wie je belt.' },
+          { href: '/nl/noodpakket-checklist/', label: 'Checklist noodpakket', note: 'De twaalf onderdelen en de tas voor als je weg moet.' },
+          { href: '/nl/sirene/', label: 'Wat doe je als de sirene gaat?', note: 'Wanneer je juist binnen moet blijven.' },
+          { href: '/nl/nl-alert/', label: 'NL-Alert', note: 'Hoe je hoort dat je weg moet.' },
+          { href: '/nl/rampenzender/', label: 'Rampenzender per gemeente', note: 'De zender en frequentie waarop de overheid bij een ramp aanwijzingen geeft.' },
+          { href: '/nl/noodhandboek/', label: 'Gratis noodhandboek voor jouw adres', note: 'Hoogte, overstromingsrisico, spoedeisende hulp en rampenzender voor jouw huis, op vier pagina’s.' },
+        ]}
+      />
+
       <details class="sources-block">
         <summary class="sources-header">
           <Icon name="BookOpen" size={18} />
@@ -529,10 +520,10 @@ const faqs = [
         </summary>
         <div class="sources-content">
           <ul>
-            <li><a href="https://www.rijksoverheid.nl/onderwerpen/veiligheidsregios-en-crisisbeheersing/vraag-en-antwoord/wat-moet-ik-doen-bij-een-evacuatie" target="_blank" rel="noopener">Rijksoverheid - Evacuatie</a></li>
-            <li><a href="https://crisis.nl/" target="_blank" rel="noopener">Crisis.nl - Nationale crisiswebsite</a></li>
-            <li><a href="https://www.rodekruis.nl/" target="_blank" rel="noopener">Rode Kruis Nederland</a></li>
-            <li><a href="https://www.government.nl/topics/emergency-number-112/nl-alert" target="_blank" rel="noopener">NL-Alert informatie</a></li>
+            <li><a href="https://www.denkvooruit.nl/bereid-je-voor/stel-je-noodpakket-samen" target="_blank" rel="noopener">Denk Vooruit - Noodpakket en tas voor als je weg moet</a></li>
+            <li><a href="https://www.nederlandveilig.nl/" target="_blank" rel="noopener">Nederland Veilig (voorheen crisis.nl)</a></li>
+            <li><a href="https://www.rodekruis.nl/wat-doen-wij/hulp-in-nederland/goed-voorbereid/" target="_blank" rel="noopener">Rode Kruis - Goed voorbereid</a></li>
+            <li><a href="https://www.nl-alert.nl/zo-werkt-nl-alert" target="_blank" rel="noopener">NL-Alert - Zo werkt NL-Alert</a></li>
           </ul>
         </div>
       </details>

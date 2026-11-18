@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../../../layouts/BaseLayout.astro';
+import Byline from '../../../../components/content/Byline.astro';
 import ShopBox from '../../../../components/growth/ShopBox.astro';
 import Breadcrumb from '../../../../components/layout/Breadcrumb.astro';
 import Icon from '../../../../components/ui/Icon.astro';
@@ -10,7 +11,7 @@ import HeroImage from '../../../../components/content/HeroImage.astro';
   title="Powerbank voor je noodpakket: welke capaciteit?"
   description="De juiste powerbank voor je noodpakket. Capaciteit, snelladen, kwaliteitskenmerken."
   locale="nl"
-  dateModified="2025-12-16"
+  dateModified="2026-11-18"
   schemaType="Article"
   alternates={{
     de: '/de/produkte/powerbanks/',
@@ -20,6 +21,7 @@ import HeroImage from '../../../../components/content/HeroImage.astro';
     <div class="max-w-3xl mx-auto px-4 sm:px-6">
       <Breadcrumb items={[{ label: 'Producten', href: '/nl/producten/' }, { label: 'Powerbanks' }]} class="mb-4" locale="nl" />
       <h1 class="text-4xl font-bold mb-6">Powerbanks</h1>
+      <Byline date="2026-11-18" />
 
       <div class="mb-8">
         <HeroImage
@@ -28,14 +30,18 @@ import HeroImage from '../../../../components/content/HeroImage.astro';
           priority={true}
         />
       </div>
-
-      <ShopBox locale="nl" category="powerbanks" />
-
       <div class="prose prose-lg">
         <p class="lead">
           Je smartphone is in noodsituaties essentieel: 112 bellen, NL-Alert ontvangen, contact
           met familie. Een goede powerbank houdt het <strong>72 uur in leven</strong>.
         </p>
+
+
+        <div class="not-prose my-8">
+
+          <ShopBox locale="nl" category="powerbanks" />
+
+        </div>
 
         <!-- Capacity Guide -->
         <div class="card p-6 my-8 bg-(--color-bg-tertiary) not-prose">
@@ -74,7 +80,7 @@ import HeroImage from '../../../../components/content/HeroImage.astro';
         <h3>1. Capaciteit (mAh)</h3>
         <p>
           Meer is beter, maar let op: boven 27.000 mAh is verboden in vliegtuigen.
-          <strong>20.000 mAh</strong> is de sweet spot.
+          <strong>20.000 mAh</strong> is voor de meeste huishoudens genoeg.
         </p>
 
         <h3>2. Uitgangsvermogen (Watt)</h3>
@@ -92,7 +98,7 @@ import HeroImage from '../../../../components/content/HeroImage.astro';
         </ul>
 
         <div class="card p-6 my-8 bg-(--color-accent-subtle) not-prose">
-          <p class="font-medium mb-2">💡 Onderhoudstip</p>
+          <p class="font-medium mb-2">Onderhoudstip</p>
           <p class="text-sm text-(--color-text-secondary)">
             Bewaar powerbanks op <strong>50-80% lading</strong>.
             Laad ze elke 2-3 maanden bij om de accuconditie te behouden.
@@ -119,7 +125,7 @@ import HeroImage from '../../../../components/content/HeroImage.astro';
 
         <div class="card p-4 my-6 border-l-4 border-l-amber-500 bg-amber-50 dark:bg-amber-950/30 not-prose">
           <p class="text-sm">
-            <strong>⚠️ Waarschuwing:</strong> Koop geen merkloze producten met onrealistische capaciteitsaanduidingen.
+            <strong>Waarschuwing:</strong> Koop geen merkloze producten met onrealistische capaciteitsaanduidingen.
             "50.000 mAh voor €15" is oplichterij — echte cellen kosten meer.
           </p>
         </div>
@@ -127,7 +133,6 @@ import HeroImage from '../../../../components/content/HeroImage.astro';
         <h2>Aanbevolen merken</h2>
         <ul>
           <li><strong>Anker</strong> — marktleider, betrouwbaar</li>
-          <li><strong>RAVPower</strong> — goede prijs-kwaliteit</li>
           <li><strong>Belkin</strong> — premium kwaliteit</li>
           <li><strong>INIU</strong> — budget optie met solide kwaliteit</li>
           <li><strong>Zendure</strong> — robuust, voor outdoor</li>
@@ -135,18 +140,18 @@ import HeroImage from '../../../../components/content/HeroImage.astro';
 
         <h2>Checklist</h2>
         <ul>
-          <li>☐ Minimaal 20.000 mAh capaciteit</li>
-          <li>☐ USB-C + USB-A uitgang</li>
-          <li>☐ Van bekend merk</li>
-          <li>☐ Passende laadkabels erbij</li>
-          <li>☐ Op 50-80% opgeladen bewaren</li>
-          <li>☐ Elke 2-3 maanden bijladen</li>
+          <li>Minimaal 20.000 mAh capaciteit</li>
+          <li>USB-C + USB-A uitgang</li>
+          <li>Van bekend merk</li>
+          <li>Passende laadkabels erbij</li>
+          <li>Op 50-80% opgeladen bewaren</li>
+          <li>Elke 2-3 maanden bijladen</li>
         </ul>
       </div>
 
       <!-- Shop Link -->
       <div class="mt-12 card p-6 bg-(--color-bg-tertiary)">
-        <h3 class="font-semibold mb-2">Powerbanks op Bol.com</h3>
+        <h3 class="font-semibold mb-2">Powerbanks op bol</h3>
         <p class="text-sm text-(--color-text-secondary) mb-4">
           Aanbevolen powerbanks met 20.000+ mAh.
         </p>
