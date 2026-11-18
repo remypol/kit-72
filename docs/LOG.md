@@ -241,3 +241,9 @@ What matters:
 - Taken from the subagents' reading, not re-read: the AEMPS medicine register queries, the EFSA reference values, the AEMET level definitions and thresholds, the IATA battery guidance, the BSI pages and reports, the bpb page on the 2021 flood, the EU staff working document on 72 hours (two subagents read it independently).
 - Left as they are because no authority owns them and nothing official contradicts them: product specifications, prices and ratings, battery shelf lives, pet water amounts, toilet flush volumes, kcal per 100 g tables.
 - Checks: build 481 pages; SEO audit 0 long titles, 0 duplicates, 0 orphans, 0 hreflang problems, 6 description warnings on legal pages; JSON-LD parses everywhere; every outbound link on the 50 changed files returns 200; no internal link without a target on German and Spanish pages; handbook test 17 of 17. Dates on the changed pages set to November 2026.
+
+## 27. German and Spanish corrections live (2026-11-18)
+
+- PR 11 (four images) and PR 12 (German and Spanish fact corrections) merged after the owner's "Ja, merge" each time; merge commits `c772c60` and `21f4e5a`.
+- Production checked after PR 12: seventeen German, Spanish and Dutch pages return 200; the German evacuation page carries "quer zur Windrichtung" and no longer "Gegen den Wind"; the Spanish evacuation page no longer says "contraria al viento"; the blackout page shows 12:33:30; the BBK page shows the Warntag of 9 September 2027; the cyber page mentions 017; the German scenario hub no longer says "in Planung".
+- Still open: indexing requests for the ten new Dutch pages (Search Console quota was used up on this date); the Awin check, which waits for the owner to log in.
