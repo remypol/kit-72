@@ -199,3 +199,9 @@ What matters:
 - `HeroImage.astro`: 3:2 instead of 1200:630 so nothing is cropped, capped at 56rem wide, and no longer bleeds out of the column on phones (that caused 4 px of sideways scroll on scenario pages).
 - The three editorial-policy pages say the pictures are AI-made illustrations and show no existing products, brands or events.
 - Still to log from round two: the apex domain now redirects with 308 instead of 307, and indexing was requested in Search Console for the broadcaster hub and three broadcaster pages (NH Radio confirmed; Brabant and Gelderland not seen confirmed).
+
+## 22. Third round live (2026-11-18)
+
+- PR 9 merged after the owner's "Ja, merge" (merge commit `a803b79`). Production checked: `/nl/hoogte-nap/`, `/nl/overstromingsrisico/`, the corrected scenario pages, the new images (old file names give 404), `robots.txt` without the `/_astro/` block, the new `llms.txt`, sitemap with 454 URLs.
+- Address check live: API answers for Almere town hall in 2.4 s (3.5 m below NAP, type B, Omroep Flevoland), 404 for an unknown address, 400 for a malformed one. In the browser the check for Rotterdam town hall shows the three facts and the handbook form opens pre-filled.
+- Search Console: sitemap index resubmitted; indexing requested for `/nl/hoogte-nap/` and `/nl/overstromingsrisico/` (both confirmed).
