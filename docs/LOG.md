@@ -257,3 +257,8 @@ What matters:
 - The four Spanish guides now show an image: `ArticleLayout` takes an optional `heroImage` and `heroAlt`, also used as the share image; the guides collection schema has the two fields.
 - Bug found and fixed: tables on the explainer pages inherited the site's dark table-header band while the component set a muted text colour, so column heads were nearly unreadable and row heads were dark bands. This was live on five Dutch pages since 18 November. Column heads are now white on dark, row heads plain bold.
 - Checks: build 483 pages; SEO audit unchanged (6 description warnings on legal pages); JSON-LD parses everywhere; no internal link without a target; both new pages and three table pages viewed on desktop and phone width.
+
+## 29. Warning pages live (2026-11-26)
+
+- PR 13 merged after the owner's "Ja, merge" (merge commit `67a3491`). Production checked: `/es/es-alert/`, `/de/warnung/`, the four Spanish guides with their image, both guides hubs and two Dutch table pages return 200; the sitemap has 466 URLs including the two new pages. In a browser on production the table column heads are white on dark green and the row heads plain, on `/nl/gidsen/koken-zonder-stroom/`.
+- Indexing requests still not made. The Chrome extension did not answer (first "not connected", after the merge a timeout on two tries) and Search Console in the app's own browser needs the owner's Google sign-in. Twelve pages now wait: the ten Dutch explainers of section 24, `/es/es-alert/` and `/de/warnung/`.
