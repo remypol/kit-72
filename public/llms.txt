@@ -41,6 +41,7 @@ Each of these pages gives the short answer first and ends with a numbered list o
 
 ## Germany (German)
 
+- [So wirst du in Deutschland gewarnt](https://www.kit-72.com/de/warnung/): what the siren signals mean, how the NINA warning app works, the date of the national Warntag, and what still works when power and mobile networks fail (source: BBK).
 - [Startseite](https://www.kit-72.com/de/): calculator for a household's 72-hour list.
 - [Notfallpaket für 72 Stunden](https://www.kit-72.com/de/notfallpaket-72-stunden/): what belongs in the kit.
 - [Kaufen oder selbst packen](https://www.kit-72.com/de/notfallrucksack-kaufen/): ready-made kits compared with building your own.
@@ -49,6 +50,7 @@ Each of these pages gives the short answer first and ends with a numbered list o
 
 ## Spain (Spanish)
 
+- [ES-Alert](https://www.kit-72.com/es/es-alert/): what Spain's phone alert system is, which phones receive it, why an alert can be missed and what to do when it sounds (source: Dirección General de Protección Civil y Emergencias).
 - [Inicio](https://www.kit-72.com/es/): calculator for a household's 72-hour list.
 - [Mochila de 72 horas](https://www.kit-72.com/es/kit-72-horas/): what belongs in the kit.
 - [Comprar o montar el kit](https://www.kit-72.com/es/comprar-kit-emergencia/): ready-made kits compared with building your own.

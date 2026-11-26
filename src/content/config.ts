@@ -50,6 +50,8 @@ const guidesCollection = defineCollection({
 
     // Content metadata
     readTime: z.string().optional(),
+    heroImage: z.string().optional(),
+    heroAlt: z.string().optional(),
     schemaType: z.enum(['Article', 'FAQPage', 'HowTo']).default('Article'),
 
     // Table of contents (optional - auto-generated from headings if not provided)

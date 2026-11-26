@@ -25,6 +25,9 @@ const explainerPaths = [
   '/nl/gidsen/zonnepanelen-thuisbatterij-stroomuitval/',
   '/nl/scenario/extreme-kou/',
 ];
+// Spanish explainers carry their own check date in their data file.
+const deWarnungChecked = readFileSync(new URL('./src/data/explainers/de-warnung.ts', import.meta.url), 'utf8').match(/CHECKED = '(\d{4}-\d{2}-\d{2})'/)[1];
+const esAlertChecked = readFileSync(new URL('./src/data/explainers/es-alert.ts', import.meta.url), 'utf8').match(/CHECKED = '(\d{4}-\d{2}-\d{2})'/)[1];
 
 // https://astro.build/config
 export default defineConfig({
@@ -144,7 +147,7 @@ export default defineConfig({
           changefreq = 'monthly';
         }
         // Sourced explainers (NL); the list and the check date live in src/data/explainers
-        else if (explainerPaths.some((path) => url.endsWith(path))) {
+        else if (explainerPaths.some((path) => url.endsWith(path)) || url.endsWith('/es/es-alert/') || url.endsWith('/de/warnung/')) {
           priority = 0.8;
           changefreq = 'monthly';
         }
@@ -206,7 +209,11 @@ export default defineConfig({
             ? gemeentenChecked
             : explainerPaths.some((path) => url.endsWith(path))
               ? explainersChecked
-              : undefined;
+              : url.endsWith('/es/es-alert/')
+                ? esAlertChecked
+                : url.endsWith('/de/warnung/')
+                  ? deWarnungChecked
+                  : undefined;
 
         return {
           ...item,
