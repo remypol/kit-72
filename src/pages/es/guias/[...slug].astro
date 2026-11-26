@@ -45,6 +45,8 @@ const {
   ctaSecondaryUrl,
   ctaSecondaryText,
   toc = [],
+  heroImage,
+  heroAlt,
 } = guide.data;
 
 // Generate FAQPage schema for rich results
@@ -68,6 +70,8 @@ const faqSchema = faqs.length > 0 ? {
   author={author}
   breadcrumbs={breadcrumbs}
   readTime={readTime}
+  heroImage={heroImage}
+  heroAlt={heroAlt}
   schemaType={schemaType}
   schemaData={faqSchema}
   faqData={faqs}

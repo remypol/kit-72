@@ -2,6 +2,7 @@
 import BaseLayout from './BaseLayout.astro';
 import Breadcrumb from '../components/layout/Breadcrumb.astro';
 import Icon from '../components/ui/Icon.astro';
+import HeroImage from '../components/content/HeroImage.astro';
 
 type Locale = 'es' | 'nl' | 'de';
 
@@ -18,6 +19,9 @@ interface Props {
   author?: string;
   canonicalUrl?: string;
   ogImage?: string;
+  /** picture under the header; also used as the share image when no ogImage is given */
+  heroImage?: string;
+  heroAlt?: string;
   breadcrumbs?: Array<{ label: string; href?: string }>;
   readTime?: string;
   locale?: Locale;
@@ -39,6 +43,8 @@ const {
   author,
   canonicalUrl,
   ogImage,
+  heroImage,
+  heroAlt = '',
   breadcrumbs = [],
   readTime,
   locale = detectedLocale,
@@ -88,7 +94,7 @@ const filteredBreadcrumbs = breadcrumbs.filter(b => !homeLabels.includes(b.label
   title={title}
   description={description}
   canonicalUrl={canonicalUrl}
-  ogImage={ogImage}
+  ogImage={ogImage ?? heroImage}
   schemaType={schemaType}
   schemaData={schemaData}
   faqData={faqData}
@@ -138,6 +144,8 @@ const filteredBreadcrumbs = breadcrumbs.filter(b => !homeLabels.includes(b.label
           )}
         </div>
       </header>
+
+      {heroImage && <HeroImage src={heroImage} alt={heroAlt} priority={true} />}
 
       <!-- Table of Contents slot -->
       <slot name="toc" />

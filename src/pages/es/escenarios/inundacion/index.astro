@@ -9,6 +9,7 @@
  * - Flash floods are increasing due to climate change
  */
 import BaseLayout from '../../../../layouts/BaseLayout.astro';
+import RelatedLinks from '../../../../components/content/RelatedLinks.astro';
 import TLDRBlock from '../../../../components/hub/TLDRBlock.astro';
 import CollapsibleSection from '../../../../components/hub/CollapsibleSection.astro';
 import PhaseTabs from '../../../../components/hub/PhaseTabs.tsx';
@@ -487,6 +488,15 @@ const faqs = [
 
     <!-- Sources -->
     <section class="scenario-section">
+      <RelatedLinks
+        title="Más en Kit-72"
+        links={[
+          { href: '/es/es-alert/', label: 'ES-Alert: avisos al móvil', note: 'Qué es, qué móviles lo reciben y qué hacer cuando suena.' },
+          { href: '/es/escenarios/kit-evacuacion/', label: 'Evacuación', note: 'Qué llevar y cuándo salir.' },
+          { href: '/es/kit-72-horas/', label: 'Mochila de 72 horas', note: 'La lista completa con cantidades por persona.' },
+        ]}
+      />
+
       <details class="sources-block">
         <summary class="sources-header">
           <Icon name="BookOpen" size={18} />
